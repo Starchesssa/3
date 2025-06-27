@@ -12,6 +12,8 @@ permissions:
 jobs:
   run-unusual-category:
     runs-on: ubuntu-latest
+    env:
+      GEMINI_API: ${{ secrets.GEMINI_API }}
 
     steps:
       - name: 📦 Checkout Repository
@@ -25,6 +27,7 @@ jobs:
       - name: 🚀 Install Dependencies
         run: |
           pip install --upgrade pip
+          pip install google-genai
 
       - name: ▶️ Run Unusual Category Script
         run: python Unusual_category.py
