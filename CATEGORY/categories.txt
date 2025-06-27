@@ -98,3 +98,53 @@
 98. Smart Art Devices  
 99. Multi-Room Audio Systems  
 100. Future Concepts (Experimental Tech)
+101. Industrial Tech  
+102. Smart Factory Equipment  
+103. Robotics for Home  
+104. Smart Logistics Devices  
+105. Smart Farming Equipment  
+106. Drone Agriculture Tech  
+107. Biometric Tech  
+108. Facial Recognition Tech  
+109. Gesture Control Devices  
+110. Voice Assistant Devices  
+111. Autonomous Vehicle Tech  
+112. E-Bikes & E-Scooters  
+113. Smart Charging Stations  
+114. EV (Electric Vehicle) Tech  
+115. Smart Retail Kiosks  
+116. Vending Machine Tech  
+117. Delivery Robot Tech  
+118. Smart Glasses  
+119. Digital Whiteboards  
+120. Remote Presentation Gadgets  
+121. Telepresence Devices  
+122. Smart Conference Tools  
+123. Crowd Monitoring Gadgets  
+124. Smart Gym Equipment  
+125. Smart Mirrors  
+126. Body Composition Scanners  
+127. VR Fitness Equipment  
+128. AR Training Systems  
+129. Industrial Wearables  
+130. Smart Construction Gear  
+131. Mining Tech Gadgets  
+132. Oil & Gas Monitoring Tech  
+133. Smart Traffic Systems  
+134. Smart Parking Gadgets  
+135. Airport Security Gadgets  
+136. Border Control Tech  
+137. Public Safety Gadgets  
+138. Environmental Cleanup Tech  
+139. Firefighting Tech  
+140. Law Enforcement Tech  
+141. Forensics & Crime Scene Gadgets  
+142. Military Grade Civilian Gadgets  
+143. Tactical Wearables  
+144. Space Exploration Gadgets  
+145. Disaster Relief Gadgets  
+146. Refugee/Field Support Tech  
+147. Remote Area Survival Kits  
+148. Research Station Tech (Arctic, Desert, etc.)  
+149. Floating City/Off-grid Living Tech  
+150. Digital Identity Gadgets
