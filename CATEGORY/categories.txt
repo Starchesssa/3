@@ -1,1 +1,100 @@
-
+1. Smart Home  
+2. Wearable Tech  
+3. Health Tech  
+4. Fitness Gadgets  
+5. Personal Safety Tech  
+6. Audio Gadgets  
+7. Visual Tech (Cameras, AR/VR)  
+8. Smart Kitchen  
+9. Smart Bathroom  
+10. Cleaning Gadgets  
+11. Entertainment Tech  
+12. Office Tech  
+13. Smart Furniture  
+14. Sleep Tech  
+15. Beauty Tech  
+16. Fashion Tech  
+17. Baby Tech  
+18. Pet Tech  
+19. Gardening Tech  
+20. Green Tech / Eco Gadgets  
+21. Travel Gadgets  
+22. Car Tech  
+23. Motorcycle Tech  
+24. Smart Bikes  
+25. Drone Tech  
+26. Surveillance Tech  
+27. Automation Gadgets  
+28. Robotics  
+29. AI Gadgets  
+30. Augmented Reality  
+31. Virtual Reality  
+32. Mixed Reality  
+33. Gaming Tech  
+34. Streaming Devices  
+35. Audio Recording Gear  
+36. Video Production Gear  
+37. Photography Tech  
+38. DIY Tech  
+39. Smart Tools  
+40. Home Improvement Tech  
+41. Energy-Saving Tech  
+42. Security Tech  
+43. Fire Safety Gadgets  
+44. Home Networking  
+45. Internet of Things (IoT)  
+46. Biometric Devices  
+47. Home Office Gadgets  
+48. Learning Gadgets  
+49. Smart Displays  
+50. Gesture-Control Tech  
+51. Voice-Controlled Devices  
+52. Touchless Gadgets  
+53. Productivity Tech  
+54. Minimalist Tech  
+55. Compact Gadgets  
+56. Foldable Tech  
+57. Transparent Tech  
+58. Waterproof Tech  
+59. Anti-Theft Gadgets  
+60. Emergency Tech  
+61. Disaster Preparedness Gadgets  
+62. Solar-Powered Gadgets  
+63. Wind-Powered Gadgets  
+64. Wireless Charging Tech  
+65. Power Banks  
+66. Charging Stations  
+67. Bluetooth Gadgets  
+68. NFC Devices  
+69. Smart Clothing  
+70. Smart Shoes  
+71. Smart Jewelry  
+72. Brainwave Tech  
+73. Meditation Gadgets  
+74. Biohacking Devices  
+75. Smart Glasses  
+76. Hologram Devices  
+77. 3D Printing  
+78. Smart Toys  
+79. Educational Tech  
+80. Language Learning Devices  
+81. Accessibility Tech  
+82. Elderly Care Gadgets  
+83. Smart Retail Tech  
+84. Payment Tech  
+85. Cryptocurrency Gadgets  
+86. Blockchain Devices  
+87. Cloud-Based Gadgets  
+88. Developer Tech Tools  
+89. Streaming Accessories  
+90. Productivity Wearables  
+91. Mobile Photography Accessories  
+92. Phone Accessories  
+93. Tablet Accessories  
+94. Laptop Accessories  
+95. PC Gaming Accessories  
+96. Home Theater Systems  
+97. Smart Musical Instruments  
+98. Smart Art Devices  
+99. Multi-Room Audio Systems  
+100. Future Concepts (Experimental Tech)
