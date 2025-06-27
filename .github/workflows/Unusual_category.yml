@@ -1,11 +1,13 @@
 
-
 name: Run Unusual Category Script Daily at 5 AM
 
 on:
   schedule:
     - cron: "0 5 * * *"  # Every day at 5 AM UTC
   workflow_dispatch:
+
+permissions:
+  contents: write  # Allow push to repo from workflow and scripts
 
 jobs:
   run-unusual-category:
