@@ -1,0 +1,26 @@
+
+name: Run Gemini TTS
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  run-gemini:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install google-genai
+
+      - name: Run GEMINI.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}  # Store this in GitHub Secrets
+        run: python GEMINI.py
