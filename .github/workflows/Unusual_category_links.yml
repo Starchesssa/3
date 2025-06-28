@@ -1,0 +1,31 @@
+
+name: Fetch Unusual YouTube Links
+
+on:
+  workflow_dispatch:  # ✅ Manual trigger
+  push:               # ✅ Trigger on changes to Products_temp.txt
+    paths:
+      - 'CATEGORY/Products_temp.txt'
+
+jobs:
+  fetch-links:
+    runs-on: ubuntu-latest
+
+    env:
+      YOUTUBE_API: ${{ secrets.YOUTUBE_API }}  # ✅ Pass API key from GitHub secrets
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies (if any)
+        run: |
+          pip install requests
+
+      - name: Run Unusual_links.py
+        run: python Unusual_links.py
