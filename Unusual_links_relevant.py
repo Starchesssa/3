@@ -2,7 +2,8 @@
 import os
 import time
 import subprocess
-from google.genai import GenerativeModel, configure, GenerationConfig
+from google import genai
+from google.genai import types, GenerationConfig
 
 # 🔧 Constants
 BASE_DIR = "Unuusual_memory"
@@ -14,17 +15,10 @@ MAX_PROMPT_ATTEMPTS = 5
 MIN_VALID_LINKS = 3
 WAIT_TIME_SECONDS = 78  # 1.3 minutes
 
-# 🤖 Gemini 2.5 Flash setup with new google-genai
-configure(api_key=os.environ.get("GEMINI_API"))
-model = GenerativeModel(
-    model_name="models/gemini-1.5-flash",  # Gemini 2.5 Flash is part of 1.5 models
-    generation_config=GenerationConfig(
-        temperature=0.3,
-        top_p=1,
-        top_k=1,
-        max_output_tokens=40
-    )
-)
+# 🤖 Gemini 2.5 Flash setup with google-genai
+# Make sure to have GOOGLE_API_KEY set in env
+client = genai.Client(api_key=os.environ.get("GEMINI_API"))
+model_name = "gemini-2.5-flash"
 
 def commit_changes():
     try:
@@ -58,9 +52,18 @@ def ask_gemini_about_link(link, product):
     )
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.3,
+                top_p=1,
+                top_k=1,
+                max_output_tokens=40
+            ),
+        )
         answer = response.text.strip().lower()
-        if answer in ["yes", "no"]:
+        if answer in ("yes", "no"):
             print(f"🔍 Gemini said: {answer.upper()} for {link}")
             return answer
     except Exception as e:
@@ -79,7 +82,6 @@ def process_links():
     for i in range(1, 31):
         file_name = f"{i}_link.txt"
         file_path = os.path.join(LINKS_DIR, file_name)
-
         if not os.path.exists(file_path):
             continue
 
@@ -89,21 +91,19 @@ def process_links():
             continue
 
         with open(file_path, 'r', encoding='utf-8') as f:
-            links = [line.strip() for line in f if line.strip()]
+            links = [l.strip() for l in f if l.strip()]
 
-        approved_links = []
-
+        approved = []
         for link in links[:MAX_PROMPT_ATTEMPTS]:
-            decision = ask_gemini_about_link(link, product)
-            if decision == "yes":
-                approved_links.append(link)
+            if ask_gemini_about_link(link, product) == "yes":
+                approved.append(link)
             time.sleep(WAIT_TIME_SECONDS)
 
-        if len(approved_links) >= MIN_VALID_LINKS:
-            output_path = os.path.join(RELEVANT_DIR, file_name)
-            with open(output_path, 'w', encoding='utf-8') as out:
-                out.write("\n".join(approved_links) + "\n")
-            print(f"✅ Saved {len(approved_links)} links to {file_name}")
+        if len(approved) >= MIN_VALID_LINKS:
+            out_path = os.path.join(RELEVANT_DIR, file_name)
+            with open(out_path, 'w', encoding='utf-8') as out:
+                out.write("\n".join(approved) + "\n")
+            print(f"✅ Saved {len(approved)} links to {file_name}")
             valid_files += 1
 
         if valid_files >= 11:
@@ -112,6 +112,5 @@ def process_links():
     print(f"🎯 Completed processing. {valid_files} files qualified.")
     commit_changes()
 
-# ✅ Entry point
 if __name__ == "__main__":
     process_links()
