@@ -13,7 +13,7 @@ WAIT_TIME_BETWEEN_LINKS = 70  # seconds
 
 # Initialize Gemini client
 print("🔐 Initializing Gemini client...")
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.environ.get("GEMINI_API"))
 
 # Use Gemini 1.5 Flash (latest)
 model = "gemini-2.5-flash"
@@ -38,9 +38,9 @@ def check_video_relevance(link: str, product: str) -> str:
                     )
                 ),
                 types.Part.from_text(
-                    f"Is this video solely about the product: '{product}'?\n"
+                    f"Is this video solely about the '{product}'?\n"
                     "The video should be entirely focused on this one product, not a compilation or list.\n"
-                    "Respond with one word only: Yes or No."
+                    "Respond with one word only: Yes or No.make sure you out pit yes or no only if the video is about the product say yes if its no say no just answer yes or no only"
                 ),
             ],
         )
