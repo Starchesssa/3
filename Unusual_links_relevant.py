@@ -1,140 +1,109 @@
 
 import os
 import time
-import subprocess
 from google import genai
-from google.genai.types import GenerateContentConfig, Content, Part
+from google.genai import types
 
-# 🔧 Constants
-BASE_DIR = "Unuusual_memory"
-LINKS_DIR = os.path.join(BASE_DIR, "Links")
-RELEVANT_DIR = os.path.join(BASE_DIR, "Relevant_links")
-PRODUCTS_FILE = os.path.join("CATEGORY", "Products_temp.txt")
+# Constants
+LINKS_DIR = "Unuusual_memory/Links"
+RELEVANT_DIR = "Unuusual_memory/Relevant_links"
+MAX_QUALIFIED_TXT = 11
+MAX_LINKS_TO_CHECK = 5
+WAIT_TIME_BETWEEN_LINKS = 70  # seconds
 
-MAX_PROMPT_ATTEMPTS = 5
-MIN_VALID_LINKS = 3
-WAIT_TIME_SECONDS = 78  # 1.3 minutes
+# Initialize Gemini client
+print("🔐 Initializing Gemini client...")
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
-VERBOSE = True
+# Use Gemini 1.5 Flash (latest)
+model = "gemini-2.5-flash"
+generate_content_config = types.GenerateContentConfig(response_mime_type="text/plain")
 
-def vprint(*args, **kwargs):
-    if VERBOSE:
-        print(*args, **kwargs)
+# Ensure the output directory exists
+print(f"📁 Ensuring output directory '{RELEVANT_DIR}' exists...")
+os.makedirs(RELEVANT_DIR, exist_ok=True)
 
-# 🤖 Gemini 2.5 Flash setup
-api_key = os.environ.get("GEMINI_API")
-if not api_key:
-    raise EnvironmentError("❌ GEMINI_API environment variable not set")
+def check_video_relevance(link: str, product: str) -> str:
+    """Uses Gemini to verify if a video is solely about a given product."""
+    print(f"🤖 Asking Gemini if this video is only about '{product}'...")
 
-client = genai.Client(api_key=api_key)
-model_name = "gemini-2.5-flash"
-
-def commit_changes():
-    vprint("📦 Committing relevant links...")
-    try:
-        subprocess.run(['git', 'config', '--global', 'user.name', 'yt-bot'], check=True)
-        subprocess.run(['git', 'config', '--global', 'user.email', 'yt-bot@example.com'], check=True)
-        subprocess.run(['git', 'add', RELEVANT_DIR], check=True)
-        subprocess.run(['git', 'commit', '-m', '✅ Relevant links committed'], check=True)
-        subprocess.run(['git', 'push'], check=True)
-        vprint("🚀 Pushed to Git.")
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Git error: {e}")
-
-def load_products():
-    vprint(f"📂 Loading products from {PRODUCTS_FILE}")
-    if not os.path.exists(PRODUCTS_FILE):
-        print("❌ Products file not found.")
-        return {}
-
-    with open(PRODUCTS_FILE, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-        products = {
-            str(i + 1): line.split(". ", 1)[1].strip()
-            for i, line in enumerate(lines)
-            if ". " in line
-        }
-        return products
-
-def ask_gemini_about_link(link, product):
-    vprint(f"\n🔍 Asking Gemini:\n🔗 {link}\n📦 {product}")
     contents = [
-        Content(
+        types.Content(
             role="user",
             parts=[
-                Part(text=f"Is this YouTube video solely about the product: '{product}'?\n"
-                          "Only respond with 'Yes' or 'No'. The video should NOT be a list or compilation."),
-                Part(file_uri=link, mime_type="video/*")
-            ]
+                types.Part(
+                    file_data=types.FileData(
+                        file_uri=link,
+                        mime_type="video/*",
+                    )
+                ),
+                types.Part.from_text(
+                    f"Is this video solely about the product: '{product}'?\n"
+                    "The video should be entirely focused on this one product, not a compilation or list.\n"
+                    "Respond with one word only: Yes or No."
+                ),
+            ],
         )
     ]
 
     try:
-        response = client.models.generate_content(
-            model=model_name,
-            contents=contents,
-            config=GenerateContentConfig(
-                temperature=0.3, top_p=1, top_k=1, max_output_tokens=40
-            )
-        )
-        answer = response.text.strip().lower()
-        vprint(f"🧠 Gemini says: {answer}")
-        return answer if answer in ["yes", "no"] else "no"
+        for chunk in client.models.generate_content_stream(
+            model=model, contents=contents, config=generate_content_config
+        ):
+            response = chunk.text.strip().lower()
+            if response in {"yes", "no"}:
+                print(f"🧠 Gemini answered: {response.upper()}")
+                return response
     except Exception as e:
-        print(f"❌ Gemini error for {link}: {e}")
-        return "no"
+        print(f"❌ Error processing link '{link}': {e}")
+    
+    print("⚠️ Defaulting to 'no' due to error or invalid response.")
+    return "no"
 
 def process_links():
-    vprint("🚦 Processing links...")
-    os.makedirs(RELEVANT_DIR, exist_ok=True)
-    products = load_products()
-    if not products:
-        print("⚠️ No products found.")
-        return
+    qualified_files = 0
 
-    valid_files = 0
+    # Sort input files by their numeric prefix
+    print(f"📑 Reading .txt files from '{LINKS_DIR}'...")
+    txt_files = sorted(
+        [f for f in os.listdir(LINKS_DIR) if f.endswith(".txt")],
+        key=lambda x: int(x.split("_")[0])
+    )
 
-    for i in range(1, 31):
-        file_name = f"{i}_link.txt"
-        file_path = os.path.join(LINKS_DIR, file_name)
-
-        if not os.path.exists(file_path):
-            vprint(f"❌ Missing: {file_path}")
-            continue
-
-        product = products.get(str(i))
-        if not product:
-            vprint(f"⚠️ No product for index {i}.")
-            continue
-
-        with open(file_path, 'r', encoding='utf-8') as f:
-            links = [line.strip() for line in f if line.strip()]
-
-        approved_links = []
-
-        for idx, link in enumerate(links[:MAX_PROMPT_ATTEMPTS]):
-            vprint(f"🧪 Checking link #{idx + 1}: {link}")
-            result = ask_gemini_about_link(link, product)
-            if result == "yes":
-                approved_links.append(link)
-            vprint(f"⏳ Waiting {WAIT_TIME_SECONDS}s...")
-            time.sleep(WAIT_TIME_SECONDS)
-
-        if len(approved_links) >= MIN_VALID_LINKS:
-            output_path = os.path.join(RELEVANT_DIR, file_name)
-            with open(output_path, 'w', encoding='utf-8') as out:
-                out.write("\n".join(approved_links) + "\n")
-            vprint(f"✅ Saved {len(approved_links)} links to {output_path}")
-            valid_files += 1
-        else:
-            vprint(f"❌ Only {len(approved_links)} passed. Skipping save.")
-
-        if valid_files >= 11:
-            vprint("🎉 11 valid files reached. Done.")
+    for file_name in txt_files:
+        if qualified_files >= MAX_QUALIFIED_TXT:
+            print(f"✅ Stopping: Collected {qualified_files} qualified files.")
             break
 
-    vprint(f"🏁 Done. Total valid files: {valid_files}")
-    commit_changes()
+        print(f"\n📄 Processing file: {file_name}")
+        full_path = os.path.join(LINKS_DIR, file_name)
+        with open(full_path, "r") as f:
+            links = [line.strip() for line in f if line.strip()]
+
+        product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
+        print(f"🔍 Product identified: '{product}' with {len(links)} total links")
+
+        checked_links = links[:MAX_LINKS_TO_CHECK]
+        qualified_links = []
+
+        for i, link in enumerate(checked_links, 1):
+            print(f"\n🔗 Checking link {i}/{MAX_LINKS_TO_CHECK}: {link}")
+            verdict = check_video_relevance(link, product)
+            if verdict == "yes":
+                qualified_links.append(link)
+            print(f"⏳ Waiting {WAIT_TIME_BETWEEN_LINKS} seconds to avoid rate limits...\n")
+            time.sleep(WAIT_TIME_BETWEEN_LINKS)
+
+        if len(qualified_links) >= 3:
+            save_path = os.path.join(RELEVANT_DIR, file_name)
+            with open(save_path, "w") as out_f:
+                out_f.write("\n".join(qualified_links))
+            print(f"✅ File '{file_name}' qualified with {len(qualified_links)} links. Saved!")
+            qualified_files += 1
+        else:
+            print(f"❌ File '{file_name}' disqualified (only {len(qualified_links)} links passed).")
+
+    print(f"\n🏁 Finished! Total qualified files saved: {qualified_files}")
 
 if __name__ == "__main__":
     process_links()
