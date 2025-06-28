@@ -14,39 +14,31 @@ concurrency:
 jobs:
   process-links:
     runs-on: ubuntu-latest
-    name: 🧠 Process Only If All Links Exist and Are Non-Empty
+    name: 🧠 Process Smart Links Automatically
 
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: 🔍 Verify all 30 link files exist and are non-empty
-        id: verify_links
-        run: |
-          missing_or_empty=0
-          for i in $(seq 1 30); do
-            file="Unuusual_memory/Links/${i}_link.txt"
-            if [ ! -s "$file" ]; then
-              echo "❌ $file is missing or empty"
-              missing_or_empty=1
-            else
-              echo "✅ $file is present and non-empty"
-            fi
-          done
-
-          if [ "$missing_or_empty" -eq 1 ]; then
-            echo "🛑 At least one file is missing or empty. Exiting."
-            echo "should_run=false" >> $GITHUB_OUTPUT
-          else
-            echo "✅ All 30 files are valid."
-            echo "should_run=true" >> $GITHUB_OUTPUT
-          fi
-
       - name: 🚀 Run Python script in verbose mode
-        if: steps.verify_links.outputs.should_run == 'true'
         run: |
           export PYTHONUNBUFFERED=1
           pip install --no-cache-dir --progress-bar=off google-genai
           python -u Unusual_links_relevant.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
+
+      - name: ✅ Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add Unuusual_memory/Relevant_links/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update relevant links via Smart Link Processor"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
