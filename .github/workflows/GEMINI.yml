@@ -2,7 +2,7 @@
 name: Run Gemini TTS
 
 on:
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   run-gemini:
@@ -22,5 +22,11 @@ jobs:
 
       - name: Run GEMINI.py
         env:
-          GEMINI_API: ${{ secrets.GEMINI_API }}  # Store this in GitHub Secrets
+          GEMINI_API: ${{ secrets.GEMINI_API }}
         run: python GEMINI.py
+
+      - name: Upload TTS audio files as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tts-audio-files
+          path: TTS/
