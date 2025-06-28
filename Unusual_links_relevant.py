@@ -16,7 +16,7 @@ MIN_VALID_LINKS = 3
 WAIT_TIME_SECONDS = 78  # 1.3 minutes
 
 # 🤖 Gemini 2.5 Flash setup
-api_key = os.environ.get("GOOGLE_API_KEY")
+api_key = os.environ.get("GEMINI_API")
 if not api_key:
     raise EnvironmentError("❌ GOOGLE_API_KEY environment variable not set")
 
