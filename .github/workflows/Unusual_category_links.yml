@@ -12,20 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      YOUTUBE_API: ${{ secrets.YOUTUBE_API }}  # ✅ Pass API key from GitHub secrets
+      YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install dependencies (if any)
-        run: |
-          pip install requests
+      - name: 📦 Install dependencies
+        run: pip install requests
 
-      - name: Run Unusual_links.py
+      - name: 🚦 Check if Products_temp.txt is empty
+        id: check_empty
+        run: |
+          if [ ! -s CATEGORY/Products_temp.txt ]; then
+            echo "🛑 File is empty. Skipping script."
+            echo "empty=true" >> $GITHUB_OUTPUT
+          else
+            echo "✅ File has content. Proceeding."
+            echo "empty=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Run Unusual_links.py
+        if: steps.check_empty.outputs.empty == 'false'
         run: python Unusual_links.py
