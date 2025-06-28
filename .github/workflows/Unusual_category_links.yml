@@ -1,6 +1,10 @@
 
 name: Fetch Unusual YouTube Links
 
+# ✅ Grant write permission to push changes
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:  # ✅ Manual trigger
   push:               # ✅ Trigger on changes to Products_temp.txt
