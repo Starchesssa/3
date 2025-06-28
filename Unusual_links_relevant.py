@@ -1,8 +1,8 @@
+
 import os
 import time
 import subprocess
-import google.generativeai as genai
-from google.generativeai.types import GenerationConfig
+from google.genai import GenerativeModel, configure, GenerationConfig
 
 # 🔧 Constants
 BASE_DIR = "Unuusual_memory"
@@ -14,9 +14,17 @@ MAX_PROMPT_ATTEMPTS = 5
 MIN_VALID_LINKS = 3
 WAIT_TIME_SECONDS = 78  # 1.3 minutes
 
-# 🤖 Gemini setup
-genai.configure(api_key=os.environ.get("GEMINI_API"))
-genai_model = genai.GenerativeModel("models/gemini-1.5-flash")  # Ensure exact model name
+# 🤖 Gemini 2.5 Flash setup with new google-genai
+configure(api_key=os.environ.get("GEMINI_API"))
+model = GenerativeModel(
+    model_name="models/gemini-1.5-flash",  # Gemini 2.5 Flash is part of 1.5 models
+    generation_config=GenerationConfig(
+        temperature=0.3,
+        top_p=1,
+        top_k=1,
+        max_output_tokens=40
+    )
+)
 
 def commit_changes():
     try:
@@ -50,15 +58,7 @@ def ask_gemini_about_link(link, product):
     )
 
     try:
-        response = genai_model.generate_content(
-            [prompt],
-            generation_config=GenerationConfig(
-                temperature=0.5,
-                top_p=1,
-                top_k=1,
-                max_output_tokens=50
-            )
-        )
+        response = model.generate_content(prompt)
         answer = response.text.strip().lower()
         if answer in ["yes", "no"]:
             print(f"🔍 Gemini said: {answer.upper()} for {link}")
