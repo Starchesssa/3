@@ -42,10 +42,11 @@ jobs:
             echo "should_run=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🚀 Run Python script
+      - name: 🚀 Run Python script in verbose mode
         if: steps.verify_links.outputs.should_run == 'true'
         run: |
-          pip install --no-cache-dir google-genai
-          python Unusual_links_relevant.py
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u Unusual_links_relevant.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
