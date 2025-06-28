@@ -2,8 +2,9 @@
 import os
 import re
 import requests
+import subprocess
 
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API")  # Loaded from GitHub secrets
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API")  # Loaded from GitHub Secrets
 
 INPUT_FILE = "CATEGORY/Products_temp.txt"
 OUTPUT_DIR = "Unuusual_memory/Links"
@@ -34,7 +35,7 @@ def search_youtube(query, max_results=MAX_RESULTS):
         "q": query,
         "maxResults": max_results,
         "type": "video",
-        "videoLicense": "creativeCommon",  # Creative Commons videos only
+        "videoLicense": "creativeCommon",
         "key": YOUTUBE_API_KEY
     }
 
@@ -53,6 +54,17 @@ def save_links_to_file(index, links):
     with open(filename, "w", encoding="utf-8") as f:
         f.write("\n".join(links))
 
+def commit_saved_links():
+    try:
+        subprocess.run(["git", "config", "--global", "user.name", "bot"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "bot@example.com"], check=True)
+        subprocess.run(["git", "add", OUTPUT_DIR], check=True)
+        subprocess.run(["git", "commit", "-m", "🔗 Auto-saved YouTube links"], check=True)
+        subprocess.run(["git", "push"], check=True)
+        print("✅ Changes committed and pushed to GitHub.")
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Git commit failed: {e}")
+
 def main():
     if not YOUTUBE_API_KEY:
         print("❌ YOUTUBE_API key is not set in environment.")
@@ -69,6 +81,8 @@ def main():
             print(f"✅ Saved {len(links)} links to {index}_link.txt\n")
         except Exception as e:
             print(f"❌ Failed on [{index}] {product}: {e}")
+
+    commit_saved_links()
 
 if __name__ == "__main__":
     main()
