@@ -1,0 +1,55 @@
+
+name: 🔁 Smart Link Processor
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Unuusual_memory/Links/[1-3]?_link.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  process-links:
+    runs-on: ubuntu-latest
+    name: 🧠 Process Only If All Links Exist and Are Non-Empty
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🕒 Wait for additional commits (buffer time)
+        run: |
+          echo "⏳ Waiting 10 minutes to collect all link commits..."
+          sleep 600  # 10 minutes delay
+
+      - name: 🔍 Verify all 30 link files exist and are non-empty
+        id: verify_links
+        run: |
+          missing_or_empty=0
+          for i in $(seq 1 30); do
+            file="Unuusual_memory/Links/${i}_link.txt"
+            if [ ! -s "$file" ]; then
+              echo "❌ $file is missing or empty"
+              missing_or_empty=1
+            else
+              echo "✅ $file is present and non-empty"
+            fi
+          done
+
+          if [ "$missing_or_empty" -eq 1 ]; then
+            echo "🛑 At least one file is missing or empty. Exiting."
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All 30 files are valid."
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Run Python script
+        if: steps.verify_links.outputs.should_run == 'true'
+        run: |
+          pip install google-generativeai
+          python Unusual_links_relevant.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
