@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 LINKS_DIR = "Unuusual_memory/Links"
 RELEVANT_DIR = "Unuusual_memory/Relevant_links"
 MAX_QUALIFIED_TXT = 11
-MAX_LINKS_TO_CHECK = 5
+MAX_LINKS_TO_CHECK = 10
 WAIT_TIME_BETWEEN_BATCHES = 70  # seconds
 
 # Gemini models
