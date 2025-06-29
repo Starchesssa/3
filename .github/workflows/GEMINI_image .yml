@@ -1,0 +1,33 @@
+
+name: Enhance Product Image with Gemini
+
+on:
+  workflow_dispatch:
+
+jobs:
+  enhance-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install google-generativeai mimetypes
+
+      - name: 🚀 Run Enhancement Script
+        run: python enhance_image.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+
+      - name: 🖼️ Upload Enhanced Images as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Enhanced_Images
+          path: Enhanced_images/
