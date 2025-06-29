@@ -5,7 +5,7 @@ import mimetypes
 from google import genai
 from google.genai import types
 
-# ✅ CONFIGURE THESE:
+# Configuration
 API_KEY = os.environ.get("GEMINI_API")
 INPUT_IMAGE = "images (68).jpeg"
 OUTPUT_FOLDER = "Enhanced_images"
@@ -21,14 +21,10 @@ PROMPT = (
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 client = genai.Client(api_key=API_KEY)
 model = "gemini-2.0-flash-preview-image-generation"
-generate_cfg = types.GenerateContentConfig(
-    response_modalities=["IMAGE"],
-    response_mime_type="image/png"
-)
+config = types.GenerateContentConfig(response_modalities=["TEXT", "IMAGE"])
 
-def load_input_image(path):
-    with open(path, "rb") as f:
-        return base64.b64encode(f.read()).decode("utf-8")
+def load_image(path):
+    return base64.b64encode(open(path, "rb").read()).decode("utf-8")
 
 def save_image(data: bytes, filename: str):
     with open(filename, "wb") as f:
@@ -36,27 +32,19 @@ def save_image(data: bytes, filename: str):
     print(f"✅ Saved: {filename}")
 
 def enhance_image():
-    b64 = load_input_image(INPUT_IMAGE)
+    img_b64 = load_image(INPUT_IMAGE)
     contents = [
         types.Content(role="user", parts=[
-            types.Part.from_bytes(mime_type="image/jpeg", data=base64.b64decode(b64)),
+            types.Part.from_bytes(mime_type="image/jpeg", data=base64.b64decode(img_b64)),
             types.Part.from_text(text=PROMPT)
         ])
     ]
 
-    for i, chunk in enumerate(client.models.generate_content_stream(
-        model=model,
-        contents=contents,
-        config=generate_cfg,
-    )):
-        cand = getattr(chunk, "candidates", None)
-        if not cand:
-            continue
-        inline = cand[0].content.parts[0].inline_data
-        if inline and inline.data:
-            ext = mimetypes.guess_extension(inline.mime_type) or ".png"
-            outpath = os.path.join(OUTPUT_FOLDER, f"enhanced_{i}{ext}")
-            save_image(inline.data, outpath)
+    response = client.models.generate_content(model=model, contents=contents, config=config)
+    for i, part in enumerate(response.candidates[0].content.parts):
+        if part.inline_data:
+            ext = mimetypes.guess_extension(part.inline_data.mime_type) or ".png"
+            save_image(part.inline_data.data, os.path.join(OUTPUT_FOLDER, f"enhanced_{i}{ext}"))
 
 if __name__ == "__main__":
     enhance_image()
