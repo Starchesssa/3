@@ -15,7 +15,7 @@ WAIT_TIME_BETWEEN_BATCHES = 70  # seconds
 # Gemini models (only 4 now: 2.5 and 2.0 variants)
 GEMINI_MODELS = [
     "gemini-2.5-flash",
-    "gemini-2.5-flash-preview-04-17",
+    "gemini-2.5-flash-lite-preview-06-17",
     "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
 ]
