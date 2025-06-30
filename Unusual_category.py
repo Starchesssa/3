@@ -95,6 +95,7 @@ def main():
         "• All gadgets must be real, tangible, and purchasable or announced by reputable brands\n"
         "• Avoid fictional concepts or sci-fi-only devices\n"
         "• Avoid any haram or inappropriate items (no sex-related, alcohol, or nudity-themed gadgets)\n"
+       f"• Every item must be a short, generic gadget name (2–4 words max), e.g., “smart mirror”, “robot mop”\n"
         "• Format the list as: a numbered list from 1 to 50 — one gadget per line, no descriptions\n"
         "• No introductions, explanations, or closing remarks — just the list\n"
         "• Emotion to trigger in viewers: amazement, curiosity, obsession"
