@@ -87,7 +87,7 @@ def main():
     prompt = (
         f"You are a world-renowned YouTube creator known for viral gadget compilation videos. "
         f"This video focuses strictly on incredible physical gadgets or devices from the category: ({next_cat}).\n\n"
-        f"🎯 Task: List 30 of the most unusual, bizarre, and mind-blowing gadgets or devices currently available that would go viral in a YouTube gadget compilation video.\n\n"
+        f"🎯 Task: List 50 of the most unusual, bizarre, and mind-blowing gadgets or devices currently available that would go viral in a YouTube gadget compilation video.\n\n"
         "⚠️ Guidelines:\n"
         "• Only list physical gadgets or devices — no apps, software, or tools\n"
         "• Use only the generic name/type of the gadget or device (e.g., 'magnetic levitating lamp', 'foldable electric scooter')\n"
@@ -95,8 +95,7 @@ def main():
         "• All gadgets must be real, tangible, and purchasable or announced by reputable brands\n"
         "• Avoid fictional concepts or sci-fi-only devices\n"
         "• Avoid any haram or inappropriate items (no sex-related, alcohol, or nudity-themed gadgets)\n"
-        "• Avoid common or well-known devices; prioritize uniqueness and surprise factor\n"
-        "• Format the list as: a numbered list from 1 to 30 — one gadget per line, no descriptions\n"
+        "• Format the list as: a numbered list from 1 to 50 — one gadget per line, no descriptions\n"
         "• No introductions, explanations, or closing remarks — just the list\n"
         "• Emotion to trigger in viewers: amazement, curiosity, obsession"
     )
