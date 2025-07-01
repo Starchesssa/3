@@ -9,8 +9,8 @@ from google.genai import types
 # Constants
 LINKS_DIR = "Unuusual_memory/Links"
 RELEVANT_DIR = "Unuusual_memory/Relevant_links"
-MAX_QUALIFIED_TXT = 11
-MAX_LINKS_TO_CHECK = 10
+MAX_QUALIFIED_TXT = 33
+MAX_LINKS_TO_CHECK = 12
 WAIT_TIME_BETWEEN_CALLS = 70  # per model
 
 GEMINI_MODELS = [
