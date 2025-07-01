@@ -56,9 +56,12 @@ def worker(model, task_queue: queue.Queue):
                         file_data=types.FileData(file_uri=job.link, mime_type="video/*")
                     ),
                     types.Part(
-                        text=f"Is this video solely about the '{job.product}'?\n"
-                             "The video should be focused on '{job.product}' .\n"
-                             "Respond with one word only: Yes or No. Make sure you output yes or no only."
+    text=(
+        f"Is this video solely about the '{job.product}'?\n"
+        f"The video should be focused on '{job.product}'.\n"
+        "Respond with one word only: Yes or No. Make sure you output yes or no only."
+    )
+),
                     ),
                 ],
             )
