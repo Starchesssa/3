@@ -139,7 +139,7 @@ def process_links():
             t.join()
 
         qualified_links = [link for link, answer in results.items() if answer == "yes"]
-        if len(qualified_links) >= 3:
+        if len(qualified_links) >= 1:
             save_path = os.path.join(RELEVANT_DIR, file_name)
             with open(save_path, "w") as out_f:
                 out_f.write("\n".join(qualified_links))
