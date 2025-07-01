@@ -57,7 +57,7 @@ def worker(model, task_queue: queue.Queue):
                     ),
                     types.Part(
                         text=f"Is this video solely about the '{job.product}'?\n"
-                             "The video should be entirely focused on this one product, not a compilation or list.\n"
+                             "The video should be focused on '{job.product}' .\n"
                              "Respond with one word only: Yes or No. Make sure you output yes or no only."
                     ),
                 ],
