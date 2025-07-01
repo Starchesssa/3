@@ -58,7 +58,7 @@ def commit_changes(file_to_commit):
 def call_gemini_api(prompt):
     try:
         client = genai.Client(api_key=os.environ.get("GEMINI_API"))
-        model = "gemini-2.0-flash"
+        model = "gemini-2.5-flash"
         contents = [types.Content(role="user", parts=[types.Part.from_text(text=prompt)])]
         config = types.GenerateContentConfig(response_mime_type="text/plain")
         full_response = ""
