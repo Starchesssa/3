@@ -10,7 +10,7 @@ YOUTUBE_API_KEY = os.getenv("YOUTUBE_API")  # GitHub Secret
 # 📂 Input and Output Paths
 INPUT_FILE = "CATEGORY/Products_temp.txt"
 OUTPUT_DIR = "Unuusual_memory/Links"
-MAX_RESULTS = 11
+MAX_RESULTS = 50
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
