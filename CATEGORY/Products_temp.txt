@@ -1,50 +1,50 @@
-1.  Robot window cleaner
-2.  Smart indoor garden
-3.  Levitating smart lamp
-4.  Smart toilet bidet
-5.  Robot litter box
-6.  Biometric door lock
-7.  Smart food composter
-8.  Invisible smart speaker
-9.  Smart aroma diffuser
-10. Smart mirror display
-11. Robot lawn mower
-12. Smart faucet dispenser
-13. Smart AI oven
-14. Smart curtain opener
-15. Smart sleep tracking mat
-16. Smart light panels
-17. Smart hydroponic garden
-18. Voice-controlled shower
-19. Smart parcel drop box
-20. Smart waste bin
-21. Smart pet feeder camera
-22. Robotic pool cleaner
-23. Smart air quality monitor
-24. Smart shower head
-25. Smart digital peephole
-26. Smart projection clock
-27. Smart pet door
-28. Smart beverage warmer
-29. Smart plant watering
-30. Smart invisible fan
-31. Smart wall art screen
-32. Smart pillow speaker
-33. Smart spice dispenser
-34. Smart toothbrush sanitizer
-35. Autonomous security robot
-36. Smart garment steamer
-37. Smart bath filler
-38. Smart adjustable bed
-39. Smart sleep mask
-40. Smart aroma alarm
-41. Smart water leak sensor
-42. Smart pet treat dispenser
-43. Smart home energy monitor
-44. Smart wine dispenser
-45. Smart invisible lock
-46. Smart fingerprint safe
-47. Smart air purifier lamp
-48. Smart fridge display
-49. Smart vertical garden
-50. Smart modular lighting
+1. Robotic Window Cleaner
+2. Smart Aroma Diffuser
+3. Voice-Controlled Mirror
+4. Automated Cocktail Maker
+5. Smart Indoor Garden
+6. Self-Cleaning Litter Box
+7. Biometric Door Lock
+8. Invisible Smart Lock
+9. Smart Sleep Tracker
+10. AI-Powered Cutting Board
+11. Transparent Smart Display
+12. Holographic Display Speaker
+13. Smart Air Purifier
+14. Automated Pet Feeder
+15. Laundry Folding Robot
+16. Smart Compost Bin
+17. Robotic Lawnmower
+18. Smart Bath Filler
+19. Smart Urine Analyzer
+20. Smart Toilet Seat
+21. Smart Plant Watering
+22. Smart Security Drone
+23. Voice-Activated Curtains
+24. Smart Coffee Table
+25. Smart Massage Chair
+26. Magnetic Levitating Light
+27. Smart Pet Translator
+28. Gesture Control Hub
+29. Smart Energy Hub
+30. Automated Medication Dispenser
+31. Smart Bird Feeder
+32. Underwater Pool Cleaner
+33. Smart Pantry Organizer
+34. Smart Food Scanner
+35. Smart Trash Compactor
+36. Wall-Mounted Robot Vacuum
+37. Smart Fridge Camera
+38. Smart Pet Health Monitor
+39. Smart Projector Clock
+40. Invisible Wall Speakers
+41. Self-Making Bed
+42. Smart Wine Dispenser
+43. Robotic Gutter Cleaner
+44. Smart Peephole Viewer
+45. Programmable Robotic Arm
+46. Smart Wall Art
+47. Smart Faucet Dispenser
+48. Health Monitoring Light
+49. Smart Door Mat
+50. Smart Weather Display
