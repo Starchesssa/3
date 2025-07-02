@@ -30,7 +30,6 @@ MODELS = [
     "gemini-2.5-flash-lite-preview-06-17",
     "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
-
 ]
 
 CLIENTS = []
@@ -40,13 +39,11 @@ for idx, key in enumerate(API_KEYS):
     else:
         raise ValueError(f"Missing GEMINI_API{idx+1} environment variable.")
 
-# Create all (client, model, client_index) combinations
 CLIENT_MODEL_COMBOS = []
 for idx, client in enumerate(CLIENTS):
     for model in MODELS:
         CLIENT_MODEL_COMBOS.append((client, model, idx))
 
-# Ensure output directory exists
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
 # === Helpers ===
@@ -75,7 +72,6 @@ def try_model_once(link, product, model, client, client_index):
         return None
 
 def process_link_with_timeout(link, product, used_indices):
-    # Shuffle combinations to distribute load across all APIs/models
     combos = CLIENT_MODEL_COMBOS.copy()
     random.shuffle(combos)
 
@@ -105,7 +101,7 @@ def wait_between_files(seconds):
         time.sleep(1)
     print("✅ Wait complete.\n")
 
-# === Main Logic ===
+# === Main ===
 def main():
     print("🚀 Starting processing...")
     txt_files = sorted(
@@ -133,13 +129,26 @@ def main():
                 executor.submit(process_link_with_timeout, link, product, []): link
                 for link in links
             }
-            completed = as_completed(futures, timeout=TIMEOUT_PER_FILE)
+
+            done_links = []
             try:
-                for future in completed:
-                    link, result = future.result()
-                    results[link] = result
+                for future in as_completed(futures, timeout=TIMEOUT_PER_FILE):
+                    try:
+                        link, result = future.result()
+                        results[link] = result
+                        done_links.append(link)
+                    except Exception as e:
+                        print(f"⚠️ A task failed: {e}")
             except TimeoutError:
-                print("🚨 Timeout while waiting for file's total completion.")
+                print("🚨 Timeout: Some links exceeded file-level time limit.")
+
+            # Cancel unfinished tasks
+            for f in futures:
+                if not f.done():
+                    f.cancel()
+
+            print(f"✅ Completed {len(done_links)} links.")
+            print(f"⏳ Skipped {len(links) - len(done_links)} links due to timeout or failure.")
 
         qualified_links = [l for l, r in results.items() if r == "yes"]
         if qualified_links:
@@ -152,7 +161,6 @@ def main():
             print("🚫 No qualified links found.")
 
         if index < len(txt_files) - 1:
-            elapsed = time.time() - start_time
             wait_between_files(WAIT_BETWEEN_FILES)
 
     print(f"\n🎉 Done! Total qualified files: {qualified_count}")
