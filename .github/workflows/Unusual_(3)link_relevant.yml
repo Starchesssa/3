@@ -29,6 +29,8 @@ jobs:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API2: ${{ secrets.GEMINI_API2 }}
           GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
 
       - name: ✅ Commit & Push Changes
         run: |
@@ -43,4 +45,3 @@ jobs:
             git commit -m "🤖 Update relevant links via Smart Link Processor"
             git push
             echo "✅ Changes committed and pushed."
-          fi
