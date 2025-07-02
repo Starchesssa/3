@@ -13,7 +13,6 @@ RELEVANT_DIR = "Unuusual_memory/Relevant_links"
 MAX_QUALIFIED_TXT = 33
 MAX_LINKS_PER_FILE = 12
 WAIT_BETWEEN_FILES = 70  # seconds
-TIMEOUT_PER_FILE = 240   # seconds
 TIMEOUT_PER_REQUEST = 45  # seconds
 
 # === Load Gemini API keys ===
@@ -25,21 +24,12 @@ API_KEYS = [
     os.environ.get("GEMINI_API5")
 ]
 
-MODELS = [
-    "gemini-2.5-flash",
-    "gemini-2.5-flash-lite-preview-06-17",
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-lite",
-]
+CLIENTS = [genai.Client(api_key=key) for key in API_KEYS if key]
+if not CLIENTS:
+    raise ValueError("No valid GEMINI_API keys found.")
 
-CLIENTS = []
-for idx, key in enumerate(API_KEYS):
-    if key:
-        CLIENTS.append(genai.Client(api_key=key))
-    else:
-        raise ValueError(f"Missing GEMINI_API{idx+1} environment variable.")
-
-CLIENT_MODEL_COMBOS = [(client, model, idx) for idx, client in enumerate(CLIENTS) for model in MODELS]
+# Just use one model
+MODEL = "gemini-2.5-flash"
 
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
@@ -47,8 +37,7 @@ os.makedirs(RELEVANT_DIR, exist_ok=True)
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def try_model_once(link, product, model, client, client_index):
-    print(f"🔎 Client {client_index + 1} using model `{model}` for: {link}")
+def check_video(client, link, product):
     contents = [
         types.Content(
             role="user",
@@ -60,26 +49,13 @@ def try_model_once(link, product, model, client, client_index):
     ]
     config = types.GenerateContentConfig(response_mime_type="text/plain")
     try:
-        response = client.models.generate_content(model=model, contents=contents, config=config)
+        response = client.models.generate_content(model=MODEL, contents=contents, config=config)
         result = normalize_response(response.text)
         print(f"✅ Response: {response.text.strip()}")
         return "yes" if result == "yes" else "no"
     except Exception as e:
-        print(f"❌ Error with model {model}, client {client_index + 1}: {e}")
+        print(f"❌ Error with link {link}: {e}")
         return "no"
-
-def process_link(link, product):
-    client, model, client_index = random.choice(CLIENT_MODEL_COMBOS)
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        future = executor.submit(try_model_once, link, product, model, client, client_index)
-        try:
-            result = future.result(timeout=TIMEOUT_PER_REQUEST)
-            return (link, result)
-        except TimeoutError:
-            print(f"⏱️ Timeout: {link} on model {model}")
-        except Exception as e:
-            print(f"⚠️ Error for link {link}: {e}")
-    return (link, "no")
 
 def wait_between_files(seconds):
     print(f"\n⏱️ Waiting {seconds} seconds before next file...")
@@ -103,30 +79,32 @@ def main():
             break
 
         print(f"\n📂 Processing file [{index + 1}]: {file_name}")
-        start_time = time.time()
         full_path = os.path.join(LINKS_DIR, file_name)
 
         with open(full_path, "r") as f:
             links = [line.strip() for line in f if line.strip()]
         product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
         links = links[:MAX_LINKS_PER_FILE]
+
         results = {}
 
         with ThreadPoolExecutor(max_workers=len(links)) as executor:
             futures = {
-                executor.submit(process_link, link, product): link
+                executor.submit(check_video, random.choice(CLIENTS), link, product): link
                 for link in links
             }
 
-            try:
-                for future in as_completed(futures, timeout=TIMEOUT_PER_FILE):
-                    try:
-                        link, result = future.result()
-                        results[link] = result
-                    except Exception as e:
-                        print(f"⚠️ A task failed: {e}")
-            except TimeoutError:
-                print("🚨 Timeout: File-level time limit exceeded.")
+            for future in as_completed(futures):
+                link = futures[future]
+                try:
+                    result = future.result(timeout=TIMEOUT_PER_REQUEST)
+                    results[link] = result
+                except TimeoutError:
+                    print(f"⏱️ Timeout on: {link}")
+                    results[link] = "no"
+                except Exception as e:
+                    print(f"⚠️ Failed to process link {link}: {e}")
+                    results[link] = "no"
 
         qualified_links = [l for l, r in results.items() if r == "yes"]
         if qualified_links:
