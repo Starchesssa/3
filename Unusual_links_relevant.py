@@ -3,7 +3,8 @@ import os
 import time
 import string
 import random
-from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError, wait, FIRST_COMPLETED
 from google import genai
 from google.genai import types
 
@@ -13,7 +14,8 @@ RELEVANT_DIR = "Unuusual_memory/Relevant_links"
 MAX_QUALIFIED_TXT = 33
 MAX_LINKS_PER_FILE = 12
 WAIT_BETWEEN_FILES = 70  # seconds
-TIMEOUT_PER_REQUEST = 45  # seconds
+FILE_TIMEOUT = 240        # seconds max per .txt file
+TIMEOUT_PER_REQUEST = 45  # timeout per API request
 
 # === Load Gemini API keys ===
 API_KEYS = [
@@ -28,9 +30,7 @@ CLIENTS = [genai.Client(api_key=key) for key in API_KEYS if key]
 if not CLIENTS:
     raise ValueError("No valid GEMINI_API keys found.")
 
-# Just use one model
 MODEL = "gemini-2.5-flash"
-
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
 # === Helpers ===
@@ -65,6 +65,52 @@ def wait_between_files(seconds):
         time.sleep(1)
     print("✅ Wait complete.\n")
 
+# === Main Processing Per File ===
+def process_file(file_name):
+    full_path = os.path.join(LINKS_DIR, file_name)
+    with open(full_path, "r") as f:
+        links = [line.strip() for line in f if line.strip()]
+
+    product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
+    links = links[:MAX_LINKS_PER_FILE]
+    results = {}
+
+    with ThreadPoolExecutor(max_workers=len(links)) as executor:
+        futures = {
+            executor.submit(check_video, random.choice(CLIENTS), link, product): link
+            for link in links
+        }
+
+        done, not_done = wait(futures.keys(), timeout=FILE_TIMEOUT, return_when=FIRST_COMPLETED)
+        start_time = time.time()
+
+        for future in as_completed(futures, timeout=FILE_TIMEOUT):
+            link = futures[future]
+            try:
+                result = future.result(timeout=TIMEOUT_PER_REQUEST)
+                results[link] = result
+            except TimeoutError:
+                print(f"⏱️ Timeout on: {link}")
+                results[link] = "no"
+            except Exception as e:
+                print(f"⚠️ Failed to process link {link}: {e}")
+                results[link] = "no"
+
+            if time.time() - start_time > FILE_TIMEOUT:
+                print(f"⏱️ File processing exceeded {FILE_TIMEOUT} seconds. Moving to next file.")
+                break
+
+    qualified_links = [l for l, r in results.items() if r == "yes"]
+    if qualified_links:
+        output_path = os.path.join(RELEVANT_DIR, file_name)
+        with open(output_path, "w") as f:
+            f.write("\n".join(qualified_links))
+        print(f"✅ Saved {len(qualified_links)} qualified links.")
+        return True
+    else:
+        print("🚫 No qualified links found.")
+        return False
+
 # === Main ===
 def main():
     print("🚀 Starting processing...")
@@ -79,45 +125,21 @@ def main():
             break
 
         print(f"\n📂 Processing file [{index + 1}]: {file_name}")
-        full_path = os.path.join(LINKS_DIR, file_name)
+        start_time = time.time()
 
-        with open(full_path, "r") as f:
-            links = [line.strip() for line in f if line.strip()]
-        product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
-        links = links[:MAX_LINKS_PER_FILE]
+        try:
+            successful = process_file(file_name)
+            if successful:
+                qualified_count += 1
+        except Exception as e:
+            print(f"❌ Unexpected error in file {file_name}: {e}")
 
-        results = {}
-
-        with ThreadPoolExecutor(max_workers=len(links)) as executor:
-            futures = {
-                executor.submit(check_video, random.choice(CLIENTS), link, product): link
-                for link in links
-            }
-
-            for future in as_completed(futures):
-                link = futures[future]
-                try:
-                    result = future.result(timeout=TIMEOUT_PER_REQUEST)
-                    results[link] = result
-                except TimeoutError:
-                    print(f"⏱️ Timeout on: {link}")
-                    results[link] = "no"
-                except Exception as e:
-                    print(f"⚠️ Failed to process link {link}: {e}")
-                    results[link] = "no"
-
-        qualified_links = [l for l, r in results.items() if r == "yes"]
-        if qualified_links:
-            output_path = os.path.join(RELEVANT_DIR, file_name)
-            with open(output_path, "w") as f:
-                f.write("\n".join(qualified_links))
-            print(f"✅ Saved {len(qualified_links)} qualified links.")
-            qualified_count += 1
+        elapsed = time.time() - start_time
+        if elapsed < WAIT_BETWEEN_FILES:
+            wait_time = WAIT_BETWEEN_FILES - elapsed
+            wait_between_files(int(wait_time))
         else:
-            print("🚫 No qualified links found.")
-
-        if index < len(txt_files) - 1:
-            wait_between_files(WAIT_BETWEEN_FILES)
+            print("⚠️ File took longer than wait period, skipping delay.\n")
 
     print(f"\n🎉 Done! Total qualified files: {qualified_count}")
 
