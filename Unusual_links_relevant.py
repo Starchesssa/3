@@ -2,6 +2,7 @@
 import os
 import time
 import string
+import random
 from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
 from google import genai
 from google.genai import types
@@ -29,7 +30,7 @@ MODELS = [
     "gemini-2.5-flash-lite-preview-06-17",
     "gemini-2.0-flash",
     "gemini-2.0-flash-lite",
-    "gemini-1.5-flash"
+
 ]
 
 CLIENTS = []
@@ -39,6 +40,13 @@ for idx, key in enumerate(API_KEYS):
     else:
         raise ValueError(f"Missing GEMINI_API{idx+1} environment variable.")
 
+# Create all (client, model, client_index) combinations
+CLIENT_MODEL_COMBOS = []
+for idx, client in enumerate(CLIENTS):
+    for model in MODELS:
+        CLIENT_MODEL_COMBOS.append((client, model, idx))
+
+# Ensure output directory exists
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
 # === Helpers ===
@@ -67,13 +75,16 @@ def try_model_once(link, product, model, client, client_index):
         return None
 
 def process_link_with_timeout(link, product, used_indices):
-    for i in range(len(CLIENTS)):
+    # Shuffle combinations to distribute load across all APIs/models
+    combos = CLIENT_MODEL_COMBOS.copy()
+    random.shuffle(combos)
+
+    for i, (client, model, client_index) in enumerate(combos):
         if i in used_indices:
             continue
-        client = CLIENTS[i]
-        model = MODELS[i % len(MODELS)]
+        print(f"🔄 Trying combo {i + 1}/{len(combos)}: Client {client_index + 1} with model {model}")
         with ThreadPoolExecutor(max_workers=1) as executor:
-            future = executor.submit(try_model_once, link, product, model, client, i)
+            future = executor.submit(try_model_once, link, product, model, client, client_index)
             try:
                 result = future.result(timeout=TIMEOUT_PER_REQUEST)
                 if result in {"yes", "no"}:
