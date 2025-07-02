@@ -3,7 +3,7 @@ import os
 import time
 import string
 import random
-from concurrent.futures import ThreadPoolExecutor, TimeoutError, wait
+from multiprocessing import Pool, TimeoutError as MP_Timeout
 from google import genai
 from google.genai import types
 
@@ -13,8 +13,7 @@ RELEVANT_DIR = "Unuusual_memory/Relevant_links"
 MAX_QUALIFIED_TXT = 33
 MAX_LINKS_PER_FILE = 12
 WAIT_BETWEEN_FILES = 70  # seconds
-FILE_TIMEOUT = 240        # seconds max per .txt file
-TIMEOUT_PER_REQUEST = 45  # timeout per API request
+TIMEOUT_PER_REQUEST = 45  # per link
 
 # === Load Gemini API keys ===
 API_KEYS = [
@@ -24,10 +23,9 @@ API_KEYS = [
     os.environ.get("GEMINI_API4"),
     os.environ.get("GEMINI_API5")
 ]
-
-CLIENTS = [genai.Client(api_key=key) for key in API_KEYS if key]
-if not CLIENTS:
-    raise ValueError("No valid GEMINI_API keys found.")
+API_KEYS = [key for key in API_KEYS if key]
+if not API_KEYS:
+    raise ValueError("❌ No valid GEMINI_API keys found.")
 
 MODEL = "gemini-2.5-flash"
 os.makedirs(RELEVANT_DIR, exist_ok=True)
@@ -36,25 +34,27 @@ os.makedirs(RELEVANT_DIR, exist_ok=True)
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def check_video(client, link, product):
-    contents = [
-        types.Content(
-            role="user",
-            parts=[
-                types.Part(file_data=types.FileData(file_uri=link, mime_type="video/*")),
-                types.Part(text=f"Is this video solely about the '{product}'?\nRespond only with Yes or No."),
-            ],
-        )
-    ]
-    config = types.GenerateContentConfig(response_mime_type="text/plain")
+def check_video_wrapper(args):
+    key_index, link, product = args
     try:
+        client = genai.Client(api_key=API_KEYS[key_index])
+        contents = [
+            types.Content(
+                role="user",
+                parts=[
+                    types.Part(file_data=types.FileData(file_uri=link, mime_type="video/*")),
+                    types.Part(text=f"Is this video solely about the '{product}'?\nRespond only with Yes or No."),
+                ],
+            )
+        ]
+        config = types.GenerateContentConfig(response_mime_type="text/plain")
         response = client.models.generate_content(model=MODEL, contents=contents, config=config)
         result = normalize_response(response.text)
-        print(f"✅ Response: {response.text.strip()}", flush=True)
-        return "yes" if result == "yes" else "no"
+        print(f"✅ [{link}] => {response.text.strip()}", flush=True)
+        return (link, "yes" if result == "yes" else "no")
     except Exception as e:
-        print(f"❌ Error with link {link}: {e}", flush=True)
-        return "no"
+        print(f"❌ [{link}] => Error: {e}", flush=True)
+        return (link, "no")
 
 def wait_between_files(seconds):
     print(f"\n⏱️ Waiting {seconds} seconds before next file...", flush=True)
@@ -64,7 +64,7 @@ def wait_between_files(seconds):
         time.sleep(1)
     print("✅ Wait complete.\n", flush=True)
 
-# === Main Processing Per File ===
+# === Process Each File ===
 def process_file(file_name):
     full_path = os.path.join(LINKS_DIR, file_name)
     with open(full_path, "r") as f:
@@ -72,47 +72,38 @@ def process_file(file_name):
 
     product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
     links = links[:MAX_LINKS_PER_FILE]
+    args_list = [(i % len(API_KEYS), link, product) for i, link in enumerate(links)]
     results = {}
 
-    with ThreadPoolExecutor(max_workers=len(links)) as executor:
-        futures = {
-            executor.submit(check_video, random.choice(CLIENTS), link, product): link
-            for link in links
-        }
-
-        done, not_done = wait(futures.keys(), timeout=FILE_TIMEOUT)
-
-        for future in done:
-            link = futures[future]
+    print(f"🧪 Checking {len(links)} links with multiprocessing...", flush=True)
+    with Pool(processes=len(args_list)) as pool:
+        multiple_results = [pool.apply_async(check_video_wrapper, (args,)) for args in args_list]
+        for i, res in enumerate(multiple_results):
+            link = args_list[i][1]
             try:
-                result = future.result(timeout=TIMEOUT_PER_REQUEST)
+                link, result = res.get(timeout=TIMEOUT_PER_REQUEST)
                 results[link] = result
-            except TimeoutError:
+            except MP_Timeout:
                 print(f"⏱️ Timeout on: {link}", flush=True)
                 results[link] = "no"
             except Exception as e:
-                print(f"⚠️ Failed to process link {link}: {e}", flush=True)
+                print(f"⚠️ Error processing {link}: {e}", flush=True)
                 results[link] = "no"
-
-        for future in not_done:
-            link = futures[future]
-            print(f"⏳ Link did not complete in time: {link}", flush=True)
-            results[link] = "no"
 
     qualified_links = [l for l, r in results.items() if r == "yes"]
     if qualified_links:
         output_path = os.path.join(RELEVANT_DIR, file_name)
         with open(output_path, "w") as f:
             f.write("\n".join(qualified_links))
-        print(f"✅ Saved {len(qualified_links)} qualified links.", flush=True)
+        print(f"✅ Saved {len(qualified_links)} qualified links to: {output_path}", flush=True)
         return True
     else:
         print("🚫 No qualified links found.", flush=True)
         return False
 
-# === Main ===
+# === Main Script ===
 def main():
-    print("🚀 Starting processing...", flush=True)
+    print("🚀 Starting Gemini video relevance filtering...\n", flush=True)
     txt_files = sorted(
         [f for f in os.listdir(LINKS_DIR) if f.endswith(".txt")],
         key=lambda x: int(x.split("_")[0])
@@ -123,7 +114,7 @@ def main():
         if qualified_count >= MAX_QUALIFIED_TXT:
             break
 
-        print(f"\n📂 Processing file [{index + 1}]: {file_name}", flush=True)
+        print(f"\n📂 File [{index + 1}/{len(txt_files)}]: {file_name}", flush=True)
         start_time = time.time()
 
         try:
@@ -131,16 +122,16 @@ def main():
             if successful:
                 qualified_count += 1
         except Exception as e:
-            print(f"❌ Unexpected error in file {file_name}: {e}", flush=True)
+            print(f"❌ Unexpected error: {e}", flush=True)
 
         elapsed = time.time() - start_time
         if elapsed < WAIT_BETWEEN_FILES:
             wait_time = WAIT_BETWEEN_FILES - elapsed
             wait_between_files(int(wait_time))
         else:
-            print("⚠️ File took longer than wait period, skipping delay.\n", flush=True)
+            print("⚠️ Skipping wait — file took longer than delay period.\n", flush=True)
 
-    print(f"\n🎉 Done! Total qualified files: {qualified_count}", flush=True)
+    print(f"\n🎉 Finished! Total qualified files saved: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
     main()
