@@ -15,7 +15,7 @@ jobs:
         run: |
           CLIENT_ID="60660374044-78lne6ja6mate7ggitngnhb6nvths0h5.apps.googleusercontent.com"
           CLIENT_SECRET="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"
-          REFRESH_TOKEN="1//09-T4ZLLHJniVCgYIARAAGAkSNwF-L9Ir97eY3qQ5aeSGPPvuOG-4DMmN0efxfsENlQ-2iQofev6yTqsaSlbCLO_7SrjEzq4eku8"
+          REFRESH_TOKEN="1//03bK5bxFh2PuqCgYIARAAGAMSNwF-L9IrBjUHUd9ayrpNAlhsMyH027POZ-VlG_OfDsetYF0VJ9ZCcboYO4vxm0fzqhs0rQwPcbQ"
 
           echo "🔄 Requesting new access token from Google OAuth..."
           RESPONSE=$(curl -s -X POST https://oauth2.googleapis.com/token \
