@@ -3,8 +3,7 @@ import os
 import time
 import string
 import random
-import threading
-from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError, wait, FIRST_COMPLETED
+from concurrent.futures import ThreadPoolExecutor, TimeoutError, wait
 from google import genai
 from google.genai import types
 
@@ -51,19 +50,19 @@ def check_video(client, link, product):
     try:
         response = client.models.generate_content(model=MODEL, contents=contents, config=config)
         result = normalize_response(response.text)
-        print(f"✅ Response: {response.text.strip()}")
+        print(f"✅ Response: {response.text.strip()}", flush=True)
         return "yes" if result == "yes" else "no"
     except Exception as e:
-        print(f"❌ Error with link {link}: {e}")
+        print(f"❌ Error with link {link}: {e}", flush=True)
         return "no"
 
 def wait_between_files(seconds):
-    print(f"\n⏱️ Waiting {seconds} seconds before next file...")
+    print(f"\n⏱️ Waiting {seconds} seconds before next file...", flush=True)
     for i in range(seconds, 0, -1):
         if i <= 5 or i % 10 == 0:
-            print(f"  ...{i}s")
+            print(f"  ...{i}s", flush=True)
         time.sleep(1)
-    print("✅ Wait complete.\n")
+    print("✅ Wait complete.\n", flush=True)
 
 # === Main Processing Per File ===
 def process_file(file_name):
@@ -81,39 +80,39 @@ def process_file(file_name):
             for link in links
         }
 
-        done, not_done = wait(futures.keys(), timeout=FILE_TIMEOUT, return_when=FIRST_COMPLETED)
-        start_time = time.time()
+        done, not_done = wait(futures.keys(), timeout=FILE_TIMEOUT)
 
-        for future in as_completed(futures, timeout=FILE_TIMEOUT):
+        for future in done:
             link = futures[future]
             try:
                 result = future.result(timeout=TIMEOUT_PER_REQUEST)
                 results[link] = result
             except TimeoutError:
-                print(f"⏱️ Timeout on: {link}")
+                print(f"⏱️ Timeout on: {link}", flush=True)
                 results[link] = "no"
             except Exception as e:
-                print(f"⚠️ Failed to process link {link}: {e}")
+                print(f"⚠️ Failed to process link {link}: {e}", flush=True)
                 results[link] = "no"
 
-            if time.time() - start_time > FILE_TIMEOUT:
-                print(f"⏱️ File processing exceeded {FILE_TIMEOUT} seconds. Moving to next file.")
-                break
+        for future in not_done:
+            link = futures[future]
+            print(f"⏳ Link did not complete in time: {link}", flush=True)
+            results[link] = "no"
 
     qualified_links = [l for l, r in results.items() if r == "yes"]
     if qualified_links:
         output_path = os.path.join(RELEVANT_DIR, file_name)
         with open(output_path, "w") as f:
             f.write("\n".join(qualified_links))
-        print(f"✅ Saved {len(qualified_links)} qualified links.")
+        print(f"✅ Saved {len(qualified_links)} qualified links.", flush=True)
         return True
     else:
-        print("🚫 No qualified links found.")
+        print("🚫 No qualified links found.", flush=True)
         return False
 
 # === Main ===
 def main():
-    print("🚀 Starting processing...")
+    print("🚀 Starting processing...", flush=True)
     txt_files = sorted(
         [f for f in os.listdir(LINKS_DIR) if f.endswith(".txt")],
         key=lambda x: int(x.split("_")[0])
@@ -124,7 +123,7 @@ def main():
         if qualified_count >= MAX_QUALIFIED_TXT:
             break
 
-        print(f"\n📂 Processing file [{index + 1}]: {file_name}")
+        print(f"\n📂 Processing file [{index + 1}]: {file_name}", flush=True)
         start_time = time.time()
 
         try:
@@ -132,16 +131,16 @@ def main():
             if successful:
                 qualified_count += 1
         except Exception as e:
-            print(f"❌ Unexpected error in file {file_name}: {e}")
+            print(f"❌ Unexpected error in file {file_name}: {e}", flush=True)
 
         elapsed = time.time() - start_time
         if elapsed < WAIT_BETWEEN_FILES:
             wait_time = WAIT_BETWEEN_FILES - elapsed
             wait_between_files(int(wait_time))
         else:
-            print("⚠️ File took longer than wait period, skipping delay.\n")
+            print("⚠️ File took longer than wait period, skipping delay.\n", flush=True)
 
-    print(f"\n🎉 Done! Total qualified files: {qualified_count}")
+    print(f"\n🎉 Done! Total qualified files: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
     main()
