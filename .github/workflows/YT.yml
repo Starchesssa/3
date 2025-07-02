@@ -1,0 +1,35 @@
+
+name: Auto Refresh YouTube Access Token
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:        # Optional manual run
+
+jobs:
+  refresh-token:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2
+
+    - name: Run YT.py to refresh access token
+      run: |
+        python3 YT.py
+
+    - name: Upload access token as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: YT
+        path: YT.txt
+        overwrite: true  # Ensure it replaces the artifact every time
