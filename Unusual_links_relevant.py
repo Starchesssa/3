@@ -39,10 +39,7 @@ for idx, key in enumerate(API_KEYS):
     else:
         raise ValueError(f"Missing GEMINI_API{idx+1} environment variable.")
 
-CLIENT_MODEL_COMBOS = []
-for idx, client in enumerate(CLIENTS):
-    for model in MODELS:
-        CLIENT_MODEL_COMBOS.append((client, model, idx))
+CLIENT_MODEL_COMBOS = [(client, model, idx) for idx, client in enumerate(CLIENTS) for model in MODELS]
 
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
@@ -69,28 +66,19 @@ def try_model_once(link, product, model, client, client_index):
         return "yes" if result == "yes" else "no"
     except Exception as e:
         print(f"❌ Error with model {model}, client {client_index + 1}: {e}")
-        return None
+        return "no"
 
-def process_link_with_timeout(link, product, used_indices):
-    combos = CLIENT_MODEL_COMBOS.copy()
-    random.shuffle(combos)
-
-    for i, (client, model, client_index) in enumerate(combos):
-        if i in used_indices:
-            continue
-        print(f"🔄 Trying combo {i + 1}/{len(combos)}: Client {client_index + 1} with model {model}")
-        with ThreadPoolExecutor(max_workers=1) as executor:
-            future = executor.submit(try_model_once, link, product, model, client, client_index)
-            try:
-                result = future.result(timeout=TIMEOUT_PER_REQUEST)
-                if result in {"yes", "no"}:
-                    return (link, result)
-            except TimeoutError:
-                print(f"⏱️ Timeout: {link} on model {model}")
-            except Exception as e:
-                print(f"⚠️ Unhandled error on {link}: {e}")
-        used_indices.append(i)
-    print(f"⚠️ All attempts failed for: {link}")
+def process_link(link, product):
+    client, model, client_index = random.choice(CLIENT_MODEL_COMBOS)
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(try_model_once, link, product, model, client, client_index)
+        try:
+            result = future.result(timeout=TIMEOUT_PER_REQUEST)
+            return (link, result)
+        except TimeoutError:
+            print(f"⏱️ Timeout: {link} on model {model}")
+        except Exception as e:
+            print(f"⚠️ Error for link {link}: {e}")
     return (link, "no")
 
 def wait_between_files(seconds):
@@ -126,29 +114,19 @@ def main():
 
         with ThreadPoolExecutor(max_workers=len(links)) as executor:
             futures = {
-                executor.submit(process_link_with_timeout, link, product, []): link
+                executor.submit(process_link, link, product): link
                 for link in links
             }
 
-            done_links = []
             try:
                 for future in as_completed(futures, timeout=TIMEOUT_PER_FILE):
                     try:
                         link, result = future.result()
                         results[link] = result
-                        done_links.append(link)
                     except Exception as e:
                         print(f"⚠️ A task failed: {e}")
             except TimeoutError:
-                print("🚨 Timeout: Some links exceeded file-level time limit.")
-
-            # Cancel unfinished tasks
-            for f in futures:
-                if not f.done():
-                    f.cancel()
-
-            print(f"✅ Completed {len(done_links)} links.")
-            print(f"⏳ Skipped {len(links) - len(done_links)} links due to timeout or failure.")
+                print("🚨 Timeout: File-level time limit exceeded.")
 
         qualified_links = [l for l, r in results.items() if r == "yes"]
         if qualified_links:
