@@ -46,3 +46,4 @@ jobs:
             git commit -m "🤖 Update relevant links via Smart Link Processor"
             git push
             echo "✅ Changes committed and pushed."
+          fi
