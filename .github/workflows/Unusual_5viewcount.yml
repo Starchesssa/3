@@ -1,0 +1,45 @@
+
+name: 📊 YouTube View Count Fetcher
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "youtube-viewcount-processing"
+  cancel-in-progress: true
+
+jobs:
+  process-youtube-viewcounts:
+    runs-on: ubuntu-latest
+    name: 📈 Fetch YouTube View Counts via API
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🚀 Install dependencies & run view count script
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off requests python-dotenv
+          python -u Unusual_viewcount.py
+        env:
+          YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
+
+      - name: ✅ Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add "Unuusual_memory/VIEW_COUNT/"
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update YouTube View Counts via View Count Fetcher"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
