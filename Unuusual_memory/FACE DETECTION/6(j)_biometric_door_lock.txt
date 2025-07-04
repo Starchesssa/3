@@ -1,0 +1,11 @@
+The requested timestamp list:
+
+00:00-00:46: No face (biometric door lock)
+00:46-04:52: No face (biometric door lock)
+04:52-05:17: Face (biometric door lock)
+05:17-12:10: No face (biometric door lock)
+12:10-12:20: Face (biometric door lock)
+12:20-12:30: Face (biometric door lock)
+12:30-12:44: Face (biometric door lock)
+12:44-13:00: Face (biometric door lock)
+13:00-13:28: Face (biometric door lock)

@@ -1,0 +1,3 @@
+00:00-01:21: No face (robot lawn mower)
+01:21-01:33: Face (robot lawn mower)
+01:33-02:02: No face (robot lawn mower)

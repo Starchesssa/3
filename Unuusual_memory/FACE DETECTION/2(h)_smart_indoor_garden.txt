@@ -1,0 +1,2 @@
+00:00-00:01: Face (smart indoor garden)
+00:01-00:37: No face (smart indoor garden)

@@ -1,0 +1,11 @@
+Below is a detailed timestamp list indicating the presence or absence of a face in the video:
+
+00:00-00:08: No face (smart AI oven)
+00:08-00:11: Face (smart AI oven)
+00:11-00:15: No face (smart AI oven)
+00:15-00:22: Face (smart AI oven)
+00:22-00:26: No face (smart AI oven)
+00:26-00:27: Face (smart AI oven)
+00:27-00:33: No face (smart AI oven)
+00:33-00:38: Face (smart AI oven)
+00:38-00:49: No face (smart AI oven)

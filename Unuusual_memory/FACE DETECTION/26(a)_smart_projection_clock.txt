@@ -1,0 +1,5 @@
+Here's the detailed timestamp list:
+
+00:00-00:02: Face (smart projection clock)
+00:02-00:03: No face (smart projection clock)
+00:03-00:07: Face (smart projection clock)

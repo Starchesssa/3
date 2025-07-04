@@ -1,0 +1,9 @@
+Here is a detailed timestamp list indicating when a face appears and when it doesn’t:
+
+00:00-00:01: No face (robot window cleaner)
+00:01-00:03: Face (robot window cleaner)
+00:03-00:06: No face (robot window cleaner)
+00:06-00:08: No face (robot window cleaner)
+00:08-00:10: No face (robot window cleaner)
+00:10-00:12: Face (robot window cleaner)
+00:12-00:16: No face (robot window cleaner)

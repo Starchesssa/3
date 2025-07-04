@@ -1,0 +1,8 @@
+00:00-00:02: Face (smart sleep tracking mat)
+00:02-00:03: No face (smart sleep tracking mat)
+00:03-00:07: Face (smart sleep tracking mat)
+00:07-00:10: No face (smart sleep tracking mat)
+00:10-00:17: Face (smart sleep tracking mat)
+00:17-00:23: No face (smart sleep tracking mat)
+00:23-00:37: Face (smart sleep tracking mat)
+00:37-00:39: No face (smart sleep tracking mat)

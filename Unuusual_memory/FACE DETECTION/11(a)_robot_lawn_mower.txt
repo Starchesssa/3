@@ -1,0 +1,7 @@
+Here is a detailed timestamp list:
+
+00:00-00:23: No face (robot lawn mower)
+00:23-00:26: Face (robot lawn mower)
+00:26-00:28: No face (robot lawn mower)
+00:28-00:29: Face (robot lawn mower)
+00:29-00:38: No face (robot lawn mower)

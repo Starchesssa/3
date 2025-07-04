@@ -1,0 +1,3 @@
+Below is a detailed timestamp list showing when a face appears and when it doesn’t:
+
+00:00-00:24: No face (smart curtain opener)

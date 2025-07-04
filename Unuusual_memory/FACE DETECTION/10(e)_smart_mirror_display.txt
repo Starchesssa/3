@@ -1,0 +1,9 @@
+Here's a detailed timestamp list for faces on the smart mirror display:
+
+00:00-00:08: No face (THOMSON Smart TV)
+00:08-00:16: Face (THOMSON Smart TV)
+00:16-00:23: Face (THOMSON Smart TV)
+00:23-00:31: Face (THOMSON Smart TV)
+00:31-03:29: No face (THOMSON Smart TV)
+03:29-03:41: No face (THOMSON Smart TV)
+03:41-03:54: Face (THOMSON Smart TV)

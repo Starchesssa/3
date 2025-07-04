@@ -1,0 +1,12 @@
+Below is a detailed timestamp list indicating when a face appears and when it doesn’t:
+
+00:00-00:03: No face (smart spice dispenser)
+00:03-00:05: Face (smart spice dispenser)
+00:05-00:07: No face (smart spice dispenser)
+00:07-00:09: Face (smart spice dispenser)
+00:09-00:13: No face (smart spice dispenser)
+00:13-00:15: Face (smart spice dispenser)
+00:15-00:17: No face (smart spice dispenser)
+00:17-00:18: Face (smart spice dispenser)
+00:18-00:22: No face (smart spice dispenser)
+00:22-00:28: Face (smart spice dispenser)

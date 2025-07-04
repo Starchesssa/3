@@ -1,0 +1,11 @@
+Here's the timestamp list for faces in the video:
+
+00:00-00:29: No face (smart plant watering)
+00:29-00:46: Face (smart plant watering)
+00:46-01:07: No face (smart plant watering)
+01:07-01:10: Face (smart plant watering)
+01:10-01:16: No face (smart plant watering)
+01:16-01:21: Face (smart plant watering)
+01:21-01:27: No face (smart plant watering)
+01:27-01:34: Face (smart plant watering)
+01:34-02:18: No face (smart plant watering)

@@ -1,0 +1,5 @@
+Here's the timestamp list for face appearance:
+
+00:00-00:10: No face (smart ai oven)
+00:10-00:11: Face (smart ai oven)
+00:11-00:16: No face (smart ai oven)

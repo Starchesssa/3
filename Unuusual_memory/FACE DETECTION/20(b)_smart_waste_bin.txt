@@ -1,0 +1,14 @@
+Here is a detailed timestamp list:
+
+00:00-00:29: No face (smart waste bin)
+00:29-00:30: Face (smart waste bin)
+00:30-00:34: No face (smart waste bin)
+00:34-00:35: Face (smart waste bin)
+00:35-00:38: No face (smart waste bin)
+00:38-00:39: Face (smart waste bin)
+00:39-00:47: No face (smart waste bin)
+00:47-00:49: Face (smart waste bin)
+00:49-00:51: No face (smart waste bin)
+00:51-00:53: Face (smart waste bin)
+00:53-00:57: No face (smart waste bin)
+00:57-01:04: Face (smart waste bin)

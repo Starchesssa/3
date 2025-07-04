@@ -1,0 +1,3 @@
+00:00-00:12: No face (smart toilet bidet)
+00:12-00:15: Face (smart toilet bidet)
+00:15-01:57: No face (smart toilet bidet)

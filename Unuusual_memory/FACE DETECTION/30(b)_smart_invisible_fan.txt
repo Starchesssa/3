@@ -1,0 +1,3 @@
+00:00-00:13: No face (smart invisible fan)
+00:13-00:18: Face (smart invisible fan)
+00:18-00:29: No face (smart invisible fan)

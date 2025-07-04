@@ -1,0 +1,16 @@
+Here's a detailed timestamp list for the video:
+
+00:00-00:06: No face (smart mirror display)
+00:06-00:30: Face (smart mirror display)
+00:30-00:32: No face (smart mirror display)
+00:32-00:52: Face (smart mirror display)
+00:52-01:05: No face (smart mirror display)
+01:05-01:14: Face (smart mirror display)
+01:14-01:28: No face (smart mirror display)
+01:28-01:46: Face (smart mirror display)
+01:46-01:56: No face (smart mirror display)
+01:56-02:20: Face (smart mirror display)
+02:20-02:24: No face (smart mirror display)
+02:24-02:40: Face (smart mirror display)
+02:40-02:51: No face (smart mirror display)
+02:51-02:58: Face (smart mirror display)

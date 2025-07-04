@@ -1,0 +1,5 @@
+Below is a detailed timestamp list of when a face appears and when it doesn't in the video:
+
+00:00-00:15: Face (smart shower head)
+00:15-00:33: No face (smart shower head)
+00:33-00:37: Face (smart shower head)

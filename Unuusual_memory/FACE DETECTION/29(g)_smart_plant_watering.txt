@@ -1,0 +1,18 @@
+Here's the detailed timestamp list:
+
+00:00-00:05: No face (smart plant watering)
+00:05-00:11: Face (smart plant watering)
+00:11-00:20: No face (smart plant watering)
+00:20-00:36: Face (smart plant watering)
+00:36-00:58: No face (smart plant watering)
+00:58-01:04: Face (smart plant watering)
+01:04-01:21: Face (smart plant watering)
+01:21-01:30: Face (smart plant watering)
+01:30-02:18: Face (smart plant watering)
+02:18-02:26: Face (smart plant watering)
+02:26-02:43: Face (smart plant watering)
+02:43-03:04: No face (smart plant watering)
+03:04-03:38: No face (smart plant watering)
+03:38-04:09: Face (smart plant watering)
+04:09-06:17: Face (smart plant watering)
+06:17-07:01: No face (smart plant watering)

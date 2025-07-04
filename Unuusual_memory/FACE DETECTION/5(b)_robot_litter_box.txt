@@ -1,0 +1,5 @@
+Here is a detailed timestamp list:
+
+00:00-00:10: Face (robot litter box)
+00:10-00:20: No face (robot litter box)
+00:20-00:24: No face (robot litter box)

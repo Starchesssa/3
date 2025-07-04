@@ -1,0 +1,5 @@
+Here's a detailed timestamp list:
+
+00:00-00:00: No face (smart curtain opener)
+00:00-00:23: Face (smart curtain opener)
+00:23-00:32: No face (smart curtain opener)

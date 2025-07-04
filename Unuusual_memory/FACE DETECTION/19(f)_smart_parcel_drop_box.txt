@@ -1,0 +1,5 @@
+00:00-00:03: No face (smart parcel drop box)
+00:03-00:08: Face (smart parcel drop box)
+00:08-00:09: No face (smart parcel drop box)
+00:09-00:11: Face (smart parcel drop box)
+00:11-00:17: No face (smart parcel drop box)

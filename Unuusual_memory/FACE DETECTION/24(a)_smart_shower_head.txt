@@ -1,0 +1,3 @@
+00:00-00:10: No face (smart shower head)
+00:10-02:39: Face (smart shower head)
+02:39-02:55: No face (smart shower head)

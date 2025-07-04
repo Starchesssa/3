@@ -1,0 +1,7 @@
+Here is the detailed timestamp list:
+
+00:00-00:04: Face (smart mirror display)
+00:04-00:10: No face (smart mirror display)
+00:10-00:12: Face (smart mirror display)
+00:12-00:18: No face (smart mirror display)
+00:18-00:30: Face (smart mirror display)

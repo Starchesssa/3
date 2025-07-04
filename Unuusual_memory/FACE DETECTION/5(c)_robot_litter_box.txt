@@ -1,0 +1,3 @@
+00:00-00:04: Face (robot litter box)
+00:04-00:17: No face (robot litter box)
+00:17-00:23: Face (robot litter box)

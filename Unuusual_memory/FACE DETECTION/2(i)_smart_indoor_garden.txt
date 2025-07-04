@@ -1,0 +1,12 @@
+Below is a detailed timestamp list of when a face appears and when it doesn’t in the video:
+
+00:00-00:03: No face (smart indoor garden)
+00:03-00:09: Face (smart indoor garden)
+00:09-00:14: Face (smart indoor garden)
+00:14-00:20: Face (smart indoor garden)
+00:20-00:23: Face (smart indoor garden)
+00:23-00:26: No face (smart indoor garden)
+00:26-00:30: Face (smart indoor garden)
+00:30-00:36: Face (smart indoor garden)
+00:36-00:39: Face (smart indoor garden)
+00:39-00:48: No face (smart indoor garden)

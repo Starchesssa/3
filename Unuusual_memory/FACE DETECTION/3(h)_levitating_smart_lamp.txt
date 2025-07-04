@@ -1,0 +1,4 @@
+00:00-00:01: No face (levitating smart lamp)
+00:01-00:01: Face (levitating smart lamp)
+00:01-00:02: No face (levitating smart lamp)
+00:02-00:11: Face (levitating smart lamp)

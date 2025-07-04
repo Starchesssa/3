@@ -1,0 +1,7 @@
+Here is the detailed timestamp list:
+
+00:00-01:02: No face (smart digital peephole)
+01:02-01:17: Face (smart digital peephole)
+01:17-01:22: No face (smart digital peephole)
+01:22-01:28: Face (smart digital peephole)
+01:28-01:52: No face (smart digital peephole)

@@ -1,0 +1,17 @@
+Here's the timestamp list for face visibility:
+
+00:00-01:14: Face (smart indoor garden)
+01:14-02:40: Face (smart indoor garden)
+02:40-03:05: No face (smart indoor garden)
+03:05-03:27: No face (smart indoor garden)
+03:27-03:55: Face (smart indoor garden)
+03:55-04:00: Face (smart indoor garden)
+04:00-04:09: Face (smart indoor garden)
+04:09-04:54: Face (smart indoor garden)
+04:54-05:15: Face (smart indoor garden)
+05:15-05:50: No face (smart indoor garden)
+05:50-06:13: Face (smart indoor garden)
+06:13-09:12: Face (smart indoor garden)
+09:12-10:10: No face (smart indoor garden)
+10:10-11:19: No face (smart indoor garden)
+11:20-12:00: No face (smart indoor garden)

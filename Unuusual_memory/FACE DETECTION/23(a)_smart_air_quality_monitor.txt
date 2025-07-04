@@ -1,0 +1,17 @@
+Here is a detailed timestamp list for faces in the video:
+
+00:00-00:01: Face (smart air quality monitor)
+00:01-00:03: No face (smart air quality monitor)
+00:03-00:03: Face (smart air quality monitor)
+00:03-00:05: Face (smart air quality monitor)
+00:05-00:05: No face (smart air quality monitor)
+00:05-00:06: Face (smart air quality monitor)
+00:06-00:07: No face (smart air quality monitor)
+00:07-00:08: Face (smart air quality monitor)
+00:08-00:09: No face (smart air quality monitor)
+00:09-00:10: No face (smart air quality monitor)
+00:10-00:10: No face (smart air quality monitor)
+00:10-00:11: Face (smart air quality monitor)
+00:11-00:12: Face (smart air quality monitor)
+00:12-00:13: No face (smart air quality monitor)
+00:13-00:16: No face (smart air quality monitor)

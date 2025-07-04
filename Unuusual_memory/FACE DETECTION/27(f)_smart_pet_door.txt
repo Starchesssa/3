@@ -1,0 +1,6 @@
+Below is a timestamp list of when a face appears and does not appear:
+
+00:00-00:03: No face (smart pet door)
+00:03-00:05: Face (smart pet door)
+00:05-00:08: No face (smart pet door)
+00:08-00:10: Face (smart pet door)

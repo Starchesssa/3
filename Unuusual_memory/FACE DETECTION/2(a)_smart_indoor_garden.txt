@@ -1,0 +1,15 @@
+Here is a detailed timestamp list of when faces appear and when they don't in the video:
+
+00:00-00:11: No face (NosiliaCast/CES)
+00:11-01:40: Face (Plantaform Smart Indoor Gardens)
+01:40-01:51: No face (Plantaform Smart Indoor Gardens)
+01:51-02:32: Face (Plantaform Smart Indoor Gardens)
+02:32-02:39: No face (Plantaform Smart Indoor Gardens)
+02:39-03:04: Face (Plantaform Smart Indoor Gardens)
+03:04-03:19: No face (Plantaform Smart Indoor Gardens)
+03:19-03:47: Face (Plantaform Smart Indoor Gardens)
+03:47-03:58: No face (Plantaform Smart Indoor Gardens)
+03:58-04:12: Face (Plantaform Smart Indoor Gardens)
+04:12-04:28: No face (Plantaform Smart Indoor Gardens)
+04:28-05:00: Face (Plantaform Smart Indoor Gardens)
+05:00-05:14: No face (NosiliaCast)

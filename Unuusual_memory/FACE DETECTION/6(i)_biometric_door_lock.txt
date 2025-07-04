@@ -1,0 +1,8 @@
+00:00-00:20: No face (biometric door lock)
+00:20-00:39: Face (biometric door lock)
+00:39-00:43: No face (biometric door lock)
+00:43-01:03: Face (biometric door lock)
+01:03-01:07: No face (biometric door lock)
+01:07-01:26: Face (biometric door lock)
+01:26-01:30: No face (biometric door lock)
+01:30-02:19: Face (biometric door lock)

@@ -1,0 +1,9 @@
+Here's a detailed timestamp list:
+
+00:00-00:01: No face (smart parcel drop box)
+00:01-00:05: Face (smart parcel drop box)
+00:05-00:07: No face (smart parcel drop box)
+00:07-00:11: Face (smart parcel drop box)
+00:11-00:13: No face (smart parcel drop box)
+00:13-00:19: Face (smart parcel drop box)
+00:19-00:25: No face (smart parcel drop box)

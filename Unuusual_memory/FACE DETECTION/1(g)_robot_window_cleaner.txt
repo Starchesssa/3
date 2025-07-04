@@ -1,0 +1,18 @@
+Here's a detailed timestamp list:
+
+00:00-00:04: Face (robot window cleaner)
+00:04-00:06: No face (robot window cleaner)
+00:06-00:10: Face (robot window cleaner)
+00:10-00:12: No face (robot window cleaner)
+00:12-00:17: Face (robot window cleaner)
+00:17-00:19: No face (robot window cleaner)
+00:19-00:23: Face (robot window cleaner)
+00:23-00:25: No face (robot window cleaner)
+00:25-00:29: Face (robot window cleaner)
+00:29-00:32: No face (robot window cleaner)
+00:32-00:37: Face (robot window cleaner)
+00:37-00:40: No face (robot window cleaner)
+00:40-00:45: Face (robot window cleaner)
+00:45-00:48: No face (robot window cleaner)
+00:48-00:54: Face (robot window cleaner)
+00:54-00:59: No face (robot window cleaner)

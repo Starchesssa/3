@@ -1,0 +1,7 @@
+Here is a detailed timestamp list:
+
+00:00-00:41: Face (smart beverage warmer)
+00:41-00:54: No face (smart beverage warmer)
+00:54-01:15: No face (smart beverage warmer)
+01:15-01:54: No face (smart beverage warmer)
+01:54-02:28: Face (smart beverage warmer)

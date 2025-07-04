@@ -1,0 +1,2 @@
+00:00-00:01: No face (smart digital peephole)
+00:01-00:48: Face (smart digital peephole)

@@ -1,0 +1,6 @@
+00:00-00:10: Face (smart mirror display)
+00:10-00:13: No face (smart mirror display)
+00:13-00:18: Face (smart mirror display)
+00:18-00:25: No face (smart mirror display)
+00:25-00:57: Face (smart mirror display)
+00:57-01:08: No face (smart mirror display)

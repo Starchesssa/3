@@ -1,0 +1,7 @@
+Here is a detailed timestamp list:
+
+00:00-00:03: No face (smart faucet dispenser)
+00:03-00:14: Face (smart faucet dispenser)
+00:14-00:16: No face (smart faucet dispenser)
+00:16-00:55: Face (smart faucet dispenser)
+00:55-01:00: No face (smart faucet dispenser)

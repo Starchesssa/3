@@ -1,0 +1,2 @@
+00:00-00:09: Face (smart beverage warmer)
+00:09-00:26: No face (smart beverage warmer)

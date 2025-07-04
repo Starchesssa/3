@@ -1,0 +1,9 @@
+Here's the timestamp list for the video:
+
+00:00-00:01: Face (smart aroma diffuser)
+00:01-00:02: No face (smart aroma diffuser)
+00:02-00:08: Face (smart aroma diffuser)
+00:08-00:09: No face (smart aroma diffuser)
+00:09-00:19: Face (smart aroma diffuser)
+00:19-00:20: No face (smart aroma diffuser)
+00:20-00:37: Face (smart aroma diffuser)

@@ -1,0 +1,16 @@
+Here is a detailed timestamp list for when a face appears and when it doesn’t:
+
+00:00-00:01: No face (smart parcel drop box)
+00:01-00:05: Face (smart parcel drop box)
+00:05-00:09: No face (smart parcel drop box)
+00:09-00:19: Face (smart parcel drop box)
+00:19-00:24: Face (smart parcel drop box)
+00:24-00:58: No face (smart parcel drop box)
+00:58-01:18: Face (smart parcel drop box)
+01:18-01:25: No face (smart parcel drop box)
+01:25-01:38: Face (smart parcel drop box)
+01:38-01:40: No face (smart parcel drop box)
+01:40-01:49: Face (smart parcel drop box)
+01:49-01:59: No face (smart parcel drop box)
+01:59-02:04: Face (smart parcel drop box)
+02:04-02:08: No face (smart parcel drop box)

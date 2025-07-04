@@ -1,0 +1,13 @@
+Here's a detailed timestamp list indicating when a "face" appears on the robotic pool cleaner and when it doesn't:
+
+00:00-00:04: No pool cleaner
+00:04-00:15: No face (robotic pool cleaner)
+00:15-00:29: Face (Dolphin Premier Inground)
+00:29-01:27: No face (Aquabot APRVJR Pool Rover)
+01:27-02:18: No face (Hayward RC9990CUB TigerShark)
+02:18-03:04: No face (Dolphin Nautilus)
+03:04-03:57: Face (Dolphin Premier Inground)
+03:57-04:49: No face (Dolphin Nautilus CC)
+04:49-05:44: No face (Aquabot Pool Rover S2)
+05:44-06:37: No face (Dolphin Nautilus CC Plus)
+06:37-07:02: No pool cleaner

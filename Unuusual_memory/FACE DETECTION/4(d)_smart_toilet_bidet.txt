@@ -1,0 +1,15 @@
+Below is a detailed timestamp list of when a face appears and when it doesn’t in the video.
+
+00:00-00:12: No face (smart toilet bidet)
+00:12-00:15: Face (smart toilet bidet)
+00:15-00:23: No face (smart toilet bidet)
+00:23-00:25: Face (smart toilet bidet)
+00:25-00:30: No face (smart toilet bidet)
+00:30-00:31: Face (smart toilet bidet)
+00:31-00:35: No face (smart toilet bidet)
+00:35-00:36: Face (smart toilet bidet)
+00:36-00:41: No face (smart toilet bidet)
+00:41-00:46: Face (smart toilet bidet)
+00:46-00:48: No face (smart toilet bidet)
+00:48-00:50: Face (smart toilet bidet)
+00:50-01:57: No face (smart toilet bidet)

@@ -1,0 +1,16 @@
+Below is a timestamp list of when a face appears and when it doesn’t in the video, with the product name:
+
+00:00-00:06: No face (smart waste bin)
+00:06-00:09: Face (smart waste bin)
+00:09-00:11: No face (smart waste bin)
+00:11-00:12: Face (smart waste bin)
+00:12-00:19: No face (smart waste bin)
+00:19-00:21: Face (smart waste bin)
+00:21-00:26: No face (smart waste bin)
+00:26-00:30: No face (smart waste bin)
+00:30-00:31: Face (smart waste bin)
+00:31-00:35: No face (smart waste bin)
+00:35-00:37: Face (smart waste bin)
+00:37-00:46: No face (smart waste bin)
+00:46-00:47: Face (smart waste bin)
+00:47-00:54: No face (smart waste bin)

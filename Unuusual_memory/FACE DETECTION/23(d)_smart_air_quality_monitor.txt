@@ -1,0 +1,5 @@
+00:00-00:07: No face (smart air quality monitor)
+00:07-00:17: Face (smart air quality monitor)
+00:17-00:24: No face (smart air quality monitor)
+00:24-00:29: Face (smart air quality monitor)
+00:29-00:58: No face (smart air quality monitor)

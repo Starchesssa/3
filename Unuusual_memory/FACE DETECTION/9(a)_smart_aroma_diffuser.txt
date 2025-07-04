@@ -1,0 +1,7 @@
+The following is a timestamp list of when a face appears and when it doesn't:
+
+00:00-00:53: No face (smart aroma diffuser)
+00:53-00:56: Face (smart aroma diffuser)
+00:56-01:21: No face (smart aroma diffuser)
+01:21-01:34: Face (smart aroma diffuser)
+01:34-01:53: No face (smart aroma diffuser)

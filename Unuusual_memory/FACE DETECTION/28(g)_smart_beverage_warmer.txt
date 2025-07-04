@@ -1,0 +1,9 @@
+Here's the timestamp list for faces in the video:
+
+00:00-00:01: No face (smart beverage warmer)
+00:01-00:48: No face (smart beverage warmer)
+00:48-00:54: Face (smart beverage warmer)
+00:54-01:02: No face (smart beverage warmer)
+01:02-01:07: Face (smart beverage warmer)
+01:07-01:14: Face (smart beverage warmer)
+01:14-01:18: No face (smart beverage warmer)

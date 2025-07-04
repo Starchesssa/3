@@ -1,0 +1,4 @@
+00:00-02:10: No face (robotic pool cleaner)
+02:10-12:50: Face (robotic pool cleaner)
+12:50-13:06: No face (robotic pool cleaner)
+13:06-18:23: Face (robotic pool cleaner)

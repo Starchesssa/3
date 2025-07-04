@@ -1,0 +1,2 @@
+00:00-00:47: Face (invisible smart speaker)
+00:47-00:54: No face (invisible smart speaker)
