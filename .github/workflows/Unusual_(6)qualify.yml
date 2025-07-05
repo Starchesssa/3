@@ -1,0 +1,42 @@
+
+name: 🔎 Smart Gadget Qualifier
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "gadget-qualifier"
+  cancel-in-progress: true
+
+jobs:
+  qualify-gadgets:
+    runs-on: ubuntu-latest
+    name: 🧠 Run Gadget Qualifier Script
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Run Python Script (Qualify Gadgets)
+        run: |
+          export PYTHONUNBUFFERED=1
+          python -u "Unusual_(6)qualify.py"
+
+      - name: ✅ Commit & Push Qualified Gadgets
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/QUALIFY/qualified.txt
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update qualified gadgets via Gadget Qualifier Script"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
