@@ -8,19 +8,19 @@ permissions:
   contents: write
 
 concurrency:
-  group: "link-processing-rating"
+  group: "link-processing"
   cancel-in-progress: true
 
 jobs:
-  process-links-with-rating:
+  process-links:
     runs-on: ubuntu-latest
-    name: 🧠 Process Smart Links with Rating Automatically
+    name: 🧠 Process Smart Links Automatically
 
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: 🚀 Run Rating Python Script in Verbose Mode
+      - name: 🚀 Run Python script in verbose mode
         run: |
           export PYTHONUNBUFFERED=1
           pip install --no-cache-dir --progress-bar=off google-genai
@@ -43,7 +43,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "🟡 No changes to commit."
           else
-            git commit -m "🤖 Update ratings via Smart Link Processor with Rating"
+            git commit -m "🤖 Update ratings via Smart Link Processor"
             git push
             echo "✅ Changes committed and pushed."
           fi
