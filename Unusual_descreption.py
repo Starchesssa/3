@@ -46,7 +46,7 @@ def letter_to_index(letter):
 
 # === MAIN ===
 def main():
-    with open(QUALIFY_PATH) as f:
+    with open(QUALIFY_PATH, encoding="utf-8") as f:
         for line in f:
             if not line.strip():
                 continue
@@ -59,7 +59,8 @@ def main():
             group_num = parts[0].split()[-1]
             file_name = parts[1].strip()
 
-            match = re.match(r'(\d+)([a-z])_(.+)\.txt$', file_name)
+            # Match format: 4(a)_smart_toilet_bidet.txt
+            match = re.match_(.+)\.txt$', file_name)
             if not match:
                 print(f"[!] Failed to parse file name: {file_name}")
                 continue
@@ -72,7 +73,7 @@ def main():
                 print(f"[!] Links file not found: {links_file}")
                 continue
 
-            with open(links_file) as lf:
+            with open(links_file, encoding="utf-8") as lf:
                 links = [l.strip() for l in lf if l.strip()]
 
             if qualified_index >= len(links):
