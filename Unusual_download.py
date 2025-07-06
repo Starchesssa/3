@@ -3,11 +3,13 @@ import os
 import subprocess
 import re
 
+# Paths to input and output directories
 QUALIFY_PATH = "Unuusual_memory/QUALIFY/qualified.txt"
 LINKS_DIR = "Unuusual_memory/Relevant_links"
 OUTPUT_DIR = "Vid"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+# Function to download videos using yt-dlp through Tor proxy
 def download_video(link, out_path):
     try:
         subprocess.run([
@@ -20,23 +22,26 @@ def download_video(link, out_path):
     except subprocess.CalledProcessError as e:
         print(f"[!] Download failed: {e}")
 
+# Function to convert letter to index (e.g., 'a' → 0)
 def letter_to_index(letter):
     return ord(letter.lower()) - ord('a')
 
+# Main loop to process qualified.txt
 with open(QUALIFY_PATH) as f:
     for line in f:
         if not line.strip():
             continue
+
         parts = line.strip().split(": ")
         if len(parts) < 2:
             print(f"[!] Unexpected line format: {line.strip()}")
             continue
-        
+
         group_num = parts[0].split()[-1]
         file_name = parts[1].strip()
 
-        # Correct regex to match filenames like 3(a)_levitating_smart_lamp.txt
-        match = re.match(r'(\d+)([a-z])_(.+)\.txt$', file_name)
+        # Updated regex: matches patterns like 3(a)_levitating_smart_lamp.txt
+        match = re.match(r'(\d+)\(([a-z])\)_(.+)\.txt$', file_name)
         if not match:
             print(f"[!] Failed to parse file name: {file_name}")
             continue
