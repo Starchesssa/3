@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 import re
@@ -11,7 +10,6 @@ LINKS_DIR = "Unuusual_memory/Relevant_links"
 OUTPUT_DIR = "Vid"
 FILTER_RESULT_PATH = os.path.join(OUTPUT_DIR, "filter_result.txt")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-
 
 # === UTILITIES ===
 def run_command(command, error_msg, retries=2, delay=5):
@@ -28,7 +26,6 @@ def run_command(command, error_msg, retries=2, delay=5):
                 print("[✘] Giving up.")
                 sys.exit(1)
 
-
 # === TOR SETUP ===
 def start_tor():
     print("[*] Setting up Tor...")
@@ -41,7 +38,6 @@ def start_tor():
     print("[*] Starting Tor service...")
     run_command(["sudo", "service", "tor", "start"], "Failed to start Tor")
 
-    # Optional validation
     try:
         result = subprocess.run([
             "curl", "--socks5", "127.0.0.1:9050", "https://check.torproject.org/"
@@ -53,7 +49,6 @@ def start_tor():
     except Exception as e:
         print(f"[!] Skipping Tor validation: {e}")
 
-
 # === FILTER CHECK ===
 def read_filter_result():
     try:
@@ -61,9 +56,7 @@ def read_filter_result():
             result = f.read().strip().lower()
             return result == "no"
     except Exception as e:
-        print(f"[ERROR] Could not read filter result: {e}")
-        return True  # Default to allowing download
-
+        print(f"[ERROR] Could not read filter return True  # Default to allowing download
 
 # === DOWNLOAD FUNCTION ===
 def download_video(link, out_path):
@@ -76,11 +69,9 @@ def download_video(link, out_path):
         link
     ], "Video download failed", retries=3, delay=7)
 
-
 # === PARSING AND MAIN LOOP ===
 def letter_to_index(letter):
     return ord(letter.lower()) - ord('a')
-
 
 def main():
     if not read_filter_result():
@@ -112,7 +103,8 @@ def main():
 
             links_file = os.path.join(LINKS_DIR, f"{group_number}_{file_title}.txt")
             if not os.path.exists(links_file):
-                print(f"[!] Links file not found:                continue
+                print(f"[!] Links file not found: {links_file}")
+                continue
 
             with open(links_file) as lf:
                 links = [l.strip() for l in lf if l.strip()]
@@ -126,7 +118,6 @@ def main():
             download_video(link, out_path)
 
     print("[✓] All downloads complete.")
-
 
 # === EXECUTE ===
 if __name__ == "__main__":
