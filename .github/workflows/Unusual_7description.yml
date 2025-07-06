@@ -1,0 +1,46 @@
+
+name: Run Unusual Description
+
+on:
+  workflow_dispatch:
+
+jobs:
+  unusual-description:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # <--- IMPORTANT to enable push with your token
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install google-api-python-client
+
+      - name: Run Unusual_descreption.py
+        env:
+          YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
+        run: python Unusual_descreption.py
+
+      - name: ✅ Commit & Push Unusual Descriptions
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add "Unuusual_memory/DESCREPTION/"
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update unusual descriptions via Unusual_descreption.py"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
