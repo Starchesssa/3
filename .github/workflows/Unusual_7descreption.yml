@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # Needed for push
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
@@ -27,8 +29,10 @@ jobs:
           YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
         run: python Unusual_descreption.py
 
-      - name: Upload video info files as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: video-descriptions
-          path: Vid/
+      - name: Commit & push results to Unuusual_memory/DESCREPTION
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Unuusual_memory/DESCREPTION
+          git commit -m "Update video descriptions [skip ci]" || echo "No changes to commit"
+          git push
