@@ -2,7 +2,7 @@
 name: Run Unusual Description
 
 on:
-  workflow_dispatch:  # Manual trigger only
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   unusual-description:
@@ -11,15 +11,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true  # Needed for push
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      - name: Install required Python packages
+      - name: Install Python dependencies
         run: |
           pip install --upgrade pip
           pip install google-api-python-client
@@ -29,10 +27,18 @@ jobs:
           YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
         run: python Unusual_descreption.py
 
-      - name: Commit & push results to Unuusual_memory/DESCREPTION
+      - name: ✅ Commit & Push Unusual Descriptions
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Unuusual_memory/DESCREPTION
-          git commit -m "Update video descriptions [skip ci]" || echo "No changes to commit"
-          git push
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/DESCREPTION/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update unusual descriptions via Unusual_descreption.py"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
