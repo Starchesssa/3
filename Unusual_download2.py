@@ -18,7 +18,7 @@ def restart_tor():
     run_command(["sudo", "service", "tor", "restart"], "Failed to restart Tor", retries=1)
     time.sleep(5)  # Allow Tor time to reconnect
 
-def run_command(command, error_msg, retries=2, delay=5, restart_ip_on_fail=False):
+def run_command(command, error_msg, retries=5, delay=5, restart_ip_on_fail=False):
     for attempt in range(retries):
         try:
             subprocess.run(command, check=True)
