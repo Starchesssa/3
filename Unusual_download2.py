@@ -13,21 +13,26 @@ FILTER_RESULT_PATH = os.path.join(OUTPUT_DIR, "filter_result.txt")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # === UTILITIES ===
-def run_command(command, error_msg):
-    subprocess.run(command, check=True)
+def restart_tor():
+    print("[*] Restarting Tor to get new IP...")
+    run_command(["sudo", "service", "tor", "restart"], "Failed to restart Tor", retries=1)
+    time.sleep(5)  # Allow Tor time to reconnect
 
-def rotate_tor_ip():
-    print("[*] Rotating Tor IP...")
-    try:
-        subprocess.run(
-            'echo -e \'AUTHENTICATE ""\\nSIGNAL NEWNYM\\nQUIT\' | nc 127.0.0.1 9051',
-            shell=True,
-            check=True
-        )
-        print("[✓] IP Rotated. Waiting for circuit...")
-        time.sleep(10)  # Give Tor time to switch circuits
-    except subprocess.CalledProcessError:
-        print("[!] Failed to rotate IP. Continuing anyway.")
+def run_command(command, error_msg, retries=2, delay=5, restart_ip_on_fail=False):
+    for attempt in range(retries):
+        try:
+            subprocess.run(command, check=True)
+            return
+        except subprocess.CalledProcessError as e:
+            print(f"[ERROR] {error_msg} (Attempt {attempt + 1}/{retries}): {e}")
+            if restart_ip_on_fail:
+                restart_tor()
+            if attempt < retries - 1:
+                print(f"[*] Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print("[✘] Giving up.")
+                sys.exit(1)
 
 # === TOR SETUP ===
 def start_tor():
@@ -65,28 +70,13 @@ def read_filter_result():
 # === DOWNLOAD FUNCTION ===
 def download_video(link, out_path):
     print(f"[*] Downloading from {link}")
-    retries = 3
-    delay = 7
-    for attempt in range(retries):
-        try:
-            run_command([
-                "yt-dlp",
-                "--proxy", "socks5://127.0.0.1:9050",
-                "--merge-output-format", "mp4",
-                "-o", out_path,
-                link
-            ], "Video download failed")
-            print("[✓] Video downloaded successfully.")
-            return
-        except subprocess.CalledProcessError as e:
-            print(f"[ERROR] Video download failed (Attempt {attempt + 1}/{retries}): {e}")
-            if attempt < retries - 1:
-                rotate_tor_ip()  # Rotate IP before retry
-                print(f"[*] Retrying in {delay} seconds...")
-                time.sleep(delay)
-            else:
-                print("[✘] Giving up on this video.")
-                sys.exit(1)
+    run_command([
+        "yt-dlp",
+        "--proxy", "socks5://127.0.0.1:9050",
+        "--merge-output-format", "mp4",
+        "-o", out_path,
+        link
+    ], "Video download failed", retries=3, delay=7, restart_ip_on_fail=True)
 
 # === FILENAME PARSER ===
 def letter_to_index(letter):
@@ -113,7 +103,7 @@ def main():
             group_num = parts[0].split()[-1]
             file_name = parts[1].strip()
 
-            match = re.match(r'(\d+)([a-z])_(.+)\.txt$', file_name)
+            match = re.match(r'(\d+)\(([a-z])\)_(.+)\.txt$', file_name)
             if not match:
                 print(f"[!] Failed to parse file name: {file_name}")
                 continue
