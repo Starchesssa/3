@@ -39,7 +39,7 @@ with open(QUALIFY_PATH, encoding='utf-8') as f:
         group_num = parts[0].split()[-1]  # e.g. "3" from "Group 3"
 
         # Correct regex to parse filenames like 3(a)_levitating_smart_lamp.txt
-        match = re.match(r"(\d+)([a-z])_(.+)\.txt$", group_info)
+        match = re.match(r"(\d+)([a-z])_(.+)\.txt$", group_info)
         if not match:
             print(f"[!] Failed to parse file name: {group_info}")
             continue
