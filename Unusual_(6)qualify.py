@@ -1,80 +1,66 @@
 
 import os
 import re
+import subprocess
 
-rating_dir = "Unuusual_memory/RATING"
-face_dir = "Unuusual_memory/FACE DETECTION"
-qualify_dir = "Unuusual_memory/QUALIFY"
-os.makedirs(qualify_dir, exist_ok=True)
+BASE_DIR = "Unuusual_memory"
+QUALIFY_FILE = os.path.join(BASE_DIR, "QUALIFY", "qualified.txt")
+RELEVANT_DIR = os.path.join(BASE_DIR, "Relevant_links")
+DOWNLOAD_DIR = os.path.join(BASE_DIR, "best_video")
 
-# Gather rating files
-rating_files = [f for f in os.listdir(rating_dir) if f.endswith('.txt')]
+os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
-# Group rating files by their group prefix (e.g., 1, 2, etc.)
-groups = {}
-for filename in rating_files:
-    group_number = filename.split('(')[0]
-    groups.setdefault(group_number, []).append(filename)
+def download_video(url, output_path):
+    print(f"Downloading: {url} -> {output_path}")
+    result = subprocess.run(
+        ["yt-dlp", "-o", output_path, url],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        raise Exception(f"yt-dlp failed: {result.stderr}")
 
-qualified_gadgets = {}
+def main():
+    with open(QUALIFY_FILE, "r", encoding="utf-8") as f:
+        qualified_lines = f.readlines()
 
-for group_number, files in groups.items():
-    candidates = []
-    
-    # Check ratings first
-    for filename in sorted(files):
-        with open(os.path.join(rating_dir, filename), 'r') as f:
-            content = f.read()
-            match = re.search(r'Overall Score:\s*(\d+(?:\.\d+)?)/10', content)
-            if match:
-                score = float(match.group(1))
-                if score >= 9.0:
-                    candidates.append((score, filename))
-    
-    # No valid high rating
-    if not candidates:
-        print(f"❌ Group {group_number} has no high-rated gadgets (9+/10)")
-        continue
-    
-    # Sort by rating (higher first), then by filename (alphabetically)
-    candidates.sort(key=lambda x: (-x[0], x[1]))
-    
-    # Check Face Detection (rich visuals rule)
-    for score, filename in candidates:
-        face_file_path = os.path.join(face_dir, filename)
-        if not os.path.exists(face_file_path):
-            print(f"⚠️ Missing face detection file for {filename}")
+    for line in qualified_lines:
+        line = line.strip()
+        if not line or ":" not in line:
             continue
-        
-        total_no_face_seconds = 0
-        timeline_pattern = re.compile(r'^(\d{2}:\d{2})-(\d{2}:\d{2}):\s*(Face|No face)')
-        
-        with open(face_file_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                match = timeline_pattern.match(line)
-                if match:
-                    start, end, label = match.groups()
-                    start_sec = int(start.split(':')[0]) * 60 + int(start.split(':')[1])
-                    end_sec = int(end.split(':')[0]) * 60 + int(end.split(':')[1])
-                    duration = end_sec - start_sec
-                    if label == "No face":
-                        total_no_face_seconds += duration
-            
-        if total_no_face_seconds > 29:
-            qualified_gadgets[group_number] = filename
-            print(f"✅ Group {group_number} qualified with {filename} (No face seconds: {total_no_face_seconds})")
-            break  # Found the qualifying gadget
-        else:
-            print(f"⛔ Disqualified {filename} (No face seconds: {total_no_face_seconds})")
-    else:
-        if group_number not in qualified_gadgets:
-            print(f"❌ No gadget qualified in Group {group_number}")
 
-# Save results
-qualify_file_path = os.path.join(qualify_dir, 'qualified.txt')
-with open(qualify_file_path, 'w') as f:
-    for group, gadget in qualified_gadgets.items():
-        f.write(f"Group {group}: {gadget}\n")
+        file_name = line.split(":", 1)[1].strip()
+        m = re.match(r"(\d+)([a-z])_(.+)\.txt", file_name)
+        if not m:
+            print(f"[!] Failed to parse file name: {file_name}")
+            continue
 
-print(f"\n🎯 Saved qualified gadgets to '{qualify_file_path}'")
+        group_num = int(m.group(1))
+        letter = m.group(2)
+        title = m.group(3)
+
+        relevant_file_name = f"{group_num}_{title}.txt"
+        relevant_file_path = os.path.join(RELEVANT_DIR, relevant_file_name)
+
+        if not os.path.isfile(relevant_file_path):
+            print(f"[!] Relevant links file not found: {relevant_file_path}")
+            continue
+
+        with open(relevant_file_path, "r", encoding="utf-8") as rf:
+            links = [line.strip() for line in rf if line.strip()]
+
+        index = ord(letter) - ord('a')
+        if index >= len(links):
+            print(f"[!] Link index {index} out of range for file {relevant_file_path}")
+            continue
+
+        url_to_download = links[index]
+        output_filename = f"{group_num}{letter}.vid"
+        output_path = os.path.join(DOWNLOAD_DIR, output_filename)
+
+        try:
+            download_video(url_to_download, output_path)
+        except Exception as e:
+            print(f"[!] Failed to download {url_to_download}: {e}")
+
+if __name__ == "__main__":
+    main()
