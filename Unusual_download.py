@@ -9,13 +9,16 @@ OUTPUT_DIR = "Vid"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def download_video(link, out_path):
-    subprocess.run([
-        "yt-dlp",
-        "--proxy", "socks5://127.0.0.1:9050",
-        "--merge-output-format", "mp4",
-        "-o", out_path,
-        link
-    ], check=True)
+    try:
+        subprocess.run([
+            "yt-dlp",
+            "--proxy", "socks5://127.0.0.1:9050",
+            "--merge-output-format", "mp4",
+            "-o", out_path,
+            link
+        ], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"[!] Download failed: {e}")
 
 def letter_to_index(letter):
     return ord(letter.lower()) - ord('a')
@@ -28,18 +31,22 @@ with open(QUALIFY_PATH) as f:
         group_info = parts[1]
         file_name = group_info.strip()
         group_num = parts[0].split()[-1]
-        
-        # Extract file name correctly
-        match = re.match(r'(\d+)([a-z])_(.+)', file_name)
+
+        # Parse filename with correct regex
+        match = re.match(r'(\d+)([a-z])_(.+)\.txt', file_name)
         if match:
             group_number, letter, file_title = match.groups()
             qualified_index = letter_to_index(letter)
-            links_file = os.path.join(LINKS_DIR, f"{group_number}_{file_title}")
+            links_file = os.path.join(LINKS_DIR, f"{group_number}_{file_title}.txt")
         else:
             print(f"[!] Failed to parse file name: {file_name}")
             continue
-        
-        print(f"[*] Looking for links file: {links_file}")
+
+        # Load links from file
+        if not os.path.exists(links_file):
+            print(f"[!] Links file not found: {links_file}")
+            continue
+
         with open(links_file) as lf:
             links = [l.strip() for l in lf if l.strip()]
 
@@ -48,8 +55,8 @@ with open(QUALIFY_PATH) as f:
             continue
 
         link = links[qualified_index]
-        print(f"[*] Group {group_num}: Downloading {link}")
-        
+        print(f"[*] Group {group_num}: Downloading from {link}")
+
         out_path = os.path.join(OUTPUT_DIR, f"group_{group_num}.%(ext)s")
         download_video(link, out_path)
 
