@@ -13,19 +13,44 @@ FILTER_RESULT_PATH = os.path.join(OUTPUT_DIR, "filter_result.txt")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # === UTILITIES ===
-def run_command(command, error_msg, retries=2, delay=5):
-    for attempt in range(retries):
-        try:
-            subprocess.run(command, check=True)
-            return
-        except subprocess.CalledProcessError as e:
-            print(f"[ERROR] {error_msg} (Attempt {attempt + 1}/{retries}): {e}")
-            if attempt < retries - 1:
-                print(f"[*] Retrying in {delay} seconds...")
-                time.sleep(delay)
-            else:
-                print("[✘] Giving up.")
-                sys.exit(1)
+def run_command(command, error_msg):
+    subprocess.run(command, check=True)
+
+def rotate_tor_ip():
+    print("[*] Rotating Tor IP...")
+    try:
+        subprocess.run(
+            'echo -e \'AUTHENTICATE ""\\nSIGNAL NEWNYM\\nQUIT\' | nc 127.0.0.1 9051',
+            shell=True,
+            check=True
+        )
+        print("[✓] IP Rotated. Waiting for circuit...")
+        time.sleep(10)  # Give Tor time to switch circuits
+    except subprocess.CalledProcessError:
+        print("[!] Failed to rotate IP. Continuing anyway.")
+
+# === TOR SETUP ===
+def start_tor():
+    print("[*] Setting up Tor...")
+    tor_installed = subprocess.run(["which", "tor"], capture_output=True).returncode == 0
+    if not tor_installed:
+        print("[*] Installing Tor...")
+        run_command(["sudo", "apt-get", "update"], "Failed to update package list")
+        run_command(["sudo", "apt-get", "install", "-y", "tor"], "Failed to install Tor")
+
+    print("[*] Starting Tor service...")
+    run_command(["sudo", "service", "tor", "start"], "Failed to start Tor")
+
+    try:
+        result = subprocess.run([
+            "curl", "--socks5", "127.0.0.1:9050", "https://check.torproject.org/"
+        ], capture_output=True, timeout=10)
+        if b"Congratulations" in result.stdout:
+            print("[✓] Tor is active.")
+        else:
+            print("[!] Tor check did not confirm activity.")
+    except Exception as e:
+        print(f"[!] Skipping Tor validation: {e}")
 
 # === FILTER CHECK ===
 def read_filter_result():
@@ -40,12 +65,28 @@ def read_filter_result():
 # === DOWNLOAD FUNCTION ===
 def download_video(link, out_path):
     print(f"[*] Downloading from {link}")
-    run_command([
-        "yt-dlp",
-        "--merge-output-format", "mp4",
-        "-o", out_path,
-        link
-    ], "Video download failed", retries=3, delay=7)
+    retries = 3
+    delay = 7
+    for attempt in range(retries):
+        try:
+            run_command([
+                "yt-dlp",
+                "--proxy", "socks5://127.0.0.1:9050",
+                "--merge-output-format", "mp4",
+                "-o", out_path,
+                link
+            ], "Video download failed")
+            print("[✓] Video downloaded successfully.")
+            return
+        except subprocess.CalledProcessError as e:
+            print(f"[ERROR] Video download failed (Attempt {attempt + 1}/{retries}): {e}")
+            if attempt < retries - 1:
+                rotate_tor_ip()  # Rotate IP before retry
+                print(f"[*] Retrying in {delay} seconds...")
+                time.sleep(delay)
+            else:
+                print("[✘] Giving up on this video.")
+                sys.exit(1)
 
 # === FILENAME PARSER ===
 def letter_to_index(letter):
@@ -56,6 +97,8 @@ def main():
     if not read_filter_result():
         print("[✘] Video flagged by filter (haram/music/face/etc). Skipping.")
         sys.exit(0)
+
+    start_tor()
 
     with open(QUALIFY_PATH) as f:
         for line in f:
