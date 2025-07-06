@@ -1,5 +1,6 @@
 
-name: Unusual Download via VPNBook
+
+name: Run Unusual Download on
 
 on:
   workflow_dispatch:
@@ -7,49 +8,36 @@ on:
     - cron: '0 */6 * * *'  # every 6 hours
 
 jobs:
-  unusual-download-vpnbook:
+  unusual-download:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Install required packages
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python packages
         run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip openvpn curl ffmpeg python3 python3-pip
+          pip install --upgrade pip
+          pip install google-genai
 
-      - name: Install yt-dlp & Python packages
+      - name: Install yt-dlp
         run: |
           sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
           sudo chmod a+rx /usr/local/bin/yt-dlp
-          pip3 install --upgrade pip
-          pip3 install google-genai
 
-      - name: Download VPNBook Config
-        run: |
-          curl -L -o vpnbook.zip "https://www.vpnbook.com/free-openvpn-account/vpnbook-openvpn-uk68.zip"
-          unzip vpnbook.zip -d vpnbook
-          echo "vpnbook" > vpnbook/auth.txt
-          echo "c3wrex2" >> vpnbook/auth.txt  # Update this password when VPNBook changes it!
-
-      - name: Connect to VPNBook (UK68)
-        run: sudo openvpn --config vpnbook/vpnbook-uk68-tcp443.ovpn --auth-user-pass vpnbook/auth.txt --daemon
-
-      - name: Wait for VPN connection to establish
-        run: sleep 30
-
-      - name: Check VPN IP
-        run: curl ifconfig.me
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Run Unusual_download.py
-        run: python3 Unusual_download.py
+        run: python Unusual_download2.py
 
       - name: Upload downloaded videos as artifact
         uses: actions/upload-artifact@v4
         with:
           name: downloaded-videos
           path: Vid/
-
-      - name: Disconnect VPN
-        run: sudo killall openvpn
