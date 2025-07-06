@@ -23,44 +23,35 @@ def download_video(link, out_path):
 def letter_to_index(letter):
     return ord(letter.lower()) - ord('a')
 
-with open(QUALIFY_PATH, encoding='utf-8') as f:
+with open(QUALIFY_PATH) as f:
     for line in f:
-        line = line.strip()
-        if not line:
+        if not line.strip():
             continue
-
-        # Split by ": " safely
-        if ": " not in line:
-            print(f"[!] Unexpected line format: {line}")
+        parts = line.strip().split(": ")
+        if len(parts) < 2:
+            print(f"[!] Unexpected line format: {line.strip()}")
             continue
+        
+        group_num = parts[0].split()[-1]
+        file_name = parts[1].strip()
 
-        parts = line.split(": ", 1)
-        group_info = parts[1].strip()  # e.g. "3(a)_levitating_smart_lamp.txt"
-        group_num = parts[0].split()[-1]  # e.g. "3" from "Group 3"
-
-        # Correct regex to parse filenames like 3(a)_levitating_smart_lamp.txt
-        match = re.match(r"(\d+)([a-z])_(.+)\.txt$", group_info)
+        # Correct regex to match filenames like 3(a)_levitating_smart_lamp.txt
+        match = re.match(r'(\d+)([a-z])_(.+)\.txt$', file_name)
         if not match:
-            print(f"[!] Failed to parse file name: {group_info}")
+            print(f"[!] Failed to parse file name: {file_name}")
             continue
 
         group_number, letter, file_title = match.groups()
-
-        # Convert letter to index (a=0, b=1, c=2 ...)
         qualified_index = letter_to_index(letter)
 
-        # Compose links filename: e.g. "3_levitating_smart_lamp.txt"
         links_file = os.path.join(LINKS_DIR, f"{group_number}_{file_title}.txt")
-
         if not os.path.exists(links_file):
             print(f"[!] Links file not found: {links_file}")
             continue
 
-        # Read links lines
-        with open(links_file, encoding='utf-8') as lf:
+        with open(links_file) as lf:
             links = [l.strip() for l in lf if l.strip()]
 
-        # Check if we have enough links
         if qualified_index >= len(links):
             print(f"[!] Not enough links in {links_file}")
             continue
