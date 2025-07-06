@@ -1,6 +1,9 @@
 
 name: Run Unusual Description
 
+permissions:
+  contents: write   # <-- this gives write access to repo contents (push, commit, etc.)
+
 on:
   workflow_dispatch:
 
@@ -12,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          persist-credentials: false   # <--- IMPORTANT to enable push with your token
+          persist-credentials: false   # <--- IMPORTANT
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
