@@ -2,7 +2,7 @@
 name: Run Unusual Description
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:  # Manual trigger only
 
 jobs:
   unusual-description:
@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # Allow overriding git token for push
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
