@@ -1,3 +1,4 @@
+
 import os
 import subprocess
 import re
@@ -34,7 +35,7 @@ def start_tor():
         print("[*] Installing Tor...")
         run_command(["sudo", "apt-get", "update"], "Failed to update package list")
         run_command(["sudo", "apt-get", "install", "-y", "tor"], "Failed to install Tor")
-    
+
     print("[*] Starting Tor service...")
     run_command(["sudo", "service", "tor", "start"], "Failed to start Tor")
 
@@ -56,7 +57,8 @@ def read_filter_result():
             result = f.read().strip().lower()
             return result == "no"
     except Exception as e:
-        print(f"[ERROR] Could not read filter return True  # Default to allowing download
+        print(f"[ERROR] Could not read filter result: {e}")
+        return True  # Default to allowing download
 
 # === DOWNLOAD FUNCTION ===
 def download_video(link, out_path):
@@ -69,10 +71,11 @@ def download_video(link, out_path):
         link
     ], "Video download failed", retries=3, delay=7)
 
-# === PARSING AND MAIN LOOP ===
+# === FILENAME PARSER ===
 def letter_to_index(letter):
     return ord(letter.lower()) - ord('a')
 
+# === MAIN EXECUTION ===
 def main():
     if not read_filter_result():
         print("[✘] Video flagged by filter (haram/music/face/etc). Skipping.")
@@ -119,6 +122,6 @@ def main():
 
     print("[✓] All downloads complete.")
 
-# === EXECUTE ===
+# === LAUNCH ===
 if __name__ == "__main__":
     main()
