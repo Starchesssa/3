@@ -1,0 +1,42 @@
+
+name: Whisper Batch Transcription
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  transcribe:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies (Torch + Whisper)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --upgrade openai-whisper
+
+      - name: 📝 Run Transcription Script
+        run: python Unusual_trans.py
+
+      - name: 🔐 Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 📤 Commit and Push Transcriptions
+        run: |
+          git add Unuusual_memory/TRANSCRIPT/*.txt
+          git commit -m "Add new transcriptions [auto-generated]" || echo "No changes to commit"
+          git push
