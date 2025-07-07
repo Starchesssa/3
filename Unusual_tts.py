@@ -5,7 +5,6 @@ import struct
 import mimetypes
 import multiprocessing
 import time
-from functools import partial
 from google import genai
 from google.genai import types
 
@@ -75,7 +74,10 @@ def generate_tts(api_key, combined_script, output_filename, retries=5, delay=10)
     for attempt in range(1, retries + 1):
         try:
             client = genai.Client(api_key=api_key)
-            contents = [types.Content(role="user", parts=[types.Part.from_text(combined_script)])]
+            
+            # Use explicit keyword argument for clarity
+            contents = [types.Content(role="user", parts=[types.Part.from_text(text=combined_script)])]
+            
             config = types.GenerateContentConfig(
                 response_modalities=["audio"],
                 speech_config=types.SpeechConfig(
@@ -112,8 +114,7 @@ def generate_tts(api_key, combined_script, output_filename, retries=5, delay=10)
 def process_batch(api_key, batch_files):
     combined_script = TONE_INSTRUCTION
     for file in batch_files:
-        script_path = os.path.join(SCRIPT_DIR, file)
-        script = parse_script(script_path)
+        script = parse_script(os.path.join(SCRIPT_DIR, file))
         combined_script += script + "\n\n"
 
     start_group = re.search(r"\d+", batch_files[0]).group()
@@ -139,10 +140,10 @@ def process_files_multiprocessing():
     tasks = []
     for i in range(0, len(all_files), BATCH_SIZE):
         batch_files = all_files[i:i + BATCH_SIZE]
-        api_key = API_KEYS[i % len(API_KEYS)]  # Rotate API keys per batch
+        api_key = API_KEYS[(i // BATCH_SIZE) % len(API_KEYS)]  # Rotate API keys
         tasks.append((api_key, batch_files))
 
-    with multiprocessing.Pool(processes=min(len(API_KEYS), multiprocessing.cpu_count())) as pool:
+    with multiprocessing.Pool(processes=len(API_KEYS)) as pool:
         pool.starmap(process_batch, tasks)
 
 if __name__ == "__main__":
