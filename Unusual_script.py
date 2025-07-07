@@ -7,7 +7,7 @@ from google.genai import types
 
 DESCRIPTION_DIR = "Unuusual_memory/DESCREPTION"
 OUTPUT_DIR = "Unuusual_memory/SCRIPT"
-TIMEOUT_PER_REQUEST = 60  # seconds per file
+TIMEOUT_PER_REQUEST = 200  # seconds per file
 
 API_KEYS = [
     os.environ.get("GEMINI_API"),
