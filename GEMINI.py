@@ -28,7 +28,7 @@ def generate():
             role="user",
             parts=[
                 types.Part.from_text(text="""
-Once upon a time, in a small village, a curious bird taught a lonely cat how to sing. 
+Read aloud in a warm and friendly tone:Once upon a time, in a small village, a curious bird taught a lonely cat how to sing. 
 They became the best of friends, filling the forest with laughter every morning.
                 """),
             ],
