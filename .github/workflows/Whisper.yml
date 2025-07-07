@@ -1,0 +1,43 @@
+
+name: Whisper Transcription
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  transcribe-audio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies (Torch + Whisper)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          # Install Torch CPU-only version manually
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --upgrade openai-whisper
+
+      - name: 📝 Transcribe Audio with Whisper Base
+        run: |
+          python -c "
+import whisper
+model = whisper.load_model('base')
+result = model.transcribe('umbriel whisper.wav')
+with open('transcription.txt', 'w') as f:
+    f.write(result['text'])
+print(result['text'])
+          "
+
+      - name: 💾 Upload Transcription Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: transcription
+          path: transcription.txt
