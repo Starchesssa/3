@@ -28,7 +28,7 @@ jobs:
           pip install --upgrade openai-whisper
 
       - name: 📝 Run Whisper Transcription Script
-        run: python whisper.py
+        run: python tra.py
 
       - name: 🔐 Configure Git
         run: |
