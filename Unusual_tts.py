@@ -4,6 +4,7 @@ import re
 import struct
 import mimetypes
 import multiprocessing
+import time
 from google import genai
 from google.genai import types
 
@@ -69,35 +70,43 @@ def parse_audio_mime_type(mime_type: str) -> dict:
                 pass
     return {"bits_per_sample": bits_per_sample, "rate": rate}
 
-def generate_tts(api_key, combined_script, output_filename):
-    client = genai.Client(api_key=api_key)
-    contents = [types.Content(role="user", parts=[types.Part.from_text(combined_script)])]
-    config = types.GenerateContentConfig(
-        response_modalities=["audio"],
-        speech_config=types.SpeechConfig(
-            voice_config=types.VoiceConfig(
-                prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Umbriel")
+def generate_tts(api_key, combined_script, output_filename, retries=5, delay=10):
+    for attempt in range(1, retries + 1):
+        try:
+            client = genai.Client(api_key=api_key)
+            contents = [types.Content(role="user", parts=[types.Part.from_text(combined_script)])]
+            config = types.GenerateContentConfig(
+                response_modalities=["audio"],
+                speech_config=types.SpeechConfig(
+                    voice_config=types.VoiceConfig(
+                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Umbriel")
+                    )
+                ),
             )
-        ),
-    )
-    for chunk in client.models.generate_content_stream(
-        model="gemini-2.5-flash-preview-tts", contents=contents, config=config
-    ):
-        if (
-            chunk.candidates
-            and chunk.candidates[0].content
-            and chunk.candidates[0].content.parts
-        ):
-            part = chunk.candidates[0].content.parts[0]
-            if part.inline_data and part.inline_data.data:
-                audio_data = part.inline_data.data
-                file_extension = mimetypes.guess_extension(part.inline_data.mime_type)
-                if file_extension is None:
-                    file_extension = ".wav"
-                    audio_data = convert_to_wav(audio_data, part.inline_data.mime_type)
-                save_binary_file(output_filename, audio_data)
-                return
-    print(f"Failed to generate audio for {output_filename}")
+            for chunk in client.models.generate_content_stream(
+                model="gemini-2.5-flash-preview-tts", contents=contents, config=config
+            ):
+                if (
+                    chunk.candidates
+                    and chunk.candidates[0].content
+                    and chunk.candidates[0].content.parts
+                ):
+                    part = chunk.candidates[0].content.parts[0]
+                    if part.inline_data and part.inline_data.data:
+                        audio_data = part.inline_data.data
+                        file_extension = mimetypes.guess_extension(part.inline_data.mime_type)
+                        if file_extension is None:
+                            file_extension = ".wav"
+                            audio_data = convert_to_wav(audio_data, part.inline_data.mime_type)
+                        save_binary_file(output_filename, audio_data)
+                        return  # Success
+            print(f"Failed to generate audio for {output_filename} on attempt {attempt}")
+        except Exception as e:
+            print(f"Error on attempt {attempt} for {output_filename}: {e}")
+        if attempt < retries:
+            print(f"Retrying after {delay} seconds...")
+            time.sleep(delay)
+    print(f"Giving up after {retries} attempts for {output_filename}")
 
 def process_batch(api_key, batch_files):
     combined_script = TONE_INSTRUCTION
@@ -118,7 +127,10 @@ def process_batch(api_key, batch_files):
 def process_files_multiprocessing():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     all_files = sorted(
-        [f for f in os.listdir(SCRIPT_DIR) if re.match(r"group_\d+\.txt$", f)],
+        [
+            f for f in os.listdir(SCRIPT_DIR)
+            if re.match(r"group_\d+\.txt$", f)
+        ],
         key=lambda x: int(re.search(r"\d+", x).group())
     )
 
