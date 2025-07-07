@@ -1,5 +1,5 @@
 
-name: Run Gemini TTS
+name: Run Gemini TTS and Commit Audio
 
 on:
   workflow_dispatch:
@@ -29,8 +29,10 @@ jobs:
           GEMINI_API5: ${{ secrets.GEMINI_API5 }}
         run: python Unusual_tts.py
 
-      - name: Upload TTS audio files as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: tts-audio-files
-          path: Unuusual_memory/AUDIO/
+      - name: Commit and Push audio files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Unuusual_memory/AUDIO/
+          git commit -m "Add generated TTS audio files" || echo "No changes to commit"
+          git push
