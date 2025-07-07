@@ -3,7 +3,6 @@ import whisper
 from datetime import timedelta
 
 def format_timestamp(seconds):
-    # Format seconds to HH:MM:SS
     return str(timedelta(seconds=int(seconds))).split('.')[0].zfill(8)[:8]
 
 model = whisper.load_model('base')
