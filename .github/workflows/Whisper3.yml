@@ -1,0 +1,67 @@
+
+name: Whisper Transcription
+
+on:
+  workflow_dispatch:
+
+jobs:
+  transcribe-audio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Dependencies (Torch + Whisper)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --upgrade openai-whisper
+
+      - name: 📝 Transcribe Audio with Word-level Timestamps Formatted
+        run: |
+          python -c "
+import whisper
+def format_time(s):
+    m, s = divmod(s, 60)
+    h, m = divmod(m, 60)
+    if h > 0:
+        return f'{int(h):02d}:{int(m):02d}:{int(s):02d}'
+    else:
+        return f'{int(m):02d}:{int(s):02d}'
+
+model = whisper.load_model('base')
+result = model.transcribe('umbriel whisper.wav', word_timestamps=True)
+
+with open('transcription.txt', 'w') as f:
+    for segment in result['segments']:
+        for w in segment.get('words', []):
+            start = format_time(w['start'])
+            end = format_time(w['end'])
+            word = w['word'].strip()
+            f.write(f'{start}-{end}: {word}\n')
+
+print('Transcription with timestamps saved to transcription.txt')
+          "
+
+      - name: 💾 Upload Transcription Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: transcription
+          path: transcription.txt
+
+      - name: 🔄 Commit and Push transcription.txt
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add transcription.txt
+          git commit -m "Update transcription.txt with word-level timestamps"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
