@@ -27,14 +27,7 @@ jobs:
 
       - name: 📝 Transcribe Audio with Whisper Base
         run: |
-          python -c "
-import whisper
-model = whisper.load_model('base')
-result = model.transcribe('umbriel whisper.wav')
-with open('transcription.txt', 'w') as f:
-    f.write(result['text'])
-print(result['text'])
-          "
+          python -c "import whisper; model = whisper.load_model('base'); result = model.transcribe('umbriel whisper.wav'); open('transcription.txt', 'w').write(result['text']); print(result['text'])"
 
       - name: 💾 Upload Transcription Artifact
         uses: actions/upload-artifact@v4
