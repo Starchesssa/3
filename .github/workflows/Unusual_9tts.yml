@@ -1,0 +1,38 @@
+
+name: Run Unusual TTS and Commit Audio
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-unusual-tts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install google-generativeai
+
+      - name: Run Unusual_tts.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: python Unusual_tts.py
+
+      - name: Commit and push generated audio
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add Unuusual_memory/AUDIO/
+          git commit -m "Add generated TTS audio files [auto-commit]" || echo "No changes to commit"
+          git push
