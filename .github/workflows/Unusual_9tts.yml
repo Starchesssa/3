@@ -6,6 +6,8 @@ on:
 
 jobs:
   run-gemini:
+    permissions:
+      contents: write  # ✅ Grant write permissions to push commits
     runs-on: ubuntu-latest
 
     steps:
@@ -29,10 +31,18 @@ jobs:
           GEMINI_API5: ${{ secrets.GEMINI_API5 }}
         run: python Unusual_tts.py
 
-      - name: Commit and Push audio files
+      - name: ✅ Commit & Push Audio Files
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Unuusual_memory/AUDIO/
-          git commit -m "Add generated TTS audio files" || echo "No changes to commit"
-          git push
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add "Unuusual_memory/AUDIO/"
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update TTS audio via Unusual_tts.py"
+            git push
+            echo "✅ Audio files committed and pushed."
+          fi
