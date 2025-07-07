@@ -1,0 +1,3 @@
+Product name: PMSA003I Air Quality Sensor
+
+Script: Introducing the PMSA003I Air Quality Sensor from Adafruit. This remarkable sensor accurately measures airborne particle concentration. Utilizing advanced laser light technology, it delivers precise data for your projects. Gain real-time insights into your environment. Ideal for various applications, from DIY air quality monitors to scientific experiments. Explore the PMSA003I and more at Adafruit.com!
