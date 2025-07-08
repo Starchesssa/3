@@ -1,46 +1,49 @@
 
-name: 📤 Commit and Push Timeline
+name: 🔁 Smart Timeline Generator
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'Unuusual_memory/SCRIPT/**'
-      - 'Unuusual_memory/TRANSCRIPT/**'
-      - 'Unuusual_memory/SCRIPT/Unusual_timeline.py'
 
 permissions:
-  contents: write  # ✅ Needed to push changes
+  contents: write
+
+concurrency:
+  group: "timeline-generator"
+  cancel-in-progress: true
 
 jobs:
-  timeline:
+  generate-timelines:
     runs-on: ubuntu-latest
+    name: 🧠 Generate Product Timelines from Transcripts
 
     steps:
-    - name: 📥 Checkout repository
-      uses: actions/checkout@v4
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: 🐍 Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
+      - name: 🚀 Run Python Script for Timeline Generation
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u Unusual_timeline.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
 
-    - name: 🚀 Run timeline script
-      run: |
-        python Unusual_timeline.py
+      - name: ✅ Commit & Push Timeline Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-    - name: ✅ Commit & Push Timeline
-      run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git add Unuusual_memory/TIMELINE/
 
-        git add "Unuusual_memory/TIMELINE/Timeline.txt"
-
-        if git diff --cached --quiet; then
-          echo "🟡 No changes to commit."
-        else
-          git commit -m "🤖 Update Timeline.txt via Unusual_timeline.py"
-          git push
-          echo "✅ Changes committed and pushed."
-        fi
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update product timelines via Timeline Generator"
+            git push
+            echo "✅ Timeline changes committed and pushed."
+          fi
