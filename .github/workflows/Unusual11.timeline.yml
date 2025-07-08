@@ -9,6 +9,9 @@ on:
       - 'Unuusual_memory/TRANSCRIPT/**'
       - 'Unuusual_memory/SCRIPT/Unusual_timeline.py'
 
+permissions:
+  contents: write  # ✅ Needed to push changes
+
 jobs:
   timeline:
     runs-on: ubuntu-latest
@@ -24,12 +27,20 @@ jobs:
 
     - name: 🚀 Run timeline script
       run: |
-        python Unusual_timeline.py
+        python Unuusual_memory/SCRIPT/Unusual_timeline.py
 
-    - name: 📤 Commit and Push Timeline
+    - name: ✅ Commit & Push Timeline
       run: |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git add Unuusual_memory/TIMELINE/Timeline.txt
-        git commit -m "Add Timeline.txt [auto-generated]" || echo "No changes to commit"
-        git push
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+        git add "Unuusual_memory/TIMELINE/Timeline.txt"
+
+        if git diff --cached --quiet; then
+          echo "🟡 No changes to commit."
+        else
+          git commit -m "🤖 Update Timeline.txt via Unusual_timeline.py"
+          git push
+          echo "✅ Changes committed and pushed."
+        fi
