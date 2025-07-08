@@ -1,0 +1,35 @@
+
+name: 📤 Commit and Push Timeline
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Unuusual_memory/SCRIPT/**'
+      - 'Unuusual_memory/TRANSCRIPT/**'
+      - 'Unuusual_memory/SCRIPT/Unusual_timeline.py'
+
+jobs:
+  timeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: 🚀 Run timeline script
+      run: |
+        python Unuusual_memory/SCRIPT/Unusual_timeline.py
+
+    - name: 📤 Commit and Push Timeline
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add Unuusual_memory/TIMELINE/Timeline.txt
+        git commit -m "Add Timeline.txt [auto-generated]" || echo "No changes to commit"
+        git push
