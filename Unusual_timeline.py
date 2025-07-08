@@ -2,7 +2,6 @@
 import os
 import re
 from pathlib import Path
-from difflib import SequenceMatcher
 
 # Directory paths
 SCRIPT_DIR = "Unuusual_memory/SCRIPT"
@@ -25,26 +24,27 @@ def load_transcript(filepath):
                 timeline.append((time_range, word.strip()))
     return timeline
 
-# Find approximate position of script inside transcript
-def find_best_match(script_words, transcript):
+# Improved word-level sliding window matching
+def find_best_match_exact(script_words, transcript, threshold=0.85):
     transcript_words = [w for _, w in transcript]
-    transcript_text = " ".join(transcript_words).lower()
-    script_text = " ".join(script_words).lower()
-
-    # Try to locate script words in transcript (allowing fuzziness)
+    best_match = None
+    best_start = None
+    best_end = None
     best_ratio = 0
-    best_start = 0
+
     for i in range(len(transcript_words) - len(script_words) + 1):
         window = transcript_words[i:i + len(script_words)]
-        window_text = " ".join(window).lower()
-        ratio = SequenceMatcher(None, script_text, window_text).ratio()
-        if ratio > best_ratio:
-            best_ratio = ratio
-            best_start = i
+        match_count = sum(1 for a, b in zip(script_words, window) if a.lower() == b.lower())
+        match_ratio = match_count / len(script_words)
 
-    if best_ratio > 0.6:  # Tweak this threshold if needed
-        start_time = transcript[best_start][0].split("-")[0]
-        end_time = transcript[best_start + len(script_words) - 1][0].split("-")[1]
+        if match_ratio > best_ratio:
+            best_ratio = match_ratio
+            best_start = i
+            best_end = i + len(script_words) - 1
+
+    if best_ratio >= threshold:
+        start_time = transcript[best_start][0].split('-')[0]
+        end_time = transcript[best_end][0].split('-')[1]
         return start_time, end_time, best_ratio
     else:
         return None, None, best_ratio
@@ -72,7 +72,7 @@ for script_file in os.listdir(SCRIPT_DIR):
         transcript_path = os.path.join(TRANSCRIPT_DIR, transcript_file)
         transcript = load_transcript(transcript_path)
 
-        start_time, end_time, ratio = find_best_match(script_words, transcript)
+        start_time, end_time, ratio = find_best_match_exact(script_words, transcript)
         if start_time and ratio > (best_match[2] if best_match else 0):
             best_match = (start_time, end_time, ratio)
             best_times = (start_time, end_time)
