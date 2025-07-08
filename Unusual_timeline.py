@@ -5,9 +5,10 @@ from google import genai
 from google.genai import types
 
 # === Configuration ===
+SCRIPT_DIR = "Unuusual_memory/SCRIPT"
 TRANSCRIPT_DIR = "Unuusual_memory/TRANSCRIPT"
 OUTPUT_DIR = "Unuusual_memory/TIMELINE"
-WAIT_BETWEEN_FILES = 40  # seconds (adjustable)
+WAIT_BETWEEN_FILES = 40  # seconds
 MODEL = "gemini-2.5-flash"
 
 API_KEYS = [
@@ -23,30 +24,46 @@ if not API_KEYS:
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# === Gemini Request ===
-def analyze_transcript(file_path, api_key_index):
-    with open(file_path, "r") as f:
-        transcript = f.read()
+# === Helper: Find Transcript Matching Group ===
+def find_transcript_file(group_number, transcript_files):
+    for file_name in transcript_files:
+        parts = file_name.replace(".txt", "").split("_to_")
+        if len(parts) == 2:
+            try:
+                start = int(parts[0].split("group_")[-1])
+                end = int(parts[1])
+                if start <= group_number <= end:
+                    return file_name
+            except:
+                continue
+    return None
 
+# === Gemini Request ===
+def analyze_script_with_transcript(product_name, script, transcript, api_key_index):
     for attempt in range(len(API_KEYS)):
         real_index = (api_key_index + attempt) % len(API_KEYS)
         try:
             client = genai.Client(api_key=API_KEYS[real_index])
             prompt = f"""
-You are given a transcript of a video with timestamps and words.
+You are given:
+1. Product Name: {product_name}
+2. Script of the video.
+3. Full Transcript (timeline).
 
 Your task:
-- Identify and extract only the product name(s) mentioned in the transcript along with their respective chapters.
-- Return the output strictly in this format:
-mm:ss-mm:ss: Product Name  
-mm:ss-mm:ss: Product Name  
-mm:ss-mm:ss: Product Name
+- Analyze the transcript and find the **exact timestamp chapter** where the given script starts and ends.
+- Return only the chapter timestamps (start and end) covering the entire script.
 
-⚠️ Important:
-- Only include chapters and product names. No extra text, no explanations.
-- Do not include "00:" hour prefix. Only minutes and seconds (mm:ss).
-- Be precise. Combine the timestamps if they are continuous for the same product.
-- each chapter contains a prpduct name and give generic chapters where the entire product name is mentioned, ie from y yo z a product x , be generic not giving where the product is mentioned rather general chapter where the product is memtioned 
+⚠️ Rules:
+- Only output the chapter timestamps where the **entire script** (given above) appears within the transcript.
+- Output format (strict):
+mm:ss-mm:ss (no extra text, no explanations)
+- Do NOT include "00:" hour prefix, only mm:ss format.
+- Be precise, cover the whole script section.
+
+Here is the script:
+{script}
+
 Here is the transcript:
 {transcript}
 """
@@ -59,27 +76,48 @@ Here is the transcript:
         except Exception as e:
             print(f"🔁 Retry {attempt + 1} with API#{real_index + 1} => Error: {e}", flush=True)
             time.sleep(1)
-    print(f"❌ Failed for file: {file_path}", flush=True)
+    print("❌ Failed to process Gemini request.", flush=True)
     return ""
 
-# === Process Files ===
+# === Main Processing ===
 def main():
-    txt_files = sorted(
+    script_files = sorted(
+        [f for f in os.listdir(SCRIPT_DIR) if f.endswith(".txt")],
+    )
+    transcript_files = sorted(
         [f for f in os.listdir(TRANSCRIPT_DIR) if f.endswith(".txt")],
     )
 
-    for idx, file_name in enumerate(txt_files):
-        file_path = os.path.join(TRANSCRIPT_DIR, file_name)
-        print(f"\n📄 Processing: {file_name}", flush=True)
+    for idx, script_file in enumerate(script_files):
+        group_number = int(script_file.replace("group_", "").replace(".txt", ""))
+        transcript_file = find_transcript_file(group_number, transcript_files)
 
-        result = analyze_transcript(file_path, idx % len(API_KEYS))
+        if not transcript_file:
+            print(f"🚫 No transcript found for {script_file}", flush=True)
+            continue
+
+        # Load script file (product + script)
+        with open(os.path.join(SCRIPT_DIR, script_file), "r") as f:
+            content = f.read()
+        product_line, script_line = content.strip().split("\n\n", 1)
+        product_name = product_line.replace("Product name:", "").strip()
+        script_text = script_line.replace("Script:", "").strip()
+
+        # Load transcript
+        with open(os.path.join(TRANSCRIPT_DIR, transcript_file), "r") as f:
+            transcript = f.read()
+
+        print(f"\n📄 Processing: {script_file} with {transcript_file}", flush=True)
+
+        # Gemini Analysis
+        result = analyze_script_with_transcript(product_name, script_text, transcript, idx % len(API_KEYS))
         if result:
-            output_path = os.path.join(OUTPUT_DIR, file_name)
+            output_path = os.path.join(OUTPUT_DIR, script_file)
             with open(output_path, "w") as f_out:
                 f_out.write(result)
-            print(f"✅ Saved timeline to: {output_path}", flush=True)
+            print(f"✅ Saved chapter timeline to: {output_path}", flush=True)
         else:
-            print(f"🚫 No result for {file_name}", flush=True)
+            print(f"🚫 No result for {script_file}", flush=True)
 
         print(f"⏳ Waiting {WAIT_BETWEEN_FILES}s before next file...\n", flush=True)
         time.sleep(WAIT_BETWEEN_FILES)
