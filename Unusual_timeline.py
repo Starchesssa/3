@@ -36,14 +36,14 @@ def analyze_transcript(file_path, api_key_index):
 You are given a transcript of a video with timestamps and words.
 
 Your task:
-- Identify and extract only the product name(s) mentioned in the transcript along with their respective timelines.
+- Identify and extract only the product name(s) mentioned in the transcript along with their respective chapters.
 - Return the output strictly in this format:
 mm:ss-mm:ss: Product Name  
 mm:ss-mm:ss: Product Name  
 mm:ss-mm:ss: Product Name
 
 ⚠️ Important:
-- Only include timelines and product names. No extra text, no explanations.
+- Only include chapters and product names. No extra text, no explanations.
 - Do not include "00:" hour prefix. Only minutes and seconds (mm:ss).
 - Be precise. Combine the timestamps if they are continuous for the same product.
 
