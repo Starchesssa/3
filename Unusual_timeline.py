@@ -46,7 +46,7 @@ mm:ss-mm:ss: Product Name
 - Only include chapters and product names. No extra text, no explanations.
 - Do not include "00:" hour prefix. Only minutes and seconds (mm:ss).
 - Be precise. Combine the timestamps if they are continuous for the same product.
-
+- each chapter contains a prpduct name and give generic chapters where the entire product name is mentioned, ie from y yo z a product x , be generic not giving where the product is mentioned rather general chapter where the product is memtioned 
 Here is the transcript:
 {transcript}
 """
