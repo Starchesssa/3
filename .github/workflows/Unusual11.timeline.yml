@@ -27,7 +27,7 @@ jobs:
 
     - name: 🚀 Run timeline script
       run: |
-        python Unuusual_memory/SCRIPT/Unusual_timeline.py
+        python Unusual_timeline.py
 
     - name: ✅ Commit & Push Timeline
       run: |
