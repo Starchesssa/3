@@ -1,92 +1,91 @@
 
 import os
-import re
-from pathlib import Path
+import time
+from google import genai
+from google.genai import types
 
-# Directory paths
-SCRIPT_DIR = "Unuusual_memory/SCRIPT"
+# === Configuration ===
 TRANSCRIPT_DIR = "Unuusual_memory/TRANSCRIPT"
-TIMELINE_FILE = "Unuusual_memory/TIMELINE/Timeline.txt"
+OUTPUT_DIR = "Unuusual_memory/TIMELINE"
+WAIT_BETWEEN_FILES = 40  # seconds (adjustable)
+MODEL = "gemini-2.5-flash"
 
-# Helper to extract product script
-def extract_script(text):
-    match = re.search(r'Script:\s*(.+)', text, re.DOTALL)
-    return match.group(1).strip() if match else ""
+API_KEYS = [
+    os.environ.get("GEMINI_API"),
+    os.environ.get("GEMINI_API2"),
+    os.environ.get("GEMINI_API3"),
+    os.environ.get("GEMINI_API4"),
+    os.environ.get("GEMINI_API5")
+]
+API_KEYS = [key for key in API_KEYS if key]
+if not API_KEYS:
+    raise ValueError("❌ No valid Gemini API keys found.")
 
-# Helper to load transcript words and timestamps
-def load_transcript(filepath):
-    timeline = []
-    with open(filepath, "r", encoding="utf-8") as f:
-        for line in f:
-            parts = line.strip().split(": ", 1)
-            if len(parts) == 2:
-                time_range, word = parts
-                timeline.append((time_range, word.strip()))
-    return timeline
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Improved word-level sliding window matching
-def find_best_match_exact(script_words, transcript, threshold=0.85):
-    transcript_words = [w for _, w in transcript]
-    best_match = None
-    best_start = None
-    best_end = None
-    best_ratio = 0
+# === Gemini Request ===
+def analyze_transcript(file_path, api_key_index):
+    with open(file_path, "r") as f:
+        transcript = f.read()
 
-    for i in range(len(transcript_words) - len(script_words) + 1):
-        window = transcript_words[i:i + len(script_words)]
-        match_count = sum(1 for a, b in zip(script_words, window) if a.lower() == b.lower())
-        match_ratio = match_count / len(script_words)
+    for attempt in range(len(API_KEYS)):
+        real_index = (api_key_index + attempt) % len(API_KEYS)
+        try:
+            client = genai.Client(api_key=API_KEYS[real_index])
+            prompt = f"""
+You are given a transcript of a video with timestamps and words.
 
-        if match_ratio > best_ratio:
-            best_ratio = match_ratio
-            best_start = i
-            best_end = i + len(script_words) - 1
+Your task:
+- Identify and extract only the product name(s) mentioned in the transcript along with their respective timelines.
+- Return the output strictly in this format:
+mm:ss-mm:ss: Product Name  
+mm:ss-mm:ss: Product Name  
+mm:ss-mm:ss: Product Name
 
-    if best_ratio >= threshold:
-        start_time = transcript[best_start][0].split('-')[0]
-        end_time = transcript[best_end][0].split('-')[1]
-        return start_time, end_time, best_ratio
-    else:
-        return None, None, best_ratio
+⚠️ Important:
+- Only include timelines and product names. No extra text, no explanations.
+- Do not include "00:" hour prefix. Only minutes and seconds (mm:ss).
+- Be precise. Combine the timestamps if they are continuous for the same product.
 
-# Main script
-timeline_results = []
-for script_file in os.listdir(SCRIPT_DIR):
-    if not script_file.startswith("group_") or not script_file.endswith(".txt"):
-        continue
+Here is the transcript:
+{transcript}
+"""
+            contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
+            config = types.GenerateContentConfig(response_mime_type="text/plain")
+            response = client.models.generate_content(
+                model=MODEL, contents=contents, config=config
+            )
+            return response.text.strip()
+        except Exception as e:
+            print(f"🔁 Retry {attempt + 1} with API#{real_index + 1} => Error: {e}", flush=True)
+            time.sleep(1)
+    print(f"❌ Failed for file: {file_path}", flush=True)
+    return ""
 
-    group_name = Path(script_file).stem.replace("group_", "Group ")
-    with open(os.path.join(SCRIPT_DIR, script_file), "r", encoding="utf-8") as f:
-        content = f.read()
-    script_text = extract_script(content)
-    script_words = script_text.split()
+# === Process Files ===
+def main():
+    txt_files = sorted(
+        [f for f in os.listdir(TRANSCRIPT_DIR) if f.endswith(".txt")],
+    )
 
-    best_match = None
-    best_times = (None, None)
-    best_file = None
+    for idx, file_name in enumerate(txt_files):
+        file_path = os.path.join(TRANSCRIPT_DIR, file_name)
+        print(f"\n📄 Processing: {file_name}", flush=True)
 
-    # Search all transcripts
-    for transcript_file in os.listdir(TRANSCRIPT_DIR):
-        if not transcript_file.endswith(".txt"):
-            continue
-        transcript_path = os.path.join(TRANSCRIPT_DIR, transcript_file)
-        transcript = load_transcript(transcript_path)
+        result = analyze_transcript(file_path, idx % len(API_KEYS))
+        if result:
+            output_path = os.path.join(OUTPUT_DIR, file_name)
+            with open(output_path, "w") as f_out:
+                f_out.write(result)
+            print(f"✅ Saved timeline to: {output_path}", flush=True)
+        else:
+            print(f"🚫 No result for {file_name}", flush=True)
 
-        start_time, end_time, ratio = find_best_match_exact(script_words, transcript)
-        if start_time and ratio > (best_match[2] if best_match else 0):
-            best_match = (start_time, end_time, ratio)
-            best_times = (start_time, end_time)
-            best_file = transcript_file
+        print(f"⏳ Waiting {WAIT_BETWEEN_FILES}s before next file...\n", flush=True)
+        time.sleep(WAIT_BETWEEN_FILES)
 
-    if best_times[0] and best_times[1]:
-        timeline_results.append(f"{group_name}: {best_times[0]}-{best_times[1]}")
-    else:
-        timeline_results.append(f"{group_name}: Timeline not found")
+    print("\n🎉 All files processed!", flush=True)
 
-# Save timeline
-os.makedirs(os.path.dirname(TIMELINE_FILE), exist_ok=True)
-with open(TIMELINE_FILE, "w", encoding="utf-8") as f:
-    for line in timeline_results:
-        f.write(line + "\n")
 
-print(f"Timeline extraction complete. Saved to {TIMELINE_FILE}")
+if __name__ == "__main__":
+    main()
