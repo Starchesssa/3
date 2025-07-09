@@ -1,0 +1,50 @@
+
+name: Process Artifact Videos (Remove Audio)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  process-videos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download artifact from previous workflow
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_6download3.yml
+          workflow_conclusion: success
+          branch: main
+          name: downloaded-videos
+          path: Vid/
+
+      - name: List downloaded video files
+        run: |
+          echo "Downloaded video files:"
+          ls -lh Vid/
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Remove audio from videos (show filenames)
+        run: |
+          mkdir -p Processed_Vid
+          for file in Vid/*; do
+            echo "Processing: $(basename "$file")"
+            ffmpeg -y -i "$file" -c:v copy -an "Processed_Vid/$(basename "$file")"
+          done
+
+      - name: List processed video files
+        run: |
+          echo "Processed video files:"
+          ls -lh Processed_Vid/
+
+      - name: Upload processed videos as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-videos
+          path: Processed_Vid/
