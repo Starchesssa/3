@@ -21,10 +21,14 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies
+      - name: Install System Dependencies
         run: |
           sudo apt update
-          sudo apt install -y ffmpeg libcairo2 libpango1.0-0 libpangocairo-1.0-0
+          sudo apt install -y ffmpeg libcairo2 libcairo2-dev libpango1.0-0 libpangocairo-1.0-0 pkg-config python3-dev
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
           pip install manim
 
       - name: Render Animation
