@@ -1,0 +1,49 @@
+
+name: 🔥 Unusual Top Gadget Processor
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "unusual-top-processing"
+  cancel-in-progress: true
+
+jobs:
+  process-top-gadget:
+    runs-on: ubuntu-latest
+    name: 🚀 Process Unusual Top Gadget Links
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🚀 Run Python script in verbose mode
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u Unusual_top.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/TOP_GDG/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update Top Gadget links via Unusual Top Processor"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
