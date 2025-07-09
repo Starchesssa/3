@@ -1,0 +1,49 @@
+
+name: 🎬 Generate Intro & Outro Scripts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "intro-outro-generation"
+  cancel-in-progress: true
+
+jobs:
+  generate-intro-outro:
+    runs-on: ubuntu-latest
+    name: ✨ Generate Intro & Outro Scripts
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Run Intro & Outro Python Script
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u Intro_outro.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Intro & Outro Scripts
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/INTR0,OUTRO/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🎬 Update Intro & Outro scripts via GitHub Actions"
+            git push
+            echo "✅ Intro & Outro scripts committed and pushed."
+          fi
