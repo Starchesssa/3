@@ -1,0 +1,38 @@
+
+name: Render Manim Animation
+
+on:
+  push:
+    paths:
+      - '**.py'
+      - 'images/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg libcairo2
+          pip install manim
+
+      - name: Render Animation
+        run: |
+          manim -pql animation.py BannerAnimation
+
+      - name: Upload Animation Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: banner-video
+          path: media/videos/**/BannerAnimation.mp4
