@@ -1,0 +1,48 @@
+
+name: Run Gemini TTS and Commit Audio
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-gemini:
+    permissions:
+      contents: write  # ✅ Grant write permissions to push commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install google-genai
+
+      - name: Run intor,ourto_audio.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: python "intor,ourto_audio.py"
+
+      - name: ✅ Commit & Push Audio Files
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add "Unuusual_memory/Intro,ourto_audio/"
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Update Intro & Outro audio via intor,ourto_audio.py"
+            git push
+            echo "✅ Audio files committed and pushed."
+          fi
