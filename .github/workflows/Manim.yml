@@ -24,7 +24,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y ffmpeg libcairo2
+          sudo apt install -y ffmpeg libcairo2 libpango1.0-0 libpangocairo-1.0-0
           pip install manim
 
       - name: Render Animation
