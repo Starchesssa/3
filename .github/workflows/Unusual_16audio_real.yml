@@ -1,8 +1,11 @@
 
-name: Unusual Audio Splitter
+name: Unusual Audio Splitter & Commit
 
 on:
-  workflow_dispatch:  # Manual Dispatch via GitHub UI
+  workflow_dispatch:  # Manual run
+
+permissions:
+  contents: write  # ✅ Allow commit & push
 
 jobs:
   run-audio-splitter:
@@ -25,10 +28,18 @@ jobs:
       - name: Run Audio Splitting Script
         run: python Unusual_audio_real.py
 
-      - name: Commit Results
+      - name: Commit & Push Extracted Audio
         run: |
-          git config --global user.email "your-email@example.com"
           git config --global user.name "github-actions"
-          git add Unuusual_memory/AUDIO_REAL
-          git commit -m "Auto: Extracted audio groups" || echo "No changes to commit"
-          git push
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/AUDIO_REAL/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Auto: Extracted audio groups via Unusual_audio_real.py"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
