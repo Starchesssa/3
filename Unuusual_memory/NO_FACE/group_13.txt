@@ -1,24 +1,24 @@
-00:00-00:25: No face (Samsung NV7000B Bespoke Built-in Oven)
-02:22-03:49: No face (Samsung NV7000B Bespoke Built-in Oven)
-04:25-05:02: No face (Samsung NV7000B Bespoke Built-in Oven)
-06:20-06:40: No face (Samsung NV7000B Bespoke Built-in Oven)
-08:15-08:24: No face (Samsung NV7000B Bespoke Built-in Oven)
-09:07-09:54: No face (Samsung NV7000B Bespoke Built-in Oven)
-09:54-10:47: No face (Samsung NV7000B Bespoke Built-in Oven)
-10:47-11:00: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:00-11:16: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:16-11:20: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:20-11:45: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:45-11:52: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:52-11:55: No face (Samsung NV7000B Bespoke Built-in Oven)
-11:55-12:12: No face (Samsung NV7000B Bespoke Built-in Oven)
-12:12-12:40: No face (Samsung NV7000B Bespoke Built-in Oven)
-16:59-17:08: No face (Samsung NV7000B Bespoke Built-in Oven)
-17:08-17:12: No face (Samsung NV7000B Bespoke Built-in Oven)
-17:21-17:46: No face (Samsung NV7000B Bespoke Built-in Oven)
-17:53-18:22: No face (Samsung NV7000B Bespoke Built-in Oven)
-18:22-18:49: No face (Samsung NV7000B Bespoke Built-in Oven)
-19:05-19:10: No face (Samsung NV7000B Bespoke Built-in Oven)
-19:10-19:35: No face (Samsung NV7000B Bespoke Built-in Oven)
-19:35-19:43: No face (Samsung NV7000B Bespoke Built-in Oven)
-19:43-20:39: No face (Samsung NV7000B Bespoke Built-in Oven)
+00:00-00:25
+02:22-03:49
+04:25-05:02
+06:20-06:40
+08:15-08:24
+09:07-09:54
+09:54-10:47
+10:47-11:00
+11:00-11:16
+11:16-11:20
+11:20-11:45
+11:45-11:52
+11:52-11:55
+11:55-12:12
+12:12-12:40
+16:59-17:08
+17:08-17:12
+17:21-17:46
+17:53-18:22
+18:22-18:49
+19:05-19:10
+19:10-19:35
+19:35-19:43
+19:43-20:39

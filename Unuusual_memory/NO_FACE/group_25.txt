@@ -1,13 +1,13 @@
-00:00-00:10: No face (smart digital peephole)
-00:14-00:26: No face (smart digital peephole)
-00:30-00:39: No face (smart digital peephole)
-00:39-00:45: No face (smart digital peephole)
-00:45-00:50: No face (smart digital peephole)
-00:50-00:59: No face (smart digital peephole)
-00:59-01:05: No face (smart digital peephole)
-01:05-01:14: No face (smart digital peephole)
-01:14-01:20: No face (smart digital peephole)
-01:24-01:37: No face (smart digital peephole)
-01:37-01:42: No face (smart digital peephole)
-01:42-01:48: No face (smart digital peephole)
-01:48-02:05: No face (smart digital peephole)
+00:00-00:10
+00:14-00:26
+00:30-00:39
+00:39-00:45
+00:45-00:50
+00:50-00:59
+00:59-01:05
+01:05-01:14
+01:14-01:20
+01:24-01:37
+01:37-01:42
+01:42-01:48
+01:48-02:05
