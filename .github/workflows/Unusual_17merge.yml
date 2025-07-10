@@ -19,7 +19,7 @@ jobs:
           workflow: Unusual_6download3.yml
           workflow_conclusion: success
           branch: main
-          name: downloaded-videos  # ✅ Correct artifact name here
+          name: downloaded-videos
           path: Processed_Vid/
 
       - name: List downloaded video files
@@ -52,14 +52,20 @@ jobs:
             i=$((i+1))
             [ $i -gt 8 ] && break
           done
-          ffmpeg -y -f concat -safe 0 -i <(for n in {1..4}; do echo "file 'Intro_Outro/clip_$n.mp4'"; done) -c copy Intro_Outro/Intro.mp4
-          ffmpeg -y -f concat -safe 0 -i <(for n in {5..8}; do echo "file 'Intro_Outro/clip_$n.mp4'"; done) -c copy Intro_Outro/Outro.mp4
+
+          # Create concat lists for Intro and Outro
+          printf "file 'Intro_Outro/clip_1.mp4'\nfile 'Intro_Outro/clip_2.mp4'\nfile 'Intro_Outro/clip_3.mp4'\nfile 'Intro_Outro/clip_4.mp4'\n" > intro_list.txt
+          printf "file 'Intro_Outro/clip_5.mp4'\nfile 'Intro_Outro/clip_6.mp4'\nfile 'Intro_Outro/clip_7.mp4'\nfile 'Intro_Outro/clip_8.mp4'\n" > outro_list.txt
+
+          ffmpeg -y -f concat -safe 0 -i intro_list.txt -c copy Intro_Outro/Intro.mp4
+          ffmpeg -y -f concat -safe 0 -i outro_list.txt -c copy Intro_Outro/Outro.mp4
 
       - name: Add Intro and Outro to Final Videos
         run: |
           mkdir -p Completed_Videos
           for vid in Final_Videos/group_*.mp4; do
-            ffmpeg -y -f concat -safe 0 -i <(echo "file 'Intro_Outro/Intro.mp4'"; echo "file '$vid'"; echo "file 'Intro_Outro/Outro.mp4'") -c copy "Completed_Videos/$(basename "$vid")"
+            printf "file 'Intro_Outro/Intro.mp4'\nfile '$vid'\nfile 'Intro_Outro/Outro.mp4'\n" > merge_list.txt
+            ffmpeg -y -f concat -safe 0 -i merge_list.txt -c copy "Completed_Videos/$(basename "$vid")"
           done
 
       - name: List completed video files
