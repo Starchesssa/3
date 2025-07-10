@@ -1,0 +1,46 @@
+name: 🚀 Extract No Face Timelines & Commit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract_no_face:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Extract No Face Timelines
+        run: |
+          mkdir -p "Unuusual_memory/NO_FACE"
+          
+          while IFS= read -r line; do
+            group_num=$(echo "$line" | grep -oP '^Group \K[0-9]+')
+            file_name=$(echo "$line" | cut -d':' -f2 | xargs)
+            
+            face_file="Unuusual_memory/FACE DETECTION/${file_name}"
+            output_file="Unuusual_memory/NO_FACE/group_${group_num}.txt"
+
+            if [[ -f "$face_file" ]]; then
+              echo "Processing $face_file -> $output_file"
+              grep -E '^[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}: No face' "$face_file" > "$output_file" || true
+            else
+              echo "⚠️ File not found: $face_file"
+            fi
+          done < "Unuusual_memory/QUALIFY/qualified.txt"
+
+      - name: ✅ Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/NO_FACE/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "🤖 Extracted No Face Timelines for Qualified Groups"
+            git push
+            echo "✅ Changes committed and pushed."
+          fi
