@@ -1,5 +1,8 @@
 name: 🚀 Extract No Face Timelines & Commit
 
+permissions:
+  contents: write  # ✅ This gives write permission to commit & push
+
 on:
   workflow_dispatch:
 
