@@ -1,11 +1,11 @@
-00:00-00:12: No face (robot litter box)
-00:30-00:32: No face (robot litter box)
-00:44-00:50: No face (robot litter box)
-00:51-00:54: No face (robot litter box)
-01:00-01:06: No face (robot litter box)
-01:06-01:09: No face (robot litter box)
-01:20-01:25: No face (robot litter box)
-01:34-01:37: No face (robot litter box)
-01:37-01:41: No face (robot litter box)
-01:45-01:48: No face (robot litter box)
-01:56-02:03: No face (robot litter box)
+00-00-00
+00-30-00
+00-44-00
+00-51-00
+01-00-01
+01-06-01
+01-20-01
+01-34-01
+01-37-01
+01-45-01
+01-56-02

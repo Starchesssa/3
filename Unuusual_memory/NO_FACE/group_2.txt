@@ -1,5 +1,5 @@
-00:03-00:05: No face (smart indoor garden)
-00:10-00:26: No face (smart indoor garden)
-00:26-00:30: No face (smart indoor garden)
-00:32-00:36: No face (smart indoor garden)
-00:36-00:45: No face (smart indoor garden)
+00-03-00
+00-10-00
+00-26-00
+00-32-00
+00-36-00

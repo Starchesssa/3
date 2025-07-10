@@ -1,12 +1,12 @@
-00:00-00:03: No face (smart air quality monitor)
-00:05-00:08: No face (smart air quality monitor)
-00:08-00:13: No face (smart air quality monitor)
-00:27-00:29: No face (smart air quality monitor)
-00:29-00:32: No face (smart air quality monitor)
-00:32-00:34: No face (smart air quality monitor)
-00:35-00:37: No face (smart air quality monitor)
-00:37-00:41: No face (smart air quality monitor)
-00:41-00:48: No face (smart air quality monitor)
-00:48-00:52: No face (smart air quality monitor)
-00:53-00:56: No face (smart air quality monitor)
-00:56-00:59: No face (smart air quality monitor)
+00-00-00
+00-05-00
+00-08-00
+00-27-00
+00-29-00
+00-32-00
+00-35-00
+00-37-00
+00-41-00
+00-48-00
+00-53-00
+00-56-00

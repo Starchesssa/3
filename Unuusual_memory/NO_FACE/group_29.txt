@@ -1,6 +1,6 @@
-00:00-00:05: No face (smart plant watering)
-00:11-00:20: No face (smart plant watering)
-00:36-00:58: No face (smart plant watering)
-02:43-03:04: No face (smart plant watering)
-03:04-03:38: No face (smart plant watering)
-06:17-07:01: No face (smart plant watering)
+00-00-00
+00-11-00
+00-36-00
+02-43-03
+03-04-03
+06-17-07

@@ -1,13 +1,13 @@
-00:00-00:11: No face (smart pet feeder camera)
-00:12-00:13: No face (smart pet feeder camera)
-00:13-00:14: No face (smart pet feeder camera)
-00:14-00:15: No face (smart pet feeder camera)
-00:15-00:23: No face (smart pet feeder camera)
-00:24-00:28: No face (smart pet feeder camera)
-00:30-00:32: No face (smart pet feeder camera)
-00:32-00:33: No face (smart pet feeder camera)
-00:34-00:34: No face (smart pet feeder camera)
-00:36-00:41: No face (smart pet feeder camera)
-00:43-00:45: No face (smart pet feeder camera)
-00:47-00:50: No face (smart pet feeder camera)
-00:52-01:06: No face (smart pet feeder camera)
+00-00-00
+00-12-00
+00-13-00
+00-14-00
+00-15-00
+00-24-00
+00-30-00
+00-32-00
+00-34-00
+00-36-00
+00-43-00
+00-47-00
+00-52-01
