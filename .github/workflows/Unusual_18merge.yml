@@ -43,7 +43,7 @@ jobs:
               > "$concat_list"
               while IFS= read -r line; do
                 start=$(echo "$line" | awk -F'-' '{print $1}' | tr -d ' ')
-                end=$(echo "$line" | awk -F'-' '{print $2}' | cut -d':' -f1,2 | tr -d ' ')
+                end=$(echo "$line" | awk -F'-' '{print $2}' | tr -d ' ')
                 ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
                 echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
                 seg_num=$((seg_num + 1))
