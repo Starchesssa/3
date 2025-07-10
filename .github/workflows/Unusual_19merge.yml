@@ -55,11 +55,7 @@ jobs:
             done < "$noface"
 
             if [[ -s "$concat_list" ]]; then
-              (
-                cd Temp_Segments
-                ffmpeg -y -f concat -safe 0 -i "${base}_concat_list.txt" -c copy "${base}_noface.mp4"
-              )
-              mv "Temp_Segments/${base}_noface.mp4" "No_Face_Videos/${base}_noface.mp4"
+              ffmpeg -y -f concat -safe 0 -i "$concat_list" -c copy "No_Face_Videos/${base}_noface.mp4"
             else
               echo "⚠️ No valid segments for $base, skipping."
             fi
