@@ -1,3 +1,4 @@
+
 name: Merge Audio and Video (No Face Only)
 
 on:
@@ -35,27 +36,27 @@ jobs:
             video="Processed_Vid/${base}.mp4"
             noface="Unuusual_memory/NO_FACE/${base}.txt"
             if [ -f "$video" ] && [ -f "$noface" ]; then
-              seg_list=""
               seg_num=1
+              concat_list="Temp_Segments/${base}_concat_list.txt"
+              > "$concat_list"  # Clear concat list
+
               while IFS= read -r line; do
                 start=$(echo "$line" | awk -F'-' '{print $1}' | tr -d ' ')
-                end=$(echo "$line" | awk -F'-' '{print $2}' | awk -F':' '{print $1 ":" $2}')
-                start_sec=$(ffmpeg -ss "$start" -i "$video" -t 1 -f null - 2>&1 | grep 'start:' | awk '{print $2}')
-                duration=$(ffmpeg -i "$video" -ss "$start" -to "$end" -f null - 2>&1 | grep 'Duration' | awk '{print $2}' | tr -d ',')
+                end=$(echo "$line" | awk -F'-' '{print $2}' | cut -d':' -f1,2 | tr -d ' ')
                 ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
-                echo "file 'Temp_Segments/${base}_seg_${seg_num}.mp4'" >> Temp_Segments/${base}_concat_list.txt
+                echo "file 'Temp_Segments/${base}_seg_${seg_num}.mp4'" >> "$concat_list"
                 seg_num=$((seg_num + 1))
               done < "$noface"
 
               # Concatenate no-face segments
-              ffmpeg -y -f concat -safe 0 -i Temp_Segments/${base}_concat_list.txt -c copy Temp_Segments/${base}_merged.mp4
+              ffmpeg -y -f concat -safe 0 -i "$concat_list" -c copy "Temp_Segments/${base}_merged.mp4"
 
-              # Trim or pad video to audio duration
+              # Trim or pad video to match audio duration
               audio_dur=$(ffprobe -i "$audio" -show_entries format=duration -v quiet -of csv="p=0")
-              ffmpeg -y -i Temp_Segments/${base}_merged.mp4 -t "$audio_dur" -c:v copy -an Temp_Segments/${base}_trimmed.mp4
+              ffmpeg -y -i "Temp_Segments/${base}_merged.mp4" -t "$audio_dur" -c:v copy -an "Temp_Segments/${base}_trimmed.mp4"
 
               # Merge trimmed video with audio
-              ffmpeg -y -i Temp_Segments/${base}_trimmed.mp4 -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
+              ffmpeg -y -i "Temp_Segments/${base}_trimmed.mp4" -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
             fi
           done
 
