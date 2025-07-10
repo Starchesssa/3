@@ -1,100 +1,56 @@
 
-name: Merge Audio and Video (No Face Only)
+name: Process Videos
 
 on:
   workflow_dispatch:
 
 jobs:
-  merge-audio-video-no-face:
+  process_videos:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Download processed video artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: Unusual_6download3.yml
-          workflow_conclusion: success
-          branch: main
-          name: downloaded-videos
-          path: Processed_Vid/
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
 
-      - name: List downloaded video files
-        run: ls -lh Processed_Vid/
+    - name: Process Videos
+      run: |
+        mkdir -p Final_Videos Temp_Segments
+        for audio in Unuusual_memory/AUDIO_REAL/group_*.wav; do
+          base=$(basename "$audio" .wav)
+          video="Processed_Vid/${base}.mp4"
+          noface="Unuusual_memory/NO_FACE/${base}.txt"
+          if [ -f "$video" ] && [ -f "$noface" ]; then
+            seg_num=1
+            while IFS= read -r line; do
+              start=$(echo "$line" | awk -F'-' '{print $1}' | tr -d ' ')
+              end=$(echo "$line" | awk -F'-' '{print $2}' | awk -F':' '{print $1 ":" $2}')
+              ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
+              echo "file '${base}_seg_${seg_num}.mp4'" >> "Temp_Segments/${base}_concat_list.txt"
+              seg_num=$((seg_num + 1))
+            done < "$noface"
 
-      - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+            # Concatenate segments inside Temp_Segments directory
+            (
+              cd Temp_Segments
+              ffmpeg -y -f concat -safe 0 -i "${base}_concat_list.txt" -c copy "${base}_merged.mp4"
+            )
 
-      - name: Extract No-Face Segments and Merge with Audio
-        run: |
-          mkdir -p Final_Videos Temp_Segments
-          for audio in Unuusual_memory/AUDIO_REAL/group_*.wav; do
-            base=$(basename "$audio" .wav)
-            video="Processed_Vid/${base}.mp4"
-            noface="Unuusual_memory/NO_FACE/${base}.txt"
-            if [ -f "$video" ] && [ -f "$noface" ]; then
-              seg_num=1
-              concat_list="Temp_Segments/${base}_concat_list.txt"
-              > "$concat_list"  # Clear concat list
+            # Trim or pad video to match audio duration
+            audio_dur=$(ffprobe -i "$audio" -show_entries format=duration -v quiet -of csv="p=0")
+            ffmpeg -y -i "Temp_Segments/${base}_merged.mp4" -t "$audio_dur" -c:v copy -an "Temp_Segments/${base}_trimmed.mp4"
 
-              while IFS= read -r line; do
-                start=$(echo "$line" | awk -F'-' '{print $1}' | tr -d ' ')
-                end=$(echo "$line" | awk -F'-' '{print $2}' | cut -d':' -f1,2 | tr -d ' ')
-                ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
-                echo "file 'Temp_Segments/${base}_seg_${seg_num}.mp4'" >> "$concat_list"
-                seg_num=$((seg_num + 1))
-              done < "$noface"
+            # Merge trimmed video with audio
+            ffmpeg -y -i "Temp_Segments/${base}_trimmed.mp4" -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
+          fi
+        done
 
-              # Concatenate no-face segments
-              ffmpeg -y -f concat -safe 0 -i "$concat_list" -c copy "Temp_Segments/${base}_merged.mp4"
-
-              # Trim or pad video to match audio duration
-              audio_dur=$(ffprobe -i "$audio" -show_entries format=duration -v quiet -of csv="p=0")
-              ffmpeg -y -i "Temp_Segments/${base}_merged.mp4" -t "$audio_dur" -c:v copy -an "Temp_Segments/${base}_trimmed.mp4"
-
-              # Merge trimmed video with audio
-              ffmpeg -y -i "Temp_Segments/${base}_trimmed.mp4" -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
-            fi
-          done
-
-      - name: Create Intro and Outro from No-Face Segments
-        run: |
-          mkdir -p Intro_Outro
-          i=1
-          for base in $(ls Unuusual_memory/NO_FACE/ | sed 's/.txt$//'); do
-            video="Processed_Vid/${base}.mp4"
-            noface="Unuusual_memory/NO_FACE/${base}.txt"
-            if [ -f "$video" ] && [ -f "$noface" ]; then
-              first_line=$(head -n 1 "$noface")
-              start=$(echo "$first_line" | awk -F'-' '{print $1}' | tr -d ' ')
-              ffmpeg -y -ss "$start" -i "$video" -t 10 -c copy "Intro_Outro/clip_$i.mp4"
-              i=$((i+1))
-              [ $i -gt 8 ] && break
-            fi
-          done
-
-          printf "file 'Intro_Outro/clip_1.mp4'\nfile 'Intro_Outro/clip_2.mp4'\nfile 'Intro_Outro/clip_3.mp4'\nfile 'Intro_Outro/clip_4.mp4'\n" > intro_list.txt
-          printf "file 'Intro_Outro/clip_5.mp4'\nfile 'Intro_Outro/clip_6.mp4'\nfile 'Intro_Outro/clip_7.mp4'\nfile 'Intro_Outro/clip_8.mp4'\n" > outro_list.txt
-
-          ffmpeg -y -f concat -safe 0 -i intro_list.txt -c copy Intro_Outro/Intro.mp4
-          ffmpeg -y -f concat -safe 0 -i outro_list.txt -c copy Intro_Outro/Outro.mp4
-
-      - name: Add Intro and Outro to Final Videos
-        run: |
-          mkdir -p Completed_Videos
-          for vid in Final_Videos/group_*.mp4; do
-            printf "file 'Intro_Outro/Intro.mp4'\nfile '$vid'\nfile 'Intro_Outro/Outro.mp4'\n" > merge_list.txt
-            ffmpeg -y -f concat -safe 0 -i merge_list.txt -c copy "Completed_Videos/$(basename "$vid")"
-          done
-
-      - name: List completed video files
-        run: ls -lh Completed_Videos/
-
-      - name: Upload Final Videos as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: completed-videos
-          path: Completed_Videos/
+    - name: Upload Final Videos as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Final_Videos
+        path: Final_Videos/
