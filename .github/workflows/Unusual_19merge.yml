@@ -50,14 +50,30 @@ jobs:
             seg_num=1
             concat_list="Temp_Segments/${base}_concat_list.txt"
             > "$concat_list"
+
             while IFS= read -r line; do
-              [[ -z "$line" ]] && continue  # Skip blank lines
+              # Trim line and skip if empty or doesn't have '-'
+              line="$(echo "$line" | xargs)"
+              [[ -z "$line" || "$line" != *-* ]] && continue
+
               start="$(echo "$line" | cut -d'-' -f1 | xargs)"
               end="$(echo "$line" | cut -d'-' -f2 | xargs)"
-              if [[ -z "$start" || -z "$end" ]]; then
-                echo "⚠️ Skipping invalid time segment in $noface: '$line'"
+
+              # Validate time format mm:ss or hh:mm:ss
+              valid_time_regex='^([0-9]{1,2}:)?[0-5][0-9]:[0-5][0-9]$|^[0-5]?[0-9]$' 
+
+              if ! [[ "$start" =~ ^([0-9]+:)?[0-9]{1,2}(:[0-9]{2})?$ ]]; then
+                echo "⚠️ Skipping invalid start time '$start' in $noface"
                 continue
               fi
+              if ! [[ "$end" =~ ^([0-9]+:)?[0-9]{1,2}(:[0-9]{2})?$ ]]; then
+                echo "⚠️ Skipping invalid end time '$end' in $noface"
+                continue
+              fi
+
+              # ffmpeg -ss and -to accepts formats like hh:mm:ss or mm:ss or seconds
+              # So as long as start and end are mm:ss or hh:mm:ss, it's fine.
+
               ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
               echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
               seg_num=$((seg_num + 1))
@@ -86,16 +102,22 @@ jobs:
             video="Processed_Vid/${base}.mp4"
             noface="Unuusual_memory/NO_FACE/${base}.txt"
             if [[ -f "$video" && -f "$noface" ]]; then
+              # Skip blank lines, get first non-empty valid line
               first_line="$(grep -v '^\s*$' "$noface" | head -n 1)"
-              if [[ -z "$first_line" ]]; then
+              first_line="$(echo "$first_line" | xargs)"
+              if [[ -z "$first_line" || "$first_line" != *-* ]]; then
                 echo "⚠️ Skipping intro clip for $base: No valid segments"
                 continue
               fi
+
               start="$(echo "$first_line" | cut -d'-' -f1 | xargs)"
-              if [[ -z "$start" ]]; then
-                echo "⚠️ Skipping intro clip for $base: Invalid start time"
+
+              # Validate start time format
+              if ! [[ "$start" =~ ^([0-9]+:)?[0-9]{1,2}(:[0-9]{2})?$ ]]; then
+                echo "⚠️ Skipping intro clip for $base: Invalid start time '$start'"
                 continue
               fi
+
               ffmpeg -y -ss "$start" -i "$video" -t 10 -c copy "Intro_Outro/clip_${i}.mp4"
               i=$((i + 1))
               [[ "$i" -gt 8 ]] && break
