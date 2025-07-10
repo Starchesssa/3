@@ -1,3 +1,4 @@
+
 name: Merge Audio and Video (No Face Only)
 
 on:
@@ -36,27 +37,45 @@ jobs:
             base="$(basename "$audio" .wav)"
             video="Processed_Vid/${base}.mp4"
             noface="Unuusual_memory/NO_FACE/${base}.txt"
-            if [ -f "$video" ] && [ -f "$noface" ]; then
-              seg_num=1
-              concat_list="Temp_Segments/${base}_concat_list.txt"
-              > "$concat_list"
-              while IFS= read -r line; do
-                start="$(echo "$line" | awk -F'-' '{print $1}' | tr -d ' ')"
-                end="$(echo "$line" | awk -F'-' '{print $2}' | tr -d ' ')"
-                ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
-                echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
-                seg_num=$((seg_num + 1))
-              done < "$noface"
 
-              (
-                cd Temp_Segments
-                ffmpeg -y -f concat -safe 0 -i "${base}_concat_list.txt" -c copy "${base}_merged.mp4"
-              )
-
-              audio_dur="$(ffprobe -i "$audio" -show_entries format=duration -v quiet -of csv="p=0")"
-              ffmpeg -y -i "Temp_Segments/${base}_merged.mp4" -t "$audio_dur" -c:v copy -an "Temp_Segments/${base}_trimmed.mp4"
-              ffmpeg -y -i "Temp_Segments/${base}_trimmed.mp4" -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
+            if [[ ! -f "$video" ]]; then
+              echo "⚠️ Skipping: Missing video for $base"
+              continue
             fi
+            if [[ ! -f "$noface" ]]; then
+              echo "⚠️ Skipping: Missing no-face TXT for $base"
+              continue
+            fi
+
+            seg_num=1
+            concat_list="Temp_Segments/${base}_concat_list.txt"
+            > "$concat_list"
+            while IFS= read -r line; do
+              [[ -z "$line" ]] && continue  # Skip blank lines
+              start="$(echo "$line" | cut -d'-' -f1 | xargs)"
+              end="$(echo "$line" | cut -d'-' -f2 | xargs)"
+              if [[ -z "$start" || -z "$end" ]]; then
+                echo "⚠️ Skipping invalid time segment in $noface: '$line'"
+                continue
+              fi
+              ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
+              echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
+              seg_num=$((seg_num + 1))
+            done < "$noface"
+
+            if [[ ! -s "$concat_list" ]]; then
+              echo "⚠️ Skipping merge for $base: No valid segments found"
+              continue
+            fi
+
+            (
+              cd Temp_Segments
+              ffmpeg -y -f concat -safe 0 -i "${base}_concat_list.txt" -c copy "${base}_merged.mp4"
+            )
+
+            audio_dur="$(ffprobe -i "$audio" -show_entries format=duration -v quiet -of csv="p=0")"
+            ffmpeg -y -i "Temp_Segments/${base}_merged.mp4" -t "$audio_dur" -c:v copy -an "Temp_Segments/${base}_trimmed.mp4"
+            ffmpeg -y -i "Temp_Segments/${base}_trimmed.mp4" -i "$audio" -map 0:v -map 1:a -c:v copy -c:a aac -shortest "Final_Videos/${base}.mp4"
           done
 
       - name: Create Intro and Outro from No-Face Segments
@@ -66,31 +85,48 @@ jobs:
           for base in $(ls Unuusual_memory/NO_FACE/ | sed 's/.txt$//'); do
             video="Processed_Vid/${base}.mp4"
             noface="Unuusual_memory/NO_FACE/${base}.txt"
-            if [ -f "$video" ] && [ -f "$noface" ]; then
-              first_line="$(head -n 1 "$noface")"
-              start="$(echo "$first_line" | awk -F'-' '{print $1}' | tr -d ' ')"
+            if [[ -f "$video" && -f "$noface" ]]; then
+              first_line="$(grep -v '^\s*$' "$noface" | head -n 1)"
+              if [[ -z "$first_line" ]]; then
+                echo "⚠️ Skipping intro clip for $base: No valid segments"
+                continue
+              fi
+              start="$(echo "$first_line" | cut -d'-' -f1 | xargs)"
+              if [[ -z "$start" ]]; then
+                echo "⚠️ Skipping intro clip for $base: Invalid start time"
+                continue
+              fi
               ffmpeg -y -ss "$start" -i "$video" -t 10 -c copy "Intro_Outro/clip_${i}.mp4"
               i=$((i + 1))
-              [ "$i" -gt 8 ] && break
+              [[ "$i" -gt 8 ]] && break
             fi
           done
 
-          printf "file 'clip_1.mp4'\nfile 'clip_2.mp4'\nfile 'clip_3.mp4'\nfile 'clip_4.mp4'\n" > Intro_Outro/intro_list.txt
-          printf "file 'clip_5.mp4'\nfile 'clip_6.mp4'\nfile 'clip_7.mp4'\nfile 'clip_8.mp4'\n" > Intro_Outro/outro_list.txt
+          if [[ $(ls Intro_Outro/clip_*.mp4 2>/dev/null | wc -l) -lt 8 ]]; then
+            echo "⚠️ Not enough clips for intro/outro. Skipping."
+          else
+            printf "file 'clip_1.mp4'\nfile 'clip_2.mp4'\nfile 'clip_3.mp4'\nfile 'clip_4.mp4'\n" > Intro_Outro/intro_list.txt
+            printf "file 'clip_5.mp4'\nfile 'clip_6.mp4'\nfile 'clip_7.mp4'\nfile 'clip_8.mp4'\n" > Intro_Outro/outro_list.txt
 
-          (
-            cd Intro_Outro
-            ffmpeg -y -f concat -safe 0 -i intro_list.txt -c copy Intro.mp4
-            ffmpeg -y -f concat -safe 0 -i outro_list.txt -c copy Outro.mp4
-          )
+            (
+              cd Intro_Outro
+              ffmpeg -y -f concat -safe 0 -i intro_list.txt -c copy Intro.mp4
+              ffmpeg -y -f concat -safe 0 -i outro_list.txt -c copy Outro.mp4
+            )
+          fi
 
       - name: Add Intro and Outro to Final Videos
         run: |
           mkdir -p Completed_Videos
           for vid in Final_Videos/group_*.mp4; do
             base="$(basename "$vid")"
-            printf "file 'Intro_Outro/Intro.mp4'\nfile '$vid'\nfile 'Intro_Outro/Outro.mp4'\n" > merge_list.txt
-            ffmpeg -y -f concat -safe 0 -i merge_list.txt -c copy "Completed_Videos/$base"
+            if [[ -f "Intro_Outro/Intro.mp4" && -f "Intro_Outro/Outro.mp4" ]]; then
+              printf "file 'Intro_Outro/Intro.mp4'\nfile '$vid'\nfile 'Intro_Outro/Outro.mp4'\n" > merge_list.txt
+              ffmpeg -y -f concat -safe 0 -i merge_list.txt -c copy "Completed_Videos/$base"
+            else
+              echo "⚠️ Skipping intro/outro merge for $base (missing Intro/Outro)"
+              cp "$vid" "Completed_Videos/$base"
+            fi
           done
 
       - name: List completed video files
