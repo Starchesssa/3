@@ -1,0 +1,48 @@
+
+name: Clean No-Face TXT Files and Commit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-no-face-txt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clean TXT files in Unuusual_memory/NO_FACE/
+        run: |
+          cd Unuusual_memory/NO_FACE
+          for file in *.txt; do
+            [ -f "$file" ] || continue
+            awk -F':' '{print $1 "-" $2}' "$file" | sed 's/ *$//' > "$file.tmp" && mv "$file.tmp" "$file"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Unuusual_memory/NO_FACE/*.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Cleaned no-face TXT files automatically"
+            git push
+          fi
+
+      - name: Show cleaned files
+        run: |
+          echo "Cleaned TXT Files:"
+          cd Unuusual_memory/NO_FACE
+          for file in *.txt; do
+            echo "----- $file -----"
+            cat "$file"
+            echo
+          done
