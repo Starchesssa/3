@@ -1,0 +1,34 @@
+
+name: Unusual Audio Splitter
+
+on:
+  workflow_dispatch:  # Manual Dispatch via GitHub UI
+
+jobs:
+  run-audio-splitter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Run Audio Splitting Script
+        run: python Unusual_audio_real.py
+
+      - name: Commit Results
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "github-actions"
+          git add Unuusual_memory/AUDIO_REAL
+          git commit -m "Auto: Extracted audio groups" || echo "No changes to commit"
+          git push
