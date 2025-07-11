@@ -1,0 +1,38 @@
+
+name: Sort and Merge Audio with No-Face Videos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sort-audio-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download No-Face Videos Artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_19conc.yml
+          workflow_conclusion: success
+          branch: main
+          name: no-face-videos
+          path: No_Face_Videos/
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: ✨ Run Audio Merge Script
+        run: |
+          python3 Unusual_audioconc.py
+
+      - name: 📤 Upload Final Videos as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-videos
+          path: Final_Videos/
