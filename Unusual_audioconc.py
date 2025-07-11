@@ -68,11 +68,13 @@ for audio_file in audio_files:
             "-i", concat_list, "-c", "copy", looped_video
         ], check=True)
 
-        # Trim excess
+        # Trim excess safely using a temp file
+        trimmed_video = f"Trimmed_{group_name}.mp4"
         subprocess.run([
             "ffmpeg", "-y", "-ss", "0", "-t", str(audio_duration),
-            "-i", looped_video, "-c", "copy", looped_video
+            "-i", looped_video, "-c", "copy", trimmed_video
         ], check=True)
+        os.replace(trimmed_video, looped_video)
 
         os.remove(concat_list)
 
