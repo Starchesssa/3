@@ -1,0 +1,38 @@
+
+name: Sort No Face Footage and Upload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sort-no-face:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download processed video artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_6download3.yml
+          workflow_conclusion: success
+          branch: main
+          name: downloaded-videos
+          path: Processed_Vid/
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: ✨ Run No-Face Processing Script
+        run: |
+          python3 Unusual_conc.py
+
+      - name: 📤 Upload No-Face Videos as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: no-face-videos
+          path: No_Face_Videos/
