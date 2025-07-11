@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download processed video artifact
+      - name: 📥 Download processed video artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -22,29 +22,27 @@ jobs:
           name: downloaded-videos
           path: Processed_Vid/
 
-      - name: Install FFmpeg
+      - name: 🔧 Install FFmpeg
         run: |
-          echo "🔧 Updating packages and installing FFmpeg..."
-          sudo apt-get update && sudo apt-get install -y ffmpeg
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
-      - name: Cut No-Face Segments and Concatenate (Debug Enabled)
+      - name: ✂️ Cut No-Face Segments and Concatenate
         run: |
-          set -euxo pipefail  # Debugging enabled: stop on error, print commands
-          
-          echo "📂 Creating necessary directories..."
+          set -euxo pipefail
+
           mkdir -p No_Face_Videos Temp_Segments
 
-          echo "🚀 Starting to process NO_FACE groups..."
           for noface in Unuusual_memory/NO_FACE/group_*.txt; do
             base=$(basename "$noface" .txt)
             video="Processed_Vid/${base}.mp4"
 
             if [[ ! -f "$video" ]]; then
-              echo "⚠️ Skipping $base - video not found at $video"
+              echo "⚠️ Skipping $base - video not found."
               continue
             fi
 
-            echo "🎬 Processing $base with video: $video"
+            echo "🎬 Processing $base"
             seg_num=1
             concat_list="Temp_Segments/${base}_concat_list.txt"
             > "$concat_list"
@@ -52,13 +50,13 @@ jobs:
             while IFS= read -r line; do
               line="$(echo "$line" | xargs)"
               if [[ -z "$line" || "$line" != *-* ]]; then
-                echo "⏭️ Skipping invalid or empty line: '$line'"
+                echo "⏭️ Skipping invalid line: '$line'"
                 continue
               fi
 
               start="$(echo "$line" | cut -d'-' -f1 | xargs)"
               end="$(echo "$line" | cut -d'-' -f2 | xargs)"
-              echo "✂️ Cutting segment: Start=$start, End=$end"
+              echo "✂️ Cutting segment from $start to $end"
 
               ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
               echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
@@ -70,11 +68,11 @@ jobs:
               ffmpeg -y -f concat -safe 0 -i "$concat_list" -c copy "No_Face_Videos/${base}_noface.mp4"
               echo "✅ Finished processing $base"
             else
-              echo "⚠️ No valid segments found for $base, skipping concatenation."
+              echo "⚠️ No valid segments for $base, skipping."
             fi
           done
 
-      - name: Upload No-Face Videos as Artifact
+      - name: 📤 Upload No-Face Videos as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: no-face-videos
