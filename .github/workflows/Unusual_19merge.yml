@@ -23,31 +23,42 @@ jobs:
           path: Processed_Vid/
 
       - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
-      - name: Cut No-Face Segments and Concatenate
         run: |
+          echo "🔧 Updating packages and installing FFmpeg..."
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Cut No-Face Segments and Concatenate (Debug Enabled)
+        run: |
+          set -euxo pipefail  # Debugging enabled: stop on error, print commands
+          
+          echo "📂 Creating necessary directories..."
           mkdir -p No_Face_Videos Temp_Segments
+
+          echo "🚀 Starting to process NO_FACE groups..."
           for noface in Unuusual_memory/NO_FACE/group_*.txt; do
             base=$(basename "$noface" .txt)
             video="Processed_Vid/${base}.mp4"
 
             if [[ ! -f "$video" ]]; then
-              echo "⚠️ Skipping $base - video not found."
+              echo "⚠️ Skipping $base - video not found at $video"
               continue
             fi
 
-            echo "🎬 Processing $base"
+            echo "🎬 Processing $base with video: $video"
             seg_num=1
             concat_list="Temp_Segments/${base}_concat_list.txt"
             > "$concat_list"
 
             while IFS= read -r line; do
               line="$(echo "$line" | xargs)"
-              [[ -z "$line" || "$line" != *-* ]] && continue
+              if [[ -z "$line" || "$line" != *-* ]]; then
+                echo "⏭️ Skipping invalid or empty line: '$line'"
+                continue
+              fi
 
               start="$(echo "$line" | cut -d'-' -f1 | xargs)"
               end="$(echo "$line" | cut -d'-' -f2 | xargs)"
+              echo "✂️ Cutting segment: Start=$start, End=$end"
 
               ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
               echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
@@ -55,9 +66,11 @@ jobs:
             done < "$noface"
 
             if [[ -s "$concat_list" ]]; then
+              echo "🔗 Concatenating segments for $base..."
               ffmpeg -y -f concat -safe 0 -i "$concat_list" -c copy "No_Face_Videos/${base}_noface.mp4"
+              echo "✅ Finished processing $base"
             else
-              echo "⚠️ No valid segments for $base, skipping."
+              echo "⚠️ No valid segments found for $base, skipping concatenation."
             fi
           done
 
