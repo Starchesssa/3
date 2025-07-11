@@ -43,6 +43,11 @@ jobs:
             fi
 
             echo "🎬 Processing $base"
+            
+            echo "📄 Contents of $noface:"
+            cat -A "$noface"
+            echo "----------------------------------"
+
             seg_num=1
             concat_list="Temp_Segments/${base}_concat_list.txt"
             > "$concat_list"
