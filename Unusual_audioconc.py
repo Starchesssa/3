@@ -95,6 +95,30 @@ def create_middle_clip(video_path, duration=5):
     ], check=True)
     return temp_clip
 
+# Concatenate clips (Try stream copy first, then re-encode if needed)
+def concat_clips(clip_list, output_file):
+    concat_list = "concat_clips.txt"
+    with open(concat_list, "w") as f:
+        for clip in clip_list:
+            f.write(f"file '{clip}'\n")
+    try:
+        # Try stream copy first (fast, no quality loss)
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+            "-i", concat_list, "-c", "copy", output_file
+        ], check=True)
+        print(f"✅ Concatenated without re-encoding: {output_file}")
+    except subprocess.CalledProcessError:
+        print(f"⚠️ Stream copy failed! Re-encoding: {output_file}")
+        # Fallback to re-encoding (minimize quality loss)
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+            "-i", concat_list, "-c:v", "libx264", "-preset", "slow", "-crf", "18",
+            "-c:a", "aac", "-b:a", "192k", output_file
+        ], check=True)
+        print(f"✅ Successfully re-encoded: {output_file}")
+    os.remove(concat_list)
+
 # Select random videos for intro and outro
 final_videos = sorted([
     os.path.join(final_folder, f)
@@ -104,18 +128,6 @@ final_videos = sorted([
 intro_clips = [create_middle_clip(v) for v in random.sample(final_videos, min(5, len(final_videos)))]
 remaining_videos = [v for v in final_videos if v not in intro_clips]
 outro_clips = [create_middle_clip(v) for v in random.sample(remaining_videos, min(5, len(remaining_videos)))]
-
-# Concatenate intro and outro clips
-def concat_clips(clip_list, output_file):
-    concat_list = "concat_clips.txt"
-    with open(concat_list, "w") as f:
-        for clip in clip_list:
-            f.write(f"file '{clip}'\n")
-    subprocess.run([
-        "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-        "-i", concat_list, "-c", "copy", output_file
-    ], check=True)
-    os.remove(concat_list)
 
 intro_video = "Intro_Video.mp4"
 outro_video = "Outro_Video.mp4"
