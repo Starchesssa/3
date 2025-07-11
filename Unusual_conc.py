@@ -5,47 +5,63 @@ import subprocess
 os.makedirs("No_Face_Videos", exist_ok=True)
 os.makedirs("Temp_Segments", exist_ok=True)
 
-for txt_file in os.listdir("Unuusual_memory/NO_FACE"):
-    if not txt_file.startswith("group_") or not txt_file.endswith(".txt"):
+for noface in os.listdir("Unuusual_memory/NO_FACE"):
+    if not noface.endswith(".txt"):
         continue
 
-    base = txt_file[:-4]
-    video_path = f"Processed_Vid/{base}.mp4"
+    base = noface[:-4]
+    video = f"Processed_Vid/{base}.mp4"
+    noface_path = f"Unuusual_memory/NO_FACE/{noface}"
 
-    if not os.path.isfile(video_path):
+    if not os.path.exists(video):
         print(f"⚠️ Skipping {base} - video not found.")
         continue
 
     print(f"🎬 Processing {base}")
 
     seg_num = 1
-    concat_list_path = f"Temp_Segments/{base}_concat_list.txt"
-    with open(concat_list_path, "w") as concat_list, open(f"Unuusual_memory/NO_FACE/{txt_file}", "r") as f:
-        for raw_line in f:
-            line = raw_line.strip().replace('\ufeff', '').replace('\r', '')
-            print(f"📄 Raw line: [{line}]")
+    concat_list = f"Temp_Segments/{base}_concat_list.txt"
+    with open(concat_list, "w") as cl:
+        with open(noface_path, "r", encoding="utf-8-sig") as f:
+            for rawline in f:
+                line = rawline.strip().replace('\r', '')
+                print(f"📄 Raw line: [{line}]")
 
-            if not (len(line) == 11 and line[2] == ':' and line[5] == '-' and line[8] == ':'):
-                print(f"⏭️ Skipping invalid line: '{line}'")
-                continue
+                if not line or not (":" in line and "-" in line):
+                    print(f"⏭️ Skipping invalid line: '{line}'")
+                    continue
 
-            start, end = line.split('-')
-            print(f"✂️ Cutting segment from '{start}' to '{end}'")
+                start, end = line.split('-')
 
-            seg_filename = f"Temp_Segments/{base}_seg_{seg_num}.mp4"
-            subprocess.run([
-                "ffmpeg", "-y", "-ss", start, "-to", end, "-i", video_path,
-                "-c", "copy", seg_filename
-            ], check=True)
+                if start == end:
+                    print(f"⏭️ Skipping zero-duration segment: {start} to {end}")
+                    continue
 
-            concat_list.write(f"file '{os.path.basename(seg_filename)}'\n")
-            seg_num += 1
+                print(f"✂️ Cutting segment from '{start}' to '{end}'")
+                seg_file = f"Temp_Segments/{base}_seg_{seg_num}.mp4"
 
-    if os.path.getsize(concat_list_path) > 0:
+                try:
+                    subprocess.run([
+                        "ffmpeg", "-y",
+                        "-ss", start,
+                        "-to", end,
+                        "-i", video,
+                        "-c", "copy",
+                        seg_file
+                    ], check=True)
+                    cl.write(f"file '{os.path.basename(seg_file)}'\n")
+                    seg_num += 1
+                except subprocess.CalledProcessError as e:
+                    print(f"❌ FFmpeg error on segment {start} to {end}: {e}")
+                    continue
+
+    if os.path.getsize(concat_list) > 0:
         print(f"🔗 Concatenating segments for {base}...")
         subprocess.run([
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-            "-i", concat_list_path, "-c", "copy",
+            "ffmpeg", "-y",
+            "-f", "concat", "-safe", "0",
+            "-i", concat_list,
+            "-c", "copy",
             f"No_Face_Videos/{base}_noface.mp4"
         ], check=True)
         print(f"✅ Finished processing {base}")
