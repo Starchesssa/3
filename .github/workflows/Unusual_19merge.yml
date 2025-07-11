@@ -34,7 +34,7 @@ jobs:
           mkdir -p No_Face_Videos Temp_Segments
 
           for noface in Unuusual_memory/NO_FACE/group_*.txt; do
-            base="$(basename "$noface" .txt)"
+            base=$(basename "$noface" .txt)
             video="Processed_Vid/${base}.mp4"
 
             if [[ ! -f "$video" ]]; then
@@ -48,7 +48,12 @@ jobs:
             > "$concat_list"
 
             while IFS= read -r line; do
-              line="$(echo "$line" | xargs)"
+              # Clean up hidden characters & trim
+              line="$(echo "$line" | tr -d '\r' | xargs)"
+
+              # Debug: Show hidden characters (optional, can remove later)
+              printf '📄 Processing line (hidden chars shown): [%s]\n' "$line" | cat -v
+
               if [[ -z "$line" || "$line" != *-* ]]; then
                 echo "⏭️ Skipping invalid line: '$line'"
                 continue
@@ -56,9 +61,6 @@ jobs:
 
               start="${line%-*}"
               end="${line#*-}"
-
-              start="$(echo "$start" | xargs)"
-              end="$(echo "$end" | xargs)"
 
               echo "✂️ Cutting segment from '$start' to '$end'"
 
