@@ -90,7 +90,7 @@ for audio_file in audio_files:
 def create_middle_clip(video_path, duration=5):
     total_duration = get_duration(video_path)
     if total_duration <= duration:
-        return video_path  # Use full video if too short
+        return None  # Skip too-short videos
     start_time = total_duration / 2 - duration / 2
     temp_clip = f"Clip_{os.path.basename(video_path)}"
     subprocess.run([
@@ -128,9 +128,11 @@ final_videos = sorted([
 ])
 
 # Select random clips for intro and outro (5 clips or fewer if less available)
-intro_clips = [create_middle_clip(v) for v in random.sample(final_videos, min(5, len(final_videos)))]
-remaining_videos = [v for v in final_videos if v not in intro_clips]
-outro_clips = [create_middle_clip(v) for v in random.sample(remaining_videos, min(5, len(remaining_videos)))]
+intro_clips_raw = [create_middle_clip(v) for v in random.sample(final_videos, min(5, len(final_videos)))]
+intro_clips = [clip for clip in intro_clips_raw if clip]  # Remove None
+remaining_videos = [v for v in final_videos if v not in intro_clips_raw]  # Use originals for filtering
+outro_clips_raw = [create_middle_clip(v) for v in random.sample(remaining_videos, min(5, len(remaining_videos)))]
+outro_clips = [clip for clip in outro_clips_raw if clip]
 
 intro_video = "Intro_Video.mp4"
 outro_video = "Outro_Video.mp4"
@@ -139,7 +141,7 @@ outro_video = "Outro_Video.mp4"
 concat_clips(intro_clips, intro_video)
 concat_clips(outro_clips, outro_video)
 
-# Step 3: Merge intro/outro visuals with your own Intro.wav and Outro.wav audio files
+# Step 3: Merge intro/outro visuals with Intro.wav and Outro.wav audio files
 intro_final = os.path.join(final_folder, "Intro_Video_Final.mp4")
 outro_final = os.path.join(final_folder, "Outro_Video_Final.mp4")
 
@@ -160,9 +162,11 @@ print(f"✅ Created final outro video with Outro.wav audio: {outro_final}")
 
 # Cleanup temporary intro/outro clips and intermediate silent videos
 for clip in intro_clips + outro_clips:
-    if clip not in [intro_video, outro_video]:
+    if clip and clip.startswith("Clip_") and os.path.exists(clip):
         os.remove(clip)
-os.remove(intro_video)
-os.remove(outro_video)
+if os.path.exists(intro_video):
+    os.remove(intro_video)
+if os.path.exists(outro_video):
+    os.remove(outro_video)
 
 print("🎬 Finished Processing All Videos.")
