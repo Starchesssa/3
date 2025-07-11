@@ -34,7 +34,7 @@ jobs:
           mkdir -p No_Face_Videos Temp_Segments
 
           for noface in Unuusual_memory/NO_FACE/group_*.txt; do
-            base=$(basename "$noface" .txt)
+            base="$(basename "$noface" .txt)"
             video="Processed_Vid/${base}.mp4"
 
             if [[ ! -f "$video" ]]; then
@@ -54,9 +54,13 @@ jobs:
                 continue
               fi
 
-              start="$(echo "$line" | cut -d'-' -f1 | xargs)"
-              end="$(echo "$line" | cut -d'-' -f2 | xargs)"
-              echo "✂️ Cutting segment from $start to $end"
+              start="${line%-*}"
+              end="${line#*-}"
+
+              start="$(echo "$start" | xargs)"
+              end="$(echo "$end" | xargs)"
+
+              echo "✂️ Cutting segment from '$start' to '$end'"
 
               ffmpeg -y -ss "$start" -to "$end" -i "$video" -c copy "Temp_Segments/${base}_seg_${seg_num}.mp4"
               echo "file '${base}_seg_${seg_num}.mp4'" >> "$concat_list"
