@@ -13,11 +13,9 @@ for video in videos:
     input_path = os.path.join(input_folder, video)
     output_path = os.path.join(output_folder, video)
     
-    # Example product name from filename (you can change this logic)
     product_name = video.replace(".mp4", "").replace("_", " ").title()
     cta_text = "Product — link in the description 👇"
 
-    # Check resolution
     cmd_probe = [
         "ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
         "stream=width,height", "-of", "csv=s=x:p=0", input_path
@@ -33,22 +31,26 @@ for video in videos:
     if orientation == "vertical":
         print(f"[J] Vertical video detected: {video}")
 
+        # Product name text: 0s to 5s with animation
         drawtext_product = (
             f"drawtext=fontfile='{font_path}':"
             f"text='{product_name}':"
             f"fontsize=90:fontcolor=#C0C0C0:"
             f"box=1:boxcolor=black@0.8:boxborderw=5:"
-            f"x=(w-text_w)/2:y='if(lt(t,1), h+text_h, if(lt(t,2), h-(t-1)*(h-text_h-100), if(lt(t,7), h-text_h-100, NAN)))':"
-            f"enable='lt(t,7)':shadowcolor=black:shadowx=3:shadowy=3"
+            f"x=(w-text_w)/2:"
+            f"y='if(lt(t,1), h+text_h, if(lt(t,2), h-(t-1)*(h-text_h-100), if(lt(t,5), h-text_h-100, NAN)))':"
+            f"enable='lt(t,5)':shadowcolor=black:shadowx=3:shadowy=3"
         )
 
+        # CTA text: 5s to 10s with animation
         drawtext_cta = (
             f"drawtext=fontfile='{font_path}':"
             f"text='{cta_text}':"
             f"fontsize=60:fontcolor=white:"
             f"box=1:boxcolor=black@0.8:boxborderw=4:"
-            f"x=(w-text_w)/2:y=h-text_h-30:"
-            f"enable='between(t,1,7)':shadowcolor=black:shadowx=2:shadowy=2"
+            f"x=(w-text_w)/2:"
+            f"y='if(lt(t,6), h+text_h, if(lt(t,7), h-(t-6)*(h-text_h-100), if(lt(t,10), h-text_h-100, NAN)))':"
+            f"enable='and(gte(t,5),lt(t,10))':shadowcolor=black:shadowx=2:shadowy=2"
         )
 
         vf = (
@@ -72,7 +74,6 @@ for video in videos:
 
     else:
         print(f"[+] Horizontal video detected: {video}")
-        # Skip or copy directly
         try:
             subprocess.run([
                 "ffmpeg", "-y", "-i", input_path,
