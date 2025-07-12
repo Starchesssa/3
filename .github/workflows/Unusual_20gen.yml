@@ -1,0 +1,49 @@
+
+name: 🔁 Generate Generic Product Names
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "product-name-generator"
+  cancel-in-progress: true
+
+jobs:
+  generate-names:
+    runs-on: ubuntu-latest
+    name: 🧠 Generate Generic Product Names
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Install dependencies and run Python script
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u Unusual_gen.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Output
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add Unuusual_memory/GROUP_GDG/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new generic names to commit."
+          else
+            git commit -m "🤖 Update product names via Product Name Generator"
+            git push
+            echo "✅ Product name files committed and pushed."
+          fi
