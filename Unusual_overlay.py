@@ -9,7 +9,6 @@ OUTPUT_DIR = "Overlayed_Videos"
 GENERIC_TXT = "Unuusual_memory/GROUP_GDG/group_gdg.txt"
 DURATION = 7  # seconds to show the overlay
 
-# Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def parse_generic_names(txt_path):
@@ -22,8 +21,10 @@ def parse_generic_names(txt_path):
         mapping[f"group_{group_num}.mp4"] = generic_name.strip(" *")
     return mapping
 
+def sanitize_filename(name):
+    return name.strip().replace(" ", "").replace("__", "_")
+
 def add_slide_text_overlay(input_file, output_file, text, font_path):
-    # Detect video resolution
     probe_cmd = [
         "ffprobe", "-v", "error", "-select_streams", "v:0",
         "-show_entries", "stream=width,height",
@@ -38,7 +39,6 @@ def add_slide_text_overlay(input_file, output_file, text, font_path):
 
     is_vertical = height > width
 
-    # Sliding text overlay filter
     slide_filter = (
         f"drawtext=fontfile='{font_path}':"
         f"text='{text}':"
@@ -50,8 +50,7 @@ def add_slide_text_overlay(input_file, output_file, text, font_path):
     )
 
     if is_vertical:
-        print(f"↕ Detected vertical video: {input_file}")
-        # Scale blurred bg to 1280x720, scale main to fit height, center it
+        print(f"↕ Vertical video detected: {input_file}")
         filter_chain = (
             f"[0:v]scale=1280:720,boxblur=10:1[blurred];"
             f"[0:v]scale=-2:720[main];"
@@ -59,7 +58,7 @@ def add_slide_text_overlay(input_file, output_file, text, font_path):
             f"{slide_filter}"
         )
     else:
-        print(f"↔ Detected horizontal video: {input_file}")
+        print(f"↔ Horizontal video detected: {input_file}")
         filter_chain = slide_filter
 
     cmd = [
@@ -72,8 +71,8 @@ def add_slide_text_overlay(input_file, output_file, text, font_path):
     try:
         subprocess.run(cmd, check=True)
         print(f"[✔] Overlayed: {output_file}")
-    except subprocess.CalledProcessError:
-        print(f"❌ Failed to process: {input_file}")
+    except subprocess.CalledProcessError as e:
+        print(f"❌ FFmpeg failed: {input_file}\n{e}")
 
 def main():
     generic_map = parse_generic_names(GENERIC_TXT)
@@ -84,14 +83,16 @@ def main():
         return
 
     for video in video_files:
-        generic_name = generic_map.get(video)
+        clean_name = sanitize_filename(video)
+        input_path = os.path.join(INPUT_DIR, clean_name)
+        output_path = os.path.join(OUTPUT_DIR, clean_name)
+
+        generic_name = generic_map.get(clean_name)
         if not generic_name:
-            print(f"⚠️ No generic name found for: {video}")
+            print(f"⚠️ No generic name found for: {clean_name}")
             continue
 
-        input_path = os.path.join(INPUT_DIR, video)
-        output_path = os.path.join(OUTPUT_DIR, video)
-
+        print(f"➤ Processing: {clean_name} | Generic: {generic_name}")
         add_slide_text_overlay(input_path, output_path, generic_name, FONT_PATH)
 
 if __name__ == "__main__":
