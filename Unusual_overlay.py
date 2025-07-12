@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 
@@ -9,13 +8,30 @@ os.makedirs(output_folder, exist_ok=True)
 
 videos = [f for f in os.listdir(input_folder) if f.endswith(".mp4")]
 
+def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=300):
+    text_k = ''.join([f'{{\\k20}}{c}' for c in text])
+    ass_content = f"""[Script Info]
+Title: Typewriter Effect
+ScriptType: v4.00+
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,{font_name},{fontsize},&H00FFFFFF,&HFF0000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.00,0:00:10.00,Default,,0,0,0,,{{\\pos({x},{y})}}{text_k}
+"""
+    with open(ass_path, 'w', encoding='utf-8') as f:
+        f.write(ass_content)
+
 for video in videos:
     input_path = os.path.join(input_folder, video)
     output_path = os.path.join(output_folder, video)
 
     product_name = video.replace(".mp4", "").replace("_", " ").title()
-    cta_text = "Product — link in the description 👇"
 
+    # Detect orientation
     cmd_probe = [
         "ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
         "stream=width,height", "-of", "csv=s=x:p=0", input_path
@@ -28,57 +44,30 @@ for video in videos:
         print(f"[!] Could not probe video {video}: {e}")
         continue
 
-    if orientation == "vertical":
-        print(f"[J] Vertical video detected: {video}")
+    print(f"[>] Processing {orientation} video: {video}")
 
-        drawtext_product = (
-            f"drawtext=fontfile='{font_path}':"
-            f"text='{product_name}':"
-            f"fontsize=90:fontcolor=#C0C0C0:"
-            f"box=1:boxcolor=black@0.8:boxborderw=5:"
-            f"x=(w-text_w)/2:"
-            f"y='if(lt(t,1), h+text_h, if(lt(t,2), h-(t-1)*(h-text_h-100), if(lt(t,5), h-text_h-100, NAN)))':"
-            f"enable='lt(t,5)':"
-            f"shadowcolor=black:shadowx=3:shadowy=3"
-        )
+    # Generate .ass file
+    ass_path = f"temp_{os.path.splitext(video)[0]}.ass"
+    generate_ass_file(product_name, ass_path)
 
-        drawtext_cta = (
-            f"drawtext=fontfile='{font_path}':"
-            f"text='{cta_text}':"
-            f"fontsize=60:fontcolor=white:"
-            f"box=1:boxcolor=black@0.8:boxborderw=4:"
-            f"x=(w-text_w)/2:"
-            f"y='if(lt(t,5), NAN, if(lt(t,6), h+text_h, if(lt(t,10), h-text_h-30, NAN)))':"
-            f"enable='gte(t,5)*lt(t,10)':"
-            f"shadowcolor=black:shadowx=2:shadowy=2"
-        )
+    # Set text position based on orientation
+    y_pos = 300 if orientation == "vertical" else 100
 
-        vf = (
-            f"[0:v]scale=1280:720,boxblur=10:1[blurred];"
-            f"[0:v]scale=-2:720[main];"
-            f"[blurred][main]overlay=(W-w)/2:(H-h)/2,"
-            f"{drawtext_product},{drawtext_cta}"
-        )
+    # Adjust position in the .ass file
+    generate_ass_file(product_name, ass_path, x=100, y=y_pos)
 
-        cmd_overlay = [
-            "ffmpeg", "-y", "-i", input_path,
-            "-vf", vf,
-            "-c:v", "libx264", "-crf", "23", "-preset", "fast",
-            output_path
-        ]
-        try:
-            subprocess.run(cmd_overlay, check=True)
-            print(f"[V] Overlayed: {output_path}")
-        except subprocess.CalledProcessError:
-            print(f"[X] FFmpeg failed for {video}")
-
-    else:
-        print(f"[+] Horizontal video detected: {video}")
-        try:
-            subprocess.run([
-                "ffmpeg", "-y", "-i", input_path,
-                "-c", "copy", output_path
-            ], check=True)
-            print(f"[V] Overlayed: {output_path}")
-        except subprocess.CalledProcessError:
-            print(f"[X] Copy failed for {video}")
+    # Apply subtitles (typewriter) with FFmpeg
+    cmd_overlay = [
+        "ffmpeg", "-y", "-i", input_path,
+        "-vf", f"subtitles={ass_path}",
+        "-c:v", "libx264", "-crf", "23", "-preset", "fast",
+        output_path
+    ]
+    try:
+        subprocess.run(cmd_overlay, check=True)
+        print(f"[✓] Overlayed with typewriter effect: {output_path}")
+    except subprocess.CalledProcessError:
+        print(f"[X] FFmpeg failed for {video}")
+    finally:
+        if os.path.exists(ass_path):
+            os.remove(ass_path)
