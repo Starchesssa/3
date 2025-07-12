@@ -12,7 +12,7 @@ videos = [f for f in os.listdir(input_folder) if f.endswith(".mp4")]
 for video in videos:
     input_path = os.path.join(input_folder, video)
     output_path = os.path.join(output_folder, video)
-    
+
     product_name = video.replace(".mp4", "").replace("_", " ").title()
     cta_text = "Product — link in the description 👇"
 
@@ -31,7 +31,6 @@ for video in videos:
     if orientation == "vertical":
         print(f"[J] Vertical video detected: {video}")
 
-        # Product name text: 0s to 5s with animation
         drawtext_product = (
             f"drawtext=fontfile='{font_path}':"
             f"text='{product_name}':"
@@ -39,18 +38,19 @@ for video in videos:
             f"box=1:boxcolor=black@0.8:boxborderw=5:"
             f"x=(w-text_w)/2:"
             f"y='if(lt(t,1), h+text_h, if(lt(t,2), h-(t-1)*(h-text_h-100), if(lt(t,5), h-text_h-100, NAN)))':"
-            f"enable='lt(t,5)':shadowcolor=black:shadowx=3:shadowy=3"
+            f"enable='lt(t,5)':"
+            f"shadowcolor=black:shadowx=3:shadowy=3"
         )
 
-        # CTA text: 5s to 10s with animation
         drawtext_cta = (
             f"drawtext=fontfile='{font_path}':"
             f"text='{cta_text}':"
             f"fontsize=60:fontcolor=white:"
             f"box=1:boxcolor=black@0.8:boxborderw=4:"
             f"x=(w-text_w)/2:"
-            f"y='if(lt(t,6), h+text_h, if(lt(t,7), h-(t-6)*(h-text_h-100), if(lt(t,10), h-text_h-100, NAN)))':"
-            f"enable='and(gte(t,5),lt(t,10))':shadowcolor=black:shadowx=2:shadowy=2"
+            f"y='if(lt(t,5), NAN, if(lt(t,6), h+text_h, if(lt(t,10), h-text_h-30, NAN)))':"
+            f"enable='gte(t,5)*lt(t,10)':"
+            f"shadowcolor=black:shadowx=2:shadowy=2"
         )
 
         vf = (
