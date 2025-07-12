@@ -2,7 +2,7 @@
 import os
 import subprocess
 
-font_path = "/storage/emulated/0/Download/FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"
+font_path = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"
 input_folder = "Final_Videos"
 output_folder = "Overlayed_Videos"
 os.makedirs(output_folder, exist_ok=True)
