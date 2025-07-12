@@ -6,31 +6,31 @@ Generic Name: Window cleaning robot
 
 --- group_11.txt ---
 Original Product Name: Luba 2
-Generic Name: Robotic lawn mower
+Generic Name: GPS lawn mower
 
 --- group_12.txt ---
 Original Product Name: Xiaomi ZAJIA Automatic Sense Infrared Induction Water Saving Device For Kitchen Bathroom Sink Faucet
-Generic Name: Automatic Faucet Sensor
+Generic Name: Automatic Faucet Adapter
 
 --- group_13.txt ---
 Original Product Name: Samsung Bespoke Oven
-Generic Name: Smart Wall Oven
+Generic Name: Smart Built-in Oven
 
 --- group_15.txt ---
 Original Product Name: Nokia Sleep Sensing Pad
-Generic Name: Sleep Tracking Pad
+Generic Name: Sleep Tracking Mat
 
 --- group_16.txt ---
 Original Product Name: Nanoleaf Aurora
-Generic Name: Smart Lighting Panels
+Generic Name: Smart Light Panel
 
 --- group_17.txt ---
 Original Product Name: Letpot Smart Hydroponics Growing System
-Generic Name: Hydroponics Growing System
+Generic Name: Smart Hydroponics System
 
 --- group_19.txt ---
 Original Product Name: BenchSentry
-Generic Name: Bench security device
+Generic Name: **Bench security device**
 
 --- group_2.txt ---
 Original Product Name: Click and Grow
@@ -38,12 +38,7 @@ Generic Name: Smart indoor garden
 
 --- group_20.txt ---
 Original Product Name: SDARISB DR-HW026
-Generic Name: Based on "DR-HW026", where "DR" very strongly suggests "Doorbell", and the "SD" in "SDARISB" often points to "Smart" or "Security" features in modern electronics:
-
-**Smart Doorbell**
-
-Other strong candidates:
-*   Video Doorbell
+Generic Name: Wireless router
 
 --- group_21.txt ---
 Original Product Name: Pawbby Smart Pet Feeder
@@ -51,8 +46,60 @@ Generic Name: Smart Pet Feeder
 
 --- group_22.txt ---
 Original Product Name: Robot Pool Cleaners
-Generic Name: Aquatic Cleaning Robot
+Generic Name: Robotic pool cleaner
 
 --- group_23.txt ---
 Original Product Name: PMSA003I Air Quality Sensor
-Generic Name: Air Quality Monitor
+Generic Name: Air quality sensor
+
+--- group_24.txt ---
+Original Product Name: Dr.Story LED Smart Shower Head
+Generic Name: Smart shower head
+
+--- group_25.txt ---
+Original Product Name: 3MP Security Protection Door Peephole Camera iCam365
+Generic Name: Peephole Camera
+
+--- group_26.txt ---
+Original Product Name: HoMedics SoundSpa Dual Alarm Digital FM Clock Radio
+Generic Name: Alarm clock radio
+
+--- group_27.txt ---
+Original Product Name: Wayzn Automatic Sliding Pet Door Opener
+Generic Name: Automatic Pet Door
+
+--- group_28.txt ---
+Original Product Name: COSORI Coffee Mug Warmer & Mug Set
+Generic Name: Beverage warmer
+
+--- group_3.txt ---
+Original Product Name: MOKOQI Magnetic Levitating Globe with LED Light
+Generic Name: Levitating Globe Display
+
+--- group_30.txt ---
+Original Product Name: Flaire
+Generic Name: Personal air purifier
+
+--- group_4.txt ---
+Original Product Name: Smart Toilet
+Generic Name: Automated Hygiene System
+
+--- group_5.txt ---
+Original Product Name: homerunPET CS106
+Generic Name: Pet Grooming Device
+
+--- group_6.txt ---
+Original Product Name: Smart Fingerprint Door Lock
+Generic Name: Smart Door Lock
+
+--- group_7.txt ---
+Original Product Name: KALEA
+Generic Name: Golf rangefinder
+
+--- group_8.txt ---
+Original Product Name: BOSE HOME SPEAKER 300
+Generic Name: Home speaker
+
+--- group_9.txt ---
+Original Product Name: Govee Home Humidifier Lite
+Generic Name: Smart humidifier
