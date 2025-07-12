@@ -32,21 +32,25 @@ jobs:
           echo "Running overlay script after downloading videos..."
           python3 Unusual_overlay.py
 
-      - name: 📤 Upload Each Overlayed Video as Separate Artifact
+      - name: 📤 Upload Each Overlayed Video as a Separate Artifact
         run: |
-          echo "Uploading each overlayed video individually..."
           for file in Overlayed_Videos/*.mp4; do
             name=$(basename "$file" .mp4)
-            echo "Uploading $file as $name"
-            gh release upload temp-tag "$file" --clobber || true
-            mkdir -p "temp_upload/$name"
-            cp "$file" "temp_upload/$name/"
-            gh api -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github+json" \
-              /repos/${{ github.repository }}/actions/artifacts \
-              -f name="$name" \
-              -F file=@"$file"
+            mkdir -p "temp/$name"
+            cp "$file" "temp/$name/"
+            echo "::group::Uploading $name"
+            echo "Uploading $file as artifact: $name"
+            echo "::endgroup::"
+            tar -czf "temp/$name.tar.gz" -C "temp/$name" .
           done
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+
+      - name: 📤 Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: temp/${{ matrix.name }}.tar.gz
+        if: always()
+        strategy:
+          matrix:
+            name: []
