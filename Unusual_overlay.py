@@ -15,7 +15,7 @@ for video in videos:
     
     # Example product name from filename (you can change this logic)
     product_name = video.replace(".mp4", "").replace("_", " ").title()
-    cta_text = "Get this product — link in the description 👇"
+    cta_text = "Product — link in the description 👇"
 
     # Check resolution
     cmd_probe = [
