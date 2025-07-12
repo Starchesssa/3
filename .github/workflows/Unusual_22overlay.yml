@@ -1,0 +1,39 @@
+
+name: Overlay Generic Names with Cinematic Style
+
+on:
+  workflow_dispatch:
+
+jobs:
+  overlay-generic-names:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download Final Videos Artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_20audioconc.yml
+          workflow_conclusion: success
+          branch: main
+          name: final-videos
+          path: Final_Videos/
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: 🖋️ Run Overlay Script
+        run: |
+          echo "Running overlay script after downloading videos..."
+          python3 Unusual_overlay.py
+
+      - name: 📤 Upload Overlayed Videos as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: overlayed-videos
+          path: Overlayed_Videos/
