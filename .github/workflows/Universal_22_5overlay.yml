@@ -1,0 +1,52 @@
+
+name: Overlay Generic Names with Cinematic Style
+
+on:
+  workflow_dispatch:
+
+jobs:
+  overlay-generic-names:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download Final Videos Artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_20audioconc.yml
+          workflow_conclusion: success
+          branch: main
+          name: final-videos
+          path: Final_Videos/
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: 🖋️ Run Overlay Script
+        run: |
+          echo "Running overlay script after downloading videos..."
+          python3 Unusual_overlay.py
+
+      - name: 📤 Upload Each Overlayed Video as Separate Artifact
+        run: |
+          echo "Uploading each overlayed video individually..."
+          for file in Overlayed_Videos/*.mp4; do
+            name=$(basename "$file" .mp4)
+            echo "Uploading $file as $name"
+            gh release upload temp-tag "$file" --clobber || true
+            mkdir -p "temp_upload/$name"
+            cp "$file" "temp_upload/$name/"
+            gh api -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github+json" \
+              /repos/${{ github.repository }}/actions/artifacts \
+              -f name="$name" \
+              -F file=@"$file"
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
