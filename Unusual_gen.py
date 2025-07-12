@@ -32,7 +32,7 @@ def call_gemini_api(product_name):
             "Example:\n"
             "If the product is 'Roomba J9+', respond with 'self-cleaning robot'.\n"
             "If the product is 'Ecovacs Winbot X', respond with 'window cleaning robot'.\n"
-            "Just give a 2–4 word generic name. No explanation. No brand. Just the type."
+            "Just give a 2–4 word generic name. No explanation. No brand. Just the type.just output the generic name only,nothing more,just generic name only"
         )
         contents = [types.Content(role="user", parts=[types.Part.from_text(prompt)])]
         config = types.GenerateContentConfig(response_mime_type="text/plain")
