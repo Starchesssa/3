@@ -1,1 +1,58 @@
 📦 Generic Product Names Output
+
+--- group_1.txt ---
+Original Product Name: ECOVACS WINBOT 850
+Generic Name: Window cleaning robot
+
+--- group_11.txt ---
+Original Product Name: Luba 2
+Generic Name: Robotic lawn mower
+
+--- group_12.txt ---
+Original Product Name: Xiaomi ZAJIA Automatic Sense Infrared Induction Water Saving Device For Kitchen Bathroom Sink Faucet
+Generic Name: Automatic Faucet Sensor
+
+--- group_13.txt ---
+Original Product Name: Samsung Bespoke Oven
+Generic Name: Smart Wall Oven
+
+--- group_15.txt ---
+Original Product Name: Nokia Sleep Sensing Pad
+Generic Name: Sleep Tracking Pad
+
+--- group_16.txt ---
+Original Product Name: Nanoleaf Aurora
+Generic Name: Smart Lighting Panels
+
+--- group_17.txt ---
+Original Product Name: Letpot Smart Hydroponics Growing System
+Generic Name: Hydroponics Growing System
+
+--- group_19.txt ---
+Original Product Name: BenchSentry
+Generic Name: Bench security device
+
+--- group_2.txt ---
+Original Product Name: Click and Grow
+Generic Name: Smart indoor garden
+
+--- group_20.txt ---
+Original Product Name: SDARISB DR-HW026
+Generic Name: Based on "DR-HW026", where "DR" very strongly suggests "Doorbell", and the "SD" in "SDARISB" often points to "Smart" or "Security" features in modern electronics:
+
+**Smart Doorbell**
+
+Other strong candidates:
+*   Video Doorbell
+
+--- group_21.txt ---
+Original Product Name: Pawbby Smart Pet Feeder
+Generic Name: Smart Pet Feeder
+
+--- group_22.txt ---
+Original Product Name: Robot Pool Cleaners
+Generic Name: Aquatic Cleaning Robot
+
+--- group_23.txt ---
+Original Product Name: PMSA003I Air Quality Sensor
+Generic Name: Air Quality Monitor
