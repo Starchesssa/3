@@ -1,38 +1,45 @@
 
 import os
 import subprocess
+from manim import *
 
-# === Configuration ===
-font_file = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"  # Make sure the file is in the same directory
+# === CONFIGURATION ===
 input_video = "group_21.mp4"
 output_video = "overlayed_group_21.mp4"
-text = "Group 21"
-ass_file = "temp_group_21.ass"
+overlay_clip = "manim_overlay.mov"
+text_content = "Group 21"
+render_dir = "media/videos/manim_overlay/480p15"
+font_name = "Proxima Nova Bold"  # Use any system-installed or local font
 
-# === Generate .ass subtitle file ===
-def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=500):
-    text_k = ''.join([f'{{\\k20}}{c}' for c in text])
-    ass_content = f"""[Script Info]
-Title: Typewriter
-ScriptType: v4.00+
+# === MANIM SCENE CLASS ===
+class TextOverlay(Scene):
+    def construct(self):
+        text = Text(text_content, font=font_name, font_size=72, color=WHITE)
+        text.move_to(DOWN * 2)
+        self.play(Write(text))  # typewriter-like
+        self.wait(2)
 
-[V4+ Styles]
-Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{font_name},{fontsize},&HFF00C5FF,&HFF000000,&HFF000000,&H64000000,1,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+# === RENDER MANIM OVERLAY ===
+print("[1] Rendering Manim overlay...")
+subprocess.run([
+    "manim", "-pql", __file__, "TextOverlay",
+    "--format=mov", "--transparent"
+], check=True)
 
-[Events]
-Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:01.00,0:00:10.00,Default,,0,0,0,,{{\\pos({x},{y})}}{text_k}
-"""
-    with open(ass_path, 'w', encoding='utf-8') as f:
-        f.write(ass_content)
+# === Find the Rendered Manim File ===
+try:
+    for root, _, files in os.walk(render_dir):
+        for f in files:
+            if f.endswith(".mov"):
+                overlay_path = os.path.join(root, f)
+                os.rename(overlay_path, overlay_clip)
+                break
+except Exception as e:
+    print("[X] Error moving overlay clip:", e)
+    exit(1)
 
-# === Main Process ===
-if not os.path.exists(input_video):
-    print(f"[X] Input video not found: {input_video}")
-    exit()
-
-# Get video size
+# === GET VIDEO SIZE ===
+print("[2] Probing video...")
 try:
     output = subprocess.check_output([
         "ffprobe", "-v", "error", "-select_streams", "v:0",
@@ -40,29 +47,27 @@ try:
     ]).decode().strip()
     width, height = map(int, output.split("x"))
     orientation = "vertical" if height > width else "horizontal"
-    y_pos = height - 200 if orientation == "vertical" else height - 100
 except Exception as e:
-    print(f"[!] Could not probe video: {e}")
-    y_pos = 300
+    print(f"[X] Could not get video size: {e}")
+    exit(1)
 
-print(f"[>] Detected {orientation} video. Overlaying at y={y_pos}")
-
-# Generate ASS subtitle
-generate_ass_file(text, ass_file, x=100, y=y_pos)
-
-# Run FFmpeg
-cmd = [
-    "ffmpeg", "-y", "-i", input_video,
-    "-vf", f"subtitles={ass_file}:fontsdir=.",  # font from local folder
-    "-c:v", "libx264", "-crf", "23", "-preset", "fast",
+# === OVERLAY WITH FFMPEG ===
+print(f"[3] Detected {orientation} video. Overlaying Manim animation...")
+ffmpeg_cmd = [
+    "ffmpeg", "-y",
+    "-i", input_video,
+    "-i", overlay_clip,
+    "-filter_complex", "[0:v][1:v] overlay=0:main_h-overlay_h-50:format=auto",
+    "-c:a", "copy",
     output_video
 ]
 
 try:
-    subprocess.run(cmd, check=True)
-    print(f"[✓] Done! Output saved to: {output_video}")
+    subprocess.run(ffmpeg_cmd, check=True)
+    print(f"[✓] Success! Video saved as {output_video}")
 except subprocess.CalledProcessError as e:
     print("[X] FFmpeg failed:", e)
-finally:
-    if os.path.exists(ass_file):
-        os.remove(ass_file)
+
+# === CLEAN UP ===
+if os.path.exists(overlay_clip):
+    os.remove(overlay_clip)
