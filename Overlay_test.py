@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 
@@ -8,7 +7,7 @@ input_video = "group_21.mp4"
 output_video = "overlayed_group_21.mp4"
 font_name = "Proxima Nova Bold"
 text = "Group 21"
-ass_file = "temp_group_21_style2.ass"
+ass_file = "temp_group_21_style3.ass"
 
 # === Generate .ass file ===
 def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=50, x=50, y=300):
@@ -19,7 +18,7 @@ ScriptType: v4.00+
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{font_name},{fontsize},&H0034C1FF,&HFF0000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,1,0,1,20,20,20,1
+Style: Default,{font_name},{fontsize},&H00FFFFFF,&HFF0000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,1,1,1,20,20,20,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -46,7 +45,7 @@ except Exception as e:
     print(f"[!] Could not probe video: {e}")
     y_pos = 300
 
-print(f"[>] Detected {orientation} video. Overlaying with Style 2...")
+print(f"[>] Detected {orientation} video. Overlaying with Style 3...")
 
 # Create ASS subtitle file
 generate_ass_file(text, ass_file, x=50, y=y_pos)
