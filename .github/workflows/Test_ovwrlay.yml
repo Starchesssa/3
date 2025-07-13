@@ -1,5 +1,5 @@
 
-name: Overlay Typewriter Text on Video
+name: Overlay Floating Text with FFmpeg
 
 on:
   workflow_dispatch:
@@ -12,28 +12,18 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Install System Dependencies (FFmpeg, Cairo, Pango)
+      - name: 🔧 Install FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg libcairo2-dev libpango1.0-dev ffmpeg texlive texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y ffmpeg fonts-dejavu
 
-      - name: 🐍 Set up Python and Install Manim
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: 📦 Install Python Requirements (Manim and other packages)
+      - name: ▶️ Run FFmpeg Overlay Script
         run: |
-          pip install --upgrade pip
-        
-
-      - name: 🖋️ Run Overlay Script with Manim
-        run: |
-          echo "Running overlay script..."
+          echo "Running FFmpeg overlay script..."
           python3 Overlay_test.py
 
-      - name: 📤 Upload Overlayed Video
+      - name: 📤 Upload Output Video
         uses: actions/upload-artifact@v4
         with:
           name: overlayed-video
-          path: output.mp4
+          path: output.mp4  # or your actual output file name
