@@ -12,10 +12,10 @@ jobs:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🔧 Install FFmpeg
+      - name: 🔧 Install FFmpeg and Ubuntu Fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-dejavu
+          sudo apt-get install -y ffmpeg fonts-ubuntu  # Includes Ubuntu-Bold
 
       - name: ▶️ Run FFmpeg Overlay Script
         run: |
@@ -26,4 +26,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: overlayed-video
-          path: output.mp4  # or your actual output file name
+          path: output.mp4  # Make sure this matches your actual file
