@@ -3,7 +3,7 @@ import subprocess
 
 # === CONFIGURATION ===
 input_video = "group_21.mp4"
-output_video = "overlayed_group_21.mp4"
+output_video = "output.mp4"
 text_string = "Group 21"
 
 # === WAVY TEXT FILTER USING FONT NAME ONLY ===
