@@ -6,17 +6,16 @@ input_video = "group_21.mp4"
 output_video = "output.mp4"
 text_string = "Group 21"
 
-# === WAVY + REVEAL ANIMATION + STYLE ===
+# === DRAW TEXT FILTER (FIXED) ===
 drawtext_filter = (
     "drawtext="
-    "font='DejaVu Sans Bold':"
+    "font='DejaVu Sans-Bold':"
     f"text='{text_string}':"
-    "fontsize=60:"
-    "fontcolor=yellow@0.9:"
-    "borderw=3:bordercolor=black:"
+    "fontsize=64:"
+    "fontcolor=yellow@0.95:"
+    "borderw=4:bordercolor=black:"
     "x=20:"
-    "y=min(h-50+10*sin(2*PI*t), h-30-(20-t*50)):"
-    "enable='between(t,0,10)'"
+    "y=h-80+20*sin(2*PI*t):"
 )
 
 # === FFMPEG COMMAND ===
