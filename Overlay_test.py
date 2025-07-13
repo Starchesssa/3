@@ -5,44 +5,30 @@ import subprocess
 input_video = "group_21.mp4"
 output_video = "output.mp4"
 text_string = "Smart Pet-feeder"
-font_path = "comicsansmsbold.ttf"
+font_path = "comicsansmsbold.ttf"  # custom font
 
 # === FADE IN / FADE OUT ALPHA EXPRESSION ===
+# Shows at full opacity from 2s to 9s (was 6s before), total duration ~11s
 fade_alpha = (
     "if(lt(t,0),0,"
-    "if(lt(t,2),t/2,"
-    "if(lt(t,7),1,"
-    "if(lt(t,9),1-(t-7)/2,0))))"
+    "if(lt(t,2),t/2,"      # fade in: 0s–2s
+    "if(lt(t,9),1,"        # stay: 2s–9s
+    "if(lt(t,11),1-(t-9)/2,0))))"  # fade out: 9s–11s
 )
 
-# === MULTILAYER SHADOW EFFECT ===
-# These draw the shadow multiple times around the text with small offsets
-shadow_layers = ""
-offsets = [(-2, -2), (2, -2), (-2, 2), (2, 2), (0, -3), (-3, 0), (3, 0), (0, 3)]
-for i, (dx, dy) in enumerate(offsets):
-    shadow_layers += (
-        f"drawtext=fontfile='{font_path}':"
-        f"text='{text_string}':"
-        "fontsize=84:"
-        "fontcolor=black:"
-        f"alpha='{fade_alpha}':"
-        f"x=20+{dx}:"
-        f"y=h-80+{dy},"
-    )
-
-# === TOP LAYER: THE ACTUAL WHITE TEXT ===
-main_text = (
+# === DRAW TEXT FILTER WITH STRONGER SHADOW ===
+drawtext_filter = (
     f"drawtext=fontfile='{font_path}':"
     f"text='{text_string}':"
     "fontsize=84:"
-    "fontcolor=white:"
+    "fontcolor=cyan:"
     f"alpha='{fade_alpha}':"
-    "x=20:"
-    "y=h-80"
+    "x=20:"           # bottom-left (left padding)
+    "y=h-80:"         # bottom-left (from bottom)
+    "shadowcolor=black:"
+    "shadowx=6:"      # increased shadow thickness horizontally
+    "shadowy=6"       # increased shadow thickness vertically
 )
-
-# === COMPLETE FILTER CHAIN ===
-drawtext_filter = shadow_layers + main_text
 
 # === FFMPEG COMMAND ===
 cmd = [
