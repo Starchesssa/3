@@ -3,14 +3,14 @@ import os
 import subprocess
 
 # === Configuration ===
-font_file = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"  # Ensure exact filename
+font_file = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"  # Ensure this font is in the same directory
 input_video = "group_21.mp4"
 output_video = "overlayed_group_21.mp4"
 text = "Group 21"
 ass_file = "temp_group_21.ass"
 
 # === Generate .ass subtitle file ===
-def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=300):
+def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=50, y=None):
     text_k = ''.join([f'{{\\k20}}{c}' for c in text])
     ass_content = f"""[Script Info]
 Title: Typewriter
@@ -18,7 +18,7 @@ ScriptType: v4.00+
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{font_name},{fontsize},&H00FFFFFF,&H000000FF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+Style: Default,{font_name},{fontsize},&H00000000,&H000000FF,&H0000B4FF,&H66FFD700,1,0,0,0,100,100,0,0,1,2,0,1,50,50,30,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -40,20 +40,20 @@ try:
     ]).decode().strip()
     width, height = map(int, output.split("x"))
     orientation = "vertical" if height > width else "horizontal"
-    y_pos = 300 if orientation == "vertical" else 100
+    y_pos = height - 120  # Adjust to near bottom
 except Exception as e:
     print(f"[!] Could not probe video: {e}")
-    y_pos = 300
+    y_pos = 600  # fallback
 
 print(f"[>] Detected {orientation} video. Overlaying with Typewriter style...")
 
 # Generate ASS subtitle
-generate_ass_file(text, ass_file, x=100, y=y_pos)
+generate_ass_file(text, ass_file, x=50, y=y_pos)
 
 # === FFmpeg command with font embedding ===
 cmd = [
     "ffmpeg", "-y", "-i", input_video,
-    "-vf", f"subtitles={ass_file}:fontsdir=.",  # ← this ensures FFmpeg loads your font from current dir
+    "-vf", f"subtitles={ass_file}:fontsdir=.",  # ← load your font from current dir
     "-c:v", "libx264", "-crf", "23", "-preset", "fast",
     output_video
 ]
