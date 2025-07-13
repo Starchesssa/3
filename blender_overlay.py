@@ -5,7 +5,7 @@ import os
 # Set up paths
 script_dir = os.path.dirname(bpy.data.filepath)
 video_path = os.path.join(script_dir, "group_21.mp4")
-output_path = os.path.join(script_dir, "overlayed_group_21.mp4")
+output_path = os.path.join(script_dir, "output.mp4")
 
 # Reset Blender to default scene
 bpy.ops.wm.read_factory_settings(use_empty=True)
