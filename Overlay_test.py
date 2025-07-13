@@ -5,13 +5,13 @@ import subprocess
 # === Configuration ===
 font_path = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"
 input_video = "group_21.mp4"
-output_video = "overlayed_group_21.mp4"
+output_video = "overlayed_group_21_style2.mp4"
 font_name = "Proxima Nova Bold"
 text = "Group 21"
-ass_file = "temp_group_21.ass"
+ass_file = "temp_group_21_style2.ass"
 
 # === Generate .ass file ===
-def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=300):
+def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=50, x=50, y=300):
     text_k = ''.join([f'{{\\k20}}{c}' for c in text])
     ass_content = f"""[Script Info]
 Title: Typewriter Effect
@@ -19,7 +19,7 @@ ScriptType: v4.00+
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{font_name},{fontsize},&H00FFFFFF,&HFF0000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+Style: Default,{font_name},{fontsize},&H0034C1FF,&HFF0000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,1,0,1,20,20,20,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -41,15 +41,15 @@ try:
     ]).decode().strip()
     width, height = map(int, output.split("x"))
     orientation = "vertical" if height > width else "horizontal"
-    y_pos = 300 if orientation == "vertical" else 100
+    y_pos = height - 100
 except Exception as e:
     print(f"[!] Could not probe video: {e}")
     y_pos = 300
 
-print(f"[>] Detected {orientation} video. Overlaying...")
+print(f"[>] Detected {orientation} video. Overlaying with Style 2...")
 
 # Create ASS subtitle file
-generate_ass_file(text, ass_file, x=100, y=y_pos)
+generate_ass_file(text, ass_file, x=50, y=y_pos)
 
 # Apply the ASS subtitle using FFmpeg
 cmd = [
