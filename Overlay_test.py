@@ -10,7 +10,7 @@ text = "Group 21"
 ass_file = "temp_group_21.ass"
 
 # === Generate .ass subtitle file ===
-def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=300):
+def generate_ass_file(text, ass_path, font_name="Proxima Nova Bold", fontsize=60, x=100, y=1000):
     text_k = ''.join([f'{{\\k20}}{c}' for c in text])
     ass_content = f"""[Script Info]
 Title: Typewriter
