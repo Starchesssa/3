@@ -4,7 +4,7 @@ import subprocess
 # === CONFIGURATION ===
 input_video = "group_21.mp4"
 output_video = "output.mp4"
-text_string = "Group 21"
+text_string = "Smart Pet-feeder"
 
 # === DRAW TEXT FILTER (UPDATED) ===
 drawtext_filter = (
