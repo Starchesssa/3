@@ -5,7 +5,7 @@ import subprocess
 input_video = "group_21.mp4"
 output_video = "output.mp4"
 text_string = "Smart Pet-feeder"
-font_path = "Milkyway DEMO.ttf"  # custom font
+font_path = "Magnolia Script.otf"  # custom font
 
 # === FADE IN / FADE OUT ALPHA EXPRESSION ===
 fade_alpha = (
