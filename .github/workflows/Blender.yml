@@ -1,0 +1,35 @@
+
+name: Render Video with Blender
+
+on:
+  workflow_dispatch:
+
+jobs:
+  blender-render:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: 🔧 Install Blender CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget https://download.blender.org/release/Blender3.6/blender-3.6.5-linux-x64.tar.xz
+        tar -xf blender-3.6.5-linux-x64.tar.xz
+        sudo mv blender-3.6.5-linux-x64 /opt/blender
+        sudo ln -s /opt/blender/blender /usr/local/bin/blender
+      # This installs Blender CLI so it can run in headless mode (no GUI)
+
+    - name: Run Blender Script
+      run: |
+        blender --background --python blender_overlay.py
+      env:
+        BLENDER_USER_CONFIG: ""
+
+    - name: 📤 Upload Rendered Video
+      uses: actions/upload-artifact@v4
+      with:
+        name: rendered-video
+        path: overlayed_group_21.mp4
