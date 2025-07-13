@@ -1,0 +1,32 @@
+
+name: Overlay Typewriter Text on Video
+
+on:
+  workflow_dispatch:
+
+jobs:
+  overlay-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: 🔧 Install Python if needed
+        run: sudo apt-get install -y python3
+
+      - name: 🖋️ Run Overlay Script
+        run: |
+          echo "Running overlay script..."
+          python3 Overlay_test.py
+
+      - name: 📤 Upload Overlayed Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: overlayed-video
+          path: overlayed_group_21.mp4
