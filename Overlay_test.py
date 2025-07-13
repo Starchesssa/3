@@ -7,17 +7,22 @@ output_video = "output.mp4"
 text_string = "Smart Pet-feeder"
 
 # === DRAW TEXT FILTER ===
-# Slide from slightly lower to bottom-left corner (y animates gently)
-slide_y = "if(lt(t,1), h+50, if(lt(t,2), h+50-(t-1)*70, h-80))"
+# Fade in (0-2s), fully visible (2-6s), fade out (6-8s)
+fade_alpha = (
+    "if(lt(t,0),0,"                          # Before 0s invisible
+    "if(lt(t,2),(t)/2,"                      # 0-2s fade in from 0 to 1 alpha
+    "if(lt(t,6),1,"                          # 2-6s fully visible
+    "if(lt(t,8),1-(t-6)/2,0))))"             # 6-8s fade out from 1 to 0 alpha
+)
 
 drawtext_filter = (
     "drawtext="
     "font='Ubuntu-Bold':"
     f"text='{text_string}':"
-    "fontsize=84:"  # Bigger text = thicker
-    "fontcolor=cyan:"
-    "x=20:"
-    f"y='{slide_y}':"
+    "fontsize=84:"
+    f"fontcolor=cyan@{fade_alpha}:"
+    "x=(w-text_w)/2:"  # centered horizontally
+    "y=h-80:"          # fixed near bottom
     "shadowcolor=black:shadowx=4:shadowy=4"
 )
 
