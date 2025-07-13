@@ -3,7 +3,7 @@ import bpy
 import os
 
 # Path to your input video
-video_path = os.path.join(os.path.dirname(bpy.data.filepath), "input.mp4")
+video_path = os.path.join(os.path.dirname(bpy.data.filepath), "group_21.mp4")
 
 # Reset Blender to an empty scene
 bpy.ops.wm.read_factory_settings(use_empty=True)
