@@ -7,12 +7,12 @@ output_video = "output.mp4"
 text_string = "Smart Pet-feeder"
 
 # === DRAW TEXT FILTER ===
-# Fade in (0-2s), fully visible (2-6s), fade out (6-8s)
+# Fade in (0-2s), full visible (2-6s), fade out (6-8s)
 fade_alpha = (
-    "if(lt(t,0),0,"                          # Before 0s invisible
-    "if(lt(t,2),(t)/2,"                      # 0-2s fade in from 0 to 1 alpha
-    "if(lt(t,6),1,"                          # 2-6s fully visible
-    "if(lt(t,8),1-(t-6)/2,0))))"             # 6-8s fade out from 1 to 0 alpha
+    "if(lt(t,0),0,"
+    "if(lt(t,2),(t)/2,"
+    "if(lt(t,6),1,"
+    "if(lt(t,8),1-(t-6)/2,0))))"
 )
 
 drawtext_filter = (
@@ -20,9 +20,10 @@ drawtext_filter = (
     "font='Ubuntu-Bold':"
     f"text='{text_string}':"
     "fontsize=84:"
-    f"fontcolor=cyan@{fade_alpha}:"
-    "x=(w-text_w)/2:"  # centered horizontally
-    "y=h-80:"          # fixed near bottom
+    "fontcolor=cyan:"
+    f"alpha='{fade_alpha}':"
+    "x=(w-text_w)/2:"  # Centered horizontally
+    "y=h-80:"          # Fixed near bottom
     "shadowcolor=black:shadowx=4:shadowy=4"
 )
 
