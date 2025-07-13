@@ -5,7 +5,7 @@ import subprocess
 # === Configuration ===
 font_path = "FontsFree-Net-Proxima-Nova-Bold-It.otf.ttf"
 input_video = "group_21.mp4"
-output_video = "overlayed_group_21_style2.mp4"
+output_video = "overlayed_group_21.mp4"
 font_name = "Proxima Nova Bold"
 text = "Group 21"
 ass_file = "temp_group_21_style2.ass"
