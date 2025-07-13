@@ -7,18 +7,18 @@ output_video = "output.mp4"
 text_string = "Smart Pet-feeder"
 
 # === DRAW TEXT FILTER ===
-# Slide in from bottom, hold, no bouncing
-slide_y = "if(lt(t,1), h, if(lt(t,3), h-(t-1)*100, h-200))"
+# Slide from slightly lower to bottom-left corner (y animates gently)
+slide_y = "if(lt(t,1), h+50, if(lt(t,2), h+50-(t-1)*70, h-80))"
 
 drawtext_filter = (
     "drawtext="
     "font='Ubuntu-Bold':"
     f"text='{text_string}':"
-    "fontsize=78:"
+    "fontsize=84:"  # Bigger text = thicker
     "fontcolor=cyan:"
-    "x=(w-text_w)/2:"
+    "x=20:"
     f"y='{slide_y}':"
-    "shadowcolor=black:shadowx=2:shadowy=2"
+    "shadowcolor=black:shadowx=4:shadowy=4"
 )
 
 # === FFMPEG COMMAND ===
