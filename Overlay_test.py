@@ -6,14 +6,14 @@ input_video = "group_21.mp4"
 output_video = "output.mp4"
 text_string = "Group 21"
 
-# === DRAW TEXT FILTER (FIXED) ===
+# === DRAW TEXT FILTER (UPDATED) ===
 drawtext_filter = (
     "drawtext="
-    "font='DejaVu Sans-Bold':"
+    "font='Ubuntu-Bold':"
     f"text='{text_string}':"
-    "fontsize=64:"
+    "fontsize=72:"
     "fontcolor=yellow@0.95:"
-    "borderw=4:bordercolor=black:"
+    "borderw=6:bordercolor=black:"
     "x=20:"
     "y=h-80+20*sin(2*PI*t):"
 )
