@@ -1,0 +1,29 @@
+
+name: Convert Vertical Video to 16:9 with Blur
+
+on:
+  workflow_dispatch:
+
+jobs:
+  horizontal-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: ▶️ Run Horizontal.py Script
+        run: |
+          echo "Running Horizontal.py..."
+          python3 Horizontal.py
+
+      - name: 📤 Upload Converted Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: horizontal-video
+          path: horizontal_output.mp4  # Make sure this matches your Python output filename
