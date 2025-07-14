@@ -38,7 +38,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          git add Unuusual_memory/Relevant_links/
+          git add Unuusual_memory/Relevant/
 
           if git diff --cached --quiet; then
             echo "🟡 No changes to commit."
