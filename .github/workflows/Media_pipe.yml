@@ -35,7 +35,7 @@ jobs:
           path: output_person_detection.mp4
 
       - name: Upload timeline
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: person-timeline
           path: timeline.json
