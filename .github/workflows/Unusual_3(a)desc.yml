@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # ✅ Gives the workflow permission to push commits to the repo
+  contents: write  # ✅ Allows push access for the workflow
 
 jobs:
   run-unusual-description:
@@ -42,3 +42,4 @@ jobs:
             git commit -m "🤖 Update unusual descriptions via Unusual_descreption.py"
             git push
             echo "✅ Changes committed and pushed."
+          fi
