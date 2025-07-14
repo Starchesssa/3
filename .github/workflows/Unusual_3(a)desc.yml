@@ -23,7 +23,7 @@ jobs:
       - name: 🚀 Run Unusual_descreption.py
         env:
           YOUTUBE_API: ${{ secrets.YOUTUBE_API }}
-        run: python Unusual_descreption.py
+        run: python Unusual_descr.py
 
       - name: ✅ Commit & Push Unusual Descriptions
         run: |
