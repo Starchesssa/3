@@ -4,16 +4,12 @@ import subprocess
 input_video = "Screen_Recording_20240710-155313_TikTok Lite.mp4"
 output_video = "horizontal_output.mp4"
 
-# FFmpeg complex filter:
-# 1. Create blurred background
-# 2. Slightly enlarge main video (crop 1350px height to center)
-# 3. Overlay main on top of blur
+# Apply a strong blur and center the main video with max height 1080
 vf_filter = (
     "format=yuv420p,"
-    "scale=iw:ih,"
     "split=2[main][blurred];"
-    "[blurred]scale=1920:1080,boxblur=20:1[bg];"
-    "[main]scale=-1:1350,crop=720:1080:(in_w-720)/2:0[fg];"
+    "[blurred]scale=1920:1080,boxblur=30:1[bg];"
+    "[main]scale=-2:1080[fg];"
     "[bg][fg]overlay=(W-w)/2:(H-h)/2"
 )
 
