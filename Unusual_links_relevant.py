@@ -8,12 +8,11 @@ from google import genai
 from google.genai import types
 
 # === Configuration ===
-LINKS_DIR = "Unuusual_memory/Links"
-RELEVANT_DIR = "Unuusual_memory/Relevant_links"
+DESCR_DIR = "Unuusual_memory/DESCR"
+RELEVANT_DIR = "Unuusual_memory/Relevant"
 MAX_QUALIFIED_TXT = 33
-MAX_LINKS_PER_FILE = 12
 WAIT_BETWEEN_FILES = 70  # seconds
-TIMEOUT_PER_REQUEST = 45  # per link
+TIMEOUT_PER_REQUEST = 45  # per file
 
 # === Load Gemini API keys ===
 API_KEYS = [
@@ -34,32 +33,31 @@ os.makedirs(RELEVANT_DIR, exist_ok=True)
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def check_video_wrapper(args):
-    key_index, link, product = args
+def check_description_wrapper(args):
+    key_index, title, description, product = args
     for attempt in range(len(API_KEYS)):
         real_index = (key_index + attempt) % len(API_KEYS)
         try:
             client = genai.Client(api_key=API_KEYS[real_index])
-            contents = [
-                types.Content(
-                    role="user",
-                    parts=[
-                        types.Part(file_data=types.FileData(file_uri=link, mime_type="video/*")),
-                        types.Part(text=f"Is this video solely about the '{product}'?\nRespond only with Yes or No."),
-                    ],
-                )
-            ]
+            prompt = (
+                f"Here is a YouTube video title and description:\n\n"
+                f"Title: {title}\n\n"
+                f"Description:\n{description}\n\n"
+                f"Is this video solely about the product '{product}'?\n"
+                f"also the video should not be like compilation video containing many products ,it should be just about the product,Respond only with Yes or No."
+            )
+            contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
             config = types.GenerateContentConfig(response_mime_type="text/plain")
             response = client.models.generate_content(model=MODEL, contents=contents, config=config)
             result = normalize_response(response.text)
-            print(f"✅ [{link}] => {response.text.strip()} (API#{real_index + 1})", flush=True)
-            return (link, "yes" if result == "yes" else "no")
+            print(f"✅ [{title[:40]}...] => {response.text.strip()} (API#{real_index + 1})", flush=True)
+            return ("yes" if result == "yes" else "no", title, description)
         except Exception as e:
-            print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on {link} (API#{real_index + 1}) => Error: {e}", flush=True)
-            time.sleep(1)  # Brief wait before retry
+            print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on '{title[:30]}' (API#{real_index + 1}) => Error: {e}", flush=True)
+            time.sleep(1)
 
-    print(f"❌ [{link}] => All retries failed.", flush=True)
-    return (link, "no")
+    print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
+    return ("no", title, description)
 
 def wait_between_files(seconds):
     print(f"\n⏱️ Waiting {seconds} seconds before next file...", flush=True)
@@ -69,49 +67,65 @@ def wait_between_files(seconds):
         time.sleep(1)
     print("✅ Wait complete.\n", flush=True)
 
+# === Parse Title and Description from file ===
+def parse_txt_file(file_path):
+    with open(file_path, "r") as f:
+        lines = f.read().splitlines()
+
+    title = ""
+    description_lines = []
+    in_description = False
+
+    for line in lines:
+        if line.startswith("Title:"):
+            title = line.replace("Title:", "").strip()
+        elif line.startswith("Description:"):
+            in_description = True
+        elif in_description:
+            description_lines.append(line)
+
+    description = "\n".join(description_lines).strip()
+    return title, description
+
 # === Process Each File ===
 def process_file(file_name):
-    full_path = os.path.join(LINKS_DIR, file_name)
-    with open(full_path, "r") as f:
-        links = [line.strip() for line in f if line.strip()]
-
+    full_path = os.path.join(DESCR_DIR, file_name)
     product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
-    links = links[:MAX_LINKS_PER_FILE]
-    args_list = [(i % len(API_KEYS), link, product) for i, link in enumerate(links)]
-    results = {}
 
-    print(f"🧪 Checking {len(links)} links with multiprocessing...", flush=True)
-    with Pool(processes=len(args_list)) as pool:
-        multiple_results = [pool.apply_async(check_video_wrapper, (args,)) for args in args_list]
-        for i, res in enumerate(multiple_results):
-            link = args_list[i][1]
-            try:
-                link, result = res.get(timeout=TIMEOUT_PER_REQUEST)
-                results[link] = result
-            except MP_Timeout:
-                print(f"⏱️ Timeout on: {link}", flush=True)
-                results[link] = "no"
-            except Exception as e:
-                print(f"⚠️ Error processing {link}: {e}", flush=True)
-                results[link] = "no"
-
-    qualified_links = [l for l, r in results.items() if r == "yes"]
-    if qualified_links:
-        output_path = os.path.join(RELEVANT_DIR, file_name)
-        with open(output_path, "w") as f:
-            f.write("\n".join(qualified_links))
-        print(f"✅ Saved {len(qualified_links)} qualified links to: {output_path}", flush=True)
-        return True
-    else:
-        print("🚫 No qualified links found.", flush=True)
+    try:
+        title, description = parse_txt_file(full_path)
+    except Exception as e:
+        print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
         return False
+
+    args = (random.randint(0, len(API_KEYS) - 1), title, description, product)
+
+    with Pool(processes=1) as pool:
+        result = pool.apply_async(check_description_wrapper, (args,))
+        try:
+            verdict, title, description = result.get(timeout=TIMEOUT_PER_REQUEST)
+            if verdict == "yes":
+                output_path = os.path.join(RELEVANT_DIR, file_name)
+                with open(output_path, "w") as f:
+                    f.write(f"Title: {title}\n\nDescription:\n{description}")
+                print(f"✅ Saved qualified: {output_path}", flush=True)
+                return True
+            else:
+                print("🚫 Not qualified", flush=True)
+                return False
+        except MP_Timeout:
+            print(f"⏱️ Timeout on file: {file_name}", flush=True)
+            return False
+        except Exception as e:
+            print(f"⚠️ Error processing {file_name}: {e}", flush=True)
+            return False
 
 # === Main Script ===
 def main():
-    print("🚀 Starting Gemini video relevance filtering...\n", flush=True)
+    print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
     txt_files = sorted(
-        [f for f in os.listdir(LINKS_DIR) if f.endswith(".txt")],
-        key=lambda x: int(x.split("_")[0])
+        [f for f in os.listdir(DESCR_DIR) if f.endswith(".txt")],
+        key=lambda x: int(x.split("_")[0].split("(")[0])
     )
 
     qualified_count = 0
@@ -128,10 +142,9 @@ def main():
         except Exception as e:
             print(f"❌ Unexpected error: {e}", flush=True)
 
-        # Always wait 70 seconds regardless of processing time
         wait_between_files(WAIT_BETWEEN_FILES)
 
-    print(f"\n🎉 Finished! Total qualified files saved: {qualified_count}", flush=True)
+    print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
     main()
