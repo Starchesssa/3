@@ -2,7 +2,7 @@
 import subprocess
 
 input_file = "Screen_Recording_20240710-155313_TikTok Lite.mp4"  # Replace with your input video filename
-output_file = "output.webm"
+output_file = "horizontal_output.mp4"
 
 ffmpeg_command = [
     "ffmpeg", "-y",
