@@ -8,7 +8,6 @@ text_string = "Smart Pet-feeder"
 font_path = "comicsansmsbold.ttf"  # custom font
 
 # === FADE IN / FADE OUT ALPHA EXPRESSION ===
-# Shows at full opacity from 2s to 9s (was 6s before), total duration ~11s
 fade_alpha = (
     "if(lt(t,0),0,"
     "if(lt(t,2),t/2,"      # fade in: 0s–2s
@@ -16,18 +15,20 @@ fade_alpha = (
     "if(lt(t,11),1-(t-9)/2,0))))"  # fade out: 9s–11s
 )
 
-# === DRAW TEXT FILTER WITH STRONGER SHADOW ===
+# === DRAW TEXT FILTER WITH THIN BORDER & SLIGHTLY HIGHER POSITION ===
 drawtext_filter = (
     f"drawtext=fontfile='{font_path}':"
     f"text='{text_string}':"
     "fontsize=84:"
     "fontcolor=cyan:"
     f"alpha='{fade_alpha}':"
-    "x=20:"           # bottom-left (left padding)
-    "y=h-80:"         # bottom-left (from bottom)
+    "x=20:"
+    "y=h-120:"              # Moved text slightly up from bottom
+    "borderw=2:"            # Thin black border around text
+    "bordercolor=black:"
     "shadowcolor=black:"
-    "shadowx=6:"      # increased shadow thickness horizontally
-    "shadowy=6"       # increased shadow thickness vertically
+    "shadowx=1:"            # Optional subtle shadow
+    "shadowy=1"
 )
 
 # === FFMPEG COMMAND ===
