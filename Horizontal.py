@@ -1,29 +1,24 @@
 
 import subprocess
 
-input_video = "Screen_Recording_20240710-155313_TikTok Lite.mp4"
-output_video = "horizontal_output.mp4"
+input_file = "input.mp4"  # Replace with your input video filename
+output_file = "output.webm"
 
-vf_filter = (
-    "format=yuv420p,"
-    "split[main][bg];"
-    "[bg]scale=ih*16/9:-1,"
-    "crop=trunc(in_h*16/9):in_h,"
-    "gblur=sigma=60[blurred];"
-    "[main]scale=iw*1.1:ih*1.1[zoomed];"
-    "[blurred][zoomed]overlay=(W-w)/2:(H-h)/2"
-)
-
-cmd = [
+ffmpeg_command = [
     "ffmpeg", "-y",
-    "-i", input_video,
-    "-filter_complex", vf_filter,
-    "-c:a", "copy",
-    output_video
+    "-i", input_file,
+    "-lavfi",
+    "[0:v]scale=ih*16/9:-1,"
+    "boxblur=luma_radius=min(h\\,w)/20:luma_power=1:"
+    "chroma_radius=min(cw\\,ch)/20:chroma_power=1[bg];"
+    "[bg][0:v]overlay=(W-w)/2:(H-h)/2,"
+    "crop=h=iw*9/16",
+    "-vb", "800K",
+    output_file
 ]
 
 try:
-    subprocess.run(cmd, check=True)
-    print(f"[✓] Done! Saved as {output_video}")
+    subprocess.run(ffmpeg_command, check=True)
+    print("✅ Video processed successfully.")
 except subprocess.CalledProcessError as e:
-    print("[X] FFmpeg failed:", e)
+    print("❌ FFmpeg failed:", e)
