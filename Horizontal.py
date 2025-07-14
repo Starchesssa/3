@@ -13,7 +13,10 @@ ffmpeg_command = [
     "chroma_radius=min(cw\\,ch)/20:chroma_power=1[bg];"
     "[bg][0:v]overlay=(W-w)/2:(H-h)/2,"
     "crop=h=iw*9/16",
-    "-vb", "800K",
+    "-c:v", "libx264",       # Use x264 encoder
+    "-crf", "23",            # Lower CRF = better quality (range: 18–28)
+    "-preset", "medium",     # Can be: ultrafast, superfast, fast, medium, slow, veryslow
+    "-movflags", "+faststart",  # Good for web playback
     output_file
 ]
 
