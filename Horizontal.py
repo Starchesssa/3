@@ -7,7 +7,9 @@ output_video = "horizontal_output.mp4"
 vf_filter = (
     "format=yuv420p,"
     "split[main][bg];"
-    "[bg]scale=ih*16/9:-1,crop=1920:1080,gblur=sigma=60[blurred];"
+    "[bg]scale=ih*16/9:-1,"
+    "crop=trunc(in_h*16/9):in_h,"
+    "gblur=sigma=60[blurred];"
     "[main]scale=iw*1.1:ih*1.1[zoomed];"
     "[blurred][zoomed]overlay=(W-w)/2:(H-h)/2"
 )
