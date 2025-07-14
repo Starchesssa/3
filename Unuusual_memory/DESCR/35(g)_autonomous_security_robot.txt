@@ -1,0 +1,7 @@
+Title: Patrolling a building and detecting security threats with an autonomous mobile robot
+
+Description:
+Daniela Filipa Aires Nobre (2016). RoboCops II – Patrolling buildings with multiple mobile robots. MSc. thesis, University of Coimbra. Advisor: Rui P. Rocha
+https://hdl.handle.net/10316/81589
+
+Date: Sep. 13, 2016

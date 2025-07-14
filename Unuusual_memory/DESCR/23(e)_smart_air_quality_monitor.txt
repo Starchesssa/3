@@ -1,0 +1,19 @@
+Title: Is the accuracy of low-cost air quality monitoring systems a valid concern?
+
+Description:
+Air pollution is on the rise, and it is not just the governments that want to do something about it. Local organizations and industrialists are also asking for data to understand what is responsible for the damage of the air around them. Pollutant dispersion causes subtle yet fatal side effects on public health. Therefore, it becomes essential to understand their concentration levels and what they indicate. Ambient air quality monitoring systems measure different air pollutants like CO2, CO, NOx, SOx, O3, PM2.5 and, PM10, using sensors that help develop strategies to combat air pollution. But the accuracy of low-cost air quality monitoring systems is a primary requirement for effective mitigation.
+
+Why is there so much hype around these devices?
+Deployment of cost-effective air quality monitoring systems can be a scalable solution to monitor the local air quality. Sensor-based air quality monitoring systems allow people to operate their devices remotely using wireless network protocols. It is also easy to retrieve data from the devices. These devices have become the popular choice because of three main factors, namely:
+
+1. Affordability 2. Scalability 3. Compact size
+
+Manual devices are challenging to work with and require a specific skill set that only trained persons have. The latest third-generation monitors, i.e., low-cost sensor-based systems, are a lot easier to operate. They do not require frequent visits to the field once installed. They can provide easily interpretable data as and when needed. As a result, it gives access to real-time air pollutant concentration information. These devices are compact and helpful in developing air pollution mitigation strategies explicitly based on the local conditions.
+
+Read the Full blog to know more: https://oizom.com/is-the-accuracy-of-low-cost-air-quality-monitoring-systems-a-valid-concern/
+
+
+About:  Oizom is into Environmental Monitoring Solution. We have hardware-software ecosystem to monitor various parameters of the environment like Particulates, Toxic Gases, Vehicular Pollution, Radiation, Light, UV, Noise, Odour, Traffic, Weather etc. We have the capabilities to customise the solutions for various use-cases related to Smart-City, Industrial Monitoring, Smart Waste Management etc. We are also open to work on some critical applications by required modifications in the solution.
+Have a quick look at https://oizom.com for more info.
+
+#airquality #airqualitymonitoring #oizom

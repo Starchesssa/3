@@ -1,0 +1,4 @@
+Title: Automated Plant Watering System with Arduino Uno, Moisture Sensor, and Servo Motor"
+
+Description:
+"Learn how to create an automatic plant watering system using Arduino Uno, a moisture sensor, and a servo motor. This DIY project incorporates a 5-second timer to water plants and a 5-second sensor reading time, allowing you to efficiently water up to 6 plants with precision and ease. Watch this tutorial to build your own smart watering solution and keep your plants healthy and hydrated!"

@@ -1,0 +1,28 @@
+Title: Significance of low-cost air quality monitors in NCAP
+
+Description:
+The original blog was uploaded on https://oizom.com/significance-of-low-cost-air-quality-monitors-in-ncap/
+
+One of the key components of the NCAP is to increase the existing ambient air monitoring network. Air quality was monitored only using manual and continuous monitoring stations in the previous action plans such as the National Air Quality Monitoring Programme (NAMP). However, In NCAP low-cost air quality sensors were for the first time officially mentioned as a possible alternative monitoring technology. The advantages of low-cost air quality monitoring devices such as Oizom’s PolludroneTM and DustroidTM can be found here.
+
+How low-cost air quality sensors help bridge the data gaps mentioned in NCAP?
+Air is dynamic in nature. As a result, the air quality at locations only 10 meters apart can significantly vary. External factors such as nearby construction sites, industries, highways, and meteorological parameters make it very difficult to get a representative measurement of the air quality. The National Clean Air Programme (NCAP) was planned to overcome this limitation and expand the ambient air monitoring network across the country.
+
+According to a recent study, there are 230 CAAQMS and 750 manual operating monitoring stations in India as of May 2020. Furthermore, according to the monitoring guidelines, a minimum of 4000 CAAQMS are required to cover the entire nation. It is not economically feasible to achieve that using conventional manual and continuous ambient air quality monitoring stations (CAAQMS). The high capital and maintenance costs of such devices result in lesser deployment with higher investments. Moreover, conventional monitoring systems with 1 station per 10-15 km2 (or even more) cannot be an efficient manner to monitor air quality. Low-cost air quality sensors can help bridge this gap to get more detailed insights and analysis that lead to planning and mitigating air pollution.
+
+Smart Cities
+Cities are the economic and pollution hubs of the country. Increased road traffic, construction activities, industries, and biomass burning leads to deteriorated air quality in cities. On the other hand, there are much more sensitive locations such as schools, hospitals, residential areas where it is crucial to monitor air pollution. NCAP promotes and mandates research initiatives such as source apportionment studies, health exposure studies, etc for the non-attainment cities. Hence, a dense monitoring network is required to measure air quality in cities. Low-cost air quality sensors help in deploying a larger number of devices as compared to their predecessors.
+
+A robust monitoring network can be deployed for hyperlocal monitoring using Oizom’s Polludrone and Dustroid. Such a microscale monitoring in cities or with areas less than 100 km2 is known as Hyperlocal Monitoring. It helps in understanding the spatial trends of air pollution, its sources, and sensitive receptors in the cities to provide deeper and more precise results. On the other hand, the real-time data also helps in validating the source apportionment studies mentioned earlier.
+
+Non-Attainment cities according to the NCAP
+Oizom deployed different variants of Polludrone at Itanagar, Gandhinagar, Varanasi, Surat, etc for smart city monitoring. The real-time data was shared with the government officials through an online platform which enables them to take timely data-driven actions.
+
+Low-cost air quality monitoring in smart cities
+Network of low-cost air quality monitors
+Integrating data and mitigation measure through low-cost air quality sensors
+The main focus of the NCAP is to reduce dust pollution caused due to particulate matter PM2.5 and PM10. Moreover, particulate matter of size 1 micrometer, PM1 was also introduced in NCAP which can cause severe respiratory diseases. Oizom’s Dustroid measures the ambient particulate pollution (including PM1) caused due to major sources such as road traffic, road dust, construction activities.
+
+NCAP directs to install dust suppression systems such as mist cannons and sprinklers at the sources. Oizom successfully installed Dustroid to monitor the dust concentration at construction sites, highways, tunnels, and industries and automated the dust suppression systems through Data-Driven Automation.
+
+Cities have come up with city-level Clean Air Plans (CAP) such as Air Information and Response (AIR) plans in Ahmedabad and Pune. The majority of the cities are focusing on the transport sector, construction activities, industries, and monitoring activities. In each respective sector, monitoring through low-cost air quality sensors aids in providing sustainable solutions and improving air quality. The air quality monitored by the device only represents a fraction of its surrounding area. However, real-time pollution heat maps generated through Oizom’s online dispersion analysis helps in air quality forecast and prediction.

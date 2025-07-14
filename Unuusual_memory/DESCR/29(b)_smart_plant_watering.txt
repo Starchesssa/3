@@ -1,0 +1,34 @@
+Title: LeafGuard: Save Your Plants with This DIY Smart Watering System!
+
+Description:
+Smart Irrigation Monitoring System
+
+In this video, I’m sharing my passion project, LeafGuard, a DIY smart irrigation system to keep my Money Plant thriving while I’m away on a two-week trip. After a heartbreaking plant loss in 2020, I wasn’t taking any chances with my new pet plant! Watch how I scaled down a college irrigation project using a NodeMCU ESP8266, soil moisture sensor, and a 5L water container to create a compact, reliable system with battery backup and Wi-Fi monitoring.
+
+Links & Resources:
+Altium Designer Free Trial (25% off): https://altium.com/yt/electronicsinnovation
+
+Here’s what you’ll see:
+
+Building LeafGuard with Altium Designer’s powerful PCB design tools
+Overcoming the single A0 pin challenge with a CD4051BE multiplexer
+Coding the NodeMCU for precise 3-second watering
+Powering it with 18650 Samsung cells for outage protection
+Real-time monitoring via a custom app
+Want to build your own LeafGuard or scale it up? Drop a comment, and I’ll share the code and schematics! Get the components here: [Insert affiliate links to NodeMCU, sensor, etc., if applicable].
+
+
+Subscribe to Electronics Innovation for more DIY tech projects, and hit the bell 🔔 to stay updated! Let’s keep our plants thriving and stay green!
+
+#DIY #SmartIrrigation #LeafGuard #ElectronicsProjects #MoneyPlant #AltiumDesigner
+
+Subscribe to Electronics Innovation for more exciting projects and tutorials!
+ http://bit.ly/ElectronicsInnovation
+Visit Electronics Innovation.com for more Tutorials, Tips, Projects, and How It Works videos:
+http://electronicsinnovation.com/
+
+Follow us on Social Media:
+
+Twitter: https://x.com/Electronicsinno
+Instagram: https://www.instagram.com/electronicsinnovation/
+Facebook: https://www.facebook.com/ElectroniczInnovation

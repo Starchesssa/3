@@ -1,0 +1,5 @@
+Title: Automatic Irrigation and Plant Watering System using Soil Moisture Sensors
+
+Description:
+This working model presents the idea for automatic soil moisture monitoring and plant watering system to avoid wastage of water and time. It senses the moisture content of the soil and automatically switches on and off the pump as per requirement. 
+The other section of the model shows the poultry farm and cattle farm. The dung of the cattle can be utilised to produce biogas which is used for cooking. The waste from the poultry can be used to make manure for plants to maintain soil fertility.
