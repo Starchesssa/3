@@ -4,16 +4,17 @@ import time
 import string
 import random
 import re
-from multiprocessing import Process, Queue, current_process
+from multiprocessing import Pool, Manager
+import concurrent.futures
 from google import genai
 from google.genai import types
 
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
-MAX_GROUP = 33
-WAIT_BETWEEN_CALLS = 61  # seconds
-PARALLEL_WORKERS = 4
+TIMEOUT_PER_REQUEST = 45
+PARALLEL_JOBS = 4
+API_COOLDOWN = 61  # seconds
 
 # Load API keys
 API_KEYS = [
@@ -32,6 +33,44 @@ os.makedirs(RELEVANT_DIR, exist_ok=True)
 
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
+
+def wait_if_needed(api_index, last_used_dict):
+    now = time.time()
+    last_used = last_used_dict.get(api_index, 0)
+    wait_time = API_COOLDOWN - (now - last_used)
+    if wait_time > 0:
+        print(f"⏳ Waiting {int(wait_time)}s for API#{api_index + 1} cooldown...", flush=True)
+        time.sleep(wait_time)
+
+def check_description_wrapper(api_key_index, title, description, product, last_used_dict):
+    for attempt in range(len(API_KEYS)):
+        real_index = (api_key_index + attempt) % len(API_KEYS)
+        try:
+            wait_if_needed(real_index, last_used_dict)
+            client = genai.Client(api_key=API_KEYS[real_index])
+
+            prompt = (
+                f"Here is a YouTube video title and description:\n\n"
+                f"Title: {title}\n\n"
+                f"Description:\n{description}\n\n"
+                f"Is this video solely about the product '{product}'?\n"
+                f"Also the video should not be like a compilation video containing many products. "
+                f"It should be just about the product. Respond only with Yes or No."
+            )
+
+            contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
+            config = types.GenerateContentConfig(response_mime_type="text/plain")
+            response = client.models.generate_content(model=MODEL, contents=contents, config=config)
+
+            last_used_dict[real_index] = time.time()  # Update cooldown timer
+            result = normalize_response(response.text)
+            print(f"✅ [{title[:40]}...] => {response.text.strip()} (API#{real_index + 1})", flush=True)
+            return ("yes" if result == "yes" else "no", title, description)
+        except Exception as e:
+            print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on '{title[:30]}' (API#{real_index + 1}) => Error: {e}", flush=True)
+            time.sleep(1)
+    print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
+    return ("no", title, description)
 
 def parse_txt_file(file_path):
     with open(file_path, "r") as f:
@@ -60,58 +99,38 @@ def extract_group_key(filename):
         return (num, letter.lower())
     return (float('inf'), '')
 
-def check_description(api_key, title, description, product):
+def process_file(args):
+    file_name, last_used_dict = args
+    full_path = os.path.join(DESCR_DIR, file_name)
+    product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
+
     try:
-        client = genai.Client(api_key=api_key)
-        prompt = (
-            f"Here is a YouTube video title and description:\n\n"
-            f"Title: {title}\n\n"
-            f"Description:\n{description}\n\n"
-            f"Is this video solely about the product '{product}'?\n"
-            f"Also the video should not be like a compilation video containing many products. "
-            f"It should be just about the product. Respond only with Yes or No."
-        )
-        contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
-        config = types.GenerateContentConfig(response_mime_type="text/plain")
-        response = client.models.generate_content(model=MODEL, contents=contents, config=config)
-        result = normalize_response(response.text)
-        print(f"✅ [{title[:40]}...] => {response.text.strip()} (PID:{current_process().pid})", flush=True)
-        return "yes" if result == "yes" else "no"
+        title, description = parse_txt_file(full_path)
     except Exception as e:
-        print(f"❌ Error on '{title[:30]}' => {e} (PID:{current_process().pid})", flush=True)
-        return "no"
+        print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
+        return False
 
-def worker(api_key, task_queue):
-    while not task_queue.empty():
+    key_index = random.randint(0, len(API_KEYS) - 1)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(check_description_wrapper, key_index, title, description, product, last_used_dict)
         try:
-            file_name = task_queue.get_nowait()
-        except:
-            break
-
-        product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
-        full_path = os.path.join(DESCR_DIR, file_name)
-
-        try:
-            title, description = parse_txt_file(full_path)
-        except Exception as e:
-            print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
-            continue
-
-        verdict = check_description(api_key, title, description, product)
-
-        if verdict == "yes":
-            output_path = os.path.join(RELEVANT_DIR, file_name)
-            try:
+            verdict, title, description = future.result(timeout=TIMEOUT_PER_REQUEST)
+            if verdict == "yes":
+                output_path = os.path.join(RELEVANT_DIR, file_name)
                 with open(output_path, "w") as f:
                     f.write(f"Title: {title}\n\nDescription:\n{description}")
                 print(f"✅ Saved qualified: {output_path}", flush=True)
-            except Exception as e:
-                print(f"⚠️ Could not save file {file_name}: {e}", flush=True)
-        else:
-            print(f"🚫 Not qualified: {file_name}", flush=True)
-
-        print(f"⏳ Waiting {WAIT_BETWEEN_CALLS} seconds before next call... (PID:{current_process().pid})", flush=True)
-        time.sleep(WAIT_BETWEEN_CALLS)
+                return True
+            else:
+                print("🚫 Not qualified", flush=True)
+                return False
+        except concurrent.futures.TimeoutError:
+            print(f"⏱️ Timeout on file: {file_name}", flush=True)
+            return False
+        except Exception as e:
+            print(f"⚠️ Error processing {file_name}: {e}", flush=True)
+            return False
 
 def main():
     print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
@@ -123,29 +142,22 @@ def main():
 
     sorted_files = sorted(txt_files, key=extract_group_key)
 
-    # Filter files: Only process groups 1 to MAX_GROUP
     filtered_files = [
         f for f in sorted_files
-        if extract_group_key(f)[0] <= MAX_GROUP
+        if extract_group_key(f)[0] <= 33
     ]
 
-    print(f"🔎 Processing files in order (group 1 to {MAX_GROUP}) — Total: {len(filtered_files)}\n", flush=True)
+    print(f"🔎 Processing in exact order from group 1 to 33 (total files: {len(filtered_files)})\n", flush=True)
 
-    task_queue = Queue()
-    for f in filtered_files:
-        task_queue.put(f)
+    with Manager() as manager:
+        last_used_dict = manager.dict()
 
-    processes = []
-    for i in range(min(PARALLEL_WORKERS, len(API_KEYS))):
-        p = Process(target=worker, args=(API_KEYS[i], task_queue))
-        p.start()
-        processes.append(p)
+        with Pool(processes=PARALLEL_JOBS) as pool:
+            args_list = [(file, last_used_dict) for file in filtered_files]
+            results = pool.map(process_file, args_list)
 
-    for p in processes:
-        p.join()
-
-    qualified_total = len(os.listdir(RELEVANT_DIR))
-    print(f"\n🎉 Done! Total qualified saved files: {qualified_total}", flush=True)
+        qualified_count = sum(1 for r in results if r)
+        print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
     main()
