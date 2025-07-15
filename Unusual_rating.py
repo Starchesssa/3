@@ -84,18 +84,15 @@ def main():
     print("🚀 Starting Gemini video rating...\n", flush=True)
     txt_files = sorted(
         [f for f in os.listdir(RELEVANT_DIR) if f.endswith(".txt") and f[0].isdigit()],
-        key=lambda x: int(x.split("_")[0])
+        key=lambda x: int(x.split("_")[0].split("(")[0])  # safer split to get number before '('
     )
 
     for file_name in txt_files:
-        # Example filename: "2(b)_smart_indoor_garden.txt"
-        # Parse number part, letter in parentheses, and product part
         try:
             number_part = file_name.split("_")[0]  # e.g. "2(b)"
             product_part = "_".join(file_name.split("_")[1:]).replace(".txt", "")  # e.g. "smart_indoor_garden"
 
-            # Extract the number and letter from the number_part
-            # number_part format assumed: "2(b)" or "1(a)"
+            # Extract number and letter from number_part
             num_str = ""
             letter = ""
             for c in number_part:
@@ -105,20 +102,29 @@ def main():
                     letter = c
             number = int(num_str)
             if not letter:
-                # If letter missing, assume 'a'
                 letter = 'a'
 
-            # Open corresponding links file
-            links_filename = f"{number}_{product_part}.txt"
-            links_path = os.path.join(LINKS_DIR, links_filename)
-            if not os.path.exists(links_path):
-                print(f"⚠️ Links file not found for {file_name}: {links_path}", flush=True)
-                continue
+            # Find links file by matching product_part only
+            matching_links_files = [
+                f for f in os.listdir(LINKS_DIR)
+                if f.endswith(".txt") and product_part in f
+            ]
 
+            if not matching_links_files:
+                print(f"⚠️ No links file found containing product '{product_part}' for {file_name}", flush=True)
+                continue
+            elif len(matching_links_files) > 1:
+                print(f"⚠️ Multiple links files found containing product '{product_part}' for {file_name}: {matching_links_files}", flush=True)
+                exact_match = [f for f in matching_links_files if f == f"{product_part}.txt"]
+                links_filename = exact_match[0] if exact_match else matching_links_files[0]
+            else:
+                links_filename = matching_links_files[0]
+
+            links_path = os.path.join(LINKS_DIR, links_filename)
             with open(links_path, "r") as f:
                 all_links = [line.strip() for line in f if line.strip()]
 
-            link_index = letter_to_index(letter) - 1  # zero-based index
+            link_index = letter_to_index(letter) - 1
             if link_index >= len(all_links):
                 print(f"⚠️ Link index {link_index + 1} out of range for {links_path}", flush=True)
                 continue
@@ -133,7 +139,6 @@ def main():
                 for idx, res in enumerate(multiple_results):
                     try:
                         result = res.get(timeout=TIMEOUT_PER_REQUEST)
-                        # Use letter from filename for output
                         output_file = f"{num_str}({letter})_{product_part}.txt"
                         output_path = os.path.join(RATING_DIR, output_file)
                         with open(output_path, "w") as out_f:
