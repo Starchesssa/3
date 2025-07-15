@@ -86,14 +86,6 @@ def parse_txt_file(file_path):
     description = "\n".join(description_lines).strip()
     return title, description
 
-def git_commit_file(file_path, message):
-    try:
-        subprocess.run(["git", "add", file_path], check=True)
-        subprocess.run(["git", "commit", "-m", message], check=True)
-        print(f"✅ Committed {file_path} with message: {message}")
-    except subprocess.CalledProcessError as e:
-        print(f"⚠️ Git commit failed: {e}")
-
 # === Process Each File ===
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
@@ -129,8 +121,6 @@ def process_file(file_name):
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(f"Title: {title}\n\nDescription:\n{description}")
         print(f"✅ Saved qualified: {output_path}", flush=True)
-
-        git_commit_file(output_path, f"Add qualified video description {file_name}")
         return True
     else:
         print("🚫 Not qualified", flush=True)
