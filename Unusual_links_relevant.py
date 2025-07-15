@@ -4,6 +4,7 @@ import time
 import string
 import random
 import subprocess
+import concurrent.futures
 from multiprocessing import Pool, TimeoutError as MP_Timeout
 from google import genai
 from google.genai import types
@@ -44,7 +45,7 @@ def check_description_wrapper(key_index, title, description, product):
                 f"Title: {title}\n\n"
                 f"Description:\n{description}\n\n"
                 f"Is this video solely about the product '{product}'?\n"
-                f"also the video should not be like compilation video containing many products ,it should be just about the product,Respond only with Yes or No."
+                f"The video should not be a compilation containing many products — respond only with Yes or No."
             )
             contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
             config = types.GenerateContentConfig(response_mime_type="text/plain")
@@ -93,13 +94,12 @@ def git_commit_file(file_path, message):
     except subprocess.CalledProcessError as e:
         print(f"⚠️ Git commit failed: {e}")
 
-# === Process Each File (no inner Pool!) ===
+# === Process Each File ===
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
 
-    # Extract product from filename e.g. "1(c)_product_name.txt"
-    # This regex matches leading digit + optional (letter), then underscore, then product name
-    m = re.match(r"(\d+(?:[a-z])?)_(.+)\.txt$", file_name, re.IGNORECASE)
+    # Extract product name using a safe regex
+    m = re.match(r"(\d+(?:\([a-z]\))?)_(.+)\.txt$", file_name, re.IGNORECASE)
     if not m:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
         return False
@@ -114,8 +114,6 @@ def process_file(file_name):
     key_index = random.randint(0, len(API_KEYS) - 1)
     verdict = None
     try:
-        # Run with timeout manually
-        import concurrent.futures
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(check_description_wrapper, key_index, title, description, product)
             verdict = future.result(timeout=TIMEOUT_PER_REQUEST)
@@ -132,7 +130,6 @@ def process_file(file_name):
             f.write(f"Title: {title}\n\nDescription:\n{description}")
         print(f"✅ Saved qualified: {output_path}", flush=True)
 
-        # Commit to git
         git_commit_file(output_path, f"Add qualified video description {file_name}")
         return True
     else:
@@ -140,33 +137,25 @@ def process_file(file_name):
         return False
 
 def main():
-    print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
+    print("🚀 Starting Gemini relevance filter...\n", flush=True)
 
-    # Gather and filter only files numbered 1 to 33 (with optional letter suffix)
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+([a-z])?_.+\.txt$", f, re.IGNORECASE)
+        if f.endswith(".txt") and re.match(r"\d+(?:\([a-z]\))?_.+\.txt$", f, re.IGNORECASE)
     ]
 
-    # Sort by the number prefix, ignoring letter suffix for ordering but keep file as is
     def sort_key(f):
-        m = re.match(r"(\d+)(?:[a-z])?_.+\.txt$", f, re.IGNORECASE)
+        m = re.match(r"(\d+)", f)
         return int(m.group(1)) if m else 9999
 
     filtered_files = sorted([f for f in txt_files if int(re.match(r"(\d+)", f).group(1)) <= 33], key=sort_key)
-
-    print(f"🔎 Processing numbered groups 1 to 33 (total files: {len(filtered_files)})\n", flush=True)
+    print(f"🔎 Processing files 1–33 (total: {len(filtered_files)})\n", flush=True)
 
     qualified_count = 0
-
-    # Use multiprocessing to process files in parallel
     with Pool(processes=min(8, os.cpu_count() or 1)) as pool:
         results = pool.map(process_file, filtered_files)
 
-    for success in results:
-        if success:
-            qualified_count += 1
-
+    qualified_count = sum(1 for success in results if success)
     print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
