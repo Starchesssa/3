@@ -10,9 +10,8 @@ from google.genai import types
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
-MAX_QUALIFIED_TXT = 33
-WAIT_BETWEEN_FILES = 70  # seconds
 TIMEOUT_PER_REQUEST = 45  # per file
+PARALLEL_JOBS = 4  # Max number of files to process in parallel
 
 # === Load Gemini API keys ===
 API_KEYS = [
@@ -44,7 +43,8 @@ def check_description_wrapper(args):
                 f"Title: {title}\n\n"
                 f"Description:\n{description}\n\n"
                 f"Is this video solely about the product '{product}'?\n"
-                f"also the video should not be like compilation video containing many products ,it should be just about the product,Respond only with Yes or No."
+                f"Also the video should not be like a compilation video containing many products. "
+                f"It should be just about the product. Respond only with Yes or No."
             )
             contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
             config = types.GenerateContentConfig(response_mime_type="text/plain")
@@ -58,14 +58,6 @@ def check_description_wrapper(args):
 
     print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
     return ("no", title, description)
-
-def wait_between_files(seconds):
-    print(f"\n⏱️ Waiting {seconds} seconds before next file...", flush=True)
-    for i in range(seconds, 0, -1):
-        if i <= 5 or i % 10 == 0:
-            print(f"  ...{i}s", flush=True)
-        time.sleep(1)
-    print("✅ Wait complete.\n", flush=True)
 
 # === Parse Title and Description from file ===
 def parse_txt_file(file_path):
@@ -123,27 +115,25 @@ def process_file(file_name):
 # === Main Script ===
 def main():
     print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
-    txt_files = sorted(
-        [f for f in os.listdir(DESCR_DIR) if f.endswith(".txt")],
-        key=lambda x: int(x.split("_")[0].split("(")[0])
-    )
 
-    qualified_count = 0
-    for index, file_name in enumerate(txt_files):
-        if qualified_count >= MAX_QUALIFIED_TXT:
-            break
+    # Gather and filter only files numbered 1 to 33
+    txt_files = [
+        f for f in os.listdir(DESCR_DIR)
+        if f.endswith(".txt") and f.split("_")[0].split("(")[0].isdigit()
+    ]
 
-        print(f"\n📂 File [{index + 1}/{len(txt_files)}]: {file_name}", flush=True)
+    filtered_files = []
+    for f in sorted(txt_files, key=lambda x: int(x.split("_")[0].split("(")[0])):
+        num = int(f.split("_")[0].split("(")[0])
+        if num <= 33:
+            filtered_files.append(f)
 
-        try:
-            successful = process_file(file_name)
-            if successful:
-                qualified_count += 1
-        except Exception as e:
-            print(f"❌ Unexpected error: {e}", flush=True)
+    print(f"🔎 Processing numbered groups 1 to 33 (total files: {len(filtered_files)})\n", flush=True)
 
-        wait_between_files(WAIT_BETWEEN_FILES)
+    with Pool(processes=PARALLEL_JOBS) as pool:
+        results = pool.map(process_file, filtered_files)
 
+    qualified_count = sum(1 for r in results if r)
     print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
