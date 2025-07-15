@@ -118,7 +118,7 @@ def main():
     ]
 
     filtered_files = []
-    for f in sorted(txt_files, key=lambda x: int(f.split("_")[0].split("(")[0].strip())):
+    for f in sorted(txt_files, key=lambda x: int(x.split("_")[0].split("(")[0].strip())):
         num = int(f.split("_")[0].split("(")[0].strip())
         if num <= 33:
             filtered_files.append(f)
