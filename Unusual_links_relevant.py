@@ -7,15 +7,15 @@ import subprocess
 from multiprocessing import Pool, TimeoutError as MP_Timeout
 from google import genai
 from google.genai import types
+import re
 
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
-WAIT_BETWEEN_BATCHES = 5  # wait after each batch of parallel runs
-TIMEOUT_PER_REQUEST = 45
-MAX_FILE_NUMBER = 33
-PARALLEL_WORKERS = 4  # adjust for number of parallel files to process
+WAIT_BETWEEN_FILES = 70  # seconds
+TIMEOUT_PER_REQUEST = 45  # seconds per file
 
+# === Load Gemini API keys ===
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
@@ -30,11 +30,11 @@ if not API_KEYS:
 MODEL = "gemini-2.5-flash"
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
+# === Helpers ===
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def check_description_wrapper(args):
-    key_index, title, description, product = args
+def check_description_wrapper(key_index, title, description, product):
     for attempt in range(len(API_KEYS)):
         real_index = (key_index + attempt) % len(API_KEYS)
         try:
@@ -44,26 +44,36 @@ def check_description_wrapper(args):
                 f"Title: {title}\n\n"
                 f"Description:\n{description}\n\n"
                 f"Is this video solely about the product '{product}'?\n"
-                f"The video should not be a compilation. Just respond Yes or No."
+                f"also the video should not be like compilation video containing many products ,it should be just about the product,Respond only with Yes or No."
             )
             contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
             config = types.GenerateContentConfig(response_mime_type="text/plain")
             response = client.models.generate_content(model=MODEL, contents=contents, config=config)
             result = normalize_response(response.text)
             print(f"✅ [{title[:40]}...] => {response.text.strip()} (API#{real_index + 1})", flush=True)
-            return ("yes" if result == "yes" else "no", title, description)
+            return "yes" if result == "yes" else "no"
         except Exception as e:
             print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on '{title[:30]}' (API#{real_index + 1}) => Error: {e}", flush=True)
             time.sleep(1)
     print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
-    return ("no", title, description)
+    return "no"
+
+def wait_between_files(seconds):
+    print(f"\n⏱️ Waiting {seconds} seconds before next file...", flush=True)
+    for i in range(seconds, 0, -1):
+        if i <= 5 or i % 10 == 0:
+            print(f"  ...{i}s", flush=True)
+        time.sleep(1)
+    print("✅ Wait complete.\n", flush=True)
 
 def parse_txt_file(file_path):
-    with open(file_path, "r") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         lines = f.read().splitlines()
+
     title = ""
     description_lines = []
     in_description = False
+
     for line in lines:
         if line.startswith("Title:"):
             title = line.replace("Title:", "").strip()
@@ -71,72 +81,91 @@ def parse_txt_file(file_path):
             in_description = True
         elif in_description:
             description_lines.append(line)
+
     description = "\n".join(description_lines).strip()
     return title, description
 
-def git_commit(file_path):
+def git_commit_file(file_path, message):
     try:
         subprocess.run(["git", "add", file_path], check=True)
-        subprocess.run(["git", "commit", "-m", f"✅ Added relevant file: {os.path.basename(file_path)}"], check=True)
-        print("📥 Git committed.", flush=True)
-    except Exception as e:
-        print(f"⚠️ Git commit failed: {e}", flush=True)
+        subprocess.run(["git", "commit", "-m", message], check=True)
+        print(f"✅ Committed {file_path} with message: {message}")
+    except subprocess.CalledProcessError as e:
+        print(f"⚠️ Git commit failed: {e}")
 
+# === Process Each File (no inner Pool!) ===
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-    product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
+
+    # Extract product from filename e.g. "1(c)_product_name.txt"
+    # This regex matches leading digit + optional (letter), then underscore, then product name
+    m = re.match(r"(\d+(?:[a-z])?)_(.+)\.txt$", file_name, re.IGNORECASE)
+    if not m:
+        print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
+        return False
+    product = m.group(2).replace("_", " ")
+
     try:
         title, description = parse_txt_file(full_path)
     except Exception as e:
         print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
         return False
 
-    args = (random.randint(0, len(API_KEYS) - 1), title, description, product)
-    with Pool(processes=1) as pool:
-        result = pool.apply_async(check_description_wrapper, (args,))
-        try:
-            verdict, title, description = result.get(timeout=TIMEOUT_PER_REQUEST)
-            if verdict == "yes":
-                output_path = os.path.join(RELEVANT_DIR, file_name)
-                with open(output_path, "w") as f:
-                    f.write(f"Title: {title}\n\nDescription:\n{description}")
-                print(f"✅ Saved qualified: {output_path}", flush=True)
-                git_commit(output_path)
-                return True
-            else:
-                print("🚫 Not qualified", flush=True)
-                return False
-        except MP_Timeout:
-            print(f"⏱️ Timeout on file: {file_name}", flush=True)
-            return False
-        except Exception as e:
-            print(f"⚠️ Error processing {file_name}: {e}", flush=True)
-            return False
-
-def valid_file_number(name):
+    key_index = random.randint(0, len(API_KEYS) - 1)
+    verdict = None
     try:
-        part = name.split("_")[0]
-        num_str = ''.join(filter(str.isdigit, part))
-        return int(num_str)
-    except:
-        return -1
+        # Run with timeout manually
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(check_description_wrapper, key_index, title, description, product)
+            verdict = future.result(timeout=TIMEOUT_PER_REQUEST)
+    except concurrent.futures.TimeoutError:
+        print(f"⏱️ Timeout on file: {file_name}", flush=True)
+        return False
+    except Exception as e:
+        print(f"⚠️ Error processing {file_name}: {e}", flush=True)
+        return False
+
+    if verdict == "yes":
+        output_path = os.path.join(RELEVANT_DIR, file_name)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(f"Title: {title}\n\nDescription:\n{description}")
+        print(f"✅ Saved qualified: {output_path}", flush=True)
+
+        # Commit to git
+        git_commit_file(output_path, f"Add qualified video description {file_name}")
+        return True
+    else:
+        print("🚫 Not qualified", flush=True)
+        return False
 
 def main():
     print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
 
+    # Gather and filter only files numbered 1 to 33 (with optional letter suffix)
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and valid_file_number(f) > 0 and valid_file_number(f) <= MAX_FILE_NUMBER
+        if f.endswith(".txt") and re.match(r"\d+([a-z])?_.+\.txt$", f, re.IGNORECASE)
     ]
-    txt_files = sorted(txt_files, key=lambda x: valid_file_number(x))
 
-    print(f"🔎 Processing files 1 to {MAX_FILE_NUMBER} (total: {len(txt_files)})\n", flush=True)
+    # Sort by the number prefix, ignoring letter suffix for ordering but keep file as is
+    def sort_key(f):
+        m = re.match(r"(\d+)(?:[a-z])?_.+\.txt$", f, re.IGNORECASE)
+        return int(m.group(1)) if m else 9999
+
+    filtered_files = sorted([f for f in txt_files if int(re.match(r"(\d+)", f).group(1)) <= 33], key=sort_key)
+
+    print(f"🔎 Processing numbered groups 1 to 33 (total files: {len(filtered_files)})\n", flush=True)
 
     qualified_count = 0
-    with Pool(processes=PARALLEL_WORKERS) as pool:
-        results = pool.map(process_file, txt_files)
 
-    qualified_count = sum(1 for res in results if res)
+    # Use multiprocessing to process files in parallel
+    with Pool(processes=min(8, os.cpu_count() or 1)) as pool:
+        results = pool.map(process_file, filtered_files)
+
+    for success in results:
+        if success:
+            qualified_count += 1
 
     print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
