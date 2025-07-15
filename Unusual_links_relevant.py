@@ -114,12 +114,12 @@ def main():
 
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and f.split("_")[0].split("(")[0].isdigit()
+        if f.endswith(".txt") and f.split("_")[0].split("(")[0].strip().isdigit()
     ]
 
     filtered_files = []
-    for f in sorted(txt_files, key=lambda x: int(x.split("_")[0].split("(")[0])):
-        num = int(f.split("_")[0].split("(")[0])
+    for f in sorted(txt_files, key=lambda x: int(f.split("_")[0].split("(")[0].strip())):
+        num = int(f.split("_")[0].split("(")[0].strip())
         if num <= 33:
             filtered_files.append(f)
 
