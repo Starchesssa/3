@@ -3,30 +3,29 @@ import os
 import time
 import string
 import random
-import re
-from multiprocessing import Pool, Manager
-import concurrent.futures
+import subprocess
+from multiprocessing import Pool, TimeoutError as MP_Timeout
 from google import genai
 from google.genai import types
 
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
+WAIT_BETWEEN_BATCHES = 5  # wait after each batch of parallel runs
 TIMEOUT_PER_REQUEST = 45
-PARALLEL_JOBS = 4
-API_COOLDOWN = 61  # seconds
+MAX_FILE_NUMBER = 33
+PARALLEL_WORKERS = 4  # adjust for number of parallel files to process
 
-# Load API keys
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
     os.environ.get("GEMINI_API3"),
     os.environ.get("GEMINI_API4"),
-    os.environ.get("GEMINI_API5"),
+    os.environ.get("GEMINI_API5")
 ]
-API_KEYS = [k for k in API_KEYS if k]
+API_KEYS = [key for key in API_KEYS if key]
 if not API_KEYS:
-    raise ValueError("No GEMINI_API keys found!")
+    raise ValueError("❌ No valid GEMINI_API keys found.")
 
 MODEL = "gemini-2.5-flash"
 os.makedirs(RELEVANT_DIR, exist_ok=True)
@@ -34,35 +33,22 @@ os.makedirs(RELEVANT_DIR, exist_ok=True)
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def wait_if_needed(api_index, last_used_dict):
-    now = time.time()
-    last_used = last_used_dict.get(api_index, 0)
-    wait_time = API_COOLDOWN - (now - last_used)
-    if wait_time > 0:
-        print(f"⏳ Waiting {int(wait_time)}s for API#{api_index + 1} cooldown...", flush=True)
-        time.sleep(wait_time)
-
-def check_description_wrapper(api_key_index, title, description, product, last_used_dict):
+def check_description_wrapper(args):
+    key_index, title, description, product = args
     for attempt in range(len(API_KEYS)):
-        real_index = (api_key_index + attempt) % len(API_KEYS)
+        real_index = (key_index + attempt) % len(API_KEYS)
         try:
-            wait_if_needed(real_index, last_used_dict)
             client = genai.Client(api_key=API_KEYS[real_index])
-
             prompt = (
                 f"Here is a YouTube video title and description:\n\n"
                 f"Title: {title}\n\n"
                 f"Description:\n{description}\n\n"
                 f"Is this video solely about the product '{product}'?\n"
-                f"Also the video should not be like a compilation video containing many products. "
-                f"It should be just about the product. Respond only with Yes or No."
+                f"The video should not be a compilation. Just respond Yes or No."
             )
-
             contents = [types.Content(role="user", parts=[types.Part(text=prompt)])]
             config = types.GenerateContentConfig(response_mime_type="text/plain")
             response = client.models.generate_content(model=MODEL, contents=contents, config=config)
-
-            last_used_dict[real_index] = time.time()  # Update cooldown timer
             result = normalize_response(response.text)
             print(f"✅ [{title[:40]}...] => {response.text.strip()} (API#{real_index + 1})", flush=True)
             return ("yes" if result == "yes" else "no", title, description)
@@ -75,11 +61,9 @@ def check_description_wrapper(api_key_index, title, description, product, last_u
 def parse_txt_file(file_path):
     with open(file_path, "r") as f:
         lines = f.read().splitlines()
-
     title = ""
     description_lines = []
     in_description = False
-
     for line in lines:
         if line.startswith("Title:"):
             title = line.replace("Title:", "").strip()
@@ -87,77 +71,74 @@ def parse_txt_file(file_path):
             in_description = True
         elif in_description:
             description_lines.append(line)
-
     description = "\n".join(description_lines).strip()
     return title, description
 
-def extract_group_key(filename):
-    match = re.match(r"(\d+)(?:(\w))?_", filename)
-    if match:
-        num = int(match.group(1))
-        letter = match.group(2) or ''
-        return (num, letter.lower())
-    return (float('inf'), '')
+def git_commit(file_path):
+    try:
+        subprocess.run(["git", "add", file_path], check=True)
+        subprocess.run(["git", "commit", "-m", f"✅ Added relevant file: {os.path.basename(file_path)}"], check=True)
+        print("📥 Git committed.", flush=True)
+    except Exception as e:
+        print(f"⚠️ Git commit failed: {e}", flush=True)
 
-def process_file(args):
-    file_name, last_used_dict = args
+def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
     product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
-
     try:
         title, description = parse_txt_file(full_path)
     except Exception as e:
         print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
         return False
 
-    key_index = random.randint(0, len(API_KEYS) - 1)
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        future = executor.submit(check_description_wrapper, key_index, title, description, product, last_used_dict)
+    args = (random.randint(0, len(API_KEYS) - 1), title, description, product)
+    with Pool(processes=1) as pool:
+        result = pool.apply_async(check_description_wrapper, (args,))
         try:
-            verdict, title, description = future.result(timeout=TIMEOUT_PER_REQUEST)
+            verdict, title, description = result.get(timeout=TIMEOUT_PER_REQUEST)
             if verdict == "yes":
                 output_path = os.path.join(RELEVANT_DIR, file_name)
                 with open(output_path, "w") as f:
                     f.write(f"Title: {title}\n\nDescription:\n{description}")
                 print(f"✅ Saved qualified: {output_path}", flush=True)
+                git_commit(output_path)
                 return True
             else:
                 print("🚫 Not qualified", flush=True)
                 return False
-        except concurrent.futures.TimeoutError:
+        except MP_Timeout:
             print(f"⏱️ Timeout on file: {file_name}", flush=True)
             return False
         except Exception as e:
             print(f"⚠️ Error processing {file_name}: {e}", flush=True)
             return False
 
+def valid_file_number(name):
+    try:
+        part = name.split("_")[0]
+        num_str = ''.join(filter(str.isdigit, part))
+        return int(num_str)
+    except:
+        return -1
+
 def main():
     print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
 
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+(\w)?_", f)
+        if f.endswith(".txt") and valid_file_number(f) > 0 and valid_file_number(f) <= MAX_FILE_NUMBER
     ]
+    txt_files = sorted(txt_files, key=lambda x: valid_file_number(x))
 
-    sorted_files = sorted(txt_files, key=extract_group_key)
+    print(f"🔎 Processing files 1 to {MAX_FILE_NUMBER} (total: {len(txt_files)})\n", flush=True)
 
-    filtered_files = [
-        f for f in sorted_files
-        if extract_group_key(f)[0] <= 33
-    ]
+    qualified_count = 0
+    with Pool(processes=PARALLEL_WORKERS) as pool:
+        results = pool.map(process_file, txt_files)
 
-    print(f"🔎 Processing in exact order from group 1 to 33 (total files: {len(filtered_files)})\n", flush=True)
+    qualified_count = sum(1 for res in results if res)
 
-    with Manager() as manager:
-        last_used_dict = manager.dict()
-
-        with Pool(processes=PARALLEL_JOBS) as pool:
-            args_list = [(file, last_used_dict) for file in filtered_files]
-            results = pool.map(process_file, args_list)
-
-        qualified_count = sum(1 for r in results if r)
-        print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
+    print(f"\n🎉 Done! Total qualified: {qualified_count}", flush=True)
 
 if __name__ == "__main__":
     main()
