@@ -1,0 +1,6 @@
+Title: How to make Smart trash bin using Arduino
+
+Description:
+In this project, I will show you How to Make a Smart Dustbin using Arduino, where the lid of the dustbin will automatically open when you approach with trash. The other important components used to make this Smart dustbin are HC-04 Ultrasonic Sensor and SG90 TowerPro Servo Motor.
+Code & Circuit Diagram:
+https://drive.google.com/open?id=1LB4...
