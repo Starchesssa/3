@@ -1,9 +1,0 @@
-Title: Smart Curtains
-
-Description:
-A research team led by UC Berkeley engineering professor Ali Javey used carbon nanotubes layered on top of plastic polycarbonate to create a new material that can move in response to light. The new material can be used to create "smart curtains" that open or close, depending upon how the nanotubes are engineered, with the flick of a light switch. 
-In this video, some of the experimental curtains are engineered to open when a light is switched on, and others are set to close.
-Full Story:  http://newscenter.berkeley.edu/2014/01/09/smart-curtains/
-http://berkeley.edu
-https://www.facebook.com/UCBerkeley
-https://twitter.com/UCBerkeley
