@@ -11,7 +11,7 @@ from google.genai import types
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
 TIMEOUT_PER_REQUEST = 45  # per file
-PARALLEL_JOBS = 4  # Max number of files to process in parallel
+PARALLEL_JOBS = 5  # Max number of files to process in parallel
 
 # === Load Gemini API keys ===
 API_KEYS = [
