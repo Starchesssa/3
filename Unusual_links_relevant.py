@@ -3,37 +3,36 @@ import os
 import time
 import string
 import random
-from multiprocessing import Pool, TimeoutError as MP_Timeout
+from multiprocessing import Pool
+import concurrent.futures
 from google import genai
 from google.genai import types
 
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
-TIMEOUT_PER_REQUEST = 45  # per file
-PARALLEL_JOBS = 5  # Max number of files to process in parallel
+TIMEOUT_PER_REQUEST = 45
+PARALLEL_JOBS = 4
 
-# === Load Gemini API keys ===
+# Load API keys
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
     os.environ.get("GEMINI_API3"),
     os.environ.get("GEMINI_API4"),
-    os.environ.get("GEMINI_API5")
+    os.environ.get("GEMINI_API5"),
 ]
-API_KEYS = [key for key in API_KEYS if key]
+API_KEYS = [k for k in API_KEYS if k]
 if not API_KEYS:
-    raise ValueError("❌ No valid GEMINI_API keys found.")
+    raise ValueError("No GEMINI_API keys found!")
 
 MODEL = "gemini-2.5-flash"
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
-# === Helpers ===
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
-def check_description_wrapper(args):
-    key_index, title, description, product = args
+def check_description_wrapper(key_index, title, description, product):
     for attempt in range(len(API_KEYS)):
         real_index = (key_index + attempt) % len(API_KEYS)
         try:
@@ -55,11 +54,9 @@ def check_description_wrapper(args):
         except Exception as e:
             print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on '{title[:30]}' (API#{real_index + 1}) => Error: {e}", flush=True)
             time.sleep(1)
-
     print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
     return ("no", title, description)
 
-# === Parse Title and Description from file ===
 def parse_txt_file(file_path):
     with open(file_path, "r") as f:
         lines = f.read().splitlines()
@@ -79,7 +76,6 @@ def parse_txt_file(file_path):
     description = "\n".join(description_lines).strip()
     return title, description
 
-# === Process Each File ===
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
     product = file_name.split("_", 1)[1].replace(".txt", "").replace("_", " ")
@@ -90,12 +86,13 @@ def process_file(file_name):
         print(f"❌ Failed to parse file {file_name}: {e}", flush=True)
         return False
 
-    args = (random.randint(0, len(API_KEYS) - 1), title, description, product)
+    key_index = random.randint(0, len(API_KEYS) - 1)
 
-    with Pool(processes=1) as pool:
-        result = pool.apply_async(check_description_wrapper, (args,))
+    # Run check_description_wrapper with timeout using ThreadPoolExecutor
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(check_description_wrapper, key_index, title, description, product)
         try:
-            verdict, title, description = result.get(timeout=TIMEOUT_PER_REQUEST)
+            verdict, title, description = future.result(timeout=TIMEOUT_PER_REQUEST)
             if verdict == "yes":
                 output_path = os.path.join(RELEVANT_DIR, file_name)
                 with open(output_path, "w") as f:
@@ -105,18 +102,16 @@ def process_file(file_name):
             else:
                 print("🚫 Not qualified", flush=True)
                 return False
-        except MP_Timeout:
+        except concurrent.futures.TimeoutError:
             print(f"⏱️ Timeout on file: {file_name}", flush=True)
             return False
         except Exception as e:
             print(f"⚠️ Error processing {file_name}: {e}", flush=True)
             return False
 
-# === Main Script ===
 def main():
     print("🚀 Starting Gemini relevance filter (title/desc based)...\n", flush=True)
 
-    # Gather and filter only files numbered 1 to 33
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
         if f.endswith(".txt") and f.split("_")[0].split("(")[0].isdigit()
