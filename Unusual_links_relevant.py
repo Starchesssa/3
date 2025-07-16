@@ -91,13 +91,14 @@ def check_description_wrapper(key_index, title, description, product):
     print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
     return "no"
 
-# === File processing ===
+# === File processing ==
 
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
 
-    # Updated regex to match patterns like: 1(a)_robot_window_cleaner.txt
-    m = re.match(r"(\d+[a-z])_(.+)\.txt$", file_name, re.IGNORECASE)
+    # Correct regex to match patterns like: 1(a)_robot_window_cleaner.txt
+    # It captures: digits + optional (letter) + underscore + filename + .txt
+    m = re.match(r"(\d+\([a-z]\))_(.+)\.txt$", file_name, re.IGNORECASE)
 
     if not m:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
