@@ -1,4 +1,0 @@
-Title: Smart Shower
-
-Description:
-The smart sensor can help save water by providing instant feedback and analytics. You can find more details about this project, leave your comments and vote at http://devpost.com/software/smart-shower .

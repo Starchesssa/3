@@ -1,4 +1,0 @@
-Title: uHoo air quality monitor
-
-Description:
-The concept of uHoo came together when CEO Dustin Onghanseng and CTO Brian Lin met at the MBA program at the Hong Kong University of Science and Technology back in 2013.

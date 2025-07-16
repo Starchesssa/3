@@ -1,6 +1,0 @@
-Title: Smart Air Quality Monitor
-
-Description:
-Našim cieľom bolo vytvoriť Iot projekt ktorý meria kvalitu ovzdušia. Merania sú reprezentované a vyhodnocované v aplikácii pre iOS.
-
-Autori: Mark Berta, Ján Matoniak, Dávid Barľak

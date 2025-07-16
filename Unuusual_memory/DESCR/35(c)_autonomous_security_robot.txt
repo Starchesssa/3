@@ -1,6 +1,0 @@
-Title: Demonstration of Autonomous Sweeper
-
-Description:
-Workshop in partnership with Kongsberg Kommune, Statens Vegvesen, Forskningsprosjektet Bevegelse, Kongsberg Technology Park and Spring looking into use cases and how to deploy autonomous maintenance machines. The goal is to improve areas for walking and bicycling, and to make cities safe and clean. 
-
-The experience from the demonstrator were very good, both in regards to the Spring1 machine and the control centre of Applied Autonomy including real-time video with Telenor 5G.
