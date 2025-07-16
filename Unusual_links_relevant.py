@@ -92,13 +92,19 @@ def check_description_wrapper(key_index, title, description, product):
     return "no"
 
 # === File processing ===
+
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-    m = re.match(r"(\d+)(?:_[a-z]_)?_(.+)\.txt$", file_name, re.IGNORECASE)
+
+    # Updated regex to match patterns like: 1(a)_robot_window_cleaner.txt
+    m = re.match(r"(\d+[a-z])_(.+)\.txt$", file_name, re.IGNORECASE)
+
     if not m:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
         return False
+
     product = m.group(2).replace("_", " ")
+
     try:
         title, description = parse_txt_file(full_path)
     except Exception as e:
@@ -107,6 +113,7 @@ def process_file(file_name):
 
     key_index = random.randint(0, len(API_KEYS) - 1)
     verdict = check_description_wrapper(key_index, title, description, product)
+
     if verdict == "yes":
         output_path = os.path.join(RELEVANT_DIR, file_name)
         with open(output_path, "w", encoding="utf-8") as f:
