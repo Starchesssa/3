@@ -26,14 +26,22 @@ os.makedirs(RATING_DIR, exist_ok=True)
 PROMPT = """On a scale from 1 to 10, rate this video based on:
 
 1. How much of the video’s total time is spent visually showcasing the product’s design, features, and usage to general viewers.
+
 2. How well the video presents the product in an attractive, engaging, and concise way that is easy for non-technical viewers to follow.
+
 3. Professional Quality: Rate how professionally the video is produced based on factors like visual quality, camera work, audio clarity, lighting, editing, background setup, and overall polish.
 
-Reward more a video with quality and professional product video...
-[... your existing prompt continues here ...]
+Reward more a video with quality and profesional product video, if video is more filmed profesionally reward it more.
+Penalize heavily for shaky footage, poor audio, unedited clips, or distracting backgrounds.
+Penalize heavily for videos that spend most of their time on technical tutorials, setup instructions, or coding.
+Penalise heavily if video is showing much faces in video ie even if there is a product shown ,reward showcase of product without faces,just the product,penalise faces even if they show the product but if they keep focusing on face and product penalise them ,if they showcase just the product most of time reward them.
+
 Output Format (Strict):
 Overall Score: [Score]/10
-"""
+
+No additional explanation, product name, or text. Only output in this exact structured format."""
+
+
 
 def normalize_response(text: str) -> str:
     return text.strip()
