@@ -5,13 +5,11 @@ from multiprocessing import Pool, TimeoutError as MP_Timeout
 from google import genai
 from google.genai import types
 
-# === Configuration ===
 RELEVANT_DIR = "Unuusual_memory/Relevant"
 LINKS_DIR = "Unuusual_memory/Links"
 RATING_DIR = "Unuusual_memory/RATING"
 TIMEOUT_PER_REQUEST = 60  # seconds
 
-# === Load Gemini API keys ===
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
@@ -26,7 +24,6 @@ if not API_KEYS:
 MODEL = "gemini-2.5-flash"
 os.makedirs(RATING_DIR, exist_ok=True)
 
-# === Prompt ===
 PROMPT = """On a scale from 1 to 10, rate this video based on:
 
 1. How much of the video’s total time is spent visually showcasing the product’s design, features, and usage to general viewers.
@@ -45,20 +42,22 @@ Overall Score: [Score]/10
 
 No additional explanation, product name, or text. Only output in this exact structured format."""
 
-# === Helpers ===
 def normalize_response(text: str) -> str:
     return text.strip()
 
 def letter_to_index(letter: str) -> int:
-    """Convert letter a,b,c,... to 1,2,3,..."""
     return ord(letter.lower()) - ord('a') + 1
 
 def rate_video_wrapper(args):
-    key_index, link = args
-    for attempt in range(len(API_KEYS)):
-        real_index = (key_index + attempt) % len(API_KEYS)
+    key_index, link, output_path = args
+    api_key = API_KEYS[key_index]
+
+    max_retries = 5
+    retry_delay = 5  # seconds between retries
+
+    for attempt in range(1, max_retries + 1):
         try:
-            client = genai.Client(api_key=API_KEYS[real_index])
+            client = genai.Client(api_key=api_key)
             contents = [
                 types.Content(
                     role="user",
@@ -71,22 +70,29 @@ def rate_video_wrapper(args):
             config = types.GenerateContentConfig(response_mime_type="text/plain")
             response = client.models.generate_content(model=MODEL, contents=contents, config=config)
             result = normalize_response(response.text)
-            print(f"✅ [{link}] => {result} (API#{real_index + 1})", flush=True)
-            return result
+            print(f"✅ [{link}] => {result} (API#{key_index + 1})", flush=True)
+            with open(output_path, "w") as f:
+                f.write(result + "\n")
+            print(f"💾 Saved rating to {output_path}", flush=True)
+            break  # success, exit retry loop
         except Exception as e:
-            print(f"🔁 Retry {attempt + 1}/{len(API_KEYS)} on {link} (API#{real_index + 1}) => Error: {e}", flush=True)
-            time.sleep(1)
+            print(f"❌ Attempt {attempt}/5: API#{key_index + 1} failed on {link} => {e}", flush=True)
+            if attempt == max_retries:
+                print(f"❌❌ Giving up after {max_retries} failed attempts for {link}", flush=True)
+            else:
+                time.sleep(retry_delay)  # wait before retrying
 
-    print(f"❌ [{link}] => All retries failed.", flush=True)
-    return "ERROR"
+    time.sleep(61)  # wait to avoid hitting API rate limits
 
-# === Main Script ===
 def main():
-    print("🚀 Starting Gemini video rating...\n", flush=True)
+    print("🚀 Starting parallel Gemini video rating...\n", flush=True)
+
     txt_files = sorted(
         [f for f in os.listdir(RELEVANT_DIR) if f.endswith(".txt") and f[0].isdigit()],
         key=lambda x: int(x.split("_")[0].split("(")[0])
     )
+
+    tasks = []
 
     for file_name in txt_files:
         try:
@@ -110,50 +116,32 @@ def main():
             ]
 
             if not matching_links_files:
-                print(f"⚠️ No links file found containing product '{product_part}' for {file_name}", flush=True)
+                print(f"⚠️ No links file found for {file_name}", flush=True)
                 continue
-            elif len(matching_links_files) > 1:
-                print(f"⚠️ Multiple links files found containing product '{product_part}' for {file_name}: {matching_links_files}", flush=True)
-                exact_match = [f for f in matching_links_files if f == f"{product_part}.txt"]
-                links_filename = exact_match[0] if exact_match else matching_links_files[0]
-            else:
-                links_filename = matching_links_files[0]
 
-            links_path = os.path.join(LINKS_DIR, links_filename)
-            with open(links_path, "r") as f:
+            links_filename = matching_links_files[0]
+            with open(os.path.join(LINKS_DIR, links_filename), "r") as f:
                 all_links = [line.strip() for line in f if line.strip()]
 
             link_index = letter_to_index(letter) - 1
             if link_index >= len(all_links):
-                print(f"⚠️ Link index {link_index + 1} out of range for {links_path}", flush=True)
+                print(f"⚠️ Link index {link_index + 1} out of range in {links_filename}", flush=True)
                 continue
 
             link_to_rate = all_links[link_index]
-            args_list = [(0, link_to_rate)]  # one at a time
+            output_filename = f"{num_str}({letter})_{product_part}.txt"
+            output_path = os.path.join(RATING_DIR, output_filename)
 
-            with Pool(processes=1) as pool:
-                multiple_results = [pool.apply_async(rate_video_wrapper, (args,)) for args in args_list]
-                for idx, res in enumerate(multiple_results):
-                    try:
-                        result = res.get(timeout=TIMEOUT_PER_REQUEST)
-                        output_file = f"{num_str}({letter})_{product_part}.txt"
-                        output_path = os.path.join(RATING_DIR, output_file)
-                        with open(output_path, "w") as out_f:
-                            out_f.write(result + "\n")
-                        print(f"💾 Saved rating to {output_path}", flush=True)
-                    except MP_Timeout:
-                        print(f"⏱️ Timeout on: {link_to_rate}", flush=True)
-                    except Exception as e:
-                        print(f"⚠️ Error processing {link_to_rate}: {e}", flush=True)
-
-                    # 💤 Delay after each rating to avoid rate limits
-                    print("⏳ Sleeping 61 seconds to avoid rate limits...", flush=True)
-                    time.sleep(61)
+            tasks.append((len(tasks) % len(API_KEYS), link_to_rate, output_path))
 
         except Exception as e:
-            print(f"⚠️ Error processing file {file_name}: {e}", flush=True)
+            print(f"⚠️ Error preparing task for {file_name}: {e}", flush=True)
 
-    print("\n🎉 Finished rating all videos!", flush=True)
+    # Run with 5 parallel processes
+    with Pool(processes=min(5, len(API_KEYS))) as pool:
+        pool.map(rate_video_wrapper, tasks)
+
+    print("\n🎉 All video ratings complete!", flush=True)
 
 if __name__ == "__main__":
     main()
