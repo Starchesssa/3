@@ -44,14 +44,31 @@ def index_to_letter(index):
     """Convert index (0–25) to letter (a–z)."""
     return chr(ord('a') + index)
 
+def extract_number_prefix(filename):
+    """Extract leading number from filename."""
+    match = re.match(r"^(\d+)_", filename)
+    return int(match.group(1)) if match else None
+
 # === MAIN SCRIPT ===
 def main():
-    txt_files = sorted([f for f in os.listdir(LINKS_DIR) if f.endswith(".txt")])
-    if not txt_files:
-        print("[✘] No .txt files found in Links directory.")
+    all_files = os.listdir(LINKS_DIR)
+    valid_txt_files = []
+
+    for file in all_files:
+        if not file.endswith(".txt"):
+            continue
+        number = extract_number_prefix(file)
+        if number and 1 <= number <= 33:
+            valid_txt_files.append((number, file))
+
+    # Sort based on number prefix (1 to 33)
+    valid_txt_files.sort(key=lambda x: x[0])
+
+    if not valid_txt_files:
+        print("[✘] No valid numbered .txt files found in range 1–33.")
         return
 
-    for file_index, txt_file in enumerate(txt_files[:33]):  # First 33 files only
+    for number, txt_file in valid_txt_files:
         file_path = os.path.join(LINKS_DIR, txt_file)
         print(f"[•] Processing: {txt_file}")
 
@@ -62,16 +79,11 @@ def main():
             print(f"[!] Failed to read {txt_file}: {e}")
             continue
 
-        group_match = re.match(r"(\d+)_([\w\d\-]+)\.txt$", txt_file)
-        if not group_match:
-            print(f"[!] Unexpected filename format: {txt_file}")
-            continue
+        file_title = re.sub(r"^\d+_", "", txt_file).replace(".txt", "")
 
-        group_number, file_title = group_match.groups()
-
-        for i, link in enumerate(links[:12]):  # First 12 links
+        for i, link in enumerate(links[:12]):  # First 12 links only
             letter = index_to_letter(i)
-            new_filename = f"{group_number}({letter})_{file_title}.txt"
+            new_filename = f"{number}({letter})_{file_title}.txt"
             output_path = os.path.join(OUTPUT_DIR, new_filename)
 
             video_id = extract_video_id(link)
