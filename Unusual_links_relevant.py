@@ -75,11 +75,11 @@ def check_description_wrapper(key_index, title, description, product):
 
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-    m = re.match(r"(\d+(?:[a-z])?)_(.+)\.txt$", file_name, re.IGNORECASE)
-    if not m:
+    match = re.match(r"(\d+(?:_[a-z]_)?)(?=_)(.+)\.txt$", file_name, re.IGNORECASE)
+    if not match:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
         return False
-    product = m.group(2).replace("_", " ")
+    product = match.group(2).replace("_", " ")
     try:
         title, description = parse_txt_file(full_path)
     except Exception as e:
@@ -110,12 +110,15 @@ def main():
     print("🚀 Starting Gemini relevance filter...\n", flush=True)
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+(?:[a-z])?_.+\.txt$", f, re.IGNORECASE)
+        if f.endswith(".txt") and re.match(r"\d+(?:_[a-z]_)?_.+\.txt$", f, re.IGNORECASE)
     ]
     def sort_key(f):
         m = re.match(r"(\d+)", f)
         return int(m.group(1)) if m else 9999
-    filtered_files = sorted([f for f in txt_files if int(re.match(r"(\d+)", f).group(1)) <= 33], key=sort_key)
+    filtered_files = sorted(
+        [f for f in txt_files if int(re.match(r"(\d+)", f).group(1)) <= 33],
+        key=sort_key
+    )
     print(f"🔎 Processing files 1–33 (total: {len(filtered_files)})\n", flush=True)
 
     manager = Manager()
