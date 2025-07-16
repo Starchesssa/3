@@ -3,7 +3,6 @@ import os
 import time
 import string
 import random
-import re
 import subprocess
 from multiprocessing import Process, Manager
 from threading import Lock
@@ -13,10 +12,8 @@ from google.genai import types
 # === Configuration ===
 DESCR_DIR = "Unuusual_memory/DESCR"
 RELEVANT_DIR = "Unuusual_memory/Relevant"
-TIMEOUT_PER_REQUEST = 45  # seconds per file (unused here)
 DELAY_BETWEEN_LAUNCHES = 61  # seconds between starting each process
 
-# === Load Gemini API keys ===
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
@@ -28,14 +25,12 @@ API_KEYS = [key for key in API_KEYS if key]
 if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found.")
 
-# === Per-key rate limiting ===
 key_last_call = {key: 0 for key in API_KEYS}
 key_locks = {key: Lock() for key in API_KEYS}
 
 MODEL = "gemini-2.5-flash"
 os.makedirs(RELEVANT_DIR, exist_ok=True)
 
-# === Helpers ===
 def normalize_response(text: str) -> str:
     return text.strip().lower().translate(str.maketrans('', '', string.punctuation))
 
@@ -55,13 +50,11 @@ def parse_txt_file(file_path):
     description = "\n".join(description_lines).strip()
     return title, description
 
-# === Core function with per-key rate limiting ===
 def check_description_wrapper(key_index, title, description, product):
     for attempt in range(len(API_KEYS)):
         real_index = (key_index + attempt) % len(API_KEYS)
         api_key = API_KEYS[real_index]
 
-        # Enforce 1 request per minute per key
         with key_locks[api_key]:
             now = time.time()
             wait_time = 60 - (now - key_last_call[api_key])
@@ -91,20 +84,9 @@ def check_description_wrapper(key_index, title, description, product):
     print(f"❌ [{title[:30]}...] => All retries failed.", flush=True)
     return "no"
 
-# === File processing ==
-
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-
-    # Correct regex to match patterns like: 1(a)_robot_window_cleaner.txt
-    # It captures: digits + optional (letter) + underscore + filename + .txt
-    m = re.match(r"(\d+\([a-z]\))_(.+)\.txt$", file_name, re.IGNORECASE)
-
-    if not m:
-        print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
-        return False
-
-    product = m.group(2).replace("_", " ")
+    product = file_name.rsplit(".", 1)[0].replace("_", " ")
 
     try:
         title, description = parse_txt_file(full_path)
@@ -125,35 +107,21 @@ def process_file(file_name):
         print("🚫 Not qualified", flush=True)
         return False
 
-# === Multiprocessing wrapper ===
 def delayed_process(file_name, delay, result_list):
     time.sleep(delay)
     result = process_file(file_name)
     result_list.append(result)
 
-# === Main entrypoint ===
 def main():
-    print("🚀 Starting Gemini relevance filter...\n", flush=True)
-    txt_files = [
-        f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+(?:_[a-z]_)?_.+\.txt$", f, re.IGNORECASE)
-    ]
+    print("🚀 Starting Gemini relevance filter (ALL .txt files)...\n", flush=True)
+    txt_files = [f for f in os.listdir(DESCR_DIR) if f.endswith(".txt")]
 
-    def sort_key(f):
-        m = re.match(r"(\d+)", f)
-        return int(m.group(1)) if m else 9999
-
-    filtered_files = sorted(
-        [f for f in txt_files if int(re.match(r"(\d+)", f).group(1)) <= 33],
-        key=sort_key
-    )
-
-    print(f"🔎 Processing files 1–33 (total: {len(filtered_files)})\n", flush=True)
+    print(f"🔎 Found {len(txt_files)} .txt files.\n", flush=True)
     manager = Manager()
     results = manager.list()
     processes = []
 
-    for i, file_name in enumerate(filtered_files):
+    for i, file_name in enumerate(txt_files):
         delay = i * DELAY_BETWEEN_LAUNCHES
         p = Process(target=delayed_process, args=(file_name, delay, results))
         p.start()
