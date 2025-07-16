@@ -95,7 +95,7 @@ def check_description_wrapper(key_index, title, description, product):
 
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-    m = re.match(r"(\d+(?:[a-z])?)_(.+)\.txt$", file_name, re.IGNORECASE)
+    m = re.match(r"(\d+(?:_[a-z]_)?)(.+)\.txt$", file_name, re.IGNORECASE)
     if not m:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
         return False
@@ -130,7 +130,7 @@ def main():
     print("🚀 Starting Gemini relevance filter...\n", flush=True)
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+(?:[a-z])?_.+\.txt$", f, re.IGNORECASE)
+        if f.endswith(".txt") and re.match(r"\d+(?:_[a-z]_)?_.+\.txt$", f, re.IGNORECASE)
     ]
     def sort_key(f):
         m = re.match(r"(\d+)", f)
