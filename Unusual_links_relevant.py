@@ -75,7 +75,7 @@ def check_description_wrapper(key_index, title, description, product):
 
 def process_file(file_name):
     full_path = os.path.join(DESCR_DIR, file_name)
-    match = re.match(r"(\d+(?:_[a-z]_)?)(?=_)(.+)\.txt$", file_name, re.IGNORECASE)
+    match = re.match(r"(\d+(?:\([a-z]\))?)_(.+)\.txt$", file_name, re.IGNORECASE)
     if not match:
         print(f"❌ Skipping invalid file name format: {file_name}", flush=True)
         return False
@@ -110,7 +110,7 @@ def main():
     print("🚀 Starting Gemini relevance filter...\n", flush=True)
     txt_files = [
         f for f in os.listdir(DESCR_DIR)
-        if f.endswith(".txt") and re.match(r"\d+(?:_[a-z]_)?_.+\.txt$", f, re.IGNORECASE)
+        if f.endswith(".txt") and re.match(r"\d+(?:\([a-z]\))?_.+\.txt$", f, re.IGNORECASE)
     ]
     def sort_key(f):
         m = re.match(r"(\d+)", f)
@@ -127,7 +127,7 @@ def main():
     for batch_start in range(0, len(filtered_files), BATCH_SIZE):
         batch = filtered_files[batch_start:batch_start + BATCH_SIZE]
         processes = []
-        for i, file_name in enumerate(batch):
+        for i, file_name):
             delay = i * DELAY_BETWEEN_LAUNCHES
             p = Process(target=delayed_process, args=(file_name, delay, results))
             p.start()
