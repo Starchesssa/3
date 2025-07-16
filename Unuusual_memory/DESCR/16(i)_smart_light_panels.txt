@@ -1,0 +1,4 @@
+Title: How to integrate LED light on a strip panel
+
+Description:
+Inserting a LED light strip between two VicStrip panels is easy. Use a 6mm LED strip to fit the grooves' size of Vicoustic's slat panel. More: https://vicoustic.com/product/vicstrip

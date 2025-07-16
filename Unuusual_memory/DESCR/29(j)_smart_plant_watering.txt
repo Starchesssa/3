@@ -1,0 +1,9 @@
+Title: W.I.P. Automated Plant Watering
+
+Description:
+Go to Robotix.com.au to download schematics, programs and handouts for FREE!
+
+-~-~~-~~~-~~-~-
+Latest and Best Arduino Playlist in Collaboratio with DFRobot:
+https://www.youtube.com/playlist?list=PL_92WMXSLe_86NTWf0nchm-EmQIwccEye
+-~-~~-~~~-~~-~-
