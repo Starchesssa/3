@@ -1,0 +1,15 @@
+Title: SMART TOILET
+
+Description:
+Smart Toilet with Voice Announcement contents:
+Arduino Nano
+Transistor Switching Circuit
+DC motor Fan
+DC water Pump
+Room Light
+Ultra Voilet Light
+MP3 Audio Player
+Speaker
+Servo Motor
+IR Object Detector Sensor
+5 Volt Adaptor
