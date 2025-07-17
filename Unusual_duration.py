@@ -1,131 +1,116 @@
 
 #!/usr/bin/env python3
+"""
+Unusual_duration.py
+
+Match each file in Unuusual_memory/Relevant/ like:
+  1(a)_robot_window_cleaner.txt
+  1(b)_robot_window_cleaner.txt
+with its corresponding Links file:
+  1_robot_window_cleaner.txt
+
+Then:
+- map letter (a=0, b=1, c=2, ...)
+- read that link from the links file
+- call YouTube Data API v3 to get duration (contentDetails.duration)
+- write out Unuusual_memory/DURATION/<same relevant filename>.txt
+"""
+
 import os
 import re
 import sys
 import requests
 
-# --- CONFIG ---
 BASE_DIR = "Unuusual_memory"
 RELEVANT_DIR = os.path.join(BASE_DIR, "Relevant")
 LINKS_DIR = os.path.join(BASE_DIR, "Links")
-DURATION_DIR = os.path.join(BASE_DIR, "DURATION")
+OUT_DIR = os.path.join(BASE_DIR, "DURATION")
 
 API_KEY = os.environ.get("YOUTUBE_API")
 if not API_KEY:
-    print("❌ ERROR: YOUTUBE_API environment variable not set.", file=sys.stderr)
+    print("❌ ERROR: env var YOUTUBE_API not set.", file=sys.stderr)
     sys.exit(1)
 
-# Create output dir
-os.makedirs(DURATION_DIR, exist_ok=True)
+os.makedirs(OUT_DIR, exist_ok=True)
 
-# --- HELPERS ---
 
-def debug(msg):
-    print(msg, flush=True)
+# ---------- Helpers ----------
 
-def extract_num_and_slot(filename: str):
+_slug_cleanup_re = re.compile(r'[^a-z0-9]+')
+
+def normalize_slug(s: str) -> str:
+    s = s.lower()
+    s = _slug_cleanup_re.sub("_", s)
+    s = re.sub(r'_+', '_', s).strip('_')
+    return s
+
+
+# Relevant filename pattern: NUMBER(PART)_SLUG.txt
+RELEVANT_RE = re.compile(r'^(\d+)\s*\s*([A-Za-z0-9])\s*\s*_(.+?)\.txt$', re.IGNORECASE)
+
+# Links filename pattern: NUMBER_SLUG.txt
+LINKS_RE = re.compile(r'^(\d+)\s*[_\s]\s*(.+?)\.txt$', re.IGNORECASE)
+
+
+def parse_relevant_name(name: str):
     """
-    Parse things like:
-      26(a)_ _smart_projection_clock. txt
-      4(C)_Smart_toilet_bidet.txt
-      28(d)_smart_beverage_warmer.txt
-      4(1)_smart__toilet_bidet.txt   <-- sloppy, we'll treat (1) as slot 0
-
-    Returns (number:int, slot_index:int) or (None, None) if no match.
+    Return (number:int, slot_index:int, slug_norm:str) or None if no match.
+    slot_index: a=0,b=1,...; digits treated 1-based -> index-1
     """
-    # Strip extension spaces
-    name = filename.strip()
-
-    # Quick reject non-txt
-    if not name.lower().endswith(".txt"):
-        return (None, None)
-
-    # Extract leading digits and the (...) token
-    # Allow spaces:  26 ( a ) _stuff
-    m = re.search(r'^\s*(\d+)\s*\s*([^)]+)\s*', name)
+    m = RELEVANT_RE.match(name.strip())
     if not m:
-        return (None, None)
+        return None
+    num = int(m.group(1))
+    raw_slot = m.group(2)
+    raw_slug = m.group(3)
 
-    num_str = m.group(1)
-    slot_raw = m.group(2).strip()
-
-    # Normalize slot: take first alnum char
-    slot_char = None
-    for ch in slot_raw:
-        if ch.isalnum():
-            slot_char = ch
-            break
-
-    if slot_char is None:
-        return (None, None)
-
-    # Convert to index
-    if slot_char.isdigit():
-        # interpret 1-based digit
-        slot_index = int(slot_char) - 1
+    if raw_slot.isdigit():
+        slot_index = int(raw_slot) - 1
     else:
-        # letter
-        slot_index = ord(slot_char.lower()) - ord('a')
+        slot_index = ord(raw_slot.lower()) - ord('a')
 
     if slot_index < 0:
-        slot_index = 0  # fail-safe
+        slot_index = 0  # safety
 
-    return (int(num_str), slot_index)
+    slug_norm = normalize_slug(raw_slug)
+    return num, slot_index, slug_norm
 
 
-def find_links_file(number: int, link_files):
+def parse_links_name(name: str):
     """
-    Look for a Links file starting with '<number>_' (ignores case/spacing).
-    Returns filename or None.
+    Return (number:int, slug_norm:str) or None if no match.
+    Accepts 1_robot_window_cleaner.txt or sloppy 1 robot window cleaner.txt
     """
-    prefix = f"{number}_"
-    prefix_alt = f"{number} "  # in case of space instead of underscore
-    numstr = str(number)
-
-    candidates = []
-    for lf in link_files:
-        lf_clean = lf.strip().lower()
-        if lf_clean.startswith(prefix.lower()) or lf_clean.startswith(prefix_alt.lower()):
-            candidates.append(lf)
-        else:
-            # as fallback: check that it STARTS with number even if no underscore
-            if lf_clean.startswith(numstr):
-                candidates.append(lf)
-
-    if not candidates:
+    m = LINKS_RE.match(name.strip())
+    if not m:
         return None
+    num = int(m.group(1))
+    raw_slug = m.group(2)
+    slug_norm = normalize_slug(raw_slug)
+    return num, slug_norm
 
-    # If multiple matches, pick the shortest name (most likely correct)
-    return sorted(candidates, key=len)[0]
 
-
-def load_links_from_file(path):
+def load_links(path: str):
+    """
+    Load non-empty, non-comment lines from a links file.
+    """
     links = []
     with open(path, "r", encoding="utf-8", errors="ignore") as f:
         for line in f:
             line = line.strip()
-            if not line:
-                continue
-            if line.startswith("#"):
+            if not line or line.startswith("#"):
                 continue
             links.append(line)
     return links
 
 
-def get_video_id_from_url(url):
-    """
-    Support standard watch URLs and share links.
-    """
-    # watch?v=VIDEOID
-    m = re.search(r'(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})', url)
+def get_video_id(url: str):
+    # support watch?v=, share links, short links
+    m = re.search(r'(?:v=|youtu\.be/)([A-Za-z0-9_-]{11})', url)
     return m.group(1) if m else None
 
 
-def get_duration_iso(video_id):
-    """
-    Call YouTube API for 1 video; returns ISO8601 duration or None.
-    """
+def fetch_duration_iso(video_id: str):
     api_url = (
         "https://www.googleapis.com/youtube/v3/videos"
         f"?part=contentDetails&id={video_id}&key={API_KEY}"
@@ -135,97 +120,115 @@ def get_duration_iso(video_id):
         r.raise_for_status()
         data = r.json()
     except Exception as e:
-        debug(f"❌ API error for {video_id}: {e}")
+        print(f"❌ API error for {video_id}: {e}", file=sys.stderr)
         return None
 
     items = data.get("items", [])
     if not items:
-        debug(f"❌ No items returned for {video_id}.")
+        print(f"❌ No API items for {video_id}", file=sys.stderr)
         return None
 
     return items[0]["contentDetails"].get("duration")
 
 
-def iso_to_seconds(duration_iso):
+def iso_to_seconds(duration_iso: str):
     """
-    Convert ISO8601 to seconds without extra deps.
-    Example inputs: PT3M45S, PT1H2M10S, PT45S
+    Parse a subset of ISO 8601 durations used by YouTube: PT#H#M#S
     """
-    # Regex parse
-    # PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?
     m = re.match(r'^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$', duration_iso)
     if not m:
         return None
     h = int(m.group(1) or 0)
-    m_ = int(m.group(2) or 0)
+    mi = int(m.group(2) or 0)
     s = int(m.group(3) or 0)
-    return h * 3600 + m_ * 60 + s
+    return h * 3600 + mi * 60 + s
 
 
-def process_file(relevant_filename, link_files):
-    number, slot_index = extract_num_and_slot(relevant_filename)
-    if number is None:
-        debug(f"Skipping unmatched file: {relevant_filename}")
-        return
+# ---------- Build lookup for Links ----------
 
-    link_file = find_links_file(number, link_files)
-    if not link_file:
-        debug(f"❌ No link file found for number {number} ({relevant_filename})")
-        return
-
-    links_path = os.path.join(LINKS_DIR, link_file)
-    links = load_links_from_file(links_path)
-
-    if slot_index >= len(links):
-        debug(f"❌ Slot {slot_index} out of range for {link_file} (has {len(links)} links) [{relevant_filename}]")
-        return
-
-    url = links[slot_index]
-    vid = get_video_id_from_url(url)
-    if not vid:
-        debug(f"❌ Could not parse video ID from URL: {url} [{relevant_filename}]")
-        return
-
-    dur_iso = get_duration_iso(vid)
-    if not dur_iso:
-        debug(f"❌ Could not retrieve duration for {vid} [{relevant_filename}]")
-        return
-
-    dur_sec = iso_to_seconds(dur_iso)
-
-    # Write result
-    out_path = os.path.join(DURATION_DIR, relevant_filename)
-    with open(out_path, "w", encoding="utf-8") as out_f:
-        out_f.write(f"{url}\n")
-        out_f.write(f"Duration_ISO: {dur_iso}\n")
-        if dur_sec is not None:
-            out_f.write(f"Duration_seconds: {dur_sec}\n")
-
-    debug(f"✅ {relevant_filename} → {dur_sec if dur_sec is not None else dur_iso}")
+def build_links_lookup():
+    """
+    Scan LINKS_DIR and map (num, slug_norm) -> fullpath
+    """
+    lookup = {}
+    for fname in os.listdir(LINKS_DIR):
+        if not fname.lower().endswith(".txt"):
+            continue
+        parsed = parse_links_name(fname)
+        if not parsed:
+            continue
+        num, slug_norm = parsed
+        path = os.path.join(LINKS_DIR, fname)
+        lookup[(num, slug_norm)] = path
+    return lookup
 
 
-def main():
-    if not os.path.isdir(RELEVANT_DIR):
-        print(f"❌ Relevant dir not found: {RELEVANT_DIR}", file=sys.stderr)
-        sys.exit(1)
-    if not os.path.isdir(LINKS_DIR):
-        print(f"❌ Links dir not found: {LINKS_DIR}", file=sys.stderr)
-        sys.exit(1)
+# ---------- Main processing ----------
 
-    link_files = [f for f in os.listdir(LINKS_DIR) if f.lower().endswith(".txt")]
+def process_all():
+    links_lookup = build_links_lookup()
+
     relevant_files = [f for f in os.listdir(RELEVANT_DIR) if f.lower().endswith(".txt")]
-
-    if not relevant_files:
-        debug("⚠️ No relevant TXT files found.")
-    if not link_files:
-        debug("⚠️ No link TXT files found.")
-
-    # Sort numeric by extracted number so logs are stable
     relevant_files.sort()
 
-    for rf in relevant_files:
-        process_file(rf, link_files)
+    processed = 0
+    skipped = 0
+
+    for fname in relevant_files:
+        parsed = parse_relevant_name(fname)
+        if not parsed:
+            print(f"⚠️ Skip unmatched Relevant file name pattern: {fname}")
+            skipped += 1
+            continue
+
+        num, slot_index, slug_norm = parsed
+        key = (num, slug_norm)
+
+        links_path = links_lookup.get(key)
+        if not links_path:
+            print(f"❌ No Links file match for {fname} -> need {num}_{slug_norm}.txt")
+            skipped += 1
+            continue
+
+        links = load_links(links_path)
+        if slot_index >= len(links):
+            print(f"❌ Slot {slot_index} out of range ({len(links)} links) for {fname}")
+            skipped += 1
+            continue
+
+        link_url = links[slot_index]
+        vid = get_video_id(link_url)
+        if not vid:
+            print(f"❌ Bad link in {links_path} slot {slot_index}: {link_url}")
+            skipped += 1
+            continue
+
+        dur_iso = fetch_duration_iso(vid)
+        if not dur_iso:
+            print(f"❌ No duration for {vid} ({fname})")
+            skipped += 1
+            continue
+
+        dur_sec = iso_to_seconds(dur_iso)
+
+        out_path = os.path.join(OUT_DIR, fname)
+        with open(out_path, "w", encoding="utf-8") as out_f:
+            out_f.write(f"{link_url}\n")
+            out_f.write(f"Duration_ISO: {dur_iso}\n")
+            if dur_sec is not None:
+                out_f.write(f"Duration_seconds: {dur_sec}\n")
+
+        print(f"✅ {fname}: {dur_iso} ({dur_sec}s)")
+        processed += 1
+
+    print(f"\nDone. Processed: {processed}, Skipped: {skipped}")
 
 
 if __name__ == "__main__":
-    main()
+    if not os.path.isdir(RELEVANT_DIR):
+        print(f"❌ Missing directory: {RELEVANT_DIR}", file=sys.stderr)
+        sys.exit(1)
+    if not os.path.isdir(LINKS_DIR):
+        print(f"❌ Missing directory: {LINKS_DIR}", file=sys.stderr)
+        sys.exit(1)
+    process_all()
