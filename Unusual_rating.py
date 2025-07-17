@@ -21,7 +21,7 @@ API_KEYS = [key for key in API_KEYS if key]
 if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found.")
 
-MODEL = "gemini-2.5-Pro"
+MODEL = "gemini-2.5-pro"
 os.makedirs(RATING_DIR, exist_ok=True)
 
 PROMPT = """On a scale from 1 to 10, rate this video based on:
