@@ -20,10 +20,22 @@ jobs:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install --upgrade pip
+          # Add any other dependencies if needed
+          # e.g., pip install regex
+
       - name: 🚀 Run Python Script (Qualify Gadgets)
         run: |
           export PYTHONUNBUFFERED=1
-          python -u "Unusual_(6)qualify.py"
+          echo "Starting Unusual_qualify.py..."
+          python -u "Unusual_qualify.py"
 
       - name: ✅ Commit & Push Qualified Gadgets
         run: |
@@ -31,7 +43,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          git add Unuusual_memory/QUALIFY/qualified.txt
+          git add "Unuusual_memory/QUALIFY/qualified.txt"
 
           if git diff --cached --quiet; then
             echo "🟡 No changes to commit."
