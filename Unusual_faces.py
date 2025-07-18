@@ -3,7 +3,7 @@
 """
 face_timeline.py
 ----------------
-Scan each *.mp4 in VIDEO_DIR (default: Vid/), detect faces per second (0..N),
+Scan each *.mp4 in VIDEO_DIR (default: Final_Videos/), detect faces per second (0..N),
 cap at MAX_ANALYZE_SECONDS (default 180), and write timeline text files to
 TIMELINE_DIR (default: Timeline/).
 
