@@ -1,0 +1,48 @@
+
+name: Run Face Detection with Unusual_faces.py
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-face-detection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download artifacts from Unusual_7download.yml
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: Unusual_7download.yml
+          workflow_conclusion: success
+          branch: main
+          name: final-videos           # Change this if your artifact name differs
+          path: Final_Videos/
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install opencv-python mediapipe
+
+      - name: ▶️ Run Unusual_faces.py script
+        run: |
+          mkdir -p Timeline
+          python Unusual_faces.py
+          # Ensure your script saves all outputs (video & JSON) into Timeline directory
+
+      - name: 📤 Upload Timeline folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: timeline-results
+          path: Timeline/
