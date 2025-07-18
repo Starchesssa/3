@@ -29,9 +29,10 @@ import cv2
 import mediapipe as mp
 
 # ---------------- ENV ----------------
-def _truthy(x): return str(x).strip().lower() in ("1","true","yes","on")
+def _truthy(x): 
+    return str(x).strip().lower() in ("1", "true", "yes", "on")
 
-VIDEO_DIR       = os.environ.get("VIDEO_DIR", "Vid")
+VIDEO_DIR       = os.environ.get("VIDEO_DIR", "Final_Videos")
 TIMELINE_DIR    = os.environ.get("TIMELINE_DIR", "Timeline")
 MAX_ANALYZE_SEC = int(os.environ.get("MAX_ANALYZE_SECONDS", "180"))
 MIN_CONF        = float(os.environ.get("MIN_CONFIDENCE", "0.5"))
@@ -57,13 +58,11 @@ def detect_faces_bgr(image_bgr, detector):
     """
     # MediaPipe expects RGB
     image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
-    # Improve performance: mark as not writeable
     image_rgb.flags.writeable = False
     results = detector.process(image_rgb)
     count = 0
     if results.detections:
         for det in results.detections:
-            # det.score list; index 0 usually detection confidence
             if det.score and det.score[0] >= MIN_CONF:
                 count += 1
     return count
@@ -83,32 +82,21 @@ def analyze_video(video_path, timeline_path):
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     if not fps or fps <= 0:
-        # fallback guess
         fps = 30.0
         vlog(f"[warn] invalid FPS -> fallback to {fps}")
 
     frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    if not frame_count or frame_count <= 0:
-        frame_count = None
+    duration_sec_est = frame_count / fps if frame_count else None
 
-    duration_sec_est = None
-    if frame_count:
-        duration_sec_est = frame_count / fps
-
-    # Stop time: min(duration, MAX_ANALYZE_SEC) if we know duration.
-    # If unknown, just analyze up to MAX_ANALYZE_SEC worth of frames.
     if duration_sec_est is not None:
         max_seconds = min(duration_sec_est, MAX_ANALYZE_SEC)
     else:
         max_seconds = MAX_ANALYZE_SEC
 
     max_seconds_int = int(math.floor(max_seconds))
-
     vlog(f"  fps={fps:.3f} frames={frame_count} dur_est={duration_sec_est} analyze<= {max_seconds_int}s")
 
-    # We'll examine the *first frame in each whole second interval*.
-    # Strategy: Read sequentially; when floor(current_time) changes, run detection.
-    sec_results = {}  # second_index -> bool face
+    sec_results = {}
 
     with mp_face.FaceDetection(model_selection=0, min_detection_confidence=MIN_CONF) as detector:
         current_sec_index = -1
@@ -120,22 +108,17 @@ def analyze_video(video_path, timeline_path):
                 break
             grabbed_any = True
 
-            pos_msec = cap.get(cv2.CAP_PROP_POS_MSEC)  # ms into video
+            pos_msec = cap.get(cv2.CAP_PROP_POS_MSEC)
             if pos_msec is None:
-                # fallback by frame number
                 pos_frames = cap.get(cv2.CAP_PROP_POS_FRAMES)
                 pos_msec = (pos_frames / fps) * 1000.0
 
             cur_sec = int(pos_msec / 1000.0)
-
-            # stop when beyond analysis limit
             if cur_sec > max_seconds_int:
                 break
 
-            # process only when new second
             if cur_sec != current_sec_index:
                 current_sec_index = cur_sec
-                # detect faces
                 n_faces = detect_faces_bgr(frame, detector)
                 sec_results[cur_sec] = (n_faces > 0)
 
@@ -145,17 +128,14 @@ def analyze_video(video_path, timeline_path):
         err(f"[!] no frames read: {video_path}")
         return False
 
-    # Guarantee all seconds 0..max_seconds_int have entries; fill missing as no_face
     timeline = []
     for s in range(0, max_seconds_int + 1):
         has_face = sec_results.get(s, False)
         timeline.append((s, has_face))
 
-    # Write file
     try:
         with open(timeline_path, "w", encoding="utf-8") as f:
             f.write(f"total_seconds_analyzed: {len(timeline)}\n")
-            # show actual video est if known
             if duration_sec_est is not None:
                 f.write(f"video_duration_est: {int(duration_sec_est)}\n")
             f.write(f"seconds_truncated_to: {max_seconds_int}\n")
