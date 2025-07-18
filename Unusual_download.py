@@ -126,7 +126,7 @@ def parse_qualify_line(line: str):
 # Accept: "3(e)_levitating_smart_lamp.txt", "3(e) levitating smart lamp .txt", etc.
 # We only NEED the group number + letter; we ignore slug for matching.
 # ------------------------------------------------------------------
-WINNER_TOL_RE = re.compile(r'^\s*(\d+)\s*\s*([a-z0-9])\s*', re.IGNORECASE)
+WINNER_TOL_RE = re.compile(r'^\s*(\d+)\s*(\s*([a-z0-9])\s*)', re.IGNORECASE)
 
 def parse_winner_filename(fname: str):
     m = WINNER_TOL_RE.match(fname)
