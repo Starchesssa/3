@@ -1,273 +1,145 @@
 
 #!/usr/bin/env python3
+"""
+Unusual_faces.py
+Recursively scan a directory for .mp4 files, extract segments where the "person" confidence is below a threshold,
+and concatenate those segments into a single output video using ffmpeg.
+"""
+
 import os
 import sys
-import cv2
-import math
-import uuid
-import tempfile
 import subprocess
-import mediapipe as mp
+from pathlib import Path
+import json
+import tempfile
+import shutil
+from typing import List, Tuple
 
-# ------------ CONFIG ------------
-VIDEO_DIR = os.environ.get("VIDEO_DIR", "Final_Videos")
-OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "Final_Videos_Clean")
-MAX_ANALYZE_SEC = int(os.environ.get("MAX_ANALYZE_SECONDS", "180"))  # cap analysis (set big number to ignore)
-MIN_CONF = float(os.environ.get("MIN_CONFIDENCE", "0.5"))
-VERBOSE = True  # simple always-on logging; could also read an env
+# threshold for detection confidence
+THRESHOLD = 0.5
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-mp_face = mp.solutions.face_detection
-
-
-# ------------ LOG HELPERS ------------
-def vlog(msg: str) -> None:
-    if VERBOSE:
-        print(msg, flush=True)
-
-
-def warn(msg: str) -> None:
-    print(f"[WARN] {msg}", flush=True)
-
-
-def err(msg: str) -> None:
-    print(f"[ERROR] {msg}", file=sys.stderr, flush=True)
-
-
-# ------------ FACE DETECTION ------------
-def detect_faces(frame_bgr, detector) -> bool:
-    """Return True if ≥1 face at or above MIN_CONF."""
-    rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
-    rgb.flags.writeable = False
-    results = detector.process(rgb)
-    if results.detections:
-        for det in results.detections:
-            if det.score and det.score[0] >= MIN_CONF:
-                return True
-    return False
-
-
-# ------------ ANALYZE VIDEO (1 sample per second) ------------
-def build_face_timeline(video_path: str):
+def extract_segments_from_metadata(meta_path: str, threshold: float) -> List[Tuple[float, float]]:
     """
-    Sample the *first frame encountered in each whole second* (0,1,2,...)
-    until MAX_ANALYZE_SEC or end of video. Returns:
-
-        timeline: list of (sec_int, has_face_bool)
-        fps: float
-        duration_est: float (seconds, best guess)
-        analyze_limit_int: int seconds actually analyzed
+    Given a metadata JSON file with object detection results, return segments where person confidence < threshold.
+    Each segment is represented as (start_time, end_time) in seconds.
     """
-    cap = cv2.VideoCapture(video_path)
-    if not cap.isOpened():
-        err(f"Cannot open {video_path}")
-        return [], 0.0, 0.0, 0
+    segments = []
+    try:
+        with open(meta_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Failed to read metadata {meta_path}: {e}")
+        return segments
 
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    if not fps or fps <= 0:
-        fps = 30.0
-        warn(f"Invalid FPS -> fallback {fps}")
+    # Assuming structure: data["frames"] = list of frames with "time" and "objects"
+    current_segment_start = None
+    previous_time = None
 
-    frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-    duration_est = frame_count / fps if frame_count and frame_count > 0 else None
-
-    # limit analysis
-    if duration_est is not None:
-        analyze_limit = min(duration_est, MAX_ANALYZE_SEC)
-    else:
-        analyze_limit = float(MAX_ANALYZE_SEC)
-    analyze_limit_int = int(math.floor(analyze_limit))
-
-    vlog(f"  fps={fps:.3f} frames={frame_count} est_dur={duration_est} analyze≤{analyze_limit_int}s")
-
-    timeline = []
-    current_sec = -1
-
-    with mp_face.FaceDetection(model_selection=0, min_detection_confidence=MIN_CONF) as detector:
-        while True:
-            ok, frame = cap.read()
-            if not ok:
+    for frame in data.get("frames", []):
+        time_sec = frame.get("time", 0)
+        objects = frame.get("objects", [])
+        # find person object confidence
+        person_conf = 1.0
+        for obj in objects:
+            if obj.get("name") == "person":
+                person_conf = obj.get("confidence", 1.0)
                 break
-
-            # Use position in ms; fallback frame math if needed
-            pos_msec = cap.get(cv2.CAP_PROP_POS_MSEC)
-            if not pos_msec or pos_msec < 0:
-                pos_frames = cap.get(cv2.CAP_PROP_POS_FRAMES)  # 1-based after read
-                pos_msec = ((pos_frames - 1) / fps) * 1000.0
-
-            sec = int(pos_msec / 1000.0)
-
-            if sec > analyze_limit_int:
-                break
-
-            if sec != current_sec:
-                current_sec = sec
-                has_face = detect_faces(frame, detector)
-                timeline.append((sec, has_face))
-
-    cap.release()
-    return timeline, fps, (duration_est if duration_est is not None else analyze_limit), analyze_limit_int
-
-
-# ------------ TIMELINE → NO-FACE RANGES ------------
-def extract_no_face_ranges(timeline, analyze_limit_int):
-    """
-    timeline = list of (sec_int, has_face_bool)
-    Return merged [(start_sec, end_sec)] *half-open* ranges (end exclusive).
-    """
-    ranges = []
-    start = None
-
-    # walk timeline in order
-    for s, has_face in timeline:
-        if not has_face:
-            if start is None:
-                start = s
+        if person_conf < threshold:
+            if current_segment_start is None:
+                current_segment_start = time_sec
         else:
-            if start is not None:
-                ranges.append((start, s))  # end at current second where face found
-                start = None
+            if current_segment_start is not None:
+                # close segment
+                if previous_time is not None:
+                    segments.append((current_segment_start, previous_time))
+                current_segment_start = None
+        previous_time = time_sec
 
-    if start is not None:
-        ranges.append((start, analyze_limit_int))
+    if current_segment_start is not None and previous_time is not None:
+        segments.append((current_segment_start, previous_time))
 
-    # Filter out zero or negative length
-    ranges = [(a, b) for (a, b) in ranges if b > a]
-    return ranges
+    return segments
 
 
-# ------------ CUT RANGES USING TEMP FILES ------------
-def ffmpeg_trim_segments(input_path, ranges, output_path):
+def ffmpeg_trim_segments(input_video: str, segments: List[Tuple[float, float]], output_path: str):
     """
-    Trim each no-face range to a separate temp MP4 (stream copy),
-    then concat them into output_path. More robust than inpoint/outpoint.
+    Extract given segments from input_video and concatenate them into output_path using ffmpeg.
     """
-    if not ranges:
-        warn("No ranges to keep; skipping ffmpeg.")
-        return False
-
-    temp_dir = tempfile.mkdtemp(prefix="noface_")
-    part_paths = []
-
-    # create each part
-    for idx, (start, end) in enumerate(ranges):
-        part = os.path.join(temp_dir, f"part_{idx:04d}.mp4")
-        # Use accurate seek: put -ss *before* -i for speed but may clip; to be safe use after -i
-        # We'll use after -i for accuracy because segments may start mid-GOP.
-        cmd = [
-            "ffmpeg", "-hide_banner", "-loglevel", "error",
-            "-y",
-            "-i", input_path,
-            "-ss", f"{start:.3f}",
-            "-to", f"{end:.3f}",
-            "-c", "copy",
-            part,
-        ]
-        vlog(f"  ffmpeg cut seg#{idx} {start:.3f}-{end:.3f}")
-        r = subprocess.run(cmd)
-        if r.returncode != 0 or (not os.path.exists(part)):
-            warn(f"    seg#{idx} cut failed; skipping.")
-            continue
-        part_paths.append(part)
-
-    if not part_paths:
-        err("All segment cuts failed; abort concatenation.")
-        return False
-
-    # build concat manifest
-    manifest = os.path.join(temp_dir, "concat_list.txt")
-    with open(manifest, "w", encoding="utf-8") as mf:
-        for p in part_paths:
-            # escape single quotes for ffmpeg concat
-            mf.write(f"file '{p.replace(\"'\", \"'\\\\''\")}'\n")
-
-    cmd_concat = [
-        "ffmpeg", "-hide_banner", "-loglevel", "error",
-        "-y",
-        "-f", "concat", "-safe", "0",
-        "-i", manifest,
-        "-c", "copy",
-        output_path,
-    ]
-    vlog(f"  ffmpeg concat -> {output_path}")
-    r = subprocess.run(cmd_concat)
-    if r.returncode != 0:
-        err("Concat failed.")
-        return False
-
-    return True
-
-
-# ------------ REPORT WRITER ------------
-def write_report(report_path, duration_full, analyze_limit_int, kept_ranges):
-    kept_duration = sum(end - start for start, end in kept_ranges)
-    removed = analyze_limit_int - kept_duration
-    with open(report_path, "w", encoding="utf-8") as f:
-        f.write(f"Original Duration (est): {int(duration_full)} sec\n")
-        f.write(f"Analyzed Up To: {analyze_limit_int} sec\n")
-        f.write(f"Kept (no-face): {kept_duration} sec\n")
-        f.write(f"Removed (face): {removed} sec\n")
-        f.write("--- ranges kept ---\n")
-        for s, e in kept_ranges:
-            f.write(f"{s}-{e} sec\n")
-
-
-# ------------ PER-VIDEO DRIVER ------------
-def process_video(video_path):
-    base = os.path.splitext(os.path.basename(video_path))[0]
-    out_video = os.path.join(OUTPUT_DIR, base + "_clean.mp4")
-    out_report = os.path.join(OUTPUT_DIR, base + "_report.txt")
-
-    vlog(f"\n=== Processing {video_path} ===")
-    timeline, fps, duration_est, analyze_limit_int = build_face_timeline(video_path)
-
-    if not timeline:
-        err("No timeline (video open or read error). Skipping.")
-        return False
-
-    ranges = extract_no_face_ranges(timeline, analyze_limit_int)
-    if not ranges:
-        warn("All analyzed seconds contain faces; nothing to keep.")
-        write_report(out_report, duration_est, analyze_limit_int, [])
-        return False
-
-    ok = ffmpeg_trim_segments(video_path, ranges, out_video)
-    write_report(out_report, duration_est, analyze_limit_int, ranges)
-
-    if ok:
-        vlog(f"✅ Saved cleaned video: {out_video}")
-    else:
-        err(f"❌ Failed to produce cleaned video for {video_path}")
-    return ok
-
-
-# ------------ MAIN ------------
-def main():
-    if not os.path.isdir(VIDEO_DIR):
-        err(f"VIDEO_DIR not found: {VIDEO_DIR}")
-        sys.exit(1)
-
-    videos = [
-        f for f in os.listdir(VIDEO_DIR)
-        if f.lower().endswith((".mp4", ".mov", ".mkv", ".m4v", ".webm"))
-    ]
-    if not videos:
-        err("No videos found.")
+    if not segments:
+        print("No segments to process.")
         return
 
-    ok_total = fail_total = 0
-    for vid in sorted(videos):
-        in_path = os.path.join(VIDEO_DIR, vid)
-        if process_video(in_path):
-            ok_total += 1
-        else:
-            fail_total += 1
+    temp_dir = tempfile.mkdtemp(prefix="unusual_faces_")
+    part_paths = []
+    try:
+        for i, (start, end) in enumerate(segments):
+            duration = end - start
+            if duration <= 0:
+                continue
+            part_file = os.path.join(temp_dir, f"part_{i:04d}.mp4")
+            cmd = [
+                "ffmpeg",
+                "-y",
+                "-i", input_video,
+                "-ss", str(start),
+                "-t", str(duration),
+                "-c", "copy",
+                part_file
+            ]
+            subprocess.run(cmd, check=False)
+            part_paths.append(part_file)
 
-    print("\n=== Summary ===")
-    print(f"OK    : {ok_total}")
-    print(f"Failed: {fail_total}")
+        if not part_paths:
+            print("No valid segments extracted.")
+            return
+
+        # build concat manifest
+        manifest = os.path.join(temp_dir, "concat_list.txt")
+        with open(manifest, "w", encoding="utf-8") as mf:
+            for p in part_paths:
+                # escape single quotes for ffmpeg concat
+                escaped_p = p.replace("'", "'\\''")
+                mf.write(f"file '{escaped_p}'\n")
+
+        concat_cmd = [
+            "ffmpeg",
+            "-y",
+            "-f", "concat",
+            "-safe", "0",
+            "-i", manifest,
+            "-c", "copy",
+            output_path
+        ]
+        subprocess.run(concat_cmd, check=False)
+        print(f"Output written to {output_path}")
+    finally:
+        shutil.rmtree(temp_dir)
+
+
+def process_directory(root_dir: str, output_dir: str):
+    """
+    For each .mp4 in root_dir, find corresponding .json metadata and create a processed video.
+    """
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    for dirpath, _, filenames in os.walk(root_dir):
+        for fname in filenames:
+            if fname.lower().endswith(".mp4"):
+                video_path = os.path.join(dirpath, fname)
+                meta_path = os.path.splitext(video_path)[0] + ".json"
+                if not os.path.exists(meta_path):
+                    print(f"No metadata for {video_path}, skipping.")
+                    continue
+                print(f"Processing {video_path} with {meta_path}")
+                segments = extract_segments_from_metadata(meta_path, THRESHOLD)
+                out_name = os.path.splitext(fname)[0] + "_unusual.mp4"
+                out_path = os.path.join(output_dir, out_name)
+                ffmpeg_trim_segments(video_path, segments, out_path)
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) < 3:
+        print("Usage: python Unusual_faces.py <root_video_dir> <output_dir>")
+        sys.exit(1)
+    root_dir = sys.argv[1]
+    output_dir = sys.argv[2]
+    process_directory(root_dir, output_dir)
