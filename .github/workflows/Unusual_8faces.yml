@@ -1,3 +1,4 @@
+
 name: Run Face Detection with Unusual_faces.py
 
 on:
@@ -34,12 +35,21 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: 📦 Install dependencies
+      - name: 📦 Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install opencv-python mediapipe
 
+      - name: 🔧 Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version
+
       - name: ▶️ Run Unusual_faces.py
+        env:
+          VIDEO_DIR: Final_Videos          # ensure script looks in correct dir
+          TIMELINE_DIR: Timeline           # ensure output goes here
         run: |
           mkdir -p Timeline
           python Unusual_faces.py
