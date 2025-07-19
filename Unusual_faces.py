@@ -1,354 +1,263 @@
 
 #!/usr/bin/env python3
 """
-Unusual_faces.py  (Real-time MediaPipe version, NO JSON)
+face_timeline.py
+----------------
+Purpose:
+    For every video file in VIDEO_DIR (default: Final_Videos), detect faces using
+    MediaPipe *for every frame (optionally with a stride)* and build a per-second
+    timeline. A whole second is marked as "face" if **any frame** in that second
+    has at least one detected face with confidence >= MIN_CONFIDENCE. Otherwise
+    the second is "no_face".
 
-For each video (recursively under VIDEO_DIR):
-  * Run MediaPipe face detection (sample every FRAME_STRIDE frames).
-  * Mark frames "unusual" if NO face with confidence >= THRESHOLD is present.
-  * Build continuous unusual time segments (merge small gaps, drop tiny segments).
-  * Cut those segments from the source using ffmpeg and concatenate into
-        <basename>_unusual.mp4
-    written to TIMELINE_DIR.
+    The result is written to TIMELINE_DIR as <video_basename>.txt with format:
 
-Environment Variables (optional):
-    VIDEO_DIR (default: Final_Videos)
-    TIMELINE_DIR (default: Timeline)
-    THRESHOLD (default: 0.5)       # Face confidence threshold
-    MIN_CONFIDENCE (alias for THRESHOLD if you prefer naming)
-    FRAME_STRIDE (default: 1)      # Analyze every Nth frame
-    MAX_ANALYZE_SECONDS (default: 0 -> no cap)
-    MIN_SEG_DUR (default: 0.40)    # Minimum unusual segment length in seconds
-    MERGE_GAP_SEC (default: 0.20)  # Merge gaps <= this
-    REENCODE (default: 0)          # 1: re-encode segments, 0: stream copy
-    SKIP_EXISTING (default: 1)
-    DEBUG (default: 1)
-    MODEL_SELECTION (default: 0)
-    DEBUG_KEEP_TEMP (unset)        # keep temp parts if set
+        total_seconds_analyzed: <int>
+        video_duration_est: <int>             # (if known)
+        seconds_truncated_to: <int>
+        ---
+        0: face
+        1: no_face
+        2: face
+        ...
 
-Requires:
-    pip install mediapipe opencv-python ffmpeg (ffmpeg binary in PATH)
+Key Features / Differences from your original:
+    * Aggregates across ALL frames within each second, not just the first frame.
+    * If ANY frame in that second has a face => that second = 'face'.
+    * Saves timeline text file; skips video if timeline already exists (unless SKIP_EXISTING=0).
+    * Allows FRAME_STRIDE to speed up detection (e.g., analyze every 2nd or 3rd frame).
+    * Clean error handling and verbose logging controlled by VERBOSE flag.
+
+Environment Variables (all optional):
+    VIDEO_DIR            (default: Final_Videos)
+    TIMELINE_DIR         (default: Timeline)
+    MAX_ANALYZE_SECONDS  (default: 180)   # 0 => no cap (analyze full video)
+    MIN_CONFIDENCE       (default: 0.5)   # threshold for a face detection
+    FRAME_STRIDE         (default: 1)     # analyze every Nth frame (1 = every frame)
+    SKIP_EXISTING        (default: 1)     # 1 => do not re-create existing timeline
+    VERBOSE              (default: 1)     # 1 => print progress
+    MODEL_SELECTION      (default: 0)     # mediapipe face model (0=short-range,1=full-range)
+
+Return Codes:
+    0 on success (even if some videos failed; see per-video summary)
+    Non-zero exit if VIDEO_DIR is missing.
+
+Dependencies:
+    pip install mediapipe opencv-python
+    (ffmpeg not required for this script)
+
 """
 
 import os
 import sys
 import math
-import shutil
-import tempfile
-import subprocess
-from pathlib import Path
-from typing import List, Tuple
+import cv2
+import mediapipe as mp
 
-# -------------------- ENV --------------------
-def _truthy(v): return str(v).strip().lower() in ("1", "true", "yes", "on")
+# ---------------- ENV ----------------
+def _truthy(x):
+    return str(x).strip().lower() in ("1", "true", "yes", "on")
 
-VIDEO_DIR        = os.environ.get("VIDEO_DIR", "Final_Videos")
-OUTPUT_DIR       = os.environ.get("TIMELINE_DIR", "Timeline")
-# Allow either THRESHOLD or MIN_CONFIDENCE naming
-THRESHOLD        = float(os.environ.get("THRESHOLD",
-                         os.environ.get("MIN_CONFIDENCE", "0.5")))
-FRAME_STRIDE     = int(os.environ.get("FRAME_STRIDE", "1"))
-MAX_ANALYZE_SEC  = float(os.environ.get("MAX_ANALYZE_SECONDS", "0"))
-MIN_SEG_DUR      = float(os.environ.get("MIN_SEG_DUR", "0.40"))
-MERGE_GAP_SEC    = float(os.environ.get("MERGE_GAP_SEC", "0.20"))
-REENCODE         = _truthy(os.environ.get("REENCODE", "0"))
-SKIP_EXISTING    = _truthy(os.environ.get("SKIP_EXISTING", "1"))
-DEBUG            = _truthy(os.environ.get("DEBUG", "1"))
-MODEL_SELECTION  = int(os.environ.get("MODEL_SELECTION", "0"))
+VIDEO_DIR         = os.environ.get("VIDEO_DIR", "Final_Videos")
+TIMELINE_DIR      = os.environ.get("TIMELINE_DIR", "Timeline")
+MAX_ANALYZE_SEC   = int(os.environ.get("MAX_ANALYZE_SECONDS", "180"))
+MIN_CONF          = float(os.environ.get("MIN_CONFIDENCE", "0.5"))
+FRAME_STRIDE      = int(os.environ.get("FRAME_STRIDE", "1"))
+SKIP_EXISTING     = _truthy(os.environ.get("SKIP_EXISTING", "1"))
+VERBOSE           = _truthy(os.environ.get("VERBOSE", "1"))
+MODEL_SELECTION   = int(os.environ.get("MODEL_SELECTION", "0"))
 
-Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
+os.makedirs(TIMELINE_DIR, exist_ok=True)
 
-# -------------------- LOGGING --------------------
-def dbg(msg: str):
-    if DEBUG:
-        print(f"[DBG] {msg}", flush=True)
-
-def info(msg: str):
-    print(f"[INFO] {msg}", flush=True)
-
-def warn(msg: str):
-    print(f"[WARN] {msg}", flush=True)
+def vlog(msg: str):
+    if VERBOSE:
+        print(msg, flush=True)
 
 def err(msg: str):
-    print(f"[ERROR] {msg}", file=sys.stderr, flush=True)
+    print(msg, file=sys.stderr, flush=True)
 
-# -------------------- IMPORTS --------------------
-try:
-    import cv2
-except ImportError:
-    err("opencv-python not installed. Run: pip install opencv-python")
-    sys.exit(1)
-
-try:
-    import mediapipe as mp
-except ImportError:
-    err("mediapipe not installed. Run: pip install mediapipe")
-    sys.exit(1)
-
+# ---------------- FACE DETECTOR ----------------
 mp_face = mp.solutions.face_detection
 
-# -------------------- FACE CHECK --------------------
-def frame_is_usual(frame, detector) -> bool:
+def detect_faces_bgr(image_bgr, detector):
     """
-    Returns True if there is at least one face with score >= THRESHOLD.
-    Otherwise returns False (meaning it's an 'unusual' frame for our logic).
+    Run MediaPipe face detector on a single BGR frame.
+    Returns number of detections meeting MIN_CONF.
     """
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    rgb.flags.writeable = False
-    res = detector.process(rgb)
-    if res.detections:
-        for d in res.detections:
-            if d.score and d.score[0] is not None and d.score[0] >= THRESHOLD:
-                return True
-    return False
+    image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+    image_rgb.flags.writeable = False
+    results = detector.process(image_rgb)
+    count = 0
+    if results.detections:
+        for det in results.detections:
+            if det.score and det.score[0] is not None and det.score[0] >= MIN_CONF:
+                count += 1
+    return count
 
-# -------------------- SEGMENT MERGING --------------------
-def merge_segments(segments: List[Tuple[float, float]],
-                   merge_gap: float,
-                   min_len: float) -> List[Tuple[float, float]]:
-    if not segments:
-        return []
-    segments = sorted(segments)
-    merged = []
-    cur_s, cur_e = segments[0]
-    for s, e in segments[1:]:
-        if s - cur_e <= merge_gap:
-            cur_e = max(cur_e, e)
-        else:
-            if (cur_e - cur_s) >= min_len:
-                merged.append((cur_s, cur_e))
-            cur_s, cur_e = s, e
-    if (cur_e - cur_s) >= min_len:
-        merged.append((cur_s, cur_e))
-    return merged
+# ---------------- PER-VIDEO ANALYSIS ----------------
+def analyze_video(video_path: str, timeline_path: str) -> bool:
+    """
+    Analyze a single video, produce a per-second timeline file.
+    A second is 'face' if ANY frame within that second has a face.
+    """
+    vlog(f"\n[video] {video_path}")
 
-# -------------------- ANALYZE VIDEO --------------------
-def find_unusual_segments(video_path: str) -> List[Tuple[float, float]]:
-    """
-    Analyze video and return list of (start, end) for unusual (no-face/low-face) segments.
-    """
+    if SKIP_EXISTING and os.path.isfile(timeline_path):
+        vlog(f"[skip] timeline exists: {timeline_path}")
+        return True
+
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        err(f"Cannot open video: {video_path}")
-        return []
+        err(f"[!] cannot open video: {video_path}")
+        return False
 
     fps = cap.get(cv2.CAP_PROP_FPS)
-    if not fps or fps < 1e-3:
+    if not fps or fps <= 0:
         fps = 30.0
-        warn(f"Invalid FPS detected; assuming {fps}")
+        vlog(f"[warn] invalid FPS -> fallback to {fps:.3f}")
 
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
-    est_dur = total_frames / fps if total_frames > 0 else None
-    analyze_limit = est_dur if est_dur is not None else float('inf')
-    if MAX_ANALYZE_SEC > 0:
-        analyze_limit = min(analyze_limit, MAX_ANALYZE_SEC)
+    frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+    duration_sec_est = frame_count / fps if frame_count else None
 
-    dbg(f"Video: fps={fps:.3f} frames={total_frames} est_dur={est_dur} analyze<= {analyze_limit:.3f}s")
+    if duration_sec_est is not None:
+        if MAX_ANALYZE_SEC > 0:
+            max_seconds = min(duration_sec_est, MAX_ANALYZE_SEC)
+        else:
+            max_seconds = duration_sec_est
+    else:
+        # Unknown duration; rely only on MAX_ANALYZE_SEC if set
+        max_seconds = MAX_ANALYZE_SEC if MAX_ANALYZE_SEC > 0 else 0
 
-    unusual_segments_raw: List[Tuple[float, float]] = []
-    in_unusual = False
-    seg_start = 0.0
+    # If max_seconds is 0 (meaning both unknown duration and MAX_ANALYZE_SEC=0), treat as unlimited
+    unlimited = (max_seconds == 0)
+    max_seconds_int = int(math.floor(max_seconds)) if not unlimited else float('inf')
 
-    frame_idx = 0
-    processed_frames = 0
+    vlog(f"  fps={fps:.3f} frames={frame_count} dur_est={duration_sec_est} analyze<= {'ALL' if unlimited else max_seconds_int}")
 
-    with mp_face.FaceDetection(
-        model_selection=MODEL_SELECTION,
-        min_detection_confidence=THRESHOLD  # we use same threshold; internal pass
-    ) as detector:
+    sec_results = {}
+    current_sec_index = -1
+    has_face_in_current_sec = False
+    grabbed_any = False
 
+    with mp_face.FaceDetection(model_selection=MODEL_SELECTION,
+                               min_detection_confidence=MIN_CONF) as detector:
+        frame_index = 0
         while True:
             ok, frame = cap.read()
             if not ok:
+                # Save last second result if any
+                if current_sec_index != -1:
+                    sec_results[current_sec_index] = has_face_in_current_sec
                 break
 
-            t = frame_idx / fps
-            if t > analyze_limit:
-                dbg("Reached analyze limit.")
+            grabbed_any = True
+
+            # Time from frame index (more reliable than CAP_PROP_POS_MSEC for some codecs)
+            t_sec = frame_index / fps
+            cur_sec = int(t_sec)
+
+            if not unlimited and cur_sec > max_seconds_int:
+                # Save the last second before breaking
+                if current_sec_index != -1:
+                    sec_results[current_sec_index] = has_face_in_current_sec
                 break
 
-            if frame_idx % FRAME_STRIDE == 0:
-                processed_frames += 1
-                usual = frame_is_usual(frame, detector)  # True if face present above threshold
-                if not usual:
-                    if not in_unusual:
-                        in_unusual = True
-                        seg_start = t
-                else:
-                    if in_unusual:
-                        unusual_segments_raw.append((seg_start, t))
-                        in_unusual = False
+            if cur_sec != current_sec_index:
+                # New second encountered: store previous second result
+                if current_sec_index != -1:
+                    sec_results[current_sec_index] = has_face_in_current_sec
+                current_sec_index = cur_sec
+                has_face_in_current_sec = False  # reset for new second
 
-            frame_idx += 1
+            # Frame stride: skip detection if not the selected frame
+            if FRAME_STRIDE <= 1 or (frame_index % FRAME_STRIDE == 0):
+                n_faces = detect_faces_bgr(frame, detector)
+                if n_faces > 0:
+                    has_face_in_current_sec = True
+                    # Optimization: if we *already* know this second has a face and we don't
+                    # need partial counts, we could skip the rest of the frames in that second.
+                    # (Optional optimization; not implemented to keep code simple.)
 
-    if in_unusual:
-        end_t = min(analyze_limit, frame_idx / fps)
-        unusual_segments_raw.append((seg_start, end_t))
+            frame_index += 1
 
     cap.release()
 
-    dbg(f"Raw unusual segments: {len(unusual_segments_raw)}")
-    for s, e in unusual_segments_raw:
-        dbg(f"  raw {s:.3f}->{e:.3f} ({e - s:.3f}s)")
-
-    merged = merge_segments(unusual_segments_raw, MERGE_GAP_SEC, MIN_SEG_DUR)
-
-    dbg(f"Merged unusual segments: {len(merged)}")
-    for s, e in merged:
-        dbg(f"  merged {s:.3f}->{e:.3f} ({e - s:.3f}s)")
-
-    return merged
-
-# -------------------- FFMPEG HELPERS --------------------
-def run_cmd(cmd: List[str]) -> int:
-    dbg("CMD: " + " ".join(cmd))
-    try:
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    except Exception as e:
-        err(f"Subprocess failed: {e}")
-        return 1
-    if DEBUG and p.stdout:
-        print(p.stdout)
-    if DEBUG and p.stderr:
-        print(p.stderr)
-    return p.returncode
-
-def build_unusual_video(src: str, segments: List[Tuple[float, float]], out_path: str) -> bool:
-    if not segments:
-        warn("No unusual segments to cut.")
+    if not grabbed_any:
+        err(f"[!] no frames read: {video_path}")
         return False
 
-    temp_dir = tempfile.mkdtemp(prefix="unusual_parts_")
-    part_files = []
+    # Determine final range to write
+    if unlimited:
+        if sec_results:
+            max_sec_written = max(sec_results.keys())
+        else:
+            max_sec_written = -1
+    else:
+        max_sec_written = int(math.floor(max_seconds))
+
+    # Fill missing seconds (if any) with no_face (False)
+    timeline = []
+    for s in range(0, max_sec_written + 1):
+        has_face = sec_results.get(s, False)
+        timeline.append((s, has_face))
 
     try:
-        for idx, (start, end) in enumerate(segments):
-            dur = end - start
-            if dur <= 0:
-                continue
-            part = os.path.join(temp_dir, f"part_{idx:04d}.mp4")
-            if REENCODE:
-                cmd = [
-                    "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-                    "-ss", f"{start:.6f}", "-t", f"{dur:.6f}",
-                    "-i", src,
-                    "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-                    "-c:a", "aac", "-b:a", "128k",
-                    part
-                ]
+        with open(timeline_path, "w", encoding="utf-8") as f:
+            f.write(f"total_seconds_analyzed: {len(timeline)}\n")
+            if duration_sec_est is not None:
+                f.write(f"video_duration_est: {int(duration_sec_est)}\n")
+            if unlimited:
+                # If unlimited & unknown, reflect what we actually processed
+                f.write(f"seconds_truncated_to: {max_sec_written if max_sec_written >= 0 else 0}\n")
             else:
-                cmd = [
-                    "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-                    "-ss", f"{start:.6f}", "-t", f"{dur:.6f}",
-                    "-i", src,
-                    "-c", "copy",
-                    part
-                ]
-            rc = run_cmd(cmd)
-            if rc != 0 or not os.path.exists(part) or os.path.getsize(part) == 0:
-                warn(f"Cut failed for segment {idx} ({start:.3f}-{end:.3f}); skipped.")
-                continue
-            part_files.append(part)
-
-        if not part_files:
-            err("All cuts failed; nothing to concatenate.")
-            return False
-
-        manifest = os.path.join(temp_dir, "concat.txt")
-        with open(manifest, "w", encoding="utf-8") as mf:
-            for pf in part_files:
-                mf.write(f"file '{pf.replace(\"'\", \"'\\\\''\")}'\n")
-
-        if REENCODE:
-            concat_cmd = [
-                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-                "-f", "concat", "-safe", "0", "-i", manifest,
-                "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-                "-c:a", "aac", "-b:a", "128k",
-                out_path
-            ]
-        else:
-            concat_cmd = [
-                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-                "-f", "concat", "-safe", "0", "-i", manifest,
-                "-c", "copy",
-                out_path
-            ]
-        rc = run_cmd(concat_cmd)
-        if rc != 0:
-            err("Concat failed.")
-            return False
-
-        if not os.path.exists(out_path):
-            err("Output missing after concat.")
-            return False
-
-        info(f"✅ Created: {out_path}")
+                f.write(f"seconds_truncated_to: {max_sec_written}\n")
+            f.write("---\n")
+            for s, has_face in timeline:
+                f.write(f"{s}: {'face' if has_face else 'no_face'}\n")
+        vlog(f"[write] {timeline_path}")
         return True
-    finally:
-        if os.environ.get("DEBUG_KEEP_TEMP"):
-            warn(f"Keeping temp dir: {temp_dir}")
-        else:
-            shutil.rmtree(temp_dir, ignore_errors=True)
+    except Exception as e:
+        err(f"[write] fail {timeline_path}: {e}")
+        return False
 
-# -------------------- DRIVER --------------------
-def process_directory(root: str, out_dir: str):
-    processed = 0
-    skipped_existing = 0
-    skipped_empty = 0
-    failed = 0
-
-    for dirpath, _, files in os.walk(root):
-        for fname in files:
-            if not fname.lower().endswith((".mp4", ".mov", ".m4v", ".mkv", ".webm")):
-                continue
-            video_path = os.path.join(dirpath, fname)
-            base = os.path.splitext(os.path.basename(fname))[0]
-            output_path = os.path.join(out_dir, base + "_unusual.mp4")
-
-            info(f"---\nVideo: {video_path}")
-            if SKIP_EXISTING and os.path.exists(output_path):
-                warn(f"Exists (skip): {output_path}")
-                skipped_existing += 1
-                continue
-
-            segments = find_unusual_segments(video_path)
-            if not segments:
-                warn("No unusual segments detected.")
-                skipped_empty += 1
-                continue
-
-            if build_unusual_video(video_path, segments, output_path):
-                processed += 1
-            else:
-                failed += 1
-
-    print("\n=== Summary ===")
-    print(f"Processed outputs : {processed}")
-    print(f"Skipped existing  : {skipped_existing}")
-    print(f"Skipped (no segs) : {skipped_empty}")
-    print(f"Failed            : {failed}")
-
-# -------------------- MAIN --------------------
+# ---------------- SCAN VIDEO DIR ----------------
 def main():
-    info("Running Unusual_faces.py (real-time MediaPipe, NO JSON)")
-    info(f"VIDEO_DIR        = {VIDEO_DIR}")
-    info(f"TIMELINE_DIR     = {OUTPUT_DIR}")
-    info(f"THRESHOLD        = {THRESHOLD}")
-    info(f"FRAME_STRIDE     = {FRAME_STRRIDE := FRAME_STRIDE}")
-    info(f"MAX_ANALYZE_SEC  = {MAX_ANALYZE_SEC}")
-    info(f"MIN_SEG_DUR      = {MIN_SEG_DUR}")
-    info(f"MERGE_GAP_SEC    = {MERGE_GAP_SEC}")
-    info(f"REENCODE         = {REENCODE}")
-    info(f"MODEL_SELECTION  = {MODEL_SELECTION}")
-    info(f"SKIP_EXISTING    = {SKIP_EXISTING}")
-    info(f"DEBUG            = {DEBUG}")
+    print("=== face_timeline.py ===")
+    print(f"VIDEO_DIR          = {VIDEO_DIR}")
+    print(f"TIMELINE_DIR       = {TIMELINE_DIR}")
+    print(f"MAX_ANALYZE_SEC    = {MAX_ANALYZE_SEC}")
+    print(f"MIN_CONF           = {MIN_CONF}")
+    print(f"FRAME_STRIDE       = {FRAME_STRIDE}")
+    print(f"MODEL_SELECTION    = {MODEL_SELECTION}")
+    print(f"SKIP_EXISTING      = {SKIP_EXISTING}")
+    print(f"VERBOSE            = {VERBOSE}")
 
     if not os.path.isdir(VIDEO_DIR):
-        err(f"Input directory not found: {VIDEO_DIR}")
+        err(f"❌ VIDEO_DIR not found: {VIDEO_DIR}")
         sys.exit(1)
 
-    process_directory(VIDEO_DIR, OUTPUT_DIR)
+    videos = [fn for fn in os.listdir(VIDEO_DIR)
+              if fn.lower().endswith((".mp4", ".mov", ".m4v", ".mkv", ".webm"))]
+
+    if not videos:
+        err("[!] No video files found.")
+        return
+
+    ok_total = 0
+    fail_total = 0
+
+    for vid in sorted(videos):
+        in_path = os.path.join(VIDEO_DIR, vid)
+        base, _ = os.path.splitext(vid)
+        out_path = os.path.join(TIMELINE_DIR, base + ".txt")
+        if analyze_video(in_path, out_path):
+            ok_total += 1
+        else:
+            fail_total += 1
+
+    print("\n=== Summary ===")
+    print(f"Timelines OK : {ok_total}")
+    print(f"Failed       : {fail_total}")
 
 if __name__ == "__main__":
     main()
