@@ -25,5 +25,3 @@ jobs: render: runs-on: ubuntu-latest steps: - name: Checkout repo uses: actions/
       name: revideo-output
       path: output.mp4
 
-Here is my ga , give me full corrected yml
-
