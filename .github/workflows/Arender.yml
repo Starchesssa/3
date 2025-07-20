@@ -2,32 +2,49 @@
 name: Render Video with Revideo
 
 on:
-  workflow_dispatch:  # Trigger manually
+  workflow_dispatch:  # Manual trigger
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   render:
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Checkout your repo
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # 2. Use Node (Revideo recommends modern Node; 20 LTS is stable)
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: npm
 
-      - name: Install Revideo
+      # 3. Install dependencies
+      #    - If you already have a package.json in the repo, this will just install.
+      #    - If not, it will create one and install the needed packages.
+      - name: Install Revideo + build deps
         run: |
-          npm init -y
-          npm install @revideo/2d @revideo/core @revideo/cli
+          if [ ! -f package.json ]; then
+            npm init -y
+          fi
+          npm install --save-dev typescript ts-node @types/node
+          npm install @revideo/cli @revideo/core @revideo/2d
 
-      - name: Create video
+      # 4. (Optional) List files to confirm paths are cor
+      # 5. Render video
+      # NOTE:
+      #   * Use --file to point to your scene (TypeScript file).
+      #   * Use --output to specify the MP4 file.
+      #   * Adjust --fps/--width/--height if you want different settings.
+      #   * If your image has spaces, rename it or escape the path in your code.
+      - name: Render video with Revideo
         run: |
-          npx revideo render src/index.ts --out output.mp4
+          npx revideo --file src/index.ts --output output.mp4 --fps 30 --width 1280 --height 720
 
+      # 6. Upload artifact so you can download the rendered video
       - name: Upload video artifact
         uses: actions/upload-artifact@v4
         with:
