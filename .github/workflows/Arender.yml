@@ -1,32 +1,24 @@
 
-name: Render Video with Revideo
+name: CI Render
 
 on:
   workflow_dispatch:
+    inputs:
+      message:
+        required: false
 
 jobs:
   render:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Install Revideo
-        run: |
-          npm init -y
-          npm install @revideo/2d @revideo/core @revideo/cli
-
-      - name: Create video
-        run: |
-          npx revideo render src/index.ts --out output.mp4
-
-      - name: Upload video artifact
-        uses: actions/upload-artifact@v4
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run render  # Provided in examples' package.json
+      - uses: actions/upload-artifact@v4
         with:
-          name: revideo-output
+          name: video
           path: output.mp4
