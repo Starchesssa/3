@@ -1,17 +1,31 @@
 
 name: Render video
+
 on:
   workflow_dispatch:
+
 jobs:
   render:
-    name: Render video
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-node@main
-      - run: npm i
-      - run: npx remotion render MyComp out/video.mp4
-      - uses: actions/upload-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          name: out.mp4
+          node-version: 18
+
+      - name: Install deps
+        run: npm install
+
+      - name: Render video
+        run: npm run render
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: out-video
           path: out/video.mp4
+          if-no-files-found: error
