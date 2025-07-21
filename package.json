@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "render": "npx remotion render src/Root.tsx MyComp out/video.mp4"
+    "render": "npx remotion render src/index.tsx MyComp out/video.mp4"
   },
   "dependencies": {
     "remotion": "^4.0.0",
