@@ -4,31 +4,26 @@ name: Render Revideo Animation
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   render-video:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install Revideo
-        run: |
-          npm init -y
-          npm install @revideo/core @revideo/2d
+      - name: Install dependencies
+        run: npm install @revideo/core @revideo/2d @revideo/cli
 
-      - name: Render
-        run: npx revideo render coolText.tsx --out=output.mp4
+      - name: Render video
+        run: npx revideo render scenes/coolText.tsx --out=output.mp4
 
-      - name: Upload video
+      - name: Upload video artifact
         uses: actions/upload-artifact@v4
         with:
           name: output
