@@ -3,28 +3,38 @@ name: Render Revideo Animation
 
 on:
   workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message text'
+        required: false
+        default: 'Default Message'
+
+permissions:
+  contents: write
 
 jobs:
-  render-video:
+  render:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    env:
+      MESSAGE: ${{ github.event.inputs.message }}
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install @revideo/core @revideo/2d @revideo/cli
+        run: npm ci
 
-      - name: Render video
-        run: npx revideo render scenes/coolText.tsx --out=output.mp4
+      - name: Render animation
+        run: npm run render
 
-      - name: Upload video artifact
+      - name: Upload video
         uses: actions/upload-artifact@v4
         with:
-          name: output
+          name: output_video
           path: output.mp4
