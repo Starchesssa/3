@@ -1,0 +1,52 @@
+
+name: Render Revideo Animation
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Optional text to override in your video"
+        required: false
+        default: "Rendered in CI"
+
+permissions:
+  contents: write   # allow this workflow to write to the repo if you add commit steps later
+  actions: read
+
+jobs:
+  render-video:
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # available to all steps
+      MSG: ${{ github.event.inputs.message || 'Rendered in CI' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install deps
+        run: |
+          npm init -y
+          npm install @revideo/core @revideo/2d
+
+      # If coolText.tsx is in the repo root, this will work directly.
+      # If it's in another path, update the --project arg.
+      - name: Render
+        run: |
+          npx revideo render coolText.tsx --out=output.mp4 --var message="$MSG"
+
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: output
+          path: output.mp4
+          if-no-files-found: error
