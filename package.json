@@ -1,17 +1,15 @@
 
 {
-  "name": "revideo-ci",
+  "name": "my-remotion-project",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
-  "dependencies": {
-    "@revideo/core": "^0.4.0",
-    "@revideo/2d": "^0.4.0",
-    "@revideo/renderer": "^0.4.0"
-  },
-  "devDependencies": {
-    "tsx": "^4.15.0"
-  },
   "scripts": {
-    "render": "tsx render.js"
+    "start": "remotion preview",
+    "build": "remotion render MyComp out/video.mp4"
+  },
+  "dependencies": {
+    "remotion": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }
