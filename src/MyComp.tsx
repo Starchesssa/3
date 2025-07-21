@@ -1,15 +1,27 @@
 
 import {Composition} from 'remotion';
+import React from 'react';
 
-export const RemotionRoot = () => {
+export const MyComp: React.FC = () => {
   return (
-    <Composition
-      id="MyComp"
-      component={() => <h1>Hello Remotion!</h1>}
-      durationInFrames={150}
-      fps={30}
-      width={1920}
-      height={1080}
-    />
+    <div style={{flex: 1, backgroundColor: 'papayawhip', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+      <h1 style={{fontSize: 100}}>Hello Remotion!</h1>
+    </div>
+  );
+};
+
+// Register the composition
+export const RemotionRoot: React.FC = () => {
+  return (
+    <>
+      <Composition
+        id="MyComp"
+        component={MyComp}
+        durationInFrames={120}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+    </>
   );
 };
