@@ -146,7 +146,7 @@ const MoneyExplainer = () => {
 export const RemotionRoot = () => (
   <>
     <Composition
-      id="MoneyExplainer"
+      id="MyComp"
       component={MoneyExplainer}
       durationInFrames={180}
       fps={30}
