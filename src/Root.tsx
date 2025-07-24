@@ -134,7 +134,7 @@ const MoneyAnimationScene = () => {
 export const RemotionRoot = () => (
   <>
     <Composition
-      id="MoneyScene"
+      id="MyComp"
       component={MoneyAnimationScene}
       durationInFrames={180} // Ends when animation ends (~6 sec @ 30fps)
       fps={30}
