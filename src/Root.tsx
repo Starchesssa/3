@@ -1,62 +1,110 @@
 
 import React from 'react';
-import { Composition, useCurrentFrame, interpolate, spring, Easing } from 'remotion';
+import {Composition, useCurrentFrame, interpolate, spring, Easing} from 'remotion';
 
-const easeInOutCubic = (t: number) => 
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const AnimatedCircle = ({delay = 0, color = 'red', xStart = 0, xEnd = 200}) => {
+  const frame = useCurrentFrame() - delay;
+  const progress = spring({
+    frame: frame < 0 ? 0 : frame,
+    fps: 30,
+    config: {damping: 10},
+  });
 
-const StunningAnimation = () => {
-  const frame = useCurrentFrame();
-  const duration = 900; // 30 seconds at 30fps
-
-  // Animate opacity from 0 to 1 over first 2 seconds
-  const opacity = interpolate(frame, [0, 60], [0, 1], { easing: Easing.ease });
-
-  // Slide in from bottom over first 3 seconds
-  const translateY = interpolate(frame, [0, 90], [100, 0], { easing: Easing.out(Easing.cubic) });
-
-  // Scale bounce between 1 and 1.15 between 3s and 10s, repeated pulse effect
-  const scale = 1 + 0.15 * Math.sin((frame - 90) / 10);
-
-  // Rotate slowly full 360 degrees over 30 seconds
-  const rotate = interpolate(frame, [0, duration], [0, 360]);
-
-  // Color shift from blue to purple over 30 seconds
-  const colorInterpolation = interpolate(frame, [0, duration], [0, 1]);
-  const backgroundColor = `rgb(
-    ${Math.floor(70 + 80 * colorInterpolation)}, 
-    ${Math.floor(130 + 30 * (1 - colorInterpolation))}, 
-    ${Math.floor(180 + 75 * colorInterpolation)})`;
-
-  // Text shadow pulse (glow effect)
-  const shadowBlur = interpolate(frame % 60, [0, 30, 60], [5, 20, 5]);
+  const translateX = interpolate(progress, [0, 1], [xStart, xEnd]);
+  const scale = interpolate(progress, [0, 0.5, 1], [0, 1.2, 1]);
 
   return (
     <div
       style={{
-        flex: 1,
-        backgroundColor,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        opacity,
-        transform: `translateY(${translateY}px) scale(${scale}) rotate(${rotate}deg)`,
-        willChange: 'transform, opacity',
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: color,
+        transform: `translateX(${translateX}px) scale(${scale})`,
+        boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+        position: 'absolute',
+        top: 100,
+        left: 100,
+      }}
+    />
+  );
+};
+
+const AnimatedBar = ({delay = 0, heightStart = 0, heightEnd = 150, color = 'blue', left = 300}) => {
+  const frame = useCurrentFrame() - delay;
+  const progress = spring({
+    frame: frame < 0 ? 0 : frame,
+    fps: 30,
+    config: {mass: 1, damping: 15},
+  });
+
+  const height = interpolate(progress, [0, 1], [heightStart, heightEnd]);
+
+  return (
+    <div
+      style={{
+        width: 40,
+        height,
+        backgroundColor: color,
+        position: 'absolute',
+        bottom: 100,
+        left,
+        borderRadius: 10,
+        boxShadow: '0 0 8px rgba(0,0,0,0.2)',
+      }}
+    />
+  );
+};
+
+const AnimatedLine = ({delay = 0}) => {
+  const frame = useCurrentFrame() - delay;
+  const progress = interpolate(frame, [0, 60], [0, 1], {extrapolateRight: 'clamp'});
+
+  return (
+    <svg
+      width={400}
+      height={200}
+      style={{
+        position: 'absolute',
+        top: 250,
+        left: 50,
+        overflow: 'visible',
       }}
     >
-      <h1
-        style={{
-          color: 'white',
-          fontSize: 120,
-          fontWeight: '900',
-          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-          textShadow: `0 0 ${shadowBlur}px rgba(255,255,255,0.8)`,
-          userSelect: 'none',
-          margin: 0,
-        }}
-      >
-        Stunning Remotion!
-      </h1>
+      <line
+        x1={0}
+        y1={100}
+        x2={400 * progress}
+        y2={100}
+        stroke="green"
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
+
+const ExplainerScene = () => {
+  return (
+    <div
+      style={{
+        flex: 1,
+        backgroundColor: '#f0f0f0',
+        position: 'relative',
+      }}
+    >
+      {/* Circles animating from left to right */}
+      <AnimatedCircle delay={0} color="#FF6347" xStart={0} xEnd={220} />
+      <AnimatedCircle delay={15} color="#4682B4" xStart={0} xEnd={300} />
+      <AnimatedCircle delay={30} color="#FFD700" xStart={0} xEnd={350} />
+
+      {/* Bars animating height growth */}
+      <AnimatedBar delay={45} color="#1E90FF" left={320} heightEnd={150} />
+      <AnimatedBar delay={60} color="#32CD32" left={380} heightEnd={130} />
+      <AnimatedBar delay={75} color="#FF8C00" left={440} heightEnd={170} />
+
+      {/* Line growing left to right */}
+      <AnimatedLine delay={90} />
     </div>
   );
 };
@@ -65,8 +113,8 @@ export const RemotionRoot = () => (
   <>
     <Composition
       id="MyComp"
-      component={StunningAnimation}
-      durationInFrames={900} // 30 seconds @ 30 fps
+      component={ExplainerScene}
+      durationInFrames={900} // 30 seconds at 30fps
       fps={30}
       width={1280}
       height={720}
