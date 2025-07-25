@@ -1,8 +1,8 @@
-// src/RemotionRoot.tsx
+// src/Root.tsx or src/RemotionRoot.tsx
 import { Composition } from 'remotion';
 import { MoneyExplainer } from './MoneyExplainer';
 
-export const RemotionRoot = () => {
+const RemotionRoot = () => {
   return (
     <>
       <Composition
@@ -16,3 +16,5 @@ export const RemotionRoot = () => {
     </>
   );
 };
+
+export default RemotionRoot; // ✅ Add this line
