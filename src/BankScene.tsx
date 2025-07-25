@@ -34,9 +34,37 @@ const FireworkParticle = ({ delay = 0, color = "orange" }) => {
 
 const BankModel = () => {
   return (
-    <group>
-      {/* bank base, roof, pillars, and text go here as you had them */}
-      {/* ... */}
+    <group position={[0, -1, 0]}>
+      {/* Base */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[3, 0.5, 3]} />
+        <meshStandardMaterial color="#888" />
+      </mesh>
+
+      {/* Roof */}
+      <mesh position={[0, 1.5, 0]} rotation={[Math.PI / 4, 0, 0]}>
+        <coneGeometry args={[2.5, 1, 4]} />
+        <meshStandardMaterial color="#555" />
+      </mesh>
+
+      {/* Pillars */}
+      {[...Array(4)].map((_, i) => (
+        <mesh key={i} position={[-1.5 + i, 0.75, 1.4]}>
+          <cylinderGeometry args={[0.1, 0.1, 1.5]} />
+          <meshStandardMaterial color="white" />
+        </mesh>
+      ))}
+
+      {/* Bank Text */}
+      <Text
+        position={[0, 1.2, 1.6]}
+        fontSize={0.3}
+        color="gold"
+        anchorX="center"
+        anchorY="middle"
+      >
+        BANK
+      </Text>
     </group>
   );
 };
@@ -50,14 +78,17 @@ const BankScene = () => {
     }
   });
 
-  const fireworksData = useMemo(() => [
-    { color: "#ff4081", delay: 0 },
-    { color: "#448aff", delay: 15 },
-    { color: "#ffff00", delay: 30 },
-    { color: "#00e676", delay: 45 },
-    { color: "#ff9100", delay: 60 },
-    { color: "#e040fb", delay: 75 },
-  ], []);
+  const fireworksData = useMemo(
+    () => [
+      { color: "#ff4081", delay: 0 },
+      { color: "#448aff", delay: 15 },
+      { color: "#ffff00", delay: 30 },
+      { color: "#00e676", delay: 45 },
+      { color: "#ff9100", delay: 60 },
+      { color: "#e040fb", delay: 75 },
+    ],
+    []
+  );
 
   return (
     <>
