@@ -1,195 +1,153 @@
 
-import React from 'react';
-import { Composition, useCurrentFrame, interpolate } from 'remotion';
+import React, { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Sparkles, Text, Environment } from "@react-three/drei";
+import * as THREE from "three";
+import { useCurrentFrame } from "remotion";
 
-// Common style for Zdog-like visuals
-const cartoonStyle = {
-  border: '4px solid #333',
-  boxShadow: '2px 2px 4px #0004',
-};
+/**
+ * Firework particle component animates position and opacity.
+ */
+const FireworkParticle = ({ delay = 0, color = "orange" }) => {
+  const ref = useRef();
+  const startFrame = delay;
 
-// Scene 1: Cute Bank Eating Money
-const HouseEatingMoney = () => {
-  const frame = useCurrentFrame();
-  const moneyX = interpolate(frame, [0, 45], [1280, 600], { extrapolateRight: 'clamp' });
-  const opacity = frame < 60 ? 1 : 0;
+  useFrame(({ clock, viewport }) => {
+    const elapsed = clock.elapsedTime * 60; // 60fps approx
+    const t = elapsed - startFrame;
 
-  return (
-    <div style={{ flex: 1, backgroundColor: '#f9f1e7', position: 'relative' }}>
-      {/* Cute Bank */}
-      <div
-        style={{
-          ...cartoonStyle,
-          position: 'absolute',
-          top: 300,
-          left: 550,
-          width: 180,
-          height: 180,
-          backgroundColor: '#FFD580',
-          borderRadius: 20,
-        }}
-      >
-        <div
-          style={{
-            ...cartoonStyle,
-            position: 'absolute',
-            top: -60,
-            left: 40,
-            width: 100,
-            height: 100,
-            backgroundColor: '#FFAA00',
-            borderRadius: '50%',
-            border: '6px solid #000',
-            transform: 'rotate(45deg)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 10,
-            left: 65,
-            fontSize: 24,
-          }}
-        >
-          🏦
-        </div>
-      </div>
+    if (!ref.current) return;
 
-      {/* Money flying in */}
-      <div
-        style={{
-          ...cartoonStyle,
-          position: 'absolute',
-          top: 360,
-          left: moneyX,
-          width: 80,
-          height: 40,
-          backgroundColor: '#8BC34A',
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: 20,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: 10,
-          opacity,
-        }}
-      >
-        💵
-      </div>
-    </div>
-  );
-};
+    if (t < 0) {
+      ref.current.visible = false;
+      return;
+    }
 
-// Scene 2: Crowd Stealing Money
-const CrowdStealingMoney = () => {
-  const frame = useCurrentFrame();
-  const people = Array.from({ length: 5 }).map((_, i) => {
-    const delay = i * 10;
-    const personX = interpolate(frame, [delay, delay + 30], [550, 300 + i * 100], {
-      extrapolateRight: 'clamp',
-    });
+    ref.current.visible = true;
 
-    return (
-      <div
-        key={i}
-        style={{
-          ...cartoonStyle,
-          position: 'absolute',
-          top: 500,
-          left: personX,
-          width: 40,
-          height: 40,
-          backgroundColor: '#FF6B6B',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 16,
-          color: 'white',
-        }}
-      >
-        🧍
-      </div>
-    );
+    // Move particle outwards and fade out
+    const speed = 0.05;
+    ref.current.position.x = speed * t * Math.cos(t * 0.7 + delay);
+    ref.current.position.y = speed * t * Math.sin(t * 1.2 + delay) + t * 0.03;
+    ref.current.position.z = speed * t * Math.sin(t * 1.7 + delay);
+
+    ref.current.material.opacity = THREE.MathUtils.clamp(1 - t / 40, 0, 1);
   });
 
   return (
-    <div style={{ flex: 1, backgroundColor: '#f1f1f1', position: 'relative' }}>
-      <div
-        style={{
-          ...cartoonStyle,
-          position: 'absolute',
-          top: 300,
-          left: 550,
-          width: 180,
-          height: 180,
-          backgroundColor: '#FFD580',
-          borderRadius: 20,
-        }}
+    <mesh ref={ref} visible position={[0, 0, 0]}>
+      <sphereGeometry args={[0.05, 8, 8]} />
+      <meshBasicMaterial color={color} transparent opacity={1} />
+    </mesh>
+  );
+};
+
+/**
+ * Simple stylized Bank building as a box + roof.
+ */
+const BankModel = () => {
+  return (
+    <group>
+      {/* Bank base */}
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[2, 1, 2]} />
+        <meshStandardMaterial color="#004d40" metalness={0.7} roughness={0.3} />
+      </mesh>
+      {/* Roof */}
+      <mesh position={[0, 0.75, 0]} rotation={[Math.PI / 4, 0, 0]}>
+        <coneGeometry args={[1.5, 1, 4]} />
+        <meshStandardMaterial color="#00796b" metalness={0.9} roughness={0.2} />
+      </mesh>
+      {/* Pillars */}
+      {[ -0.7, 0, 0.7 ].map((x) => (
+        <mesh key={x} position={[x, -0.5, 1]} scale={[0.2, 1.5, 0.2]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#b2dfdb" />
+        </mesh>
+      ))}
+      {/* Bank sign */}
+      <Text
+        position={[0, 0.6, 1.01]}
+        fontSize={0.3}
+        color="#a7ffeb"
+        anchorX="center"
+        anchorY="middle"
+        font="/fonts/Roboto-Bold.ttf" // replace with your font path or default
+      >
+        BANK
+      </Text>
+    </group>
+  );
+};
+
+/**
+ * Main scene with Bank and fireworks.
+ */
+const Scene4_3DBankFireworks = () => {
+  const frame = useCurrentFrame();
+  const groupRef = useRef();
+
+  // Slowly rotate the bank model
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.005;
+    }
+  });
+
+  // Firework colors and delays
+  const fireworksData = useMemo(
+    () => [
+      { color: "#ff4081", delay: 0 },
+      { color: "#448aff", delay: 15 },
+      { color: "#ffff00", delay: 30 },
+      { color: "#00e676", delay: 45 },
+      { color: "#ff9100", delay: 60 },
+      { color: "#e040fb", delay: 75 },
+    ],
+    []
+  );
+
+  return (
+    <Canvas
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [0, 2, 5], fov: 50 }}
+      style={{ width: "100%", height: "100%" }}
+    >
+      <ambientLight intensity={0.4} />
+      <directionalLight
+        castShadow
+        intensity={0.7}
+        position={[5, 5, 5]}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
       />
-      {people}
-    </div>
+      <group ref={groupRef} position={[0, 0, 0]}>
+        <BankModel />
+      </group>
+
+      {/* Firework particles */}
+      {fireworksData.map(({ color, delay }, i) => (
+        <FireworkParticle key={i} color={color} delay={delay} />
+      ))}
+
+      {/* Sparkles effect */}
+      <Sparkles
+        size={4}
+        scale={[6, 2, 6]}
+        position={[0, 1, 0]}
+        color="#ffea00"
+        count={40}
+        speed={0.3}
+      />
+
+      {/* Environment for reflections */}
+      <Environment preset="sunset" />
+
+      {/* OrbitControls disabled for video output */}
+      {/* <OrbitControls enableZoom={false} enablePan={false} /> */}
+    </Canvas>
   );
 };
 
-// Scene 3: People with Money Bellies
-const MoneyBellies = () => {
-  const frame = useCurrentFrame();
-  const people = Array.from({ length: 4 }).map((_, i) => {
-    const delay = i * 15;
-    const y = interpolate(frame, [delay, delay + 30], [800, 400], {
-      extrapolateRight: 'clamp',
-    });
-
-    return (
-      <div
-        key={i}
-        style={{
-          ...cartoonStyle,
-          position: 'absolute',
-          top: y,
-          left: 200 + i * 250,
-          width: 80,
-          height: 80,
-          borderRadius: '50%',
-          backgroundColor: '#FFDD57',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 'bold',
-          fontSize: 16,
-          color: '#333',
-        }}
-      >
-        💰
-      </div>
-    );
-  });
-
-  return <div style={{ flex: 1, backgroundColor: '#FAF3E0', position: 'relative' }}>{people}</div>;
-};
-
-// Master animation controller
-const MoneyExplainer = () => {
-  const frame = useCurrentFrame();
-  if (frame < 60) return <HouseEatingMoney />;
-  if (frame < 120) return <CrowdStealingMoney />;
-  return <MoneyBellies />;
-};
-
-// Final export
-export const RemotionRoot = () => (
-  <>
-    <Composition
-      id="MyComp"
-      component={MoneyExplainer}
-      durationInFrames={180}
-      fps={30}
-      width={1280}
-      height={720}
-    />
-  </>
-);
-
-export default RemotionRoot;
+export default Scene4_3DBankFireworks;
