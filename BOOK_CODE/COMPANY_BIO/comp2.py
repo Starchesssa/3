@@ -43,14 +43,13 @@ def generate_chapters(book):
 
     prompt = (
         f'From the book titled "{title}" by {author}, which is about {company}:\n'
-        "Write numbered chapters summarizing the book.\n"
-        "Number each chapter starting from 1.\n"
-        "Each chapter should be concise and about 150 words max.\n"
+        "list all numbered chapter names  of the book.\n"
+        "Number each chapter starting from 1.make sure you list all chapters \n"
         "Example format:\n"
-        "1. Chapter title or summary\n"
-        "2. Next chapter title or summary\n"
-        "3. And so on...\n"
-        "Only provide the numbered chapters text without extra commentary."
+        "1. The problem\n"
+        "2. Solution Comes\n"
+        "3. Succes \n"
+        "Only provide the numbered chapters text without extra commentary,just chapter only nothing more."
     )
 
     for i, key in enumerate(API_KEYS):
