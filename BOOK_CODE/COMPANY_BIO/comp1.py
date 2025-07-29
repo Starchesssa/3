@@ -2,6 +2,7 @@
 import os
 import time
 import json
+import datetime
 from google import genai
 
 # === Configuration ===
@@ -29,6 +30,11 @@ def load_books():
     if not data or not isinstance(data, list):
         raise ValueError("❌ JSON is empty or not a list.")
     return data
+
+def save_remaining_books(remaining):
+    with open(BOOK_PATH, "w", encoding="utf-8") as f:
+        json.dump(remaining, f, indent=2, ensure_ascii=False)
+    print(f"✂️ Updated source list with {len(remaining)} remaining books.\n", flush=True)
 
 def ask_is_book_haram(book):
     title = book.get("title", "Unknown Title")
@@ -70,6 +76,7 @@ def save_book(path, book):
 def append_haram(book):
     os.makedirs(os.path.dirname(HARAM_PATH), exist_ok=True)
     try:
+        book["_checked_at"] = datetime.datetime.now().isoformat()
         if os.path.exists(HARAM_PATH):
             with open(HARAM_PATH, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -79,6 +86,7 @@ def append_haram(book):
         with open(HARAM_PATH, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         print(f"⛔ Added haram book: {book['title']}", flush=True)
+        print(f"📦 Total haram books stored: {len(data)}\n", flush=True)
     except Exception as e:
         print(f"❌ Failed to append haram book: {e}", flush=True)
 
@@ -86,23 +94,31 @@ def append_haram(book):
 def main():
     print("📚 Scanning for the first halal book...\n", flush=True)
     all_books = load_books()
+    remaining_books = []
 
     for i, book in enumerate(all_books, start=1):
         print(f"🔍 [{i}/{len(all_books)}] Checking: {book.get('title')}", flush=True)
         try:
             verdict = ask_is_book_haram(book)
-            if verdict.lower().strip(".! ") == "no":
+            clean_answer = verdict.lower().strip(".! ")
+            if clean_answer == "no":
                 print(f"✅ {book['title']} → Halal! Stopping search.\n", flush=True)
                 save_book(HALAL_PATH, book)
-                return
-            elif verdict.lower().strip(".! ") == "yes":
+                remaining_books = all_books[i:]  # remove current and earlier
+                break
+            elif clean_answer == "yes":
                 append_haram(book)
             else:
-                print(f"⚠️ Unexpected Gemini response: {verdict}", flush=True)
+                print(f"⚠️ Unexpected Gemini response: {verdict}\n", flush=True)
         except Exception as e:
             print(f"❌ Error checking {book.get('title')}: {e}", flush=True)
 
-    print("🚫 No halal book found in the list.\n", flush=True)
+    else:
+        # Only triggered if loop completes without break
+        print("🚫 No halal book found in the list.\n")
+        remaining_books = []
+
+    save_remaining_books(remaining_books)
 
 if __name__ == "__main__":
     main()
