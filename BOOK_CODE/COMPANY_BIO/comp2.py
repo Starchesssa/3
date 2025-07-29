@@ -46,6 +46,7 @@ def generate_chapters(book):
         "list all numbered chapter names  of the book.\n"
         "Number each chapter starting from 1.make sure you list all chapters \n"
         "if the book has no chapters ,make themed chapters for it for my audience to understand the book"
+        "chapters must be 7 and above so that my audience may clearly understand , if the official chapters contian less then no problem"
         "Example format:\n"
         "1. The problem\n"
         "2. Solution Comes\n"
