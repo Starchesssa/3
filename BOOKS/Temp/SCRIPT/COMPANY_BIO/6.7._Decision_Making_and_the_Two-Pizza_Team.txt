@@ -1,0 +1,28 @@
+Imagine you're trying to pick a movie to watch with a huge group of friends – say, twenty people. What happens? Everyone has an opinion, it takes forever to agree, and sometimes you end up watching something nobody really wanted. This is what Amazon tried to avoid when it came to making important decisions.
+
+In Chapter 6 of the book 'Amazon', it talks about "Decision Making and the Two-Pizza Team." It's a simple, smart idea about how to get things done quickly and effectively.
+
+Let's break it down:
+
+First, **Decision Making**. Every company, big or small, has to make countless choices every day. What product to build next? How to solve a customer's problem? Which idea to pursue? If decisions are slow or unclear, the company slows down and can't keep up. Amazon realized that fast, good decisions are key to moving quickly and innovating.
+
+Now, the **Two-Pizza Team**. This is where the brilliant simplicity comes in. A "Two-Pizza Team" is exactly what it sounds like: a team small enough that two pizzas would be enough to feed everyone. Think about it – how many people can you really feed with two large pizzas? Probably somewhere between five and eight people, maybe ten at most.
+
+The idea isn't literally about pizza, of course. It's about the *size* of the team. Amazon found that when teams get too big, decision-making becomes slow and complicated. Too many people means:
+*   **More meetings:** Everyone needs to be in the loop, which means more time talking and less time doing.
+*   **Harder to agree:** More opinions mean more disagreements and longer discussions to reach a consensus.
+*   **Less ownership:** When a big group makes a decision, it's easy for individuals to feel less responsible for the outcome. "Someone else will handle it."
+
+So, how does the Two-Pizza Team help with decision making?
+
+1.  **Speed:** With only a few people, discussions are shorter, and agreement comes much faster. Imagine our movie example again – it's much easier for five friends to pick a movie than twenty.
+2.  **Clarity:** Everyone on a small team can easily understand the goal and their role in achieving it. There's less room for confusion.
+3.  **Ownership and Responsibility:** In a small team, it's clear who is accountable. If a decision is made, the people on that two-pizza team are directly responsible for its success or failure. This makes people think harder about their choices and feel more invested.
+4.  **Innovation:** Small teams can be more experimental and nimble. They can try new things without needing to convince a huge number of people. If something doesn't work, they can pivot quickly.
+
+**Here's an example:**
+Let's say Amazon wants to add a new small feature to its website – maybe a new way to track your delivery.
+*   **Old way (big team):** A large department meeting with people from design, engineering, marketing, legal, customer service. Everyone gives input, a lot of time is spent debating small details, and it takes weeks to get a final decision.
+*   **Two-Pizza Team way:** A small team of 6-7 people – a designer, two engineers, a product manager, and perhaps someone from customer experience. They sit together, quickly hash out the ideas, make a decision, and start building the feature almost immediately. They own it from start to finish.
+
+In essence, the "Two-Pizza Team" concept is Amazon's way of making sure that decision-making is kept simple, fast, and effective by empowering small, focused groups of people to take charge and deliver results. It's all about avoiding the "too many cooks spoil the broth" problem and instead making sure every team is agile and accountable.
