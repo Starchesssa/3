@@ -1,0 +1,50 @@
+
+name: 📚 Check Company Bio Books (Halal or Haram)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "company-bio-check"
+  cancel-in-progress: true
+
+jobs:
+  check-company-bio:
+    runs-on: ubuntu-latest
+    name: 🤖 Run Halal/Haram Checker on Company Bio Books
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🧠 Install Gemini SDK and Run Script
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u BOOK_CODE/COMPANY_BIO/comp1.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Updates
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/USED/COMPANY_BIO
+          git add BOOKS/Temp/COMPANY_BIO
+
+          if git diff --cached --quiet; then
+            echo "🟡 No book status updates to commit."
+          else
+            git commit -m "📚 Gemini book scan result: Moved books to USED or Temp"
+            git push
+            echo "✅ Book status committed and pushed."
+          fi
