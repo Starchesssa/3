@@ -52,8 +52,10 @@ def ask_is_book_haram(book):
                 model=MODEL,
                 contents=[{"role": "user", "parts": [{"text": prompt}]}]
             )
+            answer = response.text.strip()
             print(f"✅ Checked with API#{i + 1} for: {title}", flush=True)
-            return response.text.strip()
+            print(f"🧠 Gemini Response: \"{answer}\"\n", flush=True)
+            return answer
         except Exception as e:
             print(f"⚠️ API#{i + 1} failed. Error: {e}", flush=True)
             time.sleep(1)
@@ -89,11 +91,11 @@ def main():
         print(f"🔍 [{i}/{len(all_books)}] Checking: {book.get('title')}", flush=True)
         try:
             verdict = ask_is_book_haram(book)
-            if verdict.lower() == "no":
+            if verdict.lower().strip(".! ") == "no":
                 print(f"✅ {book['title']} → Halal! Stopping search.\n", flush=True)
                 save_book(HALAL_PATH, book)
                 return
-            elif verdict.lower() == "yes":
+            elif verdict.lower().strip(".! ") == "yes":
                 append_haram(book)
             else:
                 print(f"⚠️ Unexpected Gemini response: {verdict}", flush=True)
