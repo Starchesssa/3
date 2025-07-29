@@ -26,7 +26,11 @@ jobs:
           pip install --no-cache-dir --progress-bar=off google-genai
           python -u BOOK_CODE/COMPANY_BIO/comp2.py
         env:
-          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API1: ${{ secrets.GEMINI_API1 }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
 
       - name: ✅ Commit & Push Generated Script
         run: |
