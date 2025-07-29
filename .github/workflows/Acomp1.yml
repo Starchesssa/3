@@ -1,4 +1,3 @@
-
 name: 📚 Check Company Bio Books (Halal or Haram)
 
 on:
@@ -40,11 +39,12 @@ jobs:
 
           git add BOOKS/USED/COMPANY_BIO
           git add BOOKS/Temp/COMPANY_BIO
+          git add BOOKS/WEALTH/BIO/COMPANY_BIO
 
           if git diff --cached --quiet; then
             echo "🟡 No book status updates to commit."
           else
-            git commit -m "📚 Gemini book scan result: Moved books to USED or Temp"
+            git commit -m "📚 Gemini book scan result: Updated USED, Temp, and WEALTH"
             git push
             echo "✅ Book status committed and pushed."
           fi
