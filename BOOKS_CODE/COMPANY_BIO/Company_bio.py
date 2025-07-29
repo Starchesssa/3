@@ -41,7 +41,7 @@ def ask_is_book_haram(book):
         f"Company: {company}\n\n"
         "Based on your knowledge, does this book contain any content that is considered haram in Islam, "
         "such as promotion of riba (interest), alcohol, gambling, unethical behavior, or misguidance?\n\n"
-        "**Only answer** with 'Yes' or 'No'. No explanation. Just the word."
+        "Only answer with 'Yes' or 'No'. No explanation. Just the word."
     )
 
     for i, key in enumerate(API_KEYS):
