@@ -36,11 +36,11 @@ def sanitize_filename(name):
 def generate_script(chapter_number, chapter_title, book_title, all_chapters, api_index):
     chapter_list_text = "\n".join([f"{idx+1}. {title}" for idx, title in enumerate(all_chapters)])
     prompt = (
-        f"You are helping write a YouTube narration script based on the book titled '{book_title}'.\n\n"
+        f"From the book titled '{book_title}'.\n\n"
         f"Here is the full chapter list:\n{chapter_list_text}\n\n"
         f"You are now generating a script for **Chapter {chapter_number}: {chapter_title}**.\n\n"
-        "Narrate it in a very clear, simple, and engaging way, like you're explaining it to someone directly.\n"
-        "Break down complex parts into everyday examples and digestible ideas.\n"
+        "Explain in a simple way easy to understand.\n"
+        "Break down complex scenes  into easy .\n"
         "Because its a biograph of a company, explain in a biograph style with real events occured at the time that made attention"
         "Do NOT include any intros, outros, headings, or summaries — just the script content.\n"
         "Do NOT say 'Here's the script' — just return the flat narration script only.\n"
