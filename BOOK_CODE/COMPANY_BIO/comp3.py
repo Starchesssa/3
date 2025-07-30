@@ -40,7 +40,9 @@ def generate_script(chapter_number, chapter_title, book_title, api_index):
         "Break complex scenes into easy parts.\n"
         "Use examples to help the viewer grasp the ideas.\n"
         "Avoid using words that may confuse people (no jargon).\n"
-        "Output the script for a YouTube video — just the flat script. No intros like 'Welcome to my channel', no outros. Just the main script only."
+        "dont ouput anything other than the script, dont say here is the .... no just the script only"
+        "make the script more ready for narration  directly jist like you are talking to someone or narrating a youtube script"
+        "Output the script for a YouTube script — just the flat script. No intros like 'Welcome to my channel', no outros. Just the main script only."
     )
 
     attempts = len(API_KEYS)
