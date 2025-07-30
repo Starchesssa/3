@@ -44,6 +44,7 @@ def generate_script(chapter_number, chapter_title, book_title, all_chapters, api
         "Because its a biograph of a company, explain in a biograph style with real events occured at the time that made attention"
         "Do NOT include any intros, outros, headings, or summaries — just the script content.\n"
         "Do NOT say 'Here's the script' — just return the flat narration script only.\n"
+        "Do not include more than 510 words ,just say whats is more important to know lesson wise or anything in the book that is more important is either lesson wise, shocking, inspiring,sad,succes,etc"
         "Make it ready to be used directly as a voiceover for a video."
     )
 
