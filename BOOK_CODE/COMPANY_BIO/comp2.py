@@ -43,16 +43,16 @@ def generate_chapters(book):
 
     prompt = (
         f'From the book titled "{title}" by {author}, which is about {company}:\n'
-        "list all numbered chapter names  of the book.\n"
-        "Number each chapter starting from 1.make sure you list all chapters \n"
+        "list all key lessons  of the book.\n"
+        "Number each lesson starting from 1.make sure you list all key lessons  \n"
         "if the book has no chapters ,make themed chapters for it for my audience to understand the book"
-        "chapters must be 7 and above so that my audience may clearly understand , if the official chapters contain less then no problem"
+        "lessons must be 7 and above so that my audience may clearly understand , if the lessons contain less then no problem"
         "Example format:\n"
         "1. The problem\n"
         "2. Solution Comes\n"
         "3. Succes \n"
-        "always arrange each chapter in its own line , dont make two chapters in same line,arrange the chapters in a list,each chapter on its own line"
-        "Only provide the numbered chapters text without extra commentary,just chapter only nothing more."
+        "always arrange each lesson  in its own line , dont make two lessons  in same line,arrange the lessons  in a list,each lesson on its own line"
+        "Only provide the numbered lessons  text without extra commentary,just lessons  only nothing more."
     )
 
     for i, key in enumerate(API_KEYS):
