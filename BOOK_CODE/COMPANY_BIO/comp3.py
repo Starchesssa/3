@@ -38,7 +38,7 @@ def generate_script(chapter_number, chapter_title, book_title, all_chapters, api
     prompt = (
         f"From the book titled '{book_title}'.\n\n"
         f"Here is the full chapter list:\n{chapter_list_text}\n\n"
-        f"You are now generating a script for **Chapter {chapter_number}: {chapter_title}**.\n\n"
+        f"You are now generating a script for the lesson : {chapter_title}**.\n\n"
         "Explain in a simple way easy to understand.\n"
         "Break down complex scenes  into easy .\n"
         "Because its a biograph of a company, explain in a biograph style with real events occured at the time that made attention"
