@@ -1,0 +1,49 @@
+
+name: 🔊 Generate TTS from Company Bio Script
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "company-bio-tts"
+  cancel-in-progress: true
+
+jobs:
+  generate-tts:
+    runs-on: ubuntu-latest
+    name: 🎙️ Generate Company Bio TTS
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🧠 Install Gemini SDK & Run TTS Script
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u BOOK_CODE/COMPANY_BIO/comp4.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API1 }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Generated Audio
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/TTS/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new audio to commit."
+          else
+            git commit -m "🔊 Add company bio TTS via Gemini"
+            git push
+            echo "✅ Audio committed and pushed."
+          fi
