@@ -1,0 +1,5 @@
+Embracing long-term thinking means making decisions today that might not show quick results, but will lead to big success far down the road. Imagine planting a tree: you spend effort now, and it takes years to grow, but eventually, it provides a lot of fruit.
+
+Amazon truly understood this with Amazon Web Services, or AWS. Around 2003, Amazon spent billions developing powerful computer systems for its own online store. Instead of just using it internally, they saw a future where other companies would need such services. This was a long-term gamble. It meant pouring massive investments into data centers and engineers, affecting short-term profits for years.
+
+AWS officially launched in 2006. For quite a while, it didn't contribute significantly to Amazon's overall income. Yet, Amazon persisted. By 2020, AWS generated over $45 billion in annual revenue and contributed more than 60% of Amazon's total operating profit. This massive success, built over almost two decades, shows the incredible power of patiently investing for the distant future, rather than focusing only on immediate gains.
