@@ -41,7 +41,7 @@ def generate_script(chapter_number, chapter_title, book_title, all_chapters, api
         f"You are now generating a script for the lesson : {chapter_title}**.\n\n"
         "Explain in a simple way easy to understand.\n"
         "Break down complex scenes  into easy .\n"
-        "Because its a biograph of a company, explain in a biograph style with real events examples  occured at the time that made attention"
+        "relate the book with 'you' ie this vompany did this so you should be careful when..., focus on the audience to educate them on the lesson."
         "Do NOT include any intros, outros, headings, or summaries — just the script content.\n"
         "Do NOT say 'Here's the script' — just return the flat narration script only.\n"
         "Do not include more than 200 words   ,just say whats is more important to know lesson wise or anything in the book that is more important is either lesson wise, shocking, inspiring,sad,succes,etc"
