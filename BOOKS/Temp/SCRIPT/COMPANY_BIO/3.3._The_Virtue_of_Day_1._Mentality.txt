@@ -1,0 +1,5 @@
+Day 1. Mentality means approaching every day as if it's the company's first, ensuring constant innovation, agility, and a relentless focus on customers, avoiding the complacency of 'Day 2' which leads to decline. It's about making high-quality, high-velocity decisions.
+
+Take Amazon Web Services (AWS) as a prime example. Instead of just using its internal infrastructure, Amazon decided to offer it externally. When launched in 2006, it was a bold, unproven bet. By Q4 2023, AWS alone generated $24.2 billion in net sales, representing 14% of Amazon's total revenue and a disproportionately higher share of its operating income. This demonstrates a Day 1 willingness to invent and disrupt even its own business models.
+
+Similarly, Amazon Prime, launched in 2005, offered "free two-day shipping" for an annual fee. Many saw it as a massive cost center. However, by 2023, over 200 million global members were spending significantly more; studies estimate Prime members spend 4.6 times more annually than non-Prime members, around $3,100 versus $700. This Day 1 decision to prioritize customer value over short-term profits fueled incredible loyalty and long-term growth.
