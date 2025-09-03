@@ -39,13 +39,14 @@ def generate_script(chapter_number, chapter_title, book_title, all_chapters, api
         f"From the book titled '{book_title}'.\n\n"
         f"Here is the full chapter list:\n{chapter_list_text}\n\n"
         f"You are now generating a script for the lesson : {chapter_title}**.\n\n"
+        "make sure you geenrate examples, the examples should be real life  events that affected the company via the lesson , ie in 1985 the xyz company invented xyz which was biggest failure , this madeimpact on......."
         "Explain in a simple way easy to understand.\n"
         "Break down complex scenes  into easy and give multiple examples of how the company did it and what the viewer should do.\n"
         "explain step  by step how the comapny did it by using  the lesson or explain the failures also ."
         "relate the book with 'you' ie this company did this so you should be careful when..., focus on the audience to educate them on the lesson."
         "Do NOT include any intros, outros, headings, or summaries — just the script content.\n"
         "Do NOT say 'Here's the script' — just return the flat narration script only.\n"
-        "Do not include more than 200 words   ,just say whats is more important to know lesson wise or anything in the book that is more important is either lesson wise, shocking, inspiring,sad,succes,etc"
+        "Do not include more than 250 words   ,just say whats is more important to know lesson wise or anything in the book that is more important is either lesson wise, shocking, inspiring,sad,succes,etc"
         "Make it ready to be used directly as a voiceover for a video."
     )
 
