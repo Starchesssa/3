@@ -7,7 +7,7 @@ from google import genai
 # === Configuration ===
 CHAPTERS_PATH = "BOOKS/Temp/CHAPTERS"
 SCRIPT_OUTPUT_PATH = "BOOKS/Temp/SCRIPT/COMPANY_BIO"
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-2.5-pro"
 
 # === Load Gemini API keys from environment variables ===
 API_KEYS = [
