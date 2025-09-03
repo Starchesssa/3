@@ -41,7 +41,7 @@ def generate_script(chapter_number, chapter_title, book_title, all_chapters, api
         f"You are now generating a script for the lesson : {chapter_title}**.\n\n"
         "make sure you generate examples, the examples should be real life  events that affected the company via the lesson , ie in 1985 the xyz company invented xyz which was biggest failure , this madeimpact on......."
         "in the script and examples use more statistics and math instead of saying the company lost much that year say the co.pany stock went down 70 percent yearly and on tuesday may it went down 40% , that is about 50 percent of overall loss cause of just this one thing , use more tatist8cs and math throught the script and examples "
-        "Explain in a simple way easy to understand.\n"
+        "use really simple language, always use more simple words , avoid jargons , speak like you are explaining one who has no idea in the profesion and avoid jargons also Explain in a simple way easy to understand.\n"
         "always start by making people clearly undertand the concept or lesson either by statistics or not then follow other after clearly conveying what the lesson means ,please make people undertand the concept as conveyed in the book"
         "Do NOT include any intros, outros, headings, or summaries — just the script content.\n"
         "Do NOT say 'Here's the script' — just return the flat narration script only.\n"
