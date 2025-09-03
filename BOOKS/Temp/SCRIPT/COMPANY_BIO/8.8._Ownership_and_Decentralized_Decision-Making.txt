@@ -1,5 +1,0 @@
-Amazon believes in giving teams true ownership. This means employees don't just complete tasks; they think and act like owners, responsible for the long-term outcomes of their area. A core principle here is decentralized decision-making. Instead of decisions flowing only from the top, they are pushed down to the smallest, most informed teams.
-
-Take their famous 'two-pizza teams' – groups small enough to be fed by two pizzas. Each team is given a clear mission and the autonomy to make decisions rapidly without endless approvals. This empowered structure enabled the incredible innovation seen in AWS. Rather than a central command, individual AWS service teams, like S3 or EC2, owned their services end-to-end, making fast, independent choices.
-
-This approach means faster experimentation and greater accountability. You should empower your teams similarly. Give them clear objectives and the authority to make critical decisions. Trust them to act like owners. When decisions are made closer to the problem, solutions are often better, and execution is quicker, fostering a more innovative and responsible environment.
