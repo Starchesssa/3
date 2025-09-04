@@ -8,7 +8,7 @@ from google import genai  # Make sure google-genai is installed
 # === Configuration ===
 BOOK_PATH = "BOOKS/WEALTH/BIO/COMPANY_BIO"
 CHAPTERS_PATH = "BOOKS/Temp/CHAPTERS"
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-2.5-pro"
 
 # === Load Gemini API keys from environment variables ===
 API_KEYS = [
