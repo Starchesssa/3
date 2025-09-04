@@ -9,7 +9,7 @@ from google import genai
 BOOK_PATH = "BOOKS/WEALTH/BIO/COMPANY_BIO"
 HALAL_PATH = "BOOKS/Temp/COMPANY_BIO"
 HARAM_PATH = "BOOKS/USED/COMPANY_BIO"
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-2.5-pro"
 
 # === Load Gemini API keys ===
 API_KEYS = [
