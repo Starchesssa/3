@@ -23,7 +23,7 @@ jobs:
         run: |
           export PYTHONUNBUFFERED=1
           pip install --no-cache-dir --progress-bar=off google-genai
-          python -u BOOK_CODE/COMPANY_BIO/prompts_gen.py
+          python -u BOOK_CODE/COMPANY_BIO/comp5.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API2: ${{ secrets.GEMINI_API2 }}
