@@ -1,0 +1,52 @@
+
+name: 🎵 Split Audio into Sentences
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "comp6-job"
+  cancel-in-progress: true
+
+jobs:
+  split-audio:
+    runs-on: ubuntu-latest
+    name: 🎧 Run comp6.py (Sentence Splitter)
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg espeak mbrola mbrola-en1
+          pip install --no-cache-dir --progress-bar=off pydub aeneas
+
+      - name: ▶️ Run comp6.py
+        run: |
+          python -u BOOK_CODE/COMPANY_BIO/comp6.py
+
+      - name: ✅ Commit & Push Sentence Clips
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/Sentences/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new audio clips to commit."
+          else
+            git commit -m "🎶 Add sentence-split audio from comp6.py"
+            git push
+            echo "✅ Sentence audio committed and pushed."
+          fi
