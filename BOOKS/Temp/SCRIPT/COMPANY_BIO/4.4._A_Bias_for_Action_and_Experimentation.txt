@@ -1,0 +1,5 @@
+Amazon believes speed is very important in business. It is better to make a decision with 70 percent of the information you need than to wait for 90 percent. This is called a bias for action. It means you should act quickly. Many decisions can be changed later if they are wrong. Waiting too long is often the biggest mistake.
+
+This leads to many experiments. Many of these tests will not work. For example, the Amazon Fire Phone was a big failure in 2014. The company announced a loss of $170 million mostly because of the phone. The price of the phone dropped from $199 to just 99 cents in two months, a fall of over 99 percent.
+
+But this same culture of trying new things created Amazon Web Services, or AWS. AWS started as a small experiment. By 2023, AWS was responsible for over 60 percent of Amazon's entire operating profit. This one big success paid for all the failures like the Fire Phone many times over. Acting fast and testing ideas is a powerful plan.
