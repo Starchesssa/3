@@ -1,7 +1,0 @@
-The lesson "Invent and Simplify" means creating something totally new, but making it incredibly easy for people to use. Imagine building a super-powerful engine. That's the invention. The simplification is making it start with just the turn of a key, so anyone can use it.
-
-A perfect example is Amazon Web Services, or AWS. Amazon built a massive, complex computer network to run its own store. Then, they *invented* a new business: renting that computer power to others.
-
-The simplification was revolutionary. Before AWS, a new company might need to spend 80% of its initial money on computer hardware. Amazon simplified this process down to a few clicks and a credit card payment. This single idea was so powerful that in 2023, while AWS accounted for only 16% of Amazon’s total sales, it generated over 67% of the company's entire operating profit.
-
-Think about their patented 1-Click ordering. Online stores often see cart abandonment rates as high as 70%, meaning 70 out of every 100 shoppers who add an item leave without buying, often due to a long checkout process. Amazon invented and simplified the process to a single click, directly attacking that massive loss of potential sales.
