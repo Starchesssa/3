@@ -1,5 +1,0 @@
-High standards are contagious. This means setting the quality bar so high that it spreads to everyone around you. At Amazon, it's not enough to work hard; you must first be taught to recognize what "great" actually looks like.
-
-A famous example is the 6-page memo. Before big meetings, instead of a simple slideshow, a detailed six-page document is written. A truly great memo might take an employee 30 hours to research and write. A bad one might be rushed in only 3 hours. That's a 90% difference in quality and deep thinking. When a new manager presents a weak, 3-hour memo, they see the high-quality work from others and quickly learn the standard. Their next memo will be much better.
-
-This mindset is why Amazon Web Services, or AWS, can promise 99.999% uptime for many of its services. That sounds close to 99%, right? But the math shows a huge difference. A 99% uptime standard means the service could be down for over 87 hours a year. But Amazon's high standard of 99.999% means it's down for less than 6 minutes per year. That standard, spreading from one person to the next, is how you build a business trusted by millions.
