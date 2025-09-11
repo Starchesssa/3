@@ -1,4 +1,4 @@
-name: 🎵 Split Audio into Sentences
+name: 🎵 Split Audio into Sentences (Whisper)
 
 on:
   workflow_dispatch:
@@ -7,13 +7,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: "comp6-job"
+  group: "comp6-whisper-job"
   cancel-in-progress: true
 
 jobs:
   split-audio:
     runs-on: ubuntu-latest
-    name: 🎧 Run comp6.py (Sentence Splitter)
+    name: 🎧 Run comp6.py (Whisper Sentence Splitter)
 
     steps:
       # 1. Checkout your repo
@@ -29,10 +29,9 @@ jobs:
       # 3. Install system packages and Python dependencies
       - name: 📦 Install Dependencies
         run: |
-          pip install numpy
           sudo apt-get update
-          sudo apt-get install -y ffmpeg espeak mbrola mbrola-en1 build-essential libasound2-dev
-          pip install --no-cache-dir pydub aeneas
+          sudo apt-get install -y ffmpeg
+          pip install --no-cache-dir torch pydub openai-whisper
 
       # 4. Run your comp6.py script
       - name: ▶️ Run comp6.py
@@ -51,6 +50,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "🟡 No new audio clips to commit."
           else
-            git commit -m "🎶 Add sentence-split audio from comp6.py"
+            git commit -m "🎶 Add sentence-split audio from comp6.py (Whisper)"
             git push
             echo "✅ Sentence audio committed and pushed."
