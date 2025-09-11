@@ -44,11 +44,11 @@ def generate_prompts(sentences, api_index):
     prompt = (
         f"This passage has {count} sentences:\n\n"
         f"{passage_text}\n\n"
-        "For each of these sentences, generate an **image prompt** in the style of Kurzgesagt. "
-        "Do not include humans or animals in the prompts. "
-        "Write the prompts numbered (1, 2, 3, ...).prompts should be numbered and arranged vertically  one after another"
-        "Focus on abstract, futuristic, colorful infographic-like visuals. "
-        "Each prompt should visualize the idea of the sentence in a simple, clear way."
+        "For each of these sentences in the script/paragraph desceibe suitable motion graphic animation  that will describe what should be in the video based on the snetence . "
+        "Do not include humans or animals in the descriptions. "
+        "Write the descriptions numbered (1, 2, 3, ...).descriptions  should be numbered and arranged vertically  one after another according to corresponding sentence number,a sentence with a dot at the end is a valid sentence,so look for dots thats where is the sentence complete"
+        "consider the timing, camera movement, gradient ,glow , svgs , and other ,describe ever tiny thing in the video that will convey the message. "
+        "Each description  should visualize the idea of the sentence in a simple, clear way."
     )
 
     attempts = len(API_KEYS)
