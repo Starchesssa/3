@@ -1,5 +1,0 @@
-Imagine you own a small part of a huge company, but you get to make all the important decisions for it. This is what Amazon calls "ownership." To make this work, they use a rule called "two-pizza teams." If a team is too big to be fed by two pizzas, it's too slow to make decisions. Small teams get to act like owners of their specific project.
-
-Let's look at a company that did the opposite. In 2007, Nokia held nearly 50% of the global smartphone market. But by 2013, its market share had plummeted by over 90% to below 5%. A major reason was its slow, centralized decision-making. Ideas had to pass through too many layers of management, and by the time they were approved, the market had already moved on.
-
-In contrast, Amazon Web Services (AWS) started as a small, independent "two-pizza team" project. They were given ownership to solve a problem. In 2023, AWS generated over $90 billion in revenue. While this was only about 16% of Amazon's total sales, it accounted for over 60% of the company's entire operating profit. This single, decentralized team created a business more profitable than the rest of Amazon combined, showing the incredible power of ownership.
