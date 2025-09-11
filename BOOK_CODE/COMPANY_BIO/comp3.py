@@ -3,12 +3,13 @@ import os
 import time
 import re
 import json
+import difflib
 from google import genai
 
 # === Configuration ===
 CHAPTERS_PATH = "BOOKS/Temp/CHAPTERS"
 SCRIPT_OUTPUT_PATH = "BOOKS/Temp/SCRIPT/COMPANY_BIO"
-COMPANY_BIO_PATH = "BOOKS/Temp/COMPANY_BIO"
+COMPANY_BIO_PATH = "BOOKS/Temp/COMPANY_BIO"  # single file, not a directory
 MODEL = "gemini-2.5-pro"
 
 # === Load Gemini API keys from environment variables ===
@@ -36,18 +37,32 @@ def sanitize_filename(name):
     return re.sub(r"[^\w\d\-_. ]+", "", name).replace(" ", "_")
 
 def load_company_info(book_title):
-    """Load company info (title, author, company) from JSON files in COMPANY_BIO directory."""
-    for f in os.listdir(COMPANY_BIO_PATH):
-        if f.endswith(".json"):
-            path = os.path.join(COMPANY_BIO_PATH, f)
-            with open(path, "r", encoding="utf-8") as jf:
-                try:
-                    data = json.load(jf)
-                    for entry in data:
-                        if entry.get("title", "").strip().lower() == book_title.strip().lower():
-                            return entry
-                except Exception as e:
-                    print(f"⚠️ Could not parse {f}: {e}", flush=True)
+    """Load company info (title, author, company) from COMPANY_BIO file with fuzzy match."""
+    if not os.path.exists(COMPANY_BIO_PATH):
+        print(f"❌ COMPANY_BIO file not found: {COMPANY_BIO_PATH}", flush=True)
+        return {"title": book_title, "author": "Unknown", "company": "Unknown"}
+
+    try:
+        with open(COMPANY_BIO_PATH, "r", encoding="utf-8") as jf:
+            data = json.load(jf)
+
+        # Try exact match first
+        for entry in data:
+            if entry.get("title", "").strip().lower() == book_title.strip().lower():
+                return entry
+
+        # If no exact match → fuzzy match
+        titles = [entry.get("title", "") for entry in data]
+        best_match = difflib.get_close_matches(book_title, titles, n=1, cutoff=0.5)
+        if best_match:
+            for entry in data:
+                if entry.get("title") == best_match[0]:
+                    print(f"🔎 Fuzzy matched '{book_title}' → '{best_match[0]}'", flush=True)
+                    return entry
+
+    except Exception as e:
+        print(f"⚠️ Could not parse COMPANY_BIO file: {e}", flush=True)
+
     # Default if no match found
     return {"title": book_title, "author": "Unknown", "company": "Unknown"}
 
@@ -116,7 +131,7 @@ def main():
             return
 
     book_title = selected_file.replace("_chapters.txt", "")
-    book_info = load_company_info(book_title)  # ⬅️ Load title, author, company
+    book_info = load_company_info(book_title)  # ⬅️ fuzzy lookup added
     chapter_file_path = os.path.join(CHAPTERS_PATH, selected_file)
     chapters = read_chapters(chapter_file_path)
 
