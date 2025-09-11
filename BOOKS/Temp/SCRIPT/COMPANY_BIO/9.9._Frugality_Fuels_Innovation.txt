@@ -1,7 +1,0 @@
-Amazon's idea of "Frugality Fuels Innovation" means you don't waste money on things that don't help customers. This forces you to be clever and find new ways to solve problems.
-
-A famous example is the "door desk." In the company's early days, a normal office desk cost around $300. Instead of buying those, Jeff Bezos bought a simple wooden door for about $30 and screwed on four legs for another $20. The total cost was just $50 per desk.
-
-Let's do the math. That's a saving of $250, an 83% cost reduction on each desk. For their first 100 employees, that single decision saved the company $25,000.
-
-This thinking led to bigger things. When creating Amazon Web Services, they didn't buy expensive custom servers. They built their system using basic, low-cost computer parts, cutting initial server costs by an estimated 40%. This massive saving was passed on to customers as lower prices, which helped AWS grow into a business now worth hundreds of billions of dollars. It shows how saving small can lead to innovating big.
