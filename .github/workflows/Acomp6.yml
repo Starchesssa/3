@@ -16,25 +16,30 @@ jobs:
     name: 🎧 Run comp6.py (Sentence Splitter)
 
     steps:
+      # 1. Checkout your repo
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
+      # 2. Setup Python
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
+      # 3. Install system packages and Python dependencies
       - name: 📦 Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg espeak mbrola mbrola-en1
+          sudo apt-get install -y ffmpeg espeak mbrola mbrola-en1 build-essential libasound2-dev
           pip install --no-cache-dir numpy
           pip install --no-cache-dir pydub aeneas
 
+      # 4. Run your comp6.py script
       - name: ▶️ Run comp6.py
         run: |
           python -u BOOK_CODE/COMPANY_BIO/comp6.py
 
+      # 5. Commit & push the sentence audio clips
       - name: ✅ Commit & Push Sentence Clips
         run: |
           git config --global user.name "github-actions"
