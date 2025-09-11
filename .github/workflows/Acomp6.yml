@@ -1,4 +1,3 @@
-
 name: 🎵 Split Audio into Sentences
 
 on:
@@ -29,7 +28,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg espeak mbrola mbrola-en1
-          pip install --no-cache-dir --progress-bar=off pydub aeneas
+          pip install --no-cache-dir numpy
+          pip install --no-cache-dir pydub aeneas
 
       - name: ▶️ Run comp6.py
         run: |
@@ -49,4 +49,3 @@ jobs:
             git commit -m "🎶 Add sentence-split audio from comp6.py"
             git push
             echo "✅ Sentence audio committed and pushed."
-          fi
