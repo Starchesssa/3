@@ -1,3 +1,4 @@
+
 name: 🎵 Split Audio into Sentences (Whisper)
 
 on:
@@ -53,3 +54,4 @@ jobs:
             git commit -m "🎶 Add sentence-split audio from comp6.py (Whisper)"
             git push
             echo "✅ Sentence audio committed and pushed."
+          fi
