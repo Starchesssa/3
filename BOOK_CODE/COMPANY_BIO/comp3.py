@@ -92,7 +92,7 @@ def build_prompt(book_info, sample_years=None, chapters_reference=None):
         f"'{book_info['title']}' by {book_info['author']} about the company {book_info['company']}.{years_text}\n\n"
         "Requirements and style rules:\n"
         "1. The script must be at least 2,500 words long. Do not produce anything shorter than 2,500 words.\n"
-        "2. Write the script as a continuous storytelling journey that explains how the company progressed over time.\n"
+        "2. mantain viewers retention throught the script,hook people,cliffhangers between sections,curiousity driven questions,keep the aidience engaged and suspensful transitions. \n"
         "3. Use a timeline-style narrative. Include clear moments in the company's history such as years like 1999, 2003, 2006, 2008, 2017, 2019 (major failure, COVID-19), 2022 (rise), and similar turning points.\n"
         "4. Structure the script around lessons. Each important theme or lesson must appear as a CAPITALIZED HEADING line. Example heading format: 'KEY LESSON: INNOVATION FAILURE.'\n"
         "5. After each KEY LESSON heading, continue with plain narration sentences that explain the lesson, give concrete real-life events, and show numbers, percentages, dates, and math where appropriate.\n"
