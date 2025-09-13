@@ -43,7 +43,7 @@ jobs:
           GEMINI_API4: ${{ secrets.GEMINI_API4 }}
           GEMINI_API5: ${{ secrets.GEMINI_API5 }}
         run: |
-          python -u BOOKS/Temp/COMPANY_BIO/comp7.py
+          python -u BOOK_CODE/COMPANY_BIO/comp7.py
 
       # 5. Commit & push generated Video.tsx files
       - name: ✅ Commit & Push Video.tsx Files
