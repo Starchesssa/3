@@ -56,3 +56,4 @@ jobs:
             git commit -m "🎶 Add sentence audio and transcript timelines from comp6.py"
             git push
             echo "✅ Files committed and pushed."
+          fi
