@@ -1,6 +1,4 @@
-
 import { registerRoot } from 'remotion';
-import RemotionRoot from './Root';
+import { RemotionVideo } from './Video';
 
-// Register the main Remotion composition
-registerRoot(RemotionRoot);
+registerRoot(RemotionVideo);
