@@ -1,5 +1,5 @@
 
-name: 🎵 Split Audio into Sentences (Whisper)
+name: 🎵 Split Audio into Sentences & Transcripts (Whisper)
 
 on:
   workflow_dispatch:
@@ -39,19 +39,20 @@ jobs:
         run: |
           python -u BOOK_CODE/COMPANY_BIO/comp6.py
 
-      # 5. Commit & push the sentence audio clips
-      - name: ✅ Commit & Push Sentence Clips
+      # 5. Commit & push sentence audio clips AND transcript TXT files
+      - name: ✅ Commit & Push Audio + Transcripts
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
+          # Add both audio clips (Sentences folder) and STT transcripts
           git add BOOKS/Temp/Sentences/
+          git add BOOKS/Temp/STT/*.txt
 
           if git diff --cached --quiet; then
-            echo "🟡 No new audio clips to commit."
+            echo "🟡 No new files to commit."
           else
-            git commit -m "🎶 Add sentence-split audio from comp6.py (Whisper)"
+            git commit -m "🎶 Add sentence audio and transcript timelines from comp6.py"
             git push
-            echo "✅ Sentence audio committed and pushed."
-          fi
+            echo "✅ Files committed and pushed."
