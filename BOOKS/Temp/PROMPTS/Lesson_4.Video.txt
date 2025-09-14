@@ -1,0 +1,98 @@
+1. abstract-gears.jpg
+A dark, sophisticated background with slowly turning gears full
+
+2. glowing-keyhole.jpg
+A semi-transparent keyhole emitting a soft light in a white background
+
+3. dollar-to-product-stream.jpg
+A stream of dollar signs and product boxes in a white background
+
+4. 2006-amazon-homepage.jpg
+A blurry screenshot of the Amazon.com homepage from 2006 full
+
+5. warehouse-aisle.jpg
+A classic Amazon warehouse aisle, slightly out of focus full
+
+6. vintage-crt-monitor.jpg
+The frame of an old CRT monitor in a white background
+
+7. dark-server-room.jpg
+A wide shot of a vast, dark server room with blinking LEDs full
+
+8. scrolling-code-overlay.jpg
+A transparent overlay of green, cascading code in a white background
+
+9. complex-server-diagram.jpg
+A messy, chaotic whiteboard diagram of a server architecture full
+
+10. throbbing-red-glow.jpg
+A soft, pulsing red glow in a white background
+
+11. tangled-wires.jpg
+A thick mess of tangled computer cables in a white background
+
+12. network-nodes-abstract.jpg
+An abstract background of glowing, interconnected nodes full
+
+13. database-stack-icon.jpg
+A clean, glowing icon of a database stack in a white background
+
+14. server-blade-closeup.jpg
+A close-up shot of a server blade in a white background
+
+15. industrial-machine-dark.jpg
+The interior of a massive, complex industrial machine full
+
+16. beast-shadow-overlay.jpg
+A subtle, shadowy silhouette of a monstrous creature in a white background
+
+17. office-whiteboard.jpg
+A typical office whiteboard background full
+
+18. red-cost-graph.jpg
+A simple graph in red showing high costs in a white background
+
+19. glowing-lightbulb-idea.jpg
+A bright, glowing lightbulb in a white background
+
+20. clean-blueprint.jpg
+A clean, blue blueprint background full
+
+21. central-hub-diagram.jpg
+A diagram of a central hub in a white background
+
+22. arrows-to-logos.jpg
+Arrows radiating outwards from a hub to generic company logos in a white background
+
+23. sky-with-clouds.jpg
+An epic shot of the sky and clouds at sunrise full
+
+24. aws-logo-official.jpg
+The official AWS logo in a white background
+
+25. power-lines-sunset.jpg
+Silhouettes of electrical power lines against a sunset full
+
+26. data-flow-abstract.jpg
+Abstract streams of data flowing like electricity in a white background
+
+27. power-plug-to-cloud.jpg
+An icon of a power plug connecting to a cloud icon in a white background
+
+28. blurry-crowd.jpg
+A background of a blurry, indistinct crowd of people full
+
+29. floating-question-marks.jpg
+Semi-transparent question marks in a white background
+
+30. digital-water-surface.jpg
+A dark, digital water-like surface full
+
+31. ripple-effect.jpg
+A massive, glowing ripple effect in a white background
+
+32. futuristic-cityscape.jpg
+A bright, thriving futuristic cityscape full
+
+33. expense-report-overlay.jpg
+A semi-transparent overlay of an expense report in a white background

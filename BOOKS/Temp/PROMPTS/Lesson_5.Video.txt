@@ -1,0 +1,80 @@
+1. chess-board-bg.jpg
+A dark, high-contrast image of a chessboard, full
+
+2. chess-piece-mg.jpg
+A single, powerful chess piece like a Queen or King in a white background
+
+3. chess-foreground-blur.jpg
+Out-of-focus chess pieces in the foreground, full
+
+4. stock-market-crash-bg.jpg
+A chaotic, red stock market graph plunging downwards, full
+
+5. nyse-building-mg.jpg
+The facade of the New York Stock Exchange building in a white background
+
+6. trader-blur-fg.jpg
+Blurred figures of distressed traders or falling ticker symbols, full
+
+7. lehman-building-bg.jpg
+The iconic Lehman Brothers office building, dark and empty, full
+
+8. bankruptcy-newspaper-mg.jpg
+A crumpled newspaper with a headline about bankruptcy in a white background
+
+9. papers-flying-fg.jpg
+Scattered office papers flying in the air and out of focus, full
+
+10. empty-office-bg.jpg
+A vast, dark, and empty office space at night, full
+
+11. lonely-chair-mg.jpg
+A single, lonely office chair in a white background
+
+12. vault-door-fg.jpg
+A locked vault or safe door in a white background
+
+13. digital-blueprint-bg.jpg
+Abstract, glowing digital blueprints or code, full
+
+14. kindle-product-mg.jpg
+The first Amazon Kindle device in a white background
+
+15. glowing-letters-fg.jpg
+Floating, semi-transparent glowing letters and words, full
+
+16. old-library-bg.jpg
+The interior of a classic, grand library with old books, full
+
+17. hand-with-kindle-mg.jpg
+A hand holding a glowing Kindle in a white background
+
+18. printing-press-fg.jpg
+A close-up, out-of-focus shot of an old printing press gear in a white background
+
+19. recession-headlines-bg.jpg
+A chaotic collage of recession headlines, full
+
+20. circuit-board-mg.jpg
+A microprocessor or circuit board in a white background
+
+21. money-stack-fg.jpg
+Piles of coins and hundred-dollar bills, slightly blurred, full
+
+22. storm-clearing-bg.jpg
+A dramatic image of a powerful storm clearing to reveal sunlight, full
+
+23. resilient-tree-mg.jpg
+A single, strong, resilient tree in a white background
+
+24. debris-fg.jpg
+Blown leaves and debris in the foreground, full
+
+25. sunrise-horizon-bg.jpg
+A beautiful, epic sunrise over a mountain range or city, full
+
+26. amazon-logo-glow-mg.jpg
+A stylized, glowing Amazon logo in a white background
+
+27. growth-chart-fg.jpg
+A simple, elegant chart line showing exponential growth in a white background

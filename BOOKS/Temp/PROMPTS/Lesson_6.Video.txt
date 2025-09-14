@@ -1,0 +1,65 @@
+1. dust_overlay.png
+Image of dust and particle overlay, full
+
+2. rich_farmland.jpg
+A rich, green field, full
+
+3. cash_cow.jpg
+A stylized, healthy cow with a subtle dollar sign marking on a white background
+
+4. digital_calendar.jpg
+A sleek, futuristic interface displaying "2017" prominently, full
+
+5. dark_server_room.jpg
+An ominous, vast server room, full
+
+6. money_printer.jpg
+A stylized machine or server churning out glowing dollar bills on a white background
+
+7. data_background.jpg
+An abstract background of flowing data lines, full
+
+8. revenue_chart.jpg
+A clean, bold bar chart showing exponential growth to $17B on a white background
+
+9. office_background.jpg
+A generic corporate background, full
+
+10. margin_comparison.jpg
+A graphic comparing a thin sliver for retail to a large block for AWS on a white background
+
+11. vault_interior.jpg
+The inside of a massive bank vault, full
+
+12. war_chest.jpg
+An overflowing, ornate treasure chest labeled "AWS Profits" on a white background
+
+13. news_background.jpg
+A busy, abstract newsroom backdrop, full
+
+14. amazon_wholefoods_logos.jpg
+The Amazon and Whole Foods logos merging together on a white background
+
+15. shocked_crowd.jpg
+A blurred photo of many surprised faces, full
+
+16. ecommerce_vs_store.jpg
+A graphic showing a digital shopping cart crashing into a physical storefront on a white background
+
+17. stock_market_floor.jpg
+A chaotic trading floor, full
+
+18. plummeting_stock_chart.jpg
+A red stock chart line falling off a cliff, with competitor logos like Kroger and Costco at the bottom on a white background
+
+19. abstract_blue.jpg
+A simple, clean abstract blue background, full
+
+20. balancing_scale.jpg
+A large balancing scale, with a small pile of gold ($13.7B) on one side and a much larger, heavier pile (Market Loss) on the other on a white background
+
+21. gears_and_cogs.jpg
+A background of intricate, moving gears, full
+
+22. chessboard.jpg
+A chessboard with a glowing piece making an unexpected, game-changing move on a white background
