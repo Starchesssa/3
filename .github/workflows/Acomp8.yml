@@ -1,0 +1,62 @@
+
+name: 🖼️ Generate Image Prompts from VIDEO_TSX
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "comp8-prompts-job"
+  cancel-in-progress: true
+
+jobs:
+  generate-prompts:
+    runs-on: ubuntu-latest
+    name: 📝 Run comp8.py (Gemini Image Prompt Generator)
+
+    steps:
+      # 1. Checkout repo
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Setup Python
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3. Install system packages and Python dependencies
+      - name: 📦 Install Dependencies
+        run: |
+          sudo apt-get update
+          pip install --no-cache-dir google-genai
+
+      # 4. Run comp8.py
+      - name: ▶️ Run comp8.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: |
+          python -u BOOK_CODE/COMPANY_BIO/comp8.py
+
+      # 5. Commit & push generated PROMPTS files
+      - name: ✅ Commit & Push PROMPTS
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/PROMPTS/*.txt
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new prompts to commit."
+          else
+            git commit -m "🖼️ Add image prompts generated from comp8.py"
+            git push
+            echo "✅ Prompts committed and pushed."
+          fi
