@@ -64,13 +64,13 @@ Timeline from transcript (start --> end : text):
 {timeline_content}
 
 Visual requirements:
-- Base container: <AbsoluteFill style={{backgroundColor: '#000'}} />
 - All images (.jpg) are in assets/images:
 {image_list_str}
+- The name of the inage should be clear dont just say fore ground , say building.jpg, comment on how each image jpg should look like 
 - Parallax effect: background, midground, foreground layers with smooth camera movement.
 - Cinematic camera: slow zoom and pan across duration.
 - Text sequences: fade-in and fade-out, fully synchronized with timeline.
-- Artistic environment: subtle glow, dust, light, smooth transitions.
+- Artistic environment: subtle glow, dust, light, smooth transitions , all vfx should be built in with your code if you cant then majust just ignore using vfx.
 - Video duration must match audio length.
 - Frame rate: {FPS} fps.
 """
