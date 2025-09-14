@@ -1,0 +1,11 @@
+1. background.jpg
+A full background image for a parallax effect
+
+2. midground.jpg
+A full midground image for a parallax effect
+
+3. foreground.jpg
+A full foreground image for a parallax effect
+
+4. dust-overlay.png
+A full image of dust and light particles on a black background for an overlay effect

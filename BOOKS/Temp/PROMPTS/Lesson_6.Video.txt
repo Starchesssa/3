@@ -1,0 +1,41 @@
+1. data_center.jpg
+Image of a data center, full
+
+2. stock_chart_up.jpg
+Image of a stock chart going up, full
+
+3. newspaper_headlines.jpg
+Image of newspaper headlines, full
+
+4. server_racks_glow.jpg
+Image of server racks glowing, full
+
+5. cash_cow.jpg
+A cash cow in a white background
+
+6. aws_logo.jpg
+AWS logo in a white background
+
+7. war_chest.jpg
+A war chest in a white background
+
+8. amazon_whole_foods.jpg
+Amazon and Whole Foods logos together in a white background
+
+9. stock_chart_down.jpg
+A stock chart going down in a white background
+
+10. grocery_aisle.jpg
+Image of a grocery aisle, full
+
+11. key.jpg
+A key in a white background
+
+12. dollar_bills.jpg
+Image of dollar bills, full
+
+13. chess_piece.jpg
+A chess piece in a white background
+
+14. dust_particles.png
+Image of dust particles, full
