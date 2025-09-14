@@ -1,5 +1,0 @@
-1. background.jpg
-full
-
-2. midground.jpg
-A midground object with a white background
