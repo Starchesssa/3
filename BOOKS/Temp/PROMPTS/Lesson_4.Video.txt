@@ -1,8 +1,0 @@
-1. data-center-bg.jpg
-Full image of a data center background
-
-2. server-racks-mid.jpg
-Full image of server racks
-
-3. digital-overlay-fg.jpg
-Full image of a digital technology overlay
