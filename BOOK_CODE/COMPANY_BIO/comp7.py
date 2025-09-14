@@ -66,7 +66,8 @@ Timeline from transcript (start --> end : text):
 Visual requirements:
 - All images (.jpg) are in assets/images:
 {image_list_str}
-- The name of the inage should be clear dont just say fore ground , say building.jpg, comment on how each image jpg should look like 
+- The name of the inage should be clear dont just say fore ground , say building.jpg, comment on how each image jpg should look like.
+- each sentence must have new env ie new jpg, effects ,overlays etc , the video shoukd not be static , each sentence should reveal and convey message visually ,  with new layers of images animated in paralax.
 - Parallax effect: background, midground, foreground layers with smooth camera movement.
 - Cinematic camera: slow zoom and pan across duration.
 - Text sequences: fade-in and fade-out, fully synchronized with timeline.
