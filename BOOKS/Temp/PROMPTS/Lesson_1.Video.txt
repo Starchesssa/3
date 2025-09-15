@@ -1,0 +1,95 @@
+1. background_abstract_dark.jpg
+A dark, moody, subtly textured background
+
+2. foreground_key.png
+A large, ornate, antique key in a white background
+
+3. overlay_glowing_path.png
+A faint, glowing path or nebula leading into the distance in a white background
+
+4. background_1999_computer.jpg
+A retro CRT monitor with a green and black terminal screen aesthetic
+
+5. overlay_stock_chart_green.png
+A glowing green stock chart line going sharply up in a white background
+
+6. overlay_bubbles.png
+Subtle, semi-transparent bubbles floating upwards in a white background
+
+7. background_trading_floor.jpg
+A bustling, slightly blurred 90s trading floor
+
+8. foreground_confident_trader.png
+A silhouette of a trader looking triumphant in a white background
+
+9. overlay_up_arrows.png
+Faint, glowing green arrows pointing up in a white background
+
+10. background_old_amazon_website.jpg
+A recreation of the 1999 Amazon homepage
+
+11. midground_book_stack.png
+A stack of physical books in a white background
+
+12. overlay_server_lines.png
+Glowing lines representing data and the internet in a white background
+
+13. background_wall_street.jpg
+The iconic Wall Street bull or building, dark and imposing
+
+14. foreground_bezos_silhouette.png
+A silhouette of a person facing the background in a white background
+
+15. background_dark_abstract.jpg
+A dark, textured background
+
+16. midground_falling_dollars.png
+Bills of money falling in a white background
+
+17. overlay_red_graph_down.png
+A red line graph pointing downwards in a white background
+
+18. background_small_bookstore.jpg
+A quaint, small bookstore
+
+19. background_massive_warehouse.jpg
+A huge, sprawling Amazon fulfillment center
+
+20. overlay_blueprint_grid.png
+A schematic blueprint grid overlay in a white background
+
+21. background_parchment.jpg
+A textured paper or parchment background
+
+22. overlay_handwritten_text.png
+Stylized text quote from a letter in a white background
+
+23. overlay_light_beam.png
+A soft light beam in a white background
+
+24. background_stock_ticker.jpg
+A blur of green numbers and tickers
+
+25. midground_rocket.png
+A rocket graphic with a green stock line trail in a white background
+
+26. overlay_confetti.png
+Subtle celebratory confetti in a white background
+
+27. background_foggy_horizon.jpg
+A vast, empty landscape with a foggy, distant horizon
+
+28. midground_single_coin.png
+A single coin being tossed in a white background
+
+29. background_books_loss.jpg
+A pile of books with red down-arrows on them
+
+30. background_global_empire.jpg
+A futuristic image of a global network and data streams
+
+31. background_galaxy.jpg
+A swirling galaxy or nebula
+
+32. midground_human_head_silhouette.png
+A silhouette of a human head in a white background

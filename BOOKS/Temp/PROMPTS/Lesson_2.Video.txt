@@ -1,0 +1,86 @@
+1. background_abstract_light.jpg
+A soft, out-of-focus light texture full
+
+2. key_golden.png
+An ornate golden key in a white background
+
+3. background_market_chart_blur.jpg
+A blurry, abstract stock chart full
+
+4. swing_pendulum.png
+A large pendulum in a white background
+
+5. background_old_map.jpg
+A textured, vintage world map full
+
+6. compass_vintage.png
+An antique brass compass in a white background
+
+7. background_city_night.jpg
+A vibrant city skyline at night full
+
+8. bubbles_soap.png
+Floating soap bubbles in a white background
+
+9. smoke_effect.png
+Wisps of smoke/dust in a white background
+
+10. background_digital_graveyard.jpg
+Dark, glitchy digital background full
+
+11. logo_petscom.png
+Pets.com logo in a white background
+
+12. logo_webvan.png
+Webvan logo in a white background
+
+13. background_wall_street.jpg
+A dark, imposing shot of a Wall Street building full
+
+14. amazon_logo_old.png
+Old Amazon logo in a white background
+
+15. bomb_cartoon.png
+A cartoon bomb in a white background
+
+16. background_graph_paper.jpg
+A simple graph paper texture full
+
+17. stock_chart_down.png
+A stylized red line graph showing a dramatic drop in a white background
+
+18. shattering_glass.png
+Glass shard fragments in a white background
+
+19. background_office_desk.jpg
+A founder's desk with blueprints, etc. full
+
+20. dust_particles.png
+A particle overlay in a white background
+
+21. background_boardroom_tense.jpg
+A dark, tense boardroom setting full
+
+22. scissors_cutting_rope.png
+Scissors cutting a rope in a white background
+
+23. background_construction_site.jpg
+A construction site at dawn full
+
+24. blueprints_glowing.png
+Glowing blue blueprint lines in a white background
+
+25. background_static_tv.jpg
+A screen with TV static full
+
+26. bull_bear_fighting.png
+Silhouettes of a bull and bear clashing in a white background
+
+27. background_stormy_sea.jpg
+A dark, stormy ocean full
+
+28. ship_sturdy.png
+A sturdy ship on the water in a white background
+
+29. lighthouse_beam.png
+A strong beam of light in a white background

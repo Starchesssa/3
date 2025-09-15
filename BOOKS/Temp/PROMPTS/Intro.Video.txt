@@ -1,0 +1,35 @@
+1. rules-background.jpg
+A slightly out-of-focus image of a gridded, oppressive-looking city or library as a full background
+
+2. rulebook-overlay.png
+A semi-transparent, glowing rulebook or set of geometric lines in a white background
+
+3. office-background.jpg
+A sterile, modern but soulless office environment as a full background
+
+4. spreadsheet.png
+A stylized, glowing spreadsheet grid in a white background
+
+5. money-background.jpg
+A dark, moody background with abstract shapes resembling coins or currency as a full background
+
+6. profit-graph.png
+A glowing green, upward-trending stock chart in a white background
+
+7. forgettable-street.jpg
+A sepia-toned or desaturated photo of a row of identical, small, boring buildings as a full background
+
+8. imposing-building.jpg
+A dramatic, low-angle shot of a single, unique, futuristic skyscraper at night as a full background
+
+9. system-gears.jpg
+A dark background showing an intricate, glowing network of gears, circuits, or abstract lines as a full background
+
+10. abstract-rules.png
+A foreground layer of floating, glowing particles or symbols in a white background
+
+11. earth-from-space.jpg
+A high-quality image of planet Earth from space as a full background
+
+12. world-eater.png
+A massive, shadowy, mechanical structure in a white background

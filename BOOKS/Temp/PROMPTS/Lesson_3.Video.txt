@@ -1,0 +1,92 @@
+1. dark_library.jpg
+A moody, dimly lit library or study, with bookshelves out of focus in the background.
+
+2. ornate_key.png
+A single, old, detailed key with a slight glow in a white background.
+
+3. forge_background.jpg
+A dark, fiery industrial forge environment with sparks and heat haze.
+
+4. glowing_sword.png
+A powerful sword, glowing with an inner light, presented vertically in a white background.
+
+5. digital_background.jpg
+A dark background with cascading green digital numbers, like in The Matrix.
+
+6. dotcom_graveyard.jpg
+A misty, desolate landscape at dusk with tombstones.
+
+7. fog_overlay.png
+A semi-transparent layer of fog to add depth in a white background.
+
+8. stormy_sky.jpg
+A dark, dramatic sky with storm clouds and a hint of lightning.
+
+9. damaged_tower.png
+A tall, stone tower with visible cracks and damage but still standing strong in a white background.
+
+10. cracking_ground.jpg
+A close-up shot of dry, cracked earth or concrete spreading.
+
+11. blueprint.jpg
+A detailed, complex technical blueprint with a dark blue background.
+
+12. glowing_lines.png
+A transparent overlay of glowing lines that match some of the blueprint's paths in a white background.
+
+13. dark_machinery.jpg
+A background of complex, dark metallic gears and cogs.
+
+14. golden_coin.png
+A single, shiny golden coin, rendered realistically in a white background.
+
+15. stock_chart.jpg
+A digital display of a stock market chart, mostly showing a red downward trend.
+
+16. green_uptick.png
+A transparent overlay of a single, sharp, glowing green line moving upwards in a white background.
+
+17. package_mountain.jpg
+An immense, overwhelming pile of cardboard packages stretching into the distance.
+
+18. glowing_speck.png
+A tiny, bright pinpoint of light in a white background.
+
+19. upward_graph.jpg
+A clean, modern digital graph with a steady, strong upward trend line in green.
+
+20. factory_floor.jpg
+A bustling, bright, and productive modern factory or warehouse interior.
+
+21. wall_street_building.png
+An iconic Wall Street building, made semi-transparent and faded in a white background.
+
+22. engine_room.jpg
+The dark interior of a massive engine room or power plant.
+
+23. glowing_core.png
+A bright, pulsating blue or orange energy core in a white background.
+
+24. endless_road.jpg
+A road stretching to a distant horizon under a vast sky.
+
+25. dissolving_finish_line.png
+A finish line tape that appears to be breaking apart into particles in a white background.
+
+26. abstract_tech_background.jpg
+A dark, abstract background with flowing lines of light and data points.
+
+27. rocket_launch.png
+A rocket taking off, angled from the side in a white background.
+
+28. dna_strand.png
+A glowing DNA helix for 'experiment' in a white background.
+
+29. crane_building.png
+A silhouette of a crane building a skyscraper in a white background.
+
+30. concrete_foundation.jpg
+A massive, epic-scale construction foundation with steel rebar.
+
+31. looming_shadows.png
+Dark, shadowy silhouettes of corporate skyscrapers in the misty background in a white background.

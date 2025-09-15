@@ -1,0 +1,59 @@
+1. abstract-bg.jpg
+A dark, textured background full image
+
+2. growth-line.png
+A jagged, non-linear line in a white background
+
+3. cityscape-dusk.jpg
+A city at dusk full image
+
+4. calendar-2022.png
+A calendar showing the year 2022 in a white background
+
+5. financial-data-bg.jpg
+Background of financial data and charts full image
+
+6. inflation-graph.png
+A rising graph showing high inflation in a white background
+
+7. tech-stock-chart.png
+A falling stock market chart in a white background
+
+8. overbuilt-warehouse.jpg
+A wide, massive warehouse interior full image
+
+9. amazon-stock-drop-chart.png
+A chart showing a fifty percent stock drop in a white background
+
+10. empty-offices.jpg
+A somber image of empty offices full image
+
+11. media-headlines.png
+A collage of media headlines in a white background
+
+12. glowing-machine.png
+A complex, glowing machine in a white background
+
+13. aws-servers.jpg
+A high-tech, cool-toned image of server racks full image
+
+14. aws-growth-chart.png
+A strong, upward-trending growth chart in a white background
+
+15. storm-clouds.jpg
+Dark, dramatic storm clouds full image
+
+16. cash-cow.png
+A stylized, literal representation of a cash cow in a white background
+
+17. lighthouse.jpg
+A lighthouse standing strong in a storm full image
+
+18. sunrise-bg.jpg
+A sunrise over a landscape full image
+
+19. battlefield-ruins.png
+Ruins on a battlefield in a white background
+
+20. amazon-empire.png
+A futuristic, strong building representing an empire in a white background

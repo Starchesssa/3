@@ -1,0 +1,80 @@
+1. blueprint_background.jpg
+A dark, moody background with faint blueprint lines full
+
+2. key.png
+An ornate, glowing antique key in a white background
+
+3. failure_stamp.png
+A red, grunge-style "FAILURE" stamp in a white background
+
+4. calendar_2019.png
+A single calendar page for 2019, looking slightly worn, in a white background
+
+5. ghostly_phone.png
+A semi-transparent, ghostly image of a generic failed smartphone in a white background
+
+6. fire_phone.png
+A clear product shot of the Amazon Fire Phone in a white background
+
+7. tech_stage_background.jpg
+A dark, empty tech conference stage with a single spotlight full
+
+8. cracked_glass.png
+A transparent overlay of shattered glass in a white background
+
+9. stock_chart_down.png
+A red stock market graph plummeting downwards in a white background
+
+10. newspaper_clipping.png
+A generic newspaper clipping texture in a white background
+
+11. apple_logo_silhouette.png
+A dark silhouette of the Apple logo in a white background
+
+12. google_logo_silhouette.png
+A dark silhouette of the Google logo in a white background
+
+13. bezos_portrait.jpg
+A determined-looking portrait of Jeff Bezos, preferably in black and white full
+
+14. sunrise_background.jpg
+A hopeful, beautiful sunrise over a landscape full
+
+15. brain_connections.png
+A stylized brain with glowing neural pathways in a white background
+
+16. engineers_team.png
+A diverse team of engineers collaborating in a white background
+
+17. supply_chain_diagram.png
+A complex, glowing supply chain flowchart in a white background
+
+18. repurpose_symbol.png
+A circular arrow/recycling symbol, glowing green, in a white background
+
+19. echo_blueprint.png
+A technical blueprint drawing of an Amazon Echo device in a white background
+
+20. amazon_echo.png
+A clean product shot of a first-generation Amazon Echo in a white background
+
+21. alexa_logo.png
+The Amazon Alexa logo in a white background
+
+22. smart_home_background.jpg
+A modern, stylish living room with subtle smart home elements full
+
+23. ashes.png
+A small pile of grey ashes in a white background
+
+24. sprout.png
+A single green sprout emerging from the ground in a white background
+
+25. success_tree.png
+A large, flourishing, vibrant tree with a strong trunk in a white background
+
+26. bright_sky_background.jpg
+A clear, bright blue sky with a few fluffy clouds full
+
+27. dust_overlay.png
+A subtle, semi-transparent overlay of dust particles in a white background
