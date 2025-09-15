@@ -64,16 +64,16 @@ Timeline from transcript (start --> end : text):
 {timeline_content}
 
 Visual requirements:
-- All images (.jpg) are in assets/images:
+- All images (.jpg/png) are in assets/images:if an image requires transparent background save as .png if image requires full square image save as jpg (especially background)
 {image_list_str}
-- The name of the inage should be clear dont just say fore ground , say building.jpg, comment on how each image jpg should look like.
-- each sentence must have new env ie new jpg, effects ,overlays etc , the video shoukd not be static , each sentence should reveal and convey message visually ,  with new layers of images animated in paralax.
-- Parallax effect: background, midground, foreground layers with smooth camera movement.
-- Cinematic camera: slow zoom and pan across duration.
+- The name of the image should be clear dont just say fore ground , say building.ppg, comment on how each image jpg/png should look like.
+- each sentence must have new env ie new jpg,png, effects ,overlays etc , the video shoukd not be static , each sentence should reveal and convey message visually ,  with new layers of images animated in paralax.
+- Parallax effect:  layers with smooth camera movement.
+- Cinematic camera: slow zoom pan,rotate,pull back reveal(dolly zoom),paralax shift,tracking , key frames etc across duration.
 - Text sequences: fade-in and fade-out, fully synchronized with timeline.
-- Artistic environment: subtle glow, dust, light, smooth transitions , all vfx should be built in with your code if you cant then majust just ignore using vfx.
+- Artistic environment: subtle glow, dust, light, smooth transitions , all vfx should be built in with your code if you cant make the with code then just just ignore using vfx.
 - Video duration must match audio length.
-- Frame rate: {FPS} fps.
+- Frame rate: {FPS} fps.make general scene more decorative 
 """
     return prompt
 
