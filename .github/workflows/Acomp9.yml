@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Step 3: Install dependencies
+      # Step 3: Install dependencies (including onnxruntime for rembg)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests rembg opencv-python
+          pip install requests rembg opencv-python onnxruntime
 
       # Step 4: Create output directory
       - name: Create assets/images directory
