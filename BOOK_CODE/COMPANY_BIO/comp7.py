@@ -64,9 +64,10 @@ Timeline from transcript (start --> end : text):
 {timeline_content}
 
 Visual requirements:
-- All images (.jpg/png) are in assets/images:if an image requires transparent background save as .png if image requires full square image save as jpg (especially background)
+- All images (.jpg/png) are in assets/images:if an image requires transparent background save as .png if image requires full square/rectangle image save as jpg (especially background)
 {image_list_str}
 - The name of the image should be clear dont just say fore ground , say building.ppg, comment on how each image jpg/png should look like.
+- the overall video  should be 16:9 aspect ration and 4k quality.
 - each sentence must have new env ie new jpg,png, effects ,overlays etc , the video shoukd not be static , each sentence should reveal and convey message visually ,  with new layers of images animated in paralax.
 - Parallax effect:  layers with smooth camera movement.
 - Cinematic camera: slow zoom pan,rotate,pull back reveal(dolly zoom),paralax shift,tracking , key frames etc across duration.
