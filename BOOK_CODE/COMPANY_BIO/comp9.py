@@ -1,4 +1,3 @@
-
 import os
 import time
 import requests
@@ -9,7 +8,6 @@ OUTPUT_DIR = "assets/images"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_image(prompt, save_path, retries=3, delay=5):
-    """Download image from Pollinations AI with retry logic."""
     url = f"https://image.pollinations.ai/prompt/{prompt.replace(' ', '%20')}"
     attempt = 0
     while attempt < retries:
@@ -30,12 +28,10 @@ def generate_image(prompt, save_path, retries=3, delay=5):
         if attempt < retries:
             print(f"🔄 Retrying in {delay} seconds...")
             time.sleep(delay)
-
     print(f"❌ Giving up on: {prompt}")
     return False
 
 def remove_bg_and_save_as_png(jpg_path):
-    """Remove background and save as PNG."""
     try:
         with open(jpg_path, "rb") as f:
             input_data = f.read()
@@ -58,35 +54,35 @@ for txt_file in os.listdir(PROMPTS_DIR):
 
     txt_path = os.path.join(PROMPTS_DIR, txt_file)
     with open(txt_path, "r", encoding="utf-8") as f:
-        lines = f.read().strip().splitlines()
+        lines = [line.strip() for line in f if line.strip()]  # remove empty lines
 
-    # Process pairs: filename line + description line
     i = 0
-    while i < len(lines) - 1:
-        filename_line = lines[i].strip()
-        description_line = lines[i+1].strip()
-
-        # Ensure valid format like "1. bullet.png"
+    while i < len(lines):
+        filename_line = lines[i]
+        # Skip lines that don't have a dot (just in case)
         if "." not in filename_line:
             i += 1
             continue
 
         # Extract filename after number prefix
-        try:
-            _, filename = filename_line.split(".", 1)
-            filename = filename.strip()
-        except ValueError:
-            i += 1
+        parts = filename_line.split(".", 1)
+        if len(parts) == 2:
+            filename = parts[1].strip()  # this is the real filename like crumbling_building.png
+        else:
+            filename = filename_line.strip()
+
+        # Get description line
+        description_line = lines[i+1] if i+1 < len(lines) else ""
+        description_line = description_line.strip()
+
+        if not filename or not description_line:
+            i += 2
             continue
 
-        if not filename:
-            i += 1
-            continue
-
-        # Save as JPG first using original name
+        # Save JPG first
         jpg_path = os.path.join(OUTPUT_DIR, os.path.splitext(filename)[0] + ".jpg")
 
         if generate_image(description_line, jpg_path):
             remove_bg_and_save_as_png(jpg_path)
 
-        i += 2  # Move to next pair
+        i += 2
