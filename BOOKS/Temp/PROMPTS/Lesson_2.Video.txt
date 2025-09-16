@@ -1,0 +1,58 @@
+background_abstract_light.jpg
+Image of a soft, out-of-focus light texture
+key_golden.png
+An ornate golden key in a white background
+background_market_chart_blur.jpg
+Image of a blurry, abstract stock chart
+swing_pendulum.png
+A large pendulum in a white background
+background_old_map.jpg
+Image of a textured, vintage world map
+compass_vintage.png
+An antique brass compass in a white background
+background_city_night.jpg
+Image of a vibrant city skyline at night
+bubbles_soap.png
+Floating soap bubbles in a white background
+smoke_effect.png
+Wisps of smoke or dust in a white background
+background_digital_graveyard.jpg
+Image of a dark, glitchy digital background
+logo_petscom.png
+The Pets.com logo in a white background
+logo_webvan.png
+The Webvan logo in a white background
+background_wall_street.jpg
+Image of a dark, imposing shot of a Wall Street building
+amazon_logo_old.png
+The old Amazon logo in a white background
+bomb_cartoon.png
+A cartoon bomb in a white background
+background_graph_paper.jpg
+Image of a simple graph paper texture
+stock_chart_down.png
+A stylized red line graph showing a dramatic drop in a white background
+shattering_glass.png
+Glass shard fragments in a white background
+background_office_desk.jpg
+Image of a founder's desk with blueprints and other items
+dust_particles.png
+An overlay of dust particles in a white background
+background_boardroom_tense.jpg
+Image of a dark, tense boardroom setting
+scissors_cutting_rope.png
+Scissors cutting a rope in a white background
+background_construction_site.jpg
+Image of a construction site at dawn
+blueprints_glowing.png
+Glowing blue blueprint lines in a white background
+background_static_tv.jpg
+Image of a screen with TV static
+bull_bear_fighting.png
+Silhouettes of a bull and a bear clashing in a white background
+background_stormy_sea.jpg
+Image of a dark, stormy ocean
+ship_sturdy.png
+A sturdy ship on the water in a white background
+lighthouse_beam.png
+A strong beam of light from a lighthouse in a white background

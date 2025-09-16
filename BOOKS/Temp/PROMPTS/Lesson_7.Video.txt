@@ -1,0 +1,54 @@
+blueprint_background.jpg
+Image of a dark, moody background with faint blueprint lines
+key.png
+An ornate, glowing antique key in a white background
+failure_stamp.png
+A red, grunge-style "FAILURE" stamp in a white background
+calendar_2019.png
+A single calendar page for 2019, looking slightly worn, in a white background
+ghostly_phone.png
+A semi-transparent, ghostly image of a generic failed smartphone in a white background
+fire_phone.png
+A clear product shot of the Amazon Fire Phone in a white background
+tech_stage_background.jpg
+Image of a dark, empty tech conference stage with a single spotlight
+cracked_glass.png
+An overlay of shattered glass in a white background
+stock_chart_down.png
+A red stock market graph plummeting downwards in a white background
+newspaper_clipping.png
+A generic newspaper clipping texture in a white background
+apple_logo_silhouette.png
+A dark silhouette of the Apple logo in a white background
+google_logo_silhouette.png
+A dark silhouette of the Google logo in a white background
+bezos_portrait.jpg
+A determined-looking portrait of Jeff Bezos, in black and white
+sunrise_background.jpg
+Image of a hopeful, beautiful sunrise over a landscape
+brain_connections.png
+A stylized brain with glowing neural pathways in a white background
+engineers_team.png
+A diverse team of engineers collaborating in a white background
+supply_chain_diagram.png
+A complex, glowing supply chain flowchart in a white background
+repurpose_symbol.png
+A circular arrow/recycling symbol, glowing green, in a white background
+echo_blueprint.png
+A technical blueprint drawing of an Amazon Echo device in a white background
+amazon_echo.png
+A clean product shot of a first-generation Amazon Echo in a white background
+alexa_logo.png
+The Amazon Alexa logo in a white background
+smart_home_background.jpg
+Image of a modern, stylish living room with subtle smart home elements
+ashes.png
+A small pile of grey ashes in a white background
+sprout.png
+A single green sprout emerging from the ground in a white background
+success_tree.png
+A large, flourishing, vibrant tree with a strong trunk in a white background
+bright_sky_background.jpg
+Image of a clear, bright blue sky with a few fluffy clouds
+dust_overlay.png
+A subtle, semi-transparent overlay of dust particles in a white background
