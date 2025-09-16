@@ -1,0 +1,80 @@
+abstract-background-1.jpg
+A full-screen, dark, high-tech background image featuring subtle, intricate patterns of glowing blue and purple digital circuit lines that softly pulse and flow, creating a sense of deep, complex technology.
+
+glowing-key.png
+A photorealistic image of a single, ornate, vintage brass key viewed directly from the front. The key is emitting a soft, ethereal golden light from within and has a visible aura around its edges, set against a pure white background.
+
+expense-to-product.png
+A minimalist graphic on a white background, showing a thick, vibrant red arrow pointing downwards that seamlessly curves upwards and transforms into a bright green, stylized icon of a factory with a smokestack, symbolizing the conversion of an expense into an asset.
+
+amazon-warehouse-2006.jpg
+A full-screen, wide-angle photograph capturing the immense scale of a warehouse interior circa 2006. The image has a slightly grainy, desaturated quality and shows endless aisles of towering metal shelves packed with brown cardboard boxes under harsh, industrial fluorescent lighting.
+
+calendar-2006.png
+A crisp, clean image of a standard white spiral-bound desk calendar, shot from a slight angle. The page is flipped to a header page that prominently displays the year "2006" in a bold, black, sans-serif font, isolated on a white background.
+
+tech-background-2.jpg
+A full-screen, dark background image featuring a dense network of glowing, razor-thin cyan and blue circuit board traces that recede into the distance with a shallow depth of field, creating a futuristic and complex technological aesthetic.
+
+server-blueprint.png
+A highly detailed technical drawing of a server farm's architecture, rendered in a classic blueprint style with sharp white lines and annotations on a deep blue background, all presented as a clean cutout on a pure white background.
+
+server-racks-dark.jpg
+A full-screen, atmospheric, eye-level photograph looking down a long, dark data center corridor. The scene is illuminated only by the thousands of small, blinking green and amber LED lights from the server racks that line both sides, reflecting on a polished floor.
+
+tangled-cables.png
+A chaotic, tightly packed cluster of thick red and black computer cables, hopelessly tangled together in a messy knot. The image is shot straight-on and is perfectly isolated on a pure white background.
+
+glowing-data-lines.png
+An abstract image of multiple horizontal streaks of bright, glowing blue light with a slight motion blur effect, representing the rapid flow of digital data, isolated on a pure white background.
+
+generic-office.jpg
+A full-screen photograph of a bland and generic corporate office environment, featuring beige cubicle walls, grey fabric office chairs, and old CRT monitors under flat, sterile fluorescent lighting, conveying a sense of monotony.
+
+cost-cutting-graph.png
+A simple, bold graphic on a white background depicting a 2D business chart. It features a thick, red line that starts high on the left and trends sharply downwards, with a large dollar sign icon next to it to represent cost reduction.
+
+idea-background.jpg
+A full-screen, bright, and inspiring background image of a clear, vivid blue sky with a brilliant, radiant sun casting dramatic golden rays downward from the top of the frame.
+
+lightbulb-idea.png
+A photorealistic icon of a classic, clear glass incandescent lightbulb that is brightly lit. The tungsten filament inside glows with a warm, intense yellow light. The bulb is viewed straight-on and isolated against a pure white background.
+
+blue-tech-background.jpg
+A full-screen, professional corporate background with a smooth gradient from deep navy to a lighter royal blue, overlaid with a subtle, faint pattern of interconnected geometric shapes and thin lines.
+
+aws-network-hub.png
+A clean, informational graphic on a white background, featuring a large, central Amazon Web Services (AWS) logo from which numerous thin, glowing lines radiate outwards to connect with a dozen smaller, stylized, and generic corporate logos.
+
+aws-logo.png
+The official Amazon Web Services (AWS) logo, rendered in its correct corporate colors and proportions, positioned centrally and isolated on a pure white background.
+
+sky-background.jpg
+A full-screen, serene photograph of a clear daytime sky with a gentle gradient from light blue near the horizon to a deeper blue at the top, populated by a few soft, wispy white clouds.
+
+power-plant-silhouette.png
+A sharp, detailed, solid black silhouette of an industrial power plant complex, featuring large buildings and multiple tall smokestacks, viewed from a distance against a pure white background.
+
+data-center-silhouette.png
+A sharp, detailed, solid black silhouette of a large, modern, single-story data center building, characterized by its long, rectangular shape and rooftop cooling units, presented against a pure white background.
+
+confused-background.jpg
+A full-screen, abstract background image filled with a chaotic, overlapping swirl of semi-transparent grey question marks of various sizes and rotations, creating a sense of confusion and uncertainty.
+
+book-icon.png
+A simple, solid black, flat 2D icon of an open book, viewed from the front with stylized lines for pages, isolated on a pure white background.
+
+server-icon.png
+A simple, solid black, flat 2D icon of a tall computer server rack, viewed from the front, showing horizontal lines to represent the stacked servers, isolated on a pure white background.
+
+futuristic-sky.jpg
+A full-screen, vibrant, and awe-inspiring digital illustration of a deep space nebula. The scene is filled with swirling clouds of magenta, purple, and cyan gas, with distant stars and planets visible in the background.
+
+cloud-icon-glowing.png
+A stylized, modern icon of a fluffy white cloud with a soft, ethereal blue glow radiating from its edges, giving it a digital, high-tech appearance, isolated on a pure white background.
+
+expense-report.png
+A crisp, photorealistic image of a generic paper business expense report, shown at a slight angle. The document has a grid with columns and filled-in placeholder data, and is cleanly cut out on a pure white background.
+
+dollar-explosion.png
+A dynamic burst of 3D, shiny golden dollar signs of various sizes radiating outwards from a central point, as if exploding. The image creates a sense of wealth and rapid growth, and is isolated on a pure white background.

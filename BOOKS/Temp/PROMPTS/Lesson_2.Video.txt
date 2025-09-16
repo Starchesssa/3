@@ -1,0 +1,86 @@
+background_abstract_light.jpg
+A full image of a soft, aesthetically pleasing abstract light texture, featuring out-of-focus bokeh lights in warm, gentle tones like gold and cream, creating a dreamy and ethereal background.
+
+key_golden.png
+A highly detailed, ornate, vintage-style golden key, viewed straight-on, gleaming with a metallic sheen under soft lighting, on a white background.
+
+background_market_chart_blur.jpg
+A full image of a digital stock market chart, heavily blurred and abstract, with indistinct lines and numbers in greens and reds, conveying a sense of complex financial data without being readable.
+
+swing_pendulum.png
+A large, classic grandfather clock pendulum made of polished brass, swinging slightly to one side as if in motion, viewed from the front, on a white background.
+
+background_old_map.jpg
+A full image of a vintage, textured world map, with sepia tones, aged paper, and classic cartography, evoking a sense of history and exploration.
+
+compass_vintage.png
+An antique brass compass, viewed from a top-down three-quarter angle, with intricate markings on its face and a clear glass cover, casting a soft shadow, on a white background.
+
+background_city_night.jpg
+A full, vibrant wide-angle photograph of a major city skyline at night, with brilliantly lit skyscrapers, light trails from traffic, and reflections in a body of water in the foreground.
+
+bubbles_soap.png
+A cluster of iridescent, translucent soap bubbles of various sizes, floating upwards, with realistic rainbow-like reflections on their surfaces, on a white background.
+
+smoke_effect.png
+A realistic wisp of thin, white smoke or dust, curling and fading softly at the edges, on a white background.
+
+background_digital_graveyard.jpg
+A full image of a dark, abstract digital background with a glitch art style, featuring corrupted data, distorted pixels, and faint, eerie green and blue code elements, suggesting technological decay.
+
+logo_petscom.png
+The official logo for the company 'Pets.com', featuring the iconic sock puppet mascot, presented clearly and centered, on a white background.
+
+logo_webvan.png
+The official historical logo for the company 'Webvan', featuring its distinctive design and typography, presented clearly and centered, on a white background.
+
+background_wall_street.jpg
+A full image of a Wall Street building, shot from a low angle looking up to create an imposing and powerful effect, in a dark, dramatic, high-contrast black and white or desaturated color style.
+
+amazon_logo_old.png
+The old Amazon.com logo from the late 1990s, featuring the large 'A' with the swoosh underneath that resembles a river, presented cleanly, on a white background.
+
+bomb_cartoon.png
+A classic, spherical black cartoon bomb with a short, lit fuse sparking at the end, presented in a clean, simple illustrative style, on a white background.
+
+background_graph_paper.jpg
+A full image of a clean, simple light blue grid graph paper texture, with evenly spaced lines creating a technical, mathematical background.
+
+stock_chart_down.png
+A stylized, clean line graph, rendered in a bold, vibrant red color, showing a dramatic, steep decline from a high point on the left to a low point on the right, on a white background.
+
+shattering_glass.png
+A dynamic image of sharp, transparent glass fragments frozen in mid-air, radiating outwards from a central point as if capturing the moment of impact, on a white background.
+
+background_office_desk.jpg
+A full, top-down view of a founder's wooden desk, cluttered with creative tools: rolled-up blueprints, calipers, pens, a coffee mug, and a notebook, illuminated by a warm desk lamp.
+
+dust_particles.png
+A high-resolution overlay of fine dust particles and motes floating in the air, appearing as small, out-of-focus white specks as if caught in a sunbeam, on a white background.
+
+background_boardroom_tense.jpg
+A full image of a modern, empty boardroom at night, with a long, polished dark wood table reflecting the dim, moody lighting from overhead fixtures, conveying a tense and serious atmosphere.
+
+scissors_cutting_rope.png
+A pair of sharp, metallic scissors, shown in the act of snapping through a thick, frayed rope, captured at the precise moment of the cut, on a white background.
+
+background_construction_site.jpg
+A full image of a large-scale building construction site during the golden hour of dawn, with silhouettes of cranes and steel frameworks against a soft, warm, orange and purple sky.
+
+blueprints_glowing.png
+An intricate network of architectural blueprint lines, rendered in a glowing, electric blue color, appearing as a holographic projection, on a white background.
+
+background_static_tv.jpg
+A full, close-up image of an old television screen displaying noisy, flickering black and white analog TV static, creating a chaotic and noisy texture.
+
+bull_bear_fighting.png
+A dynamic silhouette of a bull and a bear locked in conflict, with the bull's horns charging and the bear swiping with its claws, rendered in solid black, on a white background.
+
+background_stormy_sea.jpg
+A full, dramatic image of a dark, turbulent ocean during a storm, with massive, crashing waves, a dark, overcast sky, and sea spray in the air.
+
+ship_sturdy.png
+A sturdy, resilient old-fashioned fishing trawler, viewed from a side angle, battling through waves but remaining upright and intact, on a white background.
+
+lighthouse_beam.png
+A powerful, conical beam of bright white light emanating from an unseen source, cutting horizontally through the darkness, with visible rays and a soft glow, on a white background.

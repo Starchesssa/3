@@ -1,0 +1,59 @@
+abstract-bg.jpg
+Image of a dark, subtly textured background, reminiscent of charcoal or dark stone, with very low-key, diffused lighting creating a serious and sophisticated mood, full image.
+
+growth-line.png
+A single, glowing white, jagged, non-linear line chart moving generally upwards from left to right, representing unpredictable growth, on a white background.
+
+cityscape-dusk.jpg
+A wide, panoramic photograph of a sprawling modern cityscape at dusk, with the sky showing a deep blue and orange gradient and city lights beginning to twinkle in the buildings, full image.
+
+calendar-2022.png
+A clean, minimalist, single calendar page showing the year "2022" in a large, bold, modern font, shot straight-on, on a white background.
+
+financial-data-bg.jpg
+An abstract background image of glowing, out-of-focus financial data, stock tickers, and charts in shades of digital blue and green on a dark background, full image.
+
+inflation-graph.png
+A simple, bold line graph with a stark red line that starts low on the left and climbs steeply and dramatically upwards to the top right, on a white background.
+
+tech-stock-chart.png
+A digital stock market candlestick chart with a jagged, volatile red trendline moving sharply downwards, indicating a market crash, on a white background.
+
+overbuilt-warehouse.jpg
+A wide-angle, low-angle photograph of the vast interior of a massive, modern, and mostly empty fulfillment center, with rows of towering shelves stretching into the distance under cool industrial lights, full image.
+
+amazon-stock-drop-chart.png
+A clear line chart with a thick, ominous red line showing a stock price dramatically falling by 50 percent, shot straight-on against a white background.
+
+empty-offices.jpg
+A photograph of a large, modern open-plan office that is completely empty, with chairs neatly tucked under desks and monitors turned off, lit by dim, natural light from large windows, creating a somber mood, full image.
+
+media-headlines.png
+A chaotic, overlapping collage of fictional digital news headlines about business decline and stock market crashes, appearing as a floating cluster of text boxes on a white background.
+
+glowing-machine.png
+A complex, intricate, futuristic machine with glowing blue internal components and energy flowing through visible circuits, looking powerful and reliable, shot straight-on against a white background.
+
+aws-servers.jpg
+A long corridor in a modern data center, lined with rows of sleek, black server racks with blinking blue and white LED status lights, bathed in a cool, high-tech blue light, full image.
+
+aws-growth-chart.png
+A clean, professional bar chart showing strong, consistent, upward growth, with the bars in a confident, glowing blue color, moving from bottom left to top right on a white background.
+
+storm-clouds.jpg
+A dramatic, cinematic photograph of dark, turbulent, heavy storm clouds gathering in the sky, with moody and ominous lighting, full image.
+
+cash-cow.png
+A stylized, golden illustration of a robust and content cow with dollar signs on its hide, standing proudly on a white background.
+
+lighthouse.jpg
+A photograph of a tall, sturdy lighthouse on a rocky shore, with its powerful beam of light cutting through a dark, stormy night as large waves crash against the rocks, full image.
+
+sunrise-bg.jpg
+A beautiful, wide landscape photograph of a vibrant sunrise, with the sun just cresting the horizon and casting warm orange and golden light across a calm sky, full image.
+
+battlefield-ruins.png
+The dark silhouette of a desolate, ruined landscape in the foreground, including crumbled structures and debris, on a white background.
+
+amazon-empire.png
+A grand, futuristic, and imposing building that represents a powerful corporate empire, with sleek, modern architecture, standing tall and undamaged on a white background.

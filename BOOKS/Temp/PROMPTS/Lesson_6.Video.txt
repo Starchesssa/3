@@ -1,0 +1,71 @@
+old_map_bg.jpg
+A full, detailed, antique-style world map with sepia tones, visible textures of aged paper, and intricate cartographic details like continents, oceans, and old-fashioned script. The map should fill the entire frame.
+
+cash_cow.png
+A friendly, cartoon-style cow, standing on all fours and facing slightly towards the camera, with large green dollar bill patterns as its spots. The image should be a clean cutout with a white background.
+
+invasion_arrow.png
+A bold, stylized, solid bright red arrow with a slightly hand-drawn feel, pointing forward. The arrow should be clean and sharp, presented as a cutout on a white background.
+
+server_room_bg.jpg
+A full, atmospheric photograph of a modern data center server room, shot from a low angle looking down an aisle of server racks. The room is dark, with cool blue and green blinking LED lights on the servers creating a high-tech, glowing ambiance.
+
+aws_logo.png
+The official Amazon Web Services (AWS) logo, featuring the distinctive orange smile arrow underneath the bold, dark text. The logo should be a high-resolution cutout on a white background.
+
+dollar_bill.png
+A crisp, clean United States one-dollar bill, shown at a slight three-quarter angle as if floating in the air. The image should be a realistic, detailed cutout on a white background.
+
+data_bg.jpg
+A full, dark blue abstract background image filled with a complex network of thin, glowing cyan lines and digital numbers that appear to be flowing like data streams. The image should have a sense of depth and movement, evoking a high-tech data visualization.
+
+profit_graph.png
+A minimalistic line graph with a dark grid, showing a single, bright green line that starts low on the left and curves steeply upwards to the right, indicating exponential growth. The graph should be a clean cutout on a white background.
+
+cash_pile.png
+A large, neatly organized pile of bundled United States hundred-dollar bills, sitting on a flat surface and shot from a straight-on perspective. The pile should look substantial and valuable, presented as a crisp cutout on a white background.
+
+vault.png
+A highly detailed, realistic, circular bank vault door made of thick, polished steel with complex locking mechanisms and a large turning wheel in the center. The door is closed and viewed from the front, isolated as a cutout on a white background.
+
+war_chest.png
+A large, antique wooden treasure chest with dark, weathered wood and reinforced with heavy, dark iron straps and rivets. The chest is closed and viewed from a slightly angled front perspective, appearing heavy and solid. The image should be a cutout on a white background.
+
+grocery_aisle_bg.jpg
+A full, wide-angle photograph looking down a bright, clean, and modern grocery store aisle. The shelves are fully stocked with colorful products, and the lighting is even and welcoming, with a slightly blurred background to give a sense of depth.
+
+news_bg.jpg
+A full, professional broadcast news background graphic. It should feature a deep red and blue color scheme with abstract globe motifs, moving light streaks, and a clean, modern aesthetic suitable for a "Breaking News" segment.
+
+amazon_logo.png
+The official Amazon logo, featuring the lowercase black text "amazon" with the signature orange smile arrow stretching from 'a' to 'z'. The image should be a high-resolution, clean cutout on a white background.
+
+whole_foods_logo.png
+The official Whole Foods Market logo, with its distinctive circular green design and stylized "O" that resembles a piece of fruit. The image should be a clean, high-resolution cutout on a white background.
+
+shattered_glass_overlay.png
+An overlay image of realistic white cracks resembling shattered glass, originating from the center and spreading outwards towards the edges. The image should be a cutout with a transparent background.
+
+ecommerce_screen.png
+A modern, floating computer monitor screen displaying a generic, clean e-commerce website interface with product listings. The screen should be viewed from a straight-on perspective and have a subtle shadow, presented as a cutout on a white background.
+
+whole_foods_store.jpg
+A full, eye-level photograph of the exterior entrance of a modern Whole Foods Market store on a bright, sunny day. The storefront should be clean, with the green logo clearly visible, and some shoppers entering and exiting the building.
+
+stock_market_bg.jpg
+A full, abstract background image depicting a digital stock market display. It should feature a dark background with overlapping, glowing red and green candlestick charts, tickers, and streams of financial data, creating a dynamic and complex financial atmosphere.
+
+kroger_logo.png
+The official Kroger company logo, featuring its distinctive stylized blue text and design. The image must be a high-resolution, clean cutout on a white background.
+
+costco_logo.png
+The official Costco Wholesale logo, with its bold red and blue text. The image must be a high-resolution, clean cutout on a white background.
+
+data_flow.png
+A series of interconnected, glowing blue and cyan lines in a pattern resembling a digital circuit board or data stream, flowing horizontally from left to right. The lines should have a soft glow and be isolated as a cutout on a white background.
+
+chessboard_bg.jpg
+A full, dramatic, slightly angled top-down photograph of a polished wooden chessboard. The lighting should be moody and cinematic, with deep shadows and highlighted squares, and some classic chess pieces blurred in the background, out of focus.
+
+amazon_chess_piece.png
+A stylized, futuristic chess king piece, made of a sleek, dark material with a bright, glowing cyan light emanating from within and outlining its form. The piece should stand upright and be a clean cutout on a white background.

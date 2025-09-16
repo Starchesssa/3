@@ -1,0 +1,35 @@
+rules-background.jpg
+A full background image of a vast, slightly out-of-focus, gridded cityscape or an endless library with towering shelves, viewed straight-on. The atmosphere is oppressive and monolithic, with cool, muted colors and a sense of rigid, overwhelming order.
+
+rulebook-overlay.png
+An intricate, glowing diagram of white geometric lines, grids, and abstract symbols resembling a futuristic rulebook, presented on a white background. The lines should emit a soft, ethereal light, suggesting digital or magical rules.
+
+office-background.jpg
+A full background image of a sterile, modern, and soulless corporate office, shot from a wide angle. It features endless rows of identical empty desks under harsh, cold, even fluorescent lighting. The color palette is dominated by grays, whites, and metallic tones, conveying an impersonal and clinical atmosphere.
+
+spreadsheet.png
+A stylized, futuristic spreadsheet grid with glowing blue cells and lines, presented at a slight three-quarter angle on a white background. The grid itself should appear infinite, fading into the distance, with abstract data points glowing within the cells.
+
+money-background.jpg
+A full background image that is dark and moody, featuring an abstract, out-of-focus field of softly glowing shapes reminiscent of gold and silver coins. The lighting is low-key, creating a deep, mysterious atmosphere of immense wealth.
+
+profit-graph.png
+A vibrant, glowing green stock market line graph showing a dramatic upward trend, presented straight-on against a white background. The line should have a digital, neon-like quality and be the sole focus, symbolizing pure financial success.
+
+forgettable-street.jpg
+A full background image of a long, monotonous street lined with identical, small, and architecturally boring residential buildings. The photo is desaturated with a slight sepia tone, shot straight-on from street level on a gray, overcast day to evoke a feeling of conformity and anonymity.
+
+imposing-building.jpg
+A full background, dramatic, low-angle worms-eye view of a single, massive, uniquely designed futuristic skyscraper piercing the night sky. The building is illuminated with cool blue and white lights, contrasting sharply against a dark, starless sky, conveying power and innovation.
+
+system-gears.jpg
+A full background image of a dark, complex, and intricate network of glowing mechanical gears and digital circuits intertwined. The image is a close-up, showing immense detail, with cool blue and purple light emanating from the connections, suggesting a vast, thinking machine.
+
+abstract-rules.png
+A collection of floating, glowing, white abstract digital symbols, particles, and thin lines, appearing as a data stream or HUD elements, on a white background. The elements should have a soft, ethereal glow and vary in size and brightness, designed to be used as a foreground overlay.
+
+earth-from-space.jpg
+A full background, high-resolution, photorealistic image of the planet Earth viewed from space. The planet is centered in the frame, with continents clearly visible through swirling white clouds, the deep blue of the oceans prominent, all set against the absolute blackness of space.
+
+world-eater.png
+A massive, menacing, shadowy mechanical structure with metallic tendrils and complex, alien-like architecture, rendered on a white background. The structure should be shot from below to appear vast and ominous, with some parts in deep shadow and others catching a faint, cold metallic glint, designed to look like it is large enough to encompass a planet.
