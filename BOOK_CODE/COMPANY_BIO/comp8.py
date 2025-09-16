@@ -57,6 +57,7 @@ Rules:
 - The names of the images shoukd be the  actual names use in code.
 - after each image name and prompt skip one line ie jump one line before starting another image name and prompt 
 - Keep output as a list with 'name.jpg' followed by prompt below,dont number the list.
+- in each prompt be mor decriptive espacially how do you want an object appear ie dobt just say A chair but say also how do you wnat it yo appear , achair standing is not same as laying , a chair shot from above is not same shot below it looks diff , also describe colour , lights, and each evrything you want to appear.
 - Do not explain. Return only the list.dont say here is the names and prompts no, just be straight and give the actual output only.
 
 Code:
