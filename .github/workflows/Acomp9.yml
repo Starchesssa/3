@@ -1,7 +1,11 @@
+
 name: Generate Images
 
 on:
   workflow_dispatch:  # Allows manual triggering
+
+permissions:
+  contents: write  # Give GitHub Actions write access
 
 jobs:
   generate:
@@ -12,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: true
+          persist-credentials: false  # We'll override remote with token
 
       # Step 2: Set up Python
       - name: Set up Python
@@ -37,7 +41,6 @@ jobs:
           import os
           import requests
           from rembg import remove
-          import cv2
 
           PROMPTS_DIR = "BOOKS/Temp/PROMPTS"
           OUTPUT_DIR = "assets/images"
@@ -98,6 +101,15 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Use token-authenticated remote
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
           git add assets/images
-          git commit -m "Add generated images" || echo "No changes to commit"
-          git push
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "Add generated images"
+            git push
+            echo "✅ Generated images committed and pushed."
+          fi
