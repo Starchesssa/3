@@ -40,13 +40,13 @@ Analyse the following React/TSX code and list all the images required with names
 
 Follow this style exactly:
 
-1. bicycle.jpg
+bicycle.png
 A bicycle in a white background
 
-2. building.jpg
+building.png
 Tall building in a white background
 
-3. darkblue_background.jpg
+darkblue_background.jpg
 Image of dark blue background plain
 
 Rules:
@@ -54,8 +54,8 @@ Rules:
 - If the image needs cutout, specify a white background,ie image of byscle with white background 
 - some images are required as full ie background images or any inage that is required as full make its prompt as full
 - The names of the inages shoukd be the  actual names use in code.
-- Keep output as numbered list with 'name.jpg' followed by prompt below.
-- Do not explain. Return only the list.dont sy here is the names and prompts no, jist be straight and give the actual output only.
+- Keep output as a list with 'name.jpg' followed by prompt below,dont number the list.
+- Do not explain. Return only the list.dont say here is the names and prompts no, just be straight and give the actual output only.
 
 Code:
 {code}
