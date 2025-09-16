@@ -50,38 +50,42 @@ def process_txt_file(txt_path):
     with open(txt_path, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
-    i = 0
     created = 0
+    i = 0
     while i < len(lines) - 1:
-        filename = lines[i]  # take the entire line as filename
-        prompt = lines[i + 1]  # next line is prompt
-        i += 2
+        line = lines[i]
+        # Check if line is a valid image filename
+        if any(line.lower().endswith(ext) for ext in (".jpg", ".jpeg", ".png")):
+            filename = line
+            prompt = lines[i + 1]
+            i += 2  # move past filename + prompt
 
-        # ensure it ends with jpg or png
-        if not filename.lower().endswith((".jpg", ".jpeg", ".png")):
-            print(f"⚠️ Skipping invalid filename: {filename}")
-            continue
+            save_path = os.path.join(OUTPUT_DIR, filename)
+            ext = os.path.splitext(filename)[1].lower()
 
-        save_path = os.path.join(OUTPUT_DIR, filename)
-        ext = os.path.splitext(filename)[1].lower()
+            # Print debug info
+            print(f"\n🔹 Detected filename: {filename}")
+            print(f"🔸 Associated prompt: {prompt[:80]}")
 
-        print(f"Found -> filename: {filename}  prompt: {prompt[:80]}")
-
-        try:
-            if ext in (".jpg", ".jpeg"):
-                if generate_image(prompt, save_path):
-                    created += 1
-            elif ext == ".png":
-                temp_jpg = save_path.replace(".png", "_temp.jpg")
-                if generate_image(prompt, temp_jpg):
-                    if remove_bg(temp_jpg, save_path):
-                        try:
-                            os.remove(temp_jpg)
-                        except Exception:
-                            pass
+            try:
+                if ext in (".jpg", ".jpeg"):
+                    if generate_image(prompt, save_path):
                         created += 1
-        except Exception as e:
-            print(f"❌ Error generating {filename}: {e}")
+                elif ext == ".png":
+                    temp_jpg = save_path.replace(".png", "_temp.jpg")
+                    if generate_image(prompt, temp_jpg):
+                        if remove_bg(temp_jpg, save_path):
+                            try:
+                                os.remove(temp_jpg)
+                            except Exception:
+                                pass
+                            created += 1
+            except Exception as e:
+                print(f"❌ Error generating {filename}: {e}")
+        else:
+            # Line is not a filename, skip it
+            print(f"⚠️ Skipping non-filename line: {line}")
+            i += 1
 
     return created
 
