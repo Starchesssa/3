@@ -49,11 +49,13 @@ Tall building in a white background
 darkblue_background.jpg
 Image of dark blue background plain
 
+skip a line before starting another image name and prompt .
 Rules:
 - all png , automatically requires cutout or transparent background,all jpg should be full ie as background 
 - If the image needs cutout, specify a white background,ie image of byscle with white background 
 - some images are required as full ie background images or any inage that is required as full make its prompt as full
-- The names of the inages shoukd be the  actual names use in code.
+- The names of the images shoukd be the  actual names use in code.
+- after each image name and prompt skip one line ie jump one line before starting another image name and prompt 
 - Keep output as a list with 'name.jpg' followed by prompt below,dont number the list.
 - Do not explain. Return only the list.dont say here is the names and prompts no, just be straight and give the actual output only.
 
