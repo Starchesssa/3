@@ -1,0 +1,41 @@
+digital_network.png
+An intricate, glowing blue and white digital circuit pattern on a white background, with lines emitting a soft light to suggest data flow.
+
+storm_clouds.jpg
+Full image of dark, moody, and cinematic storm clouds. The clouds should be thick and heavy, with dramatic lighting creating deep shadows and bright highlights, giving an ominous and powerful feeling.
+
+earth_globe.jpg
+Full, high-resolution, realistic image of the planet Earth seen from space. The image should be brightly lit by the sun, showing clear continents, deep blue oceans, and swirling white clouds against the blackness of space.
+
+virus_particle.png
+A stylized 3D render of a single COVID-19 virus particle on a white background. The particle should be spherical with prominent red spike proteins, detailed texturing, and realistic shadows to give it depth.
+
+empty_city_street.jpg
+Full, dramatic, wide-angle shot of a major city street, like Times Square, completely deserted by people and traffic. The scene should have a slightly desaturated, melancholic color palette, lit by dusk or dawn light to emphasize the eerie emptiness.
+
+closed_sign.png
+A realistic "CLOSED" sign with bold red and white letters, presented as if hanging on a glass door, on a white background. The sign should feature subtle reflections and highlights to create a glass-like effect.
+
+amazon_warehouse_interior.jpg
+Full, vast, and slightly futuristic interior shot of a massive Amazon fulfillment center. The perspective should capture endless rows of shelves, complex conveyor belts, and robotic arms in motion under a clean, cool-toned industrial lighting.
+
+digital_map_routes.png
+A dark, stylized map of a country, like the USA, with a complex web of glowing orange lines representing delivery routes, on a white background. The lines should look like bright energy trails connecting major hubs across the map.
+
+data_center.jpg
+Full, cinematic shot looking down a long aisle in a modern server room. The server racks should be sleek and dark, illuminated by the glow of thousands of blinking blue and green LED status lights, creating a high-tech, slightly mysterious atmosphere.
+
+netflix_logo.png
+The official, bright red Netflix wordmark logo, perfectly centered and sharp, on a white background.
+
+zoom_logo.png
+The official, clean, and modern Zoom wordmark logo in its iconic shade of blue, perfectly centered, on a white background.
+
+crumbling_building.png
+A single, isolated commercial building shown in a state of decay on a white background. The building should have visible large cracks, broken windows, and clouds of dust and debris around its base to clearly symbolize collapse.
+
+amazon_workers_group.jpg
+Full, wide, positive photograph of a large, diverse group of smiling Amazon workers. They should be standing together in their work vests in a bright, clean, and professional setting, looking directly at the camera.
+
+earth_with_amazon_network.jpg
+Full, composite image of planet Earth from space, intricately wrapped in a dense network of glowing orange and blue lines. These lines should connect continents, representing a vast global logistics and data network against the dark backdrop of space.

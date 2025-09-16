@@ -1,0 +1,59 @@
+abstract-bg.jpg
+A full image of a dark, abstract, textured background with deep blue and black tones. The lighting should be moody and subtle, creating a serious and dramatic atmosphere with a sense of depth.
+
+growth-line.png
+A single, glowing, erratic line on a white background. The line should move in a general upward direction but with many sharp, jagged peaks and valleys, visually representing non-linear, chaotic growth.
+
+cityscape-dusk.jpg
+A full, panoramic photograph of a massive modern city skyline at dusk. The sky is a gradient of deep blue, purple, and orange, and the buildings are filled with twinkling lights, conveying a sense of a bustling, active world.
+
+calendar-2022.png
+A clean, modern, and bold graphic of a single calendar page for the year "2022" on a white background. The design should be minimalist and impactful, shot straight-on for clarity.
+
+financial-data-bg.jpg
+A full background image of a digital screen with flowing, out-of-focus financial data. It should feature glowing stock tickers, charts, and numbers in cool blue and green tones, creating a high-tech, corporate feel.
+
+inflation-graph.png
+A simple and clear line graph with a thick, alarming red line showing a steep and rapid upward curve from left to right, on a white background. The visual should powerfully represent runaway inflation.
+
+tech-stock-chart.png
+A financial candlestick chart, on a white background, dominated by large, red, downward-trending candles. The chart should clearly depict a significant and punishing stock market crash.
+
+overbuilt-warehouse.jpg
+A full, wide-angle interior photograph of a massive, modern, and largely empty warehouse or fulfillment center. The perspective should be from a low angle, looking up at towering, endless rows of shelves to emphasize immense and intimidating scale under cool industrial lighting.
+
+amazon-stock-drop-chart.png
+A clear line graph on a white background, featuring a bold red line that starts high on the left and plummets dramatically to a point about halfway down on the right, with a label clearly indicating a "-50%" drop.
+
+empty-offices.jpg
+A full, somber photograph of a large, contemporary open-plan office that is completely devoid of people. Natural light from large windows illuminates rows of empty desks and dark computer screens, creating a quiet, melancholic atmosphere.
+
+media-headlines.png
+A chaotic, overlapping collage of various digital news headlines related to financial trouble and corporate decline, on a white background. The text should be varied in font and size to create a visual representation of overwhelming and negative media noise.
+
+glowing-machine.png
+An intricate, complex machine with many visible, interlocking gears and components, glowing from within with a powerful blue or golden light, on a white background. The image should represent a powerful, self-sufficient core engine.
+
+aws-servers.jpg
+A full image looking down a long, clean aisle in a modern data center. The server racks on both sides are filled with hardware and have blinking blue and white LED lights, creating a cool-toned, high-tech, and orderly environment.
+
+aws-growth-chart.png
+A clean and positive bar chart on a white background, showing consistently rising bars from left to right. The bars should be a confident blue or green color, visually representing strong, reliable, year-over-year growth.
+
+storm-clouds.jpg
+A full, dramatic, and moody photograph of a sky filled with dark, heavy, and turbulent storm clouds. The scene should be dark and ominous, suggesting an impending and powerful storm.
+
+cash-cow.png
+A stylized, healthy, and robust-looking cow standing proudly on a white background. The illustration should be clean and iconic, possibly with a subtle golden sheen, to literally represent a reliable source of profit.
+
+lighthouse.jpg
+A full, powerful photograph of a tall, strong lighthouse being battered by large, crashing waves during a storm. The lighthouse stands firm on a rocky coast, its bright beam of light cutting through the dark and rainy sky.
+
+sunrise-bg.jpg
+A full, epic, and hopeful photograph of a brilliant sunrise over a calm landscape. The sky is filled with vibrant warm colors—gold, orange, and pink—reflecting on a tranquil sea or misty valley, representing a new beginning.
+
+battlefield-ruins.png
+The dark silhouettes of crumbled buildings, broken structures, and scattered debris on a white background. The scene should look like the aftermath of a great conflict, representing defeated competitors.
+
+amazon-empire.png
+A single, massive, futuristic, and imposing building or citadel standing alone on a white background. The architecture should be grand and solid, conveying unshakable strength, dominance, and a sense of a modern empire.
