@@ -1,8 +1,8 @@
-
 import os
 import time
 import requests
-from rembg import remove
+import cv2
+import numpy as np
 
 PROMPTS_DIR = "BOOKS/Temp/PROMPTS"
 OUTPUT_DIR = "assets/images"
@@ -19,34 +19,45 @@ def generate_image(prompt, save_path, retries=3, delay=5, timeout=30):
                 with open(save_path, "wb") as f:
                     for chunk in resp.iter_content(1024):
                         f.write(chunk)
-                print(f"✅ Saved: {save_path}")
+                print(f"   ✅ Saved: {save_path}")
                 return True
             else:
-                print(f"❌ HTTP {resp.status_code} for prompt: {prompt[:80]}...")
+                print(f"   ❌ HTTP {resp.status_code} for prompt: {prompt[:80]}...")
         except Exception as e:
-            print(f"⚠️ Error: {e} (attempt {attempt})")
+            print(f"   ⚠️ Error: {e} (attempt {attempt})")
         if attempt < retries:
             time.sleep(delay)
-            print(f"🔄 Retrying in {delay}s...")
-    print(f"❌ Giving up on prompt: {prompt[:80]}...")
+            print(f"   🔄 Retrying in {delay}s...")
+    print(f"   ❌ Giving up on prompt: {prompt[:80]}...")
     return False
 
-def remove_bg(jpg_path, png_path):
-    """Remove background from JPG and save as PNG"""
+def remove_bg_white(jpg_path, png_path, threshold=240):
+    """Remove white background using OpenCV"""
     try:
-        with open(jpg_path, "rb") as f:
-            input_data = f.read()
-        output_data = remove(input_data)
+        img = cv2.imread(jpg_path, cv2.IMREAD_UNCHANGED)
+        if img is None:
+            raise ValueError("Image not found or unsupported format")
+
+        if len(img.shape) == 2:
+            img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+
+        img_rgba = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
+
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        _, mask = cv2.threshold(gray, threshold, 255, cv2.THRESH_BINARY)
+
+        img_rgba[:, :, 3] = 255 - mask
+
         os.makedirs(os.path.dirname(png_path) or ".", exist_ok=True)
-        with open(png_path, "wb") as f:
-            f.write(output_data)
-        print(f"🧹 Removed background → {png_path}")
+        cv2.imwrite(png_path, img_rgba)
+        print(f"   🧹 Removed white background → {png_path}")
         return True
     except Exception as e:
-        print(f"⚠️ Background removal failed for {jpg_path}: {e}")
+        print(f"   ⚠️ Background removal failed for {jpg_path}: {e}")
         return False
 
 def process_txt_file(txt_path):
+    print(f"\n📂 Opening file: {txt_path}")
     with open(txt_path, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
@@ -54,18 +65,19 @@ def process_txt_file(txt_path):
     i = 0
     while i < len(lines) - 1:
         line = lines[i]
-        # Check if line is a valid image filename
+        print(f"👉 Line {i}: {line}")
+
         if any(line.lower().endswith(ext) for ext in (".jpg", ".jpeg", ".png")):
             filename = line
             prompt = lines[i + 1]
-            i += 2  # move past filename + prompt
+            i += 2
 
             save_path = os.path.join(OUTPUT_DIR, filename)
             ext = os.path.splitext(filename)[1].lower()
 
-            # Print debug info
-            print(f"\n🔹 Detected filename: {filename}")
-            print(f"🔸 Associated prompt: {prompt[:80]}")
+            print(f"   🔹 Detected filename: {filename}")
+            print(f"   🔸 Associated prompt (line {i-1}): {prompt[:80]}")
+            print(f"   📦 Will save to: {save_path}")
 
             try:
                 if ext in (".jpg", ".jpeg"):
@@ -74,27 +86,31 @@ def process_txt_file(txt_path):
                 elif ext == ".png":
                     temp_jpg = save_path.replace(".png", "_temp.jpg")
                     if generate_image(prompt, temp_jpg):
-                        if remove_bg(temp_jpg, save_path):
+                        if remove_bg_white(temp_jpg, save_path):
                             try:
                                 os.remove(temp_jpg)
-                            except Exception:
-                                pass
+                                print(f"   🗑️ Deleted temp file: {temp_jpg}")
+                            except Exception as e:
+                                print(f"   ⚠️ Could not delete temp file: {e}")
                             created += 1
             except Exception as e:
-                print(f"❌ Error generating {filename}: {e}")
+                print(f"   ❌ Error generating {filename}: {e}")
         else:
-            # Line is not a filename, skip it
-            print(f"⚠️ Skipping non-filename line: {line}")
+            print(f"   ⚠️ Skipping non-filename line {i}: {line}")
             i += 1
 
     return created
 
 # --- main ---
-txt_files = sorted([f for f in os.listdir(PROMPTS_DIR) if f.lower().endswith(".txt")])
-total_created = 0
+txt_files = [f for f in os.listdir(PROMPTS_DIR) if f.lower().endswith(".txt")]
+print("\n📂 Files before sort:", txt_files)
 
+txt_files = sorted(txt_files)
+print("📑 Files after sort:", txt_files)
+
+total_created = 0
 for idx, txt_file in enumerate(txt_files, start=1):
-    print(f"\n📄 ({idx}/{len(txt_files)}) Processing: {txt_file}")
+    print(f"\n🚀 ({idx}/{len(txt_files)}) Processing: {txt_file}")
     created = process_txt_file(os.path.join(PROMPTS_DIR, txt_file))
     print(f"➡️ Created {created} images from {txt_file}")
     total_created += created
