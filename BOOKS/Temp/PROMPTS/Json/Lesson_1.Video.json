@@ -1,0 +1,130 @@
+[
+    {
+        "name": "background_abstract_dark.jpg",
+        "description": "A full image of a dark, moody, abstract background with subtle, non-distracting textures. The overall tone should be deep, mysterious, and cinematic, using dark blues and charcoals."
+    },
+    {
+        "name": "foreground_key.png",
+        "description": "A large, ornate, antique-style key made of dark, weathered brass, standing vertically and viewed from the front, with a white background."
+    },
+    {
+        "name": "overlay_glowing_path.png",
+        "description": "An image of a faint, ethereal glowing path, similar to a nebula or cosmic dust trail, leading from the bottom-left into the distance, with a white background. The glow should be a soft, magical white."
+    },
+    {
+        "name": "background_1999_computer.jpg",
+        "description": "A full image of a retro, beige CRT computer monitor from the late 1990s, viewed head-on. The screen is dark, displaying glowing green code text and a blinking cursor."
+    },
+    {
+        "name": "overlay_stock_chart_green.png",
+        "description": "A glowing, bright green, digital stock chart line graph moving sharply upwards from left to right, representing rapid growth, with a white background."
+    },
+    {
+        "name": "overlay_bubbles.png",
+        "description": "An image of various sizes of subtle, semi-transparent, iridescent soap bubbles floating upwards, with a white background."
+    },
+    {
+        "name": "background_trading_floor.jpg",
+        "description": "A full image of a bustling, high-energy stock market trading floor from the 1990s, filled with traders and monitors, with a slight motion blur to convey frenetic activity."
+    },
+    {
+        "name": "foreground_confident_trader.png",
+        "description": "A dark, crisp silhouette of a stock trader from the chest up, viewed from a slightly low angle, with arms raised in a triumphant gesture, with a white background."
+    },
+    {
+        "name": "overlay_up_arrows.png",
+        "description": "An image of multiple faint, glowing green arrows of various sizes pointing upwards and slightly to the right, arranged randomly, with a white background."
+    },
+    {
+        "name": "background_old_amazon_website.jpg",
+        "description": "A full image recreating the Amazon.com website homepage from around 1999, featuring the old logo, a simple layout, and blue hyperlinks."
+    },
+    {
+        "name": "midground_book_stack.png",
+        "description": "A neat, vertical stack of five hardcover books with varied colors, viewed from a front-three-quarters angle, with a white background."
+    },
+    {
+        "name": "overlay_server_lines.png",
+        "description": "An image of a complex network of thin, glowing blue and white lines representing data streams, crisscrossing the frame, with a white background."
+    },
+    {
+        "name": "background_wall_street.jpg",
+        "description": "A full, dramatic, low-angle shot of the New York Stock Exchange building at dusk, appearing dark and imposing with deep shadows."
+    },
+    {
+        "name": "foreground_bezos_silhouette.png",
+        "description": "A full-body, dark silhouette of a man with a distinctive bald head, resembling Jeff Bezos, standing and facing away from the viewer, with a white background."
+    },
+    {
+        "name": "background_dark_abstract.jpg",
+        "description": "A full image of a dark, abstract background with a gritty, distressed texture like concrete or aged metal in muted charcoal and grey tones."
+    },
+    {
+        "name": "midground_falling_dollars.png",
+        "description": "An image of numerous US dollar bills appearing to fall from the top of the frame, captured with motion blur, with a white background."
+    },
+    {
+        "name": "overlay_red_graph_down.png",
+        "description": "A stark, glowing red digital line graph moving sharply downwards from left to right, indicating a steep decline, with a white background."
+    },
+    {
+        "name": "background_small_bookstore.jpg",
+        "description": "A full image of the interior of a quaint, cozy independent bookstore, with warm lighting and wooden shelves packed with books."
+    },
+    {
+        "name": "background_massive_warehouse.jpg",
+        "description": "A full, wide-angle interior shot of a massive, modern Amazon fulfillment center, with towering shelves and conveyor belts stretching into the distance."
+    },
+    {
+        "name": "overlay_blueprint_grid.png",
+        "description": "A light blue grid pattern resembling a technical blueprint or a schematic, with measurement lines, on a white background."
+    },
+    {
+        "name": "background_parchment.jpg",
+        "description": "A full, high-resolution image of a sheet of aged, slightly yellowed parchment paper with a visible, rustic texture."
+    },
+    {
+        "name": "overlay_handwritten_text.png",
+        "description": "An image of a block of text written in an elegant, classic cursive font, resembling ink from a fountain pen, with a white background."
+    },
+    {
+        "name": "overlay_light_beam.png",
+        "description": "An image of a single, soft, diagonal beam of warm light, like a sunbeam, with visible dust motes, with a white background."
+    },
+    {
+        "name": "background_stock_ticker.jpg",
+        "description": "A full image of a digital stock ticker screen with glowing green numbers, symbols, and up-arrows, with a slight motion blur."
+    },
+    {
+        "name": "midground_rocket.png",
+        "description": "A stylized, sleek rocket ship launching diagonally upwards, trailing a thick, glowing green line that looks like a stock market graph, with a white background."
+    },
+    {
+        "name": "overlay_confetti.png",
+        "description": "An image of subtle, colorful, celebratory confetti pieces gently falling, with a white background."
+    },
+    {
+        "name": "background_foggy_horizon.jpg",
+        "description": "A full, atmospheric photograph of a vast, empty landscape extending to a distant horizon obscured by thick fog, creating a mysterious mood."
+    },
+    {
+        "name": "midground_single_coin.png",
+        "description": "A single, shiny golden coin captured mid-air as if it has been tossed, spinning with slight motion blur, with a white background."
+    },
+    {
+        "name": "background_books_loss.jpg",
+        "description": "A full image of a disorganized pile of old books on a dark surface, with semi-transparent, glowing red arrows pointing downwards superimposed on them."
+    },
+    {
+        "name": "background_global_empire.jpg",
+        "description": "A full, futuristic image depicting a glowing digital globe with interconnected data streams, in a high-tech style with a dark blue and cyan color palette."
+    },
+    {
+        "name": "background_galaxy.jpg",
+        "description": "A full, high-resolution astrophotography image of a swirling spiral galaxy, filled with stars and cosmic dust in vibrant blues, purples, and pinks."
+    },
+    {
+        "name": "midground_human_head_silhouette.png",
+        "description": "A crisp, dark silhouette of a human head in profile, viewed from the side, with a white background."
+    }
+]
