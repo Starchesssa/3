@@ -1,0 +1,42 @@
+
+name: 📂 Convert Prompts TXT to JSON
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "prompts-json"
+  cancel-in-progress: true
+
+jobs:
+  convert-prompts:
+    runs-on: ubuntu-latest
+    name: 📝 Convert TXT to JSON
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Run comp8a.py
+        run: |
+          export PYTHONUNBUFFERED=1
+          python -u BOOK_CODE/COMPANY_BIO/comp8a.py
+
+      - name: ✅ Commit & Push Generated JSON
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/PROMPTS/Json/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new JSON files to commit."
+          else
+            git commit -m "📂 Add converted JSON prompts"
+            git push
+            echo "✅ JSON committed and pushed."
+          fi
