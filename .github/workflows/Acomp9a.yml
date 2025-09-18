@@ -1,0 +1,44 @@
+
+name: 🎬 Render All Videos
+
+on:
+  workflow_dispatch:  # run manually
+
+permissions:
+  contents: write  # allow pushing results
+
+jobs:
+  render-all:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🎥 Render all videos
+        run: npm run render:all
+
+      - name: ✅ Commit and push rendered videos
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add out/
+          if git diff --cached --quiet; then
+            echo "🟡 No new videos to commit."
+          else
+            git commit -m "🎬 Add rendered videos"
+            git push
+            echo "✅ Videos committed and pushed."
+          fi
