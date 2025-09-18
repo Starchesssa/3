@@ -63,6 +63,13 @@ Audio file: '{os.path.join(TTS_PATH, wav_file)}'
 Timeline from transcript (start --> end : text):
 {timeline_content}
 
+"When generating React/Remotion TSX code, do not put complex expressions or template literals directly inside style={{…}} objects. Instead, assign dynamic values to variables before using them in the style. For example:
+
+const transformValue = `scale(${scale}) translateY(${y}px)`;  
+<Img style={{ transform: transformValue }} />
+
+You can still use all dynamic animations, transforms, parallax, and opacity effects — just make sure to compute the values outside the JSX style object first."
+
 Visual requirements:
 - All images (.jpg/png) are in assets/images:if an image requires transparent background save as .png if image requires full square/rectangle image save as jpg (especially background)
 {image_list_str}
