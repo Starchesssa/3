@@ -1,0 +1,116 @@
+old-paper-texture.jpg
+A full, detailed, high-resolution texture of aged, yellowed parchment paper with subtle creases and stains, creating a vintage feel.
+
+golden-cow.png
+A photorealistic, colourful cow statue made entirely of polished, shimmering gold, standing proudly in a three-quarters view with a white background.
+
+old-map.jpg
+A full, vintage-style world map with faded, sepia-toned colors, illustrated sea monsters in the oceans, and elegant calligraphic labels, spread flat.
+
+army-pieces.png
+A collection of colourful, plastic tabletop war game army pieces, including miniature tanks and soldiers, arranged in a strategic formation as seen from a slightly elevated angle, with a white background.
+
+tech-background.jpg
+A full, abstract technology background in dark blue, featuring glowing cyan circuit board lines and faint digital data streams moving across the screen.
+
+stormy-sky.jpg
+A full, dramatic and cinematic image of a dark, turbulent sky filled with swirling grey and black storm clouds, with a distant flash of lightning illuminating the scene.
+
+monster-silhouette.png
+A menacing, dark colourful silhouette of a giant, Godzilla-like monster with glowing red eyes, captured mid-roar with its arms raised aggressively, with a white background.
+
+aws-logo.png
+The official Amazon Web Services (AWS) logo, colourful and vibrant with its distinct orange and white design, presented flat, clean, and centered, with a white background.
+
+factory-interior.jpg
+A full, wide-angle photograph of a vast, industrial factory interior, featuring large, complex machinery, metal catwalks, and dim, atmospheric lighting that casts long shadows.
+
+printing-press.png
+A detailed, colourful, vintage industrial printing press machine, shown from a front-facing, slightly angled perspective, appearing heavy and powerful, with a white background.
+
+aws-dollar-bills.png
+A stack of colourful, stylized US dollar bills, where the president's portrait is replaced by the AWS logo, fanned out slightly to show detail, with a white background.
+
+corporate-background.jpg
+A full, bright, out-of-focus background of a modern, sleek corporate office, showing glass walls, minimalist furniture, and a professional, sunlit ambiance.
+
+coins.png
+A small, scattered pile of colourful, shiny metal coins of various sizes, appearing slightly worn and realistic, as if just dropped on a surface, with a white background.
+
+gold-bars.png
+Several neat stacks of shiny, colourful, polished gold bars, reflecting bright light and arranged to convey a sense of immense wealth and security, with a white background.
+
+heavenly-light-background.jpg
+A full, ethereal background image of bright, golden heavenly light beams shining down powerfully from above through soft, white, fluffy clouds.
+
+light-rays.png
+A transparent overlay of vibrant, colorful light rays or beams, emanating from a central point and spreading outwards dynamically, designed to be placed over other images, with a white background.
+
+city-at-night.jpg
+A full, stunning panoramic photograph of a sprawling metropolis at night, taken from a high vantage point, with countless glowing lights from skyscrapers and traffic creating streaks of light.
+
+ceo-silhouette.png
+A sharp, dark colourful silhouette of a person in a business suit, standing confidently with hands on hips, viewed from behind as they look out over a vast cityscape, with a white background.
+
+shareholders.jpg
+A full image depicting a diverse group of business professionals seated around a large conference table, looking attentive and engaged in a formal meeting.
+
+vault.jpg
+A full, impressive photograph looking directly into a massive, open bank vault door, revealing walls lined with safety deposit boxes and stacks of gold bars inside.
+
+war-chest.png
+A large, ornate, colourful antique wooden treasure chest, bound with heavy iron straps and overflowing with glowing gold coins, sparkling jewels, and other riches, with a white background.
+
+newspaper-background.jpg
+A full, macro-texture background created from a collage of overlapping old newspapers, with visible headlines and articles in classic black and white print.
+
+amazon-logo.png
+The official colourful Amazon logo, featuring the black text and the iconic orange swoosh arrow from 'a' to 'z', presented flat and centered, with a white background.
+
+whole-foods-logo.png
+The official colourful Whole Foods Market logo, featuring the distinctive green circular design with a leaf forming the 'o' in 'whole', presented flat and centered, with a white background.
+
+starburst-background.jpg
+A full, vibrant, and colourful comic-book style starburst background with sharp yellow and orange rays exploding dynamically from the center.
+
+earth.png
+A vibrant and colourful, high-resolution, photorealistic image of the planet Earth as seen from space, showing detailed continents, blue oceans, and swirling white clouds, with a white background.
+
+grocery-store-front.jpg
+A full, clear, eye-level photograph of the exterior of a modern, brightly lit grocery store at dusk, with large glass windows showing the interior and a welcoming entrance.
+
+ecommerce-crown.png
+A small, colourful, stylized golden crown featuring digital, circuit-like patterns etched into its surface, glowing with a soft blue light, with a white background.
+
+shopping-cart.png
+A clean, modern, colourful metal shopping cart, empty and viewed from a side-angle perspective, looking shiny and new, with a white background.
+
+stock-market-background.jpg
+A full, abstract background of a digital stock market ticker board, with glowing green and red numbers, charts, and graphs moving quickly and dynamically.
+
+kroger-logo.png
+The official colourful Kroger logo in its signature blue and red "racetrack" design, presented flat, clean, and centered, with a white background.
+
+costco-logo.png
+The official colourful Costco Wholesale logo, featuring its bold red and blue text, presented flat, clean, and centered, with a white background.
+
+money-bags.png
+A classic cartoon-style colourful canvas money bag with a large black dollar sign ($) printed on the front, tied at the top with rope and bulging as if full of cash, with a white background.
+
+futuristic-engine.png
+A complex, colourful, and glowing futuristic engine core, displaying intricate mechanical parts and pulsing with bright blue and purple energy lights, with a white background.
+
+old-farm-store.jpg
+A full, rustic and charming photograph of an old-fashioned country farm store, with a weathered wooden porch, vintage signs, and barrels of produce outside.
+
+milk-and-eggs.png
+A simple, colourful still life arrangement of a classic glass bottle of fresh milk next to a cardboard carton of brown eggs, presented in a clean, photorealistic style, with a white background.
+
+chessboard.jpg
+A full, top-down photograph of a polished, high-quality wooden chessboard, with a classic and elegant look, showing the rich grain of the light and dark squares.
+
+king-piece.png
+A classic, colourful, carved wooden king chess piece from a Staunton set, standing tall and viewed from a slightly low angle to give it a powerful and imposing presence, with a white background.
+
+rocket-piece.png
+A stylized, colourful chess piece uniquely shaped like a retro sci-fi rocket ship, with sleek fins and a pointed nose cone, standing upright as if ready for launch, with a white background.

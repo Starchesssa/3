@@ -1,0 +1,56 @@
+dust-overlay.png
+A colourful scattering of fine, floating dust particles and subtle light specks, designed as an atmospheric overlay, shot against a white background.
+
+stormy-sky.jpg
+A full, dramatic, and cinematic image of a dark, stormy sky filled with churning, deep blue and grey clouds, with subtle hints of light breaking through from a hidden sun, conveying a sense of impending crisis.
+
+keyhole.png
+A colourful, ornate, vintage-style golden keyhole, glowing faintly from within, viewed straight-on, with intricate filigree details around the edges, on a white background.
+
+empty-street.jpg
+A full image of a major city street, like Times Square or a similar iconic location, completely deserted and empty of people and cars, captured during daytime under an overcast sky to create an eerie, silent atmosphere.
+
+world-map-pandemic.jpg
+A full, dark, futuristic digital world map, glowing with interconnected red lines and hotspots to represent a spreading global pandemic. The background is a deep, dark blue with subtle grid patterns.
+
+virus-particle.png
+A colourful, highly detailed 3D model of a coronavirus particle, with prominent red spike proteins and a blue and purple textured core, rendered with realistic lighting, on a white background.
+
+closed-storefront.jpg
+A full, eye-level shot of a city storefront with a 'Closed' sign hanging in the glass door. The lights inside are off, and the street outside is empty, reflecting a somber, locked-down atmosphere.
+
+empty-office.jpg
+A full image of a large, modern open-plan office, completely empty. Desks with computers are visible, but all chairs are tucked in and there are no people, conveying a sense of sudden abandonment. The scene is lit by natural light from large windows.
+
+window-view-home.jpg
+A full image looking out from a window inside a cozy home. Rain streaks down the glass, and the view outside shows a quiet, empty suburban street, creating a feeling of being safe but confined indoors.
+
+amazon-machine.jpg
+A full, sweeping, panoramic image of the interior of a massive, highly automated Amazon fulfillment center. Conveyor belts, robotic arms, and complex machinery stretch into the distance, with a blue and orange color palette, creating a sense of immense scale and technological complexity.
+
+city-infrastructure.jpg
+A full, digitally enhanced aerial shot of a bustling city at dusk, with glowing lines and data streams overlaid on the roads and buildings to represent the flow of data, logistics, and essential infrastructure.
+
+amazon-warehouse.jpg
+A full, wide-angle shot from the floor of a brightly lit Amazon warehouse, showing towering shelves packed with goods stretching high towards the ceiling. A few workers and forklifts are visible in the distance to give a sense of scale.
+
+amazon-truck-fleet.jpg
+A full, aerial drone shot of a massive parking lot filled with a fleet of dozens of Amazon Prime delivery trucks parked in perfect, repeating rows, ready for deployment.
+
+data-center.jpg
+A full image of a long, cool-toned corridor inside a modern data center, lined with rows of humming server racks with blinking blue and green LED lights, creating a high-tech, futuristic feel.
+
+collapsing-dominoes.jpg
+A full, dramatic, cinematic shot of a long line of black dominoes toppling over in a chain reaction on a dark surface, symbolizing business collapse. The shot has a shallow depth of field, with the foreground dominoes in focus.
+
+hiring-crowd.jpg
+A full, optimistic image of a diverse and massive crowd of people at a hiring fair or orientation, looking hopeful and attentive. The scene is well-lit and conveys a sense of opportunity and large-scale employment.
+
+revenue-graph.png
+A colourful, modern, 3D-style bar chart showing a dramatic and sharp upward trend. The final data bar is significantly taller than the others, glowing with a bright teal light to represent explosive growth, on a white background.
+
+somber-world.jpg
+A full, somber and poignant image of Planet Earth seen from space, but with a dark, moody color grading. Parts of the globe are shadowed, conveying a sense of global tragedy and uncertainty.
+
+amazon-globe.jpg
+A full, powerful and symbolic image of the Amazon logo integrated onto a glowing, stylized globe. Lines of light representing logistics and data networks emanate from the continents, converging and swirling around the planet, set against a dark, cosmic background.

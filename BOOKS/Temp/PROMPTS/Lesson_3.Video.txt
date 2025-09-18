@@ -1,0 +1,71 @@
+key.png
+A colourful, highly detailed, ornate golden key, standing vertically, viewed from the front, against a white background.
+
+forge.jpg
+A full, atmospheric image of a dark, medieval blacksmith's forge, with glowing embers and hammers resting on anvils.
+
+sword.png
+A colourful, epic fantasy sword with a glowing orange hilt, standing vertically with the point downwards, viewed from the front, against a white background.
+
+office_2003.jpg
+A full, wide-angle photo of a realistic, dimly lit office from the early 2003 era, with bulky CRT monitors, beige computers, and cubicles.
+
+monitor_graveyard.jpg
+A full, cinematic image of a vast graveyard filled with old, broken CRT computer monitors instead of tombstones, under a dark, cloudy sky.
+
+dark_city.jpg
+A full, black and white, moody photograph of a sprawling city skyline at night, with rain-slicked streets reflecting the city lights.
+
+battered_skyscraper.png
+A colourful, photorealistic, tall, modern skyscraper with visible cracks, smoke damage, and broken windows, viewed from a low angle, against a white background.
+
+pressure_walls.jpg
+A full, claustrophobic image of two massive, textured stone walls slowly closing in on the viewer's perspective, creating a feeling of immense pressure.
+
+blueprint.png
+A detailed, glowing cyan-blue architectural blueprint drawing of a complex machine, with grids and annotations, on a white background.
+
+coin.png
+A shiny, colourful golden coin with an embossed symbol, slightly angled to catch the light, against a white background.
+
+report.png
+A photorealistic, multi-page financial document with charts and columns of numbers, fanned out slightly, viewed from a top-down angle, against a white background.
+
+revenue_pile.jpg
+A full, dramatic image of an immense, mountain-sized pile of cash bills, filling the entire frame in a dark, cavernous space.
+
+profit_spark.png
+A single, bright, colourful green spark of light with lens flare effects, radiating energy, against a white background.
+
+modern_office_background.jpg
+A full photograph of a sleek, modern, open-plan office interior with glass walls and minimalist furniture, intentionally blurred and darkened for background use.
+
+green_line_chart.png
+A colourful, clear data graph with a vibrant green line showing a steep upward trend, on a gridded axis, viewed straight-on, against a white background.
+
+wall_street.jpg
+A full, iconic, ground-level photograph of the Wall Street bull statue and the New York Stock Exchange building, bustling with activity.
+
+futuristic_engine.jpg
+A full, detailed, science-fiction image of a massive, glowing, futuristic engine core inside a spaceship, with complex pipes and conduits.
+
+energy_stream.png
+A vibrant, colourful, flowing stream of blue and purple plasma energy, with sparks and wisps, moving from left to right, against a white background.
+
+finish_line.png
+A colourful, checkered black and white finish line banner, viewed straight-on as if about to be crossed, against a white background.
+
+warehouse_construction.jpg
+A full, dynamic photograph of a large warehouse under construction, showing steel girders, cranes, and construction workers in action.
+
+lab.png
+A colourful, clean, modern science laboratory with beakers, test tubes, microscopes, and advanced equipment on stainless steel tables, viewed from an eye-level perspective, against a white background.
+
+rocket_launch.jpg
+A full, awe-inspiring photograph of a massive rocket launching into space, with bright flames and billowing smoke, viewed from a distance.
+
+chessboard.jpg
+A full, top-down photograph of a wooden chessboard with pieces set up for a game, blurred and darkened to create a moody atmosphere.
+
+glowing_foundation.png
+A colourful, intricate, glowing geometric pattern resembling a building's foundation, made of lines of brilliant white and gold light, against a white background.
