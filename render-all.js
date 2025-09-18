@@ -1,39 +1,50 @@
 
+// render-all.js
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const VIDEO_DIR = "BOOKS/Temp/VIDEO_TSX";
-const OUT_DIR = "out";
+const VIDEO_DIR = path.join(__dirname, "BOOKS", "Temp", "VIDEO_TSX");
+const INDEX_FILE = path.join(__dirname, "src", "index.tsx");
+const OUT_DIR = path.join(__dirname, "out");
+if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR);
 
-if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+const files = fs.readdirSync(VIDEO_DIR).filter(f => f.endsWith(".tsx"));
 
-const videoFiles = fs.readdirSync(VIDEO_DIR).filter(f => f.endsWith(".Video.tsx"));
+// 1. Build imports + exports dynamically
+let imports = [];
+let videoMap = [];
+files.forEach((file, i) => {
+  const base = path.parse(file).name; // e.g. Intro.Video
+  const compName = base.replace(/\W/g, ""); // remove . or _
+  imports.push(`import { ${compName} } from '../BOOKS/Temp/VIDEO_TSX/${base}';`);
+  videoMap.push(`  "${compName}": ${compName},`);
+});
 
-const listFile = path.join(OUT_DIR, "list.txt");
-fs.writeFileSync(listFile, ""); // reset concat list
+// 2. Write a fresh index.tsx
+const indexContent = `
+import { registerRoot } from 'remotion';
+${imports.join("\n")}
 
-for (const file of videoFiles) {
-  const baseName = path.basename(file, ".tsx"); // e.g. Intro.Video
-  const outputFile = path.join(OUT_DIR, `${baseName}.mp4`);
+export const videos = {
+${videoMap.join("\n")}
+};
 
-  console.log(`🎬 Rendering ${file} -> ${outputFile}`);
+const componentName = process.env.VIDEO_COMPONENT || Object.keys(videos)[0];
+registerRoot(videos[componentName]);
+`;
 
-  // Run remotion render with this file as entry
+fs.writeFileSync(INDEX_FILE, indexContent, "utf-8");
+console.log("📝 Generated src/index.tsx");
+
+// 3. Render each video
+files.forEach(file => {
+  const base = path.parse(file).name;
+  const compName = base.replace(/\W/g, "");
+
+  console.log(\`🎬 Rendering \${file} -> out/\${base}.mp4\`);
   execSync(
-    `npx remotion render ${path.join(VIDEO_DIR, file)} ${baseName} ${outputFile}`,
+    \`VIDEO_COMPONENT="\${compName}" npx remotion render src/index.tsx \${compName} out/\${base}.mp4\`,
     { stdio: "inherit" }
   );
-
-  // Append to concat list
-  fs.appendFileSync(listFile, `file '${baseName}.mp4'\n`);
-}
-
-// Concatenate all videos into one
-console.log("📀 Concatenating into out/final_video.mp4");
-execSync(
-  `ffmpeg -f concat -safe 0 -i ${listFile} -c copy ${path.join(OUT_DIR, "final_video.mp4")}`,
-  { stdio: "inherit" }
-);
-
-console.log("✅ Done!");
+});
