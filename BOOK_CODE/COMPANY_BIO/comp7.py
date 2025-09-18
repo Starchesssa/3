@@ -65,6 +65,7 @@ Timeline from transcript (start --> end : text):
 
 When creating the Remotion/React video, don’t put complicated formulas or direct variable calculations inside the style settings. Instead, calculate or store any changing values in separate variables first, and then use those variables in the style. You can still include all animations, movements, parallax effects, and transparency changes — just make sure to compute everything before applying it to the style so it’s clean and easier to manage.
 
+also carefull when using inlines define each value ,no value shoukd be left undefined 
 Visual requirements:
 - All images (.jpg/png) are in assets/images: if an image requires transparent background save as .png, if image requires full square/rectangle image save as jpg (especially background)
 {image_list_str}
