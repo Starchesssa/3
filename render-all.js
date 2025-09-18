@@ -1,4 +1,3 @@
-
 // render-all.js
 const { execSync } = require("child_process");
 const fs = require("fs");
@@ -25,9 +24,13 @@ let imports = [];
 let videoMap = [];
 
 files.forEach(file => {
-  const base = path.parse(file).name;       // e.g. Intro.Video
-  const compName = base.replace(/\W/g, ""); // e.g. IntroVideo
-  imports.push(`import { ${compName} } from '../BOOKS/Temp/VIDEO_TSX/${base}';`);
+  const base = path.parse(file).name;        // e.g. Intro.Video
+  const compName = base.replace(/\W/g, "");  // e.g. IntroVideo
+
+  // Always import as { RemotionVideo as <UniqueName> }
+  imports.push(
+    `import { RemotionVideo as ${compName} } from '../BOOKS/Temp/VIDEO_TSX/${base}';`
+  );
   videoMap.push(`  "${compName}": ${compName},`);
 });
 
