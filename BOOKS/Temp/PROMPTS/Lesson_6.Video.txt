@@ -1,0 +1,8 @@
+tech_city_background.jpg
+A full, wide, panoramic image of a futuristic, high-tech city at night. The cityscape should be filled with glowing neon blue and purple lights, towering, complex skyscrapers, and advanced architectural designs, creating a sense of a bustling digital metropolis.
+
+cloud_servers_midground.png
+A detailed, colourful illustration of floating, interconnected cloud servers and glowing data nodes with a white background. The servers should look sleek and futuristic, with glowing blue and purple lights and visible data pathways connecting them, shot from a slightly angled side perspective.
+
+data_stream_foreground.png
+A vibrant, colourful, abstract representation of a digital data stream with a white background. The image should feature flowing lines of bright cyan light, glowing binary code (0s and 1s), and ethereal particles, all moving horizontally as if in fast motion.

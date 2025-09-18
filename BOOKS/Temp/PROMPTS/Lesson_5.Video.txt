@@ -1,0 +1,11 @@
+sky-background.jpg
+A full, wide-angle image of a dramatic and beautiful sky at dusk, with clouds painted in deep hues of orange, purple, and dark blue, creating a vast and atmospheric background.
+
+mountains-far.png
+A colourful, majestic mountain range seen from a distance on a white background. The mountains have sharp, snow-capped peaks and deep, shadowed valleys, rendered in shades of atmospheric purple and blue, suggesting they are far away.
+
+city-skyline-mid.png
+A colourful, detailed silhouette of a modern city skyline on a white background. The buildings are a mix of skyscrapers of varied heights and architectural styles, depicted as if seen from across a body of water, with subtle lighting effects giving them depth.
+
+buildings-foreground.png
+A colourful collection of detailed, modern skyscrapers and buildings viewed from a low angle on a white background. The image focuses on the architectural details of the foreground structures, with vibrant colours and dynamic lighting that creates strong highlights and deep shadows, giving a sense of scale and proximity.

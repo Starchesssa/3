@@ -1,0 +1,8 @@
+tech_cityscape.jpg
+A full, sprawling, futuristic cityscape at night, viewed from a high panoramic angle. The city is filled with towering, sleek skyscrapers illuminated by glowing neon lights in shades of electric blue, vibrant magenta, and cool cyan. Light trails from flying vehicles weave between the buildings under a dark, starry sky.
+
+digital_grid.png
+A vibrant, colourful digital grid pattern on a white background. The grid lines are made of glowing, thin lines of light in a spectrum of bright blue, neon green, and purple. The grid is angled with a sense of perspective, receding into the distance to create a dynamic, three-dimensional effect.
+
+data_stream.png
+A colourful, abstract visualization of a digital data stream on a white background. The image features a cascade of glowing, flowing lines, binary code (0s and 1s), and particle effects in energetic colours like electric yellow, cyan, and pink, appearing to move rapidly from one side to the other with a sense of motion and depth.

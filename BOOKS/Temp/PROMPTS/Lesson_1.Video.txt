@@ -1,0 +1,8 @@
+city_background.jpg
+A full, photorealistic image of a sprawling modern cityscape at dusk. The sky is a deep twilight blue with streaks of orange and purple from the setting sun. Countless skyscrapers with brightly lit windows dominate the scene, creating a vibrant, energetic atmosphere with light trails from traffic below. The perspective is from a high aerial viewpoint, looking down over the expansive city.
+
+buildings_midground.png
+A detailed row of colourful, futuristic skyscrapers with a white background. The buildings feature a variety of sleek, modern architectural designs with glass, steel, and concrete textures in shades of deep blue, silver, and bronze. The lighting should be dramatic, with one side of the buildings catching a bright light while the other is in shadow, giving them a strong three-dimensional appearance. The view is from a slightly low angle, making the buildings look tall and imposing.
+
+data_overlay_foreground.png
+A complex and colourful, semi-transparent holographic data interface with a white background. It features glowing neon blue and cyan charts, graphs, network grids, and abstract digital patterns. The elements should have a sense of depth and perspective, appearing to float in layers. The overall effect should be futuristic, high-tech, and visually intricate.

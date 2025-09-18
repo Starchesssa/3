@@ -1,0 +1,8 @@
+city-background.jpg
+Image of a full, sprawling futuristic city skyline at night, illuminated with vibrant blue and purple neon lights, viewed from a high-angle panoramic perspective.
+
+stock-chart-midground.png
+A colourful, glowing, holographic stock market candlestick chart on a white background. The chart features a volatile mix of glowing green and red candles, with digital lines and data points, giving it a futuristic 3D appearance as if floating.
+
+tech-overlay-foreground.png
+A complex and colourful abstract technological interface on a white background. The design features intricate, glowing neon blue and cyan circuit board lines, digital data streams, and futuristic geometric HUD elements, creating a layered sense of depth.

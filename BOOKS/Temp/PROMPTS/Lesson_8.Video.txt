@@ -1,0 +1,23 @@
+abstract_gears_background.jpg
+A full, photorealistic background image of intricate, interlocking metallic gears and cogs, with a dark, moody, industrial feel and subtle blue and orange lighting.
+
+cracked_glass_overlay.png
+A colourful, detailed image of shattered glass cracks spreading from a central point, viewed head-on, with subtle rainbow refractions along the edges of the cracks, in a white background.
+
+empty_city_street_background.jpg
+A full, wide-angle background image of a deserted, post-apocalyptic city street at dawn. The street is wet from recent rain, reflecting the gloomy, overcast sky, with no people or cars visible.
+
+biohazard_symbol_overlay.png
+A vibrant, colourful biohazard symbol in a bright yellow and black colour scheme, appearing slightly weathered and distressed, viewed straight-on, in a white background.
+
+amazon_box_foreground.png
+A standard, colourful cardboard Amazon shipping box with the smile logo, shot from a three-quarters angle and sitting on the ground. The box is sealed with black tape, in a white background.
+
+data_center_background.jpg
+A full background image looking down a long, sterile aisle in a modern, high-tech data center. Rows of server racks with blinking blue and green LED lights stretch into the distance under cool, futuristic lighting.
+
+amazon_warehouse_midground.png
+A detailed, colourful image of a section of an Amazon fulfillment center, showing towering yellow shelves stacked high with various products and conveyor belts, in a white background.
+
+delivery_drone_foreground.png
+A sleek, colourful, futuristic delivery drone in Amazon's blue, white, and orange colours, carrying a small package. The drone is captured in mid-flight from a side-view angle, with its propellers in motion, in a white background.
