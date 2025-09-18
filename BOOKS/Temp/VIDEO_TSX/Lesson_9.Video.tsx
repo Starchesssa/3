@@ -6,546 +6,420 @@ import {
 	useCurrentFrame,
 	useVideoConfig,
 	Audio,
-	Img,
 	staticFile,
 } from 'remotion';
 import React from 'react';
 
-const FADE_DURATION = 15; // in frames
+// Helper function to convert seconds to frames
+const sec = (seconds: number) => seconds * 30;
 
-const textStyle: React.CSSProperties = {
-	fontFamily: 'Helvetica, Arial, sans-serif',
-	fontSize: '80px',
-	fontWeight: 'bold',
-	textAlign: 'center',
-	color: 'white',
-	textShadow: '0 0 20px rgba(0,0,0,0.8)',
-	padding: '0 100px',
+const transcript = [
+	{start: 0.0, end: 0.52, text: 'Key'},
+	{start: 0.52, end: 0.96, text: 'lesson,'},
+	{start: 1.42, end: 1.76, text: 'growth'},
+	{start: 1.76, end: 2.16, text: 'is'},
+	{start: 2.16, end: 2.64, text: 'never'},
+	{start: 2.64, end: 2.9, text: 'a'},
+	{start: 2.9, end: 3.14, text: 'straight'},
+	{start: 3.14, end: 3.54, text: 'line.'},
+	{start: 4.22, end: 4.76, text: 'Finally,'},
+	{start: 5.04, end: 5.14, text: 'we'},
+	{start: 5.14, end: 5.42, text: 'arrive'},
+	{start: 5.42, end: 5.62, text: 'at'},
+	{start: 5.62, end: 6.26, text: '2022.'},
+	{start: 7.08, end: 7.18, text: 'The'},
+	{start: 7.18, end: 7.46, text: 'world'},
+	{start: 7.46, end: 7.72, text: 'is'},
+	{start: 7.72, end: 8.26, text: 'reopening,'},
+	{start: 8.72, end: 8.84, text: 'but'},
+	{start: 8.84, end: 9.1, text: 'there'},
+	{start: 9.1, end: 9.3, text: 'is'},
+	{start: 9.3, end: 9.4, text: 'a'},
+	{start: 9.4, end: 9.62, text: 'new'},
+	{start: 9.62, end: 10.2, text: 'reality.'},
+	{start: 10.82, end: 11.38, text: 'Inflation'},
+	{start: 11.38, end: 11.62, text: 'is'},
+	{start: 11.62, end: 11.94, text: 'high,'},
+	{start: 12.32, end: 12.52, text: 'the'},
+	{start: 12.52, end: 12.84, text: 'stock'},
+	{start: 12.84, end: 13.2, text: 'market'},
+	{start: 13.2, end: 13.44, text: 'is'},
+	{start: 13.44, end: 13.92, text: 'punishing'},
+	{start: 13.92, end: 14.22, text: 'tech'},
+	{start: 14.22, end: 14.62, text: 'companies.'},
+	{start: 15.24, end: 15.42, text: 'The'},
+	{start: 15.42, end: 15.88, text: 'pandemic'},
+	{start: 15.88, end: 16.2, text: 'boom'},
+	{start: 16.2, end: 16.56, text: 'is'},
+	{start: 16.56, end: 16.94, text: 'over.'},
+	{start: 17.6, end: 17.94, text: 'Amazon'},
+	{start: 17.94, end: 18.48, text: 'stock'},
+	{start: 18.48, end: 18.72, text: 'fell'},
+	{start: 18.72, end: 18.98, text: 'nearly'},
+	{start: 18.98, end: 19.52, text: '50%'},
+	{start: 19.96, end: 20.26, text: 'during'},
+	{start: 20.26, end: 20.96, text: '2022,'},
+	{start: 21.58, end: 21.7, text: 'a'},
+	{start: 21.7, end: 22.18, text: 'massive'},
+	{start: 22.18, end: 22.56, text: 'drop.'},
+	{start: 23.08, end: 23.42, text: 'They'},
+	{start: 23.42, end: 23.62, text: 'had'},
+	{start: 23.62, end: 24.3, text: 'overbuilt,'},
+	{start: 24.66, end: 24.86, text: 'they'},
+	{start: 24.86, end: 25.02, text: 'had'},
+	{start: 25.02, end: 25.34, text: 'hired'},
+	{start: 25.34, end: 25.7, text: 'too'},
+	{start: 25.7, end: 25.9, text: 'many'},
+	{start: 25.9, end: 26.26, text: 'people'},
+	{start: 26.26, end: 26.54, text: 'during'},
+	{start: 26.54, end: 26.68, text: 'the'},
+	{start: 26.68, end: 27.08, text: 'pandemic'},
+	{start: 27.08, end: 27.56, text: 'frenzy.'},
+	{start: 28.03, end: 28.36, text: 'Now'},
+	{start: 28.36, end: 28.74, text: 'they'},
+	{start: 28.74, end: 29.0, text: 'had'},
+	{start: 29.0, end: 29.2, text: 'to'},
+	{start: 29.2, end: 29.5, text: 'correct.'},
+	{start: 29.98, end: 30.34, text: 'The'},
+	{start: 30.34, end: 30.66, text: 'company'},
+	{start: 30.66, end: 31.14, text: 'announced'},
+	{start: 31.14, end: 31.6, text: 'layoffs,'},
+	{start: 31.9, end: 32.36, text: 'eventually'},
+	{start: 32.36, end: 32.86, text: 'totalling'},
+	{start: 32.86, end: 33.14, text: 'over'},
+	{start: 33.14, end: 34.46, text: '27,000'},
+	{start: 34.46, end: 35.0, text: 'employees.'},
+	{start: 35.42, end: 35.94, text: 'The'},
+	{start: 35.94, end: 36.3, text: 'media'},
+	{start: 36.3, end: 36.5, text: 'wrote'},
+	{start: 36.5, end: 36.96, text: 'stories'},
+	{start: 36.96, end: 37.2, text: 'about'},
+	{start: 37.2, end: 37.82, text: "Amazon's"},
+	{start: 37.82, end: 38.1, text: 'decline,'},
+	{start: 38.68, end: 38.8, text: 'but'},
+	{start: 38.8, end: 38.98, text: 'they'},
+	{start: 38.98, end: 39.12, text: 'were'},
+	{start: 39.12, end: 39.46, text: 'missing'},
+	{start: 39.46, end: 39.66, text: 'the'},
+	{start: 39.66, end: 39.88, text: 'point'},
+	{start: 39.88, end: 40.2, text: 'again.'},
+	{start: 40.84, end: 41.0, text: 'They'},
+	{start: 41.0, end: 41.14, text: 'were'},
+	{start: 41.14, end: 41.44, text: 'looking'},
+	{start: 41.44, end: 41.64, text: 'at'},
+	{start: 41.64, end: 41.78, text: 'the'},
+	{start: 41.78, end: 42.12, text: 'stock'},
+	{start: 42.12, end: 42.5, text: 'price,'},
+	{start: 42.74, end: 43.0, text: 'not'},
+	{start: 43.0, end: 43.2, text: 'the'},
+	{start: 43.2, end: 43.56, text: 'machine.'},
+	{start: 44.26, end: 44.56, text: 'Yes,'},
+	{start: 44.9, end: 45.26, text: 'the e-commerce'},
+	{start: 45.44, end: 45.9, text: 'business'},
+	{start: 45.9, end: 46.16, text: 'was'},
+	{start: 46.16, end: 46.54, text: 'slowing'},
+	{start: 46.54, end: 46.8, text: 'down'},
+	{start: 46.8, end: 47.06, text: 'from'},
+	{start: 47.06, end: 47.24, text: 'its'},
+	{start: 47.24, end: 47.9, text: 'impossible'},
+	{start: 47.9, end: 48.44, text: 'pandemic'},
+	{start: 48.44, end: 48.84, text: 'highs.'},
+	{start: 49.32, end: 49.54, text: 'But'},
+	{start: 49.54, end: 49.7, text: 'the'},
+	{start: 49.7, end: 50.02, text: 'real'},
+	{start: 50.02, end: 50.44, text: 'engine,'},
+	{start: 50.76, end: 51.12, text: 'AWS,'},
+	{start: 51.78, end: 51.9, text: 'was'},
+	{start: 51.9, end: 52.32, text: 'still'},
+	{start: 52.32, end: 52.78, text: 'growing.'},
+	{start: 53.42, end: 54.0, text: 'AWS'},
+	{start: 54.0, end: 54.84, text: 'generated'},
+	{start: 54.84, end: 55.74, text: '$80 billion'},
+	{start: 56.0, end: 56.34, text: 'in'},
+	{start: 56.34, end: 56.7, text: 'revenue'},
+	{start: 56.7, end: 56.84, text: 'in'},
+	{start: 56.84, end: 57.54, text: '2022.'},
+	{start: 58.1, end: 58.54, text: 'Its'},
+	{start: 58.54, end: 59.04, text: 'operating'},
+	{start: 59.04, end: 59.48, text: 'income'},
+	{start: 59.48, end: 59.76, text: 'was'},
+	{start: 59.76, end: 61.36, text: '$22.8 billion.'},
+	{start: 62.08, end: 62.58, text: 'The'},
+	{start: 62.58, end: 63.0, text: 'retail'},
+	{start: 63.0, end: 63.42, text: 'business'},
+	{start: 63.42, end: 63.96, text: 'actually'},
+	{start: 63.96, end: 64.28, text: 'lost'},
+	{start: 64.28, end: 64.68, text: 'money'},
+	{start: 64.68, end: 64.92, text: 'that'},
+	{start: 64.92, end: 65.16, text: 'year.'},
+	{start: 65.74, end: 65.92, text: 'The'},
+	{start: 65.92, end: 66.32, text: 'cash'},
+	{start: 66.32, end: 66.52, text: 'cow'},
+	{start: 66.52, end: 66.8, text: 'was'},
+	{start: 66.8, end: 67.1, text: 'keeping'},
+	{start: 67.1, end: 67.36, text: 'the'},
+	{start: 67.36, end: 67.92, text: 'entire'},
+	{start: 67.92, end: 68.46, text: 'empire'},
+	{start: 68.46, end: 69.02, text: 'afloat'},
+	{start: 69.02, end: 69.2, text: 'during'},
+	{start: 69.2, end: 69.36, text: 'the'},
+	{start: 69.36, end: 69.7, text: 'storm.'},
+	{start: 70.36, end: 70.64, text: 'This'},
+	{start: 70.64, end: 70.9, text: 'is'},
+	{start: 70.9, end: 71.06, text: 'the'},
+	{start: 71.06, end: 71.44, text: 'final'},
+	{start: 71.44, end: 71.84, text: 'lesson.'},
+	{start: 72.42, end: 72.54, text: 'The'},
+	{start: 72.54, end: 72.96, text: 'system'},
+	{start: 72.96, end: 73.24, text: 'is'},
+	{start: 73.24, end: 73.54, text: 'more'},
+	{start: 73.54, end: 74.08, text: 'resilient'},
+	{start: 74.08, end: 74.42, text: 'than'},
+	{start: 74.42, end: 74.84, text: 'any'},
+	{start: 74.84, end: 75.2, text: 'single'},
+	{start: 75.2, end: 75.46, text: 'year'},
+	{start: 75.46, end: 75.78, text: 'stock'},
+	{start: 75.78, end: 76.3, text: 'performance.'},
+	{start: 76.86, end: 77.26, text: 'You'},
+	{start: 77.26, end: 77.52, text: 'build'},
+	{start: 77.52, end: 77.7, text: 'a'},
+	{start: 77.7, end: 78.42, text: 'diversified'},
+	{start: 8.42, end: 78.86, text: 'machine'},
+	{start: 78.86, end: 79.32, text: 'so'},
+	{start: 79.32, end: 79.46, text: 'that'},
+	{start: 79.46, end: 79.64, text: 'when'},
+	{start: 79.64, end: 79.88, text: 'one'},
+	{start: 79.88, end: 80.12, text: 'part'},
+	{start: 80.12, end: 80.32, text: 'is'},
+	{start: 80.32, end: 80.52, text: 'weak,'},
+	{start: 80.86, end: 81.14, text: 'another'},
+	{start: 81.14, end: 81.38, text: 'is'},
+	{start: 81.38, end: 81.68, text: 'strong.'},
+	{start: 82.28, end: 82.52, text: 'It'},
+	{start: 82.52, end: 82.66, text: 'is'},
+	{start: 82.66, end: 82.88, text: 'not'},
+	{start: 82.88, end: 83.14, text: 'about'},
+	{start: 83.14, end: 83.62, text: 'avoiding'},
+	{start: 83.62, end: 84.5, text: 'downturns.'},
+	{start: 84.8, end: 84.92, text: 'It'},
+	{start: 84.92, end: 85.04, text: 'is'},
+	{start: 85.04, end: 85.26, text: 'about'},
+	{start: 85.26, end: 85.68, text: 'building'},
+	{start: 85.68, end: 85.86, text: 'a'},
+	{start: 85.86, end: 86.18, text: 'business'},
+	{start: 86.18, end: 86.42, text: 'that'},
+	{start: 86.42, end: 86.58, text: 'can'},
+	{start: 86.58, end: 86.96, text: 'survive'},
+	{start: 86.96, end: 87.3, text: 'them.'},
+	{start: 87.82, end: 87.98, text: 'And'},
+	{start: 87.98, end: 88.24, text: 'then,'},
+	{start: 88.46, end: 88.64, text: 'when'},
+	{start: 88.64, end: 88.78, text: 'the'},
+	{start: 88.78, end: 89.04, text: 'sun'},
+	{start: 89.04, end: 89.26, text: 'comes'},
+	{start: 89.26, end: 89.48, text: 'out'},
+	{start: 89.48, end: 89.72, text: 'again,'},
+	{start: 90.08, end: 90.32, text: 'you'},
+	{start: 90.32, end: 90.52, text: 'are'},
+	{start: 90.52, end: 90.66, text: 'the'},
+	{start: 90.66, end: 91.1, text: 'only'},
+	{start: 91.1, end: 91.34, text: 'one'},
+	{start: 91.34, end: 91.68, text: 'left'},
+	{start: 91.68, end: 91.88, text: 'on'},
+	{start: 91.88, end: 91.98, text: 'the'},
+	{start: 91.98, end: 92.3, text: 'battlefield.'},
+];
+
+const Word: React.FC<{
+	word: {start: number; end: number; text: string};
+}> = ({word}) => {
+	const frame = useCurrentFrame();
+	const opacity = interpolate(
+		frame,
+		[sec(word.start), sec(word.start) + 5, sec(word.end), sec(word.end) + 5],
+		[0.3, 1, 1, 0.3]
+	);
+
+	const textGlow = `0 0 7px rgba(255, 255, 255, ${opacity * 0.7})`;
+
+	const style: React.CSSProperties = {
+		display: 'inline-block',
+		opacity: opacity,
+		textShadow: textGlow,
+	};
+
+	return <span style={style}>{word.text}&nbsp;</span>;
 };
 
-// Helper component for animated text
-const AnimatedText: React.FC<{text: string}> = ({text}) => {
+const Subtitles: React.FC = () => {
+	const textStyle: React.CSSProperties = {
+		fontFamily: 'Arial, sans-serif',
+		fontSize: 80,
+		fontWeight: 'bold',
+		color: 'white',
+		textAlign: 'center',
+		position: 'absolute',
+		bottom: '15%',
+		width: '90%',
+		left: '5%',
+	};
+
+	return (
+		<div style={textStyle}>
+			{transcript.map((word, i) => (
+				<Word key={i} word={word} />
+			))}
+		</div>
+	);
+};
+
+const ParallaxImage: React.FC<{
+	src: string;
+	speed: number;
+	z?: number;
+	scale?: number;
+}> = ({src, speed, z = 0, scale = 1.1}) => {
 	const frame = useCurrentFrame();
 	const {durationInFrames} = useVideoConfig();
 
+	const yOffset = interpolate(frame, [0, durationInFrames], [0, -200 * speed]);
+	const finalScale = interpolate(frame, [0, durationInFrames], [scale, scale + 0.1]);
+
+	const style: React.CSSProperties = {
+		position: 'absolute',
+		width: '100%',
+		height: '100%',
+		objectFit: 'cover',
+		transform: `translateY(${yOffset}px) scale(${finalScale})`,
+		zIndex: z,
+	};
+	return <img src={staticFile(src)} style={style} />;
+};
+
+const Scene: React.FC<{
+	from: number;
+	to: number;
+	children: React.ReactNode;
+}> = ({from, to, children}) => {
+	const frame = useCurrentFrame();
 	const opacity = interpolate(
 		frame,
-		[0, FADE_DURATION, durationInFrames - FADE_DURATION, durationInFrames],
+		[from, from + 15, to - 15, to],
 		[0, 1, 1, 0]
 	);
 
-	const translateY = interpolate(
-		frame,
-		[0, FADE_DURATION],
-		[20, 0],
-		{extrapolateRight: 'clamp'}
-	);
-
-	const style = {
-		...textStyle,
+	const style: React.CSSProperties = {
 		opacity,
-		transform: `translateY(${translateY}px)`,
 	};
 
-	return <h1 style={style}>{text}</h1>;
+	return <AbsoluteFill style={style}>{children}</AbsoluteFill>;
 };
 
-// Helper for scene transitions
-const Scene: React.FC<{
-	from: number;
-	duration: number;
-	children: React.ReactNode;
-}> = ({from, duration, children}) => {
+const DustParticles: React.FC = () => {
+	const {width, height} = useVideoConfig();
+	const particles = React.useMemo(() => {
+		return Array.from({length: 50}).map((_, i) => ({
+			id: i,
+			x: Math.random() * width,
+			y: Math.random() * height,
+			size: Math.random() * 3 + 1,
+			opacity: Math.random() * 0.5 + 0.1,
+			speed: Math.random() * 0.5 + 0.2,
+		}));
+	}, [width, height]);
+
+	const frame = useCurrentFrame();
+
 	return (
-		<Sequence from={from} durationInFrames={duration}>
-			{children}
-		</Sequence>
+		<AbsoluteFill>
+			{particles.map((p) => {
+				const yPos = (p.y + frame * p.speed) % height;
+				const style: React.CSSProperties = {
+					position: 'absolute',
+					left: p.x,
+					top: yPos,
+					width: p.size,
+					height: p.size,
+					borderRadius: '50%',
+					backgroundColor: 'rgba(255, 255, 255, 0.7)',
+					opacity: p.opacity,
+				};
+				return <div key={p.id} style={style} />;
+			})}
+		</AbsoluteFill>
 	);
 };
 
 export const RemotionVideo: React.FC = () => {
-	const frame = useCurrentFrame();
 	const {fps, durationInFrames} = useVideoConfig();
-
-	const secToFrames = (sec: number) => Math.floor(sec * fps);
-
-	// --- Scene 1: Growth is not a straight line (0s - 4.22s) ---
-	const scene1Start = secToFrames(0);
-	const scene1End = secToFrames(4.22);
-	const scene1Progress = interpolate(
-		frame,
-		[scene1Start, scene1End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene1Zoom = interpolate(scene1Progress, [0, 1], [1, 1.1]);
-	const scene1PanX = interpolate(scene1Progress, [0, 1], [0, -100]);
-	const scene1PanY = interpolate(scene1Progress, [0, 1], [0, 50]);
-
-	// --- Scene 2: 2022 New Reality (4.22s - 10.82s) ---
-	const scene2Start = secToFrames(4.22);
-	const scene2End = secToFrames(10.82);
-	const scene2Progress = interpolate(
-		frame,
-		[scene2Start, scene2End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene2Zoom = interpolate(scene2Progress, [0, 1], [1.2, 1]);
-	const scene2LightsOpacity = interpolate(scene2Progress, [0.4, 0.7], [0, 1], {
-		extrapolateRight: 'clamp',
-	});
-
-	// --- Scene 3: Economic Hardship (10.82s - 17.60s) ---
-	const scene3Start = secToFrames(10.82);
-	const scene3End = secToFrames(17.60);
-	const scene3Progress = interpolate(
-		frame,
-		[scene3Start, scene3End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene3GraphY = interpolate(scene3Progress, [0.1, 0.8], [-1080, 0]);
-	const scene3GraphOpacity = interpolate(scene3Progress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-	const scene3BalloonScale = interpolate(scene3Progress, [0.7, 1], [1, 0.2]);
-	const scene3BalloonOpacity = interpolate(scene3Progress, [0.7, 1], [1, 0]);
-
-	// --- Scene 4: Amazon's Stock Drop (17.60s - 23.08s) ---
-	const scene4Start = secToFrames(17.60);
-	const scene4End = secToFrames(23.08);
-	const scene4Progress = interpolate(
-		frame,
-		[scene4Start, scene4End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene4DollyZoom = interpolate(scene4Progress, [0, 1], [2, 1]);
-	const scene4ChartDrop = interpolate(scene4Progress, [0.2, 0.8], [0, -500]);
-	const scene4TextOpacity = interpolate(scene4Progress, [0.4, 0.6], [0, 1]);
-
-
-	// --- Scene 5: Overbuilt & Correction (23.08s - 29.98s) ---
-	const scene5Start = secToFrames(23.08);
-	const scene5End = secToFrames(29.98);
-	const scene5Progress = interpolate(
-		frame,
-		[scene5Start, scene5End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene5PanX = interpolate(scene5Progress, [0, 1], [-200, 200]);
-	const scene5CrowdOpacity = interpolate(scene5Progress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
-
-
-	// --- Scene 6: Layoffs & Media (29.98s - 40.84s) ---
-	const scene6Start = secToFrames(29.98);
-	const scene6End = secToFrames(40.84);
-	const scene6Progress = interpolate(
-		frame,
-		[scene6Start, scene6End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene6NewspaperZ = interpolate(scene6Progress, [0, 0.7], [-1000, 2000]);
-	const scene6NewspaperOpacity = interpolate(scene6Progress, [0, 0.1, 0.6, 0.7], [0, 1, 1, 0]);
-	const scene6GearOpacity = interpolate(scene6Progress, [0.6, 0.9], [0, 0.5]);
-	const scene6GearRotation = interpolate(scene6Progress, [0.6, 1], [0, 30]);
-
-	// --- Scene 7: The Real Engine - AWS (40.84s - 53.42s) ---
-	const scene7Start = secToFrames(40.84);
-	const scene7End = secToFrames(53.42);
-	const scene7Progress = interpolate(
-		frame,
-		[scene7Start, scene7End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene7PanX = interpolate(scene7Progress, [0.2, 1], [0, -1920]);
-	const scene7DataStreamOpacity = interpolate(scene7Progress, [0.6, 0.8], [0, 1]);
-
-
-	// --- Scene 8: AWS Numbers (53.42s - 62.08s) ---
-	const scene8Start = secToFrames(53.42);
-	const scene8End = secToFrames(62.08);
-	const scene8Progress = interpolate(
-		frame,
-		[scene8Start, scene8End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene8Zoom = interpolate(scene8Progress, [0, 1], [1, 1.1]);
-
-
-	// --- Scene 9: The Cash Cow (62.08s - 70.36s) ---
-	const scene9Start = secToFrames(62.08);
-	const scene9End = secToFrames(70.36);
-	const scene9Progress = interpolate(
-		frame,
-		[scene9Start, scene9End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene9LightOpacity = interpolate(scene9Progress, [0.5, 0.8], [0, 1]);
-	const scene9Zoom = interpolate(scene9Progress, [0, 1], [1.15, 1]);
-
-
-	// --- Scene 10: Resilience Machine (70.36s - 82.28s) ---
-	const scene10Start = secToFrames(70.36);
-	const scene10End = secToFrames(82.28);
-	const scene10Progress = interpolate(
-		frame,
-		[scene10Start, scene10End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene10AwsRotation = interpolate(scene10Progress, [0, 1], [0, 180]);
-	const scene10RetailRotation = interpolate(scene10Progress, [0, 0.5, 1], [0, 20, 20]);
-	const scene10AwsGlow = interpolate(scene10Progress, [0.5, 1], [0, 1]);
-	const scene10RetailOpacity = interpolate(scene10Progress, [0.5, 0.8], [1, 0.3]);
-
-
-	// --- Scene 11: The Battlefield (82.28s - end) ---
-	const scene11Start = secToFrames(82.28);
-	const scene11End = durationInFrames;
-	const scene11Progress = interpolate(
-		frame,
-		[scene11Start, scene11End],
-		[0, 1],
-		{extrapolateRight: 'clamp'}
-	);
-	const scene11SunOpacity = interpolate(scene11Progress, [0.3, 0.6], [0, 1]);
-	const scene11StormOpacity = interpolate(scene11Progress, [0.2, 0.5], [1, 0]);
-	const scene11FortressZoom = interpolate(scene11Progress, [0, 1], [1, 1.15]);
-
+	const audioSrc = 'BOOKS/Temp/TTS/Lesson_9.wav';
 
 	return (
 		<AbsoluteFill style={{backgroundColor: 'black'}}>
-			<Audio src={staticFile('BOOKS/Temp/TTS/Lesson_9.wav')} />
+			<DustParticles />
 
-			{/* Scene 1: Growth is never a straight line */}
-			<Scene from={scene1Start} duration={scene1End - scene1Start}>
-				<AbsoluteFill
-					style={{
-						transform: `scale(${scene1Zoom}) translateX(${scene1PanX}px) translateY(${scene1PanY}px)`,
-					}}
-				>
-					{/* assets/images/background-paper.jpg: A full-screen image of old, textured paper. */}
-					<Img
-						src={staticFile('assets/images/background-paper.jpg')}
-						style={{width: '100%', height: '100%'}}
-					/>
-					{/* assets/images/winding-path.png: A transparent image of a dark, hand-drawn line that meanders across the screen. */}
-					<Img
-						src={staticFile('assets/images/winding-path.png')}
-						style={{
-							position: 'absolute',
-							width: '80%',
-							left: '10%',
-							top: '40%',
-							opacity: 0.7,
-						}}
-					/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={secToFrames(0.0)} durationInFrames={secToFrames(3.54)}>
-						<AnimatedText text="Key lesson, growth is never a straight line." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-			
-			{/* Scene 2: 2022 New Reality */}
-			<Scene from={scene2Start} duration={scene2End - scene2Start}>
-				<AbsoluteFill
-					style={{
-						transform: `scale(${scene2Zoom})`,
-					}}
-				>
-					{/* assets/images/city-skyline-dark.jpg: A moody, dark cityscape at dusk. */}
-					<Img
-						src={staticFile('assets/images/city-skyline-dark.jpg')}
-						style={{width: '100%', height: '100%'}}
-					/>
-					{/* assets/images/city-lights-overlay.png: A transparent image with just bright window lights corresponding to the city skyline. */}
-					<Img
-						src={staticFile('assets/images/city-lights-overlay.png')}
-						style={{
-							position: 'absolute',
-							width: '100%',
-							height: '100%',
-							opacity: scene2LightsOpacity,
-						}}
-					/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(6.26 - 4.22)}>
-						<AnimatedText text="Finally, we arrive at 2022." />
-					</Sequence>
-					<Sequence from={secToFrames(7.08 - 4.22)} durationInFrames={secToFrames(10.20 - 7.08)}>
-						<AnimatedText text="The world is reopening, but there is a new reality." />
-					</Sequence>
-				</AbsoluteFill>
+			<Scene from={0} to={sec(4.0)}>
+				<ParallaxImage src="assets/images/winding-path.jpg" speed={0.2} />
+				<ParallaxImage src="assets/images/jagged-graph-line.png" speed={0.8} z={1} />
 			</Scene>
 
-			{/* Scene 3: Economic Hardship */}
-			<Scene from={scene3Start} duration={scene3End - scene3Start}>
-				{/* assets/images/dark-tech-background.jpg: A dark, abstract background with faint circuit board patterns. */}
-				<Img src={staticFile('assets/images/dark-tech-background.jpg')} style={{width: '100%', height: '100%'}} />
-				<AbsoluteFill>
-					{/* assets/images/stock-graph-down.png: A transparent, glowing red line graph trending sharply downwards. */}
-					<Img
-						src={staticFile('assets/images/stock-graph-down.png')}
-						style={{
-							position: 'absolute',
-							width: '100%',
-							height: '100%',
-							opacity: scene3GraphOpacity,
-							transform: `translateY(${scene3GraphY}px)`,
-						}}
-					/>
-					{/* assets/images/deflated-balloon.png: A transparent image of a single, sad, deflated party balloon. */}
-					<Img
-						src={staticFile('assets/images/deflated-balloon.png')}
-						style={{
-							position: 'absolute',
-							width: '20%',
-							left: '40%',
-							top: '40%',
-							opacity: scene3BalloonOpacity,
-							transform: `scale(${scene3BalloonScale})`,
-						}}
-					/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(14.62 - 10.82)}>
-						<AnimatedText text="Inflation is high, the stock market is punishing tech companies." />
-					</Sequence>
-					<Sequence from={secToFrames(15.24 - 10.82)} durationInFrames={secToFrames(16.94 - 15.24)}>
-						<AnimatedText text="The pandemic boom is over." />
-					</Sequence>
-				</AbsoluteFill>
+			<Scene from={sec(4.0)} to={sec(10.5)}>
+				<ParallaxImage src="assets/images/cityscape-2022.jpg" speed={0.3} />
+				<ParallaxImage src="assets/images/reopening-street-overlay.png" speed={0.6} z={1} />
 			</Scene>
 			
-			{/* Scene 4: Amazon's Stock Drop */}
-			<Scene from={scene4Start} duration={scene4End - scene4Start}>
-				<AbsoluteFill
-					style={{
-						transform: `scale(${scene4DollyZoom})`,
-					}}
-				>
-					{/* assets/images/office-building-generic.jpg: Photo of a modern, generic corporate office building exterior. */}
-					<Img
-						src={staticFile('assets/images/office-building-generic.jpg')}
-						style={{width: '100%', height: '100%'}}
-					/>
-					{/* assets/images/amazon-stock-chart-2022.png: A simplified stock chart showing a 50% drop, on a transparent background. */}
-					<Img
-						src={staticFile('assets/images/amazon-stock-chart-2022.png')}
-						style={{
-							position: 'absolute',
-							width: '80%',
-							left: '10%',
-							top: '50%',
-							transform: `translateY(${scene4ChartDrop}px)`,
-						}}
-					/>
-					<h1 style={{...textStyle, fontSize: 200, position: 'absolute', width: '100%', top: '25%', opacity: scene4TextOpacity, color: '#ff4136'}}>
-						-50%
-					</h1>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(22.56-17.60)}>
-						<AnimatedText text="Amazon stock fell nearly 50% during 2022, a massive drop."/>
-					</Sequence>
-				</AbsoluteFill>
+			<Scene from={sec(10.5)} to={sec(17.0)}>
+				<ParallaxImage src="assets/images/dark-office.jpg" speed={0.2} />
+				<ParallaxImage src="assets/images/stock-market-down.png" speed={1} z={1} scale={1.3} />
+			</Scene>
+			
+			<Scene from={sec(17.0)} to={sec(28.0)}>
+				<ParallaxImage src="assets/images/empty-warehouse.jpg" speed={0.4} />
+				<ParallaxImage src="assets/images/warehouse-shelf.png" speed={0.8} z={1} />
+			</Scene>
+			
+			<Scene from={sec(28.0)} to={sec(40.5)}>
+				<ParallaxImage src="assets/images/corporate-hall.jpg" speed={0.1} />
+				<ParallaxImage src="assets/images/newspaper-headlines-collage.png" speed={0.6} z={1} />
+				<ParallaxImage src="assets/images/glowing-gear.png" speed={0.3} z={2} scale={0.8} />
+			</Scene>
+			
+			<Scene from={sec(40.5)} to={sec(53.0)}>
+				<ParallaxImage src="assets/images/industrial-machine.jpg" speed={0.5} />
+				<ParallaxImage src="assets/images/server-room-glow.png" speed={0.8} z={1} />
+			</Scene>
+			
+			<Scene from={sec(53.0)} to={sec(69.8)}>
+				<ParallaxImage src="assets/images/stormy-sky.jpg" speed={0.2} />
+				<ParallaxImage src="assets/images/floating-city.png" speed={0.4} z={1} />
+				<ParallaxImage src="assets/images/strong-cow.png" speed={0.6} z={2} scale={1} />
 			</Scene>
 
-			{/* Scene 5: Overbuilt & Correction */}
-			<Scene from={scene5Start} duration={scene5End-scene5Start}>
-				{/* assets/images/empty-warehouse-interior.jpg: A vast, empty, modern warehouse interior. */}
-				<Img src={staticFile('assets/images/empty-warehouse-interior.jpg')} style={{
-					width: '150%', 
-					height: '100%',
-					transform: `translateX(${scene5PanX}px)`
-				}} />
-				{/* assets/images/crowd-silhouettes.png: A transparent image with hundreds of black human silhouettes. */}
-				<Img src={staticFile('assets/images/crowd-silhouettes.png')} style={{
-					position: 'absolute',
-					width: '100%',
-					height: '100%',
-					opacity: scene5CrowdOpacity
-				}} />
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(27.56 - 23.08)}>
-						<AnimatedText text="They had overbuilt, they had hired too many people during the pandemic frenzy." />
-					</Sequence>
-					<Sequence from={secToFrames(28.03-23.08)} durationInFrames={secToFrames(29.50 - 28.03)}>
-						<AnimatedText text="Now they had to correct." />
-					</Sequence>
-				</AbsoluteFill>
+			<Scene from={sec(69.8)} to={sec(82.0)}>
+				<ParallaxImage src="assets/images/stormy-sea.jpg" speed={0.3} />
+				<ParallaxImage src="assets/images/strong-tree.png" speed={0.7} z={1} />
 			</Scene>
 			
-			{/* Scene 6: Layoffs & Media */}
-			<Scene from={scene6Start} duration={scene6End-scene6Start}>
-				{/* assets/images/dark-background.jpg: A simple, dark, textured background. */}
-				<Img src={staticFile('assets/images/dark-background.jpg')} style={{width: '100%', height: '100%'}}/>
-				<AbsoluteFill style={{perspective: 1000}}>
-					{/* assets/images/glowing-gear.png: A single, large, subtly glowing gear on a transparent background. */}
-					<Img src={staticFile('assets/images/glowing-gear.png')} style={{
+			<Scene from={sec(82.0)} to={sec(93.0)}>
+				<ParallaxImage src="assets/images/lighthouse-storm.jpg" speed={0.4} />
+				<ParallaxImage src="assets/images/calm-sea-sunrise.png" speed={0.1} z={1} />
+			</Scene>
+
+			<AbsoluteFill>
+				<div
+					style={{
 						position: 'absolute',
-						width: '50%',
-						left: '25%',
-						top: '25%',
-						opacity: scene6GearOpacity,
-						transform: `rotate(${scene6GearRotation}deg)`
-					}}/>
-					{/* assets/images/newspaper-headlines.png: A collage of newspaper clippings with negative headlines, on a transparent background. */}
-					<Img src={staticFile('assets/images/newspaper-headlines.png')} style={{
-						position: 'absolute',
+						bottom: 0,
 						width: '100%',
-						height: '100%',
-						opacity: scene6NewspaperOpacity,
-						transform: `translateZ(${scene6NewspaperZ}px)`
-					}}/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(35.00-29.98)}>
-						<AnimatedText text="The company announced layoffs, eventually totalling over 27,000 employees." />
-					</Sequence>
-					<Sequence from={secToFrames(35.42-29.98)} durationInFrames={secToFrames(40.20-35.42)}>
-						<AnimatedText text="The media wrote stories about Amazon's decline, but they were missing the point again." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
+						height: '40%',
+						background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+						zIndex: 3,
+					}}
+				/>
+				<Subtitles />
+			</AbsoluteFill>
 			
-			{/* Scene 7: The Real Engine - AWS */}
-			<Scene from={scene7Start} duration={scene7End-scene7Start}>
-				<AbsoluteFill style={{
-					display: 'flex',
-					flexDirection: 'row',
-					width: '200%',
-					transform: `translateX(${scene7PanX}px)`
-				}}>
-					{/* assets/images/stock-ticker-flicker.jpg: A blurry, chaotic image of a stock ticker screen. */}
-					<Img src={staticFile('assets/images/stock-ticker-flicker.jpg')} style={{width: '50%', height: '100%'}}/>
-					{/* assets/images/aws-server-network.jpg: A clean, bright, futuristic image of a server room with glowing blue lights. */}
-					<Img src={staticFile('assets/images/aws-server-network.jpg')} style={{width: '50%', height: '100%'}}/>
-				</AbsoluteFill>
-				<AbsoluteFill>
-					{/* assets/images/data-stream-overlay.png: Abstract animated lines/dots representing data flow, on a transparent background. */}
-					<Img src={staticFile('assets/images/data-stream-overlay.png')} style={{width: '100%', height: '100%', opacity: scene7DataStreamOpacity}}/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(43.56 - 40.84)}>
-						<AnimatedText text="They were looking at the stock price, not the machine." />
-					</Sequence>
-					<Sequence from={secToFrames(44.26-40.84)} durationInFrames={secToFrames(48.84 - 44.26)}>
-						<AnimatedText text="Yes, the e-commerce business was slowing down from its impossible pandemic highs." />
-					</Sequence>
-					<Sequence from={secToFrames(49.32-40.84)} durationInFrames={secToFrames(52.78-49.32)}>
-						<AnimatedText text="But the real engine, AWS, was still growing." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-			
-			{/* Scene 8: AWS Numbers */}
-			<Scene from={scene8Start} duration={scene8End-scene8Start}>
-				{/* assets/images/blue-tech-background.jpg: A clean, abstract background with blue geometric shapes. */}
-				<Img src={staticFile('assets/images/blue-tech-background.jpg')} style={{
-					width: '100%', 
-					height: '100%',
-					transform: `scale(${scene8Zoom})`
-				}}/>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(57.54 - 53.42)}>
-						<AnimatedText text="AWS generated $80 billion in revenue in 2022." />
-					</Sequence>
-					<Sequence from={secToFrames(58.10 - 53.42)} durationInFrames={secToFrames(61.36-58.10)}>
-						<AnimatedText text="Its operating income was $22.8 billion." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-			
-			{/* Scene 9: The Cash Cow */}
-			<Scene from={scene9Start} duration={scene9End-scene9Start}>
-				<AbsoluteFill style={{transform: `scale(${scene9Zoom})`}}>
-					{/* assets/images/retail-warehouse-rain.jpg: A large retail warehouse under a dark, stormy, rainy sky. */}
-					<Img src={staticFile('assets/images/retail-warehouse-rain.jpg')} style={{width: '100%', height: '100%'}}/>
-					{/* assets/images/golden-light-beam.png: A transparent overlay of a golden beam of light shining down from above. */}
-					<Img src={staticFile('assets/images/golden-light-beam.png')} style={{
-						position: 'absolute',
-						width: '100%', 
-						height: '100%',
-						opacity: scene9LightOpacity
-					}}/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(65.16-62.08)}>
-						<AnimatedText text="The retail business actually lost money that year." />
-					</Sequence>
-					<Sequence from={secToFrames(65.74-62.08)} durationInFrames={secToFrames(69.70-65.74)}>
-						<AnimatedText text="The cash cow was keeping the entire empire afloat during the storm." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-
-			{/* Scene 10: Resilience Machine */}
-			<Scene from={scene10Start} duration={scene10End-scene10Start}>
-				{/* assets/images/machine-background.jpg: A background image of a machine blueprint or schematic. */}
-				<Img src={staticFile('assets/images/machine-background.jpg')} style={{width: '100%', height: '100%', opacity: 0.5}}/>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					{/* assets/images/gear-aws.png: A single gear, brightly colored, on a transparent background. */}
-					<Img src={staticFile('assets/images/gear-aws.png')} style={{
-						position: 'absolute',
-						width: '40%',
-						left: '10%',
-						transform: `rotate(${scene10AwsRotation}deg)`,
-						filter: `drop-shadow(0 0 30px rgba(0, 150, 255, ${scene10AwsGlow}))`
-					}}/>
-					{/* assets/images/gear-retail.png: Another single gear, grayed out, on a transparent background. */}
-					<Img src={staticFile('assets/images/gear-retail.png')} style={{
-						position: 'absolute',
-						width: '30%',
-						left: '45%',
-						top: '55%',
-						transform: `rotate(-${scene10RetailRotation}deg)`,
-						opacity: scene10RetailOpacity
-					}}/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={secToFrames(70.36-scene10Start)} durationInFrames={secToFrames(71.84 - 70.36)}>
-						<AnimatedText text="This is the final lesson." />
-					</Sequence>
-					<Sequence from={secToFrames(72.42-scene10Start)} durationInFrames={secToFrames(76.30 - 72.42)}>
-						<AnimatedText text="The system is more resilient than any single year stock performance." />
-					</Sequence>
-					<Sequence from={secToFrames(76.86-scene10Start)} durationInFrames={secToFrames(81.68 - 76.86)}>
-						<AnimatedText text="You build a diversified machine so that when one part is weak, another is strong." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-			
-			{/* Scene 11: The Battlefield */}
-			<Scene from={scene11Start} duration={scene11End-scene11Start}>
-				<AbsoluteFill style={{transform: `scale(${scene11FortressZoom})`}}>
-					{/* assets/images/battlefield-sunny.jpg: A landscape after a battle, with a clear sky and rising sun. */}
-					<Img src={staticFile('assets/images/battlefield-sunny.jpg')} style={{width: '100%', height: '100%'}}/>
-					{/* assets/images/stormy-battlefield.jpg: The same battlefield but dark, rainy, and stormy. */}
-					<Img src={staticFile('assets/images/stormy-battlefield.jpg')} style={{position: 'absolute', width: '100%', height: '100%', opacity: scene11StormOpacity}}/>
-					{/* assets/images/fortress-amazon.png: A single, strong, modern fortress standing tall in the center, on a transparent background. */}
-					<Img src={staticFile('assets/images/fortress-amazon.png')} style={{position: 'absolute', width: '100%', height: '100%'}}/>
-					{/* assets/images/sun-rising-overlay.png: A lens flare/sun rising effect on a transparent background. */}
-					<Img src={staticFile('assets/images/sun-rising-overlay.png')} style={{position: 'absolute', width: '100%', height: '100%', opacity: scene11SunOpacity}}/>
-				</AbsoluteFill>
-				<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
-					<Sequence from={0} durationInFrames={secToFrames(87.30 - 82.28)}>
-						<AnimatedText text="It is not about avoiding downturns. It is about building a business that can survive them." />
-					</Sequence>
-					<Sequence from={secToFrames(87.82-82.28)} durationInFrames={secToFrames(92.30-87.82)}>
-						<AnimatedText text="And then, when the sun comes out again, you are the only one left on the battlefield." />
-					</Sequence>
-				</AbsoluteFill>
-			</Scene>
-			
+			<Audio src={staticFile(audioSrc)} />
 		</AbsoluteFill>
 	);
 };
