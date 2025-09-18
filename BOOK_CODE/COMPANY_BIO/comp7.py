@@ -54,7 +54,7 @@ def build_video_prompt(wav_file, txt_file):
     prompt = f"""
 You are generating a Remotion Video.tsx component for a storytelling video.
 
-ONLY output the Video.tsx code, nothing else.
+ONLY output the Video.tsx code, nothing else ,dont out put any css,html,or js ,just output react + typescript suitable for making video in remotion.
 
 Component name: RemotionVideo
 
