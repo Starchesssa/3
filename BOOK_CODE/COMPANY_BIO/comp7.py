@@ -58,6 +58,10 @@ ONLY output the Video.tsx code, nothing else ,dont out put any css,html,or js ,j
 
 Component name: RemotionVideo
 
+just output code less than 100 lines of code,use fewer code to avoid errors , be simple yet powerful, just use parallax affect as throught the video , use all types of parallax effect meaning layeros overlayers of images.
+
+dont animate the whole script , just animate or some kew words that are more important ,dont animate each word,just key words only.
+
 Audio file: '{os.path.join(TTS_PATH, wav_file)}'
 
 Timeline from transcript (start --> end : text):
@@ -71,13 +75,10 @@ Visual requirements:
 {image_list_str}
 - The name of the image should be clear, don’t just say foreground — say building.jpg, etc.
 - The overall video should be 16:9 aspect ratio and 4K quality.
-- Each sentence must have a new environment (new jpg/png, effects, overlays, etc.). The video should not be static — each sentence should reveal and convey the message visually with new layers of images animated in parallax.
+- parallax effect should be the main effect with layers over layers of png and jpg aninated with parallax effect .
 - Parallax effect: layers with smooth camera movement.
-- Cinematic camera: slow zoom, pan, rotate, pull-back reveal (dolly zoom), parallax shift, tracking, keyframes, etc.
-- Text sequences: fade-in and fade-out, fully synchronized with timeline.
-- Artistic environment: subtle glow, dust, light, smooth transitions. All VFX should be built with your code. If you can’t make the VFX with code, ignore them.
 - Video duration must match audio length.
-- Frame rate: {FPS} fps. Make the general scene more decorative.
+- Frame rate: {FPS} fps. Make the general scene more decorative.the video should be full of parallax effect and full of smooth movements aninations in parallax.
 """
     return prompt
 
