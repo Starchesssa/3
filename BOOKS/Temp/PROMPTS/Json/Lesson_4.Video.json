@@ -1,0 +1,98 @@
+[
+    {
+        "name": "abstract_gears.jpg",
+        "description": "Full image of interconnected, metallic, colorful gears with a subtle dark blue and purple technological glow, viewed from a slight top-down angle."
+    },
+    {
+        "name": "dollar_sign.png",
+        "description": "A vibrant, glowing, golden 3D dollar sign symbol ($) shot from the front, emitting a soft yellow light, in a white background."
+    },
+    {
+        "name": "product_box.png",
+        "description": "A colorful, sealed cardboard product box, reminiscent of software packaging from the early 2000s, standing upright and viewed from a slight three-quarter angle, in a white background."
+    },
+    {
+        "name": "amazon_2006_bg.jpg",
+        "description": "Full image of the Amazon.com website homepage as it appeared in 2006, featuring its classic blue and orange color scheme, displayed on a computer screen."
+    },
+    {
+        "name": "server_network.jpg",
+        "description": "Full image of a dark data center interior filled with racks of servers, with glowing blue and green LED status lights and abstract digital network lines connecting them."
+    },
+    {
+        "name": "data_streams.png",
+        "description": "A colorful abstract visualization of glowing, flowing lines and particles representing digital data streams, moving dynamically across the frame, in a white background."
+    },
+    {
+        "name": "dark_server_room.jpg",
+        "description": "Full image of a long, dark server room aisle, with tall server racks on both sides, illuminated only by the moody blinking red and blue server status lights."
+    },
+    {
+        "name": "server_rack_back.jpg",
+        "description": "Full image providing a close-up, detailed view of the back of a server rack, showing a dense and complex mess of colorful ethernet cables and power cords plugged into various ports."
+    },
+    {
+        "name": "server_rack_mid.png",
+        "description": "A single, colorful, highly detailed server rack seen from the front, filled with various server blades and network switches with brightly blinking lights, in a white background."
+    },
+    {
+        "name": "server_rack_front.png",
+        "description": "A close-up, slightly out-of-focus view of the front of a single colorful server rack, emphasizing the texture of the perforated metal and visible cooling fans with glowing status lights, in a white background."
+    },
+    {
+        "name": "tangled_wires_bg.jpg",
+        "description": "Full image close-up of a massive, chaotic tangle of multi-colored computer cables, ethernet cords, and power wires, creating a complex and messy abstract texture."
+    },
+    {
+        "name": "corporate_meeting_room.jpg",
+        "description": "Full image of a modern, empty corporate boardroom with a long, polished wooden table, sleek office chairs, and a large presentation screen on the wall, viewed from one end of the table."
+    },
+    {
+        "name": "cost_graph.png",
+        "description": "A colorful, futuristic holographic-style line graph projected in the air, showing a sharply rising red line to indicate increasing costs, complete with glowing grid lines and axis labels, in a white background."
+    },
+    {
+        "name": "light_beam.png",
+        "description": "A bright, volumetric, colorful beam of light, like a divine ray shining down from an unseen source above, with visible dust particles and a subtle lens flare effect, in a white background."
+    },
+    {
+        "name": "server_to_clients.png",
+        "description": "A colorful, stylized diagram showing a central server icon connected by glowing blue lines to multiple smaller computer, laptop, and mobile device icons representing clients, arranged in a circular network pattern, in a white background."
+    },
+    {
+        "name": "cloud_tech_bg.jpg",
+        "description": "Full image of an abstract, dark blue technological background with faint, glowing digital patterns and subtle circuit board lines, creating a sophisticated and clean high-tech feel."
+    },
+    {
+        "name": "aws_logo.png",
+        "description": "The colorful, official Amazon Web Services (AWS) logo from the 2006 era, featuring the orange \"swoosh\" and bold text, shot straight-on and centered, in a white background."
+    },
+    {
+        "name": "power_plant.jpg",
+        "description": "Full image of a large, industrial power plant with massive cooling towers emitting thick plumes of steam against a dramatic sky at dusk or dawn."
+    },
+    {
+        "name": "data_center.jpg",
+        "description": "Full image of a massive, modern data center building exterior with a clean, imposing, high-tech architectural design, seen from a low angle on a clear day."
+    },
+    {
+        "name": "book_and_server.png",
+        "description": "A colorful, surreal composition showing a vertical stack of old, leather-bound books seamlessly morphing into a modern, metallic server blade, viewed from a side angle, in a white background."
+    },
+    {
+        "name": "question_marks.png",
+        "description": "A pattern of multiple floating, semi-transparent, colorful 3D question mark symbols of various sizes and orientations, scattered randomly, in a white background."
+    },
+    {
+        "name": "earth_network.jpg",
+        "description": "Full image of the planet Earth as viewed from space at night, with glowing lines and nodes of light connecting major continents and cities, representing a global data network."
+    },
+    {
+        "name": "futuristic_cityscape.jpg",
+        "description": "Full image of a sprawling, high-tech futuristic cityscape at night, filled with towering, illuminated skyscrapers, vibrant holographic advertisements, and streaks of light from flying vehicles."
+    },
+    {
+        "name": "expense_report.png",
+        "description": "A colorful, stylized document representing a financial expense report or spreadsheet, with rows of numbers and a single line item highlighted in red, viewed at a slight perspective angle, in a white background."
+    }
+]
