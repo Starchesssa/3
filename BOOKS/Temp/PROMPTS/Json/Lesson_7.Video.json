@@ -1,38 +1,18 @@
 [
     {
-        "name": "dark_clouds.jpg",
-        "description": "Full image of a dramatic, stormy sky filled with dark, ominous clouds."
+        "name": "tech_city_background.jpg",
+        "description": "A full, wide panoramic shot of a sprawling futuristic technology city at night, illuminated by vibrant neon lights in shades of blue, purple, and magenta, with tall, sleek skyscrapers creating a sense of grand scale and advancement."
     },
     {
-        "name": "broken_gears.png",
-        "description": "A collection of colourful, metallic, broken and rusted gears scattered around, shot from a slightly high angle, on a white background."
-    },
-    {
-        "name": "rain_overlay.png",
-        "description": "A pattern of colourful, stylistic raindrops falling diagonally, on a white background."
-    },
-    {
-        "name": "blueprint_bg.jpg",
-        "description": "Full image of a detailed technical blueprint, with intricate white lines and annotations on a deep blue background."
+        "name": "gears-midground.png",
+        "description": "A collection of colourful and intricate mechanical gears of various sizes, floating and overlapping in a dynamic composition. The gears have a glossy metallic finish in bronze, silver, and copper, shot straight-on against a white background."
     },
     {
         "name": "phoenix_from_ashes.png",
-        "description": "A majestic, colourful phoenix with fiery orange, red, and yellow feathers rising from a small pile of grey ashes, wings spread wide, on a white background."
+        "description": "A majestic, colourful phoenix with wings spread wide, rising powerfully from a pile of grey ashes. Its feathers are a vibrant gradient of fiery red, orange, and gold, with its head held high, all on a white background for transparency."
     },
     {
-        "name": "glowing_particles.png",
-        "description": "A cloud of colourful, glowing, out-of-focus bokeh-like particles floating upwards, on a white background."
-    },
-    {
-        "name": "bright_sky.jpg",
-        "description": "Full image of a clear, bright blue sky with a few wispy white clouds and a soft, warm sun glare."
-    },
-    {
-        "name": "modern_city.png",
-        "description": "A colourful, futuristic city skyline with sleek, glass skyscrapers and flying vehicles, shot from a low angle looking up, on a white background."
-    },
-    {
-        "name": "soundwaves_overlay.png",
-        "description": "A series of vibrant, colourful, concentric soundwave ripples expanding outwards from a central point, on a white background."
+        "name": "data_overlay_foreground.png",
+        "description": "A colourful, abstract digital data overlay resembling a futuristic heads-up display (HUD), featuring a complex network of glowing cyan and blue interconnected lines, holographic elements, and faint binary code streams, all on a white background."
     }
 ]

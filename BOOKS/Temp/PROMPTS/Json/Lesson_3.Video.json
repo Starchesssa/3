@@ -1,14 +1,38 @@
 [
     {
+        "name": "dark_clouds.jpg",
+        "description": "Image of a full, dark, stormy sky filled with menacing, heavy clouds. The scene should be dramatic and cinematic, with subtle hints of lightning deep within the clouds."
+    },
+    {
+        "name": "empty_city_street_background.jpg",
+        "description": "Image of a full, empty, rain-slicked city street at night. The street is lined with dark, imposing buildings, and the wet asphalt reflects the faint, moody glow from distant streetlights, creating a desolate and atmospheric scene."
+    },
+    {
+        "name": "rain_overlay.png",
+        "description": "Colourful streaks of rain falling diagonally, shot against a white background for easy cutout. The raindrops should vary in size and intensity to create a realistic, heavy downpour effect."
+    },
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "Image of a full, detailed, technical blueprint background. The image should be a rich cyan-blue with intricate white lines, grids, schematics, and geometric shapes, evoking a sense of engineering and design."
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "An intricate arrangement of colourful, interlocking metallic gears and cogs of various sizes, shot straight-on against a white background. The gears should have a polished, reflective surface with subtle highlights and shadows to give them a 3D feel."
+    },
+    {
+        "name": "data_stream_foreground.png",
+        "description": "A vibrant, colourful stream of glowing binary code (0s and 1s) and abstract digital light trails, flowing from the top left to the bottom right, on a white background. The stream should have a sense of motion and depth."
+    },
+    {
         "name": "tech_cityscape.jpg",
-        "description": "A full, sprawling, futuristic cityscape at night, viewed from a high panoramic angle. The city is filled with towering, sleek skyscrapers illuminated by glowing neon lights in shades of electric blue, vibrant magenta, and cool cyan. Light trails from flying vehicles weave between the buildings under a dark, starry sky."
+        "description": "Image of a full, futuristic, sprawling cityscape at night. The scene is illuminated by glowing neon lights, holographic advertisements, and streams of light from flying vehicles, creating a high-tech, cyberpunk atmosphere."
     },
     {
-        "name": "digital_grid.png",
-        "description": "A vibrant, colourful digital grid pattern on a white background. The grid lines are made of glowing, thin lines of light in a spectrum of bright blue, neon green, and purple. The grid is angled with a sense of perspective, receding into the distance to create a dynamic, three-dimensional effect."
+        "name": "server-racks-midground.png",
+        "description": "A long row of colourful, modern server racks seen from a slight side-angle perspective, on a white background. The racks are filled with blinking LED lights in various colours (blue, green, amber) indicating activity, with neatly organized cables visible."
     },
     {
-        "name": "data_stream.png",
-        "description": "A colourful, abstract visualization of a digital data stream on a white background. The image features a cascade of glowing, flowing lines, binary code (0s and 1s), and particle effects in energetic colours like electric yellow, cyan, and pink, appearing to move rapidly from one side to the other with a sense of motion and depth."
+        "name": "delivery_drone_foreground.png",
+        "description": "A colourful, sleek, futuristic delivery drone flying towards the viewer, seen from a slightly low angle, against a white background. The drone is carrying a small package and has glowing blue lights on its propellers, conveying speed and advanced technology."
     }
 ]
