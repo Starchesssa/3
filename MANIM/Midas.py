@@ -1,4 +1,3 @@
-
 import requests
 import torch
 import cv2
@@ -25,32 +24,37 @@ else:
 
 # ========== Step 2: Load MiDaS depth estimation model ==========
 print("[2] Loading MiDaS depth estimation model (CPU mode)...")
-midas = torch.hub.load("intel-isl/MiDaS", "DPT_Hybrid")  # smaller model = faster
+midas = torch.hub.load("intel-isl/MiDaS", "DPT_Hybrid")
 midas.to("cpu")
 midas.eval()
 
+# Load the transforms
 transform = torch.hub.load("intel-isl/MiDaS", "transforms").dpt_transform
 
 # ========== Step 3: Estimate depth ==========
 print("[3] Estimating depth map...")
 img = cv2.imread(str(img_path))
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-input_batch = transform(img_rgb).unsqueeze(0)
 
+# Apply transforms and add batch dimension
+input_batch = transform(img_rgb).unsqueeze(0).to("cpu")
+
+# Predict depth
 with torch.no_grad():
     prediction = midas(input_batch)
-    # Resize prediction to match input image size
-    prediction = torch.nn.functional.interpolate(
+    # Interpolate prediction to match original image size
+    prediction_resized = torch.nn.functional.interpolate(
         prediction.unsqueeze(1),
-        size=img.shape[:2],
+        size=(img.shape[0], img.shape[1]),
         mode="bicubic",
         align_corners=False
     ).squeeze()
-    depth_map = prediction.cpu().numpy()
 
-# Normalize for visualization
+depth_map = prediction_resized.cpu().numpy()
+
+# Normalize depth map for visualization
 depth_min, depth_max = depth_map.min(), depth_map.max()
-depth_vis = (255 * (depth_map - depth_min) / (depth_max - depth_min)).astype("uint8")
+depth_vis = ((depth_map - depth_min) / (depth_max - depth_min) * 255).astype(np.uint8)
 
 # Save grayscale depth map
 cv2.imwrite("depth_map.png", depth_vis)
