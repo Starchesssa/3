@@ -1,3 +1,4 @@
+
 import requests
 import torch
 import cv2
@@ -22,14 +23,14 @@ if response.status_code == 200:
 else:
     raise Exception(f"Failed to fetch image: {response.status_code}")
 
-# ========== Step 2: Load MiDaS depth estimation model ==========
-print("[2] Loading MiDaS depth estimation model (CPU mode)...")
-midas = torch.hub.load("intel-isl/MiDaS", "DPT_Hybrid")
+# ========== Step 2: Load MiDaS_small depth estimation model ==========
+print("[2] Loading MiDaS_small depth estimation model (CPU mode)...")
+midas = torch.hub.load("intel-isl/MiDaS", "MiDaS_small")
 midas.to("cpu")
 midas.eval()
 
-# Load the transforms
-transform = torch.hub.load("intel-isl/MiDaS", "transforms").dpt_transform
+# Load the correct transforms for MiDaS_small
+transform = torch.hub.load("intel-isl/MiDaS", "transforms").small_transform
 
 # ========== Step 3: Estimate depth ==========
 print("[3] Estimating depth map...")
@@ -37,12 +38,12 @@ img = cv2.imread(str(img_path))
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Apply transforms and add batch dimension
-input_batch = transform(img_rgb).unsqueeze(0).to("cpu")
+input_batch = transform(img_rgb).unsqueeze(0).to("cpu")  # shape [1,3,H,W]
 
 # Predict depth
 with torch.no_grad():
     prediction = midas(input_batch)
-    # Interpolate prediction to match original image size
+    # Resize prediction to match original image size
     prediction_resized = torch.nn.functional.interpolate(
         prediction.unsqueeze(1),
         size=(img.shape[0], img.shape[1]),
