@@ -1,12 +1,12 @@
-
 name: DepthFlow CPU Workflow
 
 on:
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch: # manual trigger
 
 jobs:
   run-depthflow:
     runs-on: ubuntu-latest
+
     steps:
       # 1️⃣ Checkout repo
       - name: Checkout repository
@@ -24,6 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
           pip install opencv-python requests numpy
+          # Install DepthFlow from GitHub (avoids broken-source error)
           pip install git+https://github.com/BrokenSource/DepthFlow.git
 
       # 4️⃣ Run your Depth.py script
