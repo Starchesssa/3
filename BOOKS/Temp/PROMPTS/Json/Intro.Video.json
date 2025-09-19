@@ -1,0 +1,18 @@
+[
+    {
+        "name": "sky-background.jpg",
+        "description": "A full, dramatic image of a vast, deep blue and purple twilight sky filled with faint, twinkling stars and subtle nebula clouds, suitable for a background."
+    },
+    {
+        "name": "gears-background.png",
+        "description": "A collection of large, colourful, dark brass and copper-toned steampunk-style gears of various sizes, softly lit and slightly blurred, arranged as a cluster, on a white background."
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "An intricate arrangement of medium-sized, colourful, polished bronze and silver mechanical gears, interlocking and layered with sharp detail and moderate lighting, on a white background."
+    },
+    {
+        "name": "gears-foreground.png",
+        "description": "A dynamic cluster of small and medium, colourful, brightly lit, golden and steel gears with crisp, sharp edges, appearing close to the viewer, on a white background."
+    }
+]

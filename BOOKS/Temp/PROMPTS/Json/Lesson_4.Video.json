@@ -1,0 +1,14 @@
+[
+    {
+        "name": "data-center-background.jpg",
+        "description": "A full, wide-angle background image of a futuristic data center hall. The scene should be filled with long rows of sleek, dark server racks stretching into a vanishing point. The atmosphere is high-tech, with cool blue and purple ambient lighting emanating from the servers and the ceiling, creating a cinematic and expansive feel."
+    },
+    {
+        "name": "server-racks-midground.png",
+        "description": "A detailed row of colourful, modern server racks shot from a straight-on, eye-level perspective against a white background. The racks are a dark charcoal color, featuring numerous brightly blinking green, blue, and amber LED status lights, creating a sense of active data processing."
+    },
+    {
+        "name": "glowing-lines-foreground.png",
+        "description": "A dynamic and colourful abstract pattern of glowing digital lines representing fast-moving data streams, on a white background. The lines should be a vibrant mix of electric blue and bright orange, flowing horizontally with varying thickness and intensity, giving a sense of speed and energy."
+    }
+]
