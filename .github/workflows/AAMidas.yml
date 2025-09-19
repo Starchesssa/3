@@ -1,0 +1,41 @@
+
+name: MiDaS Depth Map Workflow
+
+on:
+  workflow_dispatch:  # manual trigger
+
+jobs:
+  run-midas:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Python
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision timm opencv-python requests numpy
+
+      # 4️⃣ Run MiDaS depth estimation
+      - name: Run MiDaS script
+        run: |
+          python MANIM/Midas.py
+
+      # 5️⃣ Upload outputs
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: midas-output
+          path: |
+            input_image.jpg
+            depth_map.png
+            depth_map_color.png
