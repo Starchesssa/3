@@ -1,8 +1,149 @@
+abstract_gears_background.jpg
+A full background image of intricate, interlocking metallic gears with a dark, moody, slightly steampunk aesthetic, lit from the side.
+
+bright_sky.jpg
+A full background image of a clear, bright blue sky with a few fluffy white clouds and a shining sun creating lens flare.
+
+city-background.jpg
+A full background image of a bustling city skyline at dusk, with warm lights starting to turn on in the skyscrapers.
+
+rainy-city.jpg
+A full background image of a city street at night, wet with rain, with vibrant reflections of neon signs on the dark pavement.
+
 city_background.jpg
-A full, photorealistic image of a sprawling modern cityscape at dusk. The sky is a deep twilight blue with streaks of orange and purple from the setting sun. Countless skyscrapers with brightly lit windows dominate the scene, creating a vibrant, energetic atmosphere with light trails from traffic below. The perspective is from a high aerial viewpoint, looking down over the expansive city.
+A full background image of a modern city skyline on a clear day, shot from a high angle, showing tops of skyscrapers.
+
+tech_city_background.jpg
+A full background image of a futuristic cityscape at night, with glowing blue and purple neon lines and holographic displays on towering buildings.
+
+sunrise-field.jpg
+A full background image of a vast, open field of grass with a brilliant sunrise on the horizon, casting a warm golden light across the landscape.
+
+tech_cityscape.jpg
+A full background image of a sprawling, high-tech cityscape viewed from above, with flying vehicles and massive, interconnected towers under a twilight sky.
+
+blueprint_bg.jpg
+A full background image of a detailed technical blueprint, with glowing white lines, schematics, and measurements on a deep blue background.
+
+data_center_background.jpg
+A full background image looking down a long aisle in a large, modern data center with rows of server racks and glowing blue LED lights fading into the distance.
+
+dark_clouds.jpg
+A full background image of a dramatic, stormy sky filled with dark, turbulent, ominous clouds, with light breaking through in a few spots.
+
+winding-path.jpg
+A full background image of a cobblestone path winding through a lush, green, sun-dappled forest.
+
+sky-background.jpg
+A full background image of a serene sky at sunset, with soft gradients of orange, pink, and purple clouds.
+
+empty_city_street_background.jpg
+A full background image of a completely empty wide city street at dawn, shot from a low angle, with tall buildings on either side.
+
+data-center-background.jpg
+A full background image of a vast, modern data center hall with endless rows of server racks and cool blue ambient lighting.
+
+server-room.jpg
+A full background image providing a close-up, slightly angled view of server racks in a server room, with many blinking green and amber lights.
+
+mountains-far.png
+A majestic, colourful mountain range with sharp, snow-capped peaks, appearing as a distant silhouette, on a white background.
+
+gears-midground.png
+Several large, interlocking colourful metallic gears of bronze and silver, appearing as a complex and functioning mechanism, on a white background.
+
+stock-chart-midground.png
+A vibrant, colourful 3D stock market line graph showing a sharp upward trend with a glowing green line, on a white background.
+
+single-tree.png
+A single, large, colourful oak tree with a full canopy of lush green leaves and a thick, sturdy trunk, standing alone, on a white background.
+
+falling-chart.png
+A colourful, 3D stock market line graph showing a dramatic downward crash with a glowing red line breaking through the floor, on a white background.
+
+city-skyline-mid.png
+The detailed silhouette of a colourful modern city skyline, featuring iconic skyscrapers and buildings of varying heights, on a white background.
+
+modern_city.png
+A cluster of sleek, colourful, futuristic skyscrapers with glass and steel facades, viewed from a dramatic low angle, on a white background.
+
+amazon_warehouse_midground.png
+The interior of a vast, colourful Amazon fulfillment center filled with tall yellow shelves stacked with packages and robotic arms, on a white background.
+
+cloud_servers_midground.png
+A stylized, colourful illustration of glowing server racks seamlessly transforming into fluffy, white digital clouds, symbolizing cloud computing, on a white background.
+
+server-racks-midground.png
+A row of detailed, colourful, standalone server racks with blinking blue and green LED lights, viewed from a front-facing three-quarter angle, on a white background.
 
 buildings_midground.png
-A detailed row of colourful, futuristic skyscrapers with a white background. The buildings feature a variety of sleek, modern architectural designs with glass, steel, and concrete textures in shades of deep blue, silver, and bronze. The lighting should be dramatic, with one side of the buildings catching a bright light while the other is in shadow, giving them a strong three-dimensional appearance. The view is from a slightly low angle, making the buildings look tall and imposing.
+A cluster of colourful, modern office buildings with reflective glass facades, presented in a clean, isometric perspective, on a white background.
+
+broken_gears.png
+A pile of colourful, rusted, and shattered gears of various sizes, conveying a sense of mechanical failure, on a white background.
+
+gears-background.png
+A large, intricate arrangement of colourful, clean, interlocking gears of various sizes, forming a flat mechanical pattern, on a white background.
+
+forest-midground.png
+A dense row of colourful, tall pine and birch trees, forming a thick forest edge with detailed leaves and bark, on a white background.
 
 data_overlay_foreground.png
-A complex and colourful, semi-transparent holographic data interface with a white background. It features glowing neon blue and cyan charts, graphs, network grids, and abstract digital patterns. The elements should have a sense of depth and perspective, appearing to float in layers. The overall effect should be futuristic, high-tech, and visually intricate.
+A colourful, translucent overlay of glowing blue and cyan digital data, numbers, and holographic charts, intended to be placed over video, on a white background.
+
+buildings-foreground.png
+The detailed, close-up facades of the top floors of several colourful, modern skyscrapers, viewed from a sharp upward angle against a white background.
+
+glowing-data.png
+Streams of colourful, glowing blue and purple particles and light trails representing a fast flow of digital information, on a white background.
+
+soundwaves_overlay.png
+A colourful, abstract visualization of soundwaves, represented by glowing, oscillating neon lines and patterns, on a white background.
+
+delivery_drone_foreground.png
+A sleek, colourful, futuristic quadcopter delivery drone with a bright light, carrying a small package and flying towards the viewer, on a white background.
+
+digital_grid.png
+A glowing, colourful, blue and purple perspective grid made of light, stretching into an infinite horizon, on a white background.
+
+fortress.png
+A massive, imposing, colourful medieval stone fortress with tall fortified walls, battlements, and a large central keep, on a white background.
+
+cracked_glass_overlay.png
+A colourful, translucent overlay of shattered glass, with sharp, jagged cracks spreading from a central impact point, on a white background.
+
+biohazard_symbol_overlay.png
+The iconic, bright yellow and black biohazard symbol, rendered with a slight 3D effect and a soft glow, on a white background.
+
+amazon_box_foreground.png
+A colourful, classic Amazon cardboard box with the smile logo, sealed with tape and sitting at a three-quarter angle, on a white background.
+
+sad-people.png
+A group of diverse, colourfully dressed people with photorealistic, sad, and worried facial expressions, viewed from the chest up, on a white background.
+
+glowing_particles.png
+A swirling cloud of thousands of colourful, bright, out-of-focus glowing particles and specks of light, like digital dust or bokeh, on a white background.
+
+data_stream.png
+A swirling vortex of colourful, glowing green binary code (0s and 1s) that appears to be flowing towards the viewer, on a white background.
+
+rain_overlay.png
+A colourful, translucent overlay of realistic, high-density falling raindrops and water streaks, as if on a window pane, on a white background.
+
+phoenix_from_ashes.png
+A majestic, colourful phoenix bird with enormous, fiery orange and red wings, rising powerfully from a pile of dark ashes, on a white background.
+
+resilient-plant.png
+A small, vibrant, colourful, green plant sprout with two fresh leaves, growing through a single crack in dry, gray, barren ground, on a white background.
+
+data_stream_foreground.png
+A dense, colourful, high-speed stream of glowing blue digital data and light trails flowing horizontally across the frame from left to right, on a white background.
+
+aws-logo.png
+The official, colourful Amazon Web Services (AWS) logo, with its orange smile and black text, perfectly clean and sharp, on a white background.
+
+tech-overlay-foreground.png
+A colourful, complex, futuristic heads-up display (HUD) overlay with glowing blue concentric circles, grid lines, and data readouts, on a white background.
+
+gears-foreground.png
+A close-up view of two large, colourful, detailed metallic gears, one bronze and one silver, interlocked and appearing to be in the immediate foreground, on a white background.
