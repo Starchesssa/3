@@ -24,8 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
           pip install opencv-python requests numpy
-          # Install DepthFlow from GitHub (avoids broken-source error)
-          pip install git+https://github.com/BrokenSource/DepthFlow.git
+
+          # Install a valid broken-source version first
+          pip install broken-source==0.9.1
+
+          # Install DepthFlow while skipping dependency checks
+          pip install --no-deps git+https://github.com/BrokenSource/DepthFlow.git
 
       # 4️⃣ Run your Depth.py script
       - name: Run DepthFlow script
