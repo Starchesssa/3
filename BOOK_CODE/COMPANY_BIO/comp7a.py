@@ -57,8 +57,8 @@ def ask_ai(prompt: str, api_index: int) -> (str, int):
                 time.sleep(2)
         print("🔄 All keys failed this round, retrying...")
 
-def process_single_tsx(file_path: Path, api_index: int) -> int:
-    """Validate one TSX file, combine all errors in it, and ask AI to fix until success."""
+def process_tsx(file_path: Path, api_index: int) -> int:
+    """Validate & auto-rewrite TSX file until success."""
     attempt = 1
     while True:
         print(f"\n▶️ Checking {file_path.name} (attempt {attempt})")
@@ -72,7 +72,32 @@ def process_single_tsx(file_path: Path, api_index: int) -> int:
 
             code_content = file_path.read_text(encoding="utf-8")
             repair_prompt = f"""
-The following TSX file was used to make a video using Remotion:
+The following TSX code:
 
-```tsx
 {code_content}
+
+Was used to make a video using Remotion. It failed to compile with the following error:
+
+{error_log}
+
+Please rewrite the full correct version of this TSX code so that it compiles without errors.
+"""
+            fixed_code, api_index = ask_ai(repair_prompt, api_index)
+
+            # Save the fixed code back to the same file
+            file_path.write_text(fixed_code, encoding="utf-8")
+            print(f"🛠 AI returned corrected code for {file_path.name}, retrying build...")
+            attempt += 1
+
+# === Main Execution ===
+tsx_files = [f for f in VIDEO_TSX_DIR.glob("*.tsx") if f.is_file()]
+
+if not tsx_files:
+    print(f"❌ No TSX files found in {VIDEO_TSX_DIR}")
+    exit()
+
+api_index = 0
+for tsx_file in tsx_files:
+    api_index = process_tsx(tsx_file, api_index)
+
+print("\n✅ All TSX files validated and corrected if needed!")
