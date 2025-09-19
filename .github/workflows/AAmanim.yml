@@ -2,8 +2,8 @@
 name: Render Manim Video
 
 on:
-  workflow_dispatch:   # Run manually
-  push:                # Or auto-run when you push changes in MANIM/
+  workflow_dispatch:
+  push:
     paths:
       - "MANIM/**"
 
@@ -20,11 +20,22 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Manim dependencies
+      - name: Install system dependencies for Manim
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg libcairo2 libpango-1.0-0 \
-            libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev
+          sudo apt-get install -y \
+            ffmpeg \
+            libcairo2 \
+            libpango-1.0-0 \
+            libpangocairo-1.0-0 \
+            libgdk-pixbuf2.0-0 \
+            libffi-dev \
+            pkg-config \
+            python3-dev \
+            libcairo2-dev \
+            libpango1.0-dev \
+            libgirepository1.0-dev \
+            gir1.2-pango-1.0
 
       - name: Install Manim
         run: |
