@@ -1,9 +1,7 @@
 
-```tsx
 import {
 	AbsoluteFill,
 	Audio,
-	Composition,
 	Img,
 	Sequence,
 	interpolate,
@@ -16,7 +14,7 @@ import {
 // Helper to convert time in seconds to frames
 const sec = (seconds: number) => Math.round(seconds * 30);
 
-const Title = ({text, style}: {text: string; style: React.CSSProperties}) => {
+const Title = ({ text, style }: { text: string; style: React.CSSProperties }) => {
 	return (
 		<h1
 			style={{
@@ -36,31 +34,31 @@ const Title = ({text, style}: {text: string; style: React.CSSProperties}) => {
 
 export const RemotionVideo: React.FC = () => {
 	const frame = useCurrentFrame();
-	const {fps, durationInFrames} = useVideoConfig();
+	const { fps, durationInFrames } = useVideoConfig();
 
 	// --- Parallax Calculations ---
 	const bgParallax = interpolate(frame, [0, durationInFrames], [1, 1.15]);
 	const mgParallax = interpolate(frame, [0, durationInFrames], [0, -250]);
 	const fgParallax = interpolate(frame, [0, durationInFrames], [0, -500]);
-	
-	const bgStyle = {transform: `scale(${bgParallax})`};
-	const mgStyle = {transform: `translateX(${mgParallax}px) scale(1.1)`};
-	const fgStyle = {transform: `translateX(${fgParallax}px) scale(1.2)`, opacity: 0.6};
+
+	const bgStyle: React.CSSProperties = { transform: `scale(${bgParallax})` };
+	const mgStyle: React.CSSProperties = { transform: `translateX(${mgParallax}px) scale(1.1)` };
+	const fgStyle: React.CSSProperties = { transform: `translateX(${fgParallax}px) scale(1.2)`, opacity: 0.6 };
 
 	// --- Keyword Animation ---
-	const createAnimation = (startFrame: number) => {
+	const createAnimation = (startFrame: number): React.CSSProperties => {
 		const progress = spring({
 			frame: frame - startFrame,
 			fps,
-			config: {stiffness: 100, damping: 20},
+			config: { stiffness: 100, damping: 20 },
 		});
-		const scale = interpolate(progress, [0, 1], [0.8, 1]);
-		const opacity = interpolate(progress, [0, 0.5, 1], [0, 1, 1]);
-		return {transform: `scale(${scale})`, opacity};
+		const scaleVal = interpolate(progress, [0, 1], [0.8, 1]);
+		const opacityVal = interpolate(progress, [0, 0.5, 1], [0, 1, 1]);
+		return { transform: `scale(${scaleVal})`, opacity: opacityVal };
 	};
 
 	return (
-		<AbsoluteFill style={{backgroundColor: 'black'}}>
+		<AbsoluteFill style={{ backgroundColor: 'black' }}>
 			<Audio src={staticFile('BOOKS/Temp/TTS/Lesson_1.wav')} />
 
 			{/* Parallax Layers */}
@@ -71,7 +69,7 @@ export const RemotionVideo: React.FC = () => {
 			</AbsoluteFill>
 
 			{/* Animated Keywords */}
-			<AbsoluteFill style={{justifyContent: 'center', alignItems: 'center'}}>
+			<AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
 				<Sequence from={sec(1.48)} durationInFrames={sec(3.36)}>
 					<Title text="long-term vision" style={createAnimation(sec(1.48))} />
 				</Sequence>
@@ -97,4 +95,3 @@ export const RemotionVideo: React.FC = () => {
 		</AbsoluteFill>
 	);
 };
-```
