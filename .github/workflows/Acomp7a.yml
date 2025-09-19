@@ -1,0 +1,43 @@
+
+name: Run Remotion TSX AI Fixer
+
+on:
+  push:
+    paths:
+      - 'BOOK_CODE/COMPANY_BIO/comp7a.py'
+  workflow_dispatch:
+
+jobs:
+  run-ai-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-genai
+
+      # 4️⃣ Set environment variables for Gemini API keys
+      - name: Set Gemini API keys
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: echo "API keys loaded"
+
+      # 5️⃣ Run the Python script
+      - name: Run TSX AI fixer
+        run: python BOOK_CODE/COMPANY_BIO/comp7a.py
