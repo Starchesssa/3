@@ -1,8 +1,9 @@
+
 name: Render Manim Video
 
 on:
   workflow_dispatch:   # Run manually
-  push:                # Or auto-run when you push
+  push:                # Or auto-run when you push changes in MANIM/
     paths:
       - "MANIM/**"
 
@@ -15,14 +16,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install Manim dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev
+          sudo apt-get install -y ffmpeg libcairo2 libpango-1.0-0 \
+            libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev
 
       - name: Install Manim
         run: |
@@ -34,7 +36,7 @@ jobs:
           manim -pql manim.py ParallaxScene -o parallax.mp4
 
       - name: Upload video artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: manim-video
           path: MANIM/media/videos/**/parallax.mp4
