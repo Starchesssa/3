@@ -5,12 +5,20 @@ import os
 
 class ImageParallaxScene(ThreeDScene):
     def construct(self):
-        # --- Load images from assets/images ---
-        image_folder = "assets/images"
+        # --- Load images from assets/images relative to this script ---
+        script_dir = os.path.dirname(os.path.abspath(__file__))  # folder where this script lives
+        image_folder = os.path.join(script_dir, "assets", "images")
+
+        if not os.path.exists(image_folder):
+            raise FileNotFoundError(f"Folder not found: {image_folder}")
+
         image_files = [
             f for f in os.listdir(image_folder)
             if f.endswith((".png", ".jpg", ".jpeg"))
         ]
+
+        if len(image_files) < 3:
+            raise ValueError("You need at least 3 images in assets/images")
 
         # Pick random images for background, midground, foreground
         bg_file = os.path.join(image_folder, random.choice(image_files))
