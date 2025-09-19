@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "render": "npx remotion render src/index.tsx RemotionVideo out/video.mp4",
+    "render": "npx remotion render src/index.tsx RemotionVideo out/video.mp4"
   },
   "dependencies": {
     "remotion": "^4.0.0",
