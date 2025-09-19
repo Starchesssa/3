@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "render": "npx remotion render src/index.tsx RemotionVideo out/video.mp4",
-    "render:all": "node render-all.js"
   },
   "dependencies": {
     "remotion": "^4.0.0",
