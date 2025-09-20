@@ -1,5 +1,5 @@
 
-name: 🎬 Generate Video.tsx from TTS + STT
+name: 🎬 Generate FFmpeg Scripts from TTS + STT
 
 on:
   workflow_dispatch:
@@ -8,13 +8,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: "comp7-video-job"
+  group: "comp7-ffmpeg-job"
   cancel-in-progress: true
 
 jobs:
-  generate-video:
+  generate-ffmpeg:
     runs-on: ubuntu-latest
-    name: 🎥 Run comp7.py (Gemini AI Video Generator)
+    name: 🎥 Run comp7.py (Gemini AI FFmpeg Generator)
 
     steps:
       # 1. Checkout your repo
@@ -34,7 +34,7 @@ jobs:
           sudo apt-get install -y ffmpeg
           pip install --no-cache-dir google-genai
 
-      # 4. Run your comp7.py script
+      # 4. Run your comp7.py script (FFmpeg code generator)
       - name: ▶️ Run comp7.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
@@ -45,19 +45,19 @@ jobs:
         run: |
           python -u BOOK_CODE/COMPANY_BIO/comp7.py
 
-      # 5. Commit & push generated Video.tsx files
-      - name: ✅ Commit & Push Video.tsx Files
+      # 5. Commit & push generated FFmpeg scripts
+      - name: ✅ Commit & Push FFmpeg Scripts
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          git add BOOKS/Temp/VIDEO_TSX/*.tsx
+          git add BOOKS/Temp/VIDEO_FFMPEG/*.sh
 
           if git diff --cached --quiet; then
-            echo "🟡 No new files to commit."
+            echo "🟡 No new FFmpeg scripts to commit."
           else
-            git commit -m "🎬 Add Video.tsx files generated from comp7.py"
+            git commit -m "🎬 Add FFmpeg scripts generated from comp7.py"
             git push
-            echo "✅ Video.tsx files committed and pushed."
+            echo "✅ FFmpeg scripts committed and pushed."
           fi
