@@ -51,17 +51,16 @@ def build_ffmpeg_prompt(wav_file, txt_file):
     
     prompt = f"""
 You are generating FFmpeg shell code for a parallax video.
-
+just output the code only , dont say here is the code , never just outout code only.
 Requirements:
 - Use multiple layers (3-5 layers per scene).
 - Use all images in {IMAGES_DIR} (.jpg/.png) as layers.
 - Match the duration of the audio file: '{os.path.join(TTS_PATH, wav_file)}'.
 - Include all types of parallax effects that ffmpeg can, do not stick to one parallax in all scenes ,use many types of parallax throught.
 - Optionally scale layers for depth effect (pseudo 3D).
-- FPS: {FPS}, Resolution: {RESOLUTION[0]}x{RESOLUTION[1]}, 16:9 aspect ratio, match the audio duration/timeline if the audio has X duration then video should be X duration.
+- FPS: {FPS}, Resolution: {RESOLUTION[0]}x{RESOLUTION[1]}, 16:9 aspect ratio, match the audio duration/timeline if the audio has X duration then video should be X duration, all scenes must match same frame per scenod rate throught entire video.
 - Keep code simple, fully working.
 - Output a ready-to-run FFmpeg command/script.
-- Avoid inline arithmetic in FFmpeg filter; compute variables first.
 
 Timeline (start --> end : text):
 {timeline_content}
