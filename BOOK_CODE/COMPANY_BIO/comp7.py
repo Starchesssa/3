@@ -63,7 +63,7 @@ REQUIREMENTS (very strict):
 5) Use 3-5 layers per scene; use different parallax techniques across scenes (horizontal parallax, vertical float, scaling zoom, perspective/pseudo-3D via scale+offset).
 6) Use FPS={FPS}, resolution {RESOLUTION[0]}x{RESOLUTION[1]} (16:9). Ensure ffmpeg filter expressions do not rely on undeclared shell variables.
 7) Compute numeric variables in Python (durations, per-scene durations, speeds, scales), then insert those numeric values into the ffmpeg command string.
-   Do NOT leave bash-style ${VAR} inside ffmpeg filters. All ffmpeg expressions must be valid when the Python script runs.
+   Do NOT leave bash-style inside ffmpeg filters. All ffmpeg expressions must be valid when the Python script runs.
 8) Ensure every filter chain ends with a video stream of the requested resolution/fps and the scenes are concatenated correctly.
 9) Output should be high quality: use libx264 -preset slow -crf 18 and include audio (aac -b:a 192k).
 10) Keep the produced Python script under ~300 lines if possible, and make it clear/structured (functions ok).
