@@ -31,7 +31,7 @@ jobs:
           pip install requests opencv-python
 
       # Step 4: Run image generation script
-      - name: 🖼️ Run comp9.py
+      - name: 🖼️ Run comp9a.py
         run: python BOOK_CODE/COMPANY_BIO/comp9.py
 
       # Step 5: Commit and push generated images
