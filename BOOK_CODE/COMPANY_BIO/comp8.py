@@ -1,15 +1,16 @@
 
+#!/usr/bin/env python3
 import os
 import time
 import re
 from google import genai
 
 # === Configuration ===
-VIDEO_TSX_PATH = "BOOKS/Temp/VIDEO_FFMPEG"
+VIDEO_PY_PATH = "BOOKS/Temp/VIDEO_FFMPEG"  # folder containing generated .py ffmpeg scripts
 PROMPTS_PATH = "BOOKS/Temp/PROMPTS"
 MODEL = "gemini-2.5-pro"
 
-# === Load Gemini API keys from environment variables ===
+# === Load Gemini API keys ===
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
@@ -17,25 +18,24 @@ API_KEYS = [
     os.environ.get("GEMINI_API4"),
     os.environ.get("GEMINI_API5"),
 ]
-API_KEYS = [key for key in API_KEYS if key]
+API_KEYS = [k for k in API_KEYS if k]
 if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found in environment variables.")
 
 # === Helpers ===
-
-def list_tsx_files(directory):
+def list_py_files(directory: str):
+    """List all .py files inside a directory."""
     if not os.path.exists(directory):
         return []
-    return [f for f in os.listdir(directory) if f.endswith(".tsx")]
+    return [f for f in os.listdir(directory) if f.lower().endswith(".py")]
 
-def sanitize_filename(name):
+def sanitize_filename(name: str) -> str:
+    """Make safe filenames."""
     return re.sub(r"[^\w\d\-_. ]+", "", name).replace(" ", "_")
 
-def build_prompt(code):
-    """
-    Build the image-analysis prompt for Gemini.
-    """
-    prompt = f"""
+def build_prompt(code: str) -> str:
+    """Build prompt for Gemini to generate image list from Python code."""
+    return f"""
 Analyse the following python code and list all the images required with names and prompts.
 
 Follow this style exactly:
@@ -49,30 +49,24 @@ Tall building in a white background
 darkblue_background.jpg
 Image of dark blue background plain
 
-skip a line before starting another image name and prompt .
+(skip a line before starting another image)
+
 Rules:
-- all png , automatically requires cutout or transparent background,all jpg should be full ie as background 
-- If the image needs cutout, specify a white background,ie image of byscle with completely white background 
-- some images are required as full ie background images or any inage that is required as full make its prompt as full
-- make all pngs colourful , describe them as colourful not white cause if any png is white and has a white background doesnt make any sense , it will cut out entire image so describe each png as colourful ie give it any colour.
-- The names of the images shoukd be the  actual names use in code,dont use directory and names just use names ie ibstead of assets/images/golden_coin.png use golden_coin.png the its prompt.
-- after each image name and prompt skip one line ie jump one line before starting another image name and prompt 
-- Keep output as a list with 'name.jpg' followed by prompt below,dont number the list.
-- make the peompt short ie a yellow coin with completely white background of #ffffff , if its a jpg say background of a city ,just make it simpe .
-- Do not explain. Return only the list.dont say here is the names and prompts no, just be straight and give the actual output only.
+- All PNGs = transparent cutouts → describe with colorful details.
+- All JPGs = full backgrounds → describe as full scene.
+- Use the exact filenames used in the code (no directories).
+- Keep prompts short and simple.
+- Output only the list. Do not explain.
 
 Code:
 {code}
 """
-    return prompt
 
-def generate_prompts(tsx_name, code, api_index):
-    """
-    Generate prompt list for one TSX file.
-    Returns: (prompt_text, new_api_index)
-    """
+def generate_prompts(py_name: str, code: str, api_index: int):
+    """Generate image prompts using Gemini; returns (text, new_api_index)."""
     prompt = build_prompt(code)
     attempts = len(API_KEYS)
+
     for attempt in range(attempts):
         key = API_KEYS[(api_index + attempt) % attempts]
         try:
@@ -87,46 +81,51 @@ def generate_prompts(tsx_name, code, api_index):
                     text = response.output[0].content[0].text
                 except Exception:
                     text = str(response)
-            print(f"✅ Prompts generated with API#{(api_index + attempt) % attempts + 1} for file '{tsx_name}'.", flush=True)
+
+            print(f"✅ Prompts generated with API#{(api_index + attempt) % attempts + 1} for '{py_name}'", flush=True)
             return text.strip(), (api_index + attempt + 1) % attempts
+
         except Exception as e:
             print(f"⚠️ API#{(api_index + attempt) % attempts + 1} failed: {e}", flush=True)
             time.sleep(1)
-    raise RuntimeError("❌ All API keys failed.")
 
-def save_prompts(tsx_file, prompt_text):
+    raise RuntimeError("❌ All API keys failed after full rotation.")
+
+def save_prompts(py_file: str, prompt_text: str):
+    """Save prompts into PROMPTS_PATH using a safe filename."""
     os.makedirs(PROMPTS_PATH, exist_ok=True)
-    base_name = tsx_file.replace(".tsx", ".txt")
-    safe_filename = sanitize_filename(base_name)
-    path = os.path.join(PROMPTS_PATH, safe_filename)
+    base_name = py_file.replace(".py", ".txt")
+    safe_name = sanitize_filename(base_name)
+    out_path = os.path.join(PROMPTS_PATH, safe_name)
 
-    with open(path, "w", encoding="utf-8") as f:
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(prompt_text)
-    print(f"💾 Saved: {path}", flush=True)
+
+    print(f"💾 Saved prompts: {out_path}", flush=True)
 
 # === Main ===
-
 def main():
-    tsx_files = list_tsx_files(VIDEO_TSX_PATH)
-    if not tsx_files:
-        print("❌ No .tsx files found.")
+    py_files = list_py_files(VIDEO_PY_PATH)
+    if not py_files:
+        print("❌ No .py files found in VIDEO_FFMPEG.")
         return
 
     api_index = 0
-    for tsx_file in tsx_files:
-        tsx_path = os.path.join(VIDEO_TSX_PATH, tsx_file)
+    for py_file in py_files:
+        py_path = os.path.join(VIDEO_PY_PATH, py_file)
+
         try:
-            with open(tsx_path, "r", encoding="utf-8") as f:
+            with open(py_path, "r", encoding="utf-8") as f:
                 code = f.read()
         except Exception as e:
-            print(f"⚠️ Could not read {tsx_file}: {e}", flush=True)
+            print(f"⚠️ Could not read {py_file}: {e}", flush=True)
             continue
 
         try:
-            prompt_text, api_index = generate_prompts(tsx_file, code, api_index)
-            save_prompts(tsx_file, prompt_text)
+            prompt_text, api_index = generate_prompts(py_file, code, api_index)
+            save_prompts(py_file, prompt_text)
         except Exception as e:
-            print(f"❌ Failed on {tsx_file}: {e}", flush=True)
+            print(f"❌ Failed on {py_file}: {e}", flush=True)
 
     print("\n🎉 Prompt generation complete.\n")
 
