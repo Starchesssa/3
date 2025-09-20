@@ -5,7 +5,7 @@ import re
 from google import genai
 
 # === Configuration ===
-VIDEO_TSX_PATH = "BOOKS/Temp/VIDEO_TSX"
+VIDEO_TSX_PATH = "BOOKS/Temp/VIDEO_FFMPEG"
 PROMPTS_PATH = "BOOKS/Temp/PROMPTS"
 MODEL = "gemini-2.5-pro"
 
@@ -36,7 +36,7 @@ def build_prompt(code):
     Build the image-analysis prompt for Gemini.
     """
     prompt = f"""
-Analyse the following React/TSX code and list all the images required with names and prompts.
+Analyse the following python code and list all the images required with names and prompts.
 
 Follow this style exactly:
 
@@ -52,13 +52,13 @@ Image of dark blue background plain
 skip a line before starting another image name and prompt .
 Rules:
 - all png , automatically requires cutout or transparent background,all jpg should be full ie as background 
-- If the image needs cutout, specify a white background,ie image of byscle with white background 
+- If the image needs cutout, specify a white background,ie image of byscle with completely white background 
 - some images are required as full ie background images or any inage that is required as full make its prompt as full
 - make all pngs colourful , describe them as colourful not white cause if any png is white and has a white background doesnt make any sense , it will cut out entire image so describe each png as colourful ie give it any colour.
 - The names of the images shoukd be the  actual names use in code,dont use directory and names just use names ie ibstead of assets/images/golden_coin.png use golden_coin.png the its prompt.
 - after each image name and prompt skip one line ie jump one line before starting another image name and prompt 
 - Keep output as a list with 'name.jpg' followed by prompt below,dont number the list.
-- in each prompt be mor decriptive espacially how do you want an object appear ie dobt just say A chair but say also how do you wnat it to appear , achair standing is not same as laying , a chair shot from above is not same shot below it looks diff , also describe colour , lights, and each evrything you want to appear.
+- make the peompt short ie a yellow coin with completely white background of #ffffff , if its a jpg say background of a city ,just make it simpe .
 - Do not explain. Return only the list.dont say here is the names and prompts no, just be straight and give the actual output only.
 
 Code:
