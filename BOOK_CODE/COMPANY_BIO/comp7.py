@@ -52,6 +52,8 @@ def build_ffmpeg_prompt(wav_file, txt_file):
     prompt = f"""
 You are generating FFmpeg shell code for a parallax video.
 just output the code only , dont say here is the code , never just outout code only.
+
+all the vode should not cobatian any error or syntax errors , we need accuracy .
 Requirements:
 - Use multiple layers (3-5 layers per scene).
 - Use all images in {IMAGES_DIR} (.jpg/.png) as layers.
