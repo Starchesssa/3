@@ -55,8 +55,11 @@ just output the code only , dont say here is the code , never just outout code o
 
 all the vode should not cobatian any error or syntax errors , we need accuracy .
 Requirements:
+- All images (.jpg/png) are in assets/images: if an image requires transparent background save as .png, if image requires full square/rectangle image save as jpg (especially background) 
+- The name of the image should be clear, don’t just say foreground — say building.jpg, etc.
 - Use multiple layers (3-5 layers per scene).
 - Use all images in {IMAGES_DIR} (.jpg/.png) as layers.
+- each inage should match what is been said in the timeline/trasnript , match everything from the timeline , this is so important match timeline with visuals.
 - Match the duration of the audio file: '{os.path.join(TTS_PATH, wav_file)}'.
 - Include all types of parallax effects that ffmpeg can, do not stick to one parallax in all scenes ,use many types of parallax throught.
 - Optionally scale layers for depth effect (pseudo 3D).
