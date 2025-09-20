@@ -52,7 +52,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          git add BOOKS/Temp/VIDEO_FFMPEG/*.sh
+          git add BOOKS/Temp/VIDEO_FFMPEG/*.py
 
           if git diff --cached --quiet; then
             echo "🟡 No new FFmpeg scripts to commit."
