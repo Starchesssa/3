@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import shutil, subprocess, sys, os
 
-```python
 #!/usr/bin/env python3
 import subprocess
 import sys
