@@ -7,7 +7,7 @@ from google import genai
 # === Configuration ===
 TTS_PATH = "BOOKS/Temp/TTS"
 STT_PATH = "BOOKS/Temp/STT"
-VIDEO_OUTPUT_PATH = "BOOKS/Temp/VIDEO_TSX"
+VIDEO_OUTPUT_PATH = "BOOKS/Temp/VIDEO_FFMPEG"
 IMAGES_DIR = "assets/images"
 MODEL = "gemini-2.5-pro"
 FPS = 30  # frames per second
@@ -36,8 +36,8 @@ def sanitize_name(name):
     """Convert name to safe format for filenames."""
     return re.sub(r"[^\w\d\-_.]+", "_", name)
 
-def build_video_prompt(wav_file, txt_file):
-    """Build AI prompt to generate a Remotion Video.tsx for a given audio + transcript."""
+def build_ffmpeg_prompt(wav_file, txt_file):
+    """Build AI prompt to generate FFmpeg video code for a given audio + transcript."""
     base_name = os.path.splitext(wav_file)[0]
     txt_path = os.path.join(STT_PATH, txt_file)
     
@@ -45,40 +45,34 @@ def build_video_prompt(wav_file, txt_file):
     with open(txt_path, "r", encoding="utf-8") as f:
         timeline_content = f.read().strip()
     
-    # Gather all .jpg and .png images from assets/images
+    # Gather all .jpg and .png images
     image_files = list_files(IMAGES_DIR, ".jpg") + list_files(IMAGES_DIR, ".png")
     image_list_str = "\n".join(f"- {img}" for img in image_files)
     
     prompt = f"""
-You are generating a complete React + TypeScript Remotion video.
+You are generating FFmpeg shell code for a parallax video.
 
 Requirements:
-- Component name and composition name: RemotionVideo
-- Must register a Composition so useCurrentFrame() is valid
-- Calculate all animated values (scale, translate, opacity) **before applying them in JSX style**
-- Use parallax effect with multiple layers (background, midground, foreground)
-- Animate only key words, not each word
-- Use all images in assets/images (.jpg/.png) as layers
-- Match audio duration
-- FPS: {FPS}, Resolution: {RESOLUTION[0]}x{RESOLUTION[1]}, 16:9 aspect ratio
-- Output simple code, less than 100 lines, fully working
-- Do not include html/css outside JSX
-- Compute variables first, avoid inline arithmetic in JSX
-
-Audio file: '{os.path.join(TTS_PATH, wav_file)}'
+- Use multiple layers (3-5 layers per scene).
+- Use all images in {IMAGES_DIR} (.jpg/.png) as layers.
+- Match the duration of the audio file: '{os.path.join(TTS_PATH, wav_file)}'.
+- Include all types of parallax effects that ffmpeg can, do not stick to one parallax in all scenes ,use many types of parallax throught.
+- Optionally scale layers for depth effect (pseudo 3D).
+- FPS: {FPS}, Resolution: {RESOLUTION[0]}x{RESOLUTION[1]}, 16:9 aspect ratio, match the audio duration/timeline if the audio has X duration then video should be X duration.
+- Keep code simple, fully working.
+- Output a ready-to-run FFmpeg command/script.
+- Avoid inline arithmetic in FFmpeg filter; compute variables first.
 
 Timeline (start --> end : text):
 {timeline_content}
 
 Visual assets:
 {image_list_str}
-
-ONLY output TypeScript + React code for Remotion. Ensure no syntax errors or bundling errors.
 """
     return prompt
 
-def generate_video_tsx(prompt, api_index):
-    """Keep retrying across all API keys until success."""
+def generate_ffmpeg_code(prompt, api_index):
+    """Retry across all API keys until success."""
     while True:
         for attempt in range(len(API_KEYS)):
             key = API_KEYS[(api_index + attempt) % len(API_KEYS)]
@@ -121,14 +115,14 @@ for wav_file in wav_files:
     base_name = os.path.splitext(wav_file)[0]
     matching_txt = f"{base_name}_timeline.txt"
     if matching_txt in txt_files:
-        prompt = build_video_prompt(wav_file, matching_txt)
+        prompt = build_ffmpeg_prompt(wav_file, matching_txt)
         try:
-            tsx_code, api_index = generate_video_tsx(prompt, api_index)
-            out_path = os.path.join(VIDEO_OUTPUT_PATH, f"{sanitize_name(base_name)}.Video.tsx")
+            ffmpeg_code, api_index = generate_ffmpeg_code(prompt, api_index)
+            out_path = os.path.join(VIDEO_OUTPUT_PATH, f"{sanitize_name(base_name)}_ffmpeg.sh")
             with open(out_path, "w", encoding="utf-8") as f:
-                f.write(tsx_code)
-            print(f"✅ Video.tsx generated: {out_path}")
+                f.write(ffmpeg_code)
+            print(f"✅ FFmpeg script generated: {out_path}")
         except Exception as e:
-            print(f"❌ Failed to generate Video.tsx for {wav_file}: {e}")
+            print(f"❌ Failed to generate FFmpeg script for {wav_file}: {e}")
     else:
         print(f"⚠️ No matching transcript for {wav_file}, skipping.")
