@@ -1,4 +1,3 @@
-
 name: Render Manim Video
 
 on:
@@ -37,9 +36,10 @@ jobs:
             libgirepository1.0-dev \
             gir1.2-pango-1.0
 
-      - name: Install Manim
+      - name: Install Python packages
         run: |
           pip install manim
+          pip install requests
 
       - name: Render Parallax Video
         run: |
