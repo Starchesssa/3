@@ -53,7 +53,10 @@ def build_ffmpeg_prompt(wav_file, txt_file):
 You are generating FFmpeg shell code for a parallax video.
 just output the code only , dont say here is the code , never just outout code only.
 
-all the vode should not cobatian any error or syntax errors , we need accuracy .
+all the code should not cobatian any error or syntax errors , we need accuracy .
+
+use python in code, dont use shell , use python cause the code might cobtian may looks ,ingaes , effects , smooth movements , parallax etc.
+
 Requirements:
 - All images (.jpg/png) are in assets/images: if an image requires transparent background save as .png, if image requires full square/rectangle image save as jpg (especially background) 
 - The name of the image should be clear, don’t just say foreground — say building.jpg, etc.
