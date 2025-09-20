@@ -1,0 +1,41 @@
+blueprint_bg.jpg
+A technical blueprint of machinery
+
+gears-midground.png
+Several interlocking metallic gears in bronze and silver
+
+stock-chart-midground.png
+A glowing green and red stock market line chart
+
+tech-overlay-foreground.png
+A futuristic blue heads-up display with digital elements
+
+rainy-city.jpg
+A dark, neon-lit city street at night in the rain
+
+sad-people.png
+A group of diverse people in silhouette looking down sadly
+
+rain_overlay.png
+Streaks of white rain falling down
+
+sunrise-field.jpg
+A beautiful sunrise over a vast, green field
+
+resilient-plant.png
+A single, small green sprout growing from the ground
+
+glowing_particles.png
+Many small, bright yellow and orange glowing particles floating
+
+data_center_background.jpg
+A large, modern data center with rows of server racks
+
+server-racks-midground.png
+Several detailed, modern server racks with blinking blue lights
+
+cloud_servers_midground.png
+A stylized, glowing blue digital cloud with network lines
+
+data_stream_foreground.png
+A stream of flowing blue and cyan binary numbers and data

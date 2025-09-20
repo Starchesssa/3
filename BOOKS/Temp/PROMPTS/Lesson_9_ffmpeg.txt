@@ -1,0 +1,80 @@
+winding-path.jpg
+A winding dirt path through a green landscape
+
+sky-background.jpg
+A bright blue sky with fluffy white clouds
+
+mountains-far.png
+A distant, majestic mountain range in shades of blue and purple
+
+city-background.jpg
+A sprawling modern city during the daytime
+
+city-skyline-mid.png
+A detailed, colorful silhouette of a city skyline
+
+dark_clouds.jpg
+An ominous, stormy sky filled with dark grey clouds
+
+falling-chart.png
+A red stock market line graph trending sharply downwards
+
+rain_overlay.png
+Streaks of bright blue and white falling rain
+
+cracked_glass_overlay.png
+A network of white and grey cracks on glass
+
+blueprint_bg.jpg
+A detailed architectural blueprint with white lines on a blue background
+
+amazon_warehouse_midground.png
+The interior of a large warehouse with yellow shelves and conveyor belts
+
+sad-people.png
+A diverse group of people with somber, unhappy expressions
+
+amazon_box_foreground.png
+A single brown cardboard Amazon box with the black smile logo
+
+abstract_gears_background.jpg
+An abstract pattern of interlocking metallic gears
+
+gears-midground.png
+A cluster of large, metallic brass and silver gears
+
+gears-foreground.png
+A single, intricate golden gear with many teeth
+
+stock-chart-midground.png
+A glowing green line graph showing positive stock market growth
+
+data_center_background.jpg
+A server room with rows of glowing blue server racks
+
+cloud_servers_midground.png
+Stylized, fluffy white clouds with glowing blue server icons inside
+
+aws-logo.png
+The bright orange and white AWS logo with its smile arrow
+
+data_stream_foreground.png
+A flowing stream of glowing blue binary code
+
+rainy-city.jpg
+A dark city street at night with neon reflections on wet pavement
+
+fortress.png
+A massive, imposing stone fortress with tall, dark towers
+
+glowing_particles.png
+A cascade of shimmering, bright yellow and orange light particles
+
+sunrise-field.jpg
+A golden sunrise over a vast field of green grass
+
+resilient-plant.png
+A single, small green sprout pushing through cracked earth
+
+phoenix_from_ashes.png
+A majestic fiery phoenix with brilliant orange wings rising from grey ashes

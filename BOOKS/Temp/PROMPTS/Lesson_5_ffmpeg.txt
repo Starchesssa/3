@@ -1,0 +1,68 @@
+abstract_gears_background.jpg
+Full scene of abstract, metallic gears
+
+gears-midground.png
+Collection of colorful, metallic gears on a transparent background
+
+gears-foreground.png
+Several large, colorful, metallic gears on a transparent background
+
+rainy-city.jpg
+Full scene of a city street at night in the rain
+
+falling-chart.png
+A colorful stock market chart with a red arrow pointing down, on a transparent background
+
+rain_overlay.png
+Streaks of blue and white rain on a transparent background
+
+cracked_glass_overlay.png
+A network of white cracks on glass, on a transparent background
+
+empty_city_street_background.jpg
+Full scene of an empty, desolate city street
+
+sad-people.png
+A group of diverse people with sad expressions, on a transparent background
+
+broken_gears.png
+A pile of colorful, broken and rusted gears, on a transparent background
+
+blueprint_bg.jpg
+Full scene of a blue and white technical blueprint
+
+tech_city_background.jpg
+Full scene of a futuristic city with glowing lights
+
+glowing_particles.png
+Many small, glowing blue and gold particles on a transparent background
+
+data_center_background.jpg
+Full scene of a large, modern data center with server racks
+
+fortress.png
+A large, imposing stone fortress with colorful flags, on a transparent background
+
+server-racks-midground.png
+A row of detailed, colorful server racks with blinking lights, on a transparent background
+
+data_stream_foreground.png
+Streams of glowing blue and green binary code, on a transparent background
+
+dark_clouds.jpg
+Full scene of a sky filled with dark, stormy clouds
+
+phoenix_from_ashes.png
+A majestic fiery phoenix with red and orange feathers rising, on a transparent background
+
+resilient-plant.png
+A single, vibrant green plant growing from cracked earth, on a transparent background
+
+tech_cityscape.jpg
+Full scene of a futuristic cityscape at sunset
+
+city-skyline-mid.png
+A detailed, colorful silhouette of a modern city skyline, on a transparent background
+
+glowing-data.png
+Flowing lines of glowing, colorful data streams, on a transparent background

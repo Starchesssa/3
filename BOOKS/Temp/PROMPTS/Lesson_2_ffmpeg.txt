@@ -1,0 +1,56 @@
+abstract_gears_background.jpg
+A full scene of abstract mechanical gears
+
+stock-chart-midground.png
+A colorful stock market line chart trending upwards
+
+gears-midground.png
+Several large, colorful, interlocking metallic gears
+
+rainy-city.jpg
+A full scene of a city street at night in the rain
+
+falling-chart.png
+A red stock market line chart trending sharply downwards
+
+broken_gears.png
+Several colorful, cracked, and broken metallic gears
+
+rain_overlay.png
+A transparent overlay of bright blue falling rain streaks
+
+city_background.jpg
+A full scene of a modern city skyline
+
+sad-people.png
+A group of diverse people with sad, colorful expressions
+
+data_stream_foreground.png
+A flowing stream of glowing blue binary data
+
+dark_clouds.jpg
+A full scene of a stormy sky with dark, dramatic clouds
+
+glowing_particles.png
+A transparent overlay of small, bright, glowing yellow particles
+
+blueprint_bg.jpg
+A full scene of a blue and white architectural blueprint
+
+fortress.png
+A strong, stone fortress with colorful flags
+
+gears-foreground.png
+A close-up of a few large, colorful, working gears
+
+sunrise-field.jpg
+A full scene of a golden sunrise over a green field
+
+amazon_warehouse_midground.png
+A large, colorful warehouse building with logos
+
+phoenix_from_ashes.png
+A majestic, fiery orange and red phoenix rising
+
+delivery_drone_foreground.png
+A sleek, colorful delivery drone carrying a package

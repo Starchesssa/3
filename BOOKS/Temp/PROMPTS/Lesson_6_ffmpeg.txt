@@ -1,0 +1,65 @@
+abstract_gears_background.jpg
+Full scene of abstract, blue and metallic gears
+
+amazon_warehouse_midground.png
+Colorful Amazon warehouse interior with yellow robots
+
+aws-logo.png
+The orange and white Amazon Web Services logo
+
+blueprint_bg.jpg
+Full scene of a blue and white technical blueprint
+
+city_background.jpg
+Full scene of a modern city skyline during the day
+
+cracked_glass_overlay.png
+White cracked glass pattern with sharp details
+
+data_center_background.jpg
+Full scene inside a data center with blue lighting
+
+data_stream.png
+Streaks of bright blue and purple light data
+
+data_stream_foreground.png
+A dense stream of glowing blue digital data
+
+delivery_drone_foreground.png
+A futuristic white delivery drone with blue lights
+
+falling-chart.png
+A red stock market chart line pointing downwards
+
+fortress.png
+An imposing, dark stone fortress with high walls
+
+glowing-data.png
+A web of glowing blue and purple data nodes
+
+glowing_particles.png
+Many bright yellow and orange glowing particles
+
+rainy-city.jpg
+Full scene of a city street at night in the rain
+
+server-racks-midground.png
+Several rows of metallic server racks with blinking lights
+
+server-room.jpg
+Full scene of a modern server room aisle
+
+stock-chart-midground.png
+A green digital stock market chart line pointing upwards
+
+sunrise-field.jpg
+Full scene of a golden sunrise over a field
+
+tech_city_background.jpg
+Full scene of a futuristic city with glowing lights
+
+tech_overlay_foreground.png
+A blue, futuristic heads-up display with digital elements
+
+winding-path.png
+A winding, colorful path made of stone

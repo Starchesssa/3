@@ -1,0 +1,62 @@
+blueprint_bg.jpg
+Image of a technical blueprint background
+
+broken_gears.png
+Colorful shattered and broken mechanical gears
+
+city_background.jpg
+Image of a modern city skyline
+
+cracked_glass_overlay.png
+Realistic overlay of cracked and shattered glass
+
+dark_clouds.jpg
+Image of a sky with dark, stormy clouds
+
+data_center_background.jpg
+Image of a modern data center with rows of servers
+
+data_stream.png
+Glowing blue and purple stream of digital data bits
+
+falling-chart.png
+Colorful line graph chart with a red arrow pointing down
+
+fortress.png
+Large, imposing medieval stone fortress with tall towers
+
+gears-midground.png
+Several colorful, interlocking mechanical gears
+
+glowing_particles.png
+Abstract swirl of small, colorful, glowing light particles
+
+phoenix_from_ashes.png
+Majestic fiery orange and red phoenix rising from ashes
+
+rain_overlay.png
+Overlay of vertical white streaks of falling rain
+
+rainy-city.jpg
+Image of a city street at night in a heavy rainstorm
+
+resilient-plant.png
+Small, vibrant green plant sprout growing from the ground
+
+sad-people.png
+Black silhouettes of several sad, dejected people
+
+server-racks-midground.png
+A row of detailed server racks with blinking green and blue lights
+
+soundwaves_overlay.png
+Colorful blue and purple expanding concentric circles
+
+sunrise-field.jpg
+Image of a beautiful sunrise over a vast green field
+
+tech_cityscape.jpg
+Image of a futuristic city skyline at night with glowing lights
+
+winding-path.jpg
+Image of a path winding through a scenic forest landscape

@@ -1,0 +1,71 @@
+bright_sky.jpg
+Image of a bright blue sky with fluffy white clouds
+
+mountains-far.png
+Colorful, majestic mountain range with snowy peaks
+
+winding-path.jpg
+Image of a dirt path winding through a green landscape
+
+single-tree.png
+A single, vibrant green leafy tree
+
+city_background.jpg
+Image of a bustling modern city skyline at daytime
+
+stock-chart-midground.png
+A colorful, glowing green and red stock market line chart
+
+glowing_particles.png
+Many small, bright yellow and orange glowing particles
+
+rainy-city.jpg
+Image of a city street at night with rain and reflections
+
+amazon_box_foreground.png
+A brown cardboard Amazon shipping box with a black smile logo
+
+rain_overlay.png
+Streaks of white and blue rain falling
+
+blueprint_bg.jpg
+Image of a technical engineering blueprint with white lines on a blue background
+
+gears-midground.png
+Several interlocking metallic, brass-colored gears
+
+tech-overlay-foreground.png
+A futuristic, glowing blue heads-up display with data
+
+tech_city_background.jpg
+Image of a futuristic city with glowing neon lights
+
+cloud_servers_midground.png
+Stylized, glowing blue icons of clouds and servers
+
+data_stream_foreground.png
+Flowing streams of bright blue binary code numbers
+
+sky-background.jpg
+Image of a clear blue sky during the day
+
+city-skyline-mid.png
+A detailed, dark silhouette of a modern city skyline
+
+falling-chart.png
+A red line graph with a downward arrow, indicating a drop
+
+empty_city_street_background.jpg
+Image of an empty city street at dawn
+
+glowing-data.png
+Abstract network of glowing blue lines and dots
+
+data_center_background.jpg
+Image of a large, modern data center hallway
+
+server-racks-midground.png
+A row of tall, black server racks with blinking green lights
+
+aws-logo.png
+The official Amazon Web Services logo in orange and white
