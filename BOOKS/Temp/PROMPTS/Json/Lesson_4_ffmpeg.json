@@ -1,0 +1,98 @@
+[
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "A full scene of a technical blueprint background"
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "Several large, metallic, bronze and silver interlocking gears"
+    },
+    {
+        "name": "gears-foreground.png",
+        "description": "A large, intricate golden gear with smaller silver gears nearby"
+    },
+    {
+        "name": "city_background.jpg",
+        "description": "A full scene of a bustling modern city skyline at daytime"
+    },
+    {
+        "name": "amazon_warehouse_midground.png",
+        "description": "A cutout of a large, modern Amazon fulfillment center building with trucks"
+    },
+    {
+        "name": "amazon_box_foreground.png",
+        "description": "A single, brown cardboard Amazon delivery box with the smile logo"
+    },
+    {
+        "name": "data-center-background.jpg",
+        "description": "A full scene inside a vast, modern data center with rows of servers"
+    },
+    {
+        "name": "server-racks-midground.png",
+        "description": "A row of sleek, black server racks with blinking blue and green lights"
+    },
+    {
+        "name": "data_overlay_foreground.png",
+        "description": "A transparent overlay of glowing blue binary code and abstract data patterns"
+    },
+    {
+        "name": "server-room.jpg",
+        "description": "A full scene of a dark server room aisle, illuminated by glowing blue server lights"
+    },
+    {
+        "name": "glowing-data.png",
+        "description": "A swirling, energetic vortex of glowing blue and purple data streams"
+    },
+    {
+        "name": "cracked_glass_overlay.png",
+        "description": "A transparent overlay of white cracks spreading across a glass surface"
+    },
+    {
+        "name": "sunrise-field.jpg",
+        "description": "A full scene of a golden sunrise over a vast, green field"
+    },
+    {
+        "name": "mountains-far.png",
+        "description": "A distant, majestic mountain range with purple and blue hues"
+    },
+    {
+        "name": "dark_clouds.png",
+        "description": "A cluster of ominous, dark grey and purple storm clouds"
+    },
+    {
+        "name": "abstract_gears_background.jpg",
+        "description": "A full scene of an abstract background with stylized, glowing blue gears"
+    },
+    {
+        "name": "glowing_particles.png",
+        "description": "A cascade of bright, glowing yellow and orange digital particles"
+    },
+    {
+        "name": "tech-overlay-foreground.png",
+        "description": "A transparent futuristic heads-up display with glowing blue circles and lines"
+    },
+    {
+        "name": "tech_cityscape.jpg",
+        "description": "A full scene of a futuristic cityscape at night with neon lights"
+    },
+    {
+        "name": "cloud_servers_midground.png",
+        "description": "A stylized, fluffy white cloud with colorful server rack icons inside it"
+    },
+    {
+        "name": "aws-logo.png",
+        "description": "The official Amazon Web Services (AWS) logo in orange and white"
+    },
+    {
+        "name": "tech_city_background.jpg",
+        "description": "A full scene of a high-tech city with digital data streams in the sky"
+    },
+    {
+        "name": "stock-chart-midground.png",
+        "description": "A glowing green and red stock market candlestick chart trending upwards"
+    },
+    {
+        "name": "data_stream_foreground.png",
+        "description": "A flowing river of bright, glowing blue digital data bits and lines"
+    }
+]

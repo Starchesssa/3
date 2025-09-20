@@ -1,0 +1,78 @@
+[
+    {
+        "name": "aws-logo.png",
+        "description": "The colorful official Amazon Web Services logo"
+    },
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "A full scene of a blue and white technical blueprint"
+    },
+    {
+        "name": "city-skyline-mid.png",
+        "description": "A detailed, colorful city skyline with glowing windows at night"
+    },
+    {
+        "name": "cracked_glass_overlay.png",
+        "description": "A colorful pattern of cracks resembling shattered glass"
+    },
+    {
+        "name": "dark_clouds.jpg",
+        "description": "A full scene of dramatic, dark, stormy clouds"
+    },
+    {
+        "name": "data-center-background.jpg",
+        "description": "A full scene inside a modern data center with rows of servers"
+    },
+    {
+        "name": "data_stream.png",
+        "description": "A vibrant, colorful, flowing stream of binary code"
+    },
+    {
+        "name": "data_stream_foreground.png",
+        "description": "A detailed, colorful, swirling vortex of digital data"
+    },
+    {
+        "name": "fortress.png",
+        "description": "An imposing, colorful, ancient stone fortress on a hill"
+    },
+    {
+        "name": "gears-foreground.png",
+        "description": "A large, detailed, colorful gear in the foreground"
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "Several large, metallic, colorful interlocking gears"
+    },
+    {
+        "name": "phoenix_from_ashes.png",
+        "description": "A majestic phoenix with fiery, colorful wings rising from ashes"
+    },
+    {
+        "name": "rain_overlay.png",
+        "description": "Streaks of colorful falling rain on a transparent background"
+    },
+    {
+        "name": "rainy-city.jpg",
+        "description": "A full scene of a nighttime city street with reflections on wet pavement"
+    },
+    {
+        "name": "resilient-plant.png",
+        "description": "A small, vibrant green plant with colorful leaves growing"
+    },
+    {
+        "name": "server-racks-midground.png",
+        "description": "A detailed, colorful row of computer server racks with blinking lights"
+    },
+    {
+        "name": "stock-chart-midground.png",
+        "description": "A colorful, glowing, upward-trending stock market line graph"
+    },
+    {
+        "name": "sunrise-field.jpg",
+        "description": "A full scene of a beautiful sunrise over a vast, open field"
+    },
+    {
+        "name": "tech_city_background.jpg",
+        "description": "A full scene of a futuristic city with glowing lights and advanced technology"
+    }
+]

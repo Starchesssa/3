@@ -1,0 +1,86 @@
+[
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "Image of a technical blueprint background"
+    },
+    {
+        "name": "broken_gears.png",
+        "description": "Colorful shattered and broken mechanical gears"
+    },
+    {
+        "name": "city_background.jpg",
+        "description": "Image of a modern city skyline"
+    },
+    {
+        "name": "cracked_glass_overlay.png",
+        "description": "Realistic overlay of cracked and shattered glass"
+    },
+    {
+        "name": "dark_clouds.jpg",
+        "description": "Image of a sky with dark, stormy clouds"
+    },
+    {
+        "name": "data_center_background.jpg",
+        "description": "Image of a modern data center with rows of servers"
+    },
+    {
+        "name": "data_stream.png",
+        "description": "Glowing blue and purple stream of digital data bits"
+    },
+    {
+        "name": "falling-chart.png",
+        "description": "Colorful line graph chart with a red arrow pointing down"
+    },
+    {
+        "name": "fortress.png",
+        "description": "Large, imposing medieval stone fortress with tall towers"
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "Several colorful, interlocking mechanical gears"
+    },
+    {
+        "name": "glowing_particles.png",
+        "description": "Abstract swirl of small, colorful, glowing light particles"
+    },
+    {
+        "name": "phoenix_from_ashes.png",
+        "description": "Majestic fiery orange and red phoenix rising from ashes"
+    },
+    {
+        "name": "rain_overlay.png",
+        "description": "Overlay of vertical white streaks of falling rain"
+    },
+    {
+        "name": "rainy-city.jpg",
+        "description": "Image of a city street at night in a heavy rainstorm"
+    },
+    {
+        "name": "resilient-plant.png",
+        "description": "Small, vibrant green plant sprout growing from the ground"
+    },
+    {
+        "name": "sad-people.png",
+        "description": "Black silhouettes of several sad, dejected people"
+    },
+    {
+        "name": "server-racks-midground.png",
+        "description": "A row of detailed server racks with blinking green and blue lights"
+    },
+    {
+        "name": "soundwaves_overlay.png",
+        "description": "Colorful blue and purple expanding concentric circles"
+    },
+    {
+        "name": "sunrise-field.jpg",
+        "description": "Image of a beautiful sunrise over a vast green field"
+    },
+    {
+        "name": "tech_cityscape.jpg",
+        "description": "Image of a futuristic city skyline at night with glowing lights"
+    },
+    {
+        "name": "winding-path.jpg",
+        "description": "Image of a path winding through a scenic forest landscape"
+    }
+]

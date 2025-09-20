@@ -1,0 +1,110 @@
+[
+    {
+        "name": "winding-path.jpg",
+        "description": "A winding dirt path through a green landscape"
+    },
+    {
+        "name": "sky-background.jpg",
+        "description": "A bright blue sky with fluffy white clouds"
+    },
+    {
+        "name": "mountains-far.png",
+        "description": "A distant, majestic mountain range in shades of blue and purple"
+    },
+    {
+        "name": "city-background.jpg",
+        "description": "A sprawling modern city during the daytime"
+    },
+    {
+        "name": "city-skyline-mid.png",
+        "description": "A detailed, colorful silhouette of a city skyline"
+    },
+    {
+        "name": "dark_clouds.jpg",
+        "description": "An ominous, stormy sky filled with dark grey clouds"
+    },
+    {
+        "name": "falling-chart.png",
+        "description": "A red stock market line graph trending sharply downwards"
+    },
+    {
+        "name": "rain_overlay.png",
+        "description": "Streaks of bright blue and white falling rain"
+    },
+    {
+        "name": "cracked_glass_overlay.png",
+        "description": "A network of white and grey cracks on glass"
+    },
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "A detailed architectural blueprint with white lines on a blue background"
+    },
+    {
+        "name": "amazon_warehouse_midground.png",
+        "description": "The interior of a large warehouse with yellow shelves and conveyor belts"
+    },
+    {
+        "name": "sad-people.png",
+        "description": "A diverse group of people with somber, unhappy expressions"
+    },
+    {
+        "name": "amazon_box_foreground.png",
+        "description": "A single brown cardboard Amazon box with the black smile logo"
+    },
+    {
+        "name": "abstract_gears_background.jpg",
+        "description": "An abstract pattern of interlocking metallic gears"
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "A cluster of large, metallic brass and silver gears"
+    },
+    {
+        "name": "gears-foreground.png",
+        "description": "A single, intricate golden gear with many teeth"
+    },
+    {
+        "name": "stock-chart-midground.png",
+        "description": "A glowing green line graph showing positive stock market growth"
+    },
+    {
+        "name": "data_center_background.jpg",
+        "description": "A server room with rows of glowing blue server racks"
+    },
+    {
+        "name": "cloud_servers_midground.png",
+        "description": "Stylized, fluffy white clouds with glowing blue server icons inside"
+    },
+    {
+        "name": "aws-logo.png",
+        "description": "The bright orange and white AWS logo with its smile arrow"
+    },
+    {
+        "name": "data_stream_foreground.png",
+        "description": "A flowing stream of glowing blue binary code"
+    },
+    {
+        "name": "rainy-city.jpg",
+        "description": "A dark city street at night with neon reflections on wet pavement"
+    },
+    {
+        "name": "fortress.png",
+        "description": "A massive, imposing stone fortress with tall, dark towers"
+    },
+    {
+        "name": "glowing_particles.png",
+        "description": "A cascade of shimmering, bright yellow and orange light particles"
+    },
+    {
+        "name": "sunrise-field.jpg",
+        "description": "A golden sunrise over a vast field of green grass"
+    },
+    {
+        "name": "resilient-plant.png",
+        "description": "A single, small green sprout pushing through cracked earth"
+    },
+    {
+        "name": "phoenix_from_ashes.png",
+        "description": "A majestic fiery phoenix with brilliant orange wings rising from grey ashes"
+    }
+]
