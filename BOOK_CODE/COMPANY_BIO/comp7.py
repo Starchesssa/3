@@ -30,14 +30,14 @@ def list_files(directory, ext):
     """List all files in a directory with a specific extension."""
     if not os.path.exists(directory):
         return []
-    return [f for f in os.listdir(directory) if f.endswith(ext)]
+    return [f for f in os.listdir(directory) if f.lower().endswith(ext.lower())]
 
 def sanitize_name(name):
     """Convert name to safe format for filenames."""
     return re.sub(r"[^\w\d\-_.]+", "_", name)
 
 def build_ffmpeg_prompt(wav_file, txt_file):
-    """Build AI prompt to generate FFmpeg video code for a given audio + transcript."""
+    """Build AI prompt to generate a Python script that runs FFmpeg for a parallax video."""
     base_name = os.path.splitext(wav_file)[0]
     txt_path = os.path.join(STT_PATH, txt_file)
     
@@ -47,39 +47,41 @@ def build_ffmpeg_prompt(wav_file, txt_file):
     
     # Gather all .jpg and .png images
     image_files = list_files(IMAGES_DIR, ".jpg") + list_files(IMAGES_DIR, ".png")
-    image_list_str = "\n".join(f"- {img}" for img in image_files)
+    image_list_str = "\n".join(f"- {img}" for img in image_files) if image_files else "(no images found)"
     
+    # Strong, explicit instructions: output only Python script content (no explanation).
     prompt = f"""
-You are generating FFmpeg shell code for a parallax video.
-just output the code only , dont say here is the code , never just outout code only.
+You are an assistant that MUST output only a single Python script (no prose, no code fences, no commentary).
+The Python script must be fully runnable (python3) and must construct and execute a single ffmpeg command
+(using subprocess.run) that produces a parallax video matching the audio duration and the timeline.
 
-all the code should not cobatian any error or syntax errors , we need accuracy .
-
-use python in code, dont use shell , use python cause the code might cobtian may looks ,ingaes , effects , smooth movements , parallax etc.
-
-Requirements:
-- All images (.jpg/png) are in assets/images: if an image requires transparent background save as .png, if image requires full square/rectangle image save as jpg (especially background) 
-- The name of the image should be clear, don’t just say foreground — say building.jpg, etc.
-- Use multiple layers (3-5 layers per scene).
-- Use all images in {IMAGES_DIR} (.jpg/.png) as layers.
-- each inage should match what is been said in the timeline/trasnript , match everything from the timeline , this is so important match timeline with visuals.
-- Match the duration of the audio file: '{os.path.join(TTS_PATH, wav_file)}'.
-- Include all types of parallax effects that ffmpeg can, do not stick to one parallax in all scenes ,use many types of parallax throught.
-- Optionally scale layers for depth effect (pseudo 3D).
-- FPS: {FPS}, Resolution: {RESOLUTION[0]}x{RESOLUTION[1]}, 16:9 aspect ratio, match the audio duration/timeline if the audio has X duration then video should be X duration, all scenes must match same frame per scenod rate throught entire video.
-- Keep code simple, fully working.
-- Output a ready-to-run FFmpeg command/script.
+REQUIREMENTS (very strict):
+1) OUTPUT ONLY Python code (a complete .py file). Do NOT output bash, tsx, or any explanatory text.
+2) The Python script must use subprocess (or shutil) to run ffmpeg. Example: subprocess.run([...], check=True).
+3) The script must read the audio path exactly: '{os.path.join(TTS_PATH, wav_file)}' and create a video with same duration.
+4) Use the images found in {IMAGES_DIR} (listed below) as layers. If an image needs transparency, it should be a png.
+5) Use 3-5 layers per scene; use different parallax techniques across scenes (horizontal parallax, vertical float, scaling zoom, perspective/pseudo-3D via scale+offset).
+6) Use FPS={FPS}, resolution {RESOLUTION[0]}x{RESOLUTION[1]} (16:9). Ensure ffmpeg filter expressions do not rely on undeclared shell variables.
+7) Compute numeric variables in Python (durations, per-scene durations, speeds, scales), then insert those numeric values into the ffmpeg command string.
+   Do NOT leave bash-style ${VAR} inside ffmpeg filters. All ffmpeg expressions must be valid when the Python script runs.
+8) Ensure every filter chain ends with a video stream of the requested resolution/fps and the scenes are concatenated correctly.
+9) Output should be high quality: use libx264 -preset slow -crf 18 and include audio (aac -b:a 192k).
+10) Keep the produced Python script under ~300 lines if possible, and make it clear/structured (functions ok).
+11) Include basic error handling: check ffmpeg/ffprobe existence and readable inputs before running.
+12) The script must write its output to: BOOKS/Temp/VIDEO_FFMPEG/{sanitize_name(base_name)}_ffmpeg_output.mp4
 
 Timeline (start --> end : text):
 {timeline_content}
 
-Visual assets:
+Available visual assets in {IMAGES_DIR}:
 {image_list_str}
+
+Important: Do not ask for more information. Generate a single Python script that will (when run) produce the final parallax video.
 """
     return prompt
 
 def generate_ffmpeg_code(prompt, api_index):
-    """Retry across all API keys until success."""
+    """Retry across all API keys until success; return text and next api_index."""
     while True:
         for attempt in range(len(API_KEYS)):
             key = API_KEYS[(api_index + attempt) % len(API_KEYS)]
@@ -110,11 +112,11 @@ txt_files = list_files(STT_PATH, ".txt")
 
 if not wav_files:
     print("❌ No WAV files found in TTS folder.")
-    exit()
+    exit(1)
 
 if not txt_files:
     print("❌ No TXT files found in STT folder.")
-    exit()
+    exit(1)
 
 api_index = 0
 
@@ -124,11 +126,31 @@ for wav_file in wav_files:
     if matching_txt in txt_files:
         prompt = build_ffmpeg_prompt(wav_file, matching_txt)
         try:
-            ffmpeg_code, api_index = generate_ffmpeg_code(prompt, api_index)
-            out_path = os.path.join(VIDEO_OUTPUT_PATH, f"{sanitize_name(base_name)}_ffmpeg.sh")
+            ffmpeg_py_code, api_index = generate_ffmpeg_code(prompt, api_index)
+            # Force save as .py
+            out_filename = f"{sanitize_name(base_name)}_ffmpeg.py"
+            out_path = os.path.join(VIDEO_OUTPUT_PATH, out_filename)
+
+            # Ensure the AI returned something that starts with a Python shebang or "import"
+            # (We won't strictly enforce but it's a basic sanity check)
+            if not (ffmpeg_py_code.lstrip().startswith("#!") or ffmpeg_py_code.lstrip().startswith("import")):
+                # Prepend a safe header that imports subprocess (if missing) and then append returned code.
+                header = (
+                    "#!/usr/bin/env python3\n"
+                    "import shutil, subprocess, sys, os\n\n"
+                )
+                ffmpeg_py_code = header + ffmpeg_py_code
+
             with open(out_path, "w", encoding="utf-8") as f:
-                f.write(ffmpeg_code)
-            print(f"✅ FFmpeg script generated: {out_path}")
+                f.write(ffmpeg_py_code)
+
+            # Make script executable (best-effort; may require permissions)
+            try:
+                os.chmod(out_path, 0o755)
+            except Exception:
+                pass
+
+            print(f"✅ FFmpeg python script generated: {out_path}")
         except Exception as e:
             print(f"❌ Failed to generate FFmpeg script for {wav_file}: {e}")
     else:
