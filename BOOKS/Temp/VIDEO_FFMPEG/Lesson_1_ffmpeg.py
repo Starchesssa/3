@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import shutil, subprocess, sys, os
 
-```python
+
 import subprocess
 import os
 import shutil
