@@ -1,14 +1,13 @@
-
-name: FastDepth Depth Map
+name: Generate Depth Map
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:   # Allows manual trigger
+  workflow_dispatch:  # Manual trigger
 
 jobs:
-  run-fastdepth:
+  depth-map:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,26 +15,26 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Set up Python
+    # 2. Setup Python v4
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: "3.10"
 
     # 3. Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install torch torchvision matplotlib opencv-python
+        pip install torch torchvision opencv-python matplotlib
 
-    # 4. Run the FastDepth script
-    - name: Run FastDepth
+    # 4. Run Fast_depth.py
+    - name: Run MiDaS Depth Script
       run: |
         python MANIM/Fast_depth.py
 
-    # 5. Upload output as artifact
-    - name: Upload Depth Map Artifact
-      uses: actions/upload-artifact@v4
+    # 5. Upload depth map as artifact
+    - name: Upload Depth Map
+      uses: actions/upload-artifact@v3
       with:
-        name: depth-map
+        name: amazon-box-depth
         path: assets/images/amazon_box_depth.png
