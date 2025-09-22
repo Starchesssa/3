@@ -35,7 +35,7 @@ jobs:
 
     # 5. Upload output as artifact
     - name: Upload Depth Map Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: depth-map
         path: assets/images/amazon_box_depth.png
