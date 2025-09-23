@@ -16,7 +16,7 @@ jobs:
     name: 📝 Run comp7.py (Gemini AI JSON Generator)
 
     steps:
-      # 1. Checkout your repo
+      # 1. Checkout repository
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
 
@@ -26,14 +26,14 @@ jobs:
         with:
           python-version: '3.10'
 
-      # 3. Install system packages and Python dependencies
+      # 3. Install dependencies
       - name: 📦 Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           pip install --no-cache-dir google-genai
 
-      # 4. Run your comp7.py script (JSON generator)
+      # 4. Run comp7.py
       - name: ▶️ Run comp7.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
@@ -44,9 +44,11 @@ jobs:
         run: |
           python -u BOOK_CODE/COMPANY_BIO/comp7.py
 
-      # 5. Commit & push generated JSON files
+      # 5. Commit & push generated JSON
       - name: ✅ Commit & Push JSON
+        shell: bash
         run: |
+          set -e  # Exit immediately if a command fails
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
