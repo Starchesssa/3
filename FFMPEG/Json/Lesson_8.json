@@ -1,0 +1,266 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Lesson_8.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [0.0, 5.26],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "gears-midground.png",
+          "time": [1.56, 5.26],
+          "reveal": "slide_in_left",
+          "layer": "midground",
+          "scale": 0.8,
+          "x": 480,
+          "y": 270
+        },
+        {
+          "image": "dark_clouds.png",
+          "time": [3.62, 5.26],
+          "reveal": "top_reveal",
+          "layer": "foreground",
+          "scale": 1.0,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 2,
+      "images": [
+        {
+          "image": "tech_city_background.jpg",
+          "time": [5.26, 9.98],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "empty_city_street_background.jpg",
+          "time": [8.66, 9.98],
+          "reveal": "fade_in",
+          "layer": "background"
+        }
+      ],
+      "transition": "slide_left"
+    },
+    {
+      "scene": 3,
+      "images": [
+        {
+          "image": "rainy-city.jpg",
+          "time": [9.98, 14.28],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "biohazard_symbol_overlay.png",
+          "time": [11.46, 14.28],
+          "reveal": "zoom_in",
+          "layer": "foreground",
+          "scale": 0.5
+        },
+        {
+          "image": "rain_overlay.png",
+          "time": [10.14, 14.28],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 4,
+      "images": [
+        {
+          "image": "empty_city_street_background.jpg",
+          "time": [14.28, 18.68],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "sad-people.png",
+          "time": [16.58, 18.68],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 0.6,
+          "x": 384,
+          "y": 432
+        }
+      ],
+      "transition": "slide_right"
+    },
+    {
+      "scene": 5,
+      "images": [
+        {
+          "image": "data_center_background.jpg",
+          "time": [18.68, 27.06],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_warehouse_midground.png",
+          "time": [20.10, 27.06],
+          "reveal": "slide_in_left",
+          "layer": "midground",
+          "scale": 0.9
+        },
+        {
+          "image": "glowing-data.png",
+          "time": [25.12, 27.06],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "3d_right"
+    },
+    {
+      "scene": 6,
+      "images": [
+        {
+          "image": "server-room.jpg",
+          "time": [27.06, 35.84],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "delivery_drone_foreground.png",
+          "time": [28.64, 30.52],
+          "reveal": "slide_in_right",
+          "layer": "foreground",
+          "scale": 0.4,
+          "x": 600,
+          "y": 100
+        },
+        {
+          "image": "cloud_servers_midground.png",
+          "time": [30.60, 33.16],
+          "reveal": "top_reveal",
+          "layer": "midground"
+        },
+        {
+          "image": "aws-logo.png",
+          "time": [31.58, 35.84],
+          "reveal": "zoom_in",
+          "layer": "foreground",
+          "scale": 0.3
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 7,
+      "images": [
+        {
+          "image": "gears-background.png",
+          "time": [35.84, 40.48],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "cracked_glass_overlay.png",
+          "time": [36.50, 38.80],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        },
+        {
+          "image": "resilient-plant.png",
+          "time": [38.94, 40.48],
+          "reveal": "zoom_in",
+          "layer": "midground",
+          "scale": 0.7
+        }
+      ],
+      "transition": "slide_left"
+    },
+    {
+      "scene": 8,
+      "images": [
+        {
+          "image": "city_background.jpg",
+          "time": [40.48, 48.38],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [41.00, 42.48],
+          "reveal": "slide_in_diag",
+          "layer": "midground",
+          "scale": 0.6
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [42.72, 48.38],
+          "reveal": "top_reveal",
+          "layer": "midground",
+          "scale": 0.8
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 9,
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [48.38, 55.84],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "data_stream_foreground.png",
+          "time": [48.56, 55.84],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        },
+        {
+          "image": "glowing_particles.png",
+          "time": [50.70, 55.84],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "3d_left"
+    },
+    {
+      "scene": 10,
+      "images": [
+        {
+          "image": "sunrise-field.jpg",
+          "time": [55.84, 70.40],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "phoenix_from_ashes.png",
+          "time": [56.36, 62.80],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "scale": 0.8
+        },
+        {
+          "image": "fortress.png",
+          "time": [62.80, 70.40],
+          "reveal": "bottom_slide",
+          "layer": "midground"
+        },
+        {
+          "image": "tech_overlay_foreground.png",
+          "time": [65.10, 70.40],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "fade"
+    }
+  ]
+}
+```

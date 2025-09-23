@@ -1,0 +1,180 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Lesson_1.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "transition": null,
+      "images": [
+        {
+          "image": "winding-path.jpg",
+          "time": [0.0, 5.76],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "mountains-far.png",
+          "time": [2.08, 5.76],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "y": 0.4,
+          "scale": 1.1
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "transition": "slide_in_left",
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [5.76, 14.28],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [12.38, 14.28],
+          "reveal": "slide_in_diag",
+          "layer": "midground",
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "transition": "3d_left",
+      "images": [
+        {
+          "image": "data-center-background.jpg",
+          "time": [14.28, 19.78],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_box_foreground.png",
+          "time": [18.02, 19.78],
+          "reveal": "bottom_slide",
+          "layer": "foreground",
+          "y": 0.6,
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "transition": "bottom_slide",
+      "images": [
+        {
+          "image": "rainy-city.jpg",
+          "time": [19.78, 31.86],
+          "reveal": "zoom_out",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [25.56, 31.86],
+          "reveal": "top_reveal",
+          "layer": "midground",
+          "scale": 0.9
+        },
+        {
+          "image": "rain_overlay.png",
+          "time": [19.78, 31.86],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "transition": "zoom_in",
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [31.86, 36.50],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "gears-midground.png",
+          "time": [32.28, 36.50],
+          "reveal": "3d_left",
+          "layer": "midground"
+        },
+        {
+          "image": "amazon_warehouse_midground.png",
+          "time": [34.18, 36.50],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "scale": 1.2
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "transition": "top_reveal",
+      "images": [
+        {
+          "image": "city_background.jpg",
+          "time": [36.50, 49.52],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [45.80, 49.52],
+          "reveal": "slide_in_diag",
+          "layer": "midground",
+          "x": 0.5,
+          "y": 0.5,
+          "scale": 0.8
+        }
+      ]
+    },
+    {
+      "scene": 7,
+      "transition": "fade_in",
+      "images": [
+        {
+          "image": "dark_clouds.jpg",
+          "time": [49.52, 57.30],
+          "reveal": "zoom_out",
+          "layer": "background"
+        },
+        {
+          "image": "cracked_glass_overlay.png",
+          "time": [50.32, 57.30],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "transition": "3d_right",
+      "images": [
+        {
+          "image": "server-room.jpg",
+          "time": [57.30, 67.22],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "data_stream_foreground.png",
+          "time": [60.60, 67.22],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        },
+        {
+          "image": "aws-logo.png",
+          "time": [64.28, 67.22],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "scale": 0.3
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,190 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Lesson_2.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "dark_clouds.jpg",
+          "time": [0.0, 5.5],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [1.56, 3.5],
+          "reveal": "zoom_in",
+          "layer": "midground"
+        },
+        {
+          "image": "winding-path.png",
+          "time": [3.52, 5.5],
+          "reveal": "slide_in_right",
+          "layer": "midground"
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [5.5, 11.2],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "cracked_glass_overlay.png",
+          "time": [6.2, 11.2],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "empty_city_street_background.jpg",
+          "time": [11.2, 16.7],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "sad-people.png",
+          "time": [12.44, 16.4],
+          "reveal": "bottom_slide",
+          "layer": "midground"
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "city-background.jpg",
+          "time": [16.7, 21.0],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_box_foreground.png",
+          "time": [17.98, 20.64],
+          "reveal": "3d_left",
+          "layer": "midground",
+          "scale": 0.8,
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "image": "biohazard_symbol_overlay.png",
+          "time": [20.24, 21.0],
+          "reveal": "zoom_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "abstract_gears_background.jpg",
+          "time": [21.0, 31.8],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [21.46, 31.8],
+          "reveal": "top_reveal",
+          "layer": "midground"
+        },
+        {
+          "image": "rain_overlay.png",
+          "time": [25.22, 31.8],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "rainy-city.jpg",
+          "time": [31.8, 46.5],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "sad-people.png",
+          "time": [33.6, 40.02],
+          "reveal": "slide_in_left",
+          "layer": "midground"
+        },
+        {
+          "image": "broken_gears.png",
+          "time": [40.76, 46.2],
+          "reveal": "3d_right",
+          "layer": "midground"
+        }
+      ]
+    },
+    {
+      "scene": 7,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [46.5, 52.2],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_warehouse_midground.png",
+          "time": [48.66, 52.2],
+          "reveal": "bottom_slide",
+          "layer": "midground"
+        },
+        {
+          "image": "soundwaves_overlay.png",
+          "time": [51.3, 52.2],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "dark_clouds.png",
+          "time": [52.2, 59.8],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "fortress.png",
+          "time": [54.22, 59.8],
+          "reveal": "zoom_in",
+          "layer": "midground"
+        },
+        {
+          "image": "data_stream_foreground.png",
+          "time": [55.5, 59.8],
+          "reveal": "slide_in_diag",
+          "layer": "foreground"
+        }
+      ]
+    }
+  ]
+}
+```

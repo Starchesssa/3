@@ -1,0 +1,143 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Intro.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [0.0, 7.1],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [3.5, 6.9],
+          "reveal": "slide_in_left",
+          "layer": "midground",
+          "scale": 0.8,
+          "x": 0.5,
+          "y": 0.5
+        }
+      ],
+      "transition": "fade_in"
+    },
+    {
+      "scene": 2,
+      "images": [
+        {
+          "image": "city-background.jpg",
+          "time": [7.1, 9.5],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [8.3, 9.5],
+          "reveal": "top_reveal",
+          "layer": "midground"
+        }
+      ],
+      "transition": "bottom_slide"
+    },
+    {
+      "scene": 3,
+      "images": [
+        {
+          "image": "rainy-city.jpg",
+          "time": [9.5, 13.8],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "single-tree.png",
+          "time": [11.8, 13.8],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "scale": 0.7,
+          "x": 0.5,
+          "y": 0.6
+        },
+        {
+          "image": "rain_overlay.png",
+          "time": [9.5, 13.8],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "3d_left"
+    },
+    {
+      "scene": 4,
+      "images": [
+        {
+          "image": "sunrise-field.jpg",
+          "time": [13.8, 17.0],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "phoenix_from_ashes.png",
+          "time": [15.0, 17.0],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 0.9
+        }
+      ],
+      "transition": "slide_in_diag"
+    },
+    {
+      "scene": 5,
+      "images": [
+        {
+          "image": "data_center_background.jpg",
+          "time": [17.0, 23.0],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "gears-midground.png",
+          "time": [18.8, 23.0],
+          "reveal": "3d_right",
+          "layer": "midground"
+        },
+        {
+          "image": "tech_overlay_foreground.png",
+          "time": [20.9, 23.0],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "3d_right"
+    },
+    {
+      "scene": 6,
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [23.0, 25.8],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "aws-logo.png",
+          "time": [23.32, 25.8],
+          "reveal": "zoom_in",
+          "layer": "midground",
+          "scale": 0.4,
+          "x": 0.5,
+          "y": 0.5
+        },
+        {
+          "image": "data_stream_foreground.png",
+          "time": [24.0, 25.8],
+          "reveal": "top_reveal",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "fade_in"
+    }
+  ]
+}
+```

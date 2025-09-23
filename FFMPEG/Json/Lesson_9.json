@@ -1,0 +1,247 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Lesson_9.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "images": [
+        {
+          "image": "sky-background.jpg",
+          "time": [0.0, 4.0],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "winding-path.png",
+          "time": [0.52, 4.0],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 1.1,
+          "y": 0.05
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 2,
+      "images": [
+        {
+          "image": "city_background.jpg",
+          "time": [4.22, 10.5],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "tech_overlay_foreground.png",
+          "time": [9.4, 10.5],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "slide_left"
+    },
+    {
+      "scene": 3,
+      "images": [
+        {
+          "image": "dark_clouds.jpg",
+          "time": [10.82, 17.2],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [12.52, 17.2],
+          "reveal": "top_reveal",
+          "layer": "midground"
+        },
+        {
+          "image": "cracked_glass_overlay.png",
+          "time": [16.56, 17.2],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "cross_zoom"
+    },
+    {
+      "scene": 4,
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [17.6, 22.8],
+          "reveal": "zoom_out",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [17.94, 22.8],
+          "reveal": "3d_left",
+          "layer": "midground",
+          "scale": 0.9,
+          "x": -0.1,
+          "y": 0.1
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 5,
+      "images": [
+        {
+          "image": "empty_city_street_background.jpg",
+          "time": [23.08, 35.2],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_warehouse_midground.png",
+          "time": [23.62, 29.5],
+          "reveal": "slide_in_left",
+          "layer": "midground"
+        },
+        {
+          "image": "sad-people.png",
+          "time": [31.14, 35.2],
+          "reveal": "slide_in_right",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "slide_right"
+    },
+    {
+      "scene": 6,
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [35.42, 43.8],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [41.78, 43.8],
+          "reveal": "3d_right",
+          "layer": "midground"
+        },
+        {
+          "image": "gears-foreground.png",
+          "time": [43.0, 43.8],
+          "reveal": "fade_in",
+          "layer": "foreground",
+          "scale": 1.2
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 7,
+      "images": [
+        {
+          "image": "data_center_background.jpg",
+          "time": [44.26, 57.8],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "server-racks-midground.png",
+          "time": [49.54, 57.8],
+          "reveal": "slide_in_diag",
+          "layer": "midground"
+        },
+        {
+          "image": "aws-logo.png",
+          "time": [50.76, 57.8],
+          "reveal": "zoom_in",
+          "layer": "foreground",
+          "scale": 0.5
+        },
+        {
+          "image": "glowing_data.png",
+          "time": [53.42, 57.8],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "slide_up"
+    },
+    {
+      "scene": 8,
+      "images": [
+        {
+          "image": "dark_clouds.jpg",
+          "time": [58.1, 70.0],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "fortress.png",
+          "time": [65.92, 70.0],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 0.8,
+          "y": 0.1
+        },
+        {
+          "image": "rain_overlay.png",
+          "time": [69.2, 70.0],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ],
+      "transition": "fade"
+    },
+    {
+      "scene": 9,
+      "images": [
+        {
+          "image": "abstract_gears_background.jpg",
+          "time": [70.36, 82.0],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "resilient-plant.png",
+          "time": [72.54, 76.5],
+          "reveal": "zoom_in",
+          "layer": "foreground"
+        },
+        {
+          "image": "broken_gears.png",
+          "time": [79.88, 80.8],
+          "reveal": "fade_in",
+          "layer": "midground"
+        },
+        {
+          "image": "gears-midground.png",
+          "time": [80.86, 82.0],
+          "reveal": "fade_in",
+          "layer": "midground",
+          "scale": 1.1
+        }
+      ],
+      "transition": "slide_down"
+    },
+    {
+      "scene": 10,
+      "images": [
+        {
+          "image": "sunrise-field.jpg",
+          "time": [82.28, 92.30],
+          "reveal": "fade_in",
+          "layer": "background",
+          "scale": 1.2
+        },
+        {
+          "image": "phoenix_from_ashes.png",
+          "time": [88.46, 92.30],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 0.7
+        }
+      ],
+      "transition": "fade"
+    }
+  ]
+}
+```

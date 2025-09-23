@@ -1,0 +1,247 @@
+```json
+{
+  "audio": "FFMPEG/Audio/Lesson_4.wav",
+  "scenes": [
+    {
+      "scene": 1,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "blueprint_bg.jpg",
+          "time": [0.00, 4.84],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [2.16, 3.80],
+          "reveal": "slide_in_left",
+          "layer": "midground",
+          "scale": 0.6
+        },
+        {
+          "image": "phoenix_from_ashes.png",
+          "time": [3.40, 4.84],
+          "reveal": "zoom_in",
+          "layer": "foreground",
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "transition": "3d_left",
+      "images": [
+        {
+          "image": "city_background.jpg",
+          "time": [4.84, 12.24],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_warehouse_midground.png",
+          "time": [7.40, 10.20],
+          "reveal": "slide_in_right",
+          "layer": "midground",
+          "scale": 0.8
+        },
+        {
+          "image": "amazon_box_foreground.png",
+          "time": [10.20, 12.24],
+          "reveal": "bottom_slide",
+          "layer": "foreground",
+          "scale": 0.4
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "dark_clouds.jpg",
+          "time": [12.24, 21.00],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "gears-midground.png",
+          "time": [15.00, 18.34],
+          "reveal": "zoom_in",
+          "layer": "midground"
+        },
+        {
+          "image": "broken_gears.png",
+          "time": [16.76, 20.50],
+          "reveal": "3d_right",
+          "layer": "foreground",
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "transition": "slide_in_diag",
+      "images": [
+        {
+          "image": "data-center-background.jpg",
+          "time": [21.00, 31.14],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "server-racks-midground.png",
+          "time": [21.20, 26.06],
+          "reveal": "slide_in_left",
+          "layer": "midground"
+        },
+        {
+          "image": "data_stream_foreground.png",
+          "time": [28.32, 30.58],
+          "reveal": "top_reveal",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 5,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "rainy-city.jpg",
+          "time": [31.14, 37.06],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "falling-chart.png",
+          "time": [32.56, 36.40],
+          "reveal": "bottom_slide",
+          "layer": "midground",
+          "scale": 0.5
+        },
+        {
+          "image": "sunrise-field.jpg",
+          "time": [37.06, 39.02],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "resilient-plant.png",
+          "time": [37.90, 39.02],
+          "reveal": "zoom_in",
+          "layer": "midground",
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "scene": 6,
+      "transition": "3d_right",
+      "images": [
+        {
+          "image": "tech_cityscape.jpg",
+          "time": [39.02, 47.42],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "glowing-data.png",
+          "time": [41.40, 44.48],
+          "reveal": "zoom_in",
+          "layer": "midground"
+        },
+        {
+          "image": "city-skyline-mid.png",
+          "time": [45.22, 47.42],
+          "reveal": "slide_in_right",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 7,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "sky-background.jpg",
+          "time": [47.42, 58.06],
+          "reveal": "zoom_in",
+          "layer": "background"
+        },
+        {
+          "image": "aws-logo.png",
+          "time": [49.12, 51.52],
+          "reveal": "zoom_in",
+          "layer": "midground",
+          "scale": 0.5
+        },
+        {
+          "image": "cloud_servers_midground.png",
+          "time": [52.28, 57.28],
+          "reveal": "bottom_slide",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 8,
+      "transition": "3d_left",
+      "images": [
+        {
+          "image": "empty_city_street_background.jpg",
+          "time": [58.06, 64.90],
+          "reveal": "fade_in",
+          "layer": "background"
+        },
+        {
+          "image": "amazon_box_foreground.png",
+          "time": [60.40, 62.98],
+          "reveal": "slide_in_left",
+          "layer": "midground",
+          "x": -250,
+          "scale": 0.4
+        },
+        {
+          "image": "server-racks-midground.png",
+          "time": [61.84, 64.42],
+          "reveal": "slide_in_right",
+          "layer": "midground",
+          "x": 250,
+          "scale": 0.6
+        },
+        {
+          "image": "cracked_glass_overlay.png",
+          "time": [63.30, 64.90],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    },
+    {
+      "scene": 9,
+      "transition": "fade",
+      "images": [
+        {
+          "image": "tech_city_background.jpg",
+          "time": [64.90, 73.82],
+          "reveal": "background_zoomout",
+          "layer": "background"
+        },
+        {
+          "image": "stock-chart-midground.png",
+          "time": [68.40, 71.00],
+          "reveal": "top_reveal",
+          "layer": "midground"
+        },
+        {
+          "image": "data_overlay_foreground.png",
+          "time": [66.30, 73.82],
+          "reveal": "fade_in",
+          "layer": "foreground"
+        }
+      ]
+    }
+  ]
+}
+```
