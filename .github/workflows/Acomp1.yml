@@ -1,35 +1,45 @@
-name: 📚 Check Company Bio Books (Halal or Haram)
+
+name: Run comp6a.py and Commit Book Status
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # allow manual trigger
+  push:
+    paths:
+      - "BOOK_CODE/COMPANY_BIO/comp6a.py"
+      - ".github/workflows/comp6a.yml"
 
 permissions:
-  contents: write
-
-concurrency:
-  group: "company-bio-check"
-  cancel-in-progress: true
+  contents: write   # required for pushing commits
 
 jobs:
-  check-company-bio:
+  run-script:
     runs-on: ubuntu-latest
-    name: 🤖 Run Halal/Haram Checker on Company Bio Books
 
     steps:
-      - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      - name: 🧠 Install Gemini SDK and Run Script
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
         run: |
-          export PYTHONUNBUFFERED=1
-          pip install --no-cache-dir --progress-bar=off google-genai
-          python -u BOOK_CODE/COMPANY_BIO/comp1.py
+          python -m pip install --upgrade pip
+          pip install google-genai
+
+      - name: Run comp6a.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API2: ${{ secrets.GEMINI_API2 }}
           GEMINI_API3: ${{ secrets.GEMINI_API3 }}
           GEMINI_API4: ${{ secrets.GEMINI_API4 }}
           GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: |
+          python BOOK_CODE/COMPANY_BIO/comp6a.py
 
       - name: ✅ Commit & Push Updates
         run: |
