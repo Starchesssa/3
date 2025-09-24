@@ -1,0 +1,80 @@
+blueprint_bg.jpg
+Image of a blue blueprint background
+
+glowing_particles.png
+Glowing yellow particles in a white background
+
+stock-chart-midground.png
+A green and red stock chart graph in a white background
+
+fortress.png
+A large stone-gray fortress in a white background
+
+data_overlay_foreground.png
+A transparent blue data overlay with numbers in a white background
+
+empty_city_street_background.jpg
+Image of an empty city street with tall gray buildings
+
+dark_clouds.png
+Dark gray storm clouds in a white background
+
+cracked_glass_overlay.png
+A transparent gray cracked glass pattern in a white background
+
+falling-chart.png
+A red falling stock chart line in a white background
+
+amazon_warehouse_midground.png
+A large gray Amazon warehouse building in a white background
+
+resilient-plant.png
+A small green plant growing from a crack in a white background
+
+mountains-far.png
+Blue and purple mountains in a white background
+
+rain_overlay.png
+A transparent blue rain overlay in a white background
+
+abstract_gears_background.jpg
+Image of an abstract background with metallic gray gears
+
+data_stream.png
+A stream of blue digital data in a white background
+
+data_stream_foreground.png
+A bright blue stream of data code in a white background
+
+glowing-data.png
+Glowing blue data points and lines in a white background
+
+bright_sky.jpg
+Image of a bright blue sky with white clouds
+
+gears-midground.png
+Several metallic gray gears interlocked in a white background
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+city-skyline-mid.png
+A dark gray city skyline silhouette in a white background
+
+winding-path.png
+A winding brown dirt path in a white background
+
+data_center_background.jpg
+Image of a blue-lit data center with server racks
+
+cloud_servers_midground.png
+Stylized floating blue cloud servers in a white background
+
+amazon_box_foreground.png
+A brown Amazon cardboard box in a white background
+
+aws-logo.png
+The orange and white AWS logo in a white background
+
+tech_cityscape.jpg
+Image of a futuristic neon-lit cityscape at night

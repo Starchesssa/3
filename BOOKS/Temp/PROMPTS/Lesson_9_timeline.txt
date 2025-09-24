@@ -1,0 +1,101 @@
+winding-path.png
+A winding grey path in a white background
+
+blueprint_bg.jpg
+Image of a blue and white technical blueprint background
+
+city-background.jpg
+Image of a modern city skyline at dusk
+
+bright_sky.jpg
+Image of a bright blue sky with fluffy white clouds
+
+tech_cityscape.jpg
+Image of a futuristic technology cityscape at night
+
+dark_clouds.jpg
+Image of a sky filled with dark grey storm clouds
+
+falling-chart.png
+A red falling stock chart in a white background
+
+tech_city_background.jpg
+Image of a futuristic city with glowing blue lights
+
+empty_city_street_background.jpg
+Image of an empty city street with tall buildings
+
+cracked_glass_overlay.png
+A black cracked glass pattern in a white background
+
+amazon_box_foreground.png
+A brown Amazon delivery box in a white background
+
+amazon_warehouse_midground.png
+A large grey Amazon warehouse building in a white background
+
+sad-people.png
+A group of sad people in blue clothes in a white background
+
+tech_overlay_foreground.png
+A blue technology circuit pattern in a white background
+
+gears-midground.png
+A set of metallic silver gears in a white background
+
+rain_overlay.png
+A blue rain overlay pattern in a white background
+
+soundwaves_overlay.png
+A blue soundwave pattern in a white background
+
+glowing_particles.png
+A cluster of glowing yellow particles in a white background
+
+stock-chart-midground.png
+A green and red stock market chart in a white background
+
+gears-background.jpg
+Image of a complex background of interlocking metal gears
+
+delivery_drone_foreground.png
+A white and blue delivery drone in a white background
+
+aws-logo.png
+The orange and white AWS logo in a white background
+
+data_center_background.jpg
+Image of a modern data center with rows of servers
+
+glowing-data.png
+A stream of glowing blue data bits in a white background
+
+data_stream.png
+A flowing blue stream of data in a white background
+
+server-room.png
+A row of black server racks in a white background
+
+fortress.png
+A large grey stone fortress in a white background
+
+resilient-plant.png
+A small green plant growing from a crack in a white background
+
+abstract_gears_background.jpg
+Image of an abstract background with blue and grey gears
+
+broken_gears.png
+A set of broken brown rusty gears in a white background
+
+sky-background.jpg
+Image of a clear and bright blue sky
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+phoenix_from_ashes.png
+A fiery orange phoenix rising from ashes in a white background
+
+mountains-far.png
+A range of distant blue mountains in a white background

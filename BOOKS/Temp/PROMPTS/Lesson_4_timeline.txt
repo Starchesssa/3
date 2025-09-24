@@ -1,0 +1,68 @@
+falling-chart.png
+A red falling chart on a white background
+
+stock-chart-midground.png
+A green rising stock chart on a white background
+
+amazon_box_foreground.png
+A brown Amazon box on a white background
+
+city_background.jpg
+Image of a bright, modern city skyline
+
+sad-people.png
+A group of sad, grey people on a white background
+
+cracked_glass_overlay.png
+A black cracked glass pattern on a white background
+
+gears-background.png
+A set of interlocking golden gears on a white background
+
+broken_gears.png
+A set of grey broken gears on a white background
+
+server-room.png
+A detailed blue server room on a white background
+
+server-racks-midground.png
+A row of blue server racks on a white background
+
+glowing-data.png
+A cluster of blue glowing data points on a white background
+
+data_overlay_foreground.png
+A blue digital data overlay on a white background
+
+tech_cityscape.jpg
+Image of a futuristic, glowing blue cityscape at night
+
+fortress.png
+A large, grey stone fortress on a white background
+
+gears-midground.png
+A collection of metallic silver gears on a white background
+
+abstract_gears_background.jpg
+Image of an abstract background with colorful, stylized gears
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+data-center-background.jpg
+Image of the interior of a large, modern data center
+
+cloud_servers_midground.png
+A group of white fluffy clouds with blue server icons on a white background
+
+aws-logo.png
+The orange and blue AWS logo on a white background
+
+phoenix_from_ashes.png
+A fiery orange phoenix rising from grey ashes on a white background
+
+tech_overlay_foreground.png
+A blue technology data overlay on a white background
+
+blueprint_bg.jpg
+Image of a detailed blue and white blueprint background

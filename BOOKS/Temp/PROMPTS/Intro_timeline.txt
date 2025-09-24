@@ -1,0 +1,41 @@
+blueprint_bg.jpg
+Image of a blue and white architectural blueprint
+
+gears-midground.png
+Several grey and brass interlocking gears in a white background
+
+tech_city_background.jpg
+Image of a futuristic blue glowing city at night
+
+stock-chart-midground.png
+A green and red stock market chart with an upward trend in a white background
+
+city-background.jpg
+Image of a bright modern city skyline during the day
+
+glowing-data.png
+Abstract flowing lines of blue glowing data in a white background
+
+empty_city_street_background.jpg
+Image of an empty, grey city street on an overcast day
+
+sad-people.png
+A group of people in colorful clothes looking sad in a white background
+
+cracked_glass_overlay.png
+Black cracked glass pattern in a white background
+
+data_center_background.jpg
+Image of a data center with rows of blue glowing servers
+
+gears-foreground.png
+A large set of metallic grey gears in a white background
+
+data_stream.png
+A stream of glowing blue binary code numbers in a white background
+
+tech_cityscape.jpg
+Image of a sprawling futuristic cityscape with purple and blue lights
+
+aws-logo.png
+The orange and black Amazon Web Services logo in a white background
