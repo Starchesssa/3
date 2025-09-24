@@ -1,0 +1,93 @@
+1. Key=TXT=large
+   lesson=TXT=medium
+   expense=falling-chart.png=mg/c
+   product=stock-chart-midground.png=fg/r
+   Overall_par_effect=focus_pull
+
+2. year=TXT=medium
+   2006=TXT=large
+   Overall_par_effect=basic
+
+3. Amazon=amazon_box_foreground.png=fg/l
+   successful=stock-chart-midground.png=md/c
+   retailer=city_background.jpg=bg/full
+   Overall_par_effect=floating_objects
+
+4. sees=TXT=medium
+   everyone=sad-people.png=md/c
+   Overall_par_effect=mask_reveal
+
+5. inside=cracked_glass_overlay.png=fg/full
+   happening=gears-background.png=bg/full
+   Overall_par_effect=sliding_split
+
+6. headache=broken_gears.png=mg/l
+   expense=falling-chart.png=mg/r
+   infrastructure=server-room.png=bg/full
+   Overall_par_effect=blur
+
+7. servers=server-racks-midground.png=md/c
+   databases=glowing-data.png=fg/l
+   network=data_overlay_foreground.png=fg/full
+   website=tech_cityscape.jpg=bg/full
+   Overall_par_effect=diagonal
+
+8. beast=fortress.png=md/c
+   Overall_par_effect=scale
+
+9. complex=gears-midground.png=md/c
+   expensive=falling-chart.png=fg/r
+   Overall_par_effect=vertical
+
+10. company=city_background.jpg=bg/full
+    cost center=falling-chart.png=mg/c
+    Overall_par_effect=basic
+
+11. cheaper=TXT=small
+    efficient=abstract_gears_background.jpg=bg/full
+    Overall_par_effect=orbit
+
+12. Amazon=amazon_box_foreground.png=fg/l
+    opportunity=sunrise-field.jpg=bg/full
+    Overall_par_effect=focus_pull
+
+13. massive=data-center-background.jpg=bg/full
+    reliable=glowing-data.png=md/c
+    systems=cloud_servers_midground.png=mg/r
+    pay=TXT=small
+    Overall_par_effect=dolly_zoom
+
+14. 2006=TXT=medium
+    AWS=aws-logo.png=md/c
+    launched=TXT=large
+    Overall_par_effect=scale
+
+15. renting=TXT=small
+    computer power=cloud_servers_midground.png=md/c
+    Overall_par_effect=floating_objects
+
+16. power company=tech_cityscape.jpg=bg/full
+    computing=glowing-data.png=fg/c
+    Overall_par_effect=sliding_split
+
+17. understood=TXT=medium
+    no one=sad-people.png=md/c
+    Overall_par_effect=blur
+
+18. bookstore=amazon_box_foreground.png=fg/l
+    server time=server-racks-midground.png=md/r
+    Overall_par_effect=sliding_split
+
+19. no sense=cracked_glass_overlay.png=fg/full
+    Overall_par_effect=blur
+
+20. start=phoenix_from_ashes.png=md/c
+    cloud computing=cloud_servers_midground.png=mg/l
+    revolution=tech_overlay_foreground.png=fg/full
+    Overall_par_effect=mask_reveal
+
+21. industry=stock-chart-midground.png=md/c
+    born=phoenix_from_ashes.png=mg/l
+    expense report=blueprint_bg.jpg=bg/full
+    trillion dollar=TXT=large
+    Overall_par_effect=diagonal

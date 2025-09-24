@@ -1,0 +1,100 @@
+1. lesson=TXT=large
+   innovation=abstract_gears_background.jpg=bg/full
+   expensive=stock-chart-midground.png=md/r
+   failure=falling-chart.png=md/l
+   public=sad-people.png=fg/c
+   Overall_par_effect=focus_pull
+
+2. 2019=tech_cityscape.jpg=bg/full
+   2019=TXT=large
+   ghosts=dark_clouds.png=bg/c
+   failures=cracked_glass_overlay.png=fg/full
+   Overall_par_effect=mask_reveal
+
+3. biggest=TXT=Fire Phone=large
+   fire phone=server-room.jpg=bg/full
+   2014=amazon_box_foreground.png=fg/c
+   2014=TXT=medium
+   Overall_par_effect=scale
+
+4. disaster=broken_gears.png=md/c
+   flop=falling-chart.png=fg/c
+   Overall_par_effect=blur
+
+5. company=amazon_warehouse_midground.png=md/c
+   $170 million=TXT=$170 Million=large
+   write down=stock-chart-midground.png=md/r
+   Inventory=falling-chart.png=fg/c
+   Overall_par_effect=vertical
+
+6. humiliation=sad-people.png=fg/c
+   public=dark_clouds.png=bg/full
+   Overall_par_effect=diagonal
+
+7. compete=tech_city_background.jpg=bg/full
+   Apple=tech_overlay_foreground.png=fg/r
+   Google=data_overlay_foreground.png=fg/l
+   failed=cracked_glass_overlay.png=fg/full
+   Overall_par_effect=sliding_split
+
+8. normal company=city-background.jpg=bg/full
+   fire=sad-people.png=fg/c
+   team=biohazard_symbol_overlay.png=fg/c
+   Overall_par_effect=basic
+
+9. mention=dark_clouds.png=bg/full
+   project=server-room.jpg=md/c
+   Overall_par_effect=blur
+
+10. conclude=TXT=Not a Hardware Company=large
+    hardware company=data_center_background.jpg=bg/full
+    hardware company=server-racks-midground.png=md/c
+    Overall_par_effect=dolly_zoom
+
+11. Amazon=aws-logo.png=md/c
+    Amazon=amazon_box_foreground.png=fg/c
+    not do that=TXT=Amazon Did Not.=large
+    Overall_par_effect=focus_pull
+
+12. Bezos=TXT="If you are not failing, you are not innovating."=large
+    failing=broken_gears.png=md/l
+    innovating=gears-midground.png=md/r
+    Overall_par_effect=floating_objects
+
+13. $170 million=TXT=$170 Million=large
+    tuition fee=stock-chart-midground.png=md/c
+    Overall_par_effect=scale
+
+14. lessons=blueprint_bg.jpg=bg/full
+    failure=broken_gears.png=md/c
+    engineers=data_stream.png=fg/c
+    supply chains=amazon_warehouse_midground.png=md/r
+    not thrown away=resilient-plant.png=fg/l
+    Overall_par_effect=sliding_split
+
+15. repurposed=gears-midground.png=md/c
+    repurposed=abstract_gears_background.jpg=bg/full
+    Overall_par_effect=orbit
+
+16. team=blueprint_bg.jpg=bg/full
+    knowledge=glowing_particles.png=md/c
+    Amazon Echo=soundwaves_overlay.png=fg/c
+    Alexa=aws-logo.png=md/l
+    technology=tech_cityscape.jpg=bg/full
+    Overall_par_effect=mask_reveal
+
+17. 2019=TXT=2019=large
+    homes=city-skyline-mid.png=md/c
+    Echo device=soundwaves_overlay.png=fg/c
+    Overall_par_effect=vertical
+
+18. ashes=phoenix_from_ashes.png=fg/c
+    failure=dark_clouds.png=bg/full
+    soil=resilient-plant.png=fg/c
+    successes=sunrise-field.jpg=bg/full
+    Overall_par_effect=dolly_zoom
+
+19. Failure=broken_gears.png=fg/l
+    learn nothing=dark_clouds.png=bg/full
+    learn=resilient-plant.png=fg/r
+    Overall_par_effect=floating_objects

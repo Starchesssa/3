@@ -1,0 +1,104 @@
+1. Key=TXT=medium
+   lesson=TXT=medium
+   Overall_par_effect=basic
+
+2. Ignore=TXT=small
+   short-term=falling-chart.png=fg/l
+   reality=TXT=small
+   long-term=winding-path.png=bg/full
+   vision=TXT=medium
+   Overall_par_effect=dolly_zoom
+
+3. year=TXT=medium
+   1999=TXT=large
+   Overall_par_effect=basic
+
+4. world=city_background.jpg=bg/full
+   dot-com=stock-chart-midground.png=md/c
+   bubble=TXT=medium
+   Overall_par_effect=scale
+
+5. Everyone=TXT=medium
+   genius=TXT=medium
+   Overall_par_effect=basic
+
+6. Stocks=stock-chart-midground.png=md/c
+   up=bright_sky.jpg=bg/full
+   Overall_par_effect=vertical
+
+7. Amazon=amazon_box_foreground.png=fg/c
+   internet=data_stream.png=bg/full
+   economy=stock-chart-midground.png=md/c
+   Overall_par_effect=floating_objects
+
+8. sells=amazon_box_foreground.png=fg/l
+   books=TXT=medium
+   online=data_stream.png=bg/full
+   Overall_par_effect=basic
+
+9. Jeff_Bezos=TXT=small
+   Wall_Street=city-skyline-mid.png=md/c
+   not_want=sad-people.png=fg/r
+   Overall_par_effect=focus_pull
+
+10. lose_money=falling-chart.png=md/c
+    Overall_par_effect=diagonal
+
+11. spend=TXT=small
+    dollar=TXT=small
+    more=TXT=medium
+    Overall_par_effect=basic
+
+12. not=TXT=small
+    bookstore=TXT=medium
+    Overall_par_effect=mask_reveal
+
+13. building=abstract_gears_background.jpg=bg/full
+    everything=TXT=medium
+    store=amazon_warehouse_midground.png=md/c
+    Overall_par_effect=scale
+
+14. 1997=TXT=small
+    shareholders=TXT=small
+    long-term=winding-path.png=bg/full
+    Overall_par_effect=dolly_zoom
+
+15. 1999=TXT=medium
+    market=stock-chart-midground.png=md/c
+    loved=TXT=small
+    Overall_par_effect=basic
+
+16. Amazon=amazon_box_foreground.png=fg/l
+    stocks=stock-chart-midground.png=md/c
+    soared=bright_sky.jpg=bg/full
+    $100=TXT=medium
+    Overall_par_effect=vertical
+
+17. company=TXT=small
+    not_profitable=falling-chart.png=md/c
+    Overall_par_effect=blur
+
+18. Not_even_close=TXT=medium
+    Overall_par_effect=basic
+
+19. promise=TXT=medium
+    Overall_par_effect=basic
+
+20. bet=TXT=small
+    distant_future=winding-path.png=bg/full
+    Overall_par_effect=dolly_zoom
+
+21. people=sad-people.png=fg/r
+    selling_books=amazon_box_foreground.png=fg/l
+    loss=falling-chart.png=md/c
+    Overall_par_effect=sliding_split
+
+22. Bezos=TXT=small
+    global_logistics=amazon_warehouse_midground.png=md/c
+    data_empire=data_center_background.jpg=bg/full
+    Overall_par_effect=focus_pull
+
+23. vision=blueprint_bg.jpg=bg/full
+    big=TXT=medium
+    insanity=cracked_glass_overlay.png=fg/full
+    Overall_par_effect=mask_reveal

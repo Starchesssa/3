@@ -1,0 +1,167 @@
+1. Key=TXT=large
+   lesson=TXT=medium
+   blueprint_bg.jpg=bg/full
+   glowing_particles.png=fg/c
+   Overall_par_effect=basic
+
+2. market=stock-chart-midground.png=md/c
+   mood=dark_clouds.png=bg/full
+   swing=bright_sky.jpg=bg/full
+   MARKET=TXT=large
+   MOOD SWING=TXT=medium
+   Overall_par_effect=sliding_split
+
+3. strategy=blueprint_bg.jpg=bg/full
+   compass=winding-path.png=md/c
+   glowing-data.png=fg/c
+   STRATEGY=TXT=large
+   COMPASS=TXT=medium
+   Overall_par_effect=focus_pull
+
+4. bubble=stock-chart-midground.png=md/c
+   burst=cracked_glass_overlay.png=fg/full
+   falling-chart.png=md/c
+   BUBBLE=TXT=large
+   BURST=TXT=medium
+   Overall_par_effect=scale
+
+5. 1999=city-background.jpg=bg/full
+   2001=empty_city_street_background.jpg=bg/full
+   party=sad-people.png=fg/c
+   ended=rain_overlay.png=fg/full
+   PARTY ENDED=TXT=large
+   Overall_par_effect=sliding_split
+
+6. com=tech_city_background.jpg=bg/full
+   companies=glowing_particles.png=fg/c
+   vanished=dark_clouds.png=bg/full
+   .COM=TXT=large
+   VANISHED=TXT=medium
+   Overall_par_effect=blur
+
+7. Pets=TXT=large
+   .com=TXT=medium
+   city-skyline-mid.png=bg/full
+   tech_overlay_foreground.png=fg/full
+   Overall_par_effect=basic
+
+8. Webvan=TXT=large
+   city-skyline-mid.png=bg/full
+   data_overlay_foreground.png=fg/full
+   Overall_par_effect=basic
+
+9. Gone=TXT=large
+   broken_gears.png=md/c
+   empty_city_street_background.jpg=bg/full
+   Overall_par_effect=basic
+
+10. Wall Street=city_background.jpg=bg/full
+    Amazon=amazon_box_foreground.png=fg/c
+    turned on=dark_clouds.png=bg/c
+    WALL STREET=TXT=medium
+    AMAZON=TXT=medium
+    Overall_par_effect=focus_pull
+
+11. Amazon Bomb=TXT=large
+    amazon_box_foreground.png=fg/c
+    cracked_glass_overlay.png=fg/full
+    Overall_par_effect=scale
+
+12. stock=stock-chart-midground.png=md/c
+    crashed=falling-chart.png=md/c
+    $100=TXT=large
+    CRASHED=TXT=large
+    Overall_par_effect=vertical
+
+13. fell=falling-chart.png=md/c
+    $6 a share=TXT=large
+    dark_clouds.png=bg/full
+    Overall_par_effect=vertical
+
+14. drop=falling-chart.png=md/c
+    90%=TXT=large
+    biohazard_symbol_overlay.png=fg/c
+    Overall_par_effect=diagonal
+
+15. Imagine that=TXT=medium
+    glowing_particles.png=bg/full
+    data_stream.png=fg/c
+    Overall_par_effect=basic
+
+16. life's work=TXT=large
+    blueprint_bg.jpg=bg/full
+    abstract_gears_background.jpg=bg/c
+    Overall_par_effect=basic
+
+17. net worth=stock-chart-midground.png=md/c
+    evaporating=glowing_particles.png=fg/c
+    90%=TXT=large
+    cracked_glass_overlay.png=fg/full
+    Overall_par_effect=blur
+
+18. founders=sad-people.png=fg/c
+    panic=dark_clouds.png=bg/full
+    PANIC=TXT=large
+    Overall_par_effect=dolly_zoom
+
+19. cut costs=server-racks-midground.png=md/c
+    bone=broken_gears.png=fg/c
+    CUT COSTS=TXT=large
+    Overall_par_effect=vertical
+
+20. profit=stock-chart-midground.png=md/c
+    glowing-data.png=fg/c
+    PROFIT=TXT=large
+    Overall_par_effect=vertical
+
+21. Any profit=TXT=large
+    stock-chart-midground.png=md/c
+    glowing_particles.png=fg/c
+    Overall_par_effect=basic
+
+22. calm=bright_sky.jpg=bg/full
+    investors=sad-people.png=fg/c
+    CALM=TXT=medium
+    INVESTORS=TXT=medium
+    Overall_par_effect=mask_reveal
+
+23. Bezos=TXT=large
+    opposite=winding-path.png=md/c
+    blueprint_bg.jpg=bg/full
+    Overall_par_effect=diagonal
+
+24. building=amazon_warehouse_midground.png=md/c
+    data_center_background.jpg=bg/full
+    BUILDING=TXT=large
+    Overall_par_effect=scale
+
+25. market=stock-chart-midground.png=md/c
+    noise=soundwaves_overlay.png=fg/full
+    city_background.jpg=bg/full
+    Overall_par_effect=blur
+
+26. fear=dark_clouds.png=bg/full
+    greed=stock-chart-midground.png=md/c
+    FEAR=TXT=medium
+    GREED=TXT=medium
+    Overall_par_effect=dolly_zoom
+
+27. strategy=blueprint_bg.jpg=bg/full
+    signal=glowing-data.png=fg/c
+    data_stream.png=fg/full
+    STRATEGY=TXT=large
+    SIGNAL=TXT=large
+    Overall_par_effect=floating_objects
+
+28. survive=fortress.png=md/c
+    storm=rain_overlay.png=fg/full
+    dark_clouds.png=bg/full
+    SURVIVE=TXT=medium
+    STORM=TXT=medium
+    Overall_par_effect=focus_pull
+
+29. abandon=broken_gears.png=fg/c
+    ship=fortress.png=md/c
+    phoenix_from_ashes.png=bg/c
+    NOT ABANDON=TXT=large
+    Overall_par_effect=orbit

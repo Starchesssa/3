@@ -1,0 +1,74 @@
+1. Key_lesson=TXT=medium
+   Overall_par_effect=focus_pull
+
+2. cash=glowing_particles.png=fg/r
+   invade=fortress.png=md/c
+   territories=sunrise-field.jpg=bg/full
+   Overall_par_effect=sliding_split
+
+3. year=TXT=large
+   Overall_par_effect=basic
+
+4. AWS=aws-logo.png=md/c
+   monster=dark_clouds.png=bg/full
+   Overall_par_effect=scale
+
+5. money=glowing_particles.png=fg/l
+   machine=gears-midground.png=md/c
+   Overall_par_effect=floating_objects
+
+6. revenue_number=TXT=medium
+   revenue_chart=stock-chart-midground.png=md/r
+   Overall_par_effect=vertical
+
+7. retail=amazon_warehouse_midground.png=md/l
+   AWS=aws-logo.png=md/r
+   profitable=glowing_particles.png=fg/c
+   Overall_par_effect=mask_reveal
+
+8. cash=glowing_particles.png=fg/c
+   engine=gears-midground.png=md/c
+   Overall_par_effect=basic
+
+9. cash=glowing_particles.png=fg/c
+   shareholders=sad-people.png=md/r
+   Overall_par_effect=floating_objects
+
+10. path=winding-path.png=bg/full
+    war_chest=fortress.png=md/l
+    new_industry=sunrise-field.jpg=bg/r
+    Overall_par_effect=diagonal
+
+11. Amazon=amazon_box_foreground.png=fg/l
+    price=TXT=medium
+    city=city-background.jpg=bg/full
+    Overall_par_effect=focus_pull
+
+12. cash=glowing_particles.png=fg/c
+    stunned=cracked_glass_overlay.png=fg/full
+    Overall_par_effect=blur
+
+13. ecommerce=amazon_box_foreground.png=fg/l
+    brick_mortar=empty_city_street_background.jpg=bg/full
+    grocery=single-tree.png=md/r
+    Overall_par_effect=sliding_split
+
+14. plummet=falling-chart.png=fg/c
+    stocks=stock-chart-midground.png=md/c
+    Overall_par_effect=vertical
+
+15. lost=falling-chart.png=fg/c
+    value=TXT=medium
+    Overall_par_effect=scale
+
+16. amazon=amazon_box_foreground.png=fg/l
+    tech=tech_cityscape.jpg=bg/full
+    profit=glowing_particles.png=fg/r
+    aws=aws-logo.png=md/c
+    invasion=fortress.png=md/r
+    old_world=sunrise-field.jpg=bg/l
+    Overall_par_effect=dolly_zoom
+
+17. game=blueprint_bg.jpg=bg/full
+    different=TXT=large
+    Overall_par_effect=mask_reveal

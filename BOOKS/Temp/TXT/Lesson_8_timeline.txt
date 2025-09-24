@@ -1,0 +1,75 @@
+1. Key lesson=TXT=medium
+Overall_par_effect=focus_pull
+
+2. system=gears-midground.png=md/c
+crisis=dark_clouds.jpg=bg/full
+tested=cracked_glass_overlay.png=fg/full
+Overall_par_effect=blur
+
+3. 2019=city-background.jpg=bg/l
+2020=empty_city_street_background.jpg=bg/r
+world=city_background.jpg=bg/full
+stopped=TXT=large
+Overall_par_effect=sliding_split
+
+4. pandemic=biohazard_symbol_overlay.png=fg/c
+shut down=empty_city_street_background.jpg=bg/full
+COVID -19=TXT=medium
+Overall_par_effect=mask_reveal
+
+5. Stores closed=empty_city_street_background.jpg=bg/full
+offices closed=city-skyline-mid.png=md/c
+locked=sad-people.png=fg/c
+Overall_par_effect=diagonal
+
+6. machine=abstract_gears_background.jpg=bg/full
+Amazon=amazon_box_foreground.png=fg/r
+building=blueprint_bg.jpg=bg/l
+convenience=TXT=small
+Overall_par_effect=scale
+
+7. essential=fortress.png=md/c
+infrastructure=data_center_background.jpg=bg/full
+infrastructure=server-room.jpg=md/l
+Overall_par_effect=focus_pull
+
+8. warehouses=amazon_warehouse_midground.png=md/l
+delivery trucks=delivery_drone_foreground.png=fg/r
+cloud servers=cloud_servers_midground.png=md/c
+ultimate test=TXT=medium
+Overall_par_effect=floating_objects
+
+9. system=gears-midground.png=md/c
+strained=cracked_glass_overlay.png=fg/full
+slipped=falling-chart.png=md/r
+did not break=resilient-plant.png=fg/l
+Overall_par_effect=mask_reveal
+
+10. businesses collapsed=falling-chart.png=md/l
+Amazon hired=amazon_warehouse_midground.png=md/r
+other businesses=sad-people.png=fg/l
+Amazon=TXT=medium
+Overall_par_effect=sliding_split
+
+11. hired=data_stream.png=fg/full
+new workers=glowing_particles.png=fg/c
+175 ,000=TXT=large
+Overall_par_effect=scale
+
+12. revenue=stock-chart-midground.png=md/c
+exploded=glowing-data.png=fg/full
+40 %=TXT=large
+Overall_par_effect=vertical
+
+13. tragedy=dark_clouds.jpg=bg/l
+world=rain_overlay.png=fg/l
+validation=fortress.png=md/r
+business model=tech_city_background.jpg=bg/r
+Overall_par_effect=sliding_split
+
+14. logistics=amazon_warehouse_midground.png=md/l
+infrastructure=data_center_background.jpg=bg/c
+long -term thinking=blueprint_bg.jpg=bg/full
+paid off=glowing_particles.png=fg/full
+world=tech_cityscape.jpg=bg/r
+Overall_par_effect=orbit
