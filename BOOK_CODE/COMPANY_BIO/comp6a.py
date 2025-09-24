@@ -84,8 +84,9 @@ Tasks:
    1. stone=huge_stone.png=bg/full
       Cowboy=cow_boycape.png=fg/r
       Coins=money.png=mg/l
+      success=TXT=medium
       Overall_par_effect=basic
-
+      
    2. blue=blue_bg.jpeg=bg/full
       sky=blue_sky.png=bg/c
       cushion=tall_cushion.png=r
@@ -101,6 +102,10 @@ md= for midground
 r=  for right 
 l=  for left 
 c= for centre 
+TXT= for words that will display on screen 
+small= gor small text words 
+medium= for medium text words 
+large= for large text words 
 full= for full jpg image (usually background)
 use these effects only = dolly_zoom, basic, vertical, diagonal, scale, orbit, blur, mask_reveal, sliding_split, floating_objects, focus_pull].
 
