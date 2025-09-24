@@ -6,7 +6,7 @@ import re
 from google import genai
 
 # === Configuration ===
-VIDEO_PY_PATH = "BOOKS/Temp/VIDEO_FFMPEG"  # folder containing generated .py ffmpeg scripts
+VIDEO_PY_PATH = "BOOKS/Temp/TXT"  # folder containing generated .py ffmpeg scripts
 PROMPTS_PATH = "BOOKS/Temp/PROMPTS"
 MODEL = "gemini-2.5-pro"
 
@@ -41,10 +41,10 @@ Analyse the following python code and list all the images required with names an
 Follow this style exactly:
 
 bicycle.png
-A bicycle in a white background
+A black bicycle in a white background
 
 building.png
-Tall building in a white background
+Tall green  building in a white background
 
 darkblue_background.jpg
 Image of dark blue background plain
@@ -56,6 +56,8 @@ Rules:
 - All JPGs = full backgrounds → describe as full scene.
 - Use the exact filenames used in the code (no directories).
 - Keep prompts short and simple.
+- Each object must cobtain a colour ie instead of tall building say tall green buikding , 
+- in pngs background is white so nomal objects can have white colour ,give volour other tahn white ie black , green bkue , orange etc 
 - Output only the list. Do not explain.
 
 Code:
