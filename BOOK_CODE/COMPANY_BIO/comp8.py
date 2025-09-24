@@ -58,7 +58,7 @@ Rules:
 - Use the exact filenames in the text (no directories).
 - Keep prompts short and simple.
 - Each object must contain a color (instead of just "building" say "tall green building").
-- In PNGs, background is white → so object must be colored.
+- In PNGs, background is white → so object must be colored.so all pngs have white background 
 - Output only the list. Do not explain.
 
 Text:
