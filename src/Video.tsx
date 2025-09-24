@@ -1,10 +1,10 @@
-
 // src/Video.tsx
 import React from 'react';
 import fs from 'fs';
 import path from 'path';
+import {Audio} from '@remotion/media-utils';
 
-// Import all 11 templates
+// Import all templates
 import {DollyZoom} from './templates/DollyZoom';
 import {Basic} from './templates/Basic';
 import {Vertical} from './templates/Vertical';
@@ -17,7 +17,6 @@ import {SlidingSplit} from './templates/SlidingSplit';
 import {FloatingObjects} from './templates/FloatingObjects';
 import {FocusPull} from './templates/FocusPull';
 
-// Map effect names to template components
 const templatesMap: Record<string, React.FC<any>> = {
   dolly_zoom: DollyZoom,
   basic: Basic,
@@ -32,7 +31,7 @@ const templatesMap: Record<string, React.FC<any>> = {
   focus_pull: FocusPull,
 };
 
-// Load TXT assets (sentence-wise)
+// Load TXT instructions
 const loadTXT = (filePath: string) => {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const blocks = raw.split(/\n\n/).map(b => b.trim()).filter(Boolean);
@@ -46,14 +45,14 @@ const loadTXT = (filePath: string) => {
       } else {
         const [word, asset, pos] = line.split('=');
         const [layer, position] = pos.split('/');
-        assets.push({asset, layer: layer as 'bg' | 'md' | 'fg', position: position as 'l' | 'c' | 'r' | 'full'});
+        assets.push({asset, layer: layer as 'bg' | 'md' | 'fg', position: position as 'l' | 'c' | 'r' | 'full', word});
       }
     });
     return {assets, effect};
   });
 };
 
-// Load sentence timings from STT timeline
+// Load sentence timings
 const loadTimeline = (filePath: string) => {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const sentences: {start: number; end: number}[] = [];
@@ -73,17 +72,42 @@ const loadTimeline = (filePath: string) => {
   return sentences;
 };
 
+// Match audio file
+const getAudioPath = (timelineFile: string) => {
+  const baseName = path.basename(timelineFile).replace('_timeline.txt', '');
+  const audioFile = path.join(__dirname, `../BOOKS/Temp/TTS/${baseName}.wav`);
+  if (!fs.existsSync(audioFile)) return null;
+  return audioFile;
+};
+
+// Generate a small random transition time between sentences
+const randomTransition = () => Math.random() * 0.3 + 0.2; // 0.2s to 0.5s
+
 const Video: React.FC = () => {
-  const txtData = loadTXT(path.join(__dirname, '../BOOKS/Temp/TXT/Intro_timeline.txt'));
-  const sentenceTimes = loadTimeline(path.join(__dirname, '../BOOKS/Temp/STT/Intro_timeline.txt'));
+  const txtFile = path.join(__dirname, '../BOOKS/Temp/TXT/Intro_timeline.txt');
+  const timelineFile = path.join(__dirname, '../BOOKS/Temp/STT/Intro_timeline.txt');
+
+  const txtData = loadTXT(txtFile);
+  const sentenceTimes = loadTimeline(timelineFile);
+  const audioPath = getAudioPath(timelineFile);
 
   return (
     <>
+      {audioPath && <Audio src={audioPath} startFrom={0} endAt={sentenceTimes[sentenceTimes.length-1]?.end || 10} />}
+
       {txtData.map((sentence, idx) => {
         const TemplateComponent = templatesMap[sentence.effect] || Basic;
-        const time = sentenceTimes[idx] || {start: idx * 2, end: (idx + 1) * 2}; // fallback
+        const time = sentenceTimes[idx] || {start: idx * 2, end: (idx + 1) * 2};
+        const transition = randomTransition();
 
-        return <TemplateComponent key={idx} assets={sentence.assets} startTime={time.start} endTime={time.end} />;
+        return (
+          <TemplateComponent
+            key={idx}
+            assets={sentence.assets}
+            startTime={time.start}
+            endTime={time.end + transition} // random transition to next sentence
+          />
+        );
       })}
     </>
   );
