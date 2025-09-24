@@ -1,4 +1,3 @@
-
 name: Run comp6a.py and Commit Book Status
 
 on:
@@ -50,11 +49,12 @@ jobs:
           git add BOOKS/USED/COMPANY_BIO
           git add BOOKS/Temp/COMPANY_BIO
           git add BOOKS/WEALTH/BIO/COMPANY_BIO
+          git add BOOKS/Temp/TXT   # ✅ Include generated TXT files
 
           if git diff --cached --quiet; then
             echo "🟡 No book status updates to commit."
           else
-            git commit -m "📚 Gemini book scan result: Updated USED, Temp, and WEALTH"
+            git commit -m "📚 Gemini book scan result: Updated USED, Temp, WEALTH, and TXT"
             git push
             echo "✅ Book status committed and pushed."
           fi
