@@ -6,7 +6,7 @@ import re
 from google import genai
 
 # === Configuration ===
-VIDEO_PY_PATH = "BOOKS/Temp/TXT"  # folder containing generated .py ffmpeg scripts
+TXT_PATH = "BOOKS/Temp/TXT"        # folder containing .txt input files
 PROMPTS_PATH = "BOOKS/Temp/PROMPTS"
 MODEL = "gemini-2.5-pro"
 
@@ -23,20 +23,20 @@ if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found in environment variables.")
 
 # === Helpers ===
-def list_py_files(directory: str):
-    """List all .py files inside a directory."""
+def list_txt_files(directory: str):
+    """List all .txt files inside a directory."""
     if not os.path.exists(directory):
         return []
-    return [f for f in os.listdir(directory) if f.lower().endswith(".py")]
+    return [f for f in os.listdir(directory) if f.lower().endswith(".txt")]
 
 def sanitize_filename(name: str) -> str:
     """Make safe filenames."""
     return re.sub(r"[^\w\d\-_. ]+", "", name).replace(" ", "_")
 
-def build_prompt(code: str) -> str:
-    """Build prompt for Gemini to generate image list from Python code."""
+def build_prompt(content: str) -> str:
+    """Build prompt for Gemini to generate image list from .txt script content."""
     return f"""
-Analyse the following python code and list all the images required with names and prompts.
+Analyse the following lesson structure text and list all the images required with names and prompts.
 
 Follow this style exactly:
 
@@ -44,7 +44,7 @@ bicycle.png
 A black bicycle in a white background
 
 building.png
-Tall green  building in a white background
+Tall green building in a white background
 
 darkblue_background.jpg
 Image of dark blue background plain
@@ -52,21 +52,22 @@ Image of dark blue background plain
 (skip a line before starting another image)
 
 Rules:
-- All PNGs = transparent cutouts → describe with colorful details.
-- All JPGs = full backgrounds → describe as full scene.
-- Use the exact filenames used in the code (no directories).
+- Only extract images ending in .png or .jpg
+- All PNGs = transparent cutouts → describe with colorful details (not white).
+- All JPGs = full backgrounds → describe as full scenes.
+- Use the exact filenames in the text (no directories).
 - Keep prompts short and simple.
-- Each object must cobtain a colour ie instead of tall building say tall green buikding , 
-- in pngs background is white so nomal objects can have white colour ,give volour other tahn white ie black , green bkue , orange etc 
+- Each object must contain a color (instead of just "building" say "tall green building").
+- In PNGs, background is white → so object must be colored.
 - Output only the list. Do not explain.
 
-Code:
-{code}
+Text:
+{content}
 """
 
-def generate_prompts(py_name: str, code: str, api_index: int):
+def generate_prompts(txt_name: str, content: str, api_index: int):
     """Generate image prompts using Gemini; returns (text, new_api_index)."""
-    prompt = build_prompt(code)
+    prompt = build_prompt(content)
     attempts = len(API_KEYS)
 
     for attempt in range(attempts):
@@ -84,7 +85,7 @@ def generate_prompts(py_name: str, code: str, api_index: int):
                 except Exception:
                     text = str(response)
 
-            print(f"✅ Prompts generated with API#{(api_index + attempt) % attempts + 1} for '{py_name}'", flush=True)
+            print(f"✅ Prompts generated with API#{(api_index + attempt) % attempts + 1} for '{txt_name}'", flush=True)
             return text.strip(), (api_index + attempt + 1) % attempts
 
         except Exception as e:
@@ -93,10 +94,10 @@ def generate_prompts(py_name: str, code: str, api_index: int):
 
     raise RuntimeError("❌ All API keys failed after full rotation.")
 
-def save_prompts(py_file: str, prompt_text: str):
+def save_prompts(txt_file: str, prompt_text: str):
     """Save prompts into PROMPTS_PATH using a safe filename."""
     os.makedirs(PROMPTS_PATH, exist_ok=True)
-    base_name = py_file.replace(".py", ".txt")
+    base_name = txt_file.replace(".txt", ".txt")
     safe_name = sanitize_filename(base_name)
     out_path = os.path.join(PROMPTS_PATH, safe_name)
 
@@ -107,27 +108,27 @@ def save_prompts(py_file: str, prompt_text: str):
 
 # === Main ===
 def main():
-    py_files = list_py_files(VIDEO_PY_PATH)
-    if not py_files:
-        print("❌ No .py files found in VIDEO_FFMPEG.")
+    txt_files = list_txt_files(TXT_PATH)
+    if not txt_files:
+        print("❌ No .txt files found in BOOKS/Temp/TXT.")
         return
 
     api_index = 0
-    for py_file in py_files:
-        py_path = os.path.join(VIDEO_PY_PATH, py_file)
+    for txt_file in txt_files:
+        txt_path = os.path.join(TXT_PATH, txt_file)
 
         try:
-            with open(py_path, "r", encoding="utf-8") as f:
-                code = f.read()
+            with open(txt_path, "r", encoding="utf-8") as f:
+                content = f.read()
         except Exception as e:
-            print(f"⚠️ Could not read {py_file}: {e}", flush=True)
+            print(f"⚠️ Could not read {txt_file}: {e}", flush=True)
             continue
 
         try:
-            prompt_text, api_index = generate_prompts(py_file, code, api_index)
-            save_prompts(py_file, prompt_text)
+            prompt_text, api_index = generate_prompts(txt_file, content, api_index)
+            save_prompts(txt_file, prompt_text)
         except Exception as e:
-            print(f"❌ Failed on {py_file}: {e}", flush=True)
+            print(f"❌ Failed on {txt_file}: {e}", flush=True)
 
     print("\n🎉 Prompt generation complete.\n")
 
