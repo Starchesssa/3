@@ -1,97 +1,92 @@
 
-import {
-	AbsoluteFill,
-	Audio,
-	Img,
-	Sequence,
-	interpolate,
-	spring,
-	staticFile,
-	useCurrentFrame,
-	useVideoConfig,
-} from 'remotion';
+// src/Video.tsx
+import React from 'react';
+import fs from 'fs';
+import path from 'path';
 
-// Helper to convert time in seconds to frames
-const sec = (seconds: number) => Math.round(seconds * 30);
+// Import all 11 templates
+import {DollyZoom} from './templates/DollyZoom';
+import {Basic} from './templates/Basic';
+import {Vertical} from './templates/Vertical';
+import {Diagonal} from './templates/Diagonal';
+import {Scale} from './templates/Scale';
+import {Orbit} from './templates/Orbit';
+import {Blur} from './templates/Blur';
+import {MaskReveal} from './templates/MaskReveal';
+import {SlidingSplit} from './templates/SlidingSplit';
+import {FloatingObjects} from './templates/FloatingObjects';
+import {FocusPull} from './templates/FocusPull';
 
-const Title = ({ text, style }: { text: string; style: React.CSSProperties }) => {
-	return (
-		<h1
-			style={{
-				fontFamily: 'Helvetica, Arial, sans-serif',
-				fontSize: '120px',
-				fontWeight: 'bold',
-				textAlign: 'center',
-				color: 'white',
-				textShadow: '0 0 20px rgba(0,0,0,0.7)',
-				...style,
-			}}
-		>
-			{text}
-		</h1>
-	);
+// Map effect names to template components
+const templatesMap: Record<string, React.FC<any>> = {
+  dolly_zoom: DollyZoom,
+  basic: Basic,
+  vertical: Vertical,
+  diagonal: Diagonal,
+  scale: Scale,
+  orbit: Orbit,
+  blur: Blur,
+  mask_reveal: MaskReveal,
+  sliding_split: SlidingSplit,
+  floating_objects: FloatingObjects,
+  focus_pull: FocusPull,
 };
 
-export const RemotionVideo: React.FC = () => {
-	const frame = useCurrentFrame();
-	const { fps, durationInFrames } = useVideoConfig();
-
-	// --- Parallax Calculations ---
-	const bgParallax = interpolate(frame, [0, durationInFrames], [1, 1.15]);
-	const mgParallax = interpolate(frame, [0, durationInFrames], [0, -250]);
-	const fgParallax = interpolate(frame, [0, durationInFrames], [0, -500]);
-
-	const bgStyle: React.CSSProperties = { transform: `scale(${bgParallax})` };
-	const mgStyle: React.CSSProperties = { transform: `translateX(${mgParallax}px) scale(1.1)` };
-	const fgStyle: React.CSSProperties = { transform: `translateX(${fgParallax}px) scale(1.2)`, opacity: 0.6 };
-
-	// --- Keyword Animation ---
-	const createAnimation = (startFrame: number): React.CSSProperties => {
-		const progress = spring({
-			frame: frame - startFrame,
-			fps,
-			config: { stiffness: 100, damping: 20 },
-		});
-		const scaleVal = interpolate(progress, [0, 1], [0.8, 1]);
-		const opacityVal = interpolate(progress, [0, 0.5, 1], [0, 1, 1]);
-		return { transform: `scale(${scaleVal})`, opacity: opacityVal };
-	};
-
-	return (
-		<AbsoluteFill style={{ backgroundColor: 'black' }}>
-			<Audio src={staticFile('BOOKS/Temp/TTS/Lesson_1.wav')} />
-
-			{/* Parallax Layers */}
-			<AbsoluteFill>
-				<Img style={bgStyle} src={staticFile('assets/images/city_background.jpg')} />
-				<Img style={mgStyle} src={staticFile('assets/images/buildings_midground.png')} />
-				<Img style={fgStyle} src={staticFile('assets/images/data_overlay_foreground.png')} />
-			</AbsoluteFill>
-
-			{/* Animated Keywords */}
-			<AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-				<Sequence from={sec(1.48)} durationInFrames={sec(3.36)}>
-					<Title text="long-term vision" style={createAnimation(sec(1.48))} />
-				</Sequence>
-				<Sequence from={sec(6.54)} durationInFrames={sec(3.74)}>
-					<Title text="dot-com bubble" style={createAnimation(sec(6.54))} />
-				</Sequence>
-				<Sequence from={sec(14.28)} durationInFrames={sec(3.28)}>
-					<Title text="Amazon" style={createAnimation(sec(14.28))} />
-				</Sequence>
-				<Sequence from={sec(25.96)} durationInFrames={sec(1.0)}>
-					<Title text="lose money" style={createAnimation(sec(25.96))} />
-				</Sequence>
-				<Sequence from={sec(34.54)} durationInFrames={sec(1.5)}>
-					<Title text="the everything store" style={createAnimation(sec(34.54))} />
-				</Sequence>
-				<Sequence from={sec(46.68)} durationInFrames={sec(2.5)}>
-					<Title text="$100 a share" style={createAnimation(sec(46.68))} />
-				</Sequence>
-				<Sequence from={sec(66.04)} durationInFrames={sec(1.5)}>
-					<Title text="insanity" style={createAnimation(sec(66.04))} />
-				</Sequence>
-			</AbsoluteFill>
-		</AbsoluteFill>
-	);
+// Load TXT assets (sentence-wise)
+const loadTXT = (filePath: string) => {
+  const raw = fs.readFileSync(filePath, 'utf-8');
+  const blocks = raw.split(/\n\n/).map(b => b.trim()).filter(Boolean);
+  return blocks.map(block => {
+    const lines = block.split('\n');
+    const assets: any[] = [];
+    let effect = 'basic';
+    lines.forEach(line => {
+      if (line.startsWith('Overall_par_effect=')) {
+        effect = line.replace('Overall_par_effect=', '').trim().toLowerCase();
+      } else {
+        const [word, asset, pos] = line.split('=');
+        const [layer, position] = pos.split('/');
+        assets.push({asset, layer: layer as 'bg' | 'md' | 'fg', position: position as 'l' | 'c' | 'r' | 'full'});
+      }
+    });
+    return {assets, effect};
+  });
 };
+
+// Load sentence timings from STT timeline
+const loadTimeline = (filePath: string) => {
+  const raw = fs.readFileSync(filePath, 'utf-8');
+  const sentences: {start: number; end: number}[] = [];
+  let start = 0;
+  raw.split('\n').forEach(line => {
+    const match = line.match(/([\d.]+)\s*-->\s*([\d.]+)\s*:\s*(.*)/);
+    if (match) {
+      const tStart = parseFloat(match[1]);
+      const tEnd = parseFloat(match[2]);
+      const word = match[3].trim();
+      if (word.endsWith('.')) {
+        sentences.push({start, end: tEnd});
+        start = tEnd;
+      }
+    }
+  });
+  return sentences;
+};
+
+const Video: React.FC = () => {
+  const txtData = loadTXT(path.join(__dirname, '../BOOKS/Temp/TXT/Intro_timeline.txt'));
+  const sentenceTimes = loadTimeline(path.join(__dirname, '../BOOKS/Temp/STT/Intro_timeline.txt'));
+
+  return (
+    <>
+      {txtData.map((sentence, idx) => {
+        const TemplateComponent = templatesMap[sentence.effect] || Basic;
+        const time = sentenceTimes[idx] || {start: idx * 2, end: (idx + 1) * 2}; // fallback
+
+        return <TemplateComponent key={idx} assets={sentence.assets} startTime={time.start} endTime={time.end} />;
+      })}
+    </>
+  );
+};
+
+export default Video;
