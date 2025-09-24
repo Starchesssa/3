@@ -87,10 +87,24 @@ Tasks:
       Overall_par_effect=basic
 
    2. blue=blue_bg.jpeg=bg/full
-      sky=blue_sky.png=bg/md
+      sky=blue_sky.png=bg/c
       cushion=tall_cushion.png=r
       cushion=tall_cushion.png=l
       Overall_par_effect=dolly_zoom
+
+make sure you skip one line after each scene description as i have in that example.
+
+make sure you use the componets i gave you which are;
+bg= for background 
+fg= for foreground 
+md= for midground 
+r=  for right 
+l=  for left 
+c= for centre 
+full= for full jpg image (usually background)
+use these effects only = dolly_zoom, basic, vertical, diagonal, scale, orbit, blur, mask_reveal, sliding_split, floating_objects, focus_pull].
+
+do not mispell anything , take everything as i gave you , dobt add your effects or your postions , use my style only dont add anything.
 
 2) Use ONLY this set of effects: [dolly_zoom, basic, vertical, diagonal, scale, orbit, blur, mask_reveal, sliding_split, floating_objects, focus_pull].
 
