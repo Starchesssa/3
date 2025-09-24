@@ -8,7 +8,7 @@ from google import genai
 STT_PATH = "BOOKS/Temp/STT"
 IMAGES_DIR = "assets/images"
 TXT_OUTPUT_PATH = "BOOKS/Temp/TXT"  # Output folder for plain TXT
-MODEL = "gemini-2.5-pro"
+MODEL = "gemini-2.5-flash"
 
 # === Load Gemini API keys from environment variables ===
 API_KEYS = [
