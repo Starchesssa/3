@@ -1,0 +1,88 @@
+1. innovation=abstract_gears_background.jpg=bg/full
+price=falling-chart.png=mg/c
+failure=cracked_glass_overlay.png=fg/full
+Overall_par_effect=dolly_zoom
+
+2. 2019=tech_cityscape.jpg=bg/full
+ghosts=dark_clouds.png=mg/full
+passed=winding-path.png=fg/c
+Overall_par_effect=focus_pull
+
+3. biggest=dark_clouds.jpg=bg/full
+fire=broken_gears.png=mg/c
+Overall_par_effect=scale
+
+4. disaster=rainy-city.jpg=bg/full
+flop=falling-chart.png=mg/c
+disaster=cracked_glass_overlay.png=fg/full
+Overall_par_effect=blur
+
+5. company=city_background.jpg=bg/full
+Inventory=amazon_warehouse_midground.png=mg/c
+write=falling-chart.png=fg/c
+Overall_par_effect=vertical
+
+6. public=empty_city_street_background.jpg=bg/full
+humiliation=sad-people.png=mg/c
+humiliation=rain_overlay.png=fg/full
+Overall_par_effect=basic
+
+7. compete=fortress.png=mg/l
+compete=fortress.png=mg/r
+failed=cracked_glass_overlay.png=fg/full
+Overall_par_effect=sliding_split
+
+8. company=city-background.jpg=bg/full
+team=sad-people.png=mg/c
+Overall_par_effect=blur
+
+9. project=blueprint_bg.jpg=bg/full
+never=biohazard_symbol_overlay.png=fg/c
+Overall_par_effect=mask_reveal
+
+10. hardware=gears-background.png=bg/full
+not=cracked_glass_overlay.png=fg/full
+Overall_par_effect=basic
+
+11. Amazon=aws-logo.png=mg/c
+not=bright_sky.jpg=bg/full
+Overall_par_effect=scale
+
+12. failing=broken_gears.png=mg/l
+innovating=gears-midground.png=mg/r
+innovating=blueprint_bg.jpg=bg/full
+Overall_par_effect=sliding_split
+
+13. million=stock-chart-midground.png=mg/c
+tuition=blueprint_bg.jpg=bg/full
+Overall_par_effect=focus_pull
+
+14. lessons=blueprint_bg.jpg=bg/full
+engineers=gears-midground.png=mg/l
+chains=amazon_warehouse_midground.png=mg/r
+Overall_par_effect=diagonal
+
+15. repurposed=abstract_gears_background.jpg=bg/full
+repurposed=broken_gears.png=mg/l
+repurposed=gears-midground.png=mg/r
+Overall_par_effect=mask_reveal
+
+16. technology=tech_city_background.jpg=bg/full
+knowledge=data_stream.png=mg/c
+Alexa=soundwaves_overlay.png=fg/full
+Overall_par_effect=orbit
+
+17. homes=city-skyline-mid.png=mg/full
+Echo=soundwaves_overlay.png=fg/full
+2019=bright_sky.jpg=bg/full
+Overall_par_effect=floating_objects
+
+18. ashes=dark_clouds.jpg=bg/full
+failure=phoenix_from_ashes.png=mg/c
+successes=resilient-plant.png=fg/c
+Overall_par_effect=vertical
+
+19. learn=glowing-data.png=fg/full
+learn=winding-path.png=mg/c
+learn=sunrise-field.jpg=bg/full
+Overall_par_effect=dolly_zoom

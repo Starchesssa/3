@@ -1,0 +1,26 @@
+1. rules=blueprint_bg.jpg=bg/full
+   follow=winding-path.png=mg/c
+   Overall_par_effect=basic
+
+2. business=city_background.jpg=bg/full
+   spreadsheet=stock-chart-midground.png=mg/c
+   Overall_par_effect=dolly_zoom
+
+3. profitable=rainy-city.jpg=bg/full
+   profitable=falling-chart.png=mg/c
+   Overall_par_effect=vertical
+
+4. forgettable=empty_city_street_background.jpg=bg/full
+   companies=broken_gears.png=mg/c
+   small=sad-people.png=fg/l
+   Overall_par_effect=blur
+
+5. not=sunrise-field.jpg=bg/full
+   not=cracked_glass_overlay.png=fg/full
+   Overall_par_effect=mask_reveal
+
+6. system=tech_cityscape.jpg=bg/full
+   machine=gears-midground.png=mg/c
+   machine=server-racks-midground.png=mg/r
+   world=data_stream_foreground.png=fg/full
+   Overall_par_effect=orbit
