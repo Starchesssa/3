@@ -1,12 +1,15 @@
 
-name: Run comp6a.py
+name: Run comp6a.py and Commit Book Status
 
 on:
-  workflow_dispatch:   # run manually
+  workflow_dispatch:   # allow manual trigger
   push:
     paths:
       - "BOOK_CODE/COMPANY_BIO/comp6a.py"
       - ".github/workflows/comp6a.yml"
+
+permissions:
+  contents: write   # required for pushing commits
 
 jobs:
   run-script:
@@ -15,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,3 +40,21 @@ jobs:
           GEMINI_API5: ${{ secrets.GEMINI_API5 }}
         run: |
           python BOOK_CODE/COMPANY_BIO/comp6a.py
+
+      - name: ✅ Commit & Push Updates
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/USED/COMPANY_BIO
+          git add BOOKS/Temp/COMPANY_BIO
+          git add BOOKS/WEALTH/BIO/COMPANY_BIO
+
+          if git diff --cached --quiet; then
+            echo "🟡 No book status updates to commit."
+          else
+            git commit -m "📚 Gemini book scan result: Updated USED, Temp, and WEALTH"
+            git push
+            echo "✅ Book status committed and pushed."
+          fi
