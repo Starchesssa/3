@@ -95,6 +95,8 @@ Tasks:
 
 make sure you skip one line after each scene description as i have in that example.
 
+do not include an image of a person or aninal even if a person is mentioned ,,no inages of people or animals.
+
 each sentence must create atleast 2-3 minimal images or more.
 
 each sentence muat create an artistic envionment not just pngs  ie well make a class as background, person as midground  , and table as fore ground , you see the environment matches , but you can just throw inages without making a setting of a scene,creste a scene set .
