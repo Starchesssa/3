@@ -81,21 +81,23 @@ Tasks:
    Overall_par_effect=<effect_name>
 
    Example:
-   1. stone=huge_stone.png=bg/full
+   1. city=tall_blackbuikdings.png=bg/full
       Cowboy=cow_boycape.png=fg/r
       Coins=money.png=mg/l
       bags=military_bags.png/fg/c
-      eggs=green_eggs.png/fg/l
       Overall_par_effect=basic
       
-   2. blue=blue_bg.jpeg=bg/full
-      sky=blue_sky.png=bg/c
-      cushion=tall_cushion.png=r
-      cushion=tall_cushion.png=l
+   2. stage=black_backstage.png=bg/c
+      gucci=gucci_green_logo.png=mg/c
+      cushion=tall_cushion.png=fg/r
+      cushion=tall_cushion.png=fg/l
       Overall_par_effect=dolly_zoom
 
 make sure you skip one line after each scene description as i have in that example.
 
+each sentence must create atleast 2-3 minimal images or more.
+
+each sentence muat create an artistic envionment not just pngs  ie well make a class as background, person as midground  , and table as fore ground , you see the environment matches , but you can just throw inages without making a setting of a scene,creste a scene set .
 make sure you use the componets i gave you which are;
 bg= for background 
 fg= for foreground 
