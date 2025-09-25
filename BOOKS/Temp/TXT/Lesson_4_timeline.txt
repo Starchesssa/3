@@ -1,0 +1,106 @@
+1. lesson=blueprint_bg.jpg=bg/c
+   expense=falling-chart.png=mg/l
+   product=amazon_box_foreground.png=fg/r
+   Overall_par_effect=mask_reveal
+
+2. year=abstract_gears_background.jpg=bg/c
+   time=gears-midground.png=mg/c
+   era=tech-overlay-foreground.png=fg/c
+   Overall_par_effect=basic
+
+3. city=city_background.jpg=bg/c
+   amazon=amazon_warehouse_midground.png=mg/c
+   online=tech_overlay_foreground.png=fg/c
+   Overall_par_effect=scale
+
+4. sees=bright_sky.jpg=bg/c
+   city=city-skyline-mid.png=mg/c
+   perception=tech-overlay-foreground.png=fg/c
+   Overall_par_effect=blur
+
+5. inside=data-center-background.jpg=bg/c
+   activity=glowing-data.png=mg/c
+   hidden=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
+6. years=dark_clouds.png=bg/c
+   infrastructure=server-room.jpg=mg/c
+   expense=falling-chart.png=fg/c
+   Overall_par_effect=vertical
+
+7. datacenter=data_center_background.jpg=bg/c
+   servers=server-racks-midground.png=mg/c
+   network=data_stream.png=fg/c
+   Overall_par_effect=floating_objects
+
+8. beast=fortress.png=mg/c
+   complex=gears-foreground.png=fg/c
+   environment=rainy-city.jpg=bg/c
+   Overall_par_effect=dolly_zoom
+
+9. complex=abstract_gears_background.jpg=bg/c
+   broken=broken_gears.png=mg/c
+   expensive=falling-chart.png=fg/c
+   Overall_par_effect=orbit
+
+10. company=city_background.jpg=bg/c
+    normal=sad-people.png=mg/l
+    cost=falling-chart.png=fg/r
+    Overall_par_effect=diagonal
+
+11. efficiency=blueprint_bg.jpg=mg/c
+    cheaper=stock-chart-midground.png=fg/c
+    system=abstract_gears_background.jpg=bg/c
+    Overall_par_effect=focus_pull
+
+12. opportunity=sunrise-field.jpg=bg/c
+    path=winding-path.jpg=mg/c
+    amazon=amazon_box_foreground.png=fg/c
+    Overall_par_effect=mask_reveal
+
+13. systems=blueprint_bg.jpg=bg/c
+    servers=server-racks-midground.png=mg/l
+    product=amazon_box_foreground.png=fg/r
+    data=data_stream.png=mg/c
+    Overall_par_effect=sliding_split
+
+14. launched=tech_city_background.jpg=bg/c
+    year=abstract_gears_background.jpg=mg/c
+    aws=aws-logo.png=fg/c
+    Overall_par_effect=scale
+
+15. power=data_center_background.jpg=bg/c
+    cloud=cloud_servers_midground.png=mg/c
+    renting=glowing-data.png=fg/c
+    Overall_par_effect=vertical
+
+16. company=city_background.jpg=bg/c
+    power=data_stream.png=mg/c
+    computing=tech_overlay_foreground.png=fg/c
+    Overall_par_effect=floating_objects
+
+17. confusion=dark_clouds.png=bg/c
+    people=sad-people.png=mg/c
+    misunderstood=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=blur
+
+18. bookstore=amazon_box_foreground.png=fg/l
+    servers=server-racks-midground.png=mg/r
+    selling=tech_overlay_foreground.png=fg/c
+    Overall_par_effect=sliding_split
+
+19. sense=empty_city_street_background.jpg=bg/c
+    broken=broken_gears.png=mg/c
+    wrong=biohazard_symbol_overlay.png=fg/c
+    Overall_par_effect=orbit
+
+20. start=sunrise-field.jpg=bg/c
+    cloud=cloud_servers_midground.png=mg/c
+    revolution=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=mask_reveal
+
+21. industry=tech_cityscape.jpg=bg/c
+    born=glowing_particles.png=mg/c
+    aws=aws-logo.png=fg/c
+    expense=falling-chart.png=fg/l
+    Overall_par_effect=dolly_zoom

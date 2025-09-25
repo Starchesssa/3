@@ -1,0 +1,114 @@
+1. lesson=winding-path.png=md/c
+   growth=sunrise-field.png=fg/c
+   line=bright_sky.jpg=bg/c
+   Overall_par_effect=dolly_zoom
+
+2. arrival=tech_cityscape.jpg=bg/c
+   year=city_background.jpg=md/c
+   point=dark_clouds.png=fg/c
+   Overall_par_effect=basic
+
+3. world=empty_city_street_background.jpg=bg/c
+   reopening=city-skyline-mid.png=md/c
+   reality=rainy-city.jpg=fg/c
+   Overall_par_effect=blur
+
+4. inflation=falling-chart.png=md/c
+   stock_market=cracked_glass_overlay.png=fg/c
+   companies=tech_city_background.jpg=bg/c
+   Overall_par_effect=diagonal
+
+5. pandemic=empty_city_street_background.jpg=bg/c
+   boom=dark_clouds.png=md/c
+   over=falling-chart.png=fg/c
+   Overall_par_effect=scale
+
+6. stock=stock-chart-midground.png=md/c
+   drop=amazon_box_foreground.png=fg/r
+   year=dark_clouds.png=bg/c
+   Overall_par_effect=vertical
+
+7. overbuilt=amazon_warehouse_midground.png=md/c
+   people=sad-people.png=fg/c
+   frenzy=city_background.jpg=bg/c
+   Overall_par_effect=floating_objects
+
+8. correct=broken_gears.png=fg/c
+   now=gears-midground.png=md/c
+   had=blueprint_bg.jpg=bg/c
+   Overall_par_effect=focus_pull
+
+9. layoffs=sad-people.png=fg/c
+   employees=empty_city_street_background.jpg=bg/c
+   company=dark_clouds.png=md/c
+   Overall_par_effect=blur
+
+10. media=soundwaves_overlay.png=fg/c
+    decline=city_background.jpg=bg/c
+    point=tech-overlay-foreground.png=md/c
+    Overall_par_effect=mask_reveal
+
+11. stock_price=stock-chart-midground.png=md/l
+    machine=abstract_gears_background.jpg=bg/c
+    looking=gears-foreground.png=fg/r
+    Overall_par_effect=sliding_split
+
+12. ecommerce=delivery_drone_foreground.png=fg/c
+    slowing=amazon_warehouse_midground.png=md/c
+    highs=rain_overlay.png=bg/c
+    Overall_par_effect=scale
+
+13. engine=data-center-background.jpg=bg/c
+    aws=aws-logo.png=md/c
+    growing=glowing-data.png=fg/c
+    Overall_par_effect=orbit
+
+14. aws_revenue=server-room.png=bg/c
+    billion=data_stream.png=md/c
+    generated=glowing_particles.png=fg/c
+    Overall_par_effect=floating_objects
+
+15. income=data_center_background.jpg=bg/c
+    operating=server-racks-midground.png=md/c
+    billion_amount=data_overlay_foreground.png=fg/c
+    Overall_par_effect=focus_pull
+
+16. retail=amazon_box_foreground.png=fg/l
+    lost=falling-chart.png=md/r
+    money=dark_clouds.png=bg/c
+    Overall_par_effect=diagonal
+
+17. cash_cow=aws-logo.png=md/c
+    empire=fortress.png=bg/c
+    storm=rain_overlay.png=fg/c
+    Overall_par_effect=floating_objects
+
+18. final=bright_sky.jpg=bg/c
+    lesson=single-tree.png=md/c
+    this=mountains-far.png=fg/c
+    Overall_par_effect=basic
+
+19. system=abstract_gears_background.jpg=bg/c
+    resilient=resilient-plant.png=md/c
+    performance=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=mask_reveal
+
+20. diversified=gears-background.png=bg/c
+    machine=gears-midground.png=md/c
+    weak=broken_gears.png=fg/c
+    Overall_par_effect=orbit
+
+21. avoiding=winding-path.png=bg/c
+    downturns=dark_clouds.png=md/c
+    not_about=rain_overlay.png=fg/c
+    Overall_par_effect=dolly_zoom
+
+22. building=fortress.png=md/c
+    business=rain_overlay.png=fg/c
+    survive=bright_sky.jpg=bg/c
+    Overall_par_effect=scale
+
+23. sun=sunrise-field.png=bg/c
+    left=phoenix_from_ashes.png=md/c
+    battlefield=single-tree.png=fg/c
+    Overall_par_effect=focus_pull

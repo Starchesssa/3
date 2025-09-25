@@ -1,0 +1,144 @@
+1. lesson=blueprint_bg.jpg=bg/c
+   key=abstract_gears_background.jpg=mg/c
+   message=glowing_particles.png=fg/c
+   Overall_par_effect=focus_pull
+
+2. market=stock-chart-midground.png=mg/c
+   mood=dark_clouds.jpg=bg/c
+   swing=winding-path.png=fg/c
+   Overall_par_effect=sliding_split
+
+3. strategy=blueprint_bg.jpg=bg/c
+   compass=fortress.png=mg/c
+   direction=gears-midground.png=fg/c
+   Overall_par_effect=diagonal
+
+4. bubble=cracked_glass_overlay.png=fg/c
+   burst=falling-chart.png=mg/c
+   crash=broken_gears.png=bg/c
+   Overall_par_effect=mask_reveal
+
+5. party=city-skyline-mid.png=mg/c
+   ended=empty_city_street_background.jpg=bg/c
+   time=dark_clouds.jpg=fg/c
+   Overall_par_effect=blur
+
+6. companies=data-center-background.jpg=bg/c
+   vanished=data_stream.png=mg/c
+   overnight=empty_city_street_background.jpg=fg/c
+   Overall_par_effect=floating_objects
+
+7. pets=tech_overlay_foreground.png=fg/c
+   dotcom=server-room.jpg=bg/c
+   failure=biohazard_symbol_overlay.png=mg/c
+   Overall_par_effect=basic
+
+8. webvan=tech_overlay_foreground.png=fg/c
+   company=empty_city_street_background.jpg=bg/c
+   fail=broken_gears.png=mg/c
+   Overall_par_effect=basic
+
+9. gone=empty_city_street_background.jpg=bg/c
+   void=dark_clouds.jpg=mg/c
+   ending=data_overlay_foreground.png=fg/c
+   Overall_par_effect=mask_reveal
+
+10. wall=city_background.jpg=bg/c
+    street=city-skyline-mid.png=mg/c
+    turned=falling-chart.png=fg/c
+    Overall_par_effect=dolly_zoom
+
+11. amazon=amazon_box_foreground.png=fg/c
+    bomb=cracked_glass_overlay.png=mg/c
+    threat=biohazard_symbol_overlay.png=bg/c
+    Overall_par_effect=scale
+
+12. stock=stock-chart-midground.png=mg/c
+    peaked=bright_sky.jpg=bg/c
+    crashed=falling-chart.png=fg/c
+    Overall_par_effect=vertical
+
+13. fell=falling-chart.png=mg/c
+    worthless=dark_clouds.jpg=bg/c
+    plunge=data_stream_foreground.png=fg/c
+    Overall_par_effect=diagonal
+
+14. drop=stock-chart-midground.png=mg/c
+    ninety=broken_gears.png=bg/c
+    percent=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=basic
+
+15. imagine=sad-people.png=mg/c
+    that=dark_clouds.jpg=bg/c
+    thought=glowing_particles.png=fg/c
+    Overall_par_effect=focus_pull
+
+16. life=blueprint_bg.jpg=bg/c
+    work=abstract_gears_background.jpg=mg/c
+    effort=gears-foreground.png=fg/c
+    Overall_par_effect=basic
+
+17. worth=falling-chart.png=mg/c
+    evaporating=data_stream.png=bg/c
+    ninety=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=mask_reveal
+
+18. founders=sad-people.png=mg/c
+    panic=dark_clouds.jpg=bg/c
+    fear=rain_overlay.png=fg/c
+    Overall_par_effect=basic
+
+19. cut=server-racks-midground.png=mg/c
+    costs=broken_gears.png=bg/c
+    bone=empty_city_street_background.jpg=fg/c
+    Overall_par_effect=sliding_split
+
+20. show=stock-chart-midground.png=mg/c
+    profit=bright_sky.jpg=bg/c
+    effort=blueprint_bg.jpg=fg/c
+    Overall_par_effect=basic
+
+21. any=data_overlay_foreground.png=fg/c
+    profit=glowing_particles.png=mg/c
+    desperation=dark_clouds.jpg=bg/c
+    Overall_par_effect=focus_pull
+
+22. calm=bright_sky.jpg=bg/c
+    investors=city_background.jpg=mg/c
+    peace=winding-path.png=fg/c
+    Overall_par_effect=basic
+
+23. bezos=resilient-plant.png=mg/c
+    opposite=phoenix_from_ashes.png=bg/c
+    direction=winding-path.png=fg/c
+    Overall_par_effect=mask_reveal
+
+24. building=abstract_gears_background.jpg=bg/c
+    kept=server-room.jpg=mg/c
+    growth=amazon_warehouse_midground.png=fg/c
+    Overall_par_effect=vertical
+
+25. market=data_stream.png=mg/c
+    noise=soundwaves_overlay.png=fg/c
+    chaos=dark_clouds.jpg=bg/c
+    Overall_par_effect=blur
+
+26. fear=dark_clouds.jpg=bg/c
+    greed=sad-people.png=mg/c
+    emotion=rain_overlay.png=fg/c
+    Overall_par_effect=dolly_zoom
+
+27. strategy=blueprint_bg.jpg=bg/c
+    signal=glowing-data.png=mg/c
+    path=winding-path.png=fg/c
+    Overall_par_effect=focus_pull
+
+28. survive=resilient-plant.png=mg/c
+    storm=dark_clouds.jpg=bg/c
+    weather=rain_overlay.png=fg/c
+    Overall_par_effect=orbit
+
+29. abandon=single-tree.png=mg/c
+    ship=fortress.png=bg/c
+    build=aws-logo.png=fg/c
+    Overall_par_effect=basic

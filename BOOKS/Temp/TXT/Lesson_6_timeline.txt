@@ -1,0 +1,84 @@
+1. lesson=blueprint_bg.jpg=bg/c
+   key=winding-path.png=mg/c
+   wisdom=single-tree.png=fg/r
+   Overall_par_effect=focus_pull
+
+2. cash_cow=aws-logo.png=mg/c
+   invade=fortress.png=bg/c
+   strategy=gears-midground.png=fg/l
+   Overall_par_effect=diagonal
+
+3. year=data_overlay_foreground.png=fg/c
+   present=city-skyline-mid.png=mg/c
+   time=bright_sky.jpg=bg/c
+   Overall_par_effect=basic
+
+4. monster=aws-logo.png=fg/c
+   scale=data-center-background.jpg=bg/c
+   power=server-racks-midground.png=mg/l
+   Overall_par_effect=scale
+
+5. money=glowing-data.png=fg/c
+   printing=abstract_gears_background.jpg=bg/c
+   machine=aws-logo.png=mg/c
+   Overall_par_effect=floating_objects
+
+6. revenue=stock-chart-midground.png=mg/c
+   billion=data_stream.png=fg/r
+   growth=tech_cityscape.jpg=bg/c
+   Overall_par_effect=vertical
+
+7. retail=amazon_warehouse_midground.png=mg/l
+   profitable=aws-logo.png=fg/r
+   contrast=glowing_particles.png=bg/c
+   Overall_par_effect=sliding_split
+
+8. cash=glowing-data.png=fg/c
+   cow=aws-logo.png=mg/c
+   abundance=bright_sky.jpg=bg/c
+   Overall_par_effect=basic
+
+9. cash=glowing_particles.png=fg/c
+   options=winding-path.png=mg/c
+   decision=city_background.jpg=bg/c
+   Overall_par_effect=dolly_zoom
+
+10. safe=winding-path.png=mg/l
+    war_chest=fortress.png=bg/c
+    attack=biohazard_symbol_overlay.png=fg/r
+    Overall_par_effect=sliding_split
+
+11. amazon=amazon_box_foreground.png=fg/l
+    whole_foods=city_background.jpg=bg/c
+    announcement=tech_overlay_foreground.png=mg/r
+    Overall_par_effect=mask_reveal
+
+12. cash=glowing_particles.png=fg/c
+    stunned=dark_clouds.png=bg/c
+    world=city-background.jpg=mg/c
+    Overall_par_effect=blur
+
+13. e_commerce_king=aws-logo.png=fg/l
+    grocery_chain=amazon_warehouse_midground.png=mg/r
+    contrast_background=tech_city_background.jpg=bg/c
+    Overall_par_effect=sliding_split
+
+14. stocks=falling-chart.png=mg/c
+    competitors=empty_city_street_background.jpg=bg/c
+    plummeted=rain_overlay.png=fg/c
+    Overall_par_effect=vertical
+
+15. lost=broken_gears.png=mg/l
+    value=cracked_glass_overlay.png=fg/c
+    impact=falling-chart.png=bg/r
+    Overall_par_effect=blur
+
+16. engine=aws-logo.png=mg/l
+    invasion=fortress.png=bg/c
+    fund=server-racks-midground.png=fg/r
+    Overall_par_effect=diagonal
+
+17. game=blueprint_bg.jpg=bg/c
+    different=winding-path.png=mg/c
+    transformation=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=dolly_zoom

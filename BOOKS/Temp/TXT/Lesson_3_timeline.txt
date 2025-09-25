@@ -1,0 +1,79 @@
+1. lesson=blueprint_bg.jpg=bg/c
+   key=single-tree.png=mg/c
+   glowing=glowing_particles.png=fg/c
+   Overall_par_effect=focus_pull
+
+2. profitability=fortress.png=bg/c
+   weapon=biohazard_symbol_overlay.png=mg/c
+   goal=stock-chart-midground.png=fg/c
+   Overall_par_effect=sliding_split
+
+3. year=tech_cityscape.jpg=bg/c
+   time=tech-overlay-foreground.png=fg/c
+   clock=glowing_particles.png=mg/c
+   Overall_par_effect=basic
+
+4. graveyard=empty_city_street_background.jpg=bg/c
+   dotcom=sad-people.png=mg/c
+   full=broken_gears.png=fg/c
+   Overall_par_effect=vertical
+
+5. amazon=city-background.jpg=bg/c
+   standing=resilient-plant.png=mg/c
+   wounded=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
+6. pressure=dark_clouds.png=bg/c
+   immense=rain_overlay.png=mg/c
+   weight=server-racks-midground.png=fg/c
+   Overall_par_effect=blur
+
+7. prove=blueprint_bg.jpg=bg/c
+   model=gears-midground.png=mg/c
+   worked=data_stream.png=fg/c
+   Overall_par_effect=focus_pull
+
+8. show=server-room.jpg=bg/c
+   money=stock-chart-midground.png=mg/c
+   revenue=glowing-data.png=fg/c
+   Overall_par_effect=mask_reveal
+
+9. quarter=data-center-background.jpg=bg/c
+   profit=stock-chart-midground.png=mg/c
+   first=phoenix_from_ashes.png=fg/c
+   Overall_par_effect=dolly_zoom
+
+10. tiny=data_center_background.jpg=bg/c
+    profit=falling-chart.png=mg/c
+    sales=data_stream_foreground.png=fg/c
+    Overall_par_effect=scale
+
+11. consistently=winding-path.jpg=bg/c
+    profitable=stock-chart-midground.png=mg/c
+    growth=resilient-plant.png=fg/c
+    Overall_par_effect=vertical
+
+12. wallstreet=city_background.jpg=bg/c
+    pleasing=sad-people.png=mg/l
+    anymore=winding-path.jpg=fg/r
+    Overall_par_effect=sliding_split
+
+13. generating=abstract_gears_background.jpg=bg/c
+    fuel=glowing-data.png=mg/c
+    power=gears-foreground.png=fg/c
+    Overall_par_effect=orbit
+
+14. profit=winding-path.jpg=bg/c
+    goal=city-skyline-mid.png=mg/c
+    end=tech_overlay_foreground.png=fg/c
+    Overall_par_effect=diagonal
+
+15. cash=server-room.jpg=bg/c
+    build=amazon_warehouse_midground.png=mg/c
+    risks=delivery_drone_foreground.png=fg/c
+    Overall_par_effect=floating_objects
+
+16. foundation=fortress.png=bg/c
+    decade=cloud_servers_midground.png=mg/c
+    war=biohazard_symbol_overlay.png=fg/c
+    Overall_par_effect=dolly_zoom

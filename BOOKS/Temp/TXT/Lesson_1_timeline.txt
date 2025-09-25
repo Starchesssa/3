@@ -1,0 +1,114 @@
+1. Key=fortress.png=fg/c
+   lesson=blueprint_bg.jpg=bg/c
+   growth=resilient-plant.png=md/r
+   Overall_par_effect=mask_reveal
+
+2. Ignore=cracked_glass_overlay.png=fg/c
+   reality=dark_clouds.png=bg/c
+   vision=sunrise-field.jpg=bg/c
+   long_term=mountains-far.png=md/c
+   Overall_par_effect=focus_pull
+
+3. year=tech_cityscape.jpg=bg/c
+   1999=city-skyline-mid.png=md/c
+   Overall_par_effect=basic
+
+4. world=stock-chart-midground.png=md/c
+   bubble=glowing_particles.png=fg/c
+   dot_com=tech-overlay-foreground.png=fg/l
+   Overall_par_effect=scale
+
+5. Everyone=soundwaves_overlay.png=fg/c
+   genius=tech_overlay_foreground.png=md/c
+   brains=abstract_gears_background.jpg=bg/c
+   Overall_par_effect=floating_objects
+
+6. Stocks=stock-chart-midground.png=md/c
+   up=bright_sky.jpg=bg/c
+   rise=city-skyline-mid.png=fg/c
+   Overall_par_effect=vertical
+
+7. Amazon=amazon_box_foreground.png=fg/c
+   internet=tech_city_background.jpg=bg/c
+   economy=data_stream.png=md/r
+   Overall_par_effect=focus_pull
+
+8. sells=amazon_box_foreground.png=fg/c
+   online=data_stream.png=md/c
+   books=blueprint_bg.jpg=bg/c
+   Overall_par_effect=sliding_split
+
+9. Jeff_Bezos=amazon_box_foreground.png=fg/l
+   Wall_Street=city-skyline-mid.png=bg/c
+   hear=dark_clouds.png=md/r
+   Overall_par_effect=dolly_zoom
+
+10. lose_money=falling-chart.png=fg/c
+    money=cracked_glass_overlay.png=md/c
+    them=sad-people.png=fg/r
+    Overall_par_effect=diagonal
+
+11. spend=gears-midground.png=md/c
+    dollar=data_stream_foreground.png=fg/c
+    give=abstract_gears_background.jpg=bg/c
+    Overall_par_effect=orbit
+
+12. not_building=empty_city_street_background.jpg=bg/c
+    bookstore=amazon_box_foreground.png=fg/l
+    old_idea=broken_gears.png=md/r
+    Overall_par_effect=sliding_split
+
+13. building=amazon_warehouse_midground.png=md/c
+    everything_store=tech_city_background.jpg=bg/c
+    store=glowing-data.png=fg/r
+    Overall_par_effect=scale
+
+14. letter=blueprint_bg.jpg=bg/c
+    long_term=winding-path.png=md/c
+    shareholders=mountains-far.png=fg/r
+    Overall_par_effect=focus_pull
+
+15. market=stock-chart-midground.png=md/c
+    loved=bright_sky.jpg=bg/c
+    him=glowing_particles.png=fg/c
+    Overall_par_effect=vertical
+
+16. Amazon_stocks=stock-chart-midground.png=md/c
+    soared=tech_cityscape.jpg=bg/c
+    $100=glowing_particles.png=fg/c
+    Overall_par_effect=vertical
+
+17. company=falling-chart.png=md/c
+    not_profitable=sad-people.png=fg/r
+    profitable=cracked_glass_overlay.png=fg/l
+    Overall_par_effect=sliding_split
+
+18. Not_even_close=falling-chart.png=fg/c
+    close=dark_clouds.png=bg/c
+    severity=biohazard_symbol_overlay.png=md/c
+    Overall_par_effect=mask_reveal
+
+19. promise=blueprint_bg.jpg=bg/c
+    future=winding-path.png=md/c
+    hope=bright_sky.jpg=fg/c
+    Overall_par_effect=basic
+
+20. bet=winding-path.png=md/c
+    distant_future=mountains-far.png=bg/c
+    future=dark_clouds.png=fg/l
+    Overall_par_effect=focus_pull
+
+21. people=sad-people.png=fg/c
+    selling_books=amazon_box_foreground.png=md/l
+    loss=falling-chart.png=md/r
+    Overall_par_effect=blur
+
+22. Bezos_saw=amazon_warehouse_midground.png=md/c
+    global=data-center-background.jpg=bg/c
+    empire=aws-logo.png=fg/r
+    Overall_par_effect=scale
+
+23. vision=abstract_gears_background.jpg=bg/c
+    big=phoenix_from_ashes.png=md/c
+    insanity=biohazard_symbol_overlay.png=fg/c
+    Overall_par_effect=dolly_zoom
