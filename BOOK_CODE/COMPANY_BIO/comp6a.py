@@ -84,7 +84,8 @@ Tasks:
    1. stone=huge_stone.png=bg/full
       Cowboy=cow_boycape.png=fg/r
       Coins=money.png=mg/l
-      success=TXT=medium
+      bags=military_bags.png/fg/c
+      eggs=green_eggs.png/fg/l
       Overall_par_effect=basic
       
    2. blue=blue_bg.jpeg=bg/full
@@ -102,17 +103,13 @@ md= for midground
 r=  for right 
 l=  for left 
 c= for centre 
-TXT= for words that will display on screen 
-small= gor small text words 
-medium= for medium text words 
-large= for large text words 
-full= for full jpg image (usually background)
+
 use these effects only = dolly_zoom, basic, vertical, diagonal, scale, orbit, blur, mask_reveal, sliding_split, floating_objects, focus_pull].
 
 do not mispell anything , take everything as i gave you , dobt add your effects or your postions , use my style only dont add anything.
 
 2) Use ONLY this set of effects: [dolly_zoom, basic, vertical, diagonal, scale, orbit, blur, mask_reveal, sliding_split, floating_objects, focus_pull].
-
+fy
 3) Map important words to images from this list:
 {image_list_str}
 
