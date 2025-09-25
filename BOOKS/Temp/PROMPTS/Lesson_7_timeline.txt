@@ -1,0 +1,92 @@
+blueprint_bg.jpg
+Image of a blue engineering blueprint background
+
+falling-chart.png
+Red falling stock market chart in a white background
+
+cracked_glass_overlay.png
+Black cracked glass pattern in a white background
+
+tech_cityscape.jpg
+Image of a futuristic blue cityscape at night
+
+dark_clouds.jpg
+Image of a stormy sky with dark grey clouds
+
+broken_gears.png
+Rusty brown broken gears in a white background
+
+city_background.jpg
+Image of a bustling modern city during the day
+
+tech-overlay-foreground.png
+Blue holographic technology interface in a white background
+
+tech_city_background.jpg
+Image of a futuristic city with glowing blue lights
+
+amazon_warehouse_midground.png
+Grey industrial warehouse shelf with yellow bins in a white background
+
+amazon_box_foreground.png
+Brown Amazon cardboard box in a white background
+
+empty_city_street_background.jpg
+Image of an empty city street at dawn
+
+abstract_gears_background.jpg
+Image of interconnected metallic blue gears
+
+data_stream.png
+Blue stream of digital data numbers in a white background
+
+city-background.jpg
+Image of a vibrant city skyline at sunset
+
+server-racks-midground.png
+Tall black server rack with green lights in a white background
+
+rain_overlay.png
+Blue falling raindrops in a white background
+
+server-room.jpg
+Image of a large, cool-toned server room with rows of racks
+
+biohazard_symbol_overlay.png
+Yellow and black biohazard symbol in a white background
+
+data_center_background.jpg
+Image of a modern data center with blue ambient lighting
+
+aws-logo.png
+Orange and white AWS logo in a white background
+
+glowing_particles.png
+Swirl of bright golden glowing particles in a white background
+
+gears-midground.png
+Set of interlocking silver and brass gears in a white background
+
+winding-path.png
+Grey cobblestone winding path in a white background
+
+resilient-plant.png
+Small green plant growing through a crack in a white background
+
+gears-foreground.png
+Large, detailed metallic grey gear in a white background
+
+glowing-data.png
+Blue glowing sphere of data points in a white background
+
+soundwaves_overlay.png
+Set of concentric blue soundwaves in a white background
+
+city-skyline-mid.png
+Silhouette of a dark blue city skyline in a white background
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+phoenix_from_ashes.png
+Fiery red and orange phoenix rising in a white background

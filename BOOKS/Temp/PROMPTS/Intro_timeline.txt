@@ -1,0 +1,74 @@
+blueprint_bg.jpg
+Image of a blue engineering blueprint background
+
+fortress.png
+A large grey stone fortress in a white background
+
+gears-foreground.png
+Several metallic silver gears in a white background
+
+data_overlay_foreground.png
+A glowing blue digital data overlay in a white background
+
+city_background.jpg
+Image of a modern city skyline at dusk
+
+stock-chart-midground.png
+A green and red stock market chart in a white background
+
+falling-chart.png
+A red falling stock market arrow chart in a white background
+
+data_stream.png
+A flowing blue stream of digital data in a white background
+
+empty_city_street_background.jpg
+Image of an empty city street at dawn
+
+stock-chart-midground.png
+A green and red stock market chart in a white background
+
+glowing-data.png
+A cluster of glowing golden data points in a white background
+
+gears-midground.png
+A set of interlocking brass gears in a white background
+
+dark_clouds.png
+Dark grey storm clouds in a white background
+
+falling-chart.png
+A red falling stock market arrow chart in a white background
+
+broken_gears.png
+A pile of rusty brown broken gears in a white background
+
+single-tree.png
+A single green leafy tree in a white background
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+resilient-plant.png
+A small green plant growing in a white background
+
+glowing_particles.png
+A swirl of bright yellow glowing particles in a white background
+
+winding-path.png
+A grey stone winding path in a white background
+
+tech_city_background.jpg
+Image of a futuristic blue tech city at night
+
+data-center-background.jpg
+Image of a modern blue-lit server data center
+
+data_stream_foreground.png
+A vibrant blue stream of digital data in a white background
+
+gears-midground.png
+A set of interlocking brass gears in a white background
+
+server-racks-midground.png
+A row of black server racks in a white background

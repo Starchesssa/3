@@ -1,0 +1,92 @@
+blueprint_bg.jpg
+Image of a blue engineering blueprint background
+
+fortress.png
+A large grey stone fortress in a white background
+
+tech_cityscape.jpg
+Image of a futuristic neon blue cityscape at night
+
+stock-chart-midground.png
+A green line graph chart going up in a white background
+
+dark_clouds.png
+A cluster of dark grey storm clouds in a white background
+
+winding-path.png
+A winding grey stone path in a white background
+
+glowing_particles.png
+A cloud of small bright yellow glowing particles in a white background
+
+cracked_glass_overlay.png
+A pane of clear glass with black cracks in a white background
+
+falling-chart.png
+A red line graph chart going down in a white background
+
+empty_city_street_background.jpg
+Image of an empty grey city street at dawn
+
+gears-midground.png
+A set of interlocking silver metal gears in a white background
+
+broken_gears.png
+A pile of broken rusty brown gears in a white background
+
+data-center-background.jpg
+Image of a server room with glowing blue lights
+
+server-racks-midground.png
+A tall black server rack with blinking green lights in a white background
+
+glowing-data.png
+A stream of flowing blue digital data in a white background
+
+tech_overlay_foreground.png
+A transparent blue heads-up display with digital elements in a white background
+
+data_center_background.jpg
+Image of a cool, blue-lit server room aisle
+
+city_background.jpg
+Image of a sprawling modern city skyline during the day
+
+amazon_box_foreground.png
+A brown cardboard Amazon box with a black logo in a white background
+
+biohazard_symbol_overlay.png
+A bright yellow and black biohazard symbol in a white background
+
+sky-background.jpg
+Image of a clear blue sky with fluffy white clouds
+
+data_stream.png
+A vertical stream of glowing green binary code in a white background
+
+gears-foreground.png
+A group of shiny gold gears in a white background
+
+abstract_gears_background.jpg
+Image of a complex background of interlocking metallic gears
+
+server-room.jpg
+Image of a cool, blue-lit server room with rows of racks
+
+soundwaves_overlay.png
+A series of concentric blue soundwave circles in a white background
+
+phoenix_from_ashes.png
+A fiery orange phoenix rising from a pile of grey ash in a white background
+
+gears-background.jpg
+Image of a background filled with large, rustic metal gears
+
+data_stream_foreground.png
+A complex web of flowing bright purple data lines in a white background
+
+resilient-plant.png
+A small green plant growing through a crack in grey pavement in a white background
+
+amazon_warehouse_midground.png
+The interior of a large warehouse with tall yellow shelves in a white background

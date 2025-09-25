@@ -1,0 +1,92 @@
+blueprint_bg.jpg
+Image of a blue and white architectural blueprint
+
+fortress.png
+A grey stone fortress in a white background
+
+dark_clouds.png
+A cluster of dark grey storm clouds in a white background
+
+city_background.jpg
+Image of a modern city skyline at dusk with orange lights
+
+winding-path.jpg
+Image of a winding brown dirt path through a green forest
+
+tech_cityscape.jpg
+Image of a futuristic blue-lit city at night
+
+tech_city_background.jpg
+Image of a high-tech city with neon blue data lines
+
+stock-chart-midground.png
+A green and red stock market chart line in a white background
+
+glowing_particles.png
+A cloud of small, glowing yellow particles in a white background
+
+abstract_gears_background.jpg
+Image of interlocking metallic silver gears
+
+data_stream.png
+A stream of glowing blue binary code in a white background
+
+bright_sky.jpg
+Image of a bright blue sky with fluffy white clouds
+
+amazon_box_foreground.png
+A brown cardboard Amazon box with a black logo in a white background
+
+tech-overlay-foreground.png
+A futuristic blue heads-up display interface in a white background
+
+amazon_warehouse_midground.png
+An aisle of a large warehouse with tall yellow shelves in a white background
+
+data_overlay_foreground.png
+An overlay of flowing blue digital data points in a white background
+
+city-skyline-mid.png
+The silhouette of a dark grey city skyline in a white background
+
+soundwaves_overlay.png
+A set of concentric blue soundwave circles in a white background
+
+falling-chart.png
+A red stock chart line pointing downwards in a white background
+
+rain_overlay.png
+Streaks of light blue falling rain in a white background
+
+empty_city_street_background.jpg
+Image of an empty, wet city street at night with yellow streetlights
+
+gears-midground.png
+A set of interconnected shiny brass gears in a white background
+
+data_center_background.jpg
+Image of a server room with racks of blinking green and blue lights
+
+glowing-data.png
+A network of glowing light-blue data nodes and lines in a white background
+
+broken_gears.png
+A pile of rusty brown broken gears in a white background
+
+sky-background.jpg
+Image of a clear, pale blue sky
+
+cracked_glass_overlay.png
+A white spiderweb crack pattern on glass in a white background
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+resilient-plant.png
+A small green plant sprouting from a crack in a white background
+
+cloud_servers_midground.png
+A series of floating blue server icons connected by lines in a white background
+
+biohazard_symbol_overlay.png
+A bright yellow and black biohazard symbol in a white background

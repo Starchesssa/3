@@ -1,0 +1,92 @@
+blueprint_bg.jpg
+Image of a blue engineering blueprint
+
+falling-chart.png
+A red falling financial chart on a white background
+
+phoenix_from_ashes.png
+An orange fiery phoenix on a white background
+
+empty_city_street_background.jpg
+Image of an empty grey city street at dawn
+
+winding-path.jpg
+Image of a brown winding path in a green forest
+
+city_background.jpg
+Image of a purple city skyline at dusk
+
+amazon_warehouse_midground.png
+A large yellow Amazon warehouse on a white background
+
+glowing_particles.png
+A cloud of bright golden glowing particles on a white background
+
+tech_cityscape.jpg
+Image of a futuristic blue tech cityscape
+
+city-skyline-mid.png
+A dark grey city skyline on a white background
+
+data-center-background.jpg
+Image of a data center with blue glowing servers
+
+gears-midground.png
+Interconnected metallic silver gears on a white background
+
+data_stream.png
+A stream of glowing blue data on a white background
+
+biohazard_symbol_overlay.png
+A bright red biohazard symbol on a white background
+
+server-racks-midground.png
+A row of dark grey server racks on a white background
+
+server-room.jpg
+Image of a server room with green blinking lights
+
+glowing-data.png
+An abstract shape of glowing cyan data on a white background
+
+data_stream_foreground.png
+A stream of bright green data on a white background
+
+tech-overlay-foreground.png
+A futuristic blue tech interface overlay on a white background
+
+fortress.png
+A large grey stone fortress on a white background
+
+dark_clouds.jpg
+Image of dark stormy grey clouds
+
+abstract_gears_background.jpg
+Image of an abstract background of bronze gears
+
+broken_gears.png
+A pile of rusty brown broken gears on a white background
+
+stock-chart-midground.png
+A green stock market chart going up on a white background
+
+amazon_box_foreground.png
+A brown Amazon cardboard box on a white background
+
+sunrise-field.jpg
+Image of a golden sunrise over a green field
+
+resilient-plant.png
+A small green plant growing through grey concrete on a white background
+
+aws-logo.png
+The orange and white AWS logo on a white background
+
+tech_city_background.jpg
+Image of a futuristic tech city with blue lights
+
+cloud_servers_midground.png
+Stylized blue cloud server icons on a white background
+
+cracked_glass_overlay.png
+A white cracked glass pattern on a white background
