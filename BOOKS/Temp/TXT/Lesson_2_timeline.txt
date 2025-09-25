@@ -1,0 +1,117 @@
+1. Key=blueprint_bg.jpg=bg/full
+   lesson=fortress.png=md/c
+   Overall_par_effect=basic
+
+2. market=city_background.jpg=bg/full
+   mood=stock-chart-midground.png=md/c
+   swing=dark_clouds.png=bg/c
+   Overall_par_effect=dolly_zoom
+
+3. strategy=blueprint_bg.jpg=bg/full
+   compass=winding-path.png=md/c
+   Overall_par_effect=focus_pull
+
+4. bubble=cracked_glass_overlay.png=fg/full
+   burst=falling-chart.png=md/c
+   Overall_par_effect=scale
+
+5. party=empty_city_street_background.jpg=bg/full
+   ended=city-background.jpg=bg/c
+   Overall_par_effect=blur
+
+6. companies=tech_city_background.jpg=bg/full
+   vanished=glowing_particles.png=fg/c
+   Overall_par_effect=mask_reveal
+
+7. Pets=broken_gears.png=md/c
+   .com=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=basic
+
+8. Webvan=broken_gears.png=md/c
+   Overall_par_effect=basic
+
+9. Gone=empty_city_street_background.jpg=bg/full
+   Overall_par_effect=vertical
+
+10. Wall=city-background.jpg=bg/full
+    Street=stock-chart-midground.png=md/c
+    turned=sad-people.png=fg/r
+    Overall_par_effect=sliding_split
+
+11. Amazon=amazon_box_foreground.png=fg/c
+    Bomb=biohazard_symbol_overlay.png=fg/c
+    Overall_par_effect=floating_objects
+
+12. stock=stock-chart-midground.png=md/c
+    crashed=falling-chart.png=fg/c
+    Overall_par_effect=diagonal
+
+13. fell=falling-chart.png=fg/c
+    share=stock-chart-midground.png=md/c
+    Overall_par_effect=vertical
+
+14. drop=falling-chart.png=fg/c
+    90%=stock-chart-midground.png=md/c
+    Overall_par_effect=scale
+
+15. Imagine=dark_clouds.png=bg/c
+    that=sad-people.png=fg/c
+    Overall_par_effect=blur
+
+16. life's=blueprint_bg.jpg=bg/full
+    work=data-center-background.jpg=md/c
+    Overall_par_effect=focus_pull
+
+17. net=data_stream.png=fg/c
+    worth=data-center-background.jpg=bg/c
+    evaporating=glowing_particles.png=fg/c
+    Overall_par_effect=mask_reveal
+
+18. founders=sad-people.png=fg/c
+    panic=dark_clouds.png=bg/c
+    Overall_par_effect=dolly_zoom
+
+19. cut=gears-midground.png=md/c
+    costs=broken_gears.png=fg/c
+    bone=server-racks-midground.png=bg/c
+    Overall_par_effect=sliding_split
+
+20. profit=stock-chart-midground.png=md/c
+    Overall_par_effect=basic
+
+21. Any=stock-chart-midground.png=md/c
+    profit=data_stream.png=fg/c
+    Overall_par_effect=scale
+
+22. calm=single-tree.png=md/c
+    investors=sad-people.png=fg/c
+    Overall_par_effect=focus_pull
+
+23. Bezos=amazon_warehouse_midground.png=md/r
+    opposite=phoenix_from_ashes.png=fg/l
+    Overall_par_effect=sliding_split
+
+24. building=amazon_warehouse_midground.png=md/c
+    building=gears-background.png=bg/full
+    Overall_par_effect=orbit
+
+25. market=stock-chart-midground.png=md/c
+    noise=soundwaves_overlay.png=fg/c
+    Overall_par_effect=blur
+
+26. fear=dark_clouds.png=bg/c
+    greed=data_stream.png=fg/c
+    Overall_par_effect=floating_objects
+
+27. strategy=blueprint_bg.jpg=bg/full
+    signal=data_stream_foreground.png=fg/c
+    Overall_par_effect=focus_pull
+
+28. survive=resilient-plant.png=fg/c
+    storm=rainy-city.jpg=bg/full
+    storm=dark_clouds.png=bg/c
+    Overall_par_effect=dolly_zoom
+
+29. abandon=empty_city_street_background.jpg=bg/full
+    ship=fortress.png=md/c
+    Overall_par_effect=mask_reveal

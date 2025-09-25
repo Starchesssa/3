@@ -1,0 +1,84 @@
+1. lesson=abstract_gears_background.jpg=bg/full
+   price=falling-chart.png=fg/r
+   failure=sad-people.png=fg/l
+   Overall_par_effect=blur
+
+2. 2019=tech_cityscape.jpg=bg/full
+   ghosts=dark_clouds.jpg=bg/c
+   failures=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=dolly_zoom
+
+3. fire_phone=broken_gears.png=md/c
+   background=server-room.jpg=bg/full
+   Overall_par_effect=basic
+
+4. disaster=cracked_glass_overlay.png=fg/c
+   flop=falling-chart.png=md/c
+   Overall_par_effect=mask_reveal
+
+5. million=stock-chart-midground.png=md/c
+   write_down=falling-chart.png=fg/c
+   inventory=amazon_box_foreground.png=fg/r
+   Overall_par_effect=vertical
+
+6. humiliation=sad-people.png=fg/c
+   public=city-background.jpg=bg/full
+   Overall_par_effect=focus_pull
+
+7. compete=tech_cityscape.jpg=bg/full
+   failed=biohazard_symbol_overlay.png=fg/c
+   Overall_par_effect=diagonal
+
+8. company=city_background.jpg=bg/full
+   team=sad-people.png=fg/c
+   Overall_par_effect=basic
+
+9. project=dark_clouds.jpg=bg/full
+   Overall_par_effect=blur
+
+10. hardware=broken_gears.png=md/c
+    company=data-center-background.jpg=bg/full
+    Overall_par_effect=scale
+
+11. Amazon=aws-logo.png=fg/c
+    not=fortress.png=bg/full
+    Overall_par_effect=basic
+
+12. failing=glowing_particles.png=md/c
+    innovating=abstract_gears_background.jpg=bg/full
+    Overall_par_effect=floating_objects
+
+13. million=stock-chart-midground.png=md/c
+    tuition=blueprint_bg.jpg=bg/full
+    Overall_par_effect=focus_pull
+
+14. lessons=abstract_gears_background.jpg=bg/full
+    engineers=gears-midground.png=md/c
+    supply_chains=amazon_warehouse_midground.png=md/r
+    resilient=resilient-plant.png=fg/l
+    Overall_par_effect=orbit
+
+15. repurposed=gears-midground.png=md/c
+    flow=data_stream.png=fg/l
+    Overall_par_effect=sliding_split
+
+16. team=data_stream_foreground.png=fg/c
+    Echo=soundwaves_overlay.png=md/c
+    technology=tech_overlay_foreground.png=bg/full
+    success=bright_sky.jpg=bg/full
+    Overall_par_effect=dolly_zoom
+
+17. homes=city-skyline-mid.png=md/c
+    Echo=soundwaves_overlay.png=fg/c
+    millions=glowing-data.png=bg/full
+    Overall_par_effect=scale
+
+18. ashes=phoenix_from_ashes.png=fg/c
+    soil=resilient-plant.png=md/l
+    successes=sunrise-field.jpg=bg/full
+    Overall_par_effect=mask_reveal
+
+19. failure=cracked_glass_overlay.png=fg/c
+    learn=winding-path.jpg=md/c
+    nothing=single-tree.png=bg/full
+    Overall_par_effect=focus_pull
