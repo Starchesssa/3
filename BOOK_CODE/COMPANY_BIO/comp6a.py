@@ -93,6 +93,8 @@ Tasks:
       cushion=tall_cushion.png=fg/l
       Overall_par_effect=dolly_zoom
 
+each word at the beginning make sure its a word from the sentence  so that means a words from a sentence is represented(=) by xyz.png image , so make sure all words at the beginning are from sentence.
+
 make sure you skip one line after each scene description as i have in that example.
 
 do not include an image of a person or aninal even if a person is mentioned ,,no inages of people or animals.
