@@ -1,98 +1,93 @@
-1. lesson=blueprint_bg.jpg=bg/c
-   retreat=sad-people.png=mg/l
-   attack=phoenix_from_ashes.png=fg/r
-   Overall_par_effect=focus_pull
-
-2. year=city_background.jpg=bg/c
-   2008=tech-overlay-foreground.png=fg/c
-   Overall_par_effect=basic
-
-3. system=tech_cityscape.jpg=bg/c
-   financial=stock-chart-midground.png=mg/c
-   collapsing=cracked_glass_overlay.png=fg/c
-   Overall_par_effect=dolly_zoom
-
-4. lehman=empty_city_street_background.jpg=bg/c
-   gone=broken_gears.png=mg/c
-   gone_symbol=dark_clouds.png=fg/c
-   Overall_par_effect=blur
-
-5. economy=city-skyline-mid.png=bg/c
-   free_fall=falling-chart.png=mg/c
-   falling_context=dark_clouds.png=fg/c
-   Overall_par_effect=vertical
-
-6. businesses=city-background.jpg=bg/c
-   laying_off=sad-people.png=mg/c
-   empty_space=empty_city_street_background.jpg=fg/c
-   Overall_par_effect=mask_reveal
-
-7. canceling=blueprint_bg.jpg=bg/c
-   projects=broken_gears.png=mg/c
-   halt=tech_overlay_foreground.png=fg/c
+1. Key=blueprint_bg.jpg=bg/c
+   retreat=winding-path.png=md/l
+   attack=fortress.png=fg/r
    Overall_par_effect=sliding_split
 
+2. year=city_background.jpg=bg/c
+   date=tech-overlay-foreground.png=fg/c
+   Overall_par_effect=basic
+
+3. global=abstract_gears_background.jpg=bg/c
+   financial=falling-chart.png=md/c
+   collapsing=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
+4. Lehman=empty_city_street_background.jpg=bg/c
+   gone=dark_clouds.png=md/c
+   brothers=rain_overlay.png=fg/c
+   Overall_par_effect=focus_pull
+
+5. economy=city_background.jpg=bg/c
+   free_fall=stock-chart-midground.png=md/c
+   isn't=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=diagonal
+
+6. businesses=tech_cityscape.jpg=bg/c
+   laying=broken_gears.png=md/c
+   off=empty_city_street_background.jpg=fg/c
+   Overall_par_effect=blur
+
+7. canceling=blueprint_bg.jpg=bg/c
+   projects=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
 8. hoarding=fortress.png=bg/c
-   cash_symbol=abstract_gears_background.jpg=mg/c
-   scarcity=empty_city_street_background.jpg=fg/c
+   cash=data_overlay_foreground.png=fg/c
    Overall_par_effect=scale
 
-9. survival=resilient-plant.png=fg/c
-   mode=dark_clouds.png=bg/c
-   danger=biohazard_symbol_overlay.png=mg/c
+9. survival=biohazard_symbol_overlay.png=bg/c
+   mode=resilient-plant.png=fg/c
    Overall_par_effect=floating_objects
 
-10. amazon_question=amazon_box_foreground.png=fg/r
-    push_forward=winding-path.png=bg/c
-    ambition=glowing_particles.png=mg/l
-    Overall_par_effect=diagonal
+10. Amazon=aws-logo.png=md/c
+    push_forward=tech_city_background.jpg=bg/c
+    products=gears-midground.png=fg/c
+    Overall_par_effect=dolly_zoom
 
-11. kindle=tech_overlay_foreground.png=fg/c
-    reader=data_center_background.jpg=bg/c
-    digital_content=data_stream.png=mg/c
+11. Kindle=data-center-background.jpg=bg/c
+    electronic=data_stream.png=md/c
+    book_reader=glowing-data.png=fg/c
     Overall_par_effect=orbit
 
-12. recession=rainy-city.png=bg/c
-    change_books=data_stream.png=mg/c
-    ambition_of_change=blueprint_bg.jpg=fg/c
-    Overall_par_effect=dolly_zoom
-
-13. building=blueprint_bg.jpg=bg/c
-    hardware=server-racks-midground.png=mg/c
-    innovation=gears-foreground.png=fg/c
-    Overall_par_effect=basic
-
-14. fighting=fortress.png=bg/c
-    publishers=abstract_gears_background.jpg=mg/c
-    tension=cracked_glass_overlay.png=fg/c
+12. recession=falling-chart.png=md/c
+    change=phoenix_from_ashes.png=fg/c
+    books=blueprint_bg.jpg=bg/c
     Overall_par_effect=sliding_split
 
-15. investing=glowing_particles.png=fg/c
-    amazon_power=aws-logo.png=mg/c
-    others_struggle=broken_gears.png=bg/c
-    Overall_par_effect=focus_pull
-
-16. recessions=dark_clouds.png=bg/c
-    clearing=phoenix_from_ashes.png=mg/c
-    event_aftermath=falling-chart.png=fg/c
-    Overall_par_effect=mask_reveal
-
-17. weak=sad-people.png=mg/c
-    wiped_out=broken_gears.png=fg/c
-    emptiness=empty_city_street_background.jpg=bg/c
-    Overall_par_effect=blur
-
-18. strong=fortress.png=bg/c
-    stronger_growth=resilient-plant.png=mg/c
-    triumph=phoenix_from_ashes.png=fg/c
+13. building=blueprint_bg.jpg=bg/c
+    hardware=gears-background.png=md/c
+    new=server-racks-midground.png=fg/c
     Overall_par_effect=scale
 
-19. amazon=amazon_warehouse_midground.png=bg/c
-    crisis_backdrop=dark_clouds.png=mg/c
-    market_grab=data_stream_foreground.png=fg/c
+14. fighting=cracked_glass_overlay.png=fg/c
+    publishers=fortress.png=bg/c
+    Overall_par_effect=sliding_split
+
+15. investing=glowing-data.png=md/c
+    millions=data_stream_foreground.png=fg/c
+    companies=biohazard_symbol_overlay.png=bg/c
     Overall_par_effect=diagonal
 
-20. feet=sad-people.png=fg/l
-    horizon_view=sunrise-field.png=bg/c
-    long_term=mountains-far.png=mg/r
+16. recessions=dark_clouds.png=bg/c
+    clearing_event=sunrise-field.jpg=md/c
+    event=glowing_particles.png=fg/c
+    Overall_par_effect=mask_reveal
+
+17. weak=broken_gears.png=md/c
+    wiped_out=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=blur
+
+18. strong=resilient-plant.png=md/c
+    stronger=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=scale
+
+19. Amazon=aws-logo.png=md/c
+    crisis=falling-chart.png=bg/c
+    ecosystem=cloud_servers_midground.png=fg/c
+    digital_books=data_stream_foreground.png=fg/r
     Overall_par_effect=dolly_zoom
+
+20. feet=empty_city_street_background.jpg=bg/c
+    horizon=mountains-far.png=md/c
+    looking=winding-path.png=fg/c
+    Overall_par_effect=focus_pull

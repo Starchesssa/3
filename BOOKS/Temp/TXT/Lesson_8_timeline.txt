@@ -1,71 +1,71 @@
 1. Key=blueprint_bg.jpg=bg/c
-   Lesson=phoenix_from_ashes.png=mg/c
+   Lesson=fortress.png=mg/c
+   Glow=glowing_particles.png=fg/c
    Overall_par_effect=focus_pull
 
-2. System=abstract_gears_background.jpg=bg/c
-   Crisis=dark_clouds.jpg=mg/c
-   Tested=cracked_glass_overlay.png=fg/c
-   Overall_par_effect=sliding_split
+2. Crisis_sky=dark_clouds.jpg=bg/c
+   System_gears=gears-midground.png=mg/c
+   Tested_cracks=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=dolly_zoom
 
-3. World=city_background.jpg=bg/c
-   Stopped=empty_city_street_background.jpg=mg/c
-   Transition=dark_clouds.jpg=fg/c
-   Overall_par_effect=mask_reveal
-
-4. Pandemic=rainy-city.jpg=bg/c
-   COVID-19=biohazard_symbol_overlay.png=mg/c
-   Shut_down=sad-people.png=fg/c
-   Overall_par_effect=blur
-
-5. Stores_closed=empty_city_street_background.jpg=bg/c
-   Offices_closed=city_background.jpg=mg/l
-   Locked_in=rain_overlay.png=fg/c
+3. World_bg=city_background.jpg=bg/c
+   Stopped_street=empty_city_street_background.jpg=mg/c
+   Atmosphere_rain=rain_overlay.png=fg/c
    Overall_par_effect=vertical
 
-6. Machine=abstract_gears_background.jpg=bg/c
-   Amazon=amazon_box_foreground.png=fg/r
-   Building=city-skyline-mid.png=mg/c
-   Overall_par_effect=orbit
+4. Global_city=city-background.jpg=bg/c
+   Pandemic_symbol=biohazard_symbol_overlay.png=mg/c
+   Shutdown_empty=empty_city_street_background.jpg=fg/c
+   Overall_par_effect=mask_reveal
 
-7. Infrastructure=data-center-background.jpg=bg/c
-   Essential=gears-background.png=fg/c
-   Foundation=blueprint_bg.jpg=mg/c
+5. Closed_streets=empty_city_street_background.jpg=bg/c
+   Closed_skyline=city-skyline-mid.png=mg/c
+   Locked_fragile=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=blur
+
+6. Machine_gears=abstract_gears_background.jpg=bg/c
+   Amazon_warehouse=amazon_warehouse_midground.png=mg/c
+   Building_tech=tech_overlay_foreground.png=fg/c
    Overall_par_effect=scale
 
-8. Warehouses=amazon_warehouse_midground.png=mg/l
-   Delivery=delivery_drone_foreground.png=fg/r
-   Cloud_servers=data_center_background.jpg=bg/c
-   Website=tech_overlay_foreground.png=fg/c
-   Overall_par_effect=floating_objects
+7. Infrastructure_data=data-center-background.jpg=bg/c
+   Servers_essential=server-racks-midground.png=mg/c
+   Data_flow=data_stream_foreground.png=fg/c
+   Overall_par_effect=focus_pull
 
-9. System_strained=abstract_gears_background.jpg=bg/c
-   Slipped=gears-midground.png=mg/c
-   Not_break=resilient-plant.png=fg/r
-   Continued=data_stream_foreground.png=fg/l
+8. Cloud_servers=aws-logo.png=bg/c
+   Warehouses_amazon=amazon_warehouse_midground.png=mg/l
+   Powering_cloud=cloud_servers_midground.png=mg/r
+   Delivery_drone=delivery_drone_foreground.png=fg/c
+   Overall_par_effect=orbit
+
+9. System_data=data_center_background.jpg=bg/c
+   Strained_gears=broken_gears.png=mg/c
+   Did_not_break_plant=resilient-plant.png=fg/c
    Overall_par_effect=diagonal
 
-10. Collapsed=falling-chart.png=mg/l
-    Hired=amazon_warehouse_midground.png=mg/r
-    Contrast=tech_cityscape.jpg=bg/c
+10. Collapsed_clouds=dark_clouds.jpg=bg/c
+    Businesses_chart=falling-chart.png=mg/c
+    Amazon_hired_chart=stock-chart-midground.png=fg/c
     Overall_par_effect=sliding_split
 
-11. Hired=amazon_warehouse_midground.png=bg/c
-    Workers=data_overlay_foreground.png=fg/c
-    Growth=glowing_particles.png=mg/c
-    Overall_par_effect=scale
-
-12. Revenue=stock-chart-midground.png=mg/c
-    Exploded=glowing-data.png=fg/c
-    Impact=city_background.jpg=bg/c
+11. Hired_warehouse=amazon_warehouse_midground.png=bg/c
+    Workers_glowing=glowing_particles.png=mg/c
+    Flow_of_data=data_stream_foreground.png=fg/c
     Overall_par_effect=vertical
 
-13. Tragedy=dark_clouds.jpg=bg/c
-    World=sad-people.png=mg/l
-    Validation=fortress.png=mg/r
-    Overall_par_effect=sliding_split
+12. Exploded_sky=bright_sky.jpg=bg/c
+    Revenue_chart=stock-chart-midground.png=mg/c
+    Explosion_data=glowing-data.png=fg/c
+    Overall_par_effect=scale
 
-14. Bet=blueprint_bg.jpg=bg/c
-    Logistics=amazon_box_foreground.png=fg/r
-    Infrastructure=data-center-background.jpg=mg/l
-    Paid_off=phoenix_from_ashes.png=mg/c
+13. Tragedy_dark=dark_clouds.jpg=bg/c
+    Validation_plant=resilient-plant.png=mg/l
+    Phoenix_rising=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=focus_pull
+
+14. Logistics_city=tech_cityscape.jpg=bg/c
+    Thinking_blueprint=blueprint_bg.jpg=mg/c
+    Infrastructure_gears=gears-foreground.png=fg/l
+    Paid_off_box=amazon_box_foreground.png=fg/r
     Overall_par_effect=dolly_zoom
