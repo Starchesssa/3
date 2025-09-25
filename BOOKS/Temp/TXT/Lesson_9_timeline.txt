@@ -1,0 +1,128 @@
+1. lesson=blueprint_bg.jpg=bg/c
+   growth=winding-path.png=mg/c
+   line=resilient-plant.png=fg/c
+   Overall_par_effect=basic
+
+2. arrive=tech_cityscape.jpg=bg/c
+   2022=stock-chart-midground.png=mg/c
+   Overall_par_effect=focus_pull
+
+3. world=city_background.jpg=bg/c
+   reopening=bright_sky.jpg=mg/c
+   reality=dark_clouds.png=fg/c
+   Overall_par_effect=sliding_split
+
+4. Inflation=falling-chart.png=mg/c
+   high=dark_clouds.png=bg/c
+   market=stock-chart-midground.png=mg/l
+   tech=tech-overlay-foreground.png=fg/c
+   Overall_par_effect=blur
+
+5. pandemic=biohazard_symbol_overlay.png=fg/l
+   boom=cracked_glass_overlay.png=fg/r
+   over=empty_city_street_background.jpg=bg/c
+   Overall_par_effect=mask_reveal
+
+6. Amazon=amazon_box_foreground.png=fg/c
+   stock=stock-chart-midground.png=mg/c
+   fell=falling-chart.png=mg/l
+   drop=rain_overlay.png=bg/c
+   Overall_par_effect=vertical
+
+7. overbuilt=amazon_warehouse_midground.png=mg/c
+   hired=gears-midground.png=mg/l
+   pandemic=biohazard_symbol_overlay.png=fg/c
+   frenzy=gears-foreground.png=fg/r
+   Overall_par_effect=scale
+
+8. Now=blueprint_bg.jpg=bg/c
+   correct=gears-background.png=mg/c
+   Overall_par_effect=orbit
+
+9. company=city_background.jpg=bg/c
+   announced=soundwaves_overlay.png=fg/c
+   layoffs=broken_gears.png=mg/l
+   employees=empty_city_street_background.jpg=mg/r
+   Overall_par_effect=diagonal
+
+10. media=tech_overlay_foreground.png=fg/c
+    stories=data_stream.png=mg/c
+    Amazon's=amazon_box_foreground.png=fg/l
+    decline=falling-chart.png=mg/r
+    point=abstract_gears_background.jpg=bg/c
+    Overall_par_effect=floating_objects
+
+11. looking=stock-chart-midground.png=mg/c
+    stock=falling-chart.png=mg/l
+    price=data_overlay_foreground.png=fg/c
+    machine=gears-midground.png=bg/c
+    Overall_par_effect=dolly_zoom
+
+12. e-commerce=amazon_box_foreground.png=fg/c
+    business=city_background.jpg=bg/c
+    slowing=rain_overlay.png=fg/l
+    pandemic=biohazard_symbol_overlay.png=mg/c
+    highs=dark_clouds.png=bg/r
+    Overall_par_effect=blur
+
+13. real=server-room.jpg=bg/c
+    engine=gears-midground.png=mg/c
+    AWS=aws-logo.png=fg/c
+    growing=data_stream.png=fg/l
+    Overall_par_effect=focus_pull
+
+14. AWS=aws-logo.png=mg/c
+    generated=glowing-data.png=fg/c
+    revenue=stock-chart-midground.png=mg/l
+    2022=tech_cityscape.jpg=bg/c
+    Overall_par_effect=scale
+
+15. operating=server-racks-midground.png=mg/c
+    income=data_stream_foreground.png=fg/c
+    billion=stock-chart-midground.png=bg/c
+    Overall_par_effect=vertical
+
+16. retail=amazon_box_foreground.png=fg/c
+    business=falling-chart.png=mg/c
+    lost=dark_clouds.png=bg/c
+    money=stock-chart-midground.png=mg/l
+    Overall_par_effect=blur
+
+17. cash=aws-logo.png=fg/l
+    cow=fortress.png=bg/c
+    empire=city-skyline-mid.png=mg/c
+    afloat=bright_sky.jpg=bg/r
+    storm=dark_clouds.png=fg/r
+    Overall_par_effect=sliding_split
+
+18. final=blueprint_bg.jpg=bg/c
+    lesson=gears-background.png=mg/c
+    Overall_par_effect=basic
+
+19. system=abstract_gears_background.jpg=bg/c
+    resilient=resilient-plant.png=fg/c
+    stock=stock-chart-midground.png=mg/c
+    performance=falling-chart.png=mg/l
+    Overall_par_effect=orbit
+
+20. build=blueprint_bg.jpg=bg/c
+    diversified=gears-midground.png=mg/l
+    machine=server-room.jpg=mg/r
+    weak=broken_gears.png=fg/l
+    strong=glowing-data.png=fg/r
+    Overall_par_effect=floating_objects
+
+21. avoiding=winding-path.png=mg/c
+    downturns=falling-chart.png=fg/c
+    Overall_par_effect=vertical
+
+22. building=fortress.png=bg/c
+    business=city_background.jpg=mg/c
+    survive=resilient-plant.png=fg/c
+    Overall_par_effect=mask_reveal
+
+23. sun=sunrise-field.png=bg/c
+    comes=bright_sky.jpg=mg/c
+    battlefield=single-tree.png=fg/c
+    left=phoenix_from_ashes.png=mg/l
+    Overall_par_effect=dolly_zoom

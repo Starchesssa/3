@@ -1,0 +1,36 @@
+1. rules=blueprint_bg.jpg=bg/c
+   follow=fortress.png=md/c
+   system=gears-foreground.png=fg/l
+   rules=data_overlay_foreground.png=fg/r
+   Overall_par_effect=mask_reveal
+
+2. build=city_background.jpg=bg/c
+   spreadsheet=stock-chart-midground.png=md/l
+   day=falling-chart.png=fg/r
+   data=data_stream.png=fg/c
+   Overall_par_effect=focus_pull
+
+3. profitable=empty_city_street_background.jpg=bg/c
+   profitable=stock-chart-midground.png=md/l
+   glowing=glowing-data.png=fg/r
+   gears=gears-midground.png=md/r
+   Overall_par_effect=vertical
+
+4. advice=dark_clouds.png=bg/c
+   creates=falling-chart.png=md/c
+   small=broken_gears.png=fg/l
+   forgettable=single-tree.png=fg/r
+   Overall_par_effect=sliding_split
+
+5. not=sunrise-field.jpg=bg/c
+   story=resilient-plant.png=md/c
+   companies=glowing_particles.png=fg/l
+   path=winding-path.png=fg/r
+   Overall_par_effect=mask_reveal
+
+6. system=tech_city_background.jpg=bg/full
+   machine=data-center-background.jpg=md/c
+   ate=data_stream_foreground.png=fg/c
+   machine=gears-midground.png=md/l
+   world=server-racks-midground.png=md/r
+   Overall_par_effect=dolly_zoom

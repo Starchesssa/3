@@ -1,0 +1,71 @@
+1. lesson=blueprint_bg.jpg=bg/c
+lesson=gears-midground.png=mg/c
+Key=glowing_particles.png=fg/c
+Overall_par_effect=focus_pull
+
+2. system=abstract_gears_background.jpg=bg/c
+crisis=dark_clouds.png=mg/c
+crisis=cracked_glass_overlay.png=fg/c
+Overall_par_effect=blur
+
+3. world=city_background.jpg=bg/c
+stopped=empty_city_street_background.jpg=mg/c
+world=dark_clouds.png=fg/c
+Overall_par_effect=sliding_split
+
+4. pandemic=empty_city_street_background.jpg=bg/c
+COVID=biohazard_symbol_overlay.png=mg/c
+everything=rain_overlay.png=fg/c
+Overall_par_effect=mask_reveal
+
+5. Stores=empty_city_street_background.jpg=bg/c
+offices=city-background.jpg=mg/c
+closed=cracked_glass_overlay.png=fg/c
+Overall_par_effect=vertical
+
+6. machine=abstract_gears_background.jpg=bg/c
+Amazon=amazon_box_foreground.png=fg/c
+building=blueprint_bg.jpg=mg/c
+Overall_par_effect=scale
+
+7. essential=data-center-background.jpg=bg/c
+infrastructure=server-room.jpg=mg/c
+infrastructure=cloud_servers_midground.png=fg/c
+Overall_par_effect=floating_objects
+
+8. warehouses=amazon_warehouse_midground.png=bg/c
+delivery=delivery_drone_foreground.png=fg/c
+servers=cloud_servers_midground.png=mg/l
+test=data_overlay_foreground.png=fg/r
+Overall_par_effect=orbit
+
+9. system=gears-background.png=bg/c
+strained=broken_gears.png=mg/c
+break=resilient-plant.png=fg/c
+Overall_par_effect=mask_reveal
+
+10. businesses=falling-chart.png=bg/c
+Amazon=amazon_box_foreground.png=fg/c
+hired=tech_cityscape.jpg=mg/c
+Overall_par_effect=sliding_split
+
+11. hired=stock-chart-midground.png=bg/c
+workers=amazon_warehouse_midground.png=mg/c
+months=glowing_particles.png=fg/c
+Overall_par_effect=scale
+
+12. revenue=stock-chart-midground.png=bg/c
+exploded=glowing_particles.png=mg/c
+billion=data_stream.png=fg/c
+Overall_par_effect=vertical
+
+13. pandemic=dark_clouds.png=bg/c
+Amazon's=amazon_box_foreground.png=mg/c
+validation=phoenix_from_ashes.png=fg/c
+Overall_par_effect=dolly_zoom
+
+14. bet=blueprint_bg.jpg=bg/c
+logistics=gears-background.png=mg/c
+infrastructure=data-center-background.jpg=mg/r
+thinking=resilient-plant.png=fg/c
+Overall_par_effect=focus_pull

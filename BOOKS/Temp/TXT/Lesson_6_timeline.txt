@@ -1,0 +1,93 @@
+1. Key=blueprint_bg.jpg=bg/c
+   lesson=glowing_particles.png=fg/c
+   Overall_par_effect=basic
+
+2. cash=aws-logo.png=mg/c
+   cow=data_stream.png=fg/r
+   invade=fortress.png=bg/l
+   territories=city_background.jpg=bg/r
+   Overall_par_effect=dolly_zoom
+
+3. now=city_background.jpg=bg/c
+   2017=glowing_particles.png=fg/c
+   Overall_par_effect=basic
+
+4. AWS=aws-logo.png=mg/c
+   monster=dark_clouds.png=bg/c
+   monster=biohazard_symbol_overlay.png=fg/c
+   Overall_par_effect=scale
+
+5. money=aws-logo.png=mg/c
+   printing=glowing-data.png=fg/c
+   machine=abstract_gears_background.jpg=bg/c
+   Overall_par_effect=floating_objects
+
+6. 2017=tech_cityscape.jpg=bg/c
+   AWS=aws-logo.png=mg/l
+   revenue=stock-chart-midground.png=mg/r
+   billion=data_stream.png=fg/c
+   Overall_par_effect=vertical
+
+7. retail=amazon_warehouse_midground.png=bg/l
+   AWS=aws-logo.png=mg/r
+   profitable=stock-chart-midground.png=fg/c
+   Overall_par_effect=sliding_split
+
+8. cash=aws-logo.png=mg/c
+   cow=glowing-data.png=fg/c
+   was=data-center-background.jpg=bg/c
+   Overall_par_effect=focus_pull
+
+9. cash=aws-logo.png=mg/c
+   shareholders=data_stream_foreground.png=fg/c
+   do=winding-path.png=bg/c
+   Overall_par_effect=diagonal
+
+10. safe=fortress.png=bg/c
+    war=broken_gears.png=mg/l
+    chest=aws-logo.png=mg/r
+    attack=tech-overlay-foreground.png=fg/c
+    industry=city_background.jpg=bg/c
+    Overall_par_effect=mask_reveal
+
+11. Amazon=amazon_box_foreground.png=fg/l
+    buying=aws-logo.png=mg/c
+    whole=sunrise-field.jpg=bg/r
+    foods=resilient-plant.png=mg/r
+    Overall_par_effect=scale
+
+12. cash=aws-logo.png=mg/c
+    world=sky-background.jpg=bg/c
+    stunned=cracked_glass_overlay.png=fg/c
+    Overall_par_effect=blur
+
+13. king=aws-logo.png=mg/c
+    e-commerce=tech_cityscape.jpg=bg/l
+    brick=empty_city_street_background.jpg=bg/r
+    grocery=amazon_warehouse_midground.png=mg/r
+    Overall_par_effect=sliding_split
+
+14. announcement=soundwaves_overlay.png=fg/c
+    stocks=stock-chart-midground.png=mg/c
+    grocery=city_background.jpg=bg/c
+    plummeted=falling-chart.png=mg/c
+    Overall_par_effect=vertical
+
+15. lost=broken_gears.png=mg/c
+    market=stock-chart-midground.png=mg/c
+    value=falling-chart.png=fg/c
+    billion=city-skyline-mid.png=bg/c
+    Overall_par_effect=focus_pull
+
+16. Amazon=amazon_box_foreground.png=fg/l
+    tech=aws-logo.png=mg/l
+    engine=gears-midground.png=mg/c
+    invasion=fortress.png=bg/r
+    old=sunrise-field.jpg=bg/c
+    milk=resilient-plant.png=fg/r
+    Overall_par_effect=orbit
+
+17. playing=winding-path.png=bg/c
+    different=glowing_particles.png=fg/c
+    game=blueprint_bg.jpg=mg/c
+    Overall_par_effect=mask_reveal

@@ -1,0 +1,97 @@
+1. innovation=blueprint_bg.jpg=bg/c
+   expensive=falling-chart.png=mg/c
+   failure=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=focus_pull
+
+2. 2019=tech_cityscape.jpg=bg/c
+   ghosts=dark_clouds.jpg=mg/c
+   failures=broken_gears.png=fg/c
+   Overall_par_effect=blur
+
+3. biggest=city_background.jpg=bg/c
+   fire=broken_gears.png=mg/c
+   phone=tech-overlay-foreground.png=fg/c
+   Overall_par_effect=diagonal
+
+4. disaster=tech_city_background.jpg=bg/c
+   total=falling-chart.png=mg/c
+   flop=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=sliding_split
+
+5. company=amazon_warehouse_midground.png=mg/c
+   million=falling-chart.png=bg/c
+   Inventory=amazon_box_foreground.png=fg/c
+   Overall_par_effect=vertical
+
+6. public=empty_city_street_background.jpg=bg/c
+   humiliation=dark_clouds.jpg=mg/c
+   Overall_par_effect=focus_pull
+
+7. compete=abstract_gears_background.jpg=bg/c
+   Apple=tech_overlay_foreground.png=fg/l
+   failed=broken_gears.png=mg/c
+   spectacularly=data_stream.png=fg/r
+   Overall_par_effect=orbit
+
+8. company=city-background.jpg=bg/c
+   fire=cracked_glass_overlay.png=fg/c
+   team=server-racks-midground.png=mg/c
+   Overall_par_effect=mask_reveal
+
+9. mention=blueprint_bg.jpg=bg/c
+   project=dark_clouds.jpg=mg/c
+   again=rain_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
+10. conclude=server-room.jpg=bg/c
+    not=biohazard_symbol_overlay.png=fg/c
+    company=data_center_background.jpg=mg/c
+    Overall_par_effect=focus_pull
+
+11. Amazon=aws-logo.png=mg/c
+    not=glowing_particles.png=fg/c
+    that=amazon_warehouse_midground.png=bg/c
+    Overall_par_effect=scale
+
+12. failing=broken_gears.png=mg/c
+    innovating=glowing_particles.png=fg/c
+    not=abstract_gears_background.jpg=bg/c
+    Overall_par_effect=orbit
+
+13. million=falling-chart.png=fg/c
+    tuition=blueprint_bg.jpg=bg/c
+    fee=glowing_particles.png=mg/c
+    Overall_par_effect=dolly_zoom
+
+14. lessons=blueprint_bg.jpg=bg/c
+    failure=broken_gears.png=mg/l
+    engineers=gears-midground.png=mg/r
+    chains=winding-path.png=fg/c
+    away=resilient-plant.png=fg/r
+    Overall_par_effect=floating_objects
+
+15. repurposed=gears-foreground.png=fg/c
+    were=data_stream.png=mg/c
+    Overall_par_effect=scale
+
+16. team=gears-midground.png=mg/c
+    knowledge=glowing-data.png=fg/l
+    Echo=soundwaves_overlay.png=fg/r
+    technology=tech_cityscape.jpg=bg/c
+    Overall_par_effect=dolly_zoom
+
+17. 2019=tech_city_background.jpg=bg/c
+    homes=city-skyline-mid.png=mg/c
+    Echo=soundwaves_overlay.png=fg/c
+    Overall_par_effect=vertical
+
+18. ashes=dark_clouds.jpg=bg/c
+    failure=broken_gears.png=mg/c
+    soil=sunrise-field.jpg=mg/l
+    successes=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=mask_reveal
+
+19. Failure=cracked_glass_overlay.png=fg/c
+    learn=blueprint_bg.jpg=bg/c
+    nothing=empty_city_street_background.jpg=mg/c
+    Overall_par_effect=focus_pull

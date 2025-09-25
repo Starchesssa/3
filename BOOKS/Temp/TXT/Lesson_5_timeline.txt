@@ -1,0 +1,92 @@
+1. retreat=falling-chart.png=fg/l
+   attack=fortress.png=bg/r
+   Overall_par_effect=basic
+
+2. year=city-background.jpg=bg/c
+   is=tech_overlay_foreground.png=fg/c
+   Overall_par_effect=basic
+
+3. global=tech_cityscape.jpg=bg/c
+   financial=stock-chart-midground.png=mg/c
+   collapsing=falling-chart.png=fg/c
+   Overall_par_effect=dolly_zoom
+
+4. gone=empty_city_street_background.jpg=bg/c
+   gone=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=mask_reveal
+
+5. economy=city-background.jpg=bg/c
+   free=dark_clouds.png=mg/c
+   fall=rain_overlay.png=fg/c
+   Overall_par_effect=vertical
+
+6. Businesses=tech_city_background.jpg=bg/c
+   laying=broken_gears.png=mg/c
+   off=gears-foreground.png=fg/c
+   Overall_par_effect=sliding_split
+
+7. canceling=blueprint_bg.jpg=bg/c
+   projects=cracked_glass_overlay.png=fg/c
+   Overall_par_effect=blur
+
+8. hoarding=fortress.png=bg/c
+   cash=data_overlay_foreground.png=fg/c
+   Overall_par_effect=focus_pull
+
+9. Survival=biohazard_symbol_overlay.png=fg/c
+   mode=dark_clouds.png=bg/c
+   Overall_par_effect=mask_reveal
+
+10. Amazon=amazon_box_foreground.png=fg/c
+    push=winding-path.png=mg/c
+    forward=blueprint_bg.jpg=bg/c
+    Overall_par_effect=diagonal
+
+11. Kindle=amazon_box_foreground.png=fg/c
+    electronic=data_stream.png=mg/c
+    book=data_overlay_foreground.png=fg/l
+    Overall_par_effect=scale
+
+12. recession=falling-chart.png=fg/l
+    change=gears-midground.png=mg/c
+    books=data_stream.png=bg/r
+    Overall_par_effect=orbit
+
+13. building=blueprint_bg.jpg=bg/c
+    hardware=server-room.png=mg/c
+    hardware=server-racks-midground.png=fg/c
+    Overall_par_effect=vertical
+
+14. fighting=cracked_glass_overlay.png=fg/c
+    publishers=blueprint_bg.jpg=bg/c
+    fighting=biohazard_symbol_overlay.png=mg/c
+    Overall_par_effect=mask_reveal
+
+15. investing=glowing_particles.png=fg/c
+    companies=tech_city_background.jpg=bg/c
+    fighting=biohazard_symbol_overlay.png=mg/c
+    Overall_par_effect=sliding_split
+
+16. Recessions=dark_clouds.png=fg/c
+    clearing=bright_sky.jpg=bg/c
+    event=winding-path.png=mg/c
+    Overall_par_effect=focus_pull
+
+17. wiped=cracked_glass_overlay.png=fg/c
+    out=empty_city_street_background.jpg=bg/c
+    Overall_par_effect=mask_reveal
+
+18. strong=fortress.png=bg/c
+    stronger=phoenix_from_ashes.png=fg/c
+    Overall_par_effect=scale
+
+19. Amazon=aws-logo.png=mg/c
+    crisis=falling-chart.png=fg/l
+    ecosystem=data_center_background.jpg=bg/c
+    books=data_stream.png=fg/r
+    Overall_par_effect=dolly_zoom
+
+20. feet=empty_city_street_background.jpg=bg/c
+    looking=winding-path.png=mg/c
+    horizon=sunrise-field.jpg=fg/c
+    Overall_par_effect=diagonal
