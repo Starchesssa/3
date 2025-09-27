@@ -1,0 +1,53 @@
+
+name: 📝 Convert TXT to JSON
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: write  # Allow committing changes
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: ⬇️ Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      # Step 2: Set up Python
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # Step 3: Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      # Step 4: Run TXT → JSON converter
+      - name: 📝 Run comp8a.py
+        run: python BOOK_CODE/COMPANY_BIO/comp8a.py
+
+      # Step 5: Commit and push generated JSON files
+      - name: ✅ Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Use token-authenticated remote
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/PROMPTS/Json
+          
+          if git diff --cached --quiet; then
+            echo "🟡 No changes to commit."
+          else
+            git commit -m "📝 Convert TXT to JSON"
+            git push
+            echo "✅ JSON files committed and pushed."
+          fi
