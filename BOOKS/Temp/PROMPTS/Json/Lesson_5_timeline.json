@@ -1,0 +1,114 @@
+[
+    {
+        "name": "falling-chart.png",
+        "description": "A red downward trending line graph in a white background"
+    },
+    {
+        "name": "fortress.png",
+        "description": "A grey stone fortress with tall towers in a white background"
+    },
+    {
+        "name": "city-background.jpg",
+        "description": "Image of a modern city skyline at dusk"
+    },
+    {
+        "name": "tech_overlay_foreground.png",
+        "description": "A blue futuristic holographic data interface in a white background"
+    },
+    {
+        "name": "tech_cityscape.jpg",
+        "description": "Image of a futuristic city with glowing blue lights at night"
+    },
+    {
+        "name": "stock-chart-midground.png",
+        "description": "A green and red financial stock chart in a white background"
+    },
+    {
+        "name": "empty_city_street_background.jpg",
+        "description": "Image of an empty, desolate city street during the day"
+    },
+    {
+        "name": "cracked_glass_overlay.png",
+        "description": "A pattern of black cracks like shattered glass in a white background"
+    },
+    {
+        "name": "dark_clouds.png",
+        "description": "A group of dark grey storm clouds in a white background"
+    },
+    {
+        "name": "rain_overlay.png",
+        "description": "Streaks of blue falling rain in a white background"
+    },
+    {
+        "name": "tech_city_background.jpg",
+        "description": "Image of a bright, technological city with flying vehicles"
+    },
+    {
+        "name": "broken_gears.png",
+        "description": "A collection of rusty brown broken gears in a white background"
+    },
+    {
+        "name": "gears-foreground.png",
+        "description": "Large metallic silver gears interlocking in a white background"
+    },
+    {
+        "name": "blueprint_bg.jpg",
+        "description": "Image of a blue engineering blueprint with white lines"
+    },
+    {
+        "name": "data_overlay_foreground.png",
+        "description": "A grid of glowing blue digital data in a white background"
+    },
+    {
+        "name": "biohazard_symbol_overlay.png",
+        "description": "A bright yellow and black biohazard symbol in a white background"
+    },
+    {
+        "name": "amazon_box_foreground.png",
+        "description": "A brown cardboard Amazon shipping box in a white background"
+    },
+    {
+        "name": "winding-path.png",
+        "description": "A grey cobblestone path winding into the distance in a white background"
+    },
+    {
+        "name": "data_stream.png",
+        "description": "A stream of glowing green binary code in a white background"
+    },
+    {
+        "name": "gears-midground.png",
+        "description": "A set of interlocking brass colored gears in a white background"
+    },
+    {
+        "name": "server-room.png",
+        "description": "A large grey computer server with blinking green lights in a white background"
+    },
+    {
+        "name": "server-racks-midground.png",
+        "description": "A row of black server racks with blue lights in a white background"
+    },
+    {
+        "name": "glowing_particles.png",
+        "description": "A swirl of bright golden glowing particles in a white background"
+    },
+    {
+        "name": "bright_sky.jpg",
+        "description": "Image of a clear bright blue sky with a few white clouds"
+    },
+    {
+        "name": "phoenix_from_ashes.png",
+        "description": "A fiery red and orange phoenix rising from ashes in a white background"
+    },
+    {
+        "name": "aws-logo.png",
+        "description": "The orange and white Amazon Web Services logo in a white background"
+    },
+    {
+        "name": "data_center_background.jpg",
+        "description": "Image of a long aisle in a data center with server racks"
+    },
+    {
+        "name": "sunrise-field.jpg",
+        "description": "Image of a golden sunrise over a green field"
+    }
+]
