@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "remotion preview",
+    "build": "remotion render MainVideo out/video.mp4",
     "render": "node render-all.js"
   },
   "dependencies": {
