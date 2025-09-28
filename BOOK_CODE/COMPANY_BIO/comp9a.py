@@ -2,48 +2,60 @@
 import os
 import cv2
 import numpy as np
+import shutil
 
 # Directories
-IMAGES_DIR = "assets/images"
+INPUT_DIR = "src/IMG"
+OUTPUT_DIR = "assets/images"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+def remove_white_bg(input_path, output_path, threshold=240):
+    """Remove white background from a PNG image using OpenCV."""
+    # Load image with alpha channel if present
+    img = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
 
-def remove_white_bg(image_path, save_path, tolerance=30):
-    """Remove near-white background using OpenCV and save as PNG with transparency."""
-    img = cv2.imread(image_path)
     if img is None:
-        print(f"⚠️ Could not open {image_path}")
-        return
+        print(f"⚠️ Could not read {input_path}")
+        return False
 
-    # Convert to RGB
-    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # If image has no alpha, add one
+    if img.shape[2] == 3:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
 
-    # Define white color range
-    lower = np.array([255 - tolerance, 255 - tolerance, 255 - tolerance])
-    upper = np.array([255, 255, 255])
+    # Create mask where pixels are "almost white"
+    lower = np.array([threshold, threshold, threshold, 0], dtype=np.uint8)
+    upper = np.array([255, 255, 255, 255], dtype=np.uint8)
+    mask = cv2.inRange(img, lower, upper)
 
-    # Create mask for white regions
-    mask = cv2.inRange(img_rgb, lower, upper)
+    # Invert mask to keep non-white areas
+    mask_inv = cv2.bitwise_not(mask)
 
-    # Invert mask to get alpha
-    alpha = cv2.bitwise_not(mask)
+    # Apply mask to set transparent background
+    img[:, :, 3] = mask_inv
 
-    # Merge channels with alpha
-    b, g, r = cv2.split(img)
-    rgba = [b, g, r, alpha]
-    dst = cv2.merge(rgba)
+    # Save result
+    cv2.imwrite(output_path, img)
+    return True
 
-    cv2.imwrite(save_path, dst)
+def process_images():
+    for file in os.listdir(INPUT_DIR):
+        input_path = os.path.join(INPUT_DIR, file)
 
+        # Skip non-image files
+        if not (file.lower().endswith(".png") or file.lower().endswith(".jpg")):
+            continue
 
-def process_png_images():
-    """Process all PNGs in the directory to remove white backgrounds."""
-    for file in os.listdir(IMAGES_DIR):
+        output_path = os.path.join(OUTPUT_DIR, file)
+
         if file.lower().endswith(".png"):
-            raw_path = os.path.join(IMAGES_DIR, file)
-            final_path = os.path.join(IMAGES_DIR, file)  # overwrite
-            remove_white_bg(raw_path, final_path)
-            print(f"✨ Made transparent: {final_path}")
-
+            if remove_white_bg(input_path, output_path):
+                print(f"✅ Background removed: {file}")
+            else:
+                print(f"❌ Failed to process: {file}")
+        else:
+            # Copy JPG as is
+            shutil.copy2(input_path, output_path)
+            print(f"📄 Copied JPG as is: {file}")
 
 if __name__ == "__main__":
-    process_png_images()
+    process_images()
