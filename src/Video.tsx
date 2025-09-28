@@ -51,11 +51,7 @@ export const Video: React.FC<VideoProps> = ({ sentences, audioPath }) => {
   return (
     <>
       {audioPath && (
-        <Audio
-          src={audioPath}
-          startFrom={0}
-          endAt={sentences[sentences.length - 1]?.end || 10}
-        />
+        <Audio src={audioPath} startFrom={0} endAt={sentences[sentences.length - 1]?.end || 10} />
       )}
 
       {sentences.map((s, idx) => {
