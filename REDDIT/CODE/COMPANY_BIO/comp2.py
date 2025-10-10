@@ -2,7 +2,7 @@
 import os
 import json
 import time
-from google import genai
+from google import genai  # pip install google-genai
 
 # === Paths ===
 UNUSED_PATH = "REDDIT/THEMES/Company bio/BOOKS/USED/Unused.json"
@@ -21,19 +21,27 @@ API_KEYS = [key for key in API_KEYS if key]
 if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found in environment variables.")
 
-# === Helper ===
+# === Helper functions ===
+
 def load_unused_book():
-    """Load the first unused book from JSON file"""
+    """Load the first unused book from JSON file (handles dict or list)"""
     if not os.path.exists(UNUSED_PATH):
         raise FileNotFoundError(f"❌ File not found: {UNUSED_PATH}")
     with open(UNUSED_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
-    if not data:
-        raise ValueError("❌ Unused.json is empty.")
-    return data[0]  # only one book
+
+    # If single book stored as dict
+    if isinstance(data, dict):
+        return data
+
+    # If multiple books stored in list
+    if isinstance(data, list) and len(data) > 0:
+        return data[0]
+
+    raise ValueError("❌ Unused.json is empty or in an unknown format.")
 
 def load_halal_data():
-    """Load or create halal record file"""
+    """Load existing halal records or create new list"""
     if os.path.exists(HALAL_PATH):
         with open(HALAL_PATH, "r", encoding="utf-8") as f:
             try:
@@ -43,14 +51,14 @@ def load_halal_data():
     return []
 
 def save_halal_data(data):
-    """Save halal/haram result"""
+    """Save halal/haram results to Halal.json"""
     os.makedirs(os.path.dirname(HALAL_PATH), exist_ok=True)
     with open(HALAL_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"✅ Saved results to {HALAL_PATH}")
 
 def ask_halal_status(book):
-    """Ask Gemini if the book is halal or haram"""
+    """Ask Gemini AI if book is halal or haram"""
     title = book.get("title", "Unknown Title")
     author = book.get("author", "Unknown Author")
     company = book.get("company", "Unknown Company")
@@ -80,7 +88,7 @@ def ask_halal_status(book):
 # === Main ===
 def main():
     book = load_unused_book()
-    print(f"📖 Checking: {book['title']} by {book['author']}")
+    print(f"📖 Checking: {book.get('title', 'Unknown')} by {book.get('author', 'Unknown')}")
 
     halal_data = load_halal_data()
     status = ask_halal_status(book)
@@ -95,7 +103,7 @@ def main():
     halal_data.append(result)
     save_halal_data(halal_data)
 
-    print(f"🕌 Result for '{book['title']}': {status.upper()}")
+    print(f"🕌 Result for '{book.get('title')}': {status.upper()}")
 
 if __name__ == "__main__":
     main()
