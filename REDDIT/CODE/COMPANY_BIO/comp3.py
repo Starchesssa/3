@@ -1,4 +1,3 @@
-
 import os
 import json
 import urllib.parse
@@ -16,23 +15,28 @@ ASSOCIATE_ID = "bookslibrar08-20"
 # === Helper Functions ===
 
 def load_json(path):
+    """Load JSON data safely, return empty list if invalid or empty."""
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
-            print(f"❌ JSON decode error in {path}: {e}")
+            print(f"❌ JSON decode error in {path}: {e}, treating as empty list.")
             return []
     return []
 
 def save_json(path, data):
+    """Save JSON data to file."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def google_search(query, site):
-    """Search Google and return first URL from results."""
-    search_url = f"https://www.google.com/search?q={urllib.parse.quote(query + ' site:' + site)}"
+def google_search(query, platform, top_n=7):
+    """
+    Search Google for a query, return the first valid link for the platform.
+    platform: 'amazon' or 'audible'
+    """
+    search_url = f"https://www.google.com/search?q={urllib.parse.quote(query)}"
     print(f"🔎 Google search URL: {search_url}")
 
     headers = {
@@ -47,7 +51,7 @@ def google_search(query, site):
         print(f"⚠️ Google search request failed: {e}")
         return None
 
-    # Parse all links
+    # Parse candidate links
     links = []
     parts = html.split('<a href="/url?q=')
     for part in parts[1:]:
@@ -55,25 +59,28 @@ def google_search(query, site):
         if url.startswith("http"):
             links.append(url)
 
-    print(f"🔗 Candidate links found ({len(links)}): {links[:5]}{'...' if len(links)>5 else ''}")
-    return links[0] if links else None
+    print(f"🔗 Candidate links found ({len(links)}): {links[:top_n]}{'...' if len(links) > top_n else ''}")
 
-def is_valid_amazon(url):
-    return "amazon.com" in url and ("/dp/" in url or "/gp/product/" in url)
+    # Return first valid link for platform from top N
+    for url in links[:top_n]:
+        if platform == "amazon" and "amazon.com" in url and ("/dp/" in url or "/gp/product/" in url):
+            print(f"✅ Selected Amazon link: {url}")
+            return url
+        if platform == "audible" and "audible.com" in url and ("/pd/" in url or "/product/" in url):
+            print(f"✅ Selected Audible link: {url}")
+            return url
 
-def is_valid_audible(url):
-    return "audible.com" in url and ("/pd/" in url or "/product/" in url)
+    return None
 
 def generate_affiliate_link(url):
-    if "amazon.com" in url:
-        separator = "&" if "?" in url else "?"
-        return f"{url}{separator}tag={ASSOCIATE_ID}"
-    elif "audible.com" in url:
+    """Append affiliate tag to URL."""
+    if "amazon.com" in url or "audible.com" in url:
         separator = "&" if "?" in url else "?"
         return f"{url}{separator}tag={ASSOCIATE_ID}"
     return url
 
 def fallback_link(book, platform):
+    """Return generic search link if Google search fails."""
     title = book.get("title", "")
     author = book.get("author", "")
     if platform == "amazon":
@@ -94,33 +101,23 @@ def main():
     book = books[0]
     title = book.get("title", "")
     author = book.get("author", "")
-    print(f"📖 Processing book: {title} by {author}\n")
+    print(f"\n📖 Processing book: {title} by {author}\n")
 
     # === Amazon ===
-    try:
-        first_amazon_url = google_search(f'"{title}" by "{author}"', "amazon.com")
-        if first_amazon_url and is_valid_amazon(first_amazon_url):
-            amazon_link = generate_affiliate_link(first_amazon_url)
-            print(f"✅ Amazon link found: {amazon_link}\n")
-        else:
-            amazon_link = fallback_link(book, "amazon")
-            print(f"⚠️ Using fallback Amazon link: {amazon_link}\n")
-    except Exception as e:
-        print(f"❌ Error during Amazon search: {e}")
+    amazon_url = google_search(f'"{title}" by "{author}"', "amazon")
+    if amazon_url:
+        amazon_link = generate_affiliate_link(amazon_url)
+    else:
         amazon_link = fallback_link(book, "amazon")
+        print(f"⚠️ Using fallback Amazon link: {amazon_link}")
 
     # === Audible ===
-    try:
-        first_audible_url = google_search(f'"{title}" by "{author}"', "audible.com")
-        if first_audible_url and is_valid_audible(first_audible_url):
-            audible_link = generate_affiliate_link(first_audible_url)
-            print(f"✅ Audible link found: {audible_link}\n")
-        else:
-            audible_link = fallback_link(book, "audible")
-            print(f"⚠️ Using fallback Audible link: {audible_link}\n")
-    except Exception as e:
-        print(f"❌ Error during Audible search: {e}")
+    audible_url = google_search(f'"{title}" by "{author}"', "audible")
+    if audible_url:
+        audible_link = generate_affiliate_link(audible_url)
+    else:
         audible_link = fallback_link(book, "audible")
+        print(f"⚠️ Using fallback Audible link: {audible_link}")
 
     # === Save links ===
     try:
