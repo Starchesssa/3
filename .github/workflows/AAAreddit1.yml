@@ -1,0 +1,32 @@
+
+name: Company Bio Book Memory
+
+on:
+  workflow_dispatch:  # allows manual run
+  schedule:
+    - cron: "0 12 * * *"  # runs daily at 12:00 UTC (optional)
+
+jobs:
+  run-company-bio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run comp1.py
+        run: |
+          python "REDDIT/CODE/COMPANY_BIO/comp1.py"
+
+      - name: Commit & push results
+        run: |
+          git config --global user.email "starches171@gmail.com"
+          git config --global user.name "github-actions"
+          git add .
+          git commit -m "Updated Used.json and Unused.json [auto]" || echo "No changes to commit"
+          git push
