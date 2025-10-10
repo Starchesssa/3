@@ -2,56 +2,62 @@
 import os
 import json
 import time
-from google import genai  # pip install google-genai
+from google import genai
 
-# === PATH CONFIG ===
-BOOKS_DIR = "REDDIT/THEMES/Company bio/BOOKS"
-BOOKS_FILES = [
-    os.path.join(BOOKS_DIR, "Books1.json"),
-    os.path.join(BOOKS_DIR, "Books2.json"),
-    os.path.join(BOOKS_DIR, "Books3.json"),
-]
-OUTPUT_FILE = os.path.join(BOOKS_DIR, "HALAL", "Halal.json")
+# === Paths ===
+UNUSED_PATH = "REDDIT/THEMES/Company bio/BOOKS/USED/Unused.json"
+HALAL_PATH = "REDDIT/THEMES/Company bio/BOOKS/HALAL/Halal.json"
 MODEL = "gemini-2.5-pro"
 
-# === LOAD API KEYS ===
-API_KEYS = [os.environ.get(f"GEMINI_API{i or ''}") for i in ['', '2', '3', '4', '5']]
-API_KEYS = [k for k in API_KEYS if k]
-
+# === Load Gemini API keys from environment variables ===
+API_KEYS = [
+    os.environ.get("GEMINI_API"),
+    os.environ.get("GEMINI_API2"),
+    os.environ.get("GEMINI_API3"),
+    os.environ.get("GEMINI_API4"),
+    os.environ.get("GEMINI_API5"),
+]
+API_KEYS = [key for key in API_KEYS if key]
 if not API_KEYS:
-    raise ValueError("❌ No Gemini API keys found in environment variables.")
+    raise ValueError("❌ No valid GEMINI_API keys found in environment variables.")
 
-# === HELPERS ===
+# === Helper ===
+def load_unused_book():
+    """Load the first unused book from JSON file"""
+    if not os.path.exists(UNUSED_PATH):
+        raise FileNotFoundError(f"❌ File not found: {UNUSED_PATH}")
+    with open(UNUSED_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not data:
+        raise ValueError("❌ Unused.json is empty.")
+    return data[0]  # only one book
 
-def load_books():
-    """Load all books from the listed JSON files"""
-    all_books = []
-    for file in BOOKS_FILES:
-        if os.path.exists(file):
+def load_halal_data():
+    """Load or create halal record file"""
+    if os.path.exists(HALAL_PATH):
+        with open(HALAL_PATH, "r", encoding="utf-8") as f:
             try:
-                with open(file, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    if isinstance(data, list):
-                        all_books.extend(data)
-            except Exception as e:
-                print(f"⚠️ Failed to load {file}: {e}")
-    return all_books
+                return json.load(f)
+            except json.JSONDecodeError:
+                return []
+    return []
 
-def save_results(results):
-    """Save halal results to output file"""
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    print(f"✅ Saved {len(results)} results to {OUTPUT_FILE}")
+def save_halal_data(data):
+    """Save halal/haram result"""
+    os.makedirs(os.path.dirname(HALAL_PATH), exist_ok=True)
+    with open(HALAL_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    print(f"✅ Saved results to {HALAL_PATH}")
 
-def ask_ai_if_halal(book):
-    """Ask AI if book is halal or haram"""
-    title = book.get("title", "")
-    author = book.get("author", "")
-    company = book.get("company", "")
-    question = (
-        f'Is the book "{title}" by {author}, which is about {company}, Halal or Haram? '
-        "Only answer with one word: Halal or Haram. No explanations."
+def ask_halal_status(book):
+    """Ask Gemini if the book is halal or haram"""
+    title = book.get("title", "Unknown Title")
+    author = book.get("author", "Unknown Author")
+    company = book.get("company", "Unknown Company")
+
+    prompt = (
+        f'Is the book "{title}" by {author} about {company} considered halal or haram in Islam? '
+        "Answer strictly with one word only: 'halal' or 'haram'."
     )
 
     for i, key in enumerate(API_KEYS):
@@ -59,39 +65,37 @@ def ask_ai_if_halal(book):
             client = genai.Client(api_key=key)
             response = client.models.generate_content(
                 model=MODEL,
-                contents=[{"role": "user", "parts": [{"text": question}]}]
+                contents=[{"role": "user", "parts": [{"text": prompt}]}]
             )
-            text = response.text.strip().lower()
-            if "halal" in text:
-                return "Halal"
-            elif "haram" in text:
-                return "Haram"
+            answer = response.text.strip().lower()
+            if "halal" in answer:
+                return "halal"
+            elif "haram" in answer:
+                return "haram"
         except Exception as e:
-            print(f"⚠️ API#{i+1} failed: {e}")
+            print(f"⚠️ API#{i + 1} failed: {e}")
             time.sleep(1)
-    return "Unknown"
+    return "unknown"
 
-# === MAIN ===
+# === Main ===
 def main():
-    all_books = load_books()
-    print(f"📚 Found {len(all_books)} total books to verify.")
-    results = []
+    book = load_unused_book()
+    print(f"📖 Checking: {book['title']} by {book['author']}")
 
-    for i, book in enumerate(all_books, start=1):
-        title = book.get("title", "Unknown")
-        print(f"\n🔍 Checking {i}/{len(all_books)}: {title}")
-        status = ask_ai_if_halal(book)
-        result = {
-            "title": title,
-            "author": book.get("author", ""),
-            "company": book.get("company", ""),
-            "status": status
-        }
-        results.append(result)
-        print(f"➡️ Result: {status}")
-        save_results(results)
+    halal_data = load_halal_data()
+    status = ask_halal_status(book)
 
-    print("\n✅ All checks complete!")
+    result = {
+        "title": book.get("title"),
+        "author": book.get("author"),
+        "company": book.get("company"),
+        "status": status
+    }
+
+    halal_data.append(result)
+    save_halal_data(halal_data)
+
+    print(f"🕌 Result for '{book['title']}': {status.upper()}")
 
 if __name__ == "__main__":
     main()
