@@ -1,0 +1,43 @@
+
+name: Company Bio Halal Checker
+
+on:
+  schedule:
+    - cron: "0 12 * * *"  # runs every day at 12:00 UTC
+  workflow_dispatch:       # allows manual run
+
+jobs:
+  halal_check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 🧩 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install google-genai
+
+      - name: 🕌 Run Halal Verification
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+        run: python REDDIT/CODE/COMPANY_BIO/comp2.py
+
+      - name: 💾 Commit & push updated Halal.json
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "starches171@gmail.com"
+          git add "REDDIT/THEMES/Company bio/BOOKS/HALAL/Halal.json"
+          git commit -m "🕌 Updated Halal.json [auto]" || echo "No new changes"
+          git push
