@@ -2,9 +2,12 @@
 name: Company Bio Book Memory
 
 on:
-  workflow_dispatch:  # allows manual run
+  workflow_dispatch:
   schedule:
-    - cron: "0 12 * * *"  # runs daily at 12:00 UTC (optional)
+    - cron: "0 21 * * *"  # midnight Tanzania
+
+permissions:
+  contents: write  # ✅ allows push access
 
 jobs:
   run-company-bio:
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # ✅ use default token
 
       - name: Set up Python
         uses: actions/setup-python@v5
