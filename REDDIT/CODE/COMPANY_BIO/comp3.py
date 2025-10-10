@@ -1,3 +1,4 @@
+
 import os
 import json
 import urllib.parse
@@ -104,7 +105,7 @@ def main():
     print(f"\n📖 Processing book: {title} by {author}\n")
 
     # === Amazon ===
-    amazon_url = google_search(f'"{title}" by "{author}"', "amazon")
+    amazon_url = google_search(f'"{title}" by "{author}" on Amazon', "amazon")
     if amazon_url:
         amazon_link = generate_affiliate_link(amazon_url)
     else:
@@ -112,7 +113,7 @@ def main():
         print(f"⚠️ Using fallback Amazon link: {amazon_link}")
 
     # === Audible ===
-    audible_url = google_search(f'"{title}" by "{author}"', "audible")
+    audible_url = google_search(f'"{title}" by "{author}" on Audible', "audible")
     if audible_url:
         audible_link = generate_affiliate_link(audible_url)
     else:
