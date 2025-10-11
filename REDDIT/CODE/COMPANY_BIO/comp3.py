@@ -10,52 +10,65 @@ LINKS_DIR = "REDDIT/THEMES/Company bio/BOOKS/LINKS"
 AMAZON_PATH = os.path.join(LINKS_DIR, "amazon.json")
 AUDIBLE_PATH = os.path.join(LINKS_DIR, "audible.json")
 
-# === Amazon Affiliate ID ===
+# === Affiliate ID ===
 ASSOCIATE_ID = "bookslibrar08-20"
 
-# === Google Custom Search environment variables ===
+# === Google Custom Search credentials ===
 GOOGLE_API = os.environ.get("GOOGLE_API")
 GOOGLE_CX = os.environ.get("GOOGLE_CX")
 
 # === Helper Functions ===
 
+def load_json(path):
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            print(f"❌ JSON decode error in {path}, treating as empty list.")
+            return []
+    return []
+
 def save_json(path, data):
-    """Save JSON data to file (always overwrite)."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def google_search_first_result(query, site):
-    """Search Google Custom Search API and return first URL."""
-    search_url = (
-        f"https://www.googleapis.com/customsearch/v1?"
-        f"q={urllib.parse.quote(query + ' on ' + site)}&cx={GOOGLE_CX}&key={GOOGLE_API}&num=10"
-    )
-    print(f"🔎 Google API request URL: {search_url}")
-
+def google_search(query, num=10):
+    """Search Google Custom Search API and return JSON results"""
+    url = f"https://www.googleapis.com/customsearch/v1?q={urllib.parse.quote(query)}&cx={GOOGLE_CX}&key={GOOGLE_API}&num={num}"
+    print(f"🔎 Google API request URL: {url}")
     try:
-        r = requests.get(search_url, timeout=10)
+        r = requests.get(url, timeout=10)
+        r.raise_for_status()
         data = r.json()
         items = data.get("items", [])
         print(f"📄 Google API returned {len(items)} items.")
-        if items:
-            first_url = items[0].get("link")
-            print(f"🔗 First URL found: {first_url}")
-            return first_url
+        return items
     except Exception as e:
         print(f"⚠️ Google API request failed: {e}")
-    return None
+        return []
+
+def is_valid_amazon(url):
+    return "amazon.com" in url and ("/dp/" in url or "/gp/product/" in url)
+
+def is_valid_audible(url):
+    return "audible.com" in url and ("/pd/" in url or "/product/" in url)
 
 def generate_affiliate_link(url):
-    if url is None:
-        return None
-    if "amazon.com" in url or "audible.com" in url:
-        separator = "&" if "?" in url else "?"
-        return f"{url}{separator}tag={ASSOCIATE_ID}"
-    return url
+    separator = "&" if "?" in url else "?"
+    return f"{url}{separator}tag={ASSOCIATE_ID}"
+
+def find_first_valid_link(items, platform):
+    for item in items:
+        link = item.get("link", "")
+        if platform == "amazon" and is_valid_amazon(link):
+            return link
+        elif platform == "audible" and is_valid_audible(link):
+            return link
+    return None
 
 def fallback_link(book, platform):
-    """Return generic search link if first result fails"""
     title = book.get("title", "")
     author = book.get("author", "")
     if platform == "amazon":
@@ -68,20 +81,9 @@ def fallback_link(book, platform):
 
 # === Main ===
 def main():
-    # Load the single book
-    if not os.path.exists(HALAL_PATH):
-        print("❌ Halal.json not found.")
-        return
-
-    try:
-        with open(HALAL_PATH, "r", encoding="utf-8") as f:
-            books = json.load(f)
-    except Exception as e:
-        print(f"❌ Failed to read Halal.json: {e}")
-        return
-
+    books = load_json(HALAL_PATH)
     if not books:
-        print("❌ Halal.json is empty.")
+        print("❌ No books found in Halal.json")
         return
 
     book = books[0]
@@ -89,26 +91,31 @@ def main():
     author = book.get("author", "")
     print(f"📖 Processing book: {title} by {author}")
 
-    # Amazon link
-    amazon_url = google_search_first_result(f'"{title}" by "{author}"', "Amazon.com")
-    if not amazon_url:
-        amazon_url = fallback_link(book, "amazon")
-        print(f"⚠️ Using fallback Amazon link: {amazon_url}")
-    amazon_link = generate_affiliate_link(amazon_url)
-    print(f"✅ Amazon link generated: {amazon_link}")
+    # === Amazon ===
+    amazon_query = f'"{title}" by "{author}" on Amazon'
+    amazon_items = google_search(amazon_query)
+    amazon_url = find_first_valid_link(amazon_items, "amazon")
+    if amazon_url:
+        amazon_link = generate_affiliate_link(amazon_url)
+        print(f"✅ Amazon link generated: {amazon_link}")
+    else:
+        amazon_link = fallback_link(book, "amazon")
+        print(f"⚠️ Using fallback Amazon link: {amazon_link}")
 
-    # Audible link
-    audible_url = google_search_first_result(f'"{title}" by "{author}"', "Audible.com")
-    if not audible_url:
-        audible_url = fallback_link(book, "audible")
-        print(f"⚠️ Using fallback Audible link: {audible_url}")
-    audible_link = generate_affiliate_link(audible_url)
-    print(f"✅ Audible link generated: {audible_link}")
+    # === Audible ===
+    audible_query = f'"{title}" by "{author}" on Audible'
+    audible_items = google_search(audible_query)
+    audible_url = find_first_valid_link(audible_items, "audible")
+    if audible_url:
+        audible_link = generate_affiliate_link(audible_url)
+        print(f"✅ Audible link generated: {audible_link}")
+    else:
+        audible_link = fallback_link(book, "audible")
+        print(f"⚠️ Using fallback Audible link: {audible_link}")
 
-    # Save JSON files (always overwrite)
+    # === Save links (overwrite JSON each run) ===
     save_json(AMAZON_PATH, [{"title": title, "link": amazon_link}])
     save_json(AUDIBLE_PATH, [{"title": title, "link": audible_link}])
-
     print("💾 Links saved successfully!")
 
 if __name__ == "__main__":
