@@ -1,9 +1,9 @@
-name: Generate Amazon & Audible Affiliate Links
+name: Generate Amazon & Audible Links
 
 on:
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:  # Manual trigger
   schedule:
-    - cron: "0 0 * * *"  # Optional: runs daily at 00:00 UTC
+    - cron: "0 0 * * *"  # Optional: daily at 00:00 UTC
 
 jobs:
   generate-links:
@@ -30,3 +30,11 @@ jobs:
 
       - name: Run comp3.py
         run: python REDDIT/CODE/COMPANY_BIO/comp3.py
+
+      - name: Commit updated links
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add REDDIT/THEMES/Company\ bio/BOOKS/LINKS/
+          git diff --cached --quiet || git commit -m "Update Amazon & Audible links"
+          git push
