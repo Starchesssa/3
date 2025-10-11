@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "0 0 * * *"   # Optional: runs daily at 00:00 UTC
 
+permissions:
+  contents: write          # Give write permission to push changes
+
 jobs:
   generate-links:
     runs-on: ubuntu-latest
