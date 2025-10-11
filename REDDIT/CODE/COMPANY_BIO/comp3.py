@@ -1,65 +1,69 @@
 
-import requests
-import json
-import re
 import os
+import json
+import requests
 
-# --- Google API credentials ---
+# === Google Custom Search credentials ===
 API_KEY = "AIzaSyB4NaA2lMW6uZ6YjzbDCSo-he6zh_XBVkM"
 CX_ID = "a73cae6bad04a492d"
 
-# --- Paths ---
-unused_path = "REDDIT/THEMES/Company bio/BOOKS/USED/Unused.json"
-amazon_path = "REDDIT/THEMES/Company bio/BOOKS/LINKS/amazon.txt"
-audible_path = "REDDIT/THEMES/Company bio/BOOKS/LINKS/audible.txt"
+# === Paths ===
+BOOK_PATH = "REDDIT/THEMES/Company bio/BOOKS/USED/Unused.json"
+AMAZON_TXT = "REDDIT/THEMES/Company bio/BOOKS/LINKS/amazon.txt"
+AUDIBLE_TXT = "REDDIT/THEMES/Company bio/BOOKS/LINKS/audible.txt"
 
-# --- Ensure link directories exist ---
-os.makedirs(os.path.dirname(amazon_path), exist_ok=True)
-os.makedirs(os.path.dirname(audible_path), exist_ok=True)
+# === Helper functions ===
+def load_book(path):
+    if not os.path.exists(path):
+        print(f"❌ File not found: {path}")
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
-# --- Load book info ---
-try:
-    with open(unused_path, "r", encoding="utf-8") as f:
-        book = json.load(f)
-        title = book.get("title", "")
-except Exception as e:
-    print(f"❌ Failed to read JSON: {e}")
-    exit()
+def search_google(query):
+    url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={API_KEY}&cx={CX_ID}"
+    print(f"🔎 Searching: {query}")
+    r = requests.get(url)
+    data = r.json()
+    if "items" not in data:
+        print("⚠️ No items found or invalid API response")
+        return []
+    return data["items"]
 
-# --- Search Query ---
-QUERY = title
-print(f"🔍 Searching for: {QUERY}")
-
-# --- Make request ---
-url = f"https://www.googleapis.com/customsearch/v1?q={QUERY}&key={API_KEY}&cx={CX_ID}"
-response = requests.get(url)
-data = response.json()
-
-amazon_link = None
-audible_link = None
-
-# --- Extract valid links ---
-if "items" in data:
-    for item in data["items"]:
+def find_first_valid_link(items, domain):
+    for item in items:
         link = item.get("link", "")
-        if re.search(r"amazon\.com", link, re.IGNORECASE) and not amazon_link:
-            amazon_link = link
-        elif re.search(r"audible\.com", link, re.IGNORECASE) and not audible_link:
-            audible_link = link
-        if amazon_link and audible_link:
-            break
+        if domain in link:
+            return link
+    return None
 
-# --- Save links ---
-if amazon_link:
-    with open(amazon_path, "a", encoding="utf-8") as f:
-        f.write(f"{title}: {amazon_link}\n")
-    print(f"✅ Amazon link saved: {amazon_link}")
-else:
-    print("❌ No Amazon link found.")
+def save_link(path, link):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(link if link else "No valid link found.")
 
-if audible_link:
-    with open(audible_path, "a", encoding="utf-8") as f:
-        f.write(f"{title}: {audible_link}\n")
-    print(f"✅ Audible link saved: {audible_link}")
-else:
-    print("❌ No Audible link found.")
+# === Main ===
+def main():
+    book = load_book(BOOK_PATH)
+    if not book:
+        return
+
+    title = book.get("title", "")
+    author = book.get("author", "")
+
+    # === Amazon ===
+    amazon_query = f'"{title}" by {author} on Amazon'
+    amazon_items = search_google(amazon_query)
+    amazon_link = find_first_valid_link(amazon_items, "amazon.com")
+    save_link(AMAZON_TXT, amazon_link or "No Amazon link found.")
+    print(f"✅ Amazon link: {amazon_link or 'No valid link found.'}")
+
+    # === Audible ===
+    audible_query = f'"{title}" by {author} on Audible'
+    audible_items = search_google(audible_query)
+    audible_link = find_first_valid_link(audible_items, "audible.com")
+    save_link(AUDIBLE_TXT, audible_link or "No Audible link found.")
+    print(f"✅ Audible link: {audible_link or 'No valid link found.'}")
+
+if __name__ == "__main__":
+    main()
