@@ -1,9 +1,10 @@
+
 name: Generate Amazon & Audible Links
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:       # Allows manual triggering
   schedule:
-    - cron: "0 0 * * *"  # Optional: daily at 00:00 UTC
+    - cron: "0 0 * * *"   # Optional: runs daily at 00:00 UTC
 
 jobs:
   generate-links:
@@ -12,11 +13,12 @@ jobs:
     env:
       GOOGLE_API: ${{ secrets.GOOGLE_API }}
       GOOGLE_CX: ${{ secrets.GOOGLE_CX }}
-      ASSOCIATE_ID: bookslibrar08-20
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true   # Allows git push with GITHUB_TOKEN
 
       - name: Set up Python
         uses: actions/setup-python@v4
