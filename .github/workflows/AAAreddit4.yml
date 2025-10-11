@@ -1,20 +1,24 @@
 
-name: Generate Amazon & Audible Affiliate Links (Comp4)
+name: Generate & Commit Affiliate Links
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:       # Manual trigger
   schedule:
-    - cron: "0 1 * * *"  # Optional: daily at 01:00 UTC
+    - cron: "0 0 * * *"   # Optional: runs daily at 00:00 UTC
 
 jobs:
-  generate-affiliate-links:
+  generate-aff-links:
     runs-on: ubuntu-latest
 
+    env:
+      ASSOCIATE_ID: bookslibrar08-20
+
     steps:
-      - name: Checkout repository
+      - name: Checkout repository with write permissions
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # Keep permissions for pushing if needed
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,11 +33,11 @@ jobs:
       - name: Run comp4.py to generate affiliate links
         run: python REDDIT/CODE/COMPANY_BIO/comp4.py
 
-      # Optional: Commit changes to the AFF folder
-      - name: Commit & push affiliate links
+      - name: Commit and push affiliate links
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add REDDIT/THEMES/Company\ bio/BOOKS/AFF/*.txt
-          git commit -m "Update affiliate links" || echo "No changes to commit"
-          git push
+          git add REDDIT/THEMES/Company\ bio/BOOKS/AFF/amazon.txt
+          git add REDDIT/THEMES/Company\ bio/BOOKS/AFF/audible.txt
+          git commit -m "Update affiliate links"
+          git push origin main
