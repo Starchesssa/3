@@ -6,11 +6,9 @@ from google.genai import types
 
 # === Paths ===
 BOOK_PATH = "REDDIT/THEMES/Company bio/BOOKS/USED/Unused.json"
-AMAZON_PATH = "REDDIT/THEMES/Company bio/BOOKS/AFF/amazon.txt"
-AUDIBLE_PATH = "REDDIT/THEMES/Company bio/BOOKS/AFF/audible.txt"
-OUTPUT_PATH = "REDDIT/THEMES/Company bio/BOOKS/POST/post.txt"
+OUTPUT_DIR = "REDDIT/THEMES/Company bio/BOOKS/POSTS"
 
-# === Load Gemini API key ===
+# === Load Gemini API keys ===
 API_KEYS = [
     os.environ.get("GEMINI_API"),
     os.environ.get("GEMINI_API2"),
@@ -19,87 +17,91 @@ API_KEYS = [
     os.environ.get("GEMINI_API5"),
 ]
 API_KEYS = [k for k in API_KEYS if k]
+
 if not API_KEYS:
     raise ValueError("❌ No Gemini API keys found.")
 
-# === Helper functions ===
-def load_json(path):
+# === Helper to load book data ===
+def load_book_data(path):
     if not os.path.exists(path):
-        print(f"❌ Missing file: {path}")
-        return None
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        print(f"⚠️ Invalid JSON format in {path}")
-        return None
-
-def load_link(path):
-    if not os.path.exists(path):
-        return "(LINK NOT FOUND)"
+        raise FileNotFoundError(f"❌ Book JSON not found: {path}")
     with open(path, "r", encoding="utf-8") as f:
-        return f.read().strip()
+        return json.load(f)
 
-def save_post(text):
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(text)
-    print(f"💾 Post saved to {OUTPUT_PATH}")
-
-# === Main ===
-def main():
-    book = load_json(BOOK_PATH)
-    if not book:
-        print("❌ Book info not found.")
-        return
-
-    title = book.get("title", "")
-    author = book.get("author", "")
-    company = book.get("company", "")
-    amazon_link = load_link(AMAZON_PATH)
-    audible_link = load_link(AUDIBLE_PATH)
-
-    print(f"📚 Generating post for: {title} by {author}")
-
+# === Main generator ===
+def generate_reddit_post(api_key, title, author, company):
     prompt = f"""
-Give me a cool reddit post on {title} by {author}, use you and your instead of i and me.
+Give me a cool reddit post on {title} by {author}, use 'you' and 'your' instead of 'I' and 'me'.
 
 Make the post so cool people wanna purchase the book.
 
-Make a cool headline all in capital letters — the headline must be about the book and mention the book or person or company of the biography (choose whichever is more famous: the book, the author, or the company).
+Make a cool headline all in CAPITAL LETTERS — the headline must be generic, not a single concept in the book. 
+Concepts can be explained in the body.
 
-Include the link of the book in amazon and audible.
+The headline should be about the book and mention the book or person or company of the biography 
+(look who is more famous, the book, or the author or the company, and put some or all).
 
-Audible is normally free trial, make the audible part sound natural for audible.com.
+Include the link of the book in Amazon and Audible.
 
-Avoid any complex words used in the book that can confuse people. Avoid robotic or AI language, sound like a mentor or entrepreneur who is obsessed with success, and use emojis.
+Audible is normally free trial, make the Audible as it is supposed to be in audible.com
 
-Convince the reader to take the book for free on Audible if they’re new, or check it on Amazon. Audible is for audiobooks (free for new users), Amazon is for Kindle, paperback, and hardcover.
+Headline must be based on the book.
 
-In amazon link write:
+Avoid any complex words used in the book that can confuse people.
+
+Avoid robotic or AI language, sound like a mentor and entrepreneur obsessed with success, and use emojis plz.
+
+Convince the reader to take the book for free in Audible if they’re new users, 
+or check the Amazon page (Audible is for audiobook, free for new users, 
+Amazon page is for Kindle, paperback, physical, ebook etc).
+
+In Amazon link write:
 (AMAZON LINK)
 
-In audible link write:
+In Audible link write:
 (AUDIBLE LINK)
 
-Prioritize Audible with a short CTA.
+Prioritize Audible cause some can get it for free. Just a simple CTA, no extra wording.
 
-Output only the final  post only. Nothing else.
+Output the post only, nothing else.
 """
 
-    api_key = API_KEYS[0]
-    client = genai.Client(api_key=api_key)
-
     try:
+        client = genai.Client(api_key=api_key)
         response = client.models.generate_content(
-            model="gemini-2.0-flash-exp",
-            contents=[types.Content(role="user", parts=[types.Part.from_text(prompt)])],
+            model="gemini-2.0-flash",
+            contents=[types.Part(text=prompt)]
         )
-        post_text = response.candidates[0].content.parts[0].text
-        save_post(post_text)
-        print("✅ Reddit post generated successfully.")
+        return response.text.strip()
     except Exception as e:
         print(f"❌ Error generating post: {e}")
+        return None
+
+# === Save the post ===
+def save_post(title, post_text):
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    safe_name = title.replace(" ", "_").replace("&", "and")
+    file_path = os.path.join(OUTPUT_DIR, f"{safe_name}.txt")
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(post_text)
+    print(f"💾 Saved Reddit post to: {file_path}")
+
+# === Main ===
+def main():
+    book = load_book_data(BOOK_PATH)
+    title = book.get("title", "")
+    author = book.get("author", "")
+    company = book.get("company", "")
+
+    print(f"📚 Generating post for: {title} by {author}")
+
+    api_key = API_KEYS[0]
+    post_text = generate_reddit_post(api_key, title, author, company)
+
+    if post_text:
+        save_post(title, post_text)
+    else:
+        print("⚠️ No post was generated.")
 
 if __name__ == "__main__":
     main()
