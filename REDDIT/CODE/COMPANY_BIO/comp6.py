@@ -41,6 +41,8 @@ Concepts can be explained in the body.
 The headline should be about the book and mention the book or person or company of the biography 
 (look who is more famous, the book, or the author or the company, and put some or all in the headline).
 
+the headline should be clearly about the book and make a tension in the headline  about the book that people wanna click and view the book, make what is special about the book. 
+
 Include the link of the book in Amazon and Audible.
 
 Audible is normally free trial, make the Audible as it is supposed to be in audible.com
@@ -49,7 +51,7 @@ Headline must be based on the book.
 
 Avoid any complex words used in the book that can confuse people.
 
-Avoid robotic or AI language, sound like a mentor who obsessed with your success, and use emojis plz.
+Avoid robotic or AI language, sound like a normal human, and use emoji throught the writing plz.
 
 Write like you are talking to that one person directly.
 
