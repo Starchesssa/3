@@ -84,11 +84,7 @@ In audible link write:
 
 Prioritize Audible with a short CTA.
 
-Here are the actual links:
-Amazon: {amazon_link}
-Audible: {audible_link}
-
-Output only the final Reddit post. Nothing else.
+Output only the final  post only. Nothing else.
 """
 
     api_key = API_KEYS[0]
