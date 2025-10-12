@@ -66,7 +66,7 @@ reddit = praw.Reddit(
 )
 
 # === Subreddit name ===
-subreddit_name = "your_subreddit_name_here"  # Replace with your subreddit
+subreddit_name = "Financialbooks"  # Replace with your subreddit
 title = lines[0] if lines else "New Book Post"
 
 # === Post to Reddit ===
