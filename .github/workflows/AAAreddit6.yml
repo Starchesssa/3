@@ -27,7 +27,7 @@ jobs:
 
       - name: 🤖 Run Gemini Reddit Post Generator
         run: |
-          python -u BOOK_CODE/COMPANY_BIO/comp6.py
+          python -u REDDIT/CODE/COMPANY_BIO/comp6.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
           GEMINI_API2: ${{ secrets.GEMINI_API2 }}
