@@ -2,6 +2,7 @@
 import os
 import glob
 import praw
+import prawcore  # Needed for OAuth exceptions
 
 # === Paths ===
 POSTS_DIR = "REDDIT/THEMES/Company bio/BOOKS/POSTS"
@@ -61,8 +62,8 @@ title = lines[0] if lines else "New Book Post"
 
 try:
     if image_file:
-        print(f"📤 Posting text + image (Markdown embedded): {image_file}")
-        reddit.subreddit(subreddit_name).submit(title=title, selftext=post_text, url=image_file)
+        print(f"📤 Posting with image: {image_file}")
+        reddit.subreddit(subreddit_name).submit_image(title=title, image_path=image_file, body=post_text)
     else:
         print("📤 Posting text only")
         reddit.subreddit(subreddit_name).submit(title=title, selftext=post_text)
