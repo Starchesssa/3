@@ -37,11 +37,11 @@ post_text = "\n".join(lines)
 # Remove asterisks
 post_text = post_text.replace("*", "")
 
-# Replace placeholders with affiliate links
+# Replace placeholders with Markdown-shortened affiliate links
 if amazon_link:
-    post_text = post_text.replace("(AMAZON LINK)", f"[Amazon Link]({amazon_link})")
+    post_text = post_text.replace("(AMAZON LINK)", f"[Amazon]({amazon_link})")
 if audible_link:
-    post_text = post_text.replace("(AUDIBLE LINK)", f"[Audible Link]({audible_link})")
+    post_text = post_text.replace("(AUDIBLE LINK)", f"[Audible]({audible_link})")
 
 # === Select Image ===
 image_files = glob.glob(os.path.join(IMG_DIR, "*.*"))
@@ -55,18 +55,24 @@ reddit = praw.Reddit(
     user_agent="CompanyBioBot/1.0"
 )
 
-# === Post to Reddit ===
+# === Subreddit name ===
 subreddit_name = "your_subreddit_name_here"  # Replace with your subreddit
 title = lines[0] if lines else "New Book Post"
 
-if image_file:
-    # Embed the image using Markdown in a text post
-    image_markdown = f"![Book Cover](https://i.imgur.com/{os.path.basename(image_file)})"
-    post_body = f"{image_markdown}\n\n{post_text}"
-    print(f"📤 Posting text + image (Markdown embedded)")
-    reddit.subreddit(subreddit_name).submit(title=title, selftext=post_body)
+try:
+    if image_file:
+        print(f"📤 Posting text + image (Markdown embedded): {image_file}")
+        reddit.subreddit(subreddit_name).submit(title=title, selftext=post_text, url=image_file)
+    else:
+        print("📤 Posting text only")
+        reddit.subreddit(subreddit_name).submit(title=title, selftext=post_text)
+except praw.exceptions.APIException as e:
+    print(f"❌ Reddit API error: {e}")
+except prawcore.exceptions.OAuthException as e:
+    print(f"❌ OAuth error: {e}")
+except prawcore.exceptions.InsufficientScope:
+    print("❌ Insufficient OAuth scope. Make sure your refresh token includes 'submit' scope and the account can post to the subreddit.")
+except Exception as e:
+    print(f"❌ Unexpected error: {e}")
 else:
-    print("📤 Posting text only")
-    reddit.subreddit(subreddit_name).submit(title=title, selftext=post_text)
-
-print("✅ Post submitted successfully!")
+    print("✅ Post submitted successfully!")
