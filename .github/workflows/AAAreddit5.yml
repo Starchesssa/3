@@ -1,21 +1,23 @@
-name: 🔍 Fetch Amazon Book Image
+name: 🔍 Fetch & Commit Amazon Book Image
 
 on:
-  workflow_dispatch:      # Allows manual triggering
+  workflow_dispatch:       # Manual trigger
   schedule:
-    - cron: "0 0 * * *"   # Optional: runs daily at 00:00 UTC
+    - cron: "0 0 * * *"    # Optional: daily at 00:00 UTC
 
 permissions:
-  contents: write         # Allows committing if needed
+  contents: write          # Required for committing
 
 jobs:
-  fetch-book-image:
+  fetch-and-commit-image:
     runs-on: ubuntu-latest
-    name: 🖼️ Fetch Amazon Book Image Link
+    name: 🖼️ Fetch & Commit Amazon Book Image Link
 
     steps:
       - name: ⬇️ Checkout Repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true  # Allows git push using GITHUB_TOKEN
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
@@ -29,3 +31,12 @@ jobs:
 
       - name: 🔎 Run comp5.py
         run: python REDDIT/CODE/COMPANY_BIO/comp5.py
+
+      - name: 💾 Commit Updated Image Link
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add REDDIT/THEMES/Company\ bio/BOOKS/IMG/Img.txt
+          git diff --cached --quiet || git commit -m "🖼️ Update Amazon book image link"
+          git push
