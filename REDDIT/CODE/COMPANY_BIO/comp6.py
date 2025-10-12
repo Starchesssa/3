@@ -35,11 +35,11 @@ Give me a cool reddit post on {title} by {author}, use 'you' and 'your' instead 
 
 Make the post so cool people wanna purchase the book.
 
-Make a cool headline all in CAPITAL LETTERS — the headline must be generic, not a single concept in the book. 
+Make a cool headline all in CAPITAL LETTERS , all letters in the tittle or headline should be in CAPITAL LETTERS — the headline must be generic, not a single concept in the book. 
 Concepts can be explained in the body.
 
 The headline should be about the book and mention the book or person or company of the biography 
-(look who is more famous, the book, or the author or the company, and put some or all).
+(look who is more famous, the book, or the author or the company, and put some or all in the headline).
 
 Include the link of the book in Amazon and Audible.
 
@@ -49,7 +49,9 @@ Headline must be based on the book.
 
 Avoid any complex words used in the book that can confuse people.
 
-Avoid robotic or AI language, sound like a mentor and entrepreneur obsessed with success, and use emojis plz.
+Avoid robotic or AI language, sound like a mentor who obsessed with your success, and use emojis plz.
+
+Write like you are talking to that one person directly.
 
 Convince the reader to take the book for free in Audible if they’re new users, 
 or check the Amazon page (Audible is for audiobook, free for new users, 
