@@ -51,9 +51,7 @@ Headline must be based on the book.
 
 Avoid any complex words used in the book that can confuse people.
 
-Avoid robotic or AI language, sound like a normal human, and use emoji throught the writing plz.
-
-Write like you are talking to that one person directly.
+Avoid robotic or AI language, sound like a normal human and the overall tone make a human natural curioUs tone like people on reddit write, and use emoji throught the writing plz.
 
 Convince the reader to take the book for free in Audible if they’re new users, 
 or check the Amazon page (Audible is for audiobook, free for new users, 
