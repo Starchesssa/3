@@ -1,0 +1,52 @@
+
+name: 🧠 Generate Reddit Post from Book (Gemini)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "company-bio-reddit-post"
+  cancel-in-progress: true
+
+jobs:
+  generate-reddit-post:
+    runs-on: ubuntu-latest
+    name: ✍️ Generate Gemini Reddit Post
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🧩 Install Dependencies
+        run: |
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+
+      - name: 🤖 Run Gemini Reddit Post Generator
+        run: |
+          python -u BOOK_CODE/COMPANY_BIO/comp6.py
+        env:
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
+
+      - name: ✅ Commit & Push Generated Reddit Post
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add REDDIT/THEMES/Company\ bio/BOOKS/POSTS/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new Reddit post generated."
+          else
+            git commit -m "🧠 Add new Gemini Reddit post content"
+            git push
+            echo "✅ Reddit post committed and pushed."
+          fi
