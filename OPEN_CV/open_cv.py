@@ -1,38 +1,39 @@
+
 import cv2
 import numpy as np
-import os
 
 # Input and output paths
-input_path = "OPEN_CV/Generated Image October 18, 2025 - 2_45PM.png"
+input_path = "OPEN_CV/Generated Image October 19, 2025 - 8_06AM.png"
 output_path = "OPEN_CV/Generated_Image_BG_Removed.png"
 
-# Load the image with alpha channel
+# Load image
 img = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
 
-# If the image has no alpha channel, add one
-if img.shape[2] == 3:
-    b, g, r = cv2.split(img)
-    alpha = np.ones(b.shape, dtype=b.dtype) * 255
-    img = cv2.merge([b, g, r, alpha])
+# Convert to RGB if image has alpha channel
+if img.shape[2] == 4:
+    img_rgb = img[:, :, :3]
+else:
+    img_rgb = img
 
-# Convert to RGB (ignore alpha for mask)
-rgb_img = img[:, :, :3]
+# Define white background threshold
+# You can adjust the threshold if background is not pure white
+lower = np.array([200, 200, 200], dtype=np.uint8)
+upper = np.array([255, 255, 255], dtype=np.uint8)
 
-# Convert to grayscale
-gray = cv2.cvtColor(rgb_img, cv2.COLOR_BGR2GRAY)
-
-# Thresholding to separate background (assuming light background)
-_, mask = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY)
+# Create mask for white areas
+mask = cv2.inRange(img_rgb, lower, upper)
 
 # Invert mask to get foreground
 mask_inv = cv2.bitwise_not(mask)
 
-# Apply mask to original image
-b, g, r, a = cv2.split(img)
-new_alpha = cv2.bitwise_and(a, mask_inv)
-result = cv2.merge([b, g, r, new_alpha])
+# Convert mask to 0-255 alpha
+alpha = mask_inv
+
+# Merge RGB channels with alpha
+b, g, r = cv2.split(img_rgb)
+result = cv2.merge([b, g, r, alpha])
 
 # Save output as PNG with transparency
 cv2.imwrite(output_path, result)
 
-print(f"Background removed! Saved at: {output_path}")
+print(f"White background removed! Saved at: {output_path}")
