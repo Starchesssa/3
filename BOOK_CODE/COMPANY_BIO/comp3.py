@@ -88,7 +88,7 @@ def build_prompt(book_info, sample_years=None, chapters_reference=None):
         )
 
     prompt = (
-        f"You are writing a long, detailed, lesson-based storytelling script based on the book titled "
+        f"You are writing a book summary script based on the book titled "
         f"'{book_info['title']}' by {book_info['author']} about the company {book_info['company']}.{years_text}\n\n"
         "Requirements and style rules:\n"
         "1. each lesson must have an exposition,rising action/conflict ,climax,falling action,resolution, this is how each lesson story must be told, dont include the words(rising action ,conflict ,climax , exposition ,falling action) in the script , just wrote a plain script  ready for text to speech, the script is on the book so make it review the book with book summary ."
