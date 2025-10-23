@@ -93,11 +93,11 @@ def build_prompt(book_info, sample_years=None, chapters_reference=None):
         "Requirements and style rules:\n"
         "1. each lesson mjst have an exposition,rising action/conflict ,climax,falling action,resolution, this is how each lesson story must be told ."
         "2. use iman gadzi style of narration  \n"
-        "4. Structure the script around lessons. Each important theme or lesson must appear as a CAPITALIZED HEADING line. Example heading format: 'KEY LESSON: INNOVATION IS A MUST IN COMPETITION.\n"
-        "6. Use simple language, avoid jargon, and explain terms as if the listener has no prior knowledge.\n"
-        "7. Prefer concrete statistics. Instead of vague phrases like 'they lost a lot', use specific metrics such as 'the stock fell 45% that year' or 'quarterly revenue dropped from $10M to $3M, a 70% decline.'\n
-        "10. Each sentence must end with a period ('.').\n"
-        "11. intro should be a hook, hook people attention. Do NOT say 'Here's the script'. Return only the narration and KEY LESSON headings inline.\n"
+        "3. Structure the script around lessons. Each important theme or lesson must appear as a CAPITALIZED HEADING line. Example heading format: 'KEY LESSON: INNOVATION IS A MUST IN COMPETITION.\n"
+        "4. Use simple language, avoid jargon, and explain terms as if the listener has no prior knowledge.\n"
+        "5. Prefer concrete statistics. Instead of vague phrases like 'they lost a lot', use specific metrics such as 'the stock fell 45% that year' or 'quarterly revenue dropped from $10M to $3M,\n"
+        "6. Each sentence must end with a period ('.').\n"
+        "7. intro should be a hook, hook people attention. Do NOT say 'Here's the script'. Return only the narration and KEY LESSON headings inline.\n"
         f"{chapter_note}\n\n"
         "Begin the long-form script now."
     )
