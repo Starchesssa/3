@@ -1,40 +1,38 @@
-
 from manim import *
 import cv2 as cv
 import numpy as np
 
 # === Parameters ===
 IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
-NUM_LAYERS = 6
+NUM_LAYERS = 8
 FRAME_SCALE = 6
-LAYER_SPACING = 1.2
+LAYER_SPACING = 1.5
 SCENE_DURATION = 6
 
 class ShatteredMirrorParallax(ThreeDScene):
     def construct(self):
-        # === Load and preprocess image ===
+        # === Load and resize image to 16:9 ===
         img = cv.imread(IMAGE_PATH, cv.IMREAD_UNCHANGED)
         if img is None:
             raise FileNotFoundError(f"Image not found: {IMAGE_PATH}")
         img = cv.cvtColor(img, cv.COLOR_BGR2BGRA)
         h, w = img.shape[:2]
-        min_dim = min(h, w)
-        img = img[(h - min_dim)//2:(h + min_dim)//2, (w - min_dim)//2:(w + min_dim)//2]
-        img = cv.resize(img, (512, 512))
+        target_w = 512
+        target_h = int(target_w * 9 / 16)
+        img = cv.resize(img, (target_w, target_h))
 
         # === Create concentric circular alpha masks ===
         slices = []
-        center = (256, 256)
-        max_radius = 256
+        center = (target_w // 2, target_h // 2)
+        max_radius = min(center)
         for i in range(NUM_LAYERS):
-            mask = np.zeros((512, 512), dtype=np.uint8)
+            mask = np.zeros((target_h, target_w), dtype=np.uint8)
             outer_r = int(max_radius * (i + 1) / NUM_LAYERS)
             inner_r = int(max_radius * i / NUM_LAYERS)
             cv.circle(mask, center, outer_r, 255, -1)
             if inner_r > 0:
                 cv.circle(mask, center, inner_r, 0, -1)
 
-            # Apply mask to alpha channel
             rgba = img.copy()
             rgba[:, :, 3] = mask
             slices.append(rgba)
@@ -44,7 +42,7 @@ class ShatteredMirrorParallax(ThreeDScene):
         for i, layer in enumerate(slices):
             mob = ImageMobject(layer)
             mob.scale(FRAME_SCALE / 6)
-            mob.move_to([0, 0, -LAYER_SPACING * i])  # stack deeper into Z
+            mob.move_to([0, 0, -LAYER_SPACING * i])  # deeper into Z
             image_mobs.append(mob)
 
         # === Add layers to scene ===
