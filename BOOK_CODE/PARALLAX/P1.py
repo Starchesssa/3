@@ -1,75 +1,57 @@
+from manim import *
 import cv2 as cv
 import numpy as np
-import os
-
-# === File Paths ===
-input_image_file = 'BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg'
-output_video_file = 'BOOK_CODE/PARALLAX/output_cv2_parallax.mp4'
 
 # === Parameters ===
-num_layers = 5             # Number of image slices
-num_frames = 90            # Total frames
-zoom_factor = 1.01         # Slow zoom
-frame_size = (1080, 1080)  # Output resolution
+IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
+NUM_LAYERS = 5
+FRAME_SCALE = 6  # Manim units
+LAYER_SPACING = 1.2  # Z-depth between slices
+SCENE_DURATION = 6  # seconds
 
-# === Load and Preprocess Image ===
-img = cv.imread(input_image_file)
-if img is None:
-    raise FileNotFoundError(f"Image not found: {input_image_file}")
+class ShatteredMirrorParallax(ThreeDScene):
+    def construct(self):
+        # === Load and preprocess image ===
+        img = cv.imread(IMAGE_PATH)
+        if img is None:
+            raise FileNotFoundError(f"Image not found: {IMAGE_PATH}")
+        img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+        h, w = img.shape[:2]
+        min_dim = min(h, w)
+        img = img[(h - min_dim)//2:(h + min_dim)//2, (w - min_dim)//2:(w + min_dim)//2]
+        img = cv.resize(img, (512, 512))
 
-# Crop to center square
-h, w = img.shape[:2]
-min_dim = min(h, w)
-start_x = (w - min_dim) // 2
-start_y = (h - min_dim) // 2
-img = img[start_y:start_y+min_dim, start_x:start_x+min_dim]
-img = cv.resize(img, frame_size)
+        # === Create circular slices ===
+        slices = []
+        center = (256, 256)
+        max_radius = 256
+        for i in range(NUM_LAYERS):
+            mask = np.zeros((512, 512), dtype=np.uint8)
+            outer_r = int(max_radius * (i + 1) / NUM_LAYERS)
+            inner_r = int(max_radius * i / NUM_LAYERS)
+            cv.circle(mask, center, outer_r, 255, -1)
+            if inner_r > 0:
+                cv.circle(mask, center, inner_r, 0, -1)
+            slice_img = cv.bitwise_and(img, img, mask=mask)
+            slices.append(slice_img)
 
-# === Create Circular Slices ===
-def create_slices(image, layers):
-    slices = []
-    center = (image.shape[1] // 2, image.shape[0] // 2)
-    max_radius = image.shape[0] // 2
-    for i in range(layers):
-        mask = np.zeros(image.shape[:2], dtype=np.uint8)
-        outer_r = int(max_radius * (i + 1) / layers)
-        inner_r = int(max_radius * i / layers)
-        cv.circle(mask, center, outer_r, 255, -1)
-        if inner_r > 0:
-            cv.circle(mask, center, inner_r, 0, -1)
-        slice_img = cv.bitwise_and(image, image, mask=mask)
-        slices.append(slice_img)
-    return slices
+        # === Convert slices to ImageMobjects and stack in 3D ===
+        image_mobs = []
+        for i, layer in enumerate(slices):
+            mob = ImageMobject(layer)
+            mob.scale(FRAME_SCALE / 6)
+            mob.move_to(ORIGIN + OUT * (LAYER_SPACING * i))
+            image_mobs.append(mob)
 
-sliced_layers = create_slices(img, num_layers)
+        # === Add layers to scene ===
+        self.set_camera_orientation(phi=75 * DEGREES, theta=0 * DEGREES)
+        for mob in image_mobs:
+            self.add(mob)
 
-# === Generate Frames ===
-frames = []
-for frame_idx in range(num_frames):
-    frame = np.zeros_like(img)
-    for i, layer in enumerate(reversed(sliced_layers)):
-        scale = zoom_factor ** (frame_idx + i * 5)  # staggered zoom
-        scaled_size = int(frame_size[0] * scale)
-        scaled = cv.resize(layer, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
-
-        # Center crop to frame size
-        sx, sy = scaled.shape[1], scaled.shape[0]
-        cx, cy = sx // 2, sy // 2
-        cropped = scaled[cy - frame_size[1]//2:cy + frame_size[1]//2,
-                         cx - frame_size[0]//2:cx + frame_size[0]//2]
-
-        # Composite layer
-        if cropped.shape[:2] == frame_size:
-            frame = cv.addWeighted(frame, 1.0, cropped, 1.0, 0)
-
-    frames.append(frame)
-
-# === Write Video ===
-fourcc = cv.VideoWriter_fourcc(*'mp4v')
-video_writer = cv.VideoWriter(output_video_file, fourcc, 30, frame_size)
-
-for f in frames:
-    video_writer.write(f)
-
-video_writer.release()
-print(f"✅ Shattered mirror parallax saved to: {output_video_file}")
+        # === Animate camera fly-through ===
+        final_z = image_mobs[-1].get_center()[2] + LAYER_SPACING
+        self.play(
+            self.camera.frame.animate.move_to([0, 0, final_z]),
+            run_time=SCENE_DURATION,
+            rate_func=linear
+        )
