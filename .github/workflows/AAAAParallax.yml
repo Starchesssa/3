@@ -1,4 +1,3 @@
-
 name: Generate Parallax Video (Manim)
 
 on:
@@ -41,7 +40,7 @@ jobs:
       - name: Rename and move video to target path
         run: |
           mkdir -p BOOK_CODE/PARALLAX
-          mv media/videos/PARALLAX/720p30/ShatteredMirrorParallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
+          mv media/videos/P1/720p30/ShatteredMirrorParallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
 
       - name: Commit and push generated video
         run: |
