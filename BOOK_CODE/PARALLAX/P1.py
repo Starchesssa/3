@@ -2,13 +2,12 @@
 from manim import *
 import cv2 as cv
 import numpy as np
-import os
 
 # === Parameters ===
 IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 NUM_LAYERS = 6
 FRAME_SCALE = 6
-LAYER_SPACING = 1.5
+LAYER_SPACING = 1.2
 SCENE_DURATION = 6
 
 class ShatteredMirrorParallax(ThreeDScene):
@@ -23,7 +22,7 @@ class ShatteredMirrorParallax(ThreeDScene):
         img = img[(h - min_dim)//2:(h + min_dim)//2, (w - min_dim)//2:(w + min_dim)//2]
         img = cv.resize(img, (512, 512))
 
-        # === Create concentric transparent ring slices ===
+        # === Create concentric circular alpha masks ===
         slices = []
         center = (256, 256)
         max_radius = 256
@@ -40,24 +39,23 @@ class ShatteredMirrorParallax(ThreeDScene):
             rgba[:, :, 3] = mask
             slices.append(rgba)
 
-        # === Convert slices to ImageMobjects and stack in 3D ===
+        # === Convert slices to ImageMobjects and stack in Z ===
         image_mobs = []
         for i, layer in enumerate(slices):
             mob = ImageMobject(layer)
             mob.scale(FRAME_SCALE / 6)
-            mob.move_to(ORIGIN + OUT * (LAYER_SPACING * i))
+            mob.move_to([0, 0, -LAYER_SPACING * i])  # stack deeper into Z
             image_mobs.append(mob)
 
         # === Add layers to scene ===
-        self.set_camera_orientation(phi=75 * DEGREES, theta=0 * DEGREES)
+        self.set_camera_orientation(phi=0 * DEGREES, theta=0 * DEGREES)
         for mob in image_mobs:
             self.add(mob)
 
         # === Animate camera fly-through ===
-        final_z = image_mobs[-1].get_center()[2] + LAYER_SPACING
+        final_z = image_mobs[-1].get_center()[2]
         self.move_camera(
-            phi=75 * DEGREES,
-            theta=0 * DEGREES,
             frame_center=[0, 0, final_z],
-            run_time=SCENE_DURATION
+            run_time=SCENE_DURATION,
+            rate_func=linear
         )
