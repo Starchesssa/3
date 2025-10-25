@@ -6,7 +6,7 @@ import numpy as np
 VIDEO_SIZE = (1280, 720)
 VIDEO_DURATION = 5
 VIDEO_FPS = 30
-OUTPUT_FILENAME = "BOOK_CODE/PARALLAX/output_cv2_circular_parallax.mp4"
+OUTPUT_FILENAME = "BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
 SOURCE_IMAGE = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 NUM_SLICES = 4          # number of circular slices
 MAX_OFFSET = 0.2
