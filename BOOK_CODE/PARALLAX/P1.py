@@ -8,9 +8,9 @@ input_image_file = 'BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-peo
 output_video_file = 'BOOK_CODE/PARALLAX/output_cv2_parallax.mp4'
 
 # === Parameters ===
-num_layers = 5             # Reduced to 5 layers
-num_frames = 90            # More frames for slower zoom
-zoom_factor = 1.01         # Slower zoom
+num_layers = 5             # Number of zoomed layers
+num_frames = 90            # Total frames
+zoom_factor = 1.01         # Slow zoom
 frame_size = (1080, 1080)  # Output resolution
 
 # === Load and Preprocess Image ===
@@ -26,33 +26,14 @@ start_y = (h - min_dim) // 2
 img = img[start_y:start_y+min_dim, start_x:start_x+min_dim]
 img = cv.resize(img, frame_size)
 
-# === Generate Circular Masks ===
-def create_circular_masks(size, layers):
-    masks = []
-    center = (size[0] // 2, size[1] // 2)
-    max_radius = size[0] // 2
-    for i in range(layers):
-        mask = np.zeros((size[1], size[0]), dtype=np.uint8)
-        outer_r = int(max_radius * (i + 1) / layers)
-        inner_r = int(max_radius * i / layers)
-        cv.circle(mask, center, outer_r, 255, -1)
-        if inner_r > 0:
-            cv.circle(mask, center, inner_r, 0, -1)
-        masks.append(mask)
-    return masks
-
-masks = create_circular_masks(frame_size, num_layers)
-
 # === Generate Frames ===
 frames = []
 for frame_idx in range(num_frames):
-    zoom = zoom_factor ** frame_idx
     frame = np.zeros_like(img)
-    for i, mask in enumerate(masks):
-        layer = cv.bitwise_and(img, img, mask=mask)
-        scale = zoom * (1 + i / num_layers)
+    for layer_idx in reversed(range(num_layers)):
+        scale = zoom_factor ** (frame_idx + layer_idx * 5)  # staggered zoom
         scaled_size = int(frame_size[0] * scale)
-        scaled = cv.resize(layer, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
+        scaled = cv.resize(img, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
 
         # Center crop to frame size
         sx, sy = scaled.shape[1], scaled.shape[0]
@@ -60,9 +41,9 @@ for frame_idx in range(num_frames):
         cropped = scaled[cy - frame_size[1]//2:cy + frame_size[1]//2,
                          cx - frame_size[0]//2:cx + frame_size[0]//2]
 
-        # Blend into frame
+        # Composite layer (no masking, full overlay)
         if cropped.shape[:2] == frame_size:
-            alpha = 1.0 / (i + 1)
+            alpha = 0.6 / (layer_idx + 1)  # decreasing opacity
             frame = cv.addWeighted(frame, 1.0, cropped, alpha, 0)
 
     frames.append(frame)
@@ -75,4 +56,4 @@ for f in frames:
     video_writer.write(f)
 
 video_writer.release()
-print(f"✅ Parallax video saved to: {output_video_file}")
+print(f"✅ Shattered mirror parallax saved to: {output_video_file}")
