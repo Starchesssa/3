@@ -1,4 +1,3 @@
-
 import cv2 as cv
 import numpy as np
 import os
@@ -8,7 +7,7 @@ input_image_file = 'BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-peo
 output_video_file = 'BOOK_CODE/PARALLAX/output_cv2_parallax.mp4'
 
 # === Parameters ===
-num_layers = 5             # Number of zoomed layers
+num_layers = 5             # Number of image slices
 num_frames = 90            # Total frames
 zoom_factor = 1.01         # Slow zoom
 frame_size = (1080, 1080)  # Output resolution
@@ -26,14 +25,32 @@ start_y = (h - min_dim) // 2
 img = img[start_y:start_y+min_dim, start_x:start_x+min_dim]
 img = cv.resize(img, frame_size)
 
+# === Create Circular Slices ===
+def create_slices(image, layers):
+    slices = []
+    center = (image.shape[1] // 2, image.shape[0] // 2)
+    max_radius = image.shape[0] // 2
+    for i in range(layers):
+        mask = np.zeros(image.shape[:2], dtype=np.uint8)
+        outer_r = int(max_radius * (i + 1) / layers)
+        inner_r = int(max_radius * i / layers)
+        cv.circle(mask, center, outer_r, 255, -1)
+        if inner_r > 0:
+            cv.circle(mask, center, inner_r, 0, -1)
+        slice_img = cv.bitwise_and(image, image, mask=mask)
+        slices.append(slice_img)
+    return slices
+
+sliced_layers = create_slices(img, num_layers)
+
 # === Generate Frames ===
 frames = []
 for frame_idx in range(num_frames):
     frame = np.zeros_like(img)
-    for layer_idx in reversed(range(num_layers)):
-        scale = zoom_factor ** (frame_idx + layer_idx * 5)  # staggered zoom
+    for i, layer in enumerate(reversed(sliced_layers)):
+        scale = zoom_factor ** (frame_idx + i * 5)  # staggered zoom
         scaled_size = int(frame_size[0] * scale)
-        scaled = cv.resize(img, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
+        scaled = cv.resize(layer, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
 
         # Center crop to frame size
         sx, sy = scaled.shape[1], scaled.shape[0]
@@ -41,10 +58,9 @@ for frame_idx in range(num_frames):
         cropped = scaled[cy - frame_size[1]//2:cy + frame_size[1]//2,
                          cx - frame_size[0]//2:cx + frame_size[0]//2]
 
-        # Composite layer (no masking, full overlay)
+        # Composite layer
         if cropped.shape[:2] == frame_size:
-            alpha = 0.6 / (layer_idx + 1)  # decreasing opacity
-            frame = cv.addWeighted(frame, 1.0, cropped, alpha, 0)
+            frame = cv.addWeighted(frame, 1.0, cropped, 1.0, 0)
 
     frames.append(frame)
 
