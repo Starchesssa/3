@@ -1,13 +1,16 @@
+
 from manim import *
 import cv2 as cv
 import numpy as np
+import os
 
 # === Parameters ===
 IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
+OUTPUT_PATH = "BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
 NUM_LAYERS = 5
-FRAME_SCALE = 6  # Manim units
-LAYER_SPACING = 1.2  # Z-depth between slices
-SCENE_DURATION = 6  # seconds
+FRAME_SCALE = 6
+LAYER_SPACING = 1.2
+SCENE_DURATION = 6
 
 class ShatteredMirrorParallax(ThreeDScene):
     def construct(self):
@@ -55,3 +58,11 @@ class ShatteredMirrorParallax(ThreeDScene):
             run_time=SCENE_DURATION,
             rate_func=linear
         )
+
+# === Save output to custom path ===
+config.output_file = OUTPUT_PATH
+config.verbosity = "WARNING"
+config.format = "mp4"
+config.pixel_height = 720
+config.pixel_width = 1280
+config.frame_rate = 30
