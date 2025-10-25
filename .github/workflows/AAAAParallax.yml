@@ -31,7 +31,7 @@ jobs:
 
       - name: Run parallax generator
         run: |
-          python BOOK_CODE/PARALLAX/P1_cv2.py
+          python BOOK_CODE/PARALLAX/P1.py
 
       - name: Commit and push generated video
         run: |
