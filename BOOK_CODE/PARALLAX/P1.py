@@ -53,13 +53,14 @@ class ShatteredMirrorParallax(ThreeDScene):
 
         # === Animate camera fly-through ===
         final_z = image_mobs[-1].get_center()[2] + LAYER_SPACING
-        self.play(
-            self.camera.frame.animate.move_to([0, 0, final_z]),
-            run_time=SCENE_DURATION,
-            rate_func=linear
+        self.move_camera(
+            phi=75 * DEGREES,
+            theta=0 * DEGREES,
+            frame_center=[0, 0, final_z],
+            run_time=SCENE_DURATION
         )
 
-# === Save output to custom path ===
+# === Output configuration ===
 config.output_file = OUTPUT_PATH
 config.verbosity = "WARNING"
 config.format = "mp4"
