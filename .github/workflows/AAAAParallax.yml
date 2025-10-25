@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "BOOK_CODE/PARALLAX/P2_manim.py"
+      - "BOOK_CODE/PARALLAX/P1.py"
       - "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 
 permissions:
