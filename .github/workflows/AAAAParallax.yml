@@ -1,15 +1,15 @@
-
-name: Generate Parallax Video (OpenCV)
+name: Generate Parallax Videos (OpenCV + Manim)
 
 on:
   workflow_dispatch:
   push:
     paths:
       - "BOOK_CODE/PARALLAX/P1_cv2.py"
+      - "BOOK_CODE/PARALLAX/P2_manim.py"
       - "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 
 permissions:
-  contents: write  # allow commits
+  contents: write
 
 jobs:
   run-parallax:
@@ -27,21 +27,30 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install opencv-python-headless numpy
+          pip install opencv-python-headless numpy manim
 
-      - name: Run parallax generator
+      - name: Run OpenCV parallax generator
         run: |
-          python BOOK_CODE/PARALLAX/P1.py
+          python BOOK_CODE/PARALLAX/P1_cv2.py
 
-      - name: Commit and push generated video
+      - name: Run Manim parallax generator
         run: |
-          VIDEO_FILE="BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
-          if [ -f "$VIDEO_FILE" ]; then
-            git config user.name "github-actions"
-            git config user.email "actions@github.com"
-            git add "$VIDEO_FILE"
-            git commit -m "Add generated parallax video" || echo "No changes to commit"
-            git push
-          else
-            echo "⚠️ Video file not found: $VIDEO_FILE"
-          fi
+          manim BOOK_CODE/PARALLAX/P2_manim.py ShatteredMirrorParallax -qm -o output_manim_parallax.mp4
+
+      - name: Commit and push generated videos
+        run: |
+          FILES=(
+            "BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
+            "media/videos/PARALLAX/1080p60/output_manim_parallax.mp4"
+          )
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          for FILE in "${FILES[@]}"; do
+            if [ -f "$FILE" ]; then
+              git add "$FILE"
+            else
+              echo "⚠️ File not found: $FILE"
+            fi
+          done
+          git commit -m "Add generated parallax videos" || echo "No changes to commit"
+          git push
