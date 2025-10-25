@@ -1,10 +1,10 @@
-name: Generate Parallax Videos (OpenCV + Manim)
+
+name: Generate Parallax Video (Manim)
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "BOOK_CODE/PARALLAX/P1_cv2.py"
       - "BOOK_CODE/PARALLAX/P2_manim.py"
       - "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  run-parallax:
+  run-manim:
     runs-on: ubuntu-latest
     steps:
 
@@ -27,30 +27,26 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install opencv-python-headless numpy manim
+          pip install manim opencv-python-headless numpy
 
-      - name: Run OpenCV parallax generator
+      - name: Render parallax video with Manim
         run: |
-          python BOOK_CODE/PARALLAX/P1_cv2.py
+          manim BOOK_CODE/PARALLAX/P2_manim.py ShatteredMirrorParallax -qm -o output_cv2_parallax.mp4
 
-      - name: Run Manim parallax generator
+      - name: Move video to target path
         run: |
-          manim BOOK_CODE/PARALLAX/P2_manim.py ShatteredMirrorParallax -qm -o output_manim_parallax.mp4
+          mkdir -p BOOK_CODE/PARALLAX
+          mv media/videos/PARALLAX/720p30/output_cv2_parallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
 
-      - name: Commit and push generated videos
+      - name: Commit and push generated video
         run: |
-          FILES=(
-            "BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
-            "media/videos/PARALLAX/1080p60/output_manim_parallax.mp4"
-          )
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          for FILE in "${FILES[@]}"; do
-            if [ -f "$FILE" ]; then
-              git add "$FILE"
-            else
-              echo "⚠️ File not found: $FILE"
-            fi
-          done
-          git commit -m "Add generated parallax videos" || echo "No changes to commit"
-          git push
+          VIDEO_FILE="BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
+          if [ -f "$VIDEO_FILE" ]; then
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git add "$VIDEO_FILE"
+            git commit -m "Add Manim-generated parallax video" || echo "No changes to commit"
+            git push
+          else
+            echo "⚠️ Video file not found: $VIDEO_FILE"
+          fi
