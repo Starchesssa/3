@@ -1,3 +1,4 @@
+
 name: Generate Parallax Video (Manim)
 
 on:
@@ -35,12 +36,12 @@ jobs:
 
       - name: Render parallax video with Manim
         run: |
-          manim BOOK_CODE/PARALLAX/P1.py ShatteredMirrorParallax -qm -o output_cv2_parallax.mp4
+          manim BOOK_CODE/PARALLAX/P1.py ShatteredMirrorParallax -qm
 
-      - name: Move video to target path
+      - name: Rename and move video to target path
         run: |
           mkdir -p BOOK_CODE/PARALLAX
-          mv media/videos/PARALLAX/720p30/output_cv2_parallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
+          mv media/videos/PARALLAX/720p30/ShatteredMirrorParallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
 
       - name: Commit and push generated video
         run: |
