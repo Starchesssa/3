@@ -1,27 +1,29 @@
+
 from manim import *
 import cv2 as cv
 import numpy as np
+import os
 
 # === Parameters ===
 IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
-NUM_LAYERS = 5
+NUM_LAYERS = 6
 FRAME_SCALE = 6
-LAYER_SPACING = 1.2
+LAYER_SPACING = 1.5
 SCENE_DURATION = 6
 
 class ShatteredMirrorParallax(ThreeDScene):
     def construct(self):
         # === Load and preprocess image ===
-        img = cv.imread(IMAGE_PATH)
+        img = cv.imread(IMAGE_PATH, cv.IMREAD_UNCHANGED)
         if img is None:
             raise FileNotFoundError(f"Image not found: {IMAGE_PATH}")
-        img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+        img = cv.cvtColor(img, cv.COLOR_BGR2BGRA)
         h, w = img.shape[:2]
         min_dim = min(h, w)
         img = img[(h - min_dim)//2:(h + min_dim)//2, (w - min_dim)//2:(w + min_dim)//2]
         img = cv.resize(img, (512, 512))
 
-        # === Create circular slices ===
+        # === Create concentric transparent ring slices ===
         slices = []
         center = (256, 256)
         max_radius = 256
@@ -32,8 +34,11 @@ class ShatteredMirrorParallax(ThreeDScene):
             cv.circle(mask, center, outer_r, 255, -1)
             if inner_r > 0:
                 cv.circle(mask, center, inner_r, 0, -1)
-            slice_img = cv.bitwise_and(img, img, mask=mask)
-            slices.append(slice_img)
+
+            # Apply mask to alpha channel
+            rgba = img.copy()
+            rgba[:, :, 3] = mask
+            slices.append(rgba)
 
         # === Convert slices to ImageMobjects and stack in 3D ===
         image_mobs = []
