@@ -1,0 +1,40 @@
+
+name: 🎬 Run Parallax Animation
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub
+  push:
+    paths:
+      - "BOOK_CODE/PARALLAX/P1.py"  # Re-run if this script changes
+
+permissions:
+  contents: write    # ✅ Allows committing files back to the repo
+
+jobs:
+  run-parallax:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🧩 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: 📦 Install dependencies
+      run: |
+        pip install moviepy numpy
+
+    - name: 🎥 Run Parallax Script
+      run: |
+        python BOOK_CODE/PARALLAX/P1.py
+
+    - name: 💾 Commit and push output
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add BOOK_CODE/PARALLAX/parallax_output.mp4
+        git commit -m "Add generated parallax video 🎬" || echo "No changes to commit"
+        git push
