@@ -8,10 +8,10 @@ input_image_file = 'BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-peo
 output_video_file = 'BOOK_CODE/PARALLAX/output_cv2_parallax.mp4'
 
 # === Parameters ===
-num_layers = 20           # Number of concentric slices
-num_frames = 60           # Total frames in the animation
-zoom_factor = 1.05        # Zoom per frame
-frame_size = (1080, 1080) # Output resolution (square crop)
+num_layers = 5             # Reduced to 5 layers
+num_frames = 90            # More frames for slower zoom
+zoom_factor = 1.01         # Slower zoom
+frame_size = (1080, 1080)  # Output resolution
 
 # === Load and Preprocess Image ===
 img = cv.imread(input_image_file)
@@ -33,10 +33,11 @@ def create_circular_masks(size, layers):
     max_radius = size[0] // 2
     for i in range(layers):
         mask = np.zeros((size[1], size[0]), dtype=np.uint8)
-        radius = int(max_radius * (i + 1) / layers)
-        cv.circle(mask, center, radius, 255, -1)
-        if i > 0:
-            cv.circle(mask, center, int(max_radius * i / layers), 0, -1)
+        outer_r = int(max_radius * (i + 1) / layers)
+        inner_r = int(max_radius * i / layers)
+        cv.circle(mask, center, outer_r, 255, -1)
+        if inner_r > 0:
+            cv.circle(mask, center, inner_r, 0, -1)
         masks.append(mask)
     return masks
 
@@ -49,7 +50,8 @@ for frame_idx in range(num_frames):
     frame = np.zeros_like(img)
     for i, mask in enumerate(masks):
         layer = cv.bitwise_and(img, img, mask=mask)
-        scaled_size = int(frame_size[0] * zoom * (1 + i / num_layers))
+        scale = zoom * (1 + i / num_layers)
+        scaled_size = int(frame_size[0] * scale)
         scaled = cv.resize(layer, (scaled_size, scaled_size), interpolation=cv.INTER_LINEAR)
 
         # Center crop to frame size
