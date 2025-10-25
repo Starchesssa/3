@@ -2,13 +2,13 @@
 name: 🎬 Run Parallax Animation
 
 on:
-  workflow_dispatch:  # Allows manual trigger from GitHub
+  workflow_dispatch:
   push:
     paths:
-      - "BOOK_CODE/PARALLAX/P1.py"  # Re-run if this script changes
+      - "BOOK_CODE/PARALLAX/P1.py"
 
 permissions:
-  contents: write    # ✅ Allows committing files back to the repo
+  contents: write
 
 jobs:
   run-parallax:
@@ -23,9 +23,12 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: 📦 Install dependencies
+    - name: 📦 Install dependencies (MoviePy, NumPy, FFmpeg)
       run: |
-        pip install moviepy numpy
+        sudo apt update
+        sudo apt install -y ffmpeg
+        pip install --upgrade pip
+        pip install moviepy numpy imageio[ffmpeg] --no-cache-dir
 
     - name: 🎥 Run Parallax Script
       run: |
