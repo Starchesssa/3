@@ -35,7 +35,7 @@ jobs:
 
       - name: Render parallax video with Manim
         run: |
-          manim BOOK_CODE/PARALLAX/P2_manim.py ShatteredMirrorParallax -qm -o output_cv2_parallax.mp4
+          manim BOOK_CODE/PARALLAX/P1.py ShatteredMirrorParallax -qm -o output_cv2_parallax.mp4
 
       - name: Move video to target path
         run: |
