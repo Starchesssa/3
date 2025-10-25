@@ -1,20 +1,22 @@
-name: Generate Parallax Animation
+
+name: Generate Parallax Video (OpenCV)
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "BOOK_CODE/PARALLAX/P1.py"
+      - "BOOK_CODE/PARALLAX/P1_cv2.py"
       - "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
 
 permissions:
-  contents: write
+  contents: write  # allow commits
 
 jobs:
   run-parallax:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -24,16 +26,22 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install opencv-python-headless numpy
 
       - name: Run parallax generator
         run: |
-          python BOOK_CODE/PARALLAX/P1.py
+          python BOOK_CODE/PARALLAX/P1_cv2.py
 
-      - name: Commit and push output
+      - name: Commit and push generated video
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add BOOK_CODE/PARALLAX/parallax_output.mp4
-          git commit -m "Generated parallax animation"
-          git push
+          VIDEO_FILE="BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
+          if [ -f "$VIDEO_FILE" ]; then
+            git config user.name "github-actions"
+            git config user.email "actions@github.com"
+            git add "$VIDEO_FILE"
+            git commit -m "Add generated parallax video" || echo "No changes to commit"
+            git push
+          else
+            echo "⚠️ Video file not found: $VIDEO_FILE"
+          fi
