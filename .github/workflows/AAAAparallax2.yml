@@ -1,3 +1,4 @@
+
 name: Extract AE Template and Commit
 
 on:
@@ -23,9 +24,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y unzip git
-          git clone https://github.com/ineo6/aep-extractor.git
-          pip install -r aep-extractor/requirements.txt
+          sudo apt-get install -y unzip
+          pip install git+https://github.com/ineo6/aep-extractor.git
 
       - name: Unzip AE template
         run: |
@@ -36,17 +36,18 @@ jobs:
         run: |
           aep_file=$(find temp_aep -name "*.aep" | head -n 1)
           echo "AEP_FILE=$aep_file" >> $GITHUB_ENV
+          echo "Found .aep file: $aep_file"
 
       - name: Run aep-extractor
         run: |
-          python aep-extractor/extract.py $AEP_FILE
+          python -m aep_extractor.extract $AEP_FILE
           mkdir -p BOOK_CODE/PARALLAX/aep_json
-          cp -r aep-extractor/output/* BOOK_CODE/PARALLAX/aep_json/
+          cp -r aep_extractor/output/* BOOK_CODE/PARALLAX/aep_json/
 
       - name: Commit extracted JSON
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add BOOK_CODE/PARALLAX/aep_json
-          git commit -m "Add extracted JSON from AE template"
+          git commit -m "Add extracted JSON from AE template" || echo "No changes to commit"
           git push
