@@ -1,0 +1,52 @@
+name: Extract AE Template and Commit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Allows committing back to the repository
+
+jobs:
+  extract_aep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true  # Needed for committing
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip git
+          git clone https://github.com/ineo6/aep-extractor.git
+          pip install -r aep-extractor/requirements.txt
+
+      - name: Unzip AE template
+        run: |
+          unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
+
+      - name: Find .aep file
+        id: find_aep
+        run: |
+          aep_file=$(find temp_aep -name "*.aep" | head -n 1)
+          echo "AEP_FILE=$aep_file" >> $GITHUB_ENV
+
+      - name: Run aep-extractor
+        run: |
+          python aep-extractor/extract.py $AEP_FILE
+          mkdir -p BOOK_CODE/PARALLAX/aep_json
+          cp -r aep-extractor/output/* BOOK_CODE/PARALLAX/aep_json/
+
+      - name: Commit extracted JSON
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add BOOK_CODE/PARALLAX/aep_json
+          git commit -m "Add extracted JSON from AE template"
+          git push
