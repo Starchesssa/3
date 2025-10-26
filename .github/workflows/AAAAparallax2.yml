@@ -1,3 +1,4 @@
+
 name: Parse AE Template to JSON
 
 on:
@@ -27,6 +28,10 @@ jobs:
       # Step 4: Install aep-parser from PyPI
       - name: Install aep-parser
         run: pip install aep-parser
+
+      # Step 4b: Install required dependency
+      - name: Install dependencies
+        run: pip install six
 
       # Step 5: Unzip AE template
       - name: Unzip AE template
