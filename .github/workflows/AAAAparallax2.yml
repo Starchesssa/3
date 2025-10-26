@@ -1,4 +1,3 @@
-
 name: Extract AE Template and Commit
 
 on:
@@ -21,11 +20,11 @@ jobs:
         with:
           python-version: 3.11
 
-      # Step 3: Install unzip
-      - name: Install unzip
-        run: sudo apt-get update && sudo apt-get install -y unzip
+      # Step 3: Install unzip and git
+      - name: Install unzip and git
+        run: sudo apt-get update && sudo apt-get install -y unzip git
 
-      # Step 4: Install aep-extractor via pip
+      # Step 4: Install aep-extractor via pip (plain URL, no brackets)
       - name: Install aep-extractor
         run: pip install git+https://github.com/ineo6/aep-extractor.git
 
@@ -33,7 +32,7 @@ jobs:
       - name: Unzip AE template
         run: unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
 
-      # Step 6: Find .aep file inside unzipped folder
+      # Step 6: Find the .aep file
       - name: Find .aep file
         id: find_aep
         run: |
