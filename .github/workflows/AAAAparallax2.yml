@@ -1,18 +1,17 @@
-
-name: Extract AE Template and Commit
+name: Parse AE Template to JSON
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Allows committing back to the repository
+  contents: write  # Allows committing back to the repo
 
 jobs:
-  extract_aep:
+  parse_aep:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout your main repo
-      - name: Checkout main repo
+      # Step 1: Checkout your repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       # Step 2: Setup Python
@@ -21,42 +20,48 @@ jobs:
         with:
           python-version: 3.11
 
-      # Step 3: Install unzip and git
-      - name: Install unzip and git
-        run: sudo apt-get update && sudo apt-get install -y unzip git
+      # Step 3: Install unzip
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
-      # Step 4: Clone aep-extractor manually
-      - name: Clone aep-extractor
-        run: git clone https://github.com/ineo6/aep-extractor.git aep-extractor
+      # Step 4: Install aep-parser from PyPI
+      - name: Install aep-parser
+        run: pip install aep-parser
 
-      # Step 5: Install aep-extractor locally
-      - name: Install aep-extractor
-        run: pip install ./aep-extractor
-
-      # Step 6: Unzip your AE template
+      # Step 5: Unzip AE template
       - name: Unzip AE template
         run: unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
 
-      # Step 7: Find the .aep file
-      - name: Find .aep file
-        id: find_aep
+      # Step 6: Parse the .aep file and save JSON
+      - name: Parse .aep file to JSON
         run: |
-          aep_file=$(find temp_aep -name "*.aep" | head -n 1)
-          echo "AEP_FILE=$aep_file" >> $GITHUB_ENV
-          echo "Found .aep file: $aep_file"
+          python - <<EOF
+          import os
+          import json
+          from aep_parser.parsers.project import parse_project
 
-      # Step 8: Run aep-extractor
-      - name: Run aep-extractor
-        run: |
-          python -m aep_extractor.extract $AEP_FILE
-          mkdir -p BOOK_CODE/PARALLAX/aep_json
-          cp -r aep_extractor/output/* BOOK_CODE/PARALLAX/aep_json/
+          # Find the .aep file
+          aep_path = next(
+              (os.path.join(dp, f) for dp, dn, filenames in os.walk("temp_aep") for f in filenames if f.endswith(".aep")),
+              None
+          )
 
-      # Step 9: Commit extracted JSON back to repo
+          if not aep_path:
+              print("No .aep file found!")
+              exit(1)
+
+          project = parse_project(aep_path)
+          os.makedirs("BOOK_CODE/PARALLAX/aep_json", exist_ok=True)
+          with open("BOOK_CODE/PARALLAX/aep_json/project.json", "w") as f:
+              json.dump(project.to_dict(), f, indent=2)
+          print("Extraction complete!")
+          EOF
+
+      # Step 7: Commit extracted JSON back to repo
       - name: Commit extracted JSON
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add BOOK_CODE/PARALLAX/aep_json
-          git commit -m "Add extracted JSON from AE template" || echo "No changes to commit"
+          git commit -m "Add parsed JSON from AE template" || echo "No changes to commit"
           git push
