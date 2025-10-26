@@ -14,22 +14,28 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # Needed for committing
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-          pip install git+https://github.com/ineo6/aep-extractor.git
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
+      - name: Clone aep-extractor
+        uses: actions/checkout@v3
+        with:
+          repository: ineo6/aep-extractor
+          path: aep-extractor
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install aep-extractor dependencies
+        run: pip install -r aep-extractor/requirements.txt
 
       - name: Unzip AE template
-        run: |
-          unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
+        run: unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
 
       - name: Find .aep file
         id: find_aep
