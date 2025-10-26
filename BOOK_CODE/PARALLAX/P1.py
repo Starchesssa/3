@@ -2,12 +2,16 @@ from manim import *
 import cv2 as cv
 import numpy as np
 
-# === Parameters ===
+# === Input image path ===
 IMAGE_PATH = "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
+
+# === Parameters ===
 NUM_LAYERS = 8
 FRAME_SCALE = 6
 LAYER_SPACING = 1.5
 SCENE_DURATION = 6
+TARGET_WIDTH = 512
+TARGET_HEIGHT = int(TARGET_WIDTH * 9 / 16)
 
 class ShatteredMirrorParallax(ThreeDScene):
     def construct(self):
@@ -16,17 +20,14 @@ class ShatteredMirrorParallax(ThreeDScene):
         if img is None:
             raise FileNotFoundError(f"Image not found: {IMAGE_PATH}")
         img = cv.cvtColor(img, cv.COLOR_BGR2BGRA)
-        h, w = img.shape[:2]
-        target_w = 512
-        target_h = int(target_w * 9 / 16)
-        img = cv.resize(img, (target_w, target_h))
+        img = cv.resize(img, (TARGET_WIDTH, TARGET_HEIGHT))
 
         # === Create concentric circular alpha masks ===
         slices = []
-        center = (target_w // 2, target_h // 2)
+        center = (TARGET_WIDTH // 2, TARGET_HEIGHT // 2)
         max_radius = min(center)
         for i in range(NUM_LAYERS):
-            mask = np.zeros((target_h, target_w), dtype=np.uint8)
+            mask = np.zeros((TARGET_HEIGHT, TARGET_WIDTH), dtype=np.uint8)
             outer_r = int(max_radius * (i + 1) / NUM_LAYERS)
             inner_r = int(max_radius * i / NUM_LAYERS)
             cv.circle(mask, center, outer_r, 255, -1)
