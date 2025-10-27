@@ -1,72 +1,37 @@
-
-name: Parse AE Template to JSON
+name: Parse AE Project and Commit Outputs
 
 on:
-  workflow_dispatch:
-
-permissions:
-  contents: write  # Allows committing back to the repo
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual trigger
 
 jobs:
   parse_aep:
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Checkout your repository
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Step 2: Setup Python
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: '3.11'
 
-      # Step 3: Install unzip
-      - name: Install unzip
-        run: sudo apt-get update && sudo apt-get install -y unzip
-
-      # Step 4: Install aep-parser from PyPI
-      - name: Install aep-parser
-        run: pip install aep-parser
-
-      # Step 4b: Install required dependency
       - name: Install dependencies
-        run: pip install six
-
-      # Step 5: Unzip AE template
-      - name: Unzip AE template
-        run: unzip BOOK_CODE/PARALLAX/Free_Parallax_Scrolling_Slideshow_source_3019\ \(2\).zip -d temp_aep
-
-      # Step 6: Parse the .aep file and save JSON
-      - name: Parse .aep file to JSON
         run: |
-          python - <<EOF
-          import os
-          import json
-          from aep_parser.parsers.project import parse_project
+          pip install aep-parser moviepy
 
-          # Find the .aep file
-          aep_path = next(
-              (os.path.join(dp, f) for dp, dn, filenames in os.walk("temp_aep") for f in filenames if f.endswith(".aep")),
-              None
-          )
+      - name: Run parser script
+        run: |
+          python BOOK_CODE/PARALLAX/parse_aep.py
 
-          if not aep_path:
-              print("No .aep file found!")
-              exit(1)
-
-          project = parse_project(aep_path)
-          os.makedirs("BOOK_CODE/PARALLAX/aep_json", exist_ok=True)
-          with open("BOOK_CODE/PARALLAX/aep_json/project.json", "w") as f:
-              json.dump(project.to_dict(), f, indent=2)
-          print("Extraction complete!")
-          EOF
-
-      # Step 7: Commit extracted JSON back to repo
-      - name: Commit extracted JSON
+      - name: Commit and push outputs
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add BOOK_CODE/PARALLAX/aep_json
-          git commit -m "Add parsed JSON from AE template" || echo "No changes to commit"
+          
+          git add BOOK_CODE/PARALLAX/outputs/ || true
+          git commit -m "Auto: parsed AE project and generated outputs" || echo "No changes to commit"
           git push
