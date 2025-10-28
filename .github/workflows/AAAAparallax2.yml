@@ -1,3 +1,4 @@
+
 name: Parse After Effects Project
 
 on:
@@ -7,7 +8,7 @@ on:
       - 'BOOK_CODE/PARALLAX/Spaced Out Final.aep'
 
 permissions:
-  contents: write  # allow committing the output JSON
+  contents: write
 
 jobs:
   parse-aep:
@@ -24,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install aep-parser
+          pip install aep-parser six
 
       - name: Run parser script
         run: |
