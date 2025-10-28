@@ -1,13 +1,16 @@
-name: Parse AE Project and Commit Outputs
+name: Parse After Effects Project
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
-  workflow_dispatch:  # allows manual trigger
+    paths:
+      - 'BOOK_CODE/PARALLAX/Spaced Out Final.aep'
+
+permissions:
+  contents: write  # allow committing the output JSON
 
 jobs:
-  parse_aep:
+  parse-aep:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,21 +20,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          pip install aep-parser moviepy
+          pip install aep-parser
 
       - name: Run parser script
         run: |
-          python BOOK_CODE/PARALLAX/parse_aep.py
+          python BOOK_CODE/PARALLAX/P1.py
 
-      - name: Commit and push outputs
+      - name: Commit parsed JSON back
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add BOOK_CODE/PARALLAX/outputs/ || true
-          git commit -m "Auto: parsed AE project and generated outputs" || echo "No changes to commit"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add BOOK_CODE/PARALLAX/Spaced_Out_Final.json
+          git commit -m "Add parsed JSON for Spaced Out Final.aep" || echo "No changes to commit"
           git push
