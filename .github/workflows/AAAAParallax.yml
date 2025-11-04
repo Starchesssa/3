@@ -1,5 +1,5 @@
 
-name: Render Remotion Video
+name: Render Parallax Video
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Install FFmpeg
+      - name: Install FFmpeg (safe)
         run: |
           sudo apt-get clean
           sudo apt-get update --fix-missing
