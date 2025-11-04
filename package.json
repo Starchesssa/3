@@ -1,10 +1,9 @@
-
 {
   "name": "remotion-parallax",
   "version": "1.0.0",
   "scripts": {
-    "start": "npx remotion preview",
-    "build": "npx remotion render src/index.jsx out/video.mp4"
+    "start": "remotion preview",
+    "build": "remotion render ParallaxScene out/video.mp4"
   },
   "dependencies": {
     "react": "latest",
