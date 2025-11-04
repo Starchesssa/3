@@ -1,56 +1,38 @@
-name: Generate Parallax Video (Manim)
+
+name: Render Parallax Video
 
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - "BOOK_CODE/PARALLAX/P1.py"
-      - "BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg"
-
-permissions:
-  contents: write
+  workflow_dispatch:  # run manually
 
 jobs:
-  run-manim:
+  render:
     runs-on: ubuntu-latest
+
     steps:
+      - name: ✅ Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcairo2-dev libpango1.0-dev ffmpeg
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: ✅ Install Node
+        uses: actions/setup-node@v3
         with:
-          python-version: "3.10"
+          node-version: 18
 
-      - name: Install Python dependencies
+      - name: ✅ Install FFmpeg
         run: |
-          pip install --upgrade pip
-          pip install manim opencv-python-headless numpy
+          sudo apt update
+          sudo apt install -y ffmpeg
 
-      - name: Render parallax video with Manim
-        run: |
-          manim BOOK_CODE/PARALLAX/P1.py ShatteredMirrorParallax -qm
+      - name: ✅ Install Dependencies
+        run: npm install
 
-      - name: Rename and move video to target path
-        run: |
-          mkdir -p BOOK_CODE/PARALLAX
-          mv media/videos/P1/720p30/ShatteredMirrorParallax.mp4 BOOK_CODE/PARALLAX/output_cv2_parallax.mp4
+      - name: ✅ Build Remotion
+        run: npm run build --if-present
 
-      - name: Commit and push generated video
-        run: |
-          VIDEO_FILE="BOOK_CODE/PARALLAX/output_cv2_parallax.mp4"
-          if [ -f "$VIDEO_FILE" ]; then
-            git config user.name "github-actions"
-            git config user.email "actions@github.com"
-            git add "$VIDEO_FILE"
-            git commit -m "Add Manim-generated parallax video" || echo "No changes to commit"
-            git push
-          else
-            echo "⚠️ Video file not found: $VIDEO_FILE"
-          fi
+      - name: 🎬 Render Video
+        run: npx remotion render Parallax out/video.mp4
+
+      - name: 📦 Upload Video Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: parallax-video
+          path: out/video.mp4
