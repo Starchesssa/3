@@ -1,12 +1,12 @@
 
-import {Composition} from "remotion";
-import ParallaxScene from "./ParallaxScene";
+import { Composition } from "remotion";
+import { Parallax } from "./Parallax";
 
 export const RemotionVideo = () => {
   return (
     <Composition
       id="ParallaxScene"
-      component={ParallaxScene}
+      component={Parallax}       // Directly use Parallax
       durationInFrames={240}
       fps={30}
       width={1920}
