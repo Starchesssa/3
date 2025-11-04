@@ -1,13 +1,8 @@
 
-name: Render Parallax Video
+name: Render Remotion Video
 
 on:
   workflow_dispatch: # manual trigger
-  push:
-    paths:
-      - "src/**"
-      - "package.json"
-      - "package-lock.json"
 
 jobs:
   render-video:
@@ -22,10 +17,9 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Enable Corepack (for pnpm/npm)
+      - name: Enable Corepack
         run: corepack enable
 
-      # 🔥 Fix Ubuntu FFmpeg issue
       - name: Install FFmpeg (safe)
         run: |
           sudo apt-get clean
@@ -35,7 +29,6 @@ jobs:
           sudo apt-get update --fix-missing
           sudo apt-get install -y ffmpeg --fix-missing
 
-      # ✅ Cache node_modules
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
@@ -48,13 +41,7 @@ jobs:
         run: npm install
 
       - name: Build & Render Remotion video
-        run: |
-          npx remotion render \
-            --codec h264 \
-            --crf 18 \
-            --quality 100 \
-            --browser-executable=$(which chromium-browser || which google-chrome || which chromium) \
-            src/index.jsx out/video.mp4
+        run: npx remotion render ParallaxScene out/video.mp4
 
       - name: Upload Rendered Video
         uses: actions/upload-artifact@v4
