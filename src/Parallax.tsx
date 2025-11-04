@@ -3,7 +3,8 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
-const image = "/image-of-new-york-in-sunshine-without-people.jpg";
+// Use require.resolve to get absolute path to image
+const image = require.resolve("../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg");
 
 export const Parallax: React.FC = () => {
   const frame = useCurrentFrame();
