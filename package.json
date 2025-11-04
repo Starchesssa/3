@@ -3,13 +3,13 @@
   "name": "remotion-parallax",
   "version": "1.0.0",
   "scripts": {
-    "start": "remotion preview",
-    "build": "remotion render"
+    "start": "npx remotion preview",
+    "build": "npx remotion render src/index.jsx out/video.mp4"
   },
   "dependencies": {
-    "remotion": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "remotion": "latest",
     "gsap": "latest"
   }
 }
