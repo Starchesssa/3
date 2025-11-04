@@ -1,33 +1,64 @@
 
-name: Render Remotion Video
+name: Render Parallax Video
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # manual trigger
+  push:
+    paths:
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
 
 jobs:
-  render:
+  render-video:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Install FFmpeg
-        run: sudo apt-get install -y ffmpeg
+      - name: Enable Corepack (for pnpm/npm)
+        run: corepack enable
+
+      # 🔥 Fix Ubuntu FFmpeg issue
+      - name: Install FFmpeg (safe)
+        run: |
+          sudo apt-get clean
+          sudo apt-get update --fix-missing
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository universe
+          sudo apt-get update --fix-missing
+          sudo apt-get install -y ffmpeg --fix-missing
+
+      # ✅ Cache node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Render video
-        run: npm run build
+      - name: Build & Render Remotion video
+        run: |
+          npx remotion render \
+            --codec h264 \
+            --crf 18 \
+            --quality 100 \
+            --browser-executable=$(which chromium-browser || which google-chrome || which chromium) \
+            src/index.jsx out/video.mp4
 
-      - name: Upload video output
+      - name: Upload Rendered Video
         uses: actions/upload-artifact@v4
         with:
-          name: remotion-output
-          path: out/
+          name: parallax-video
+          path: out/video.mp4
+          retention-days: 7
