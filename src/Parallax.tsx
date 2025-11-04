@@ -1,5 +1,4 @@
 
-// src/Parallax.tsx
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import nyImage from "../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg";
@@ -9,9 +8,8 @@ export const Parallax: React.FC = () => {
   const totalFrames = 240;
   const layers = 5;
 
-  // Max and min scale for front/back slices
-  const maxScale = 1.5;
   const minScale = 0.5;
+  const maxScale = 1.5;
 
   // Camera moves forward along Z-axis
   const cameraZ = interpolate(frame, [0, totalFrames], [-500, 500]);
@@ -19,13 +17,12 @@ export const Parallax: React.FC = () => {
   return (
     <AbsoluteFill style={{ perspective: 1500, overflow: "hidden", background: "#000" }}>
       {Array.from({ length: layers }).map((_, i) => {
-        // Depth of slice: back slices have smaller scale and more negative Z
-        const sliceZ = interpolate(i, [0, layers - 1], [-400, 0]);
-        const scale = interpolate(i, [0, layers - 1], minScale, maxScale);
+        // sliceZ and scale per layer
+        const sliceZ = interpolate(i, [0, layers - 1], [-400, 0]); // back to front
+        const scale = interpolate(i, [0, layers - 1], [minScale, maxScale]);
 
-        // Position slices in X/Y if you want a slight spread
-        const offsetX = (i - layers / 2) * 50; // horizontal offset
-        const offsetY = (i - layers / 2) * 30; // vertical offset
+        const offsetX = (i - layers / 2) * 50;
+        const offsetY = (i - layers / 2) * 30;
 
         return (
           <div
@@ -39,7 +36,7 @@ export const Parallax: React.FC = () => {
               backgroundImage: `url(${nyImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              borderRadius: "50% / 50%", // oval slice
+              borderRadius: "50% / 50%",
               transform: `
                 translate3d(${offsetX}px, ${offsetY}px, ${sliceZ + cameraZ}px)
                 translate(-50%, -50%)
