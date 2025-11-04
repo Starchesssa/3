@@ -1,38 +1,29 @@
 
-name: Render Parallax Video
+name: Render Remotion Video
 
 on:
-  workflow_dispatch:  # run manually
+  workflow_dispatch:
 
 jobs:
   render:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ✅ Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: ✅ Install Node
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: ✅ Install FFmpeg
-        run: |
-          sudo apt update
-          sudo apt install -y ffmpeg
-
-      - name: ✅ Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: ✅ Build Remotion
-        run: npm run build --if-present
+      - name: Build video
+        run: npm run build
 
-      - name: 🎬 Render Video
-        run: npx remotion render Parallax out/video.mp4
-
-      - name: 📦 Upload Video Artifact
+      - name: Upload video
         uses: actions/upload-artifact@v4
         with:
           name: parallax-video
-          path: out/video.mp4
+          path: out/
