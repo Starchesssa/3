@@ -2,25 +2,22 @@
 // src/Parallax.tsx
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-
-// Import image as module (Remotion will bundle it)
 import nyImage from "../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg";
 
 export const Parallax: React.FC = () => {
   const frame = useCurrentFrame();
+  const totalFrames = 240;
 
   return (
     <AbsoluteFill style={{ perspective: 1200, overflow: "hidden" }}>
       {Array.from({ length: 5 }).map((_, i) => {
-        // Horizontal and vertical movement
-        const x = interpolate(frame, [0, 240], [0, i * 30]);
-        const y = interpolate(frame, [0, 240], [0, i * 15]);
+        // Each layer moves differently based on depth
+        const speed = 1 + i * 0.3; // closer layers move faster
+        const x = interpolate(frame, [0, totalFrames], [0, -50 * speed]);
+        const y = interpolate(frame, [0, totalFrames], [0, 20 * speed]);
+        const z = -50 * i; // Z position (negative goes into scene)
 
-        // Depth (Z-axis) - keeps layers within camera view
-        const z = interpolate(frame, [0, 240], [i * 10, i * 60]);
-
-        // Scale based on Z to simulate depth
-        const scale = 1 + z / 500;
+        const scale = 1 + i * 0.05; // closer layers slightly larger
 
         return (
           <div
@@ -31,7 +28,7 @@ export const Parallax: React.FC = () => {
               backgroundImage: `url(${nyImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              transform: `translate3d(${x}px, ${y}px, ${-z}px) scale(${scale})`,
+              transform: `translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`,
               zIndex: 10 - i,
               opacity: 1 - i * 0.1,
             }}
