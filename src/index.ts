@@ -1,6 +1,4 @@
-
-// src/index.tsx
 import { registerRoot } from 'remotion';
-import { RemotionVideo } from './VideoComposition';
+import { RemotionVideo } from './Video';
 
 registerRoot(RemotionVideo);
