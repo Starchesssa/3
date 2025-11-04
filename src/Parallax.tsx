@@ -3,8 +3,8 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
-// Use require.resolve to get absolute path to image
-const image = require.resolve("../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg");
+// Import image as module (Remotion will bundle it)
+import nyImage from "../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg";
 
 export const Parallax: React.FC = () => {
   const frame = useCurrentFrame();
@@ -16,8 +16,8 @@ export const Parallax: React.FC = () => {
         const x = interpolate(frame, [0, 240], [0, i * 30]);
         const y = interpolate(frame, [0, 240], [0, i * 15]);
 
-        // Depth (Z-axis) - keep it within camera view
-        const z = interpolate(frame, [0, 240], [i * 10, i * 60]); // positive values move layers closer
+        // Depth (Z-axis) - keeps layers within camera view
+        const z = interpolate(frame, [0, 240], [i * 10, i * 60]);
 
         // Scale based on Z to simulate depth
         const scale = 1 + z / 500;
@@ -28,7 +28,7 @@ export const Parallax: React.FC = () => {
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${nyImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               transform: `translate3d(${x}px, ${y}px, ${-z}px) scale(${scale})`,
