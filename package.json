@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "start": "remotion preview",
-    "build": "remotion render ParallaxScene out/video.mp4"
+    "build": "npx remotion render ParallaxScene out/video.mp4"
   },
   "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "remotion": "latest",
-    "gsap": "latest"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "gsap": "^3.13.0",
+    "remotion": "^4.0.0",
+    "@remotion/cli": "^4.0.0"
   }
 }
