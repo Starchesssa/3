@@ -44,13 +44,14 @@ def generate_prompts(sentences, api_index):
     prompt = (
         f"This passage has {count} sentences:\n\n"
         f"{passage_text}\n\n"
-        "For each of these sentences in the script/paragraph describe suitable motion relevant image  that will describe what should be in the video based on the sentence . "
+        "For each of these sentences in the script/paragraph describe a realistic image  that will describe what should be in the video based on the sentence/company. "
         "Do not include humans or animals in the descriptions. "
-        "Write the descriptions numbered (1, 2, 3, ...).descriptions  should be numbered and arranged vertically  one after another according to corresponding sentence number,a sentence with a dot at the end is a valid sentence,so look for dots thats where is the sentence complete"
+        "Write the descriptions numbered (1, 2, 3, ...).descriptions  should be numbered and arranged vertically  one after another according to corresponding sentence number,skip one line after making prompts of one sentence ,a sentence with a dot at the end is a valid sentence,so look for dots thats where is the sentence complete"
         "a sentence might contain more than two images, this depends on the key words in a sentence to be revealed for people to undertand."
         "each sentence must have a phrase or word  to reveal so write the sentece number and its image prompts below with their corresponding visual phrase "
         "here is example, 1.a.(word/phrase)-image prompt , same for b , c .... , 2nd sentence also same format until all sentences are done"
-        "Each description  should visualize the idea of the sentence in a simple, clear way, images must have emotions in them if necessaryexample of sentence 'that day nutella was crushed by giant chocolate companies in stock market' here you bring inage of nutella but with emotion(red cross) ,inage of stock market big companies etc , addd emotions in top of inages thag reveal the message"
+        "dont start with , 'here is the prompts ' just begin straight',Each description  should visualize the idea of the sentence in a simple, clear way, images must have emotions in them if necessaryexample of sentence 'that day nutella was crushed by giant chocolate companies in stock market' here you bring inage of nutella but with emotion(red cross) ,inage of stock market big companies etc , addd emotions in top of inages thag reveal the message"
+        "each image should be realistic conveying ideas in the video, make this historical"
     )
 
     attempts = len(API_KEYS)
