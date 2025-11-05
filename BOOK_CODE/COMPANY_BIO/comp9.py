@@ -11,7 +11,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Size settings for Pollinations
 IMAGE_WIDTH = 1024
-IMAGE_HEIGHT = 1024
+IMAGE_HEIGHT = 720
 
 PROMPT_SUFFIX = ", make the image have white background and everything should be colourful except the white background"
 
