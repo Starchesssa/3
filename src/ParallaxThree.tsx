@@ -5,7 +5,6 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import nyImage from "../BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg";
 
-// Single plane layer component
 const LayerPlane: React.FC<{
   texture: THREE.Texture;
   index: number;
@@ -19,27 +18,22 @@ const LayerPlane: React.FC<{
   useFrame(() => {
     if (!meshRef.current) return;
 
-    // Progress of slice animation (0 → 1)
-    const progress =
-      frame < splitStartFrame
-        ? 0
-        : interpolate(frame, [splitStartFrame, totalFrames], [0, 1]);
+    const progress = frame < splitStartFrame
+      ? 0
+      : interpolate(frame, [splitStartFrame, totalFrames], [0, 1]);
 
-    // Spread layers in Z initially
-    const zStart = -400 + (index / (totalLayers - 1)) * 400;
-    const z = zStart + progress * 500; // Move toward camera
+    // Spread layers from 0 → 500 in front of camera
+    const zStart = (index / (totalLayers - 1)) * 500;
+    const z = zStart - progress * 200; // move layers slightly forward
 
-    // Offset X/Y for slight parallax spread
-    const offsetX = (index - totalLayers / 2) * 2;
-    const offsetY = (index - totalLayers / 2) * 1;
+    const offsetX = (index - totalLayers / 2) * 20;
+    const offsetY = (index - totalLayers / 2) * 10;
 
     meshRef.current.position.set(offsetX, offsetY, z);
 
-    // Scale effect based on Z
-    const scale = interpolate(z + 100, [-400, 100], [0.8, 1.2]);
+    const scale = interpolate(z, [0, 500], [1.0, 1.2]);
     meshRef.current.scale.set(scale, scale, 1);
 
-    // Optional: fade-in per layer
     if (meshRef.current.material instanceof THREE.MeshBasicMaterial) {
       meshRef.current.material.opacity = progress * (1 - index * 0.05);
     }
@@ -47,8 +41,8 @@ const LayerPlane: React.FC<{
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[5, 3]} />
-      <meshBasicMaterial map={texture} transparent />
+      <planeGeometry args={[50, 30]} />
+      <meshBasicMaterial map={texture} transparent opacity={0} />
     </mesh>
   );
 };
@@ -61,29 +55,20 @@ export const ParallaxThree: React.FC = () => {
 
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
 
-  // Load image as texture
   useEffect(() => {
     const loader = new THREE.TextureLoader();
-    loader.load(nyImage, (tex) => {
-      setTexture(tex);
-    });
+    loader.load(nyImage as unknown as string, (tex) => setTexture(tex));
   }, []);
 
-  // Show black background until texture is loaded
   if (!texture) return <AbsoluteFill style={{ background: "#000" }} />;
 
   return (
     <AbsoluteFill>
-      <Canvas
-        style={{ background: "#000" }}
-        camera={{ position: [0, 0, -600], fov: 60 }}
-      >
-        {/* Lights */}
+      <Canvas style={{ background: "#000" }} camera={{ position: [0, 0, -100], fov: 60 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 5, -5]} intensity={0.7} />
 
-        {/* Layers */}
-        {Array.from({ length: layers }).map((_, i) => (
+        {[...Array(layers)].map((_, i) => (
           <LayerPlane
             key={i}
             texture={texture}
@@ -95,7 +80,6 @@ export const ParallaxThree: React.FC = () => {
           />
         ))}
 
-        {/* Optional: add more effects, like fog */}
         <fog attach="fog" args={["#000", 0, 2000]} />
       </Canvas>
     </AbsoluteFill>
