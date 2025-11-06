@@ -1,19 +1,17 @@
-// src/index.tsx
-import {registerRoot} from 'remotion';
-import {Composition} from 'remotion';
+import { registerRoot } from 'remotion';
+import { Composition } from 'remotion';
 import React from 'react';
 
-// Import your scene component
-import {ParallaxScene} from './ParallaxScene';
+// Import your actual scene component
+import { ParallaxThree } from './ParallaxThree';
 
 const RemotionRoot: React.FC = () => {
   return (
     <>
-      {/* Composition: name, id, duration, fps, width, height */}
       <Composition
-        id="ParallaxScene"
-        component={ParallaxScene}  // Make sure this is imported correctly
-        durationInFrames={240}      // Example: 10 seconds at 24 fps
+        id="ParallaxThree"           // Use the correct ID
+        component={ParallaxThree}    // Must match the imported component
+        durationInFrames={240}
         fps={24}
         width={1920}
         height={1080}
@@ -22,5 +20,5 @@ const RemotionRoot: React.FC = () => {
   );
 };
 
-// Register root
+// Register the root
 registerRoot(RemotionRoot);
