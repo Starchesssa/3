@@ -39,10 +39,10 @@ def generate_animation_prompts_for_file(file_text, api_index):
     prompt = (
         "This is a text script for a video:\n\n"
         f"{file_text}\n\n"
-        "Please analyze the entire script and describe a simple animation for each sentence. "
+        "Please analyze the entire script and describe a simple kurzgasagt animation for each sentence. "
         "in the key lessons capitalise ,they are also part of the sentence , so describe their anomation and give me a sentence number ."
         "Do NOT include humans or animals. "
-        "if there is a need to represent a human of a company , just use logos and make the logo wear human cloth"
+        " "
         "Each animation should illustrate the key idea of the sentence. "
         "Number the animations according to the sentence number "
         "Do NOT add any preamble, start directly with the numbered animations."
