@@ -46,3 +46,4 @@ jobs:
             git commit -m "📝 Processed STT files into sentence-level timestamps"
             git push
             echo "✅ Sentences committed and pushed."
+          fi
