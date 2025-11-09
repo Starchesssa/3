@@ -42,7 +42,7 @@ def generate_animation_prompts_for_file(file_text, api_index):
         "Please analyze the entire script and describe a simple kurzgasagt animation for each sentence. "
         "in the key lessons capitalise ,they are also part of the sentence , so describe their anomation and give me a sentence number ."
         "Do NOT include humans or animals. "
-        " "
+        "each full stop(.) makes a sentence "
         "Each animation should illustrate the key idea of the sentence. "
         "Number the animations according to the sentence number "
         "Do NOT add any preamble, start directly with the numbered animations."
