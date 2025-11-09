@@ -41,13 +41,9 @@ def generate_animation_prompts_for_file(file_text, api_index):
         f"{file_text}\n\n"
         "Please analyze the entire script and describe a simple animation for each sentence. "
         "Do NOT include humans or animals. "
-        "Each sentence must have one or more numbered animation descriptions (a, b, c...) if necessary. "
+        "if tgere is a need to represent a himan of a company , just use logos and make the loho wear human cloth"
         "Each animation should illustrate the key idea of the sentence using shapes, colors, gradients, smooth motion, arrows, and visual metaphors. "
-        "Number the animations according to the sentence number and add key phrases for each animation. "
-        "Format example:\n"
-        "1.a.(key phrase)-animation description\n"
-        "1.b.(key phrase)-animation description\n"
-        "2.a.(key phrase)-animation description\n\n"
+        "Number the animations according to the sentence number "
         "Do NOT add any preamble, start directly with the numbered animations."
     )
 
