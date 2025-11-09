@@ -33,23 +33,22 @@ def read_file(file_path):
 def sanitize_filename(name):
     return re.sub(r"[^\w\d\-_. ]+", "", name).replace(" ", "_")
 
-def split_sentences(text):
-    sentences = re.split(r'(?<=[.!?])\s+', text)
-    return [s.strip() for s in sentences if s.strip()]
+# === Generate animation prompts for whole file ===
 
-# === Animation prompt generation ===
-
-def generate_animation_prompt_per_sentence(sentence, sentence_index, api_index):
+def generate_animation_prompts_for_file(file_text, api_index):
     prompt = (
-        f"Sentence {sentence_index + 1}: '{sentence}'\n\n"
-        "Describe a simple, clear animation that represents this sentence for a video. "
+        "This is a text script for a video:\n\n"
+        f"{file_text}\n\n"
+        "Please analyze the entire script and describe a simple animation for each sentence. "
         "Do NOT include humans or animals. "
-        "Focus on elements, shapes, colors, movement, gradients, and visual metaphors. "
-        "Each animation should be short and simple, enough to illustrate the sentence idea. "
-        "Number multiple elements if necessary (a, b, c...). "
-        "Example format: 1.a.(key phrase)-animation description, 1.b.(key phrase)-animation description, etc. "
-        "Use smooth motion, visual storytelling, and highlight key ideas in the animation. "
-        "Do not start with any preamble, just list the animations."
+        "Each sentence must have one or more numbered animation descriptions (a, b, c...) if necessary. "
+        "Each animation should illustrate the key idea of the sentence using shapes, colors, gradients, smooth motion, arrows, and visual metaphors. "
+        "Number the animations according to the sentence number and add key phrases for each animation. "
+        "Format example:\n"
+        "1.a.(key phrase)-animation description\n"
+        "1.b.(key phrase)-animation description\n"
+        "2.a.(key phrase)-animation description\n\n"
+        "Do NOT add any preamble, start directly with the numbered animations."
     )
 
     attempts = len(API_KEYS)
@@ -61,12 +60,12 @@ def generate_animation_prompt_per_sentence(sentence, sentence_index, api_index):
                 model=MODEL,
                 contents=[{"role": "user", "parts": [{"text": prompt}]}]
             )
-            print(f"✅ Sentence {sentence_index + 1} animation prompts generated with API#{(api_index + attempt) % attempts + 1}", flush=True)
+            print(f"✅ Animation prompts generated with API#{(api_index + attempt) % attempts + 1}", flush=True)
             return response.text.strip(), (api_index + attempt + 1) % attempts
         except Exception as e:
             print(f"⚠️ API#{(api_index + attempt) % attempts + 1} failed: {e}", flush=True)
             time.sleep(1)
-    raise RuntimeError(f"❌ All API keys failed for sentence {sentence_index + 1}")
+    raise RuntimeError("❌ All API keys failed for file prompts")
 
 def save_prompts(filename, prompts):
     os.makedirs(PROMPTS_PATH, exist_ok=True)
@@ -89,23 +88,18 @@ def main():
         print(f"\n⏳ Processing {file}...", flush=True)
         try:
             text = read_file(os.path.join(SCRIPT_PATH, file))
-            sentences = split_sentences(text)
-            if not sentences:
-                print(f"⚠️ No sentences found in {file}, skipping.")
+            if not text:
+                print(f"⚠️ Empty file: {file}, skipping.")
                 continue
 
-            all_sentence_prompts = []
-            for idx, sentence in enumerate(sentences):
-                animation_prompt, api_index = generate_animation_prompt_per_sentence(sentence, idx, api_index)
-                all_sentence_prompts.append(f"{idx+1}. {animation_prompt}\n")  # number + spacing
-
-            save_prompts(file, "\n".join(all_sentence_prompts))
+            animation_prompts, api_index = generate_animation_prompts_for_file(text, api_index)
+            save_prompts(file, animation_prompts)
 
         except Exception as e:
             print(f"❌ Failed for {file}: {e}", flush=True)
             continue
 
-    print("\n🎉 All scripts converted into per-sentence animation prompts.\n")
+    print("\n🎉 All scripts converted into full-file animation prompts.\n")
 
 if __name__ == "__main__":
     main()
