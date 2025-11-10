@@ -28,21 +28,24 @@ const Scene: React.FC<SceneProps> = ({imageSrc}) => {
     groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
   });
 
-  const slices = [];
+  // Preload textures once
+  const textures: THREE.Texture[] = [];
   for (let i = 0; i < slicesPerImage; i++) {
     const texture = new THREE.TextureLoader().load(staticFile(imageSrc));
     texture.center.set(0.5, 0.5);
     texture.repeat.set(1, 1);
+    textures.push(texture);
+  }
 
-    // Create slightly scaled plane to mimic circular slice effect
-    const scaleFactor = 1 - (i * 0.08); // smaller for inner slices
-    slices.push(
+  const slices = textures.map((texture, i) => {
+    const scaleFactor = 1 - i * 0.08; // smaller for inner slices
+    return (
       <mesh key={i} position={[0, 0, -i * sliceDepth]}>
         <planeGeometry args={[4 * scaleFactor, 4 * scaleFactor]} />
         <meshBasicMaterial map={texture} transparent={true} />
       </mesh>
     );
-  }
+  });
 
   return <group ref={groupRef}>{slices}</group>;
 };
@@ -56,12 +59,11 @@ const Slideshow: React.FC<SlideshowProps> = ({images}) => {
   const frame = useCurrentFrame();
   const totalFramesPerImage = framesPerImage;
 
-  // Determine which image we are on
   const currentImageIndex = Math.floor(frame / totalFramesPerImage) % images.length;
   const frameInImage = frame % totalFramesPerImage;
 
   return (
-    <ThreeCanvas camera={{position: [0, 0, 6]}}>
+    <ThreeCanvas width={width} height={height} camera={{position: [0, 0, 6]}}>
       <Scene imageSrc={images[currentImageIndex]} />
     </ThreeCanvas>
   );
