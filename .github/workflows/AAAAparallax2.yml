@@ -1,10 +1,8 @@
+
 name: Render Remotion Video
 
 on:
   workflow_dispatch:  # allows manual run
-  push:
-    paths:
-      - "BOOK_CODE/PARALLAX/**"
 
 jobs:
   render:
@@ -27,7 +25,7 @@ jobs:
       - name: Render video
         run: |
           cd BOOK_CODE/PARALLAX
-          npx remotion render src/parallax.tsx ThreeDepth out.mp4
+          npx remotion render parallax.tsx ThreeDepth out.mp4
 
       - name: Upload rendered video
         uses: actions/upload-artifact@v4
