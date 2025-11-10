@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurzgesagt Cave Animation</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(180deg, #1a1c2c, #282b3a, #3b3f58);
+        overflow: hidden;
+    }
+
+    .scene {
+        position: relative;
+        width: 350px;
+        height: 250px;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, #3b3f58 0%, #1c1d2a 80%);
+        box-shadow: 0 0 40px rgba(0,0,0,0.5) inset;
+        overflow: hidden;
+        transform-style: preserve-3d;
+    }
+
+    /* glowing cave edges */
+    .glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, rgba(255,255,255,0.15) 10%, transparent 70%);
+        animation: pulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { opacity: 0.6; }
+        to { opacity: 1; }
+    }
+
+    /* cave door container */
+    .door {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: 120px;
+        height: 160px;
+        transform: translateX(-50%);
+        perspective: 800px;
+    }
+
+    .door-panel {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #2e2f3e, #43455c, #606385);
+        box-shadow: inset -5px 5px 10px rgba(0,0,0,0.3);
+        transform-origin: left;
+        transform: rotateY(0deg);
+        transition: transform 2s ease;
+    }
+
+    .door.open .door-panel {
+        transform: rotateY(-110deg);
+    }
+
+    /* ground */
+    .ground {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        background: linear-gradient(180deg, #262737, #1b1c29);
+        border-top: 2px solid rgba(255,255,255,0.05);
+    }
+
+    /* amazon logo (cartoony style) */
+    .amazon-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 140px;
+        height: 80px;
+        background: none;
+        opacity: 0;
+        animation: showLogo 1s ease forwards;
+        animation-delay: 2s;
+    }
+
+    @keyframes showLogo {
+        to {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .smile {
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        width: 100px;
+        height: 20px;
+        border-bottom: 6px solid #ff9900;
+        border-radius: 50%;
+        transform: rotate(10deg);
+    }
+
+    .arrow {
+        position: absolute;
+        bottom: 22px;
+        left: 105px;
+        width: 0; 
+        height: 0; 
+        border-left: 10px solid #ff9900;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        transform: rotate(10deg);
+    }
+
+    .text {
+        position: absolute;
+        top: 15px;
+        left: 5px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        font-size: 38px;
+        color: white;
+        letter-spacing: 1px;
+    }
+
+    .scene.open .amazon-logo {
+        animation-delay: 1s;
+    }
+</style>
+</head>
+<body>
+    <div class="scene" id="scene">
+        <div class="glow"></div>
+        <div class="door" id="door">
+            <div class="door-panel"></div>
+        </div>
+        <div class="ground"></div>
+        <div class="amazon-logo" id="logo">
+            <div class="text">amazon</div>
+            <div class="smile"></div>
+            <div class="arrow"></div>
+        </div>
+    </div>
+
+    <script>
+        const door = document.getElementById('door');
+        const scene = document.getElementById('scene');
+
+        setTimeout(() => {
+            door.classList.add('open');
+            scene.classList.add('open');
+        }, 1000);
+    </script>
+</body>
+</html>
