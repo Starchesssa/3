@@ -1,42 +1,30 @@
-name: Render Parallax Video
+
+name: Render Parallax Slideshow
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # manual trigger
 
 jobs:
-  render-video:
+  render:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Install FFmpeg (safe)
-        run: |
-          sudo apt-get clean
-          sudo apt-get update --fix-missing
-          sudo apt-get install -y software-properties-common
-          sudo add-apt-repository universe
-          sudo apt-get update --fix-missing
-          sudo apt-get install -y ffmpeg --fix-missing
+      - name: Render Remotion video
+        run: npx remotion render src/ParallaxSlideshow.tsx ParallaxSlideshow out.mp4
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build & Render Remotion video
-        run: npm run build
-
-      - name: Upload Rendered Video
-        uses: actions/upload-artifact@v4
+      - name: Upload video as artifact
+        uses: actions/upload-artifact@v3
         with:
           name: parallax-video
-          path: out/video.mp4
-          retention-days: 7
+          path: out.mp4
