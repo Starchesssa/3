@@ -1,40 +1,28 @@
 
-name: Parse After Effects Project
-
-on:
-  workflow_dispatch:
-  push:
-    paths:
-      - 'BOOK_CODE/PARALLAX/Spaced Out Final.aep'
-
-permissions:
-  contents: write
+name: Render Parallax
+on: [push]
 
 jobs:
-  parse-aep:
+  render:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.10'
+          node-version: 20
 
-      - name: Install dependencies
+      - name: Install Remotion
         run: |
-          pip install aep-parser six
+          npm install remotion
 
-      - name: Run parser script
+      - name: Render video
         run: |
-          python BOOK_CODE/PARALLAX/P1.py
+          npx remotion render BOOK_CODE/PARALLAX/parallax.tsx Parallax out.mp4
 
-      - name: Commit parsed JSON back
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add BOOK_CODE/PARALLAX/Spaced_Out_Final.json
-          git commit -m "Add parsed JSON for Spaced Out Final.aep" || echo "No changes to commit"
-          git push
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: parallax-video
+          path: out.mp4
