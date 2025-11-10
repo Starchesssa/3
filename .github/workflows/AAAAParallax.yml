@@ -24,7 +24,7 @@ jobs:
         run: npx remotion render src/ParallaxSlideshow.tsx ParallaxSlideshow out.mp4
 
       - name: Upload video as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: parallax-video
           path: out.mp4
