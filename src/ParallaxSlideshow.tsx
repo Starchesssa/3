@@ -1,16 +1,15 @@
 
 // FILE: src/ParallaxSlideshow.tsx
 import React, {useRef, useMemo} from 'react';
-import {Composition, registerRoot, useCurrentFrame} from 'remotion';
+import {Composition, registerRoot, useCurrentFrame, staticFile} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
 import {useFrame} from '@react-three/fiber';
-import path from 'path';
 
 // --- CONFIGURATION ---
-const slicesPerImage = 6;       // Number of nested slices per image
-const sliceDepth = 0.5;         // Z spacing between slices
-const framesPerImage = 150;     // Duration per image in frames
+const slicesPerImage = 6;
+const sliceDepth = 0.5;
+const framesPerImage = 150;
 const fps = 30;
 const width = 1080;
 const height = 1080;
@@ -24,17 +23,13 @@ const Scene: React.FC<SceneProps> = ({imageSrc}) => {
   const frame = useCurrentFrame();
   const groupRef = useRef<THREE.Group>(null!);
 
-  // Camera animation: move forward along Z
   useFrame(() => {
     groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
   });
 
-  // Preload textures only once per image
   const textures = useMemo(() => {
     return Array.from({length: slicesPerImage}, () => {
-      // Resolve absolute path to the image in public/
-      const imgPath = path.join(process.cwd(), 'public', imageSrc);
-      const tex = new THREE.TextureLoader().load(`file://${imgPath}`);
+      const tex = new THREE.TextureLoader().load(staticFile(imageSrc));
       tex.center.set(0.5, 0.5);
       tex.repeat.set(1, 1);
       return tex;
@@ -74,12 +69,12 @@ const Slideshow: React.FC<SlideshowProps> = ({images}) => {
   );
 };
 
-// --- List your images here ---
+// --- List your images in public/ ---
 const imageFiles = [
   'image1.jpg',
   'image2.jpg',
   'image3.jpg',
-  // Add all your .jpg files in public/
+  // Add all .jpg files here
 ];
 
 // --- Register Composition ---
