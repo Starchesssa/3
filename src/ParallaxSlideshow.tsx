@@ -23,10 +23,14 @@ const Scene: React.FC<SceneProps> = ({imageSrc}) => {
   const frame = useCurrentFrame();
   const groupRef = useRef<THREE.Group>(null!);
 
+  // Move slices along Z over time
   useFrame(() => {
-    groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
+    if (groupRef.current) {
+      groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
+    }
   });
 
+  // Preload textures for slices (use staticFile for public folder)
   const textures = useMemo(() => {
     return Array.from({length: slicesPerImage}, () => {
       const tex = new THREE.TextureLoader().load(staticFile(imageSrc));
@@ -63,7 +67,11 @@ const Slideshow: React.FC<SlideshowProps> = ({images}) => {
   const currentImageIndex = Math.floor(frame / totalFramesPerImage) % images.length;
 
   return (
-    <ThreeCanvas width={width} height={height} camera={{position: [0, 0, 6]}}>
+    <ThreeCanvas
+      width={width}
+      height={height}
+      camera={{position: [0, 0, 6]}}
+    >
       <Scene imageSrc={images[currentImageIndex]} />
     </ThreeCanvas>
   );
@@ -74,7 +82,7 @@ const imageFiles = [
   'image1.jpg',
   'image2.jpg',
   'image3.jpg',
-  // Add all .jpg files here
+  // Add all your .jpg files here
 ];
 
 // --- Register Composition ---
