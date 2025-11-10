@@ -1,165 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amazon AWS Story – Kurzgesagt Style</title>
+<title>Amazon AWS Cartoon Story</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    body {
-        margin: 0;
-        overflow: hidden;
-        background: linear-gradient(135deg, #1a237e, #0d47a1, #1976d2);
-        font-family: 'Poppins', sans-serif;
-        color: white;
-    }
-
-    .scene {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        opacity: 0;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-        background: linear-gradient(to right, #FFD54F, #FFB300);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-    }
-
-    p {
-        max-width: 800px;
-        text-align: center;
-        line-height: 1.6;
-        font-size: 1.1rem;
-        color: #E3F2FD;
-        padding: 0 20px;
-    }
-
-    .planet {
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #42a5f5, #1565c0);
-        position: relative;
-        margin-bottom: 20px;
-        box-shadow: 0 0 30px rgba(66,165,245,0.6);
-    }
-
-    .orbit {
-        position: absolute;
-        width: 320px;
-        height: 320px;
-        border: 1px dashed rgba(255,255,255,0.2);
-        border-radius: 50%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .satellite {
-        width: 30px;
-        height: 30px;
-        background: linear-gradient(135deg, #ff6f61, #ff8a65);
-        border-radius: 50%;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform-origin: -120px center;
-    }
-
-    .aws-box {
-        width: 160px;
-        height: 120px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #FFB300, #F57C00);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 600;
-        color: #fff;
-        box-shadow: 0 0 20px rgba(255,183,77,0.5);
-    }
-
-    .fade {
-        opacity: 0;
-    }
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #0D47A1, #1976D2);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+  .scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+  }
+  svg {
+    width: 300px;
+    height: 300px;
+  }
+  p {
+    color: #fff;
+    font-size: 1.2rem;
+    max-width: 700px;
+    text-align: center;
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
 
+<!-- Scene 1: Messy Code -->
 <div class="scene" id="scene1">
-    <h1>KEY LESSON:</h1>
-    <p>YOUR BIGGEST PROBLEM CAN BECOME YOUR BIGGEST PRODUCT.</p>
+  <svg viewBox="0 0 200 200">
+    <!-- Cartoon tangled code -->
+    <path d="M20,20 C40,40 60,60 80,40 S140,60 160,20" stroke="#FFC107" stroke-width="4" fill="none"/>
+    <circle cx="50" cy="50" r="6" fill="#FF5722"/>
+    <circle cx="120" cy="60" r="6" fill="#FF5722"/>
+  </svg>
+  <p>Amazon's website was a tangled mess of technology, choking growth like building a skyscraper on sand.</p>
 </div>
 
+<!-- Scene 2: Engineers Rebuilding -->
 <div class="scene" id="scene2">
-    <div class="planet"></div>
-    <p>Fast forward to 2003. Amazon had survived the dot-com bust. But inside, it faced a tangled web of messy technology.</p>
+  <svg viewBox="0 0 200 200">
+    <!-- Cartoon LEGO bricks -->
+    <rect x="40" y="80" width="40" height="20" fill="#FF7043" rx="4"/>
+    <rect x="90" y="80" width="40" height="20" fill="#FFB74D" rx="4"/>
+    <rect x="65" y="100" width="40" height="20" fill="#4DB6AC" rx="4"/>
+  </svg>
+  <p>Engineers rebuilt the entire infrastructure using standardized “LEGO bricks” for internal developers.</p>
 </div>
 
+<!-- Scene 3: AWS Idea -->
 <div class="scene" id="scene3">
-    <div class="orbit"></div>
-    <div class="satellite"></div>
-    <p>Different teams had built different parts. Nothing worked well together — like building a skyscraper on sand.</p>
+  <svg viewBox="0 0 200 200">
+    <!-- Cartoon cloud for AWS -->
+    <ellipse cx="100" cy="100" rx="80" ry="50" fill="#64B5F6"/>
+    <ellipse cx="70" cy="90" rx="50" ry="30" fill="#42A5F5"/>
+    <ellipse cx="130" cy="90" rx="50" ry="30" fill="#42A5F5"/>
+    <text x="50%" y="55%" text-anchor="middle" fill="#fff" font-size="20" font-weight="bold">AWS</text>
+  </svg>
+  <p>The internal solution became Amazon Web Services, letting companies rent computing power instead of buying servers.</p>
 </div>
 
+<!-- Scene 4: AWS Growth -->
 <div class="scene" id="scene4">
-    <div class="aws-box">Rebuild</div>
-    <p>Engineers rebuilt everything from the ground up — creating standardized “LEGO bricks” for all developers.</p>
-</div>
-
-<div class="scene" id="scene5">
-    <div class="aws-box" style="background: linear-gradient(135deg, #00C853, #64DD17);">AWS</div>
-    <p>Then came the billion-dollar idea. They realized this internal solution could power every company in the world.</p>
-</div>
-
-<div class="scene" id="scene6">
-    <div class="planet"></div>
-    <p>By 2022, AWS was generating $80B in revenue. A side project became Amazon’s most profitable division.</p>
-</div>
-
-<div class="scene" id="scene7">
-    <h1>Lesson:</h1>
-    <p>The solution you build for yourself might be the next big product the world is waiting for.</p>
+  <svg viewBox="0 0 200 200">
+    <!-- Cartoon rocket for growth -->
+    <polygon points="100,10 90,50 110,50" fill="#FFEB3B"/>
+    <rect x="90" y="50" width="20" height="100" fill="#FF9800"/>
+    <polygon points="90,150 110,150 100,180" fill="#F44336"/>
+  </svg>
+  <p>AWS became wildly successful, powering Netflix, Airbnb, and generating billions in profit.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
-    const scenes = document.querySelectorAll('.scene');
-    const satellites = document.querySelectorAll('.satellite');
-    const tl = gsap.timeline({ repeat: 0 });
+const scenes = document.querySelectorAll('.scene');
+let tl = gsap.timeline({repeat:0});
 
-    // Animate each scene sequentially
-    scenes.forEach((scene, i) => {
-        tl.to(scene, {opacity: 1, duration: 1, ease: "power2.out"});
-        tl.to(scene, {opacity: 0, duration: 1, delay: 3});
-    });
+// Animate scenes sequentially
+scenes.forEach(scene => {
+  tl.to(scene, {opacity:1, duration:1});
+  tl.to(scene, {opacity:0, duration:1, delay:3});
+});
 
-    // Endless satellite orbit motion
-    gsap.to('.satellite', {
-        rotation: 360,
-        duration: 8,
-        repeat: -1,
-        ease: "linear"
-    });
+// Optional: float animation for clouds
+gsap.to('#scene3 ellipse', {
+  y: "+=10",
+  duration: 2,
+  yoyo: true,
+  repeat: -1,
+  ease: "sine.inOut"
+});
 
-    // Float planet animation
-    gsap.to('.planet', {
-        y: -10,
-        duration: 2,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut"
-    });
+// Optional: rocket bounce
+gsap.to('#scene4 polygon', {
+  y: "+=5",
+  duration: 1,
+  yoyo: true,
+  repeat: -1,
+  ease: "sine.inOut"
+});
 </script>
-
 </body>
 </html>
