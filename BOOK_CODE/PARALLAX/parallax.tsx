@@ -36,7 +36,11 @@ const Scene: React.FC = () => {
 // --- Composition Wrapper ---
 export const ThreeDepthScene: React.FC = () => {
   return (
-    <ThreeCanvas camera={{position: [0, 0, 6]}}>
+    <ThreeCanvas
+      camera={{ position: [0, 0, 6] }}
+      width={1080}   // MUST set
+      height={1080}  // MUST set
+    >
       <Scene />
     </ThreeCanvas>
   );
@@ -45,7 +49,7 @@ export const ThreeDepthScene: React.FC = () => {
 // --- Register the Composition ---
 registerRoot(() => (
   <Composition
-    id="ThreeDepth"       // ✅ Matches render command
+    id="ThreeDepth"
     component={ThreeDepthScene}
     durationInFrames={150}
     fps={30}
