@@ -1,10 +1,11 @@
 
 // FILE: src/ParallaxSlideshow.tsx
 import React, {useRef, useMemo} from 'react';
-import {Composition, registerRoot, useCurrentFrame, staticFile} from 'remotion';
+import {Composition, registerRoot, useCurrentFrame} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
 import {useFrame} from '@react-three/fiber';
+import path from 'path';
 
 // --- CONFIGURATION ---
 const slicesPerImage = 6;       // Number of nested slices per image
@@ -31,7 +32,9 @@ const Scene: React.FC<SceneProps> = ({imageSrc}) => {
   // Preload textures only once per image
   const textures = useMemo(() => {
     return Array.from({length: slicesPerImage}, () => {
-      const tex = new THREE.TextureLoader().load(staticFile(imageSrc));
+      // Resolve absolute path to the image in public/
+      const imgPath = path.join(process.cwd(), 'public', imageSrc);
+      const tex = new THREE.TextureLoader().load(`file://${imgPath}`);
       tex.center.set(0.5, 0.5);
       tex.repeat.set(1, 1);
       return tex;
