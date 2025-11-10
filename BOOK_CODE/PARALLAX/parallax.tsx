@@ -1,36 +1,52 @@
-// parallax.tsx
-import { registerRoot, Composition, useCurrentFrame, interpolate, AbsoluteFill, Img, staticFile } from "remotion";
 
-const ParallaxScene = () => {
+import {Composition, registerRoot, useCurrentFrame, interpolate} from 'remotion';
+import {ThreeCanvas} from '@remotion/three';
+import * as THREE from 'three';
+import React, {useRef} from 'react';
+import {useFrame} from '@react-three/fiber';
+
+// --- 3D Scene Component ---
+const Scene: React.FC = () => {
   const frame = useCurrentFrame();
-  const scale = interpolate(frame, [0, 150], [1, 1.2]); // smooth zoom-in
+  const meshRef = useRef<THREE.Mesh>(null!);
+
+  // Animate rotation over time
+  const rotation = interpolate(frame, [0, 150], [0, Math.PI * 2]);
+
+  useFrame(() => {
+    meshRef.current.rotation.y = rotation;
+  });
+
+  const texture = new THREE.TextureLoader().load(
+    staticFile('image-of-new-york-in-sunshine-without-people.jpg')
+  );
 
   return (
-    <AbsoluteFill
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black",
-      }}
-    >
-      <Img
-        src={staticFile("BOOK_CODE/PARALLAX/image-of-new-york-in-sunshine-without-people.jpg")}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transform: `scale(${scale})`,
-        }}
-      />
-    </AbsoluteFill>
+    <>
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[2, 2, 5]} />
+      <mesh ref={meshRef} position={[0, 0, 0]}>
+        <planeGeometry args={[4, 2.25]} />
+        <meshStandardMaterial map={texture} />
+      </mesh>
+    </>
   );
 };
 
-// Register composition directly here
+// --- Composition Wrapper ---
+export const ThreeDepthScene: React.FC = () => {
+  return (
+    <ThreeCanvas camera={{position: [0, 0, 6]}}>
+      <Scene />
+    </ThreeCanvas>
+  );
+};
+
+// --- Register the Composition ---
 registerRoot(() => (
   <Composition
-    id="Parallax"
-    component={ParallaxScene}
+    id="ThreeDepth"
+    component={ThreeDepthScene}
     durationInFrames={150}
     fps={30}
     width={1080}
