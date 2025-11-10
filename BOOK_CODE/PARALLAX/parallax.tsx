@@ -1,5 +1,5 @@
 
-import {Composition, registerRoot, useCurrentFrame, interpolate} from 'remotion';
+import {Composition, registerRoot, useCurrentFrame, interpolate, staticFile} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
 import React, {useRef} from 'react';
@@ -45,7 +45,7 @@ export const ThreeDepthScene: React.FC = () => {
 // --- Register the Composition ---
 registerRoot(() => (
   <Composition
-    id="ThreeDepth"
+    id="ThreeDepth"       // ✅ Matches render command
     component={ThreeDepthScene}
     durationInFrames={150}
     fps={30}
