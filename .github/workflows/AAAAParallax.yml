@@ -18,13 +18,14 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install remotion @remotion/three three @react-three/fiber react react-dom
 
       - name: Render Remotion video
         run: npx remotion render src/ParallaxSlideshow.tsx ParallaxSlideshow out.mp4
 
       - name: Upload video as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: parallax-video
           path: out.mp4
