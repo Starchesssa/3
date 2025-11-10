@@ -18,13 +18,13 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Render Remotion video
         run: npx remotion render src/ParallaxSlideshow.tsx ParallaxSlideshow out.mp4
 
       - name: Upload video as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: parallax-video
           path: out.mp4
