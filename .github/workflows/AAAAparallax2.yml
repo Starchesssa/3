@@ -1,28 +1,36 @@
+name: Render Remotion Video
 
-name: Render Parallax
-on: [push]
+on:
+  workflow_dispatch:  # allows manual run
+  push:
+    paths:
+      - "BOOK_CODE/PARALLAX/**"
 
 jobs:
   render:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      - name: Install Remotion
+      - name: Install dependencies
         run: |
-          npm install remotion
+          cd BOOK_CODE/PARALLAX
+          npm install remotion @remotion/three three @react-three/fiber
 
       - name: Render video
         run: |
-          npx remotion render BOOK_CODE/PARALLAX/parallax.tsx Parallax out.mp4
+          cd BOOK_CODE/PARALLAX
+          npx remotion render src/parallax.tsx ThreeDepth out.mp4
 
-      - name: Upload video
+      - name: Upload rendered video
         uses: actions/upload-artifact@v4
         with:
-          name: parallax-video
-          path: out.mp4
+          name: rendered-video
+          path: BOOK_CODE/PARALLAX/out.mp4
