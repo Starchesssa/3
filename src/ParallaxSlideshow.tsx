@@ -1,6 +1,6 @@
 
 // FILE: src/ParallaxSlideshow.tsx
-import React, {useRef} from 'react';
+import React, {useRef, useMemo} from 'react';
 import {Composition, registerRoot, useCurrentFrame, staticFile} from 'remotion';
 import {ThreeCanvas} from '@remotion/three';
 import * as THREE from 'three';
@@ -28,26 +28,29 @@ const Scene: React.FC<SceneProps> = ({imageSrc}) => {
     groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
   });
 
-  // Preload textures once
-  const textures: THREE.Texture[] = [];
-  for (let i = 0; i < slicesPerImage; i++) {
-    const texture = new THREE.TextureLoader().load(staticFile(imageSrc));
-    texture.center.set(0.5, 0.5);
-    texture.repeat.set(1, 1);
-    textures.push(texture);
-  }
+  // Preload textures only once per image
+  const textures = useMemo(() => {
+    return Array.from({length: slicesPerImage}, () => {
+      const tex = new THREE.TextureLoader().load(staticFile(imageSrc));
+      tex.center.set(0.5, 0.5);
+      tex.repeat.set(1, 1);
+      return tex;
+    });
+  }, [imageSrc]);
 
-  const slices = textures.map((texture, i) => {
-    const scaleFactor = 1 - i * 0.08; // smaller for inner slices
-    return (
-      <mesh key={i} position={[0, 0, -i * sliceDepth]}>
-        <planeGeometry args={[4 * scaleFactor, 4 * scaleFactor]} />
-        <meshBasicMaterial map={texture} transparent={true} />
-      </mesh>
-    );
-  });
-
-  return <group ref={groupRef}>{slices}</group>;
+  return (
+    <group ref={groupRef}>
+      {textures.map((texture, i) => {
+        const scaleFactor = 1 - i * 0.08;
+        return (
+          <mesh key={i} position={[0, 0, -i * sliceDepth]}>
+            <planeGeometry args={[4 * scaleFactor, 4 * scaleFactor]} />
+            <meshBasicMaterial map={texture} transparent={true} />
+          </mesh>
+        );
+      })}
+    </group>
+  );
 };
 
 // --- Slideshow Component ---
@@ -60,7 +63,6 @@ const Slideshow: React.FC<SlideshowProps> = ({images}) => {
   const totalFramesPerImage = framesPerImage;
 
   const currentImageIndex = Math.floor(frame / totalFramesPerImage) % images.length;
-  const frameInImage = frame % totalFramesPerImage;
 
   return (
     <ThreeCanvas width={width} height={height} camera={{position: [0, 0, 6]}}>
@@ -74,7 +76,7 @@ const imageFiles = [
   'image1.jpg',
   'image2.jpg',
   'image3.jpg',
-  // Add all your .jpg in public here
+  // Add all your .jpg files in public/
 ];
 
 // --- Register Composition ---
