@@ -33,12 +33,11 @@ jobs:
       # 5️⃣ Render the Remotion video
       - name: Render Remotion Video
         run: |
-          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 \
-          --webpack-cache
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 --webpack-cache
 
-      # 6️⃣ Upload the video as artifact
-      - name: Upload Video
-        uses: actions/upload-artifact@v3
+      # 6️⃣ Upload video as artifact (v4)
+      - name: Upload Rendered Video
+        uses: actions/upload-artifact@v4
         with:
           name: remotion-video
           path: out/video.mp4
