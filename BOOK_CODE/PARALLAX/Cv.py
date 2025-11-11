@@ -4,15 +4,15 @@ import numpy as np
 import os
 
 # ---------- Configuration ----------
-img_dir = "public/"  # input images folder
-out_dir = os.path.join(img_dir, "stylized")  # output folder
+img_dir = "public/"  # Input images folder
+out_dir = os.path.join(img_dir, "stylized")  # Output folder
 os.makedirs(out_dir, exist_ok=True)
 
-# Modern palette: only these colors will appear in posterized style
+# Modern strict palette: only these colors will appear
 palette = np.array([
-    [255, 209, 102],  # Yellow / Gold
-    [240, 240, 240],  # Silver / White
-    [26, 26, 26]      # Deep Black
+    [255, 209, 102],  # Warm Yellow / Gold
+    [245, 245, 245],  # Soft Silver / White
+    [10, 10, 10]      # Deep Black
 ], dtype=np.uint8)
 
 # List of images to process
@@ -53,25 +53,24 @@ def cartoonize_painterly(img):
 
 def cartoonize_posterized_strict(img, palette):
     """
-    Posterized style with strict palette: only colors in the palette appear
+    Posterized style: strictly only colors from palette
     """
-    # Flatten image
     Z = img.reshape((-1, 3)).astype(np.int32)
-    # Compute distance to palette colors
     distances = np.linalg.norm(Z[:, None, :] - palette[None, :, :], axis=2)
     nearest_idx = np.argmin(distances, axis=1)
-    # Map pixels to nearest palette color
-    res = palette[nearest_idx].reshape(img.shape).astype(np.uint8)
-    return res
+    strict_img = palette[nearest_idx].reshape(img.shape).astype(np.uint8)
+    return strict_img
 
 def cartoonize_posterized_with_edges(img, palette):
-    """Poster style with strict palette + edges"""
+    """Posterized with strict palette + black edges"""
     strict = cartoonize_posterized_strict(img, palette)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.adaptiveThreshold(cv2.medianBlur(gray,5),255,
                                   cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,9,9)
-    result = cv2.bitwise_and(strict, strict, mask=edges)
-    return result
+    edges_colored = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+    # Force edges to black
+    strict[edges_colored == 0] = [0,0,0]
+    return strict
 
 # ---------- Process Images ----------
 for fname in images:
@@ -91,7 +90,7 @@ for fname in images:
     sketch = cartoonize_sketch(img)
     cv2.imwrite(os.path.join(out_dir, f"{base_name}_sketch.png"), sketch)
     
-    # 3️⃣ Posterized with strict palette
+    # 3️⃣ Posterized (strict palette + edges)
     poster = cartoonize_posterized_with_edges(img, palette)
     cv2.imwrite(os.path.join(out_dir, f"{base_name}_poster.png"), poster)
     
