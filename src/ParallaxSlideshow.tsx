@@ -1,21 +1,24 @@
+
 import React, {useMemo} from "react";
 import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import * as THREE from "three";
+import path from "path";
+import fs from "fs";
 
 // 🖼️ Scenes with both images and depth maps in public/
 const scenes = [
-  { image: "/1.jpg", depth: "/1.png" },
-  { image: "/2.jpg", depth: "/2.png" },
-  { image: "/3.jpg", depth: "/3.png" },
-  { image: "/4.jpeg", depth: "/4.png" },
-  { image: "/5.jpeg", depth: "/5.png" },
-  { image: "/6.jpeg", depth: "/6.png" },
-  { image: "/7.jpeg", depth: "/7.png" },
-  { image: "/8.jpeg", depth: "/8.png" },
-  { image: "/9.jpeg", depth: "/9.png" },
-  { image: "/10.jpeg", depth: "/10.png" },
-  { image: "/11.jpeg", depth: "/11.png" },
+  { image: "public/1.jpg", depth: "public/1.png" },
+  { image: "public/2.jpg", depth: "public/2.png" },
+  { image: "public/3.jpg", depth: "public/3.png" },
+  { image: "public/4.jpeg", depth: "public/4.png" },
+  { image: "public/5.jpeg", depth: "public/5.png" },
+  { image: "public/6.jpeg", depth: "public/6.png" },
+  { image: "public/7.jpeg", depth: "public/7.png" },
+  { image: "public/8.jpeg", depth: "public/8.png" },
+  { image: "public/9.jpeg", depth: "public/9.png" },
+  { image: "public/10.jpeg", depth: "public/10.png" },
+  { image: "public/11.jpeg", depth: "public/11.png" },
 ];
 
 const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
@@ -24,8 +27,10 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
   const {geometry, material} = useMemo(() => {
     const geometry = new THREE.PlaneGeometry(1.6, 0.9, 256, 256);
     const loader = new THREE.TextureLoader();
-    const colorTex = loader.load(image);
-    const depthTex = loader.load(depth);
+
+    // ✅ Load images directly from file system
+    const colorTex = loader.load(path.resolve(process.cwd(), image));
+    const depthTex = loader.load(path.resolve(process.cwd(), depth));
 
     const material = new THREE.ShaderMaterial({
       uniforms: {
