@@ -1,49 +1,44 @@
 
-name: Render Depth Slideshow Video
+name: Render Remotion Video
 
 on:
-  workflow_dispatch:   # allows manual trigger
   push:
-    paths:
-      - 'src/DepthShowcase.tsx'
-      - 'src/index.tsx'
-      - 'public/**'
-
-permissions:
-  contents: write   # allows saving generated video
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   render-video:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout the repository
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: 20
 
+      # 3️⃣ Install dependencies
       - name: Install dependencies
-        run: |
-          npm ci
-          npm install three @remotion/three
+        run: npm ci
 
-      - name: Render 3D Depth Slideshow
-        run: |
-          npx remotion render src/index.tsx DepthSlideshow3D out/depth_video.mp4
+      # 4️⃣ Install FFmpeg
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Upload video artifact
-        uses: actions/upload-artifact@v4
+      # 5️⃣ Render the Remotion video
+      - name: Render Remotion Video
+        run: |
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 \
+          --webpack-cache
+
+      # 6️⃣ Upload the video as artifact
+      - name: Upload Video
+        uses: actions/upload-artifact@v3
         with:
-          name: depth-video
-          path: out/depth_video.mp4
-
-      - name: Commit & push video (optional)
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add out/depth_video.mp4 || echo "No new video"
-          git commit -m "Add rendered depth slideshow video" || echo "No changes to commit"
-          git push || echo "Push failed"
+          name: remotion-video
+          path: out/video.mp4
