@@ -1,86 +1,114 @@
+import React, {useMemo} from "react";
+import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
+import {ThreeCanvas} from "@remotion/three";
+import * as THREE from "three";
 
-// FILE: src/ParallaxSlideshow.tsx
-import React, {useRef, useMemo} from 'react';
-import {Composition, registerRoot, useCurrentFrame} from 'remotion';
-import {ThreeCanvas} from '@remotion/three';
-import * as THREE from 'three';
-import {useFrame} from '@react-three/fiber';
+// 🖼️ Scenes with both images and depth maps in public/
+const scenes = [
+  { image: "/1.jpg", depth: "/1.png" },
+  { image: "/2.jpg", depth: "/2.png" },
+  { image: "/3.jpg", depth: "/3.png" },
+  { image: "/4.jpeg", depth: "/4.png" },
+  { image: "/5.jpeg", depth: "/5.png" },
+  { image: "/6.jpeg", depth: "/6.png" },
+  { image: "/7.jpeg", depth: "/7.png" },
+  { image: "/8.jpeg", depth: "/8.png" },
+  { image: "/9.jpeg", depth: "/9.png" },
+  { image: "/10.jpeg", depth: "/10.png" },
+  { image: "/11.jpeg", depth: "/11.png" },
+];
 
-// --- CONFIGURATION ---
-const slicesPerImage = 6;
-const sliceDepth = 0.5;
-const framesPerImage = 150;
-const fps = 30;
-const width = 1080;
-const height = 1080;
+const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
+  const frame = useCurrentFrame();
 
-// --- Scene Component ---
-interface SceneProps { imageSrc: string }
+  const {geometry, material} = useMemo(() => {
+    const geometry = new THREE.PlaneGeometry(1.6, 0.9, 256, 256);
+    const loader = new THREE.TextureLoader();
+    const colorTex = loader.load(image);
+    const depthTex = loader.load(depth);
 
-const Scene: React.FC<SceneProps> = ({imageSrc}) => {
-	const frame = useCurrentFrame();
-	const groupRef = useRef<THREE.Group>(null!);
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTexture: {value: colorTex},
+        uDepth: {value: depthTex},
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        uniform sampler2D uDepth;
+        void main() {
+          vUv = uv;
+          vec4 depthData = texture2D(uDepth, uv);
+          float depth = depthData.r;
+          vec3 displaced = position + normal * (1.0 - depth) * 0.35;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform sampler2D uTexture;
+        void main() {
+          gl_FragColor = texture2D(uTexture, vUv);
+        }
+      `,
+    });
 
-	useFrame(() => {
-		groupRef.current.position.z = -frame * (sliceDepth / framesPerImage);
-	});
+    return {geometry, material};
+  }, [image, depth]);
 
-	const textures = useMemo(() => {
-		return Array.from({ length: slicesPerImage }, () => {
-			const tex = new THREE.TextureLoader().load(imageSrc);
-			tex.center.set(0.5, 0.5);
-			tex.repeat.set(1, 1);
-			return tex;
-		});
-	}, [imageSrc]);
+  const cameraZ = 1.5 + Math.sin(frame / 150) * 0.3;
+  const cameraX = Math.sin(frame / 250) * 0.2;
+  const cameraY = Math.cos(frame / 250) * 0.1;
 
-	return (
-		<group ref={groupRef}>
-			{textures.map((texture, i) => {
-				const scaleFactor = 1 - i * 0.08;
-				return (
-					<mesh key={i} position={[0, 0, -i * sliceDepth]}>
-						<planeGeometry args={[4 * scaleFactor, 4 * scaleFactor]} />
-						<meshBasicMaterial map={texture} transparent />
-					</mesh>
-				);
-			})}
-		</group>
-	);
+  return (
+    <ThreeCanvas
+      width={1920}
+      height={1080}
+      camera={{fov: 45, position: [cameraX, cameraY, cameraZ]}}
+      style={{backgroundColor: "black"}}
+    >
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[0.5, 1, 1]} intensity={0.8} />
+      <mesh geometry={geometry} material={material} />
+    </ThreeCanvas>
+  );
 };
 
-// --- Slideshow Component ---
-interface SlideshowProps { images: string[] }
+export const RemotionVideo: React.FC = () => {
+  const fps = 30;
+  const durationPerImage = 300; // 10 seconds per image
+  const totalDuration = scenes.length * durationPerImage;
 
-const Slideshow: React.FC<SlideshowProps> = ({images}) => {
-	const frame = useCurrentFrame();
-	const currentImageIndex = Math.floor(frame / framesPerImage) % images.length;
-
-	return (
-		<ThreeCanvas width={width} height={height} camera={{position: [0, 0, 6]}}>
-			<Scene imageSrc={images[currentImageIndex]} />
-		</ThreeCanvas>
-	);
+  return (
+    <Composition
+      id="DepthSlideshow3D"
+      component={MainVideo}
+      durationInFrames={totalDuration}
+      fps={fps}
+      width={1920}
+      height={1080}
+    />
+  );
 };
 
-// --- Import all images ---
-import img1 from '../public/Generated Image July 30, 2025 - 12_20PM.jpeg';
-import img2 from '../public/Generated Image September 01, 2025 - 6_36AM.jpeg';
-import img3 from '../public/Generated Image September 02, 2025 - 7_47AM.jpeg';
-import img4 from '../public/download (23).jpeg';
-import img5 from '../public/make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.jpg';
-import img6 from '../public/then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).jpg';
+const MainVideo: React.FC = () => {
+  const durationPerImage = 300;
 
-const imageFiles = [img1, img2, img3, img4, img5, img6];
+  return (
+    <>
+      {scenes.map((s, i) => (
+        <Sequence
+          key={i}
+          from={i * durationPerImage}
+          durationInFrames={durationPerImage}
+        >
+          <DepthScene image={s.image} depth={s.depth} />
+        </Sequence>
+      ))}
+    </>
+  );
+};
 
-// --- Register Composition ---
-registerRoot(() => (
-	<Composition
-		id="ParallaxSlideshow"
-		component={() => <Slideshow images={imageFiles} />}
-		durationInFrames={framesPerImage * imageFiles.length}
-		fps={fps}
-		width={width}
-		height={height}
-	/>
-));
+// ✅ Self-contained registerRoot
+registerRoot(RemotionVideo);
+
+export default RemotionVideo;
