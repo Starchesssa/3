@@ -30,7 +30,7 @@ jobs:
       # 5️⃣ Render the video (self-contained DepthShowcase.tsx)
       - name: Render video
         run: |
-          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 --webpack-cache
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 
 
       # 6️⃣ Upload video as artifact
       - name: Upload rendered video
