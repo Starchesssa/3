@@ -1,23 +1,24 @@
+
 import React, {useMemo} from "react";
 import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import * as THREE from "three";
+import path from "path";
+import fs from "fs";
 
-// 🖼️ Full list of scenes with images and depth maps
+// 🖼️ Scenes with both images and depth maps in public/
 const scenes = [
-  { image: "/Generated Image July 07, 2025 - 11_45PM.jpeg", depth: "/depth/depth-Generated Image July 07, 2025 - 11_45PM.png" },
-  { image: "/Generated Image July 30, 2025 - 12_20PM.jpeg", depth: "/depth/depth-Generated Image July 30, 2025 - 12_20PM.png" },
-  { image: "/Generated Image June 28, 2025 - 8_54AM.jpeg", depth: "/depth/depth-Generated Image June 28, 2025 - 8_54AM.png" },
-  { image: "/Generated Image September 01, 2025 - 6_36AM.jpeg", depth: "/depth/depth-Generated Image September 01, 2025 - 6_36AM.png" },
-  { image: "/Generated Image September 02, 2025 - 7_47AM.jpeg", depth: "/depth/depth-Generated Image September 02, 2025 - 7_47AM.png" },
-  { image: "/copilot_image_1751920705398.jpeg", depth: "/depth/depth-copilot_image_1751920705398.png" },
-  { image: "/download (23).jpeg", depth: "/depth/depth-download (23).png" },
-  { image: "/image (1).webp", depth: "/depth/depth-image (1).png" },
-  { image: "/image-of-new-york-in-sunshine-without-people.jpg", depth: "/depth/depth-image-of-new-york-in-sunshine-without-people.png" },
-  { image: "/images (37).jpeg", depth: "/depth/depth-images (37).png" },
-  { image: "/images (38).jpeg", depth: "/depth/depth-images (38).png" },
-  { image: "/make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.jpg", depth: "/depth/depth-make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.png" },
-  { image: "/then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).jpg", depth: "/depth/depth-then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).png" },
+  { image: "public/1.jpg", depth: "public/1.png" },
+  { image: "public/2.jpg", depth: "public/2.png" },
+  { image: "public/3.jpg", depth: "public/3.png" },
+  { image: "public/4.jpeg", depth: "public/4.png" },
+  { image: "public/5.jpeg", depth: "public/5.png" },
+  { image: "public/6.jpeg", depth: "public/6.png" },
+  { image: "public/7.jpeg", depth: "public/7.png" },
+  { image: "public/8.jpeg", depth: "public/8.png" },
+  { image: "public/9.jpeg", depth: "public/9.png" },
+  { image: "public/10.jpeg", depth: "public/10.png" },
+  { image: "public/11.jpeg", depth: "public/11.png" },
 ];
 
 const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
@@ -26,8 +27,10 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
   const {geometry, material} = useMemo(() => {
     const geometry = new THREE.PlaneGeometry(1.6, 0.9, 256, 256);
     const loader = new THREE.TextureLoader();
-    const colorTex = loader.load(image);
-    const depthTex = loader.load(depth);
+
+    // ✅ Load images directly from file system
+    const colorTex = loader.load(path.resolve(process.cwd(), image));
+    const depthTex = loader.load(path.resolve(process.cwd(), depth));
 
     const material = new THREE.ShaderMaterial({
       uniforms: {
@@ -110,7 +113,7 @@ const MainVideo: React.FC = () => {
   );
 };
 
-// ✅ Register root so this file is fully self-contained
+// ✅ Self-contained registerRoot
 registerRoot(RemotionVideo);
 
 export default RemotionVideo;
