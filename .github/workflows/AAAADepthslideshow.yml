@@ -2,41 +2,37 @@
 name: Render Remotion Video
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_dispatch:  # allows manual run
 
 jobs:
-  render-video:
+  render:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the repository
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       # 3️⃣ Install dependencies
       - name: Install dependencies
-        run: npm ci
-
-      # 4️⃣ Install FFmpeg
-      - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
-      # 5️⃣ Render the Remotion video
-      - name: Render Remotion Video
         run: |
-          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 --webpack-cache
+          cd src
+          npm install remotion @remotion/three three @react-three/fiber
 
-      # 6️⃣ Upload video as artifact (v4)
-      - name: Upload Rendered Video
+      # 4️⃣ Render Remotion video
+      - name: Render video
+        run: |
+          cd src
+          npx remotion render DepthShowcase.tsx DepthSlideshow3D ../out/video.mp4
+
+      # 5️⃣ Upload rendered video as artifact
+      - name: Upload rendered video
         uses: actions/upload-artifact@v4
         with:
           name: remotion-video
