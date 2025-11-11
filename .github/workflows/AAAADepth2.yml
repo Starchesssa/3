@@ -1,0 +1,43 @@
+
+name: Depth Map Generator
+
+on:
+  workflow_dispatch:  # you can manually trigger it
+  push:
+    paths:
+      - 'public/**/*.jpg'
+      - 'public/**/*.jpeg'
+      - 'public/Depth.py'
+
+permissions:
+  contents: write  # ✅ allows writing generated files to repo
+
+jobs:
+  generate-depth:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install transformers pillow
+
+      - name: 🧠 Run Depth Estimation Script
+        run: |
+          python public/Depth.py
+
+      - name: 💾 Commit and push generated depth maps
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add public/depth/*.png || echo "No new depth maps"
+          git commit -m "Add generated depth maps" || echo "No changes to commit"
+          git push
