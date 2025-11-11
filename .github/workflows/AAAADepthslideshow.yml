@@ -35,7 +35,7 @@ jobs:
           npx remotion render src/index.tsx DepthSlideshow3D out/depth_video.mp4
 
       - name: Upload video artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: depth-video
           path: out/depth_video.mp4
