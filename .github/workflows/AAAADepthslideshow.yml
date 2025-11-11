@@ -1,4 +1,3 @@
-
 name: Render Remotion Video
 
 on:
@@ -9,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -22,16 +21,18 @@ jobs:
       # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
-          cd src
           npm install remotion @remotion/three three @react-three/fiber
 
-      # 4️⃣ Render Remotion video
+      # 4️⃣ Install FFmpeg (required by Remotion)
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      # 5️⃣ Render the video (self-contained DepthShowcase.tsx)
       - name: Render video
         run: |
-          cd src
-          npx remotion render DepthShowcase.tsx DepthSlideshow3D ../out/video.mp4
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 --webpack-cache
 
-      # 5️⃣ Upload rendered video as artifact
+      # 6️⃣ Upload video as artifact
       - name: Upload rendered video
         uses: actions/upload-artifact@v4
         with:
