@@ -5,59 +5,36 @@ import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import * as THREE from "three";
 
-// ✅ Import all images and depth maps
-import img1 from "./public/1.jpg";
-import depth1 from "./public/1.png";
-import img2 from "./public/2.jpg";
-import depth2 from "./public/2.png";
-import img3 from "./public/3.jpg";
-import depth3 from "./public/3.png";
-import img4 from "./public/4.jpeg";
-import depth4 from "./public/4.png";
-import img5 from "./public/5.jpeg";
-import depth5 from "./public/5.png";
-import img6 from "./public/6.jpeg";
-import depth6 from "./public/6.png";
-import img7 from "./public/7.jpeg";
-import depth7 from "./public/7.png";
-import img8 from "./public/8.jpeg";
-import depth8 from "./public/8.png";
-import img9 from "./public/9.jpeg";
-import depth9 from "./public/9.png";
-import img10 from "./public/10.jpeg";
-import depth10 from "./public/10.png";
-import img11 from "./public/11.jpeg";
-import depth11 from "./public/11.png";
-
-// 🖼️ Scenes array
+// ✅ Scenes using images and depth maps in public/
 const scenes = [
-  { image: img1, depth: depth1 },
-  { image: img2, depth: depth2 },
-  { image: img3, depth: depth3 },
-  { image: img4, depth: depth4 },
-  { image: img5, depth: depth5 },
-  { image: img6, depth: depth6 },
-  { image: img7, depth: depth7 },
-  { image: img8, depth: depth8 },
-  { image: img9, depth: depth9 },
-  { image: img10, depth: depth10 },
-  { image: img11, depth: depth11 },
+  { image: "/1.jpg", depth: "/1.png" },
+  { image: "/2.jpg", depth: "/2.png" },
+  { image: "/3.jpg", depth: "/3.png" },
+  { image: "/4.jpeg", depth: "/4.png" },
+  { image: "/5.jpeg", depth: "/5.png" },
+  { image: "/6.jpeg", depth: "/6.png" },
+  { image: "/7.jpeg", depth: "/7.png" },
+  { image: "/8.jpeg", depth: "/8.png" },
+  { image: "/9.jpeg", depth: "/9.png" },
+  { image: "/10.jpeg", depth: "/10.png" },
+  { image: "/11.jpeg", depth: "/11.png" },
 ];
 
-// DepthScene component
 const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
   const frame = useCurrentFrame();
 
   const {geometry, material} = useMemo(() => {
     const geometry = new THREE.PlaneGeometry(1.6, 0.9, 256, 256);
     const loader = new THREE.TextureLoader();
+
+    // ✅ Load textures directly from public folder URLs
     const colorTex = loader.load(image);
     const depthTex = loader.load(depth);
 
     const material = new THREE.ShaderMaterial({
       uniforms: {
-        uTexture: {value: colorTex},
-        uDepth: {value: depthTex},
+        uTexture: { value: colorTex },
+        uDepth: { value: depthTex },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -79,10 +56,9 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
       `,
     });
 
-    return {geometry, material};
+    return { geometry, material };
   }, [image, depth]);
 
-  // Simple camera animation
   const cameraZ = 1.5 + Math.sin(frame / 150) * 0.3;
   const cameraX = Math.sin(frame / 250) * 0.2;
   const cameraY = Math.cos(frame / 250) * 0.1;
@@ -91,8 +67,8 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
     <ThreeCanvas
       width={1920}
       height={1080}
-      camera={{fov: 45, position: [cameraX, cameraY, cameraZ]}}
-      style={{backgroundColor: "black"}}
+      camera={{ fov: 45, position: [cameraX, cameraY, cameraZ] }}
+      style={{ backgroundColor: "black" }}
     >
       <ambientLight intensity={0.9} />
       <directionalLight position={[0.5, 1, 1]} intensity={0.8} />
@@ -101,26 +77,27 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
   );
 };
 
-// MainVideo component with all sequences
 const MainVideo: React.FC = () => {
   const durationPerImage = 300; // 10 seconds per image
 
   return (
     <>
-      {scenes.map((s, i) => (
-        <Sequence key={i} from={i * durationPerImage} durationInFrames={durationPerImage}>
-          <DepthScene image={s.image} depth={s.depth} />
+      {scenes.map((scene, i) => (
+        <Sequence
+          key={i}
+          from={i * durationPerImage}
+          durationInFrames={durationPerImage}
+        >
+          <DepthScene image={scene.image} depth={scene.depth} />
         </Sequence>
       ))}
     </>
   );
 };
 
-// Composition
 export const RemotionVideo: React.FC = () => {
   const fps = 30;
-  const durationPerImage = 300;
-  const totalDuration = scenes.length * durationPerImage;
+  const totalDuration = scenes.length * 300;
 
   return (
     <Composition
@@ -134,6 +111,7 @@ export const RemotionVideo: React.FC = () => {
   );
 };
 
-// Register root
+// ✅ Register the root component
 registerRoot(RemotionVideo);
+
 export default RemotionVideo;
