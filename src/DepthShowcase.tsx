@@ -1,63 +1,23 @@
-
-import React, {useMemo, useRef} from "react";
-import {Composition, Sequence, useCurrentFrame} from "remotion";
+import React, {useMemo} from "react";
+import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import * as THREE from "three";
 
-// 🖼️ Manual image + depth map pairs
+// 🖼️ Full list of scenes with images and depth maps
 const scenes = [
-  {
-    image: "/Generated Image July 07, 2025 - 11_45PM.jpeg",
-    depth: "/depth/depth-Generated Image July 07, 2025 - 11_45PM.png",
-  },
-  {
-    image: "/Generated Image July 30, 2025 - 12_20PM.jpeg",
-    depth: "/depth/depth-Generated Image July 30, 2025 - 12_20PM.png",
-  },
-  {
-    image: "/Generated Image June 28, 2025 - 8_54AM.jpeg",
-    depth: "/depth/depth-Generated Image June 28, 2025 - 8_54AM.png",
-  },
-  {
-    image: "/Generated Image September 01, 2025 - 6_36AM.jpeg",
-    depth: "/depth/depth-Generated Image September 01, 2025 - 6_36AM.png",
-  },
-  {
-    image: "/Generated Image September 02, 2025 - 7_47AM.jpeg",
-    depth: "/depth/depth-Generated Image September 02, 2025 - 7_47AM.png",
-  },
-  {
-    image: "/copilot_image_1751920705398.jpeg",
-    depth: "/depth/depth-copilot_image_1751920705398.png",
-  },
-  {
-    image: "/download (23).jpeg",
-    depth: "/depth/depth-download (23).png",
-  },
-  {
-    image: "/image (1).webp",
-    depth: "/depth/depth-image (1).png",
-  },
-  {
-    image: "/image-of-new-york-in-sunshine-without-people.jpg",
-    depth: "/depth/depth-image-of-new-york-in-sunshine-without-people.png",
-  },
-  {
-    image: "/images (37).jpeg",
-    depth: "/depth/depth-images (37).png",
-  },
-  {
-    image: "/images (38).jpeg",
-    depth: "/depth/depth-images (38).png",
-  },
-  {
-    image: "/make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.jpg",
-    depth: "/depth/depth-make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.png",
-  },
-  {
-    image: "/then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).jpg",
-    depth: "/depth/depth-then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).png",
-  },
+  { image: "/Generated Image July 07, 2025 - 11_45PM.jpeg", depth: "/depth/depth-Generated Image July 07, 2025 - 11_45PM.png" },
+  { image: "/Generated Image July 30, 2025 - 12_20PM.jpeg", depth: "/depth/depth-Generated Image July 30, 2025 - 12_20PM.png" },
+  { image: "/Generated Image June 28, 2025 - 8_54AM.jpeg", depth: "/depth/depth-Generated Image June 28, 2025 - 8_54AM.png" },
+  { image: "/Generated Image September 01, 2025 - 6_36AM.jpeg", depth: "/depth/depth-Generated Image September 01, 2025 - 6_36AM.png" },
+  { image: "/Generated Image September 02, 2025 - 7_47AM.jpeg", depth: "/depth/depth-Generated Image September 02, 2025 - 7_47AM.png" },
+  { image: "/copilot_image_1751920705398.jpeg", depth: "/depth/depth-copilot_image_1751920705398.png" },
+  { image: "/download (23).jpeg", depth: "/depth/depth-download (23).png" },
+  { image: "/image (1).webp", depth: "/depth/depth-image (1).png" },
+  { image: "/image-of-new-york-in-sunshine-without-people.jpg", depth: "/depth/depth-image-of-new-york-in-sunshine-without-people.png" },
+  { image: "/images (37).jpeg", depth: "/depth/depth-images (37).png" },
+  { image: "/images (38).jpeg", depth: "/depth/depth-images (38).png" },
+  { image: "/make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.jpg", depth: "/depth/depth-make-a-kazgergt-anination-of-solar-system-make-the-animation-colourfull.png" },
+  { image: "/then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).jpg", depth: "/depth/depth-then-the-crash-begins-billions-of-dollars-vanish-in-days-companies-that-were-worth-millions-becom (1).png" },
 ];
 
 const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
@@ -97,7 +57,6 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
     return {geometry, material};
   }, [image, depth]);
 
-  // Camera animation
   const cameraZ = 1.5 + Math.sin(frame / 150) * 0.3;
   const cameraX = Math.sin(frame / 250) * 0.2;
   const cameraY = Math.cos(frame / 250) * 0.1;
@@ -118,7 +77,7 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
 
 export const RemotionVideo: React.FC = () => {
   const fps = 30;
-  const durationPerImage = 300; // 10 sec per image
+  const durationPerImage = 300; // 10 seconds per image
   const totalDuration = scenes.length * durationPerImage;
 
   return (
@@ -134,18 +93,24 @@ export const RemotionVideo: React.FC = () => {
 };
 
 const MainVideo: React.FC = () => {
-  const fps = 30;
   const durationPerImage = 300;
 
   return (
     <>
       {scenes.map((s, i) => (
-        <Sequence key={i} from={i * durationPerImage} durationInFrames={durationPerImage}>
+        <Sequence
+          key={i}
+          from={i * durationPerImage}
+          durationInFrames={durationPerImage}
+        >
           <DepthScene image={s.image} depth={s.depth} />
         </Sequence>
       ))}
     </>
   );
 };
+
+// ✅ Register root so this file is fully self-contained
+registerRoot(RemotionVideo);
 
 export default RemotionVideo;
