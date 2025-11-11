@@ -1,0 +1,46 @@
+
+name: Cartoonize Images
+
+# Trigger manually
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Grant write permission to push files back to repo
+
+jobs:
+  run-cartoonize:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo with write permission
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true  # needed for push
+
+      # 2️⃣ Set up Python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install opencv-python-headless numpy
+
+      # 4️⃣ Run the cartoonization script
+      - name: Run cartoonize script
+        run: |
+          python BOOK_CODE/PARALLAX/Cv.py
+
+      # 5️⃣ Commit & push the stylized images back to repo
+      - name: Commit and push stylized images
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add public/stylized/
+          git commit -m "Add stylized images from Cv.py [skip ci]" || echo "No changes to commit"
+          git push
