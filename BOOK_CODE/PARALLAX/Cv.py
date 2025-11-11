@@ -1,4 +1,3 @@
-
 import cv2
 import numpy as np
 import os
@@ -8,13 +7,14 @@ img_dir = "public/"
 out_dir = os.path.join(img_dir, "stylized")
 os.makedirs(out_dir, exist_ok=True)
 
-# Color palette: dominant Kurzgesagt-like palette
+# Color palette: Kurzgesagt-style dominant colors
 palette = np.array([
     [255, 209, 102],  # Yellow / Gold
     [240, 240, 240],  # Silver / White
     [26, 26, 26],     # Deep Black
 ], dtype=np.uint8)
 
+# List of images to process
 images = [
     "copilot_image_1751920705398.jpeg",
     "image (1).webp",
@@ -25,9 +25,9 @@ images = [
 
 # ---------- Utility Functions ----------
 
-def smooth_edges(img, ksize=15):
-    """Make everything curvy: strong edge-preserving smoothing"""
-    return cv2.edgePreservingFilter(img, flags=1, sigma_s=60, sigma_r=0.4)
+def smooth_edges(img, sigma_s=60, sigma_r=0.4):
+    """Make everything curvy using edge-preserving filter"""
+    return cv2.edgePreservingFilter(img, flags=1, sigma_s=sigma_s, sigma_r=sigma_r)
 
 def quantize_colors(img, palette):
     """Map all colors to the nearest in our palette (color consistency)"""
@@ -40,7 +40,7 @@ def quantize_colors(img, palette):
     return res
 
 def add_soft_edges(img):
-    """Add subtle soft outlines (curvy, cartoon-like)"""
+    """Add subtle soft outlines for cartoonish look"""
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (7,7), 0)
     edges = cv2.Canny(blur, 50, 150)
@@ -50,7 +50,7 @@ def add_soft_edges(img):
     return cv2.subtract(img, edges_colored // 3)
 
 def posterize_curvy(img, palette):
-    """Full Kurzgesagt-style effect"""
+    """Full Kurzgesagt-style effect pipeline"""
     img_curvy = smooth_edges(img)
     img_colors = quantize_colors(img_curvy, palette)
     img_final = add_soft_edges(img_colors)
@@ -67,7 +67,7 @@ for fname in images:
     base_name, ext = os.path.splitext(fname)
 
     # Apply Kurzgesagt-style posterization
-    kurz = posterize_curvy(img)
+    kurz = posterize_curvy(img, palette)
     cv2.imwrite(os.path.join(out_dir, f"{base_name}_kurzgesagt.png"), kurz)
 
     print(f"✅ Processed {fname}")
