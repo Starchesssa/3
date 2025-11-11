@@ -1,0 +1,41 @@
+name: Render Depth Slideshow Video
+
+on:
+  workflow_dispatch:   # allows manual trigger
+  push:
+    paths:
+      - 'src/DepthShowcase.tsx'
+      - 'public/**'
+
+permissions:
+  contents: write   # allows saving generated video
+
+jobs:
+  render-video:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install three @remotion/three
+
+      - name: Render 3D Depth Slideshow
+        run: |
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/depth_video.mp4
+
+      - name: Commit & push video
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add out/depth_video.mp4 || echo "No new video"
+          git commit -m "Add rendered depth slideshow video" || echo "No changes to commit"
+          git push
