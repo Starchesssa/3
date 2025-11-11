@@ -1,3 +1,4 @@
+
 name: Render Depth Slideshow Video
 
 on:
@@ -5,6 +6,7 @@ on:
   push:
     paths:
       - 'src/DepthShowcase.tsx'
+      - 'src/index.tsx'
       - 'public/**'
 
 permissions:
@@ -25,17 +27,23 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
+          npm ci
           npm install three @remotion/three
 
       - name: Render 3D Depth Slideshow
         run: |
-          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/depth_video.mp4
+          npx remotion render src/index.tsx DepthSlideshow3D out/depth_video.mp4
 
-      - name: Commit & push video
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: depth-video
+          path: out/depth_video.mp4
+
+      - name: Commit & push video (optional)
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add out/depth_video.mp4 || echo "No new video"
           git commit -m "Add rendered depth slideshow video" || echo "No changes to commit"
-          git push
+          git push || echo "Push failed"
