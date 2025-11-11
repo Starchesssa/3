@@ -27,12 +27,16 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      # 5️⃣ Render the video (self-contained DepthShowcase.tsx)
+      # 5️⃣ Clear Remotion cache (ensures latest TSX and assets are used)
+      - name: Clear Remotion cache
+        run: rm -rf node_modules/.cache/remotion
+
+      # 6️⃣ Render the video (reads images directly from public/)
       - name: Render video
         run: |
-          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 
+          npx remotion render src/DepthShowcase.tsx DepthSlideshow3D out/video.mp4 --force
 
-      # 6️⃣ Upload video as artifact
+      # 7️⃣ Upload video as artifact
       - name: Upload rendered video
         uses: actions/upload-artifact@v4
         with:
