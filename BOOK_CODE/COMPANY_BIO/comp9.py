@@ -15,11 +15,10 @@ IMAGE_HEIGHT = 720
 PROMPT_SUFFIX = ", make the image have white background and everything should be colourful except the white background also no shadows, just white background"
 
 # === Helper: clean and normalize filename ===
-def normalize_filename(num, label, phrase):
-    label = label.lower().strip()  # keep small letters
+def normalize_filename(num, phrase):
     safe_phrase = re.sub(r"[^a-zA-Z0-9]+", "_", phrase.strip()).strip("_")
     safe_phrase = safe_phrase[:40]  # limit length
-    return f"{num}{label}_{safe_phrase}.png"
+    return f"{num}_{safe_phrase}.png"
 
 # === Download image from Pollinations ===
 def download_image(prompt, save_path, retries=3, delay=3):
@@ -41,41 +40,21 @@ def download_image(prompt, save_path, retries=3, delay=3):
         time.sleep(delay)
     return False
 
-# === Process prompt text files ===
+# === Process text file ===
 def process_text_file(txt_file):
     with open(txt_file, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
-    i = 0
-    current_group = None
     image_tasks = []
-
-    while i < len(lines):
-        line = lines[i]
-        match = re.match(r"(\d+)[\s\.]*([A-Za-z])[\s\.]*", line)
+    for line in lines:
+        match = re.match(r"(\d+)[\.\s]*(.+)", line)
         if match:
-            group_num = match.group(1)
-            group_letter = match.group(2)
-            current_group = group_num
-            phrase = lines[i + 1] if i + 1 < len(lines) else ""
-            filename = normalize_filename(group_num, group_letter, phrase)
+            num = match.group(1)
+            phrase = match.group(2)
+            filename = normalize_filename(num, phrase)
             image_tasks.append((filename, phrase))
-            i += 2
         else:
-            if current_group:
-                match_prev = re.match(r"([A-Za-z])[\s\.]*", line)
-                if match_prev:
-                    letter = match_prev.group(1)
-                    phrase = lines[i + 1] if i + 1 < len(lines) else ""
-                    filename = normalize_filename(current_group, letter, phrase)
-                    image_tasks.append((filename, phrase))
-                    i += 2
-                else:
-                    print(f"⚠️ Skipping line: {line}")
-                    i += 1
-            else:
-                print(f"⚠️ No group found yet, skipping: {line}")
-                i += 1
+            print(f"⚠️ Skipping line: {line}")
 
     failed = image_tasks.copy()
     round_count = 1
