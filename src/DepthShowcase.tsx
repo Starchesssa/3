@@ -1,10 +1,9 @@
-
-import React, {useMemo} from "react";
+import React, {useMemo, useEffect, useState} from "react";
 import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import * as THREE from "three";
 
-// ✅ Import all images and depth maps
+// ✅ Import only 3 long images with depth maps
 import img1 from "../public/1.jpg";
 import depth1 from "../public/1.png";
 
@@ -14,68 +13,52 @@ import depth2 from "../public/2.png";
 import img3 from "../public/3.jpg";
 import depth3 from "../public/3.png";
 
-import img4 from "../public/4.jpeg";
-import depth4 from "../public/4.png";
-
-import img5 from "../public/5.jpeg";
-import depth5 from "../public/5.png";
-
-import img6 from "../public/6.jpeg";
-import depth6 from "../public/6.png";
-
-import img7 from "../public/7.jpeg";
-import depth7 from "../public/7.png";
-
-import img8 from "../public/8.jpeg";
-import depth8 from "../public/8.png";
-
-import img9 from "../public/9.jpeg";
-import depth9 from "../public/9.png";
-
-import img10 from "../public/10.jpeg";
-import depth10 from "../public/10.png";
-
-import img11 from "../public/11.jpeg";
-import depth11 from "../public/11.png";
-
-// 🖼️ Scenes array
+// Define scenes
 const scenes = [
-  { image: img1, depth: depth1 },
-  { image: img2, depth: depth2 },
-  { image: img3, depth: depth3 },
-  { image: img4, depth: depth4 },
-  { image: img5, depth: depth5 },
-  { image: img6, depth: depth6 },
-  { image: img7, depth: depth7 },
-  { image: img8, depth: depth8 },
-  { image: img9, depth: depth9 },
-  { image: img10, depth: depth10 },
-  { image: img11, depth: depth11 },
+  {image: img1, depth: depth1},
+  {image: img2, depth: depth2},
+  {image: img3, depth: depth3},
 ];
 
-const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) => {
+const DepthScene: React.FC<{image: string; depth: string; index: number}> = ({
+  image,
+  depth,
+  index,
+}) => {
   const frame = useCurrentFrame();
+  const [aspect, setAspect] = useState(16 / 9);
+
+  // 🧮 Auto-detect aspect ratio
+  useEffect(() => {
+    const img = new Image();
+    img.src = image;
+    img.onload = () => setAspect(img.width / img.height);
+  }, [image]);
 
   const {geometry, material} = useMemo(() => {
-    const geometry = new THREE.PlaneGeometry(1.6, 0.9, 256, 256);
     const loader = new THREE.TextureLoader();
-
     const colorTex = loader.load(image);
     const depthTex = loader.load(depth);
 
+    const width = 1.8 * (aspect > 1 ? 1 : aspect);
+    const height = width / aspect;
+    const geometry = new THREE.PlaneGeometry(width, height, 256, 256);
+
     const material = new THREE.ShaderMaterial({
       uniforms: {
-        uTexture: { value: colorTex },
-        uDepth: { value: depthTex },
+        uTexture: {value: colorTex},
+        uDepth: {value: depthTex},
+        uTime: {value: 0},
       },
       vertexShader: `
         varying vec2 vUv;
         uniform sampler2D uDepth;
+        uniform float uTime;
         void main() {
           vUv = uv;
-          vec4 depthData = texture2D(uDepth, uv);
-          float depth = depthData.r;
-          vec3 displaced = position + normal * (1.0 - depth) * 0.35;
+          float depth = texture2D(uDepth, uv).r;
+          float wave = sin(uTime * 0.02 + uv.y * 10.0) * 0.02;
+          vec3 displaced = position + normal * (1.0 - depth) * (0.5 + wave);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
         }
       `,
@@ -88,38 +71,40 @@ const DepthScene: React.FC<{image: string; depth: string}> = ({image, depth}) =>
       `,
     });
 
-    return { geometry, material };
-  }, [image, depth]);
+    return {geometry, material};
+  }, [image, depth, aspect]);
 
-  const cameraZ = 1.5 + Math.sin(frame / 150) * 0.3;
-  const cameraX = Math.sin(frame / 250) * 0.2;
-  const cameraY = Math.cos(frame / 250) * 0.1;
+  // 🎥 Dynamic cinematic camera movement
+  const progress = frame / 300;
+  const direction = index % 2 === 0 ? 1 : -1; // alternate directions
+
+  const cameraX = Math.sin(progress * Math.PI) * 0.4 * direction;
+  const cameraY = Math.cos(progress * Math.PI * 0.5) * 0.2;
+  const cameraZ = 1.4 + Math.sin(progress * Math.PI) * 0.3;
+
+  material.uniforms.uTime.value = frame;
 
   return (
     <ThreeCanvas
       width={1920}
       height={1080}
-      camera={{ fov: 45, position: [cameraX, cameraY, cameraZ] }}
-      style={{ backgroundColor: "black" }}
+      camera={{fov: 45, position: [cameraX, cameraY, cameraZ]}}
+      style={{backgroundColor: "black"}}
     >
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[0.5, 1, 1]} intensity={0.8} />
+      <ambientLight intensity={1.0} />
+      <directionalLight position={[1, 1, 1]} intensity={1.2} />
       <mesh geometry={geometry} material={material} />
     </ThreeCanvas>
   );
 };
 
 const MainVideo: React.FC = () => {
-  const durationPerImage = 300; // 10 seconds per image
+  const durationPerImage = 450; // each long image = 15 seconds
   return (
     <>
       {scenes.map((s, i) => (
-        <Sequence
-          key={i}
-          from={i * durationPerImage}
-          durationInFrames={durationPerImage}
-        >
-          <DepthScene image={s.image} depth={s.depth} />
+        <Sequence key={i} from={i * durationPerImage} durationInFrames={durationPerImage}>
+          <DepthScene image={s.image} depth={s.depth} index={i} />
         </Sequence>
       ))}
     </>
@@ -128,7 +113,7 @@ const MainVideo: React.FC = () => {
 
 export const RemotionVideo: React.FC = () => {
   const fps = 30;
-  const totalDuration = scenes.length * 300;
+  const totalDuration = scenes.length * 450;
 
   return (
     <Composition
