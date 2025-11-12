@@ -1,131 +1,87 @@
-import React, {useMemo, useEffect, useState} from "react";
-import {Composition, Sequence, useCurrentFrame, registerRoot} from "remotion";
-import {ThreeCanvas} from "@remotion/three";
-import * as THREE from "three";
 
-// ✅ Import only 3 long images with depth maps
-import img1 from "../public/1.jpg";
-import depth1 from "../public/1.png";
+import React, {useRef, useMemo} from 'react';
+import {Composition, registerRoot, useCurrentFrame} from 'remotion';
+import {ThreeCanvas} from '@remotion/three';
+import * as THREE from 'three';
+import {useFrame, useLoader} from '@react-three/fiber';
 
-import img2 from "../public/2.jpg";
-import depth2 from "../public/2.png";
-
-import img3 from "../public/3.jpg";
-import depth3 from "../public/3.png";
-
-// Define scenes
-const scenes = [
-  {image: img1, depth: depth1},
-  {image: img2, depth: depth2},
-  {image: img3, depth: depth3},
-];
-
-const DepthScene: React.FC<{image: string; depth: string; index: number}> = ({
-  image,
-  depth,
-  index,
-}) => {
-  const frame = useCurrentFrame();
-  const [aspect, setAspect] = useState(16 / 9);
-
-  // 🧮 Auto-detect aspect ratio
-  useEffect(() => {
-    const img = new Image();
-    img.src = image;
-    img.onload = () => setAspect(img.width / img.height);
-  }, [image]);
-
-  const {geometry, material} = useMemo(() => {
-    const loader = new THREE.TextureLoader();
-    const colorTex = loader.load(image);
-    const depthTex = loader.load(depth);
-
-    const width = 1.8 * (aspect > 1 ? 1 : aspect);
-    const height = width / aspect;
-    const geometry = new THREE.PlaneGeometry(width, height, 256, 256);
-
-    const material = new THREE.ShaderMaterial({
-      uniforms: {
-        uTexture: {value: colorTex},
-        uDepth: {value: depthTex},
-        uTime: {value: 0},
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        uniform sampler2D uDepth;
-        uniform float uTime;
-        void main() {
-          vUv = uv;
-          float depth = texture2D(uDepth, uv).r;
-          float wave = sin(uTime * 0.02 + uv.y * 10.0) * 0.02;
-          vec3 displaced = position + normal * (1.0 - depth) * (0.5 + wave);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-        uniform sampler2D uTexture;
-        void main() {
-          gl_FragColor = texture2D(uTexture, vUv);
-        }
-      `,
-    });
-
-    return {geometry, material};
-  }, [image, depth, aspect]);
-
-  // 🎥 Dynamic cinematic camera movement
-  const progress = frame / 300;
-  const direction = index % 2 === 0 ? 1 : -1; // alternate directions
-
-  const cameraX = Math.sin(progress * Math.PI) * 0.4 * direction;
-  const cameraY = Math.cos(progress * Math.PI * 0.5) * 0.2;
-  const cameraZ = 1.4 + Math.sin(progress * Math.PI) * 0.3;
-
-  material.uniforms.uTime.value = frame;
+// Load image + depth map into a displaced plane
+const DepthImage: React.FC<{src: string; depth: string}> = ({src, depth}) => {
+  const texture = useLoader(THREE.TextureLoader, src);
+  const depthMap = useLoader(THREE.TextureLoader, depth);
+  const mesh = useRef<THREE.Mesh>(null!);
 
   return (
-    <ThreeCanvas
-      width={1920}
-      height={1080}
-      camera={{fov: 45, position: [cameraX, cameraY, cameraZ]}}
-      style={{backgroundColor: "black"}}
-    >
-      <ambientLight intensity={1.0} />
-      <directionalLight position={[1, 1, 1]} intensity={1.2} />
-      <mesh geometry={geometry} material={material} />
+    <mesh ref={mesh}>
+      {/* Plane size depends on image proportions; use 16:9 standard */}
+      <planeGeometry args={[16, 9, 256, 256]} />
+      <meshStandardMaterial
+        map={texture}
+        displacementMap={depthMap}
+        displacementScale={5}
+        metalness={0.1}
+        roughness={0.8}
+      />
+    </mesh>
+  );
+};
+
+// Scene with camera motion
+const DepthScene: React.FC<{src: string; depth: string}> = ({src, depth}) => {
+  const frame = useCurrentFrame();
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
+
+  // Animate camera along a gentle 3D path
+  useFrame(() => {
+    const t = frame / 200; // controls speed
+    if (cameraRef.current) {
+      cameraRef.current.position.x = Math.sin(t) * 2;
+      cameraRef.current.position.y = Math.cos(t * 1.2) * 1.5;
+      cameraRef.current.position.z = 6 + Math.sin(t * 0.5) * 1.5;
+      cameraRef.current.lookAt(0, 0, 0);
+    }
+  });
+
+  return (
+    <ThreeCanvas>
+      <perspectiveCamera ref={cameraRef} position={[0, 0, 6]} fov={50} />
+      <ambientLight intensity={1.2} />
+      <directionalLight position={[5, 5, 5]} intensity={2} />
+      <DepthImage src={src} depth={depth} />
     </ThreeCanvas>
   );
 };
 
-const MainVideo: React.FC = () => {
-  const durationPerImage = 450; // each long image = 15 seconds
-  return (
-    <>
-      {scenes.map((s, i) => (
-        <Sequence key={i} from={i * durationPerImage} durationInFrames={durationPerImage}>
-          <DepthScene image={s.image} depth={s.depth} index={i} />
-        </Sequence>
-      ))}
-    </>
+// Main slideshow switching through 3 images
+export const DepthSlideshow3D: React.FC = () => {
+  const frame = useCurrentFrame();
+  const duration = 300; // frames per image (~10s @ 30fps)
+  const index = Math.floor(frame / duration) % 3;
+
+  const images = useMemo(
+    () => [
+      {src: '1.jpg', depth: '1_depth.jpg'},
+      {src: '2.jpg', depth: '2_depth.jpg'},
+      {src: '3.jpg', depth: '3_depth.jpg'},
+    ],
+    []
   );
+
+  const {src, depth} = images[index];
+
+  return <DepthScene src={src} depth={depth} />;
 };
 
-export const RemotionVideo: React.FC = () => {
-  const fps = 30;
-  const totalDuration = scenes.length * 450;
-
-  return (
+// Register Remotion composition
+registerRoot(() => (
+  <>
     <Composition
       id="DepthSlideshow3D"
-      component={MainVideo}
-      durationInFrames={totalDuration}
-      fps={fps}
+      component={DepthSlideshow3D}
+      durationInFrames={900}
+      fps={30}
       width={1920}
       height={1080}
     />
-  );
-};
-
-registerRoot(RemotionVideo);
-export default RemotionVideo;
+  </>
+));
