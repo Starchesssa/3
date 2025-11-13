@@ -1,10 +1,29 @@
-1.realistic Cinematic shot of, foreground: hands in gloves writing on notebook glowing orange (#FFA500), midground: figure in business suit with Amazon logo head, teal (#1ABCBC) accent lighting, wearing black hat, background: garage desk with stacked books and laptop screen glowing, shallow depth of field, symbolic representation, Netflix-style .
-2. Warm cozy realistic  cinematic shot, foreground: gloved hands holding coffee cup, midground: suit figure with Amazon-logo head, amber (#F4B860) highlights, brown (#6B4226) desk, background: office shelves with papers and books, storytelling cinematic style, symbolic businessman, no human features
-3. realistic cinematic shot , foreground: hands in gloves holding Amazon package, neon orange (#FF4C00) glow, midground: suit figure with Amazon logo head and hat, background: dark warehouse shelves with cyan (#00FFC2) accents, cinematic depth, symbolic representation, tech-focused realism   .
-4.Cinematic realistic shot of , foreground: gloved hand sketching diagrams in notebook, orange (#FFA500) highlights, midground: figure in suit with Amazon-logo head, teal (#1ABCBC) whiteboard glowing behind, background: office cityscape through glass window, symbolic representation, Netflix-style  .
-5.realistic shot of , foreground: gloved hands adjusting drone controls, neon cyan (#00FFC2) accents, midground: suit figure with Amazon-logo head wearing cap, background: dark lab with machinery and neon orange (#FF4C00) lights, cinematic sci-fi style, symbolic businessman, no human features  .
-6.realistic shot, foreground: hands in gloves flipping pages of ledger, cream (#D9C2A6) highlights, midground: suit figure with Amazon-logo head, amber (#F4B860) light on laptop, background: bookshelves stacked densely, brown (#6B4226) walls, storytelling cinematic style .
-7. realistic shot of , foreground: gloved fingers typing on keyboard with orange (#FFA500) highlights, midground: figure in suit with Amazon-logo head and black hat, teal (#1ABCBC) monitor glow, background: minimal office space with warm lights, symbolic representation, shallow depth of field
-8. realistic shot of , foreground: gloved hands sketching rocket blueprint, neon orange (#FF4C00) highlights, midground: suit figure with Amazon-logo head, background: holographic digital display of Amazon fulfillment network glowing cyan (#00FFC2), dark tech room, cinematic futuristic, symbolic businessman   .
-9. realistic shot of , foreground: gloved hands opening Amazon box glowing amber (#F4B860), midground: suit figure with Amazon-logo head pointing with gloved hand, background: cozy home interior in cream (#D9C2A6), cinematic lifestyle shot, symbolic representation, no human features .
-10. realistic shot of , foreground: gloved hand resting on desk, orange (#FFA500) highlights, midground: suit figure with Amazon-logo head and hat, background: evening city skyline with teal (#1ABCBC) lights, shallow depth of field, symbolic representation, Netflix-style dramatic lighting .
+1. Garage Startup Desk
+Realistic cinematic photo of a business desk in a small garage, a figure in a dark suit with a round Amazon logo as a face wearing a black French hat, desk cluttered with notebooks, a laptop with Amazon website open, coffee cup, warm sunlight coming from window, soft shadows, realistic textures, cozy startup environment, color palette: Orange (#FFA500), Teal (#1ABCBC), Light (#F4F4F4)
+
+2. Cozy Office Brainstorm
+Cinematic shot of a cozy office, a figure in a brown suit with round Amazon logo as face wearing a fedora, standing by a desk with sticky notes, coffee cup, and a laptop, warm amber light reflecting off wooden shelves with books and files, realistic soft shadows, intimate office feel, color palette: Brown (#6B4226), Amber (#F4B860), Cream (#D9C2A6)
+
+3. Handling Packages
+Realistic scene of a small warehouse, a figure in a navy suit with round Amazon logo as face wearing a Mexico hat, holding an Amazon box with gloved hands, stacks of packages in background, fluorescent light casting soft shadows, cinematic depth, realistic textures on cardboard and suit, color palette: Dark Gray (#121212), Neon Cyan (#00FFC2), Neon Orange (#FF4C00)
+
+4. Sketching Ideas
+Cinematic photo of a business desk, figure in dark gray suit with round Amazon logo as face wearing a black beret, sketching diagrams on a notebook with pen, desk with scattered papers, laptop open with Amazon charts, natural daylight from side window, warm soft shadows, realistic office environment, color palette: Orange (#FFA500), Teal (#1ABCBC), Light (#F4F4F4)
+
+5. Coffee and Planning
+Realistic office scene, figure in blue suit with round Amazon logo as face wearing a straw hat, seated at desk with coffee cup and notebook, laptop glowing softly, shelves with books and plants in background, afternoon light casting gentle shadows, cinematic warm tones, natural textures, color palette: Brown (#6B4226), Amber (#F4B860), Cream (#D9C2A6)
+
+6. Unboxing Packages
+Cinematic lifestyle shot of a cozy living room, figure in gray suit with round Amazon logo as face wearing a brown hat, opening Amazon box with gloved hands, items inside box include books and gadgets, soft light from window illuminating scene, wooden table, realistic textures and shadows, color palette: Dark Gray (#121212), Neon Cyan (#00FFC2), Neon Orange (#FF4C00)
+
+7. Evening Desk Work
+Realistic cinematic shot of office at dusk, figure in dark suit with round Amazon logo as face wearing French hat, typing on laptop, warm orange light reflecting off desk, shelves with books and papers in background, soft shadows, realistic textures, cinematic cozy atmosphere, color palette: Orange (#FFA500), Teal (#1ABCBC), Light (#F4F4F4)
+
+8. Reading Early Orders
+Realistic photo of home office desk, figure in brown suit with round Amazon logo as face wearing a Mexico-style hat, flipping pages of ledger with gloved hands, laptop screen showing Amazon dashboard, shelves filled with books in background, warm amber lighting, realistic shadows and textures, color palette: Brown (#6B4226), Amber (#F4B860), Cream (#D9C2A6)
+
+9. Thinking and Planning
+Cinematic shot of office interior, figure in dark blue suit with round Amazon logo as face wearing a black fedora, standing beside a desk with scattered notebooks and laptop, large window in background showing city skyline at golden hour, natural sunlight illuminating scene, realistic textures and shadows, color palette: Dark Gray (#121212), Neon Cyan (#00FFC2), Neon Orange (#FF4C00)
+
+10. Evening Reflection
+Realistic cinematic photo, figure in gray suit with round Amazon logo as face wearing brown straw hat, standing by a desk with coffee cup and laptop, background shows city skyline through window at sunset, soft warm light illuminating desk, shelves with books, realistic textures, cinematic storytelling scene, color palette: Orange (#FFA500), Teal (#1ABCBC), Light (#F4F4F4)
