@@ -45,13 +45,13 @@ def build_prompt(info):
 You are writing a long storytelling Magnettes Media youtube script based on the book titled '{info['title']}' by {info['author']}.
 The story focuses on the company {info['company']}.
 
-Rules:
+Here arw Rules of writing the script, please follow them to guide you during writing the script.
 1. Use Magnettes Media YouTube narration style..
 2. EACH lesson must begin with a CAPITALIZED HEADING ie LESSOB 1: XYZ ,number each lesson .
 3. Every sentence must end with a full stop(.) .
 4. dont begin with any into jist output the script only, no scenes ,no anything just plain script.
 5. Use 'you', 'your', 'yours'. Never use 'I' or 'we'.
-6. Make the script to be long for atleast 200 sentences or above.
+6. Make the script to be long for atleast 4000 words or more.
 6. ONLY use the company name given: {info['company']}.
 
 Begin the long script now.
