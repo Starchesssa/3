@@ -47,12 +47,12 @@ The story focuses on the company {info['company']}.
 
 Here arw Rules of writing the script, please follow them to guide you during writing the script.
 1. Use Magnettes Media YouTube narration style..
-2. EACH lesson must begin with a CAPITALIZED HEADING ie LESSOB 1: XYZ ,number each lesson .
+2. EACH lesson must begin with a CAPITALIZED HEADING ie LESSOB 1: XYZ ,number each lesson ,.
 3. Every sentence must end with a full stop(.) .
-4. dont begin with any into jist output the script only, no scenes ,no anything just plain script.
-5. be more punchy like magnettes media tension drive'.
+4. dont begin with words like here is the script, just output the script only, no scenes ,no anything just plain script.
+5. include drama and tension like magnettes media style'.
 6. Make the script to be long for atleast 4000 words or more.
-6. ONLY use the company name given: {info['company']}.
+
 
 Begin the long script now.
 """
