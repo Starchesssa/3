@@ -1,0 +1,115 @@
+import os
+import time
+import json
+from google import genai
+
+# === Paths ===
+COMPANY_BIO_PATH = "BOOKS/Temp/COMPANY_BIO"
+SCRIPT_OUTPUT_PATH = "BOOKS/Temp/SCRIPT/COMPANY_BIO"
+MODEL = "gemini-2.5-pro"
+
+# === Load Gemini API keys ===
+API_KEYS = [
+    os.environ.get("GEMINI_API"),
+    os.environ.get("GEMINI_API2"),
+    os.environ.get("GEMINI_API3"),
+    os.environ.get("GEMINI_API4"),
+    os.environ.get("GEMINI_API5"),
+]
+API_KEYS = [k for k in API_KEYS if k]
+
+if not API_KEYS:
+    raise ValueError("❌ No API keys found in environment variables.")
+
+# === Load book info from COMPANY_BIO ===
+def load_company_bio():
+    if not os.path.exists(COMPANY_BIO_PATH):
+        raise FileNotFoundError("❌ COMPANY_BIO not found.")
+
+    with open(COMPANY_BIO_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if not isinstance(data, list) or not data:
+        raise ValueError("❌ COMPANY_BIO must contain a JSON LIST with at least 1 item.")
+
+    book = data[0]  # always first entry
+    return {
+        "title": book.get("title", "Unknown Title"),
+        "author": book.get("author", "Unknown Author"),
+        "company": book.get("company", "Unknown Company")
+    }
+
+# === Build AI Prompt ===
+def build_prompt(info):
+    return f"""
+You are writing a long storytelling script based on the book titled '{info['title']}' by {info['author']}.
+The story focuses on the company {info['company']}.
+
+Rules:
+1. Use Magnettes Media YouTube narration style..
+2. EACH lesson must begin with a CAPITALIZED HEADING.
+3. Every sentence must end with a full stop(.) .
+4. dont begin with any into jist output the script only, no scenes ,no anything just plain script.
+5. Use 'you', 'your', 'yours'. Never use 'I' or 'we'.
+6. ONLY use the company name given: {info['company']}.
+
+Begin the long script now.
+"""
+
+# === Generate script ===
+def generate_script(prompt, api_index):
+    attempts = len(API_KEYS)
+
+    for i in range(attempts):
+        key = API_KEYS[(api_index + i) % attempts]
+        try:
+            client = genai.Client(api_key=key)
+
+            response = client.models.generate_content(
+                model=MODEL,
+                contents=[{"role": "user", "parts": [{"text": prompt}]}]
+            )
+
+            text = getattr(response, "text", None)
+            if not text:
+                text = str(response)
+
+            print(f"✅ Generated script using API key #{(api_index + i) % attempts + 1}")
+            return text, (api_index + i + 1) % attempts
+
+        except Exception as e:
+            print(f"⚠️ API key #{(api_index + i) % attempts + 1} failed: {e}")
+            time.sleep(1)
+
+    raise RuntimeError("❌ All API keys failed.")
+
+# === Save script ===
+def save_script(book_info, text):
+    os.makedirs(SCRIPT_OUTPUT_PATH, exist_ok=True)
+    filename = f"FULL.{book_info['title'].replace(' ', '_')}.txt"
+    path = os.path.join(SCRIPT_OUTPUT_PATH, filename)
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    print(f"💾 Saved: {path}")
+
+# === Main ===
+def main():
+    print("📘 Loading company bio...")
+    book_info = load_company_bio()
+
+    print(f"📚 Book: {book_info['title']}")
+    print(f"✍️ Author: {book_info['author']}")
+    print(f"🏢 Company: {book_info['company']}")
+
+    prompt = build_prompt(book_info)
+
+    api_index = 0
+    script, api_index = generate_script(prompt, api_index)
+
+    save_script(book_info, script)
+    print("\n🎉 Script generation complete!\n")
+
+if __name__ == "__main__":
+    main()
