@@ -42,17 +42,14 @@ def load_company_bio():
 # === Build AI Prompt ===
 def build_prompt(info):
     return f"""
-You are writing a long storytelling Magnettes Media youtube script based on the book titled '{info['title']}' by {info['author']}.
+You are writing a long suspensful&tension storytelling script based on the book titled '{info['title']}' by {info['author']}.
 The story focuses on the company {info['company']}.
 
 Here arw Rules of writing the script, please follow them to guide you during writing the script.
-1. Use Magnettes Media YouTube narration style..
 2. dont begin with words like here is the script, just output the script only, no scenes,sound effects,no any blackets,no anything just plain script.
-3. include drama and tension like magnettes media style in the story script'.
-4. Heading must be in capital letters, include intro explaining about the intro of the book and reason of the book ,intro also should have heading ie INTRO,where you introduce the book ,the author ,purpose for the book etc .
+3. use suspensful and tension style in the story script'.
+4. Heading must be in capital letters, include intro explaining about the intro of the book and reason of the book ,intro also should have heading ie INTRO,where you introduce the book ,the author ,purpose for the book and all done in a suspensfull tension way .
 5. Make the script to be long for atleast 4000 words or more.
-6. include clear small details that will make people ubdertand the drama ie peter who was ceo of conpany was overthrown by a man who he didnt expect , than man was his step brother who he loved the most..... ,invlude details that will make people u dertand
-7. dont be genric be very specific in the story ie instead of mentioning a company was in conflict with it self , say they were 2 groups one led by x who was ceo in company ,other by y who was xyz ,the conflic began by.....
 
 
 
