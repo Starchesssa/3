@@ -55,6 +55,7 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 7. dont be profesional , just be like you are talking to a friend .
 8. use 2nd and 3rd personal prodnoun dont use 1st personal pronoun 
 9. use more statistics and state what actually happened at the comapny , real life events and statistics, tell what actually hapened instead of generic facts 
+10. dont compare more and dont use more metaphor ie instead of ,the company was like this and that , say the company was xyz where abc happened and a person called x int.....
 
 
 
