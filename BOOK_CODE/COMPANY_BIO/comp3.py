@@ -53,7 +53,7 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 5. Make the script to be long for atleast 4000 words or more.
 6. include clear small details that will make people ubdertand the drama ie peter who was ceo of conpany was overthrown by a man who he didnt expect , than man was his step brother who he loved the most..... ,invlude details that will make people u dertand
 7. dont be genric be very specific in the story ie instead of mentioning a company was in conflict with it self , say they were 2 groups one led by x who was ceo in company ,other by y who was xyz ,the conflic began by.....
-8. use simple words in a story , avoid using more complex words , use simple and direct words 
+
 
 
 Begin the magnettes media youtube script now.
