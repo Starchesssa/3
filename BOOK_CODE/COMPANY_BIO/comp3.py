@@ -42,16 +42,17 @@ def load_company_bio():
 # === Build AI Prompt ===
 def build_prompt(info):
     return f"""
-You are writing a long suspensful&tension storytelling script based on the book titled '{info['title']}' by {info['author']}.
+You are writing a long friend to friend storytelling script based on the book titled '{info['title']}' by {info['author']}.
 The story focuses on the company {info['company']}.
 
 Here arw Rules of writing the script, please follow them to guide you during writing the script.
 1. dont begin with words like here is the script, just output the script only, no scenes,sound effects,no any blackets,no anything just plain script.
-2. use exreme language throughout the script , this doesnt mean exagaratting but just making an extreme opnion, each sentence in the sceipt should be presented in extreme way '.
+2. use exreme language ie instad of 'fiji water suck , say 'fiji water is the worst water yo'll ever drink in your life , be more extreme in opinions throught the script. '.
 3. all headings must be in capital letters including the intor heading , include intro explaining about the intro of the book and reason of the book,where you introduce the book ,the author ,purpose for the book and all done in a suspensfull tension way .
 4. Make the script to be long for atleast 4000 words or more.
 5. do not use metaphors   just state what hapoened in a clearly  and use nomal day to day words instead of invommon words
 6. use small letters in the script expect capital letters in the heading 
+7.dont be profesional , just be like you are talking to a friend .
 
 
 
