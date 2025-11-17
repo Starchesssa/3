@@ -48,7 +48,7 @@ The story focuses on the company {info['company']}.
 Here arw Rules of writing the script, please follow them to guide you during writing the script.
 1. dont begin with words like here is the script, just output the script only, no scenes,sound effects,no any blackets,no anything just plain script.
 2. use exreme language ie instad of 'fiji water suck , say 'fiji water is the worst water yo'll ever drink in your life , be more extreme in opinions throught the script. '.
-3. all headings must be in capital letters including the intor heading , include intro explaining about the intro of the book and reason of the book,where you introduce the book ,the author ,purpose for the book and all done in a suspensfull tension way .
+3. all headings must be in capital letters including the intor heading , include intro explaining about the intro of the book and reason of the book,where you introduce the book ,the author ,purpose for the book and high light major concepts and events of the book.
 4. Make the script to be long for atleast 4000 words or more.
 5. do not use metaphors   just state what hapoened in a clearly  and use nomal day to day words instead of invommon words
 6. use small letters in the script expect capital letters in the heading 
