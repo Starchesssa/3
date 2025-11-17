@@ -52,7 +52,9 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 4. Make the script to be long for atleast 4000 words or more.
 5. do not use metaphors   just state what hapoened in a clearly  and use nomal day to day words instead of invommon words
 6. use small letters in the script expect capital letters in the heading 
-7.dont be profesional , just be like you are talking to a friend .
+7. dont be profesional , just be like you are talking to a friend .
+8. use 2nd and 3rd personal prodnoun dont use 1st personal pronoun 
+9. use more statistics and state what actually happened at the comapny , real life events and statistics, tell what actually hapened instead of generic facts 
 
 
 
