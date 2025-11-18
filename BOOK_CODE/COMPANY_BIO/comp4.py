@@ -103,7 +103,7 @@ def generate_tts(api_key, combined_script, output_filename, retries=5, delay=10)
                 response_modalities=["audio"],
                 speech_config=types.SpeechConfig(
                     voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="encaladus")
+                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Enceladus")
                     )
                 ),
             )
