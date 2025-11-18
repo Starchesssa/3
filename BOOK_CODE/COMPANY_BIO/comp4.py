@@ -9,7 +9,7 @@ from google.genai import types
 # ✅ Paths
 SCRIPT_DIR = "BOOKS/Temp/SCRIPT/COMPANY_BIO"
 OUTPUT_DIR = "BOOKS/Temp/TTS"
-TONE_INSTRUCTION = "Read aloud in a warm and friendly tone:\n\n"
+TONE_INSTRUCTION = "Read like you are telling a story to a friend :\n\n"
 
 # Load API keys
 API_KEYS = [
@@ -103,7 +103,7 @@ def generate_tts(api_key, combined_script, output_filename, retries=5, delay=10)
                 response_modalities=["audio"],
                 speech_config=types.SpeechConfig(
                     voice_config=types.VoiceConfig(
-                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Puck")
+                        prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="encaladus")
                     )
                 ),
             )
