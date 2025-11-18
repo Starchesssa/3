@@ -56,6 +56,7 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 8. use 2nd and 3rd personal prodnoun dont use 1st personal pronoun 
 9. use more statistics and state what actually happened at the comapny , real life events and statistics, tell what actually hapened instead of generic facts 
 10. dont compare more and dont use more metaphor ie instead of ,the company was like this and that , say the company was xyz where abc happened and a person called x int.....
+11. in the intro ,after exaplining the purpose of the book and author etc , make a mini trailer or cliffhanger of what you are going to discuss in the video, the mini trailer must be very key aread of tension ,conflict etc that will make the viewer intrigued, just be like you are making a movie trailer at the intro .and dobt include unnecessary words , just make it simple by explaining book purpose , author and its trailer what will happen 
 
 
 
