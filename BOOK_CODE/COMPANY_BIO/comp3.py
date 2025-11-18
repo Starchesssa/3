@@ -49,7 +49,7 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 1. dont begin with words like here is the script, just output the script only, no scenes,sound effects,no any blackets,no anything just plain script.
 2. use exreme language ie instad of 'fiji water suck , say 'fiji water is the worst water yo'll ever drink in your life , be more extreme in opinions throught the script. '.
 3. all headings must be in capital letters including the intor heading , include intro explaining about the intro of the book and reason of the book,where you introduce the book ,the author ,purpose for the book and high light major concepts and events of the book.
-4. Make the script to be divided into parts, intro should be less than 1.5 minutes , outro same should be less than 1.5 minutes  long, the body is didvided so each body part should not exceed 3.5 minutes -4 minutes ,it shoild be less than that, overall script should be atleast 4000 words.
+4. Make the script to be divided into parts, intro should be less than 150 words , outro same should be less than 150 words long, the body is didvided so each body part should not exceed 390 words ,it should be less than that, overall script should be atleast 4000 words.
 5. do not use metaphors   just state what hapoened in a clearly  and use nomal day to day words instead of invommon words
 6. use small letters in the script expect capital letters in the heading 
 7. dont be profesional , just be like you are talking to a friend .
