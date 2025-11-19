@@ -39,13 +39,13 @@ def generate_animation_prompts_for_file(file_text, api_index):
     prompt = (
         "This is a text script for a video:\n\n"
         f"{file_text}\n\n"
-        "Please analyze the entire script and describe a cinematic shot for each sentence . "
-        "in the key lessons capitalise ,they are also part of the sentence , so describe their anomation and give me a sentence number ."
-        "Do NOT include humans or animals. "
-        "each full stop(.) makes a sentence, and male the peomt as shott as possible "
-        "Each animation should illustrate the key idea of the sentence and exagarate the visual to make people undertand . "
-        "Number the animations according to the cirresponding sentence."
-        "Do NOT add any preamble, start directly with the numbered animations."
+        "Please analyze the entire script and describe a cinematic shot for each part of script that is necesaary to be visualy told. "
+        "  ."
+        "  "
+        " "
+        " . "
+        " "
+        "Do NOT add any preamble, start directly with the prompts."
     )
 
     attempts = len(API_KEYS)
