@@ -39,12 +39,17 @@ def generate_animation_prompts_for_file(file_text, api_index):
     prompt = (
         "This is a text script for a video:\n\n"
         f"{file_text}\n\n"
-        "Please analyze the entire script and describe a cinematic shot for each part of script that is necesaary to be visualy told. "
-        "  ."
-        "  "
-        " "
-        " . "
-        " "
+        "Please analyze the entire script and describe a cinematic shot for each part of script in each sentence. "
+        "all sentences end with a dot, any sentence taht has end with a dot (.) is a sentence ."
+        "a sentence may have more than one image prompt, and in each sentenc say where exactly the image is to be revealed ie in  a sentence there might be visuals to be revealed based on sentence so each is revealed "
+        "format like this, it start with number of the sentence , and you write whattwo words in brackets where the image prompt fits and ingront you say the image prompt "
+        " here is sample format 
+        1.(diagnasour that..) -a silhoutte ofa dianasour in the jungle
+        (queen amina) - a silhoutte of a queen sitting in a queens chair
+        
+        2.(xyz) - abc ......
+        (abc) - mno....."
+        "all image prompts must be based on slihouttes , dont make real people just silhouttes wearing clothes and gloves  , silhouutes doing this and that , amke a realistic environment for silhouttes "
         "Do NOT add any preamble, start directly with the prompts."
     )
 
