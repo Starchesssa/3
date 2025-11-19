@@ -42,7 +42,7 @@ This is a text script for a video:
 
 {file_text}
 
-Please analyze the entire script and describe a cinematic shot for each part of the script in each sentence.
+Please analyze the entire script and describe an image prompt for each part of the script in each sentence.
 
 All sentences end with a dot. Any sentence that ends with a dot (.) is a sentence.
 
