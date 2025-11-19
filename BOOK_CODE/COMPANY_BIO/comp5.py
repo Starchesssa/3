@@ -109,7 +109,7 @@ Content:
 {chunk_text}
 
 Your task:
-Generate image prompts for each sentence using Magnettes Media style.
+Generate image prompts for each sentence, make silhouttes weraing clothes with blavk gloves ie elon musk silhoutte wearing blue gloves and black suit  infront of paypal building  .
 
 RULES:
 - Every sentence ends with a dot.
