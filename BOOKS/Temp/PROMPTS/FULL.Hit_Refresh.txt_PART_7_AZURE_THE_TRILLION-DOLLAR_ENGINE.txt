@@ -1,0 +1,56 @@
+1. (Public Announcement) - A silhouette of a man in a suit standing on a large corporate stage, a large screen behind him shows a broken smartphone icon.
+(Private Investment) - A silhouette of a man in a suit in a modern glass-walled conference room, pointing at a large digital screen displaying server architecture diagrams to other silhouettes.
+
+2. (Data Center) - A wide shot of a massive, modern data center interior with endless rows of humming server racks, all bathed in a cool blue light, no people visible.
+
+3. (Cloud Competition) - A split-screen image; on the left, a data center with orange lighting and AWS branding, on the right, a data center with blue lighting and Azure branding.
+(Strategic Planning) - Silhouettes of executives around a boardroom table, a presentation screen shows the Azure logo next to the AWS logo with a "vs." between them.
+
+4. (Market Dominance) - A sprawling, futuristic data center complex viewed from above at dusk, with glowing orange lights and AWS logos, covering a vast area.
+
+5. (Early Lead) - A satellite view of the globe at night, with a vast, interconnected network of glowing orange lines representing AWS data flow, while only a few small, thin blue lines for Azure are visible.
+
+6. (Internal Perception) - In a large, bustling Microsoft office, a large group of silhouettes are gathered excitedly around a presentation screen showing the Windows and Office logos.
+(Project Neglect) - In a small, quiet corner of the same office, a single silhouette of an engineer works alone at a desk with a screen showing the early Azure interface.
+
+7. (Different Vision) - A silhouette of a man standing alone in a dark office, looking out a large window at a city skyline, which is overlaid with a faint, glowing grid representing a cloud network.
+
+8. (Division Head) - A silhouette of a man in a suit leading a meeting with a small team of engineers, all silhouettes, in front of a whiteboard covered in cloud architecture diagrams.
+
+9. (Technology Shift) - A split image: on the left, a silhouette of a technician in a cramped basement server room with old, bulky servers. On the right, a vast, clean, and modern data center hall.
+
+10. (Strategic Pivot) - A close-up on a silhouette's hand changing a presentation slide; the old slide shows a desktop computer with an OS logo, the new slide shows a complex diagram of interconnected cloud services.
+
+11. (CEO Transition) - A silhouette of a man in a suit standing on a stage at a Microsoft town hall meeting, a large screen behind him with the Microsoft logo.
+(Major Decision) - A dramatic low-angle shot of a silhouette of a man in a suit at the head of a long boardroom table, decisively signing a document under a single spotlight.
+
+12. (New Mantra) - A wide shot of a crowded auditorium filled with silhouettes of employees, looking at a man on stage in front of a giant screen displaying the words "CLOUD-FIRST, MOBILE-FIRST".
+
+13. (Massive Build-out) - A time-lapse-style shot showing an empty plot of land, then construction cranes, then the finished exterior of a massive, modern Azure data center building.
+
+14. (Company Reorganization) - Silhouettes of employees in an office packing up their desks in one department, while other silhouettes set up new desks in a different, larger department with "Azure" branding on the walls.
+
+15. (Sales Retraining) - A silhouette of an instructor in a corporate training room, pointing to a whiteboard that shows a cloud consumption model to a classroom of sales team silhouettes.
+(Changing Pitch) - A split image: left side shows a silhouette salesperson holding a Windows software box to a client. Right side shows a silhouette salesperson showing a client a tablet displaying an Azure dashboard.
+
+16. (Difficult Transition) - Silhouettes of employees in a meeting room, some looking frustrated, gathered around a table littered with charts showing declining old revenue and slowly growing new revenue.
+
+17. (Market Position) - A digital screen shows a graph with a high orange line labeled "AWS" and a much lower blue line labeled "Azure" that is just starting to climb steeply.
+(Key Advantage) - A silhouette of a Microsoft salesperson warmly shaking hands with a silhouette of a corporate CEO in a skyscraper office.
+
+18. (Existing Footprint) - A montage of different corporate environments—a bank, a factory, a hospital—all with computer screens showing the Microsoft Windows or Office interface.
+
+19. (The Sales-pitch) - In a sleek corporate boardroom, a silhouette of a Microsoft representative presents to a board of directors; the screen shows a migration path from on-premise servers to an Azure cloud diagram.
+
+20. (Deal Closed) - A close-up shot of two silhouettes' hands, one signing a contract with the Azure logo on the letterhead.
+
+21. (Rapid Expansion) - A fast-motion shot of a digital world map where small blue dots representing Azure data centers appear and rapidly multiply across all continents.
+
+22. (Growth Metrics) - A close-up on a financial report screen, showing a bar chart for "Azure Revenue" where each year's bar is nearly double the height of the previous one, labeled "+90% YoY".
+
+23. (Market Share) - A pie chart of the cloud market is shown, with a large orange slice labeled "AWS" and a significant, growing blue slice labeled "Azure" in the number two position.
+(Leadership Success) - A silhouette of a man on stage at a press conference, with a background chart showing Azure's market share growth behind him.
+
+24. (Company Valuation) - A shot of the New York Stock Exchange floor, with the Microsoft (MSFT) ticker on the screen showing a market capitalization above two trillion dollars.
+
+25. (Financial Comeback) - A stock market chart showing the Microsoft (MSFT) stock price from 2010 to the present day, displaying a dramatic and sustained upward trajectory starting around 2014.

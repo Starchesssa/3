@@ -1,0 +1,61 @@
+1. (Boardroom View) - A group of silhouettes in business attire in a dark, realistic boardroom, all focused on a large glowing screen displaying the classic Windows logo.
+(Close Up) - A silhouette's hand pointing to a presentation slide that has the Windows logo at the very top of an organizational chart.
+
+2. (Meeting Shot) - Silhouettes of executives around a conference table in a realistic office, one silhouette stands and points to a whiteboard with the question "How does this help Windows?" written on it.
+
+3. (Office Interior) - A large, brightly lit Windows logo mural on a central wall of a modern, realistic Microsoft campus building, with smaller logos for other company products on adjacent walls.
+
+4. (Chart View) - A silhouette executive looking grimly at a line graph on a large screen in a realistic office, showing a flat trajectory for their products against the sharply rising lines labeled "Internet," "Search," and "Mobile."
+
+5. (Office Night) - The silhouette of a man in a realistic office erasing a large flowchart centered around "Windows" on a glass whiteboard.
+(Sole Figure) - A single silhouette of a man in business attire looking thoughtfully out a large window of a realistic high-rise office at night.
+
+6. (Street Scene) - A wide shot of a bustling, realistic city street at dusk, with silhouettes of people everywhere looking down at the glowing screens of their mobile devices.
+
+7. (Cafe View) - A realistic cafe interior with silhouettes of people sitting at tables, using a variety of laptops, tablets, and phones.
+
+8. (Device Shot) - A close-up on a table in a realistic setting, showing a collection of devices: a smartphone, a tablet, a sleek laptop, and a notebook computer, all being used by silhouetted hands with gloves.
+
+9. (Business Presentation) - A silhouette presenter on a stage pointing to a slide in a realistic auditorium, the slide shows one bar chart labeled "PC Market" is stagnant, while another labeled "Mobile Devices" is rapidly growing.
+
+10. (Stage Presentation) - A silhouette of a man on a stage in a modern, realistic auditorium, gesturing towards a large screen showing a new strategy diagram where "Cloud" and "Services" are at the center.
+
+11. (Document Edit) - A close-up shot of a silhouetted hand using a red marker to cross out the words "Windows-First" on a printed strategy document on a realistic wooden desk.
+
+12. (Strategy Graphic) - A graphic on a presentation screen in a realistic conference room, showing Microsoft service logos connecting via lines to icons of various smartphones, tablets, and laptops.
+(App Store) - A point-of-view shot of a silhouetted hand holding a smartphone, scrolling through an app store and tapping to download a Microsoft app.
+
+13. (Audience Reaction) - A shot from behind a speaker, showing a large audience of silhouetted employees in a realistic auditorium, their postures showing surprise and intense focus on the presentation.
+
+14. (News Headline) - A close-up of a computer screen in a realistic office setting displaying a news article with the headline: "Microsoft Embraces Linux."
+
+15. (Data Center) - A wide shot of a massive, realistic server room, with two silhouetted technicians working on different server racks, one rack has a Windows Server sticker, the other has a Linux penguin sticker.
+
+16. (Stage Speech) - A silhouette of a man in business attire, animated and passionate, speaking at a podium on a brightly lit stage in a realistic conference hall.
+(Presentation Slide) - A view from the audience looking at a large screen on stage, where a silhouette speaker is pointing dismissively at the Linux penguin logo.
+
+17. (Heated Meeting) - A silhouette of an executive in a realistic boardroom, slamming a gloved fist on the conference table during a discussion in front of a presentation about competitors.
+
+18. (Split Screen) - A split-screen image: on the left, a silhouette aggressively points a finger in a meeting; on the right, a different silhouette extends an open hand for a handshake in a similar meeting.
+
+19. (Handshake Shot) - A close-up of two silhouetted figures in business suits shaking hands in a modern, realistic office lobby.
+
+20. (Keynote Announcement) - A silhouette presenter on a stage at a developer conference, with a massive screen behind them showing the Azure logo next to the Linux penguin logo, with a plus sign between them.
+
+21. (Code Commit) - A close-up over the shoulder of a silhouetted developer at a computer in a realistic office, submitting code to a repository on a screen that shows the Linux project and a Microsoft employee username.
+
+22. (Developer Screen) - A close-up shot of a computer monitor on a realistic developer's desk, the screen shows a Windows 10 interface with a command-line terminal window open and running Linux commands.
+
+23. (Office Whispers) - Two silhouettes of employees whispering to each other in a realistic, modern office hallway, glancing towards a large public screen displaying a news announcement.
+
+24. (Cafeteria Reaction) - A group of silhouetted employees sitting at a table in a realistic corporate cafeteria, looking at their phones and laptops with postures of shock and disbelief.
+
+25. (Developer Applause) - A large crowd of silhouetted developers at a tech conference, applauding and looking up at a stage where a Microsoft presentation is taking place.
+
+26. (Platform Icons) - A presentation slide on a large screen in a realistic auditorium, showing the logos for Windows, macOS, iOS, Android, and Linux all arranged equally in a circle.
+
+27. (Ecosystem Diagram) - A graphic on a presentation screen showing Microsoft tool and cloud logos in the center, with lines radiating out to connect with logos of various operating systems and devices.
+
+28. (New Welcome) - A silhouette of a man in a suit shaking hands with a diverse group of other silhouettes in casual wear at the entrance of a realistic corporate campus building.
+
+29. (Chart Comparison) - A silhouette of a presenter pointing to a large screen in a realistic boardroom, the screen displays two charts side-by-side: one labeled "Old" shows a single, large bar, the other labeled "New" shows a multitude of smaller, growing bars.
