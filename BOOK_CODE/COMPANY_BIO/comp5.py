@@ -50,13 +50,17 @@ A sentence may have more than one image prompt. For each prompt, specify exactly
 
 Use this exact format:
 
-1. (dinosaur that..) - a silhouette of a dinosaur in the jungle
-(queen amina) - a silhouette of a queen sitting in a queen's chair
+1. (word word) - image prompt 
+(word word) - image prompt 
 
-2. (xyz) - abc
-(abc) - mno
+2. (word word) - image prompt 
+(word word ) - image prompt 
 
-All image prompts must be silhouettes only. Do not create real people, only silhouettes wearing clothes and gloves. Create a realistic environment around the silhouettes.
+All people and animals must be represented by silhouettes only. Do not create real people, only silhouettes wearing clothes and gloves. Create a realistic environment around the silhouettes.
+the format is simple just wrote a sentence number ,followed by bracket two words in sentence to be made their image prompt 
+if a sentence is flat dont make any of its image peompt, the image prompts are only to those important words in sentence to be made visuals .
+so its simple ,if you want make visual of a word ,write the word and its next in brackets and ssys its image prompt
+dont skip line in image prompt of same sentence , only skip in image prompt of diff sentence ie after one sentence number skip line , one sentence number may hold multiple image prompts
 
 Do NOT add any preamble. Start directly with the prompts.
 """
