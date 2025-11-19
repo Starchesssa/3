@@ -1,0 +1,61 @@
+1. (Nadella's Speech) - A silhouette of a man in a dark suit and black gloves on a large stage, with a giant screen behind him showing a crossed-out smartphone.
+(Secret Meeting) - A silhouette of a man in a dark suit and black gloves in a dimly lit boardroom, pointing at blueprints for a data center.
+
+2. (Azure Logo) - A massive, glowing "Azure" logo on the side of a modern data center building at night, with a silhouette of a lone engineer in a hard hat and black gloves looking up at it.
+
+3. (Cloud Competitors) - A wide shot of a server farm with racks of servers, one section prominently branded with a glowing Azure logo, while in the background, a much larger section is branded with an AWS logo.
+
+4. (AWS Dominance) - A realistic cityscape at night, where glowing blue data lines from every single building flow into one central, colossal skyscraper emblazoned with the AWS logo.
+
+5. (Market Timeline) - A digital timeline on a huge screen in a dark room, showing a launch icon for "AWS" in 2006, followed by a long, empty space before other much smaller competitor icons appear years later.
+(Bezos's Vision) - A silhouette of Jeff Bezos in a casual shirt and black gloves standing alone on a vast, newly constructed data center floor, looking at endless rows of humming servers.
+
+6. (Internal View) - Inside a Microsoft boardroom, several silhouettes of executives in suits and black gloves are focused on a huge central screen displaying prominent Windows and Office logos.
+(Azure Ignored) - A single, smaller screen in the corner of the same boardroom displays the Azure logo, with one lone silhouette of an executive turned away from the main group to study it.
+
+7. (Nadella's Focus) - A silhouette of Satya Nadella in a suit and black gloves, standing in a server room and looking intently at a single server rack labeled "Azure" while other indistinct silhouettes walk past in the background.
+
+8. (Future Vision) - A silhouette of Satya Nadella in a suit and black gloves, standing alone in a dark office, looking at a glowing, holographic 3D map of the world with data centers connected across every continent.
+
+9. (Tech Transition) - A split-panel image: on the left, a silhouette of a technician in work clothes and black gloves unplugs a bulky, old server in a cramped basement.
+(Cloud Future) - On the right, a wide-angle view of a bright, clean, and massive data center aisle, with sleek server racks stretching into the vanishing point.
+
+10. (Shifting Priority) - An office desk with a personal computer where the Windows operating system icon is transparent and fading away.
+(Cloud War) - Through the office window, the city skyline is dominated by two competing, massive data center buildings, one with an Azure logo and the other with an AWS logo.
+
+11. (New CEO) - A silhouette of Satya Nadella in a suit and black gloves at a podium in a huge auditorium, with the Microsoft logo on a screen behind him, addressing a massive audience of employee silhouettes.
+
+12. (New Motto) - A close-up of a giant screen at a corporate town hall, displaying only the words "Cloud First, Mobile First" in a clean, bold font.
+(Nadella's Declaration) - A silhouette of Satya Nadella on stage, gesturing with an open hand towards the screen with the new motto.
+
+13. (Massive Investment) - A realistic architectural visualization showing a vast, empty plot of land transforming into a massive, completed Azure data center.
+(Signing Deal) - A silhouette of an executive in a suit and black gloves signing a large contract, with architectural blueprints for a data center spread out on the table.
+
+14. (Company Reorg) - A large, complex organizational chart projected on a glass wall, with silhouettes of executives physically moving magnetic nameplates into a new structure centered under a large "Azure" heading.
+
+15. (Sales Retraining) - A group of silhouettes in business suits and black gloves sitting in a modern training seminar, looking at a presenter.
+(New Focus) - The presenter silhouette is pointing to a large screen that shows a dynamic graph labeled "Azure Consumption," replacing older slides about software licenses.
+
+16. (Difficult Change) - Silhouettes of office workers in a state of organized chaos, with old marketing posters for Windows being taken down from walls as new Azure posters are put up.
+(Painful Learning) - A silhouette of a salesperson in a suit and black gloves sitting at a desk late at night, looking frustrated while studying a complex technical manual on cloud computing.
+
+17. (Enterprise Relationships) - A silhouette of a Microsoft representative in a suit and black gloves shaking hands with a silhouette of a corporate CEO across a large desk in a modern skyscraper office.
+(Connected World) - Through the office window, a skyline of corporate headquarters is visible, with faint, glowing lines connecting each building back to the Microsoft representative.
+
+18. (Microsoft Everywhere) - A photo montage showing different corporate environments—a factory floor control room, a financial trading floor, a scientific lab—where all computer monitors are displaying recognizable Microsoft software interfaces.
+
+19. (Sales Pitch) - A silhouette of a salesperson in a suit and black gloves presenting to a board of director silhouettes in a conference room.
+(Migration Plan) - The presentation screen shows a diagram with icons for "Company Servers" and "Email" with large arrows pointing towards a central, encompassing Azure cloud logo.
+
+20. (Deal Closed) - A close-up, dramatic shot of two silhouettes' hands, one with black gloves, shaking firmly to seal a deal in a high-rise office overlooking a city.
+
+21. (Rapid Growth) - A massive digital screen in a Microsoft operations center displaying a bar chart labeled "Azure Revenue," with the most recent bars showing a steep, near-vertical ascent.
+
+22. (Growth Numbers) - A person's hands, wearing black gloves, holding a tablet that displays a financial line graph with data points highlighted in circles showing "+90%", "+100%", and "+95%" year-over-year growth.
+
+23. (Market Share) - A large, clean 3D pie chart projected holographically in a room, representing the cloud market; one large slice is labeled "AWS," and a second, very substantial slice is labeled "Azure."
+(Nadella's Success) - A silhouette of Satya Nadella in a suit and black gloves stands next to the chart, looking at the "Azure" slice with a sense of accomplishment.
+
+24. (Trillion Dollars) - The exterior of the New York Stock Exchange building at dusk, with the Microsoft (MSFT) stock ticker prominently displayed on the electronic banner, showing a market capitalization figure in the trillions.
+
+25. (Comeback Engine) - A wide shot of the modern, bustling Microsoft campus, with employee silhouettes walking between buildings, and a new, massive, and architecturally central Azure data center visible as the heart of the campus.
