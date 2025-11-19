@@ -116,8 +116,8 @@ RULES:
 - A single sentence may have multiple image prompts.
 - Each prompt must be formatted like:
 
-1. (two words) - description
-(two words) - description
+1. (two words) - image prompt
+(two words) - image prompt 
 
 2. ...
 
