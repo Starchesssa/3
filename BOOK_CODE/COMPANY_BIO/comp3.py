@@ -49,7 +49,7 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 1. dont begin with words like here is the script, just output the script only, no scenes,sound effects,no any blackets,no anything just plain script.
 2. use exreme language ie instad of 'fiji water suck , say 'fiji water is the worst water yo'll ever drink in your life , be more extreme in opinions throught the script. '.
 3. all headings must be in capital letters including the intor heading , include intro explaining about the intro of the book and reason of the book,where you introduce the book ,the author ,purpose for the book and high light major concepts and events of the book.
-4. Make the script to be divided into parts, intro should be less than 150 words , outro same should be less than 150 words long, the body is didvided so each body part should not exceed 390 words ,it should be less than that, overall script should be atleast 4000 words.
+4. Make the script to be divided into parts, intro should be less than 150 words , outro same should be less than 150 words long, the body is didvided so each body part should not exceed 450 words ,it should be less than that, overall script should be atleast 4000 words.
 5. do not use metaphors   just state what hapoened in a clearly  and use nomal day to day words instead of invommon words
 6. use small letters in the script expect capital letters in the heading 
 7. dont be profesional , just be like you are talking to a friend .
@@ -58,7 +58,8 @@ Here arw Rules of writing the script, please follow them to guide you during wri
 10. dont compare more and dont use more metaphor ie instead of ,the company was like this and that , say the company was xyz where abc happened and a person called x int.....
 11. in the intro ,after exaplining the purpose of the book and author etc , make a mini trailer or cliffhanger of what you are going to discuss in the video, the mini trailer must be very key aread of tension ,conflict etc that will make the viewer intrigued, just be like you are making a movie trailer at the intro .and dobt include unnecessary words , just make it simple by explaining book purpose , author and its trailer what will happen 
 12. also make a outro , the outro should be similar to a youtube outro , and tell them to subscribe , also , link of the audio book is avaialble for free for new users audible, and the book (ebook/physical) also is available in description, do this also after the into.
-13. 
+13. dont just talk about the company , introduce different characters throught the company , peoplw related to events you are talking about the company, also quotes of people saying about the events , people reaction etc , make the audience expireience everything that was going on instead of the conpany did this and that , include characters and conglicts about the company. 
+14. make more characterisation in the script ,introduce more people like in a movie the conpany is run by people so focus on how pwople interacted with the coanpany and inckude more atatistics 
 
 Begin the magnettes media youtube script now.
 """
