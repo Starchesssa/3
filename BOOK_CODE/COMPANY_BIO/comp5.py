@@ -42,7 +42,7 @@ This is a text script for a video:
 
 {file_text}
 
-Please analyze the entire script and describe an image prompt for each part of the script in each sentence.
+Please analyze the entire script and describe an image prompt for each part of the script in each sentence and use magnettes media yoytube style.
 
 All sentences end with a dot. Any sentence that ends with a dot (.) is a sentence.
 
@@ -61,7 +61,7 @@ the format is simple just wrote a sentence number ,followed by bracket two words
 if a sentence is flat dont make any of its image peompt, the image prompts are only to those important words in sentence to be made visuals .
 so its simple ,if you want make visual of a word ,write the word and its next in brackets and ssys its image prompt
 dont skip line in image prompt of same sentence , only skip in image prompt of diff sentence ie after one sentence number skip line , one sentence number may hold multiple image prompts
-
+arrang everthing vertically as i have give you in my format example and follow the tormat strictly 
 Do NOT add any preamble. Start directly with the prompts.
 """
 
