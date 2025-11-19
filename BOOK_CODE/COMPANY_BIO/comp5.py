@@ -18,6 +18,7 @@ API_KEYS = [
     os.environ.get("GEMINI_API5"),
 ]
 API_KEYS = [k for k in API_KEYS if k]
+
 if not API_KEYS:
     raise ValueError("❌ No valid GEMINI_API keys found in environment variables.")
 
@@ -36,65 +37,94 @@ def sanitize_filename(name):
 # === Generate animation prompts for whole file ===
 
 def generate_animation_prompts_for_file(file_text, api_index):
-    prompt = (
-        "This is a text script for a video:\n\n"
-        f"{file_text}\n\n"
-        "Please analyze the entire script and describe a cinematic shot for each part of script in each sentence. "
-        "all sentences end with a dot, any sentence taht has end with a dot (.) is a sentence ."
-        "a sentence may have more than one image prompt, and in each sentenc say where exactly the image is to be revealed ie in  a sentence there might be visuals to be revealed based on sentence so each is revealed "
-        "format like this, it start with number of the sentence , and you write whattwo words in brackets where the image prompt fits and ingront you say the image prompt "
-        " here is sample format 
-        1.(diagnasour that..) -a silhoutte ofa dianasour in the jungle
-        (queen amina) - a silhoutte of a queen sitting in a queens chair
-        
-        2.(xyz) - abc ......
-        (abc) - mno....."
-        "all image prompts must be based on slihouttes , dont make real people just silhouttes wearing clothes and gloves  , silhouutes doing this and that , amke a realistic environment for silhouttes "
-        "Do NOT add any preamble, start directly with the prompts."
-    )
+    prompt = f"""
+This is a text script for a video:
+
+{file_text}
+
+Please analyze the entire script and describe a cinematic shot for each part of the script in each sentence.
+
+All sentences end with a dot. Any sentence that ends with a dot (.) is a sentence.
+
+A sentence may have more than one image prompt. For each prompt, specify exactly where the visual appears inside the sentence using two words in brackets, then after the dash write the image description.
+
+Use this exact format:
+
+1. (dinosaur that..) - a silhouette of a dinosaur in the jungle
+(queen amina) - a silhouette of a queen sitting in a queen's chair
+
+2. (xyz) - abc
+(abc) - mno
+
+All image prompts must be silhouettes only. Do not create real people, only silhouettes wearing clothes and gloves. Create a realistic environment around the silhouettes.
+
+Do NOT add any preamble. Start directly with the prompts.
+"""
 
     attempts = len(API_KEYS)
+
     for attempt in range(attempts):
         key = API_KEYS[(api_index + attempt) % attempts]
+
         try:
             client = genai.Client(api_key=key)
             response = client.models.generate_content(
                 model=MODEL,
                 contents=[{"role": "user", "parts": [{"text": prompt}]}]
             )
-            print(f"✅ Animation prompts generated with API#{(api_index + attempt) % attempts + 1}", flush=True)
+
+            print(
+                f"✅ Animation prompts generated with API#{(api_index + attempt) % attempts + 1}",
+                flush=True
+            )
+
             return response.text.strip(), (api_index + attempt + 1) % attempts
+
         except Exception as e:
-            print(f"⚠️ API#{(api_index + attempt) % attempts + 1} failed: {e}", flush=True)
+            print(
+                f"⚠️ API#{(api_index + attempt) % attempts + 1} failed: {e}",
+                flush=True
+            )
             time.sleep(1)
+
     raise RuntimeError("❌ All API keys failed for file prompts")
 
 def save_prompts(filename, prompts):
     os.makedirs(PROMPTS_PATH, exist_ok=True)
     safe_name = sanitize_filename(filename)
     path = os.path.join(PROMPTS_PATH, safe_name)
+
     with open(path, "w", encoding="utf-8") as f:
         f.write(prompts)
+
     print(f"💾 Saved prompts: {path}", flush=True)
 
 # === Main ===
 
 def main():
     txt_files = list_txt_files(SCRIPT_PATH)
+
     if not txt_files:
         print("❌ No .txt files found in COMPANY_BIO directory.")
         return
 
     api_index = 0
+
     for file in txt_files:
         print(f"\n⏳ Processing {file}...", flush=True)
+
         try:
             text = read_file(os.path.join(SCRIPT_PATH, file))
+
             if not text:
                 print(f"⚠️ Empty file: {file}, skipping.")
                 continue
 
-            animation_prompts, api_index = generate_animation_prompts_for_file(text, api_index)
+            animation_prompts, api_index = generate_animation_prompts_for_file(
+                text,
+                api_index
+            )
+
             save_prompts(file, animation_prompts)
 
         except Exception as e:
