@@ -108,7 +108,7 @@ Section title: {heading}
 Content:
 {chunk_text}
 
-Your task: make images for the script , make images representing the script , famous images in google 
+Your task: search online and make a description of  images for the script, inages must match the context in the script  , 
 
 RULES:
 - Evey sentence ends with a dot.
@@ -124,7 +124,7 @@ RULES:
 
 ...
 
-- in the image prompt , mention the famous image and tell ai to recreate the image, include company colours to exagarate.
+- in the image prompt , mention the description of the image and tell ai to recreate the image, include company colours to exagarate.
 - The two worsd in bracket are the words in the script that the visual or the image prompt is realted to , in the script if a word is related to the  prompt then we take two words ie if we need to represent the word key in key ideas are awesome , so we take the word key and the word that follows so we say key ideas - image prompt  
 - NO blank line inside the same sentence.
 - ONE blank line between sentences.
