@@ -108,11 +108,11 @@ Section title: {heading}
 Content:
 {chunk_text}
 
-Your task:describe famous images based on the script ie the pay pal mafia photo,jeff bezzos office in 1999,jobs introducing i0hobe 2007 at stage . 
+Your task: make images for the script , make images representing the script , famous images in google 
 
 RULES:
-- Every sentence ends with a dot.
-- A single sentence may have multiple image prompts.
+- Evey sentence ends with a dot.
+- A single sentence may have multiple image prompts each inage peompts is trying to recreate a famous photo .
 - Each prompt must be formatted like:
 
 1. (two words) - image prompt
