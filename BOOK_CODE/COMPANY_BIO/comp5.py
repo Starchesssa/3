@@ -108,7 +108,7 @@ Section title: {heading}
 Content:
 {chunk_text}
 
-Your task:generate image prompts for content intor dramatic,cinematic and hyper realostic images like magnettes media. 
+Your task:describe famous images based on the script ie the pay pal mafia photo,jeff bezzos office in 1999,jobs introducing i0hobe 2007 at stage . 
 
 RULES:
 - Every sentence ends with a dot.
@@ -124,16 +124,13 @@ RULES:
 
 ...
 
-- The two worss in bracket are the words in the script that the visual or the image prompt is realted to , in the script if a word is related to the  prompt then we take two words ie if we need to represent the word key in key ideas are awesome , so we take the word key and the word that follows so we say key ideas - image prompt  
+- in the image prompt , mention the famous image and tell ai to recreate the image, include company colours to exagarate.
+- The two worsd in bracket are the words in the script that the visual or the image prompt is realted to , in the script if a word is related to the  prompt then we take two words ie if we need to represent the word key in key ideas are awesome , so we take the word key and the word that follows so we say key ideas - image prompt  
 - NO blank line inside the same sentence.
 - ONE blank line between sentences.
-- All characters must be high fashion silhouettes of business figures their faces are hidden or shadowed wearing gloves, include male figures only.
-- Lighting: Dark, moody, high-contrast
-. Use Lighting to outlinethe silhouettes.
-- Atmosphere: Volumetric fog, dust particles,
-cinematic depth of field. Use "Unreal Engine
-5 render" aesthetic.
-- all of the image prompts must be relevant to what is been conveyed based on the company or script contenxt, exaggaration is allowed to make people undertand 
+- All characters must be high fashion 3d silhouettes of business figures their faces are hidden or shadowed wearing gloves, include male figures only.
+- Lighting: based on company brand colours
+- if there is a logo you want to visualise in image , include its actual name ie amazon logo  with .....
 - Start immediately with prompts. No intro.
 
 Begin:
