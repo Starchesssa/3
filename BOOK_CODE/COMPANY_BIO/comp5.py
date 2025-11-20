@@ -108,8 +108,7 @@ Section title: {heading}
 Content:
 {chunk_text}
 
-Your task:
-Generate image prompts for each sentence, make silhouttes weraing clothes with blavk gloves ie elon musk silhoutte wearing blue gloves and black suit  infront of paypal building  .
+Your task:generate image prompts for content intor dramatic,cinematic and hyper realostic images like magnettes media. 
 
 RULES:
 - Every sentence ends with a dot.
@@ -123,9 +122,13 @@ RULES:
 
 - NO blank line inside the same sentence.
 - ONE blank line between sentences.
-- All characters must be silhouettes wearing clothes + gloves.
-- Environment must be realistic.
-- No metaphors — describe real events only.
+- All characters must be high fashion silhouettes of business figures their faces are hidden or shadowed wearing gloves, dont include silhouttes of females.
+- Lighting: Dark, moody, high-contrast
+(Chiaroscuro). Use Rim Lighting to outline
+the silhouettes.
+-Atmosphere: Volumetric fog, dust particles,
+cinematic depth of field. Use "Unreal Engine
+5 render" aesthetic.
 - Start immediately with prompts. No intro.
 
 Begin:
