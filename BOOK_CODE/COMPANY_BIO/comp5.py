@@ -118,17 +118,22 @@ RULES:
 1. (two words) - image prompt
 (two words) - image prompt 
 
-2. ...
+2. (two words) - image prompt
+(two words) - image prompt
+(two words) - image prompt
 
+...
+
+- The two worss in bracket are the words in the script that the visual or the image prompt is realted to , in the script if a word is related to the  prompt then we take two words ie if we need to represent the word key in key ideas are awesome , so we take the word key and the word that follows so we say key ideas - image prompt  
 - NO blank line inside the same sentence.
 - ONE blank line between sentences.
 - All characters must be high fashion silhouettes of business figures their faces are hidden or shadowed wearing gloves, include male figures only.
 - Lighting: Dark, moody, high-contrast
-(Chiaroscuro). Use Rim Lighting to outline
-the silhouettes.
--Atmosphere: Volumetric fog, dust particles,
+. Use Lighting to outlinethe silhouettes.
+- Atmosphere: Volumetric fog, dust particles,
 cinematic depth of field. Use "Unreal Engine
 5 render" aesthetic.
+- all of the image prompts must be relevant to what is been conveyed based on the company or script contenxt, exaggaration is allowed to make people undertand 
 - Start immediately with prompts. No intro.
 
 Begin:
