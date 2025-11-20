@@ -122,7 +122,7 @@ RULES:
 
 - NO blank line inside the same sentence.
 - ONE blank line between sentences.
-- All characters must be high fashion silhouettes of business figures their faces are hidden or shadowed wearing gloves, dont include silhouttes of females.
+- All characters must be high fashion silhouettes of business figures their faces are hidden or shadowed wearing gloves, include male figures only.
 - Lighting: Dark, moody, high-contrast
 (Chiaroscuro). Use Rim Lighting to outline
 the silhouettes.
