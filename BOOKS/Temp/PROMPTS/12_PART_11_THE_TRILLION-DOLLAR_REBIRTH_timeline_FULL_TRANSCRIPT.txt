@@ -1,0 +1,23 @@
+1. (0.00 - 10.22) - A 2D parallax scene of a chaotic office. In the foreground, a silhouette of a boss is yelling and pointing towards an exit door at another male silhouette holding a box of his belongings. Papers are scattered in the air. In the background, a large screen displays a plummeting red stock graph, symbolizing the firings, write-downs, and gutted culture.
+
+2. (10.88 - 15.54) - A single male silhouette stands confidently in the center of the frame. The chaotic mess from the previous scene dissolves behind him as a bright, glowing line graph rises sharply from the bottom of the screen, representing a "staggering turnaround." The background transitions from dark and stormy to bright and clear.
+
+3. (16.18 - 23.22) - A 3D parallax shot of a stock market ticker board. The focus is on a flat, lifeless line graph hovering around a marker for "$36." The date "February 2014" is displayed prominently. A male silhouette stands in the foreground, looking thoughtfully at the stagnant price.
+
+4. (23.64 - 34.64) - A stylized 2D parallax cityscape at dusk. In the foreground is a modest, shorter building with a Microsoft-style logo, its market cap of "$300 Billion" displayed faintly on its side. Towering over it in the background are two massive, gleaming skyscrapers representing Apple and Google, dwarfing the Microsoft building.
+
+5. (35.32 - 44.72) - The scene focuses on the Microsoft building from the previous shot. A glowing, digital vine, representing Azure and Office 365, erupts from the base of the building and rapidly grows upward, wrapping around it like a "weed." The light from the vine begins to illuminate the surrounding city.
+
+6. (45.12 - 53.16) - A layered 2D scene showing a positive cultural shift. In the foreground, silhouettes of brilliant people are collaborating around a bright, glowing table. In the background, a silhouette representing Wall Street looks through binoculars at a rising stock ticker on a distant building, finally taking notice.
+
+7. (53.86 - 63.58) - An abstract 3D parallax stock chart. A glowing line representing the stock price shoots upward, physically breaking through translucent glass barriers labeled "$50," then "$70," and finally shattering a barrier labeled "$100."
+
+8. (64.18 - 73.26) - A male silhouette stands on a stage presenting in front of a giant screen. The screen shows a bar chart for "Azure Growth" where each bar is dramatically taller than the last, with a glowing "+50% Year-Over-Year" label on each one, emphasizing the "mind-blowing" numbers.
+
+9. (73.74 - 90.62) - A 2D parallax scene of a mountain range. A male silhouette plants a flag with a Microsoft logo on the highest peak, labeled "Most Valuable Company." In the final shot, a fossilized dinosaur skeleton in the foreground crumbles to dust, and from that dust, a sleek rocket ship launches into the sky, symbolizing the company being "back on top."
+
+10. (91.28 - 104.80) - A close-up on a giant, digital counter. The numbers are rapidly increasing and dramatically tick over to "$1,000,000,000,000." The scene then pulls back to show a male silhouette standing on a platform being lifted by a massive, growing stack of glowing gold bars labeled "+$700 Billion in Value."
+
+11. (105.28 - 114.46) - The stock chart returns, but now it's a near-vertical rocket launch. The glowing line blasts past markers for "$200" and "$300 a share," showing an "absolute tear."
+
+12. (114.92 - 133.20) - A final 3D parallax scene of a leader's choice. A male silhouette stands at a crossroads. He ignores the easy, flat path leading to a foggy past. Instead, he takes the steep, difficult path up a mountain toward a bright future. The final image is the silhouette standing on the sunlit peak, arms raised in victory as the words "The Comeback Was Complete" appear.

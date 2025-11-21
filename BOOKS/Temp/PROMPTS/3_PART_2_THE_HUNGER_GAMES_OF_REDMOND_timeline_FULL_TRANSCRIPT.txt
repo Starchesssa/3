@@ -1,0 +1,25 @@
+1.  (0.00-11.32) - A 2D/3D parallax image of a massive, dark, brutalist skyscraper representing the "giant tech company." In the foreground, a lone male silhouette looks up at the building. In the background, the sky is stormy. Rusted, unmoving gears are visible on the building's facade. The building itself seems to be glowing with a faint, sickly green light, hinting at the "toxic system" within.
+
+2.  (11.32-20.76) - A parallax scene focused on the words "STACK RANKING" in a stark, menacing font, glowing red and floating in a dark corporate hallway. In the foreground, out of focus, a manager silhouette is hunched over his desk in despair. The words cast long, distorted shadows down the hall, creating a nightmarish atmosphere.
+
+3.  (20.76-29.72) - A male manager silhouette is shown in the foreground, looking distressed. In the midground, a group of smaller employee silhouettes are being forcibly arranged along a large, glowing bell curve by giant, shadowy, disembodied hands representing corporate policy. The scene has a stark, clinical feel.
+
+4.  (29.72-42.26) - An abstract representation. Three vertical beams of light fill the screen: a bright gold one on the left labeled "TOP," a neutral grey one in the middle labeled "AVERAGE," and a dim, ominous red one on the right labeled "POOR." Silhouettes of employees are being sorted into the beams. One silhouette, identical to those in the "TOP" beam, is being dragged against its will towards the red "POOR" beam.
+
+5.  (42.26-50.48) - A parallax image. In the foreground, a male silhouette stands on a section of floor. In the midground, we see a large, red target symbol projected onto his back. In the background, the floor beneath him is revealed to be a trapdoor, which is slowly opening into a dark, bottomless pit.
+
+6.  (50.48-58.98) - A wide shot showing a manager silhouette standing to the side, looking proudly at five other silhouettes. These five "superstar" employees are standing on a raised platform, each glowing with a bright, confident golden aura, representing them "crushing it."
+
+7.  (58.98-71.78) - A dramatic parallax scene. The manager silhouette from the previous image is in the foreground, now wrapped in heavy, blocky chains labeled "POLICY." He is being forced to point at one of his five superstar employees in the background. As he points, the targeted employee's golden aura flickers and a stylized dagger appears in the manager's other hand, aimed at the employee's back.
+
+8.  (71.78-79.72) - An office environment is transformed into a gladiatorial arena, evoking "The Hunger Games." Overturned desks act as barriers. In the foreground, one silhouette peeks around a cubicle wall, looking suspiciously at another silhouette in the background. The lighting is harsh and dramatic, with long shadows.
+
+9.  (79.72-90.34) - A 2D/3D parallax shot focusing on two adjacent desks. In the midground, one silhouette is struggling, with papers falling around him, reaching a hand out for help. In the foreground, the neighboring silhouette deliberately turns his back, building a high wall of binders and documents between the two desks.
+
+10. (90.34-98.76) - A parallax scene depicting sabotage. In the background, a silhouette is carefully building a tall, intricate structure with glowing blocks (representing a project). In the foreground, a second silhouette is stealthily pulling a key block from the base of the structure, causing the entire thing to become unstable and flicker violently.
+
+11. (98.76-108.68) - A boardroom scene. Silhouettes are seated around a long table. Instead of collaborating, they are all pointing accusatory fingers at each other. A single spotlight shines down from the ceiling, and one silhouette is pushing another out of the way to stand in the light, representing the fight for credit.
+
+12. (108.68-123.92) - A parallax image showing a group of silhouettes surrounding a brightly glowing lightbulb, symbolizing innovation. However, instead of working together, each silhouette is holding a sharp, dagger-like object, creating a tense and hostile standoff. The light from the bulb begins to dim and flicker due to the threatening atmosphere.
+
+13. (123.92-132.76) - A powerful final image with a parallax effect. In the background, a silhouette of a brilliant engineer is visible, holding blueprints and a gear. As the view moves forward, the silhouette in the foreground is shown to have transformed: he is now wearing a suit, looking paranoid over his shoulder, and holding a dagger behind his back. The background engineer fades, replaced by a dark, cancerous texture spreading from the center.

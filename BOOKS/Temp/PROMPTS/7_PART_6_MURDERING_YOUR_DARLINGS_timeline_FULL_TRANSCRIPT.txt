@@ -1,0 +1,37 @@
+1. (0.00-10.54) - A 3D parallax image of a male silhouette standing at a crossroads. One path is smooth and labeled with email icons, leading to a calm background. The other path is rocky and difficult, leading towards a stormy sky. The silhouette is decisively looking down the stormy path, symbolizing the "brutal decisions" needed over "nice emails."
+
+2. (10.54-15.32) - A 2D parallax scene where a male silhouette stands triumphantly, holding a sledgehammer. In front of him is a shattered, old-fashioned computer monitor with a cracked screen. The words "OLD WAY" are fragmented on the broken screen, signifying that the old way of thinking is "dead."
+
+3. (16.00-23.48) - A stylized image of a massive, shadowy zombie figure with a classic Nokia phone for a head. This "zombie" is shown looming over and draining glowing energy from a building labeled "Microsoft," representing the business "eating the company's soul."
+
+4. (24.08-32.60) - A male silhouette is depicted holding a giant red marker. He makes a large, decisive "X" across a huge document titled "Nokia Acquisition: $7 Billion." The parallax effect makes the marker and the "X" appear to pop out from the screen, visualizing the act of writing it all off.
+
+5. (33.02-39.28) - A close-up on a financial ledger. A silhouette's hand points to a new entry where the numbers "-$7.6 Billion" are being stamped in bright red ink, causing a ripple effect across the page, illustrating the massive financial charge.
+
+6. (39.84-47.38) - A male silhouette stands on a world stage. Behind him, a projection shows a giant, ornate piggy bank labeled "The Deal" shattering, with coins representing "Wasted Money" spilling out and overflowing, showing they lost more than the deal was worth.
+
+7. (48.12-59.06) - A dramatic silhouette on a stage under a single spotlight. He is using a giant pair of scissors to decisively snip a thick cable labeled "Disaster Strategy." The severed ends of the cable spark and fall away, symbolizing that "it is over."
+
+8. (59.80-67.00) - A parallax image showing rows of office desks with silhouettes of workers. A powerful gust of wind blows across the scene, causing many of the silhouettes to dissolve into dust, leaving behind 18,000 empty chairs to represent the layoffs.
+
+9. (67.54-80.82) - A 3D visualization of a glowing company organizational chart. A silhouette dressed as a surgeon carefully uses a scalpel to remove a dark, tumor-like growth labeled "Devices Strategy," allowing the rest of the chart to glow brighter and healthier.
+
+10. (81.32-87.32) - A male silhouette stands firm, holding up his hand to stop another silhouette from throwing a bag of money labeled "Good Money" into a fiery pit labeled "Bad Investments." In the background, a stone statue of the word "EGO" is crumbling.
+
+11. (88.12-97.72) - An image of a large cow statue made of glass, with the classic Windows logo etched onto its side, being worshipped by smaller silhouettes. A central male silhouette approaches it with a hammer, ready to shatter this "sacred cow."
+
+12. (98.20-107.66) - A split-screen parallax image. On the left, silhouettes happily use iPads. On the right, the Microsoft Office icons are trapped behind a massive wall with the Windows logo. The silhouettes on the left are reaching out, showing their desire for Office on their devices.
+
+13. (108.20-116.32) - A silhouette representing old leadership stands as a guard in front of a vault labeled "OFFICE." He is adamantly shaking his head "NO" at a crowd of other silhouettes holding up competitor devices, symbolizing the "heresy" of sharing the flagship product.
+
+14. (117.04-123.10) - A male silhouette is shown turning a large triangular sign. The visible faces of the sign change from "Windows First" to the brightly glowing "Cloud First" and "Mobile First," illustrating his new mantra.
+
+15. (123.70-133.84) - A powerful image of a male silhouette on a stage, proudly holding up a glowing iPad. On the iPad's screen, the icons for Microsoft Word, Excel, and PowerPoint are running perfectly, shining a light onto the silhouette's face.
+
+16. (134.46-139.98) - A group of silhouettes inside a stylized Microsoft building are shown with large exclamation points and question marks above their heads in a 2D parallax effect. Their body language is one of complete shock and disbelief.
+
+17. (140.52-147.72) - A glowing digital bridge extends from a central hub labeled "Microsoft." The bridge branches out and connects to various devices held by customer silhouettes—an iPad, an Android phone, and a laptop—showing they will go "where our customers are."
+
+18. (148.28-153.58) - A scene with broken swords and shields scattered on the ground. A silhouette takes off a helmet of "War" and puts on an apron of "Service," extending a helping hand towards other silhouettes representing customers.
+
+19. (154.26-163.38) - A final, composite parallax image. On the left, a gavel slams down (the "brutal execution"). On the right, two silhouettes shake hands over their respective devices (the "act of peace"). In the center, a large, glowing button labeled "HIT REFRESH" is being pressed, sending out waves of light.

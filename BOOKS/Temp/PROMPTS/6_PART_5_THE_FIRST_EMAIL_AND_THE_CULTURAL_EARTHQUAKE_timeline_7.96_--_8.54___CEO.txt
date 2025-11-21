@@ -1,0 +1,5 @@
+1. (0.00-9.22)- A 2D parallax image showing a male silhouette standing on a brightly lit stage. Behind him, on a giant screen, a stylized, abstract logo resembling a window is visible, with the large, bold text "CEO" projected over it.
+
+2. (9.22-14.54)- A 3D parallax scene. In the foreground, several male silhouettes representing the "tech world" are seen from the back, looking intently forward. In the distance, a single male silhouette stands in a spotlight. Floating between the foreground and background are semi-transparent question marks, conveying a sense of doubt and inquiry.
+
+3. (14.54-17.98)- A split-screen parallax image. On the left, a male silhouette is hunched over a computer, with glowing lines of code reflecting on him, representing the "quiet engineer". On the right, the same silhouette stands tall at a podium, beginning to raise a hand as if to speak, symbolizing his "first act".

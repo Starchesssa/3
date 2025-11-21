@@ -1,0 +1,11 @@
+1. (0.00 - 5.86) - A 2D/3D parallax shot inside a dark, modern office. In the background, a large screen displays a stock chart plummeting downwards, engulfed in stylized digital flames. In the midground, a male silhouette of a CEO stands with slumped shoulders, watching the screen. Glowing embers float in the foreground, creating depth.
+
+2. (5.86 - 13.27) - A split-screen parallax effect. On the left, a complex blueprint labeled "STRATEGY" shatters into pieces that fall like ashes. On the right, a gleaming, futuristic city skyline rises from the digital ashes. A single male silhouette turns from the destruction on the left to face the rising city on the right with a determined posture.
+
+3. (13.27 - 17.08) - A quick transition effect. A scene of a male silhouette sitting bored in a monochrome, flat-style lecture hall morphs into a dynamic, colorful 2.5D scene. The same silhouette now stands atop a skyscraper, looking out over a neon-lit city at night, styled like a thriller movie poster.
+
+4. (17.08 - 25.52) - A clean, bright, minimalist background. A male silhouette is seen in profile wearing stylized headphones that emit a soft glow. The audiobook cover for "Hit Refresh" floats in the mid-ground, with a parallax effect making it pop. The Audible logo hovers in the background.
+
+5. (25.52 - 30.98) - A focused shot of a male silhouette's hand pointing down towards the bottom of the frame. Below the hand, three icons float in separate parallax layers: a physical book, a tablet displaying the e-book cover, and a glowing "link" symbol.
+
+6. (30.98 - 32.14) - A final, wide shot showing a male silhouette standing at the entrance of a large, glowing portal shaped like a circular "refresh" arrow. The parallax effect gives the portal a sense of immense depth as the camera slowly pushes forward, suggesting entry into the story.

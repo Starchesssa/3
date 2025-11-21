@@ -1,0 +1,27 @@
+1. (0.00-9.40) - A 3D parallax image of a male silhouette in a suit, representing a CEO, standing confidently in the center. In the background, several other blurred silhouettes are seen scratching their heads in a gesture of confusion and surprise. The setting is a minimalist, modern office.
+
+2. (9.40-16.72) - A 2D parallax scene where a CEO silhouette stands before a large digital screen. The screen displays the Microsoft logo shaking hands with a blocky logo representing Mojang. A glowing price tag floats in the foreground with "$2.5 Billion" written on it.
+
+3. (16.72-28.96) - A vibrant, 3D blocky world reminiscent of Minecraft. In the center, a large, iconic grass block from the game is featured. In the foreground and background, silhouettes of children are building structures and interacting with the blocky environment.
+
+4. (28.96-37.46) - A dramatic 2D parallax image showing several sharp silhouettes in suits, representing Wall Street. They are depicted with angry, exaggerated gestures, pointing accusingly towards a floating game controller icon. The background is a chaotic stock ticker with downward-trending red lines.
+
+5. (37.46-46.96) - Silhouettes of angry business people are shown screaming towards the viewer. In front of them, floating in a parallax layer, are icons of a cloud and an enterprise building. A large, red, semi-transparent "X" is crossed over a smaller, distant icon of a game controller.
+
+6. (46.96-56.98) - A side-profile silhouette of CEO Satya Nadella. He is not looking at a video game screen, but is instead gazing at a vast, stylized crowd of smaller silhouettes. These smaller silhouettes are glowing faintly, holding tools like blocky code brackets and wrenches, representing a future generation of creators.
+
+7. (56.98-67.58) - A split-screen 3D parallax image. On one side, silhouettes of analysts stare blankly at a simple game icon. On the other side, a CEO silhouette looks at the same icon, but from it emanates a complex, glowing network of connections, signifying a platform. Digital, Lego-like blocks float in this space.
+
+8. (67.58-76.48) - A cross-section view into a large, transparent, cube-like world. Inside, various child-like silhouettes are engaged in learning activities: one is arranging blocks to form a structure (design), another is looking at a screen with simplified code (coding), and a third is interacting with gears (engineering).
+
+9. (76.48-91.94) - A 3D parallax image of a stylized globe. Glowing lines connect continents, representing a global community. Floating around the globe are intricate, blocky castles and cities. Silhouettes are seen working together on these massive projects.
+
+10. (91.94-102.90) - A parallax image showing a timeline. On the left, a small silhouette of a child plays with building blocks. An arrow flows to the right, where the silhouette is now an adult, standing between a blueprint (architect) and a computer screen with code (developer).
+
+11. (102.90-115.72) - A large, glowing, block-shaped doorway serves as a funnel. Young silhouettes walk into it. As they emerge on the other side, they are interacting with floating, abstract icons representing Microsoft's tools and platforms. In the far background, faded icons for Google and Apple are visible.
+
+12. (115.72-130.26) - A 2D parallax classroom scene. A silhouette of a teacher points to a large screen displaying a historically accurate pyramid built within the Minecraft world. Silhouettes of students watch with engaged postures. The "Minecraft: Education Edition" logo is subtly visible on the screen.
+
+13. (130.26-141.84) - A central CEO silhouette is shown pushing away faded icons of Windows and Office with one hand. With his other hand, he reaches for two brightly glowing orbs: one contains a lightbulb icon (creativity), and the other contains an icon of interconnected figures (community).
+
+14. (141.84-154.20) - A starkly contrasted 3D parallax image. On the left, in muted, defensive colors, silhouettes build a wall. On the right, in bold, vibrant colors, a lone CEO silhouette is building a long bridge that extends from a platform out into an unknown, bright future.
