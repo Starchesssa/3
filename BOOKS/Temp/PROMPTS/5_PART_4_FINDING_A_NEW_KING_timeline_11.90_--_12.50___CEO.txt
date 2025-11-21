@@ -1,9 +1,0 @@
-1. (0.00 - 17.80) - A 2D parallax scene. In the background, a subtle, dark circus tent pattern. In the mid-ground, a male silhouette in a suit stands on a stage under a bright spotlight. In the foreground, other chaotic silhouettes of jesters and acrobats are frozen mid-action, creating a sense of a "circus." The camera slowly pushes in on the central CEO silhouette.
-
-2. (17.80 - 25.50) - A 3D parallax view of a corporate boardroom. A long, reflective table is in the foreground. Around it, several male silhouettes sit in chairs, their postures conveying panic—one has its head in its hands, another is leaning forward intensely. In the background, a large window shows a stormy sky. Jagged, abstract lines representing "panic" slowly etch across the window glass. The silhouette at the head of the table (John Thompson) is slightly larger and more in focus.
-
-3. (25.50 - 32.50) - The boardroom scene transitions. The silhouettes now look up towards a large, glowing screen on the back wall. The screen displays a complex, branching decision tree, with lines spreading out like a search. A magnifying glass icon moves rapidly from branch to branch, symbolizing the board "looking everywhere" for a solution.
-
-4. (32.50 - 37.20) - A stylized parallax image. In the background, a large, imposing corporate building is shrouded in a faint, toxic-looking green haze. In the mid-ground, a lone male silhouette stands on a clean, separate hill, looking towards the building. This "outsider" figure is sharp and distinct, contrasted with the murky scene behind him.
-
-5. (37.20 - 41.80) - A close-up shot of a presentation screen in the boardroom. A single, confident male silhouette is projected onto it, with the name "Alan Mulally" appearing in bold text beside it. In the blurred foreground, you can see the backs of the board members' heads, all looking up at this one prominent image.
