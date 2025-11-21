@@ -1,0 +1,56 @@
+1.  **(0.00 - 9.22)** - **Visual Description:** A vast, dark server farm. The camera glides slowly past endless rows of blinking server racks, the only source of light.
+    *   **Foreground:** Out-of-focus server status lights (green, amber) drift past the lens.
+    *   **Midground:** A 3D male silhouette, representing Satya Nadella, stands still amidst the rows of machines, his form cutting through the low hum and darkness. He is looking forward, contemplative.
+    *   **Background:** A massive, semi-transparent screen flickers to life, showing a stark white news headline: "FEBRUARY 4, 2014: MICROSOFT NAMES NADILLA THIRD CEO. THE SEARCH IS OVER." The parallax effect makes the background screen feel immense and distant as the foreground lights move faster.
+
+2.  **(9.94 - 16.20)** - **Visual Description:** A split-screen montage of contrasting silhouettes, showing the tech world's reaction.
+    *   **Foreground:** Animated text overlays flash across the screen, embodying the narration: "**WAS THIS THE GUY?**", "**REALLY?**", "**THE QUIET ENGINEER?**"
+    *   **Midground (Left Panel):** A collection of aggressive 2D silhouettes in sharp suits, shouting into phones and pointing at charts in a high-stakes trading floor environment. This represents the loud, cutthroat expectation.
+    *   **Midground (Right Panel):** A single, calm 3D silhouette sits at a clean desk, head down, methodically working on a laptop, code reflected on his featureless face. This is Nadella.
+    *   **Background:** Blurred, scrolling tech blog headlines and stock market tickers fill both panels.
+
+3.  **(16.86 - 27.70)** - **Visual Description:** The scene shifts to a single 3D silhouette (Nadella) in a dark, empty CEO's office at night, illuminated only by his laptop screen.
+    *   **Foreground:** A close-up on the silhouette's hands typing with calm determination.
+    *   **Midground:** The laptop screen. Instead of a press release, we see a simple, unformatted email being composed. As he hits 'Send', a single line of light shoots out from the screen.
+    *   **Background:** The line of light explodes into a vast, branching neural network, spreading across the darkness. It connects to hundreds, then thousands, then a galaxy of 100,000+ glowing points, each representing an employee. The number "**100,000+ EMPLOYEES**" materializes from the points of light.
+
+4.  **(28.14 - 36.22)** - **Visual Description:** A stylized, crumbling representation of the old Microsoft.
+    *   **Foreground:** The word "**EARTHQUAKE**" appears in a glitchy, fracturing font that sends cracks across the screen.
+    *   **Midground:** We see 2D silhouettes engaged in corporate warfare. One group wearing Google-colored armor is being charged by Microsoft silhouettes. Another silhouette smashes an Apple logo with a hammer. The Windows logo, depicted as a stone monolith, develops deep cracks and begins to crumble. These images stutter and freeze-frame as the narrator says they were *not* in the email.
+    *   **Background:** A dark, stormy sky filled with menacing corporate logos of competitors.
+
+5.  **(36.64 - 50.46)** - **Visual Description:** The broken landscape dissolves into a clean, bright, white space. A blueprint-like environment.
+    *   **Foreground:** Two 2D silhouettes face each other. Lines of light and data flow between their heads, symbolizing "**EMPATHY**." The top of one silhouette's head opens like a book, pages turning, representing "**A DESIRE TO LEARN**."
+    *   **Midground:** The quote "**OUR INDUSTRY DOES NOT RESPECT TRADITION. IT ONLY RESPECTS INNOVATION.**" is typed out across the center of the screen in a clean, modern font.
+    *   **Background:** An ever-evolving schematic of complex technology shifts and redraws itself constantly, representing perpetual innovation.
+
+6.  **(50.98 - 66.74)** - **Visual Description:** A stark, imposing, shadowy boardroom. The culture of "know-it-alls."
+    *   **Foreground:** The camera pans slowly across the table. In front of each seated 3D silhouette is a nameplate, but instead of a name, it reads "**THE SMARTEST PERSON IN THE ROOM**."
+    *   **Midground:** The silhouettes sit rigidly, each with a bright, glaring lightbulb for a head, signifying they believe they have all the answers. One silhouette pounds the table, causing the others to flicker. Nadella's voiceover says this "had to die," and a giant red "X" is stamped over the scene, shattering the lightbulbs.
+    *   **Background:** The walls are lined with dusty, framed awards and old, unchanging strategy charts.
+
+7.  **(67.22 - 83.88)** - **Visual Description:** The shattered boardroom transforms into a bright, collaborative workshop. The "learn-it-all" culture.
+    *   **Foreground:** One silhouette's head is now a glowing question mark. Another silhouette stumbles (a mistake), but two others immediately help it up (learning).
+    *   **Midground:** The words "**LEARN-IT-ALLS**" are scrawled on a whiteboard. Below it, a stylized human pyramid of 2D silhouettes, representing the toxic "stack ranking," is shown. A wrecking ball swings in and smashes the pyramid, symbolizing a "direct assault" on that culture.
+    *   **Background:** The walls are now floor-to-ceiling whiteboards covered in collaborative notes, equations, and sketches that are constantly being erased and redrawn.
+
+8.  **(84.54 - 98.00)** - **Visual Description:** A stylized public interview on a dark stage. The big mistake.
+    *   **Foreground:** Abstract shapes representing a swarm of camera lenses and microphones are pointed menacingly towards the stage.
+    *   **Midground:** A single 3D silhouette (Nadella) stands alone under a harsh spotlight. A large, jagged speech bubble appears next to him, filled with the garbled, disastrous advice about "good karma."
+    *   **Background:** A vast, dark, and empty auditorium. As the narration says "disaster," the entire scene flashes bright red for a moment.
+
+9.  **(98.56 - 114.34)** - **Visual Description:** The backlash. A split screen showing two different reactions.
+    *   **Foreground:** A torrent of angry emojis, negative headlines, and downward-trending graphs cascades down the screen.
+    *   **Midground (Left Panel):** The "Old Microsoft" is shown as a 2D silhouette inside a stone fortress, defiantly raising a shield against the torrent. Text overlay: "**DOUBLED DOWN.**"
+    *   **Midground (Right Panel):** The Nadella silhouette steps out from behind a shield, turns his back on the fortress, and faces the oncoming storm of criticism head-on, completely exposed. Text overlay: "**THE EXACT OPPOSITE.**"
+    *   **Background:** A stormy, chaotic digital landscape.
+
+10. **(114.80 - 135.70)** - **Visual Description:** Back in the quiet, dark office. Owning the mistake.
+    *   **Foreground:** The camera zooms in tight on a laptop screen. The words of the apology email fill the entire frame, stark white on black. Key phrases are highlighted as the narrator speaks them: "**COMPLETELY INCORRECTLY**," "**OWNED HIS MISTAKE**," "**APOLOGIZED**," "**PROMISED TO LEARN**."
+    *   **Midground:** The silhouette's head is bowed over the keyboard, a posture of humility and reflection.
+    *   **Background:** Outside the office window, the dark nightscape begins to show the very first, faint hints of a sunrise.
+
+11. **(136.26 - 153.74)** - **Visual Description:** The final scene is a powerful, abstract visualization of cultural change.
+    *   **Foreground:** A single, bright pulse of light—the signal—emanates from a central point and travels outwards.
+    *   **Midground:** The pulse washes over the vast neural network of 100,000+ employee silhouettes. As it passes each one, their glaring "know-it-all" lightbulb heads flicker and transform into soft, glowing "learn-it-all" question marks.
+    *   **Background:** The classic, rigid four-square Microsoft logo is in the far distance. As the light fills the network, the logo's sharp corners soften and round out, symbolizing the fundamental change. The final text appears: "**THE CHANGE HAD BEGUN.**"
