@@ -43,7 +43,7 @@ jobs:
           # Use token-authenticated remote
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           
-          git add src/IMG
+          git add BOOKS/Temp/IMG
           
           if git diff --cached --quiet; then
             echo "🟡 No changes to commit."
