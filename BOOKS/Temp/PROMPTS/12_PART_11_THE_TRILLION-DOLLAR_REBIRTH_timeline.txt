@@ -1,0 +1,31 @@
+1.(0.00-10.22)- A chaotic office scene in monochrome with red accents. In the foreground, a 3D male silhouette in a suit points towards the door, dismissing another dejected silhouette holding a box. In the background, using a parallax effect, other silhouettes are in panicked motion with papers flying and stock charts with sharp downward red arrows projected on a screen.
+
+2.(10.88-15.54)- A minimalist animation on a dark background. A single, glowing red line graphs a steep decline, hitting the bottom of the frame. After a dramatic pause, it reverses direction and shoots upwards as a brilliant, vibrant blue line, breaking through the top of the screen.
+
+3.(16.18-23.22)- A 3D male silhouette confidently steps onto a platform labeled "CEO" overlooking a digital landscape of code and networks. A digital overlay in the corner of the screen shows "FEBRUARY 2014" and a stock ticker symbol hovering steadily at "$36".
+
+4.(23.64-34.64)- A stylized city skyline made of glowing blocks representing market capitalization. One moderately tall building is labeled "$300B." Next to it, two immense, towering skyscrapers cast a long shadow over the smaller building, creating a sense of being dwarfed.
+
+5.(35.32-44.72)- Animated graphic sequence. A glowing blue cloud icon (representing Azure) rapidly expands. Simultaneously, a grid of app icons morphs to include a recurring subscription symbol, and from this grid, digital green vines sprout and grow rapidly across the screen.
+
+6.(45.12-53.16)- A parallax shot. In the foreground, a dark, thorny, and cracked corporate building facade crumbles and falls away, revealing a bright, modern, and inviting glass building behind it. Silhouettes of people turn and walk towards the bright building's entrance.
+
+7.(53.86-57.86)- An animated stock chart on a dark grid. A glowing blue line begins a gentle, slow incline. As it moves across the screen, the angle of ascent becomes progressively steeper and its speed increases.
+
+8.(58.46-63.58)- Close-up on the animated stock chart. The glowing blue line continues its rapid ascent, crashing through digital barriers labeled "$50," "$70," and then explosively shattering a much thicker barrier labeled "$100," with digital particles flying out from the impact.
+
+9.(64.18-73.26)- A fast-paced animation of calendar pages for Q1, Q2, Q3, Q4 flipping by. Each time a quarter's page settles, a digital document icon appears and opens to reveal a massive, glowing number: "AZURE GROWTH > 50%," sending a subtle shockwave across the screen.
+
+10.(73.74-85.60)- An abstract visualization of a race. A blue glowing light trail, initially behind two others, accelerates dramatically. As a timeline at the bottom ticks to "2018", the blue light trail surges forward, narrowly crossing a finish line labeled "World's Most Valuable Company."
+
+11.(85.90-90.62)- A fossilized dinosaur skeleton begins to crack and crumble into dust. As the dust swirls upwards, it coalesces and transforms into a powerful, glowing blue phoenix that soars majestically towards the sky.
+
+12.(91.28-97.54)- A shot looking up at a mountain peak. A 3D male silhouette reaches the summit and plants a flag. The camera pans up to the sky, where clouds part to reveal the monumental, glowing text: "$1,000,000,000,000."
+
+13.(97.95-104.80)- An animated bar graph. A bar is shown at "$300B." A 3D male silhouette in a suit stands beside it, gesturing upwards. A new, much larger, glowing blue section labeled "+$700B" animates, stacking on top of the original bar, driving the total value to the top of the frame.
+
+14.(105.28-114.46)- A stylized rocket launches vertically with immense force. It blasts through atmospheric cloud layers digitally labeled "$200" and then "$300," continuing its powerful ascent into a starry, infinite space.
+
+15.(114.92-131.34)- A 3D male silhouette of a leader stands at a crossroads. He uses bolt cutters to shatter a heavy chain linked to a crumbling stone monument labeled "PAST." He then turns and points decisively towards a bright, glowing, futuristic city on the horizon.
+
+16.(131.72-133.20)- A final, wide, cinematic shot. A magnificent, modern glass skyscraper stands proudly on a hilltop as the sun rises directly behind it, creating a brilliant lens flare and bathing the scene in a hopeful, golden light, signifying a new dawn.

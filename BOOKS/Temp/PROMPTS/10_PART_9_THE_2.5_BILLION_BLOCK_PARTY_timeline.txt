@@ -1,0 +1,27 @@
+1.(0.00-9.40)- A 3D male silhouette in a suit, representing a CEO, stands confidently. In the background with a parallax effect, a group of other business silhouettes scratch their heads in confusion under floating question marks. A stylized calendar page showing "September 2014" is visible in the scene.
+
+2.(9.40-16.72)- A minimalist graphic showing the Microsoft logo and the Mojang logo. Between them, a glowing price tag reads "$2.5 BILLION". A silhouette arm extends from the Microsoft side, shaking hands with an arm from the Mojang side, sealing the deal.
+
+3.(16.72-28.96)- A vibrant, blocky landscape reminiscent of the game Minecraft. Several 2D silhouettes of kids and adults are actively building imaginative structures. The word "MINECRAFT" is spelled out using the in-game blocks. A parallax effect gives the world a sense of depth.
+
+4.(28.96-33.96)- An intimidating 3D silhouette of the Wall Street charging bull statue looms. In the foreground, several male silhouettes in business suits are gesturing angrily, their forms sharp against a background of crashing red stock tickers.
+
+5.(33.96-46.96)- A central male silhouette is shown shouting. A large speech bubble next to him contains an image of a simple toy block with a question mark. Another speech bubble on the other side shows a glowing cloud icon, symbolizing the demand to "Focus on the cloud."
+
+6.(46.96-56.98)- A 3D male silhouette, representing Nadella, leans over a futuristic, glowing chessboard. Instead of a normal piece, he strategically moves a pixelated game block, signifying he's playing a different, long-term game that others don't understand.
+
+7.(56.98-67.58)- A silhouette of a CEO looks through a magnifying glass at a single pixelated block. Through the lens, the block is revealed to be the cornerstone of a massive, intricate digital city. In the background, other business silhouettes are turned away, looking at boring charts, missing the vision.
+
+8.(67.58-76.48)- Inside a blocky, digital world, 2D silhouettes of children are building. Floating around them are glowing icons representing skills: a blueprint for design, spinning gears for engineering, and code brackets (`</>`) for programming.
+
+9.(76.48-91.94)- A stylized globe made of interconnected, glowing blocks. All over the globe, silhouettes of people are linked by lines of light. They are collaborating and building together, with "share" icons emanating from them to represent a global online community.
+
+10.(91.94-102.90)- A visual timeline effect. On the left, a young 2D silhouette plays with game blocks. An arrow flows to the right, where the silhouette has transformed into an adult 3D silhouette typing at a computer (developer), wearing a hard hat (engineer), and looking at blueprints (architect).
+
+11.(102.90-115.72)- A large gateway shaped like a Minecraft block stands open. Through it is a bright world with the Microsoft logo and its product icons. A crowd of young silhouettes, previously facing logos of other tech giants, now turn and walk towards the Microsoft gateway.
+
+12.(115.72-130.26)- A stylized classroom scene. A silhouette of a teacher points to a large screen showing a historical monument rebuilt in Minecraft. Silhouettes of students watch with engagement. A logo for "Minecraft: Education Edition" is subtly placed in the corner.
+
+13.(130.26-141.84)- In the background, faded and crossed-out icons for Windows and Office are seen. The foreground is dominated by a large, glowing brain made not of tissue, but of interconnected silhouettes (community) and icons for art and building (creativity).
+
+14.(141.84-154.20)- A split-screen image. On the "Future" side, a 3D silhouette carefully plants a small, glowing seed, looking to a bright horizon. On the "Past" side, several silhouettes defensively build a wall around an old, withered plant, showing a contrast between long-term vision and short-sightedness.

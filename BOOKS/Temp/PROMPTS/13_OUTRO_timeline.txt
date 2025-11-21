@@ -1,0 +1,13 @@
+1.(0.00-8.18)- A 2D parallax scene. In the foreground, a male silhouette representing Satya Nadella stands confidently. In the midground, a large, rusty ship is sinking into dark water. In the distant background, a sleek, modern rocket launches into a starry sky, leaving a bright trail. The camera slowly pulls back, emphasizing the transformation.
+
+2.(8.18-16.10)- A 3D animation where a glowing book titled "Hit Refresh" floats in the center. A complex, translucent chessboard materializes around it. The chess pieces are 3D male silhouettes, some in collaborative poses, others standing alone, representing the idea that company culture is the entire game. The camera slowly orbits the scene.
+
+3.(16.10-22.56)- A split-screen visual with a parallax effect. On the left, a "know-it-all" male silhouette stands with arms crossed under a static, locked brain icon. On the right, a "learn-it-all" silhouette leans forward, reading a book under a brain icon with glowing, turning gears. The scene transitions to a central, pulsing heart icon (empathy), sending out waves that connect several layers of working silhouettes.
+
+4.(22.56-28.60)- A 3D animated line graph is shown. The line plummets downwards, labeled "Old Culture." A 3D silhouette hand enters the frame and presses a large, glowing "REFRESH" button. The graph line immediately reverses, soaring upwards far past its original height, now labeled "Growth Mindset." A futuristic, abstract cityscape scrolls by in the background with a parallax effect.
+
+5.(28.60-38.66)- A clean 2D animation sequence against a branded background. First, a silhouette hand "smashes" a thumbs-up 'Like' button, causing it to animate with a burst effect. The hand then moves to click a 'Subscribe' button, which changes color. Finally, the hand taps a 'Notification Bell' icon, which shakes and emits animated rings.
+
+6.(38.66-48.96)- A 2D parallax scene focused on a stylized smartphone. The screen displays the audiobook cover for "Hit Refresh" in an app interface. Text "FREE with Audible Trial" animates on screen. In the background layers, abstract icons related to the story (a rocket, a heart, gears) float by. A silhouette hand points down towards the text "Link in Description" at the bottom of the frame.
+
+7.(48.96-54.26)- A simple 2D animated outro screen. A logo appears in the center. Below, icons for a physical book and an audiobook appear next to the text "Links Below." A male silhouette waves goodbye to the viewer as the screen fades to black.
