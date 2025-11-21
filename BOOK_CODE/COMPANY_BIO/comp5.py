@@ -43,14 +43,14 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task: For each part of the transcript, give a relevant image description for the timeline.the image should tell be based on the company and not exagarate out of the topic, be more realistic 
+Your task:imagine making a movie like big short or margin call,here is my taranscipt, give me visual  description for the timeline.the visual should tell be based on the company.
 
                                                                                                                                                                                
-    make like a documentary of showing people how things occured in a company                                                                                                                                                                         
+    make like a documentary movie like big shot or margin call.                                                                                                                                                                        
 Timeline format:
-1.(0.00-9.79)- image description
-2.(9.79-15.00)- image description
-3.(15.00-19.19)- image description
+1.(0.00-9.79)- visual description
+2.(9.79-15.00)- visual description
+3.(15.00-19.19)- visual description
 ...
 
 Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect in each image
