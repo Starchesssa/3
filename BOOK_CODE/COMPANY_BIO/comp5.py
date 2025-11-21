@@ -53,7 +53,11 @@ Timeline format:
 3.(15.00-19.19)- image  description
 ...
 
+each image should have theme colours for the company you are talking about ie of company main colour ie light yellow , well have yellow fog or yellow lighting in each image to make theme consistent in each sentence 
 Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect in each image
+    just be brief and simple in your description , we need less than 3 things in the image ie 3d silhoutte wearing jeans in a court with a 3d silhout judge  
+        in the environmwnt make the gog or lightning match the conpany 
+also dont give too long peonpts just brief and sinple yet more powerful
                                                                              .
 
 Start immediately with prompts. No intro.
