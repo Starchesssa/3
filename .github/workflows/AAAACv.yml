@@ -41,6 +41,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add public/stylized/
+          git add public/IMG_style/
           git commit -m "Add stylized images from Cv.py [skip ci]" || echo "No changes to commit"
           git push
