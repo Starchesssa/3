@@ -2,13 +2,11 @@
 import os
 import re
 import time
-import json
 from google import genai
 
 # === Paths ===
-SCRIPT_PATH = "BOOKS/Temp/STT"        # <— NOW USING TRANSCRIPTS
-PROMPTS_PATH = "BOOKS/Temp/PROMPTS"
-META_FILE = "BOOKS/Temp/COMPANY_BIO"   # optional metadata JSON
+SCRIPT_PATH = "BOOKS/Temp/STT"        # Transcript input folder
+PROMPTS_PATH = "BOOKS/Temp/PROMPTS"   # Output folder
 MODEL = "gemini-2.5-pro"
 
 # === Load API Keys ===
@@ -24,42 +22,7 @@ API_KEYS = [k for k in API_KEYS if k]
 if not API_KEYS:
     raise ValueError("❌ No GEMINI_API keys found.")
 
-
-# === Load metadata from COMPANY_BIO JSON file ===
-
-def load_book_metadata():
-    if not os.path.exists(META_FILE):
-        print(f"⚠️ Metadata file not found: {META_FILE}")
-        return "Unknown Title", "Unknown Author", "Unknown Company"
-
-    try:
-        with open(META_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        if isinstance(data, list) and len(data) > 0:
-            entry = data[0]
-        elif isinstance(data, dict):
-            entry = data
-        else:
-            return "Unknown Title", "Unknown Author", "Unknown Company"
-
-        title = entry.get("title", "Unknown Title")
-        author = entry.get("author", "Unknown Author")
-        company = entry.get("company", "Unknown Company")
-
-        print(f"📘 Loaded metadata: {title} — {author} ({company})")
-        return title, author, company
-
-    except Exception as e:
-        print(f"❌ Failed to read metadata JSON: {e}")
-        return "Unknown Title", "Unknown Author", "Unknown Company"
-
-
-BOOK_TITLE, BOOK_AUTHOR, BOOK_COMPANY = load_book_metadata()
-
-
 # === Helper Functions ===
-
 def list_txt_files(directory):
     return [f for f in os.listdir(directory) if f.endswith(".txt")]
 
@@ -70,114 +33,62 @@ def read_file(path):
 def sanitize_filename(n):
     return re.sub(r"[^\w\d\-_. ]+", "", n).replace(" ", "_")
 
-
-# === Split text by CAPITAL headings ===
-
-def split_into_chunks(text):
-    chunks = {}
-    current = None
-    buf = []
-
-    for line in text.splitlines():
-        s = line.strip()
-
-        if s and s == s.upper() and any(c.isalpha() for c in s):  # heading
-            if current:
-                chunks[current] = "\n".join(buf).strip()
-            current = s
-            buf = []
-        else:
-            if current:
-                buf.append(line)
-
-    if current and buf:
-        chunks[current] = "\n".join(buf).strip()
-
-    return chunks
-
-
 # === Generate prompt ===
-
-def generate_prompts(chunk_text, heading, api_index):
+def generate_prompts(text, api_index, filename):
     prompt = f"""
-This chunk is from the book "{BOOK_TITLE}" by {BOOK_AUTHOR}, about {BOOK_COMPANY}.
-
-Section title: {heading}
+This is a full transcript from the file "{filename}".
 
 Content:
-{chunk_text}
+{text}
 
-the above timeline is in seconda ie 0.00 --> 0.36 : ,that means 0.00seconds to 0.35 seconds 
+The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task: from the transcript give relavant image  of the transcripts based on timeline, fill all the tarnsceipt with relevant images .
+Your task: For each part of the transcript, give a relevant image description for the timeline.
 
-start from 0.00
-
-time line format should be tHe folloing fornatt,
-
+Timeline format:
 1.(0.00-9.79)- image description
-2.(9.79-15.00)- image description 
-3.(15.00-19.19)- image description 
-.........
+2.(9.79-15.00)- image description
+3.(15.00-19.19)- image description
+...
 
-describe the image desceiption of a inage that should occur in a particualr timeline.
+Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect if possible.
 
-represent people with silhouttes ,and use male silhouttes only ,ie silhoutte of a boss shouting at a worker , silhouttes must be 3d/2d parallax .
-
-- Start immediately with prompts. No intro.
-
+Start immediately with prompts. No intro.
 Begin:
 """
 
     attempts = len(API_KEYS)
-
     for attempt in range(attempts):
         key = API_KEYS[(api_index + attempt) % attempts]
-
         try:
             client = genai.Client(api_key=key)
             res = client.models.generate_content(
                 model=MODEL,
                 contents=[{"role": "user", "parts": [{"text": prompt}]}]
             )
-            print(f"✅ Chunk '{heading}' processed with API#{(api_index + attempt) % attempts + 1}")
+            print(f"✅ Transcript '{filename}' processed with API#{(api_index + attempt) % attempts + 1}")
             return res.text.strip(), (api_index + attempt + 1) % attempts
-
         except Exception as e:
-            print(f"⚠️ API failed for heading '{heading}': {e}")
+            print(f"⚠️ API failed for '{filename}': {e}")
             time.sleep(1)
 
-    raise RuntimeError(f"❌ All API keys failed for: {heading}")
+    raise RuntimeError(f"❌ All API keys failed for: {filename}")
 
-
-# === Save output (updated to preserve transcript filename) ===
-
-def save_output(original, heading, text):
+# === Save output ===
+def save_output(filename, text):
     os.makedirs(PROMPTS_PATH, exist_ok=True)
-
-    base_name = original.replace(".txt", "")  # original transcript name
-
-    # If transcript contains multiple headings, separate them
-    if heading:
-        filename = f"{sanitize_filename(base_name)}_{sanitize_filename(heading)}.txt"
-    else:
-        filename = f"{sanitize_filename(base_name)}.txt"
-
-    path = os.path.join(PROMPTS_PATH, filename)
-
-    with open(path, "w", encoding="utf-8") as f:
+    base_name = filename.replace(".txt", "")
+    out_path = os.path.join(PROMPTS_PATH, sanitize_filename(base_name) + ".txt")
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(text)
-
-    print(f"💾 Saved → {path}")
-
+    print(f"💾 Saved → {out_path}")
 
 # === Main ===
-
 def main():
     files = list_txt_files(SCRIPT_PATH)
 
     if not files:
-        print("❌ No .txt files found in STT transcripts.")
+        print("❌ No transcript .txt files found in STT folder.")
         return
 
     api_index = 0
@@ -185,23 +96,13 @@ def main():
     for file in files:
         print(f"\n📄 Processing transcript: {file}")
         text = read_file(os.path.join(SCRIPT_PATH, file))
-        chunks = split_into_chunks(text)
-
-        # If no headings, process entire transcript as one chunk
-        if not chunks:
-            print("⚠️ No uppercase headings found → treating entire transcript as one chunk.")
-            chunks = {"FULL_TRANSCRIPT": text}
-
-        for heading, chunk in chunks.items():
-            print(f"\n➡️ {heading}")
-            try:
-                out, api_index = generate_prompts(chunk, heading, api_index)
-                save_output(file, heading, out)
-            except Exception as e:
-                print(f"❌ Failed: {e}")
+        try:
+            out, api_index = generate_prompts(text, api_index, file)
+            save_output(file, out)
+        except Exception as e:
+            print(f"❌ Failed processing '{file}': {e}")
 
     print("\n🎉 Finished processing all transcripts!")
-
 
 if __name__ == "__main__":
     main()
