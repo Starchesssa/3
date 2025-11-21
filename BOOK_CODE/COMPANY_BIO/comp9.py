@@ -1,8 +1,8 @@
+
 import os
 import requests
 import time
 import re
-import random
 
 # === Directories ===
 INPUT_DIR = "BOOKS/Temp/PROMPTS"
@@ -12,55 +12,51 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # === Pollinations settings ===
 IMAGE_WIDTH = 1280
 IMAGE_HEIGHT = 720
+SEED = 10000  # Fixed seed for reproducible images
 PROMPT_SUFFIX = ", make the image have white background and everything should be colourful except the white background also no shadows, just white background"
 
 # === Helper: clean and normalize filename ===
 def normalize_filename(num, phrase):
-    safe_phrase = re.sub(r"[^a-zA-Z0-9]+", "_", phrase.strip()).strip("_")
+    safe_phrase = re.sub(r"[^a-zA-Z0-9]+", "_", phrase.strip())
     safe_phrase = safe_phrase[:40]  # limit length
     return f"{num}_{safe_phrase}.png"
 
 # === Download image from Pollinations ===
-def download_image(prompt, save_path, retries=3, delay=3):
-    prompt += PROMPT_SUFFIX
-    url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt)}?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}"
+def download_image(prompt, save_path, retries=3, delay=5):
+    prompt_full = prompt + PROMPT_SUFFIX
+    url = (
+        f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt_full)}"
+        f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&seed={SEED}&no_logo=true"
+    )
 
     for attempt in range(1, retries + 1):
         try:
-            response = requests.get(url, stream=True, timeout=40)
+            response = requests.get(url, stream=True, timeout=60)
             if response.status_code == 200:
                 with open(save_path, "wb") as f:
                     f.write(response.content)
                 print(f"✅ Downloaded: {save_path}")
                 return True
             else:
-                print(f"⚠️ Attempt {attempt} failed (status {response.status_code}) for prompt: {prompt}")
+                print(f"⚠️ Attempt {attempt} failed (status {response.status_code})")
         except requests.exceptions.RequestException as e:
             print(f"⚠️ Attempt {attempt} error: {e}")
         time.sleep(delay)
     return False
 
-# === Process text file with new format ===
+# === Process text file ===
 def process_text_file(txt_file):
     with open(txt_file, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
     image_tasks = []
-    for line in lines:
-        # Match format: 1.(0.00-9.40)- Description...
-        match = re.match(r"(\d+)\.\([0-9.]+-[0-9.]+\)-\s*(.+)", line)
-        if match:
-            num = match.group(1)
-            phrase = match.group(2)
-            filename = normalize_filename(num, phrase)
-            image_tasks.append((filename, phrase))
-        else:
-            print(f"⚠️ Skipping line: {line}")
+    for i, line in enumerate(lines, start=1):
+        filename = normalize_filename(str(i), line)
+        image_tasks.append((filename, line))
 
     failed = image_tasks.copy()
     round_count = 1
 
-    # === Retry loop until all succeed ===
     while failed:
         print(f"\n🔁 Starting round {round_count} — {len(failed)} images remaining...\n")
         remaining = []
@@ -72,11 +68,6 @@ def process_text_file(txt_file):
             if not download_image(prompt, save_path):
                 print(f"❌ Failed: {filename}")
                 remaining.append((filename, prompt))
-            else:
-                # Add a random delay after each successful download (2–5 sec)
-                sleep_time = random.uniform(20, 50)
-                print(f"⏸️ Waiting {sleep_time:.2f} seconds before next download...")
-                time.sleep(sleep_time)
 
         if remaining:
             print(f"\n⏸️ {len(remaining)} images failed this round. Waiting 60 seconds before retry...\n")
@@ -91,7 +82,6 @@ def process_text_file(txt_file):
 def main():
     for file in os.listdir(INPUT_DIR):
         if file.endswith(".txt"):
-            print(f"\n📄 Processing file: {file}\n")
             process_text_file(os.path.join(INPUT_DIR, file))
 
 if __name__ == "__main__":
