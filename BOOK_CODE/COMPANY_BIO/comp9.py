@@ -1,8 +1,8 @@
-
 import os
 import requests
 import time
 import re
+import random
 
 # === Directories ===
 INPUT_DIR = "BOOKS/Temp/PROMPTS"
@@ -72,6 +72,11 @@ def process_text_file(txt_file):
             if not download_image(prompt, save_path):
                 print(f"❌ Failed: {filename}")
                 remaining.append((filename, prompt))
+            else:
+                # Add a random delay after each successful download (2–5 sec)
+                sleep_time = random.uniform(20, 50)
+                print(f"⏸️ Waiting {sleep_time:.2f} seconds before next download...")
+                time.sleep(sleep_time)
 
         if remaining:
             print(f"\n⏸️ {len(remaining)} images failed this round. Waiting 60 seconds before retry...\n")
@@ -86,6 +91,7 @@ def process_text_file(txt_file):
 def main():
     for file in os.listdir(INPUT_DIR):
         if file.endswith(".txt"):
+            print(f"\n📄 Processing file: {file}\n")
             process_text_file(os.path.join(INPUT_DIR, file))
 
 if __name__ == "__main__":
