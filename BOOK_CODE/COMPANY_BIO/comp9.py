@@ -13,7 +13,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 IMAGE_WIDTH = 1280
 IMAGE_HEIGHT = 720
 SEED = 10000  # Fixed seed for reproducible images
-PROMPT_SUFFIX = ", make the image have white background and everything should be colourful except the white background also no shadows, just white background"
+PROMPT_SUFFIX = ", make the silhouttes in wearing quality clothes and overall image as parallax "
 
 # === Helper: clean and normalize filename ===
 def normalize_filename(num, phrase):
