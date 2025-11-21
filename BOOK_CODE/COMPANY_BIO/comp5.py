@@ -43,7 +43,7 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task: For each part of the transcript, give a relevant image description for the timeline.
+Your task: For each part of the transcript, give a relevant image description for the timeline.the image should tell be based on the company and not exagarate out of the topic, be more realistic 
 
 Timeline format:
 1.(0.00-9.79)- image description
@@ -51,7 +51,8 @@ Timeline format:
 3.(15.00-19.19)- image description
 ...
 
-Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect if possible.
+Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect in each image
+                                                                             .
 
 Start immediately with prompts. No intro.
 Begin:
