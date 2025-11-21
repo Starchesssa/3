@@ -2,6 +2,7 @@ import os
 import requests
 import time
 import re
+import string
 
 # === Directories ===
 INPUT_DIR = "BOOKS/Temp/PROMPTS"
@@ -14,25 +15,16 @@ IMAGE_HEIGHT = 720
 SEED = 10000
 PROMPT_SUFFIX = ", no logo, white background, everything colorful except background, no shadows, clean"
 
-# === Helper: extract filename from line ===
-def extract_filename(line):
-    # Expected format example:
-    # 1. (0.00-4.40) - A man standing in yellow fog
-    match = re.match(r"(\d+)\.\s*\(([0-9.]+-[0-9.]+)\)", line)
-    if not match:
-        return None
-
-    num = match.group(1)
-    timeline = match.group(2)
-
-    # Build filename: 1_(0.00-4.40).jpg
-    return f"{num}_({timeline}).jpg"
-
+# === Helper: sanitize folder/filename ===
+def sanitize(text, max_len=50):
+    valid_chars = f"-_.() {string.ascii_letters}{string.digits}"
+    sanitized = ''.join(c if c in valid_chars else '_' for c in text)
+    return sanitized[:max_len]
 
 # === Download image from Pollinations ===
 def download_image(prompt, save_path, retries=3, delay=4):
-    prompt += PROMPT_SUFFIX
-    encoded = requests.utils.quote(prompt)
+    prompt_full = prompt + PROMPT_SUFFIX
+    encoded = requests.utils.quote(prompt_full)
 
     url = (
         f"https://image.pollinations.ai/prompt/{encoded}"
@@ -56,22 +48,29 @@ def download_image(prompt, save_path, retries=3, delay=4):
 
     return False
 
-
 # === Process a single text file ===
 def process_text_file(txt_file):
     print(f"\n📄 Processing file: {txt_file}\n")
 
+    # Compute relative path of the text file inside PROMPTS
+    rel_path = os.path.relpath(txt_file, INPUT_DIR)  # e.g., DIR/XYZ prompt.txt
+    rel_dir = os.path.dirname(rel_path)              # e.g., DIR
+    base_name = os.path.splitext(os.path.basename(txt_file))[0]  # XYZ prompt
+
+    # Read prompts from the text file
     with open(txt_file, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
     tasks = []
-    for line in lines:
-        filename = extract_filename(line)
-        if not filename:
-            print(f"⚠️ Could not extract filename, using fallback")
-            filename = f"prompt_{abs(hash(line))}.jpg"
+    for idx, line in enumerate(lines, start=1):
+        # Build folder inside IMG, maintaining relative directory
+        folder_path = os.path.join(OUTPUT_DIR, rel_dir, sanitize(base_name))
+        os.makedirs(folder_path, exist_ok=True)
 
-        save_path = os.path.join(OUTPUT_DIR, filename)
+        # Image filename
+        image_filename = f"{idx}_image.jpg"  # numbered image in case multiple lines
+        save_path = os.path.join(folder_path, image_filename)
+
         tasks.append((line, save_path))
 
     # Retry loop
@@ -102,12 +101,13 @@ def process_text_file(txt_file):
 
     print("\n🎉 All images generated!\n")
 
-
 # === Main ===
 def main():
-    for file in os.listdir(INPUT_DIR):
-        if file.endswith(".txt"):
-            process_text_file(os.path.join(INPUT_DIR, file))
+    for root, dirs, files in os.walk(INPUT_DIR):
+        for file in files:
+            if file.endswith(".txt"):
+                txt_file = os.path.join(root, file)
+                process_text_file(txt_file)
 
 
 if __name__ == "__main__":
