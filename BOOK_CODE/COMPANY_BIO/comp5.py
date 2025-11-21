@@ -107,7 +107,22 @@ Section title: {heading}
 Content:
 {chunk_text}
 
-Your task: from the transcript give relavant visuals of the transcripts based on timeline .
+the above timeline is in seconda ie 0.00 --> 0.36 : ,that means 0.00seconds to 0.35 seconds 
+
+Your task: from the transcript give relavant image  of the transcripts based on timeline, fill all the tarnsceipt with relevant images .
+
+start from 0.00
+
+time line format should be tHe folloing fornatt,
+
+1.(0.00-9.79)- image description
+2.(9.79-15.00)- image description 
+3.(15.00-19.19)- image description 
+.........
+
+describe the image desceiption of a inage that should occur in a particualr timeline.
+
+represent people with silhouttes ,and use male silhouttes only ,ie silhoutte of a boss shouting at a worker , silhouttes must be 3d/2d parallax .
 
 - Start immediately with prompts. No intro.
 
