@@ -1,0 +1,29 @@
+1.(0.00-9.84)
+A 3D silhouette of a large, imposing man stands on a makeshift raft made of old Windows 98 tiles, adrift on a dark, stormy sea. In the background, the glowing "NOKIA" logo, on fire, sinks beneath the waves. The parallax effect shows digital rain made of red, falling Microsoft (MSFT) stock symbols in the extreme foreground, while the raft and the silhouette are in the midground. The distant, stormy sea and a faint outline of the Microsoft campus on the horizon form the background, creating a vast sense of isolation. On-screen text appears in a stark, modern font: "AUGUST 2013".
+
+2.(10.48-17.60)
+The scene shifts to a long boardroom table that has been transformed into a chaotic three-ring circus. In the foreground, a translucent, slowly rotating carousel horse glides past the camera with a parallax effect. In the midground, 2D silhouettes of board members in suits frantically juggle flaming Microsoft logos, try to walk a tightrope stretched between stacks of cash, and ride unicycles. The background is a distorted, funhouse mirror reflection of the Microsoft campus, all under a massive, dark circus tent with strobe lights flashing erratically. A title card slams onto the screen: "THE HUNT FOR CEO #3".
+
+3.(18.30-25.32)
+An intensely claustrophobic shot inside a boardroom. The camera pushes in slowly. In the foreground, a digital graphic overlay of a heart-rate monitor spikes erratically, labeled "BOARD CONFIDENCE." In the midground, anxious silhouettes are huddled around a table, sweating under a single harsh light. One central silhouette points at a blueprint labeled "RADICAL CHANGE." The background shows the walls are actually massive server racks with countless blinking red error lights, appearing to close in on the figures, enhancing the parallax and the feeling of panic.
+
+4.(27.22-36.84)
+From inside a dark Microsoft office, a silhouette looks out a large window through a powerful telescope. The window frame and a scrolling data feed listing potential "OUTSIDER" candidates are in the foreground. The midground is the silhouette at the telescope. The background, seen through the telescope's lens, is a vast, desolate landscape under a sickly green sky, symbolizing the "toxic culture." Far in the distance, a single, lone silhouette stands on a hill, glowing faintly, representing the "untainted" outsider they are searching for.
+
+5.(37.46-51.46)
+A dynamic, high-energy shot of a silhouette on a rock concert stage, bathed in a brilliant spotlight. In the foreground, a shower of gold coins and positive news headlines ("MULALLY SAVES FORD," "TURNAROUND KING") fall like confetti with a parallax motion. The midground features the heroic silhouette of Alan Mulally, one foot on a monitor speaker, holding a glowing Ford steering wheel aloft like a guitar to a cheering crowd of other silhouettes. The background is a massive, animated stock chart for Ford (F) projected behind him, showing its meteoric rise.
+
+6.(64.20-78.80)
+A dramatic, dark scene. A silhouette representing Mulally stands at the edge of a deep, dark pit, turning his back. In the foreground, a large, red "NO THANKS" text is stamped onto the screen with a heavy thud. The midground shows Mulally's silhouette walking away. The background reveals the pit is filled with hundreds of writhing, shadowy snakes. Rising above them are two much larger, king cobra-like shadows wearing crowns, symbolizing Gates and Ballmer's lingering presence on the board. The parallax effect makes the pit seem impossibly deep.
+
+7.(79.70-89.76)
+A single, ornate, glowing chalice bearing the Microsoft logo sits on a pedestal in the center of a vast, dark hall. In the foreground, wisps of green, toxic smoke drift towards the camera. The on-screen text "POISONED CHALICE" fades in. In the midground, a series of 2D silhouettes of candidates walk into frame, cautiously approach the chalice, then recoil in horror and quickly exit the scene. The background shows the hall's far wall, which has a cracked, faded mural of Microsoft's past glories, now covered in cobwebs and decay.
+
+8.(91.32-106.74)
+A serene but high-tech scene. In the foreground, translucent lines of code and blue data packets float peacefully across the screen. The midground reveals a vast, dark server room. In one brightly lit section, a calm, thoughtful silhouette (Nadella) tends to server racks that are glowing and sprouting luminous, flower-like data structures. This represents the thriving cloud division. The background shows the rest of the massive server room stretching into darkness, with other sections flickering with red error lights, creating a stark contrast.
+
+9.(118.00-129.42)
+The scene is a sterile, white operating theater. An ominous, out-of-focus question mark hangs in the foreground. In the midground, Nadella's silhouette stands over an operating table where a glowing, abstract Microsoft org chart lies as the "patient." Instead of a scalpel, he holds a stethoscope to it, listening intently. In the background, seen from a higher observation deck, the silhouettes of the board look down with anxious postures. Medical monitors behind Nadella show flatlining charts for "MOBILE" and "SEARCH," while the chart for "CLOUD" is strong and steady.
+
+10.(136.32-149.64)
+A desolate, abstract space. In the foreground, a digital calendar flips rapidly through five months before stopping, and the text "5 AGONIZING MONTHS" burns onto the screen. In the midground, a colossal, headless giant in a suit made of circuit boards sits slumped over in a gray void—the "leaderless giant." Tiny silhouettes of employees wander aimlessly around its feet. The background is an endless, swirling gray fog, representing "limbo," with no horizon or sense of direction, creating a disorienting parallax effect as the camera slowly pulls back.
