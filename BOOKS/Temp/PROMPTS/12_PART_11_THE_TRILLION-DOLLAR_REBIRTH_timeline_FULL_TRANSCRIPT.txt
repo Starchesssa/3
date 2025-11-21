@@ -1,0 +1,43 @@
+Begin:
+
+**(0.00-10.22) "All this chaos... the firings, the write downs... the complete gutting of the company's culture"**
+A montage of chaotic and demoralizing scenes: empty office chairs spinning slowly, stacks of papers being swept off a desk into a box, a crumbling building with an old, faded Microsoft logo, and a visual of the words "RANK & YANK" being shattered.
+
+**(10.88-15.54) "one of the most staggering turnarounds in the history of business"**
+A dramatic animated graph showing a line plummeting downwards, then hitting a bottom point before sharply rocketing upwards in a V-shape, ending far higher than it began.
+
+**(16.18-23.22) "February 2014... Microsoft's stock price was hovering around $36 a share."**
+A retro-style stock ticker from 2014. The letters MSFT are clearly visible, with the price next to it stuck at "36.00" with a flat-line arrow.
+
+**(23.64-34.64) "dwarfed by newcomers like Apple and Google."**
+A visual metaphor: a small, modest building labeled "Microsoft, $300B" sits in the giant, imposing shadows cast by two gleaming, modern skyscrapers labeled "Apple" and "Google."
+
+**(35.32-44.72) "Azure's growth exploded... Office 365... grew like a weed."**
+An animated graphic of a cloud icon (Azure) that rapidly expands and pulsates with light. Next to it, an Office software box transforms into a subscription icon, from which digital green vines sprout and quickly grow to fill the screen.
+
+**(45.12-53.16) "shed its toxic culture... Wall Street started to notice."**
+A split-screen transition. On the left, a dark, siloed office with closed doors. It wipes away to reveal the right side: a bright, open, collaborative workspace with diverse teams brainstorming on glass walls. The shot then cuts to the Wall Street "Charging Bull" statue, its head looking up towards a rising MSFT stock ticker.
+
+**(53.86-63.58) "The stock began to climb... it blew past $100 a share."**
+An animated stock chart where the line for MSFT accelerates upwards, bursting through digital barriers labeled "$50," "$70," and finally "$100" with a powerful visual effect.
+
+**(67.08-73.26) "Azure growth numbers were just mind-blowing, consistently over 50% year over year."**
+A rapid sequence of stylized quarterly reports flipping towards the screen. Each one prominently features a glowing, oversized number for Azure's growth: "+58%", "+62%", "+55%", etc.
+
+**(77.54-85.60) "Microsoft surpassed Apple to briefly become the most valuable publicly traded company in the world."**
+A side-by-side graphic of the Apple and Microsoft logos, each with a live-ticking market cap number underneath. The Microsoft number animates quickly, overtakes the Apple number, and a "#1" crown graphic appears over the Microsoft logo.
+
+**(85.90-90.62) "the company that everyone had written off as a dead dinosaur was now back on top."**
+A fossilized dinosaur skeleton with a cracked, old Microsoft logo on its skull crumbles into dust. From the dust, a sleek, glowing phoenix with wings shaped like the modern four-color Microsoft logo rises majestically.
+
+**(91.28-97.54) "Microsoft officially crossed the $1 trillion market cap threshold."**
+A massive digital counter, like a high-tech odometer, spins rapidly and dramatically clicks over to show the number: **$1,000,000,000,000**. Digital confetti and fireworks erupt on screen.
+
+**(105.28-114.46) "The stock price went on an absolute tear, eventually soaring past $200, then $300 a share."**
+The animated stock chart from before reappears, but now the line goes nearly vertical, blazing past "$200" and "$300" markers like a rocket leaving the atmosphere.
+
+**(117.56-131.34) "a leader who had the courage to confront the brutal facts... change a culture... and make huge long-term bets"**
+A silhouette of Satya Nadella stands facing a storm. The clouds in front of him show swirling negative words like "failure," "toxic," "irrelevant." He gestures, and the clouds part to reveal a bright, clear future with icons for Cloud, AI, and Collaboration.
+
+**(131.72-133.20) "The comeback was complete."**
+A final, sweeping drone shot over the modern Microsoft campus on a beautiful, sunny day. The company's new, colorful logo is prominently displayed on a building, gleaming in the sunlight.

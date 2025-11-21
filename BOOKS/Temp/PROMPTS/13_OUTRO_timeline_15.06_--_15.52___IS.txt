@@ -1,0 +1,21 @@
+**15.06 - 19.78:** A split-screen animation. On the left, a brain with gears locked in place, labeled "Know-it-all." On the right, a brain with new information flowing in, labeled "Learn-it-all." The screen transitions to fully show the "Learn-it-all" side.
+
+**19.78 - 22.56:** A graphic of a heart icon appears in the center of the screen. Lines radiate from it, connecting to icons representing people, technology, and business, illustrating "empathy at the center of everything."
+
+**23.08 - 26.48:** Archival footage of a struggling, "old" Microsoft (Windows Vista/8 imagery). This dissolves into a montage of modern, successful Microsoft: Azure server farms, a user with a HoloLens 2 headset, and the sleek, modern Office 365 and Windows 11 logos.
+
+**26.48 - 28.60:** An animated line graph appears, showing Microsoft's stock price and relevance on a steep upward trajectory, surpassing its previous peaks.
+
+**29.50 - 33.68:** An animated "Like" button with a thumb-up icon gets "smashed" on screen, with explosive particle effects.
+
+**33.98 - 35.02:** A YouTube "Subscribe" button animation is shown, with a cursor clicking it, changing it from red to gray.
+
+**35.44 - 38.66:** An animated notification bell icon rings, with sound waves emanating from it.
+
+**39.18 - 44.30:** The book cover of "Hit Refresh" appears on screen, perhaps with subtle flame animations behind it to match the "fired up" line. The visual then transitions to show the book cover next to a pair of headphones, indicating the audiobook version.
+
+**44.82 - 48.96:** The Audible logo is prominently displayed with a text overlay: "Get it FREE with a new trial." An animated arrow points down towards the corner of the screen, labeled "Link in Description."
+
+**49.54 - 51.44:** An image of the physical "Hit Refresh" book appears, perhaps alongside logos of major booksellers like Amazon or Barnes & Noble. The "Link in Description" graphic remains.
+
+**52.08 - 54.26:** A YouTube end screen appears with the text "Thanks for watching!" and thumbnail suggestions for other videos from the channel.

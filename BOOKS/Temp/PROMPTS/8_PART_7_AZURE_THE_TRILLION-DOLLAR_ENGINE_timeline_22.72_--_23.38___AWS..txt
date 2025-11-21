@@ -1,0 +1,13 @@
+A vast server farm from the early 2010s, endless aisles of humming server racks with blinking green LED lights. The Amazon Web Services (AWS) logo from that era is subtly visible on the side of a rack. The atmosphere is cool, clean, and futuristic for its time. Wide-angle, photorealistic, cinematic lighting.
+
+---
+
+A split-screen image. On the left, a bustling Amazon fulfillment center from 2011, with conveyor belts and packages. On the right, a sterile and quiet Microsoft data center from the same year, representing the nascent Azure cloud. The visual contrast highlights the different business origins. Documentary style, realistic color grading.
+
+---
+
+A conceptual image of a massive, dominant mountain peak labeled "AWS" piercing through the clouds. Far below, at the base, a smaller, new mountain peak labeled "Azure" is just beginning to form, with digital scaffolding around it. Illustrates the market dominance of AWS in the early 2010s. Epic fantasy landscape, digital art.
+
+---
+
+A business strategy meeting at Microsoft, circa 2012. A group of executives, including a younger Satya Nadella, look intently at a whiteboard. The whiteboard is filled with diagrams and charts showing the exponential growth of AWS, with handwritten notes like "Cloud First!" and "How to compete?". Corporate photography style, candid, high-contrast.
