@@ -1,0 +1,31 @@
+1.(0.00-10.44)- A 3D male silhouette of a powerful executive stands in a dark, imposing boardroom, pointing at a large screen. On the screen, various generic tech company logos are displayed, each crossed out with a glowing red 'X'. With the parallax effect, the silhouette in the foreground appears sharp and dominant against the slightly out-of-focus screen in the background.
+
+2.(10.44-15.68)- A three-panel animated graphic sequence. The first panel shows one silhouette shaking hands with another (Embrace). The second shows the first silhouette adding a proprietary gear to a shared project (Extend). The third shows the first silhouette standing alone and enlarged while the other fades into the background (Extinguish). The parallax effect gives depth to the graphic elements on each panel.
+
+3.(15.68-26.52)- An animated flowchart is displayed. A large, glowing "WINDOWS" logo sits at the top. An arrow connects it to a box labeled "COMPETITOR," then to a step labeled "ADD PROPRIETARY FEATURES." A final, thick red arrow labeled "MONOPOLY POWER" points from the WINDOWS logo, crushing the competitor's box, which cracks and fades. The parallax effect makes the flowchart elements float over a blueprint-style background.
+
+4.(26.52-37.42)- A 3D male silhouette in a suit stands in a stylized, dark courtroom. In the foreground, a large stack of documents labeled "ANTITRUST" grows rapidly. In the background, the word "PARTNERSHIP" is shown on a faded screen, crossed out with a thick red line. The parallax effect makes the growing stack of documents feel imposing and close to the viewer.
+
+5.(38.30-44.94)- A 3D male silhouette stands at a crossroads. One path, dark and narrow, leads to a crumbling fortress labeled "OLD WAY." The other path, bright and wide, leads toward a vibrant, interconnected network of nodes in the sky, labeled "CLOUD FIRST." The silhouette is facing the bright path. The parallax effect gives the cloud network in the background a sense of vast, distant scale.
+
+6.(44.94-54.38)- A central silhouette representing a customer is surrounded by a complex system of mismatched, grinding gears. Another silhouette, representing the new CEO, moves between the gears, applying oil and connecting them with glowing data streams until they mesh and turn smoothly. The parallax effect creates a dynamic scene, with the CEO silhouette moving between the foreground and mid-ground gears.
+
+7.(54.38-65.44)- A split-screen shot. On the left, two 2D male silhouettes stand back-to-back with a jagged red "VERSUS" line between them. On the right, the same two silhouettes are on a stage shaking hands, with a clean blue "PARTNERS" line connecting them. The parallax effect causes the silhouettes to stand out from the corporate logos in the background of each panel.
+
+8.(65.44-77.72)- Two 3D male silhouettes are seen together, using a shovel to bury a literal hatchet in the ground in a stylized animation. As they pat the dirt down, a small, glowing green sprout labeled "TRUST" emerges from the spot. With the parallax effect, the dirt particles in the foreground move across the screen, adding realism to the scene.
+
+9.(77.72-89.32)- An animated graphic shows a generic "Salesforce" cloud logo connecting seamlessly with generic "Office" and "Windows" square logos. Below this, a line of customer silhouettes change from neutral to having green checkmarks above their heads. The parallax effect makes the logos in the foreground pop, drawing attention to the successful integration.
+
+10.(89.32-99.90)- A montage sequence shows a central CEO silhouette shaking hands on a stage. The partner silhouette and the background logo behind them quickly cycle through different designs—one representing Salesforce, another representing Adobe, and so on. The parallax effect creates a sense of fast-paced, continuous deal-making as the background elements slide past.
+
+11.(99.90-111.04)- A dramatic scene where a 3D male silhouette shakes hands with another silhouette wearing a red fedora (symbolizing Red Hat). In the background, a ghostly, faded image of a past executive appears with the quote "A CANCER" in fractured text next to a Linux penguin icon. The parallax effect makes the foreground handshake feel solid and present, contrasting with the fading memory of the past in the background.
+
+12.(111.04-115.72)- A close-up of a balancing scale. On one side, a large, ornate crown labeled "EGO" is being outweighed and lifted by a simple, glowing brain icon labeled "PRAGMATISM" on the other side. The parallax effect gives the scale a tangible, 3D quality as it tips slowly and deliberately.
+
+13.(115.72-123.84)- A 2D male silhouette stands at a whiteboard, drawing a diagram. In the center is a large circle labeled "CUSTOMER." All other circles, labeled "US" and "COMPETITORS," have arrows pointing toward the central customer circle, illustrating a shared focus. The parallax effect makes the hand doing the drawing seem to move in a layer separate from the board itself.
+
+14.(123.84-133.94)- An animation shows a large, aggressive silhouette labeled "BULLY" dissolving into particles. From the particles, two smaller, equal-sized silhouettes form and shake hands under the word "PARTNER." The background simultaneously transitions from a stormy, dark grey to a bright, clear blue. The parallax effect adds depth to the dissolving particles.
+
+15.(133.94-140.06)- A close-up on an old, dusty compass. A silhouette's hand wipes the dust away, and the needle, which was spinning erratically, firmly points to a marker labeled "CUSTOMER." With the parallax effect, the dust particles float in the foreground as the hand cleans the glass, revealing the focused needle beneath.
+
+16.(140.60-148.36)- A split-screen view. On the left, two silhouettes are fighting over a small, crumbling piece of pie. On the right, multiple silhouettes stand together, each holding a large slice of a massive, glowing, and ever-expanding pie. The parallax effect emphasizes the scale, with the expanding pie on the right growing past the edges of the frame.

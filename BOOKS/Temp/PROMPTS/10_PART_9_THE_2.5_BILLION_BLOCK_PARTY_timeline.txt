@@ -1,0 +1,29 @@
+1.(0.00-9.40)- A 2D silhouette of a CEO in a modern, glass-walled office, looking out at a city skyline. In the foreground, out of focus, other business suit silhouettes are seen scratching their heads with question marks appearing above them. The parallax effect shows the CEO in the foreground, the confused silhouettes in the mid-ground, and the city background moving slower.
+
+2.(9.94-16.72)- A clean, corporate graphic showing the Microsoft logo on the left and the Mojang logo on the right. A large, digital arrow with the text "$2.5 BILLION" moves from the Microsoft logo to the Mojang logo. The parallax effect is created by a background of flowing data streams moving at a different speed.
+
+3.(17.56-28.96)- An isometric view of a stylized, blocky landscape from the game Minecraft. A 2D silhouette of a player is placing a final block on a simple, but impressive, block structure. The parallax effect makes the player and the block feel closer, while the blocky sun and clouds in the background move more slowly.
+
+4.(29.65-33.96)- A silhouette of an analyst in a suit slams his fist on a desk in front of a large screen. The screen displays a plunging stock chart with the Microsoft logo at the top. The background, representing a blurred Wall Street trading floor, moves independently to create depth with a parallax effect.
+
+5.(34.56-42.94)- A central, calm silhouette of a CEO stands firm as aggressive, jagged speech bubbles fly in from the edges of the frame. The bubbles contain text like "KID'S GAME?", "FOCUS ON THE CLOUD!", and "WASTE!". The parallax effect is achieved by having the speech bubbles in the foreground and the CEO against a dark, corporate background.
+
+6.(43.62-50.18)- A stylized chessboard is shown at an angle. On one side are generic game pieces. On the other side, a silhouette hand moves a unique, glowing piece shaped like a Minecraft block into a strategic, unexpected position. The parallax effect creates depth between the board, the pieces, and an abstract, dark background.
+
+7.(50.80-56.98)- A single, large, translucent Minecraft block is shown floating in the center of the screen. Inside the block, like a hologram, are 2D silhouettes of young people building, drawing, and collaborating. The parallax effect makes the silhouettes inside the block appear to have depth against the simple, dark background.
+
+8.(57.50-67.58)- A side-by-side comparison. On the left, a pile of classic LEGO bricks. On the right, a pile of digital Minecraft blocks. A silhouette of a person stands in the middle, looking at a blueprint that visually connects the two, symbolizing "digital LEGO". The parallax effect separates the person from the two piles in the background.
+
+9.(68.34-76.48)- A profile silhouette of a young person's head is shown. Inside, instead of a brain, are glowing, interconnected gears, architectural lines, and simple code symbols, all rendered in a blocky, pixelated style. The parallax effect creates a sense of depth among the glowing elements within the head.
+
+10.(77.00-91.94)- A stylized globe made of interconnected, blocky Minecraft-style landscapes. Glowing lines connect different points on the globe, representing the global community. Faint silhouettes of players can be seen building together on the surface. The parallax effect is seen as the globe slowly rotates, with the network lines floating slightly above the surface.
+
+11.(92.50-102.90)- A visual timeline effect. On the left, a silhouette of a child plays with Minecraft blocks. A dotted line extends to the right, where the silhouette is now an adult engineer working on complex blueprints on a futuristic screen. The parallax effect separates the timeline elements from a simple, gridded background.
+
+12.(103.48-115.72)- A central, glowing Minecraft block acts as a hub. Lines of light radiate from it, connecting to other smaller icons representing Microsoft tools like Azure and Visual Studio. A silhouette of a user touches the central block, activating the connections. Parallax layers separate the user, the block, and the background icons.
+
+13.(116.28-130.26)- A scene in a modern classroom. A silhouette of a teacher points to a large screen displaying a historically accurate scene (like ancient Egypt) built entirely in Minecraft. Silhouettes of students are shown engaged and looking on. The parallax effect creates depth between the students in the foreground and the screen in the background.
+
+14.(130.84-141.84)- A silhouette of a leader stands at a fork in the road. One path is straight, gray, and labeled "Old Strategy". The other is a winding, creative path made of colorful blocks, labeled "Future Creativity". The silhouette is decisively stepping onto the colorful path. The parallax effect makes the background destinations on each path seem distant.
+
+15.(142.36-154.20)- A 2D silhouette of a leader is shown planting a single, glowing seed. In the background, other silhouettes tend to old, wilting trees. A faint, holographic projection of a massive, thriving tree grows from the seed, showing the long-term vision. The parallax effect separates the foreground action of planting from the background scene of the past.
