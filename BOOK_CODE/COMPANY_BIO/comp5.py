@@ -45,6 +45,8 @@ The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
 Your task: For each part of the transcript, give a relevant image description for the timeline.the image should tell be based on the company and not exagarate out of the topic, be more realistic 
 
+                                                                                                                                                                               
+    make like a documentary of showing people how things occured in a company                                                                                                                                                                         
 Timeline format:
 1.(0.00-9.79)- image description
 2.(9.79-15.00)- image description
