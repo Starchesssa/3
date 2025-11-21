@@ -12,77 +12,104 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # === Pollinations settings ===
 IMAGE_WIDTH = 1280
 IMAGE_HEIGHT = 720
-SEED = 10000  # Fixed seed for reproducible images
-PROMPT_SUFFIX = ", make the silhouttes in wearing quality clothes and overall image as parallax "
+SEED = 10000
+PROMPT_SUFFIX = ", no logo, white background, everything colorful except background, no shadows, clean"
 
-# === Helper: clean and normalize filename ===
-def normalize_filename(num, phrase):
-    safe_phrase = re.sub(r"[^a-zA-Z0-9]+", "_", phrase.strip())
-    safe_phrase = safe_phrase[:40]  # limit length
-    return f"{num}_{safe_phrase}.png"
+# === Helper: extract filename from line ===
+def extract_filename(line):
+    # Expected format example:
+    # 1. (0.00-4.40) - A man standing in yellow fog
+    match = re.match(r"(\d+)\.\s*\(([0-9.]+-[0-9.]+)\)", line)
+    if not match:
+        return None
+
+    num = match.group(1)
+    timeline = match.group(2)
+
+    # Build filename: 1_(0.00-4.40).jpg
+    return f"{num}_({timeline}).jpg"
+
 
 # === Download image from Pollinations ===
-def download_image(prompt, save_path, retries=3, delay=5):
-    prompt_full = prompt + PROMPT_SUFFIX
+def download_image(prompt, save_path, retries=3, delay=4):
+    prompt += PROMPT_SUFFIX
+    encoded = requests.utils.quote(prompt)
+
     url = (
-        f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt_full)}"
-        f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&seed={SEED}&no_logo=true"
+        f"https://image.pollinations.ai/prompt/{encoded}"
+        f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&seed={SEED}"
     )
 
     for attempt in range(1, retries + 1):
         try:
-            response = requests.get(url, stream=True, timeout=60)
+            response = requests.get(url, stream=True, timeout=45)
             if response.status_code == 200:
                 with open(save_path, "wb") as f:
                     f.write(response.content)
-                print(f"✅ Downloaded: {save_path}")
+                print(f"✅ Saved: {save_path}")
                 return True
             else:
                 print(f"⚠️ Attempt {attempt} failed (status {response.status_code})")
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             print(f"⚠️ Attempt {attempt} error: {e}")
+
         time.sleep(delay)
+
     return False
 
-# === Process text file ===
+
+# === Process a single text file ===
 def process_text_file(txt_file):
+    print(f"\n📄 Processing file: {txt_file}\n")
+
     with open(txt_file, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
 
-    image_tasks = []
-    for i, line in enumerate(lines, start=1):
-        filename = normalize_filename(str(i), line)
-        image_tasks.append((filename, line))
+    tasks = []
+    for line in lines:
+        filename = extract_filename(line)
+        if not filename:
+            print(f"⚠️ Could not extract filename, using fallback")
+            filename = f"prompt_{abs(hash(line))}.jpg"
 
-    failed = image_tasks.copy()
-    round_count = 1
+        save_path = os.path.join(OUTPUT_DIR, filename)
+        tasks.append((line, save_path))
 
-    while failed:
-        print(f"\n🔁 Starting round {round_count} — {len(failed)} images remaining...\n")
-        remaining = []
-        for filename, prompt in failed:
-            save_path = os.path.join(OUTPUT_DIR, filename)
+    # Retry loop
+    remaining = tasks.copy()
+    round_num = 1
+
+    while remaining:
+        print(f"\n🔁 Round {round_num} — {len(remaining)} images remaining...\n")
+
+        next_round = []
+        for prompt, save_path in remaining:
             if os.path.exists(save_path):
-                print(f"⏩ Already exists: {filename}")
+                print(f"⏩ Exists: {save_path}")
                 continue
+
             if not download_image(prompt, save_path):
-                print(f"❌ Failed: {filename}")
-                remaining.append((filename, prompt))
+                print(f"❌ Failed: {save_path}")
+                next_round.append((prompt, save_path))
 
-        if remaining:
-            print(f"\n⏸️ {len(remaining)} images failed this round. Waiting 60 seconds before retry...\n")
+            time.sleep(1.5)  # slow down requests
+
+        if next_round:
+            print("\n⏸️ Waiting 60 seconds before retry...\n")
             time.sleep(60)
-        else:
-            print("\n✅ All images downloaded successfully!\n")
 
-        failed = remaining
-        round_count += 1
+        remaining = next_round
+        round_num += 1
+
+    print("\n🎉 All images generated!\n")
+
 
 # === Main ===
 def main():
     for file in os.listdir(INPUT_DIR):
         if file.endswith(".txt"):
             process_text_file(os.path.join(INPUT_DIR, file))
+
 
 if __name__ == "__main__":
     main()
