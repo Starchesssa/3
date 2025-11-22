@@ -43,19 +43,21 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task:imagine making a movie like big short or margin call,here is my transcipt, give me image  description for the timeline.the image should tell be based on the company.
+Your task:,here is my transcipt, give me image  description for the timeline using alux.com style.the image should tell be based on the company.
 
-                                                                                                                                                                               
-    make like a documentary movie like big shot or margin call.                                                                                                                                                                        
+make all image dwcriptions match alux.com style ,here is the formular (3D silhoutte +gesture(emotion)+environment)parallax),this is the formular ,
+
+its simple alux.com nomally use silhouttes and environment in parallax , but more important gestures in the image based on the emotion  this is very important 
 Timeline format:
 1.(0.00-9.79)- image  description
 2.(9.79-15.00)- image description
 3.(15.00-19.19)- image  description
 ...
 
-each image should have theme colours for the company you are talking about ie of company main colour ie light yellow , well have yellow fog or yellow lighting in each image to make theme consistent in each sentence 
-Represent people with **3D/2D male silhouettes** only, e.g. a boss shouting at a worker. Use parallax effect in each image
-    just be brief and simple in your description , we need less than 3 things in the image ie 3d silhoutte wearing jeans in a court with a 3d silhout judge  
+Represent people with **3D/2D male silhouettes** only,Use parallax effect in each image
+
+remember , pose/gesture coint to 90% of the image/visual story telling, make sure you use them more.
+    
         in the environmwnt make the gog or lightning match the conpany 
 also dont give too long peonpts just brief and sinple yet more powerful
                                                                              .
