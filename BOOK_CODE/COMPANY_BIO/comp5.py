@@ -43,8 +43,7 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task:,here is my transcipt, give me image  description for the timeline using sharp geometric vectorstyle and a cyber punk noir aesthetic .the image should tell be based on the company.
-
+Your task:,here is my transcipt, give me image  description for the timeline using 
 all character you make will have angular head with no eyes,no nose, no mouth , no ears, just an abstract angular black shape 
 make all image decriptions match alux.com style ,here is the formular (3D character/s + pose of the charcter/s+environment) all in parallax),this is the formular ,
 
@@ -56,7 +55,9 @@ Timeline format:
 2.(9.79-15.00)- image description
 3.(15.00-19.19)- image  description
 ...
+in making prompts , each prompt should begin with, a geometric vector illustration style of a ........
 
+all characters must be describe by no face in prompt ie  the 3d character must have abstract anglar head with no hair, no eyes,no nose , no mouth ,just black smooth blank face.
 
 remember , pose count to 90% of the image/visual story telling, make sure you use pose estimation more.
     
