@@ -43,11 +43,11 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task:,here is my transcipt, give me image  description for the timeline using alux.com style.the image should tell be based on the company.
+Your task:,here is my transcipt, give me image  description for the timeline using sharp geometric vectorstyle and a cyber punk noir aesthetic .the image should tell be based on the company.
 
-make all image dwcriptions match alux.com style ,here is the formular (3D silhoutte+silhoutte dress+ silhoutte age + pose of the emotion+environment) all in parallax),this is the formular ,
+make all image decriptions match alux.com style ,here is the formular (3D character/s + pose of the charcter/s+environment) all in parallax),this is the formular ,
 
-its simple alux.com nomally use silhouttes in clothes amd age  and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
+its simple alux.com nomally use vector angular sharp geometric  in clothes  and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
 
 make poses based on emotion , each image must cobtain a silhoutte with a certain pose ,dont make a silhoutte stand still.
 Timeline format:
@@ -56,14 +56,11 @@ Timeline format:
 3.(15.00-19.19)- image  description
 ...
 
-Represent people with 3D/2D male silhouettes only,Use parallax effect in each image
 
 remember , pose count to 90% of the image/visual story telling, make sure you use pose estimation more.
     
-        in the environmwnt make the gog or lightning match the conpany 
-also dont give too long peonpts just brief and sinple yet more powerful
-                                                                             .
-make the silhouttes have age and wear clothes depending on the context , choose what type of age and clothes silhouttes wear .
+also dont give too long pronpts just brief and sinple yet more powerful
+                                                                        
 Start immediately with prompts. No intro.
 Begin:
 """
