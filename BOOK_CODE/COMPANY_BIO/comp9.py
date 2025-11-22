@@ -13,7 +13,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 IMAGE_WIDTH = 1280
 IMAGE_HEIGHT = 720
 SEED = 10000
-PROMPT_SUFFIX = ", no logo, white background, everything colorful except background, no shadows, clean"
+PROMPT_SUFFIX = ", "
 
 # === Helper: sanitize folder/filename ===
 def sanitize(text, max_len=50):
