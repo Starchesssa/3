@@ -54,14 +54,14 @@ Timeline format:
 3.(15.00-19.19)- image  description
 ...
 
-Represent people with **3D/2D male silhouettes** only,Use parallax effect in each image
+Represent people with 3D/2D male silhouettes** only,Use parallax effect in each image
 
 remember , pose/gesture coint to 90% of the image/visual story telling, make sure you use them more.
     
         in the environmwnt make the gog or lightning match the conpany 
 also dont give too long peonpts just brief and sinple yet more powerful
                                                                              .
-
+make the silhouttes have age and wear clothes depending on the context , choose what type of age and clothes silhouttes wear .
 Start immediately with prompts. No intro.
 Begin:
 """
