@@ -45,12 +45,12 @@ The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
 Your task:,here is my transcipt, give me image  description for the timeline using sharp geometric vectorstyle and a cyber punk noir aesthetic .the image should tell be based on the company.
 
-all character you make will have angular head with no eyes,no nose, no mouth , no ears, just an abstract angualr black shape 
+all character you make will have angular head with no eyes,no nose, no mouth , no ears, just an abstract angular black shape 
 make all image decriptions match alux.com style ,here is the formular (3D character/s + pose of the charcter/s+environment) all in parallax),this is the formular ,
 
 its simple alux.com nomally use vector angular sharp geometric  in clothes  and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
 
-make poses based on emotion , each image must cobtain a silhoutte with a certain pose ,dont make a silhoutte stand still.
+make poses based on emotion , each image must cobtain a character  with a certain pose ,dont make the character stand still.
 Timeline format:
 1.(0.00-9.79)- image  description
 2.(9.79-15.00)- image description
