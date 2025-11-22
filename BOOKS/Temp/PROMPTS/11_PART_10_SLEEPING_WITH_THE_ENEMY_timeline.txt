@@ -1,0 +1,35 @@
+1.  (0.00 - 10.44) - A towering 3D silhouette of a CEO in a suit stands with an aggressive, dominant pose on a throne of computer hardware. Below him, in a dark, misty environment lit with a cold blue glow, other smaller silhouettes are being crushed under a giant Windows logo. (Parallax effect)
+
+2.  (10.96 - 15.68) - A cunning 3D silhouette in a business suit performs a three-step motion: first, an inviting handshake gesture; second, wrapping his arms around another silhouette in a deceptive embrace; third, a final powerful push, extinguishing the other's light. The background is a stark, minimalist corporate space. (Parallax effect)
+
+3.  (16.02 - 26.52) - A massive, glowing 3D silhouette representing Microsoft slowly absorbs a smaller, competing silhouette. The larger figure extends digital tentacles from its Windows-logo core, draining the life from the smaller one in a futuristic, blue-hued data-scape. (Parallax effect)
+
+4.  (26.96 - 34.34) - A central 3D CEO silhouette stands defiantly in a stylized courtroom, surrounded by countless accusing silhouettes pointing fingers. Gavel shadows loom large on the walls behind him, creating a sense of being trapped. (Parallax effect)
+
+5.  (34.94 - 41.10) - A 3D silhouette of a new, visionary CEO stands at a fork in the road. He turns his back on a dark, crumbling path littered with broken company logos and faces a bright, open horizon filled with interconnected cloud structures, his arms open in a gesture of change. (Parallax effect)
+
+6.  (41.62 - 51.74) - A 3D silhouette stands in the center of a complex, glowing web of technology, his hands outstretched as if conducting an orchestra. The web connects dozens of different, smaller company logos, all working in harmony. (Parallax effect)
+
+7.  (52.22 - 57.96) - Two 3D CEO silhouettes, previously standing back-to-back in a confrontational pose, turn to face each other and extend hands for a handshake. One is bathed in Microsoft's blue light, the other in Salesforce's lighter blue, meeting in the middle to create a new light. (Parallax effect)
+
+8.  (58.70 - 65.44) - Two sharply dressed 3D CEO silhouettes stand on opposing, rising platforms like gladiators. They point accusingly at each other across a deep chasm in a corporate arena, with their respective company colors glowing on their platforms. (Parallax effect)
+
+9.  (66.02 - 74.72) - One flashy 3D silhouette stands on a stage, laughing and mocking with an exaggerated gesture towards another stoic silhouette below. The background is a large tech conference screen showing their competing logos. (Parallax effect)
+
+10. (75.32 - 84.36) - Two 3D CEO silhouettes firmly shake hands, burying a literal hatchet into the floor beneath them. Behind them, the Salesforce and Office 365 logos merge and glow brightly in a clean, modern office environment. (Parallax effect)
+
+11. (84.84 - 92.54) - A single 3D silhouette stands on a stage, arms raised in a gesture of shared success. Behind him, a screen cycles through multiple successful partnership logos (Salesforce, Adobe, etc.), each one lighting up as it appears. (Parallax effect)
+
+12. (93.00 - 99.90) - In a creatively lit space, a 3D silhouette representing Microsoft's CEO shakes hands with another silhouette representing Adobe's CEO. Digital creative sparks and cloud data flow between their clasped hands. (Parallax effect)
+
+13. (100.40 - 111.04) - A 3D silhouette in a Microsoft-blue tie shakes hands with another silhouette wearing a distinct red fedora (representing Red Hat/Linux). In the background, a larger, ghostly silhouette recoils in disgust, as the words "a cancer" dissolve into the air. (Parallax effect)
+
+14. (111.68 - 115.72) - A 3D silhouette calmly walks a straight, clear path guided by glowing logic puzzles and gears. He ignores a diverging path that leads to a giant, cracked, gold statue of a head labeled "EGO." The environment is a minimalist, abstract mind-space. (Parallax effect)
+
+15. (116.36 - 123.84) - A central 3D silhouette acts as a bridge, connecting two large, opposing corporate towers with his outstretched arms. Tiny silhouettes representing customers walk across his arms, moving freely between the two rival companies. (Parallax effect)
+
+16. (124.52 - 133.94) - A large, shadowy 3D silhouette with a menacing "bully" posture slowly morphs its shape, softening its shoulders and extending an open, welcoming hand. The environment changes from a dark alley to a bright, open, collaborative workspace. (Parallax effect)
+
+17. (134.38 - 140.06) - A 3D silhouette kneels with intense focus, carefully tending to a glowing, delicate plant whose leaves are made of customer profile icons. The gesture is one of maturity, care, and focus. (Parallax effect)
+
+18. (140.60 - 148.36) - A wise 3D silhouette turns away from a small, shrinking pie where two other figures are fighting violently. He instead walks toward a massive, endlessly growing pie, where dozens of silhouettes are sharing pieces peacefully under a bright, optimistic light. (Parallax effect)
