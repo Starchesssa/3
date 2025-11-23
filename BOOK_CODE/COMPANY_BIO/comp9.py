@@ -13,7 +13,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 IMAGE_WIDTH = 1280
 IMAGE_HEIGHT = 720
 SEED = 10000
-PROMPT_SUFFIX = "make sure the silhouttes have no eyes, no nose , no ears,no mouth,just blank silhoutte ,the overall inage should be polished with gradients in between colours making a smooth view, "
+PROMPT_SUFFIX = "make sure the silhouttes have no eyes,no hair , no nose , no ears,no mouth,just blank silhoutte dark shadow with shape of head ,just a dark shadow head  ,the overall inage should be polished with gradients in between colours making a smooth view, "
 
 # === Helper: sanitize folder/filename ===
 def sanitize(text, max_len=50):
