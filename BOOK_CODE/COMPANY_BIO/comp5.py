@@ -47,7 +47,9 @@ Your task:,here is my transcipt, give me image  description for the timeline usi
 all character you make will have angular head with no eyes,no nose, no mouth , no ears, just an abstract angular black shape 
 make all image decriptions match alux.com style ,here is the formular (3D silhoutte + pose of the charcter/s+environment) all in parallax),this is the formular ,
 
-its simple alux.com nomally use vector angular sharp geometric  in clothes  and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
+its simple alux.com nomally use vector angular sharp geometric  in clothes(desceibe what the silhouts wear ) and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
+
+some logos or words are nore important , so include them in a scene background so one indetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene 
 
 make poses based on emotion , each image must cobtain a character  with a certain pose ,dont make the character stand still.
 Timeline format:
@@ -60,6 +62,8 @@ in making prompts , each prompt should begin with, a geometric vector illustrati
 all characters must be describe by no face in prompt ie  the 3d character must have abstract anglar head with no hair, no eyes,no nose , no mouth ,just black smooth blank face.
 
 remember , pose count to 90% of the image/visual story telling, make sure you use pose estimation more.
+
+The 3d silhoutte must described wearing clothes ie suit,jeans ,shirt etc each silhoutte must be wearibg clothes,also each silhoutte must be described by age and hair style. clothes and age must match script 
     
 also dont give too long pronpts just brief and sinple yet more powerful
                                                                         
