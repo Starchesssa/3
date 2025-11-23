@@ -1,0 +1,31 @@
+1.(0.00-5.82)- a geometric vector illustration style of a 3D silhouette of a middle-aged businessman in a sharp suit with an abstract angular head and no face, kneeling in worship before a giant, glowing, monolithic Windows logo. The background is a dark, cathedral-like space with geometric patterns, all in parallax.
+
+2.(5.82-14.74)- a geometric vector illustration style of a 3D silhouette of a senior executive with an abstract angular head, standing at a boardroom table and pointing assertively at a single glowing question mark hovering in the center. The background features faint, geometric flowcharts all converging on the question mark, creating a parallax effect.
+
+3.(14.74-20.68)- a geometric vector illustration style of a cosmic scene where a massive, radiant Windows logo acts as the sun. Several small, geometric planets representing other company products are shown orbiting it on glowing, elliptical paths against a dark, stylized space background, all in parallax.
+
+4.(20.68-26.26)- a geometric vector illustration style of a 3D silhouette of a businessman with an abstract angular head, his back turned away from three glowing, open doorways with icons for "internet," "search," and "mobile." He is fixated on a single, dimming Windows logo in front of him, creating a sense of missed opportunity in a stark hallway.
+
+5.(26.26-31.84)- a geometric vector illustration style of a confident 3D silhouette of a modern leader in business casual attire with an abstract angular head, raising a geometric hammer to shatter a large stone monolith shaped like the old Windows logo. The background shows a crumbling, ancient structure giving way to a bright, futuristic cityscape in parallax.
+
+6.(31.84-40.22)- a geometric vector illustration style of a dynamic 3D silhouette of a young person with an abstract angular head, effortlessly juggling multiple glowing devices including a phone and a tablet. The background is a vibrant, abstract space filled with floating, stylized logos of Apple and Android in parallax.
+
+7.(40.22-46.90)- a geometric vector illustration style of a 3D silhouette of a businessman in a dated suit with an abstract angular head, struggling to pull a wooden cart attached to a heavy, stone Windows logo. In the background, a sleek, futuristic car speeds away on a modern highway in parallax, illustrating the concept of being left behind.
+
+8.(46.90-54.12)- a geometric vector illustration style of a powerful 3D leader silhouette with an abstract angular head, forcefully flipping a massive organizational chart upside down. The top block, labeled "WINDOWS," is now at the bottom, signifying a complete strategic reversal in a minimalist, corporate environment with parallax depth.
+
+9.(54.12-60.98)- a geometric vector illustration style of a central, glowing Microsoft logo radiating lines of light that connect to a constellation of various devices—smartphones, tablets, and laptops of different geometric designs. The background word "SERVICES" is subtly integrated into the network lines, all in parallax.
+
+10.(60.98-69.02)- a geometric vector illustration style of two 3D silhouettes with abstract angular heads shaking hands, causing a bright flash of light at the point of contact. One figure wears a sharp corporate suit (Microsoft), the other a casual developer's hoodie (Linux). The background is divided, with the Windows and Linux logos on opposite sides, merging in the middle in parallax.
+
+11.(69.02-82.10)- a geometric vector illustration style of an aggressive 3D silhouette of an older businessman with an abstract angular head, leaning forward and shouting with a pointed finger. His target is a small Linux penguin icon. The word "CANCER" is projected large and distorted on the wall behind him in a menacing parallax atmosphere.
+
+12.(82.10-96.78)- a geometric vector illustration style of a calm 3D silhouette of a modern leader with an abstract angular head, standing with open arms and embracing a glowing, stylized Linux penguin logo. The background is bright and optimistic, with geometric patterns suggesting harmony and integration in parallax.
+
+13.(96.78-108.56)- a geometric vector illustration style of a 3D silhouette developer with an abstract angular head, carefully placing a glowing blue cube with the Azure logo onto a large, complex open-source structure shaped like the Linux penguin. This represents contributing to the project, set against a background of a digital sky in parallax.
+
+14.(108.56-123.62)- a geometric vector illustration style of several 3D silhouettes of old-school businessmen in suits with abstract angular heads, recoiling in dramatic shock. They are shielding their eyes from a brightly glowing, merged Windows and Linux logo presented on a pedestal. The word "HERESY" is etched into the pedestal in a deep parallax background.
+
+15.(123.62-140.20)- a geometric vector illustration style of a friendly 3D silhouette with an abstract angular head, holding out its hands and offering a set of glowing, stylized developer tools. In the background, logos for Apple, Android, and Linux float peacefully under a large, protective "CLOUD" icon, all in parallax.
+
+16.(140.20-155.18)- a geometric vector illustration style showing a transition. On one side, a crumbling, dusty crown labeled "MONOPOLY" is dissolving. On the other side, a 3D silhouette of a leader with an abstract angular head tends to a vibrant, glowing tree whose branches are filled with developer logos, representing a thriving "ECOSYSTEM" in a parallax environment.
