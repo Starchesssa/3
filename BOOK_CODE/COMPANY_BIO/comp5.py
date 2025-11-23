@@ -49,7 +49,9 @@ make all image decriptions match alux.com style ,here is the formular (3D silhou
 
 its simple alux.com nomally use vector angular sharp geometric  in clothes(desceibe what the silhouts wear ) and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
 
-some logos or words are nore important , so include them in a scene background so one indetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene 
+some logos or words are nore important , so include them in a scene background so one indetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene
+
+each image should feel the script emotion ie by adding ie a company logo if a company it talked about , adding money vfx if money is talked about ,important key owrds in background if they are talked about etc make each impage pormpt feel the emotions of the sceipt its representing 
 
 make poses based on emotion , each image must cobtain a character  with a certain pose ,dont make the character stand still.
 Timeline format:
@@ -65,7 +67,9 @@ remember , pose count to 90% of the image/visual story telling, make sure you us
 
 The 3d silhoutte must described wearing clothes ie suit,jeans ,shirt etc each silhoutte must be wearibg clothes,also each silhoutte must be described by age and hair style. clothes and age must match script 
     
-also dont give too long pronpts just brief and sinple yet more powerful
+also dont give too long pronpts just brief and sinple yet more powerful.
+
+please include time line as the formatt i gave you, ie the number , time line in brackets and the inage peompt , this is very important , do not forget.
                                                                         
 Start immediately with prompts. No intro.
 Begin:
