@@ -44,12 +44,14 @@ Content:
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
 Your task:,here is my transcipt, give me image  description for the timeline using 
-all character you make will have angular head with no eyes,no nose, no mouth , no ears, just an abstract angular black shape 
+all character you make will have head with no eyes,no nose, no mouth , no ears, just an abstract black blank shape 
 make all image decriptions match alux.com style ,here is the formular (3D silhoutte + pose of the charcter/s+environment) all in parallax),this is the formular ,
 
-its simple alux.com nomally use vector angular sharp geometric  in clothes(desceibe what the silhouts wear ) and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
+its simple alux.com nomally use vector illustation silhouttes  in clothes(describe what the silhouts wear ) and environment in parallax , but more important pose estimation  in the image based on the emotion  this is very important .
 
-some logos or words are nore important , so include them in a scene background so one indetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene
+some logos or words are nore important , so include them in a scene background so one undetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene
+
+any word you emtion shoukd be in the scene ,instead of word XYZ in scene say word XYZ in the wall , see seeing the word in the wall i  the iange makes a belonging of the visual where words are inside scene 
 
 each image should feel the script emotion ie by adding ie a company logo if a company it talked about , adding money vfx if money is talked about ,important key owrds in background if they are talked about etc make each impage pormpt feel the emotions of the sceipt its representing 
 
@@ -61,15 +63,17 @@ Timeline format:
 ...
 in making prompts , each prompt should begin with, a geometric vector illustration style of a ........
 
-all characters must be describe by no face in prompt ie  the 3d character must have abstract anglar head with no hair, no eyes,no nose , no mouth ,just black smooth blank face.
+all characters must be describe by no face in prompt ie  the 3d character must have blank head with no hair, no eyes,no nose , no mouth ,just black blank face.
 
 remember , pose count to 90% of the image/visual story telling, make sure you use pose estimation more.
 
-The 3d silhoutte must described wearing clothes ie suit,jeans ,shirt etc each silhoutte must be wearibg clothes,also each silhoutte must be described by age and hair style. clothes and age must match script 
+The 3d silhoutte must described wearing clothes ie suit,jeans,watch ,shirt etc each silhoutte must be wearibg clothes,also each silhoutte must be described by age . clothes and age must match script 
     
 also dont give too long pronpts just brief and sinple yet more powerful.
 
 please include time line as the formatt i gave you, ie the number , time line in brackets and the inage peompt , this is very important , do not forget.
+
+do not include any female silhoutte just male figures silhouttes.
                                                                         
 Start immediately with prompts. No intro.
 Begin:
