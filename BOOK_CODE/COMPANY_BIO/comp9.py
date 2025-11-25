@@ -28,7 +28,7 @@ def download_image(prompt, save_path, retries=3, delay=4):
 
     url = (
         f"https://image.pollinations.ai/prompt/{encoded}"
-        f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&seed={SEED}"
+        f"?model=flux&width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&seed={SEED}"
     )
 
     for attempt in range(1, retries + 1):
