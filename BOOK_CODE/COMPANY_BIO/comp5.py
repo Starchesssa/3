@@ -72,6 +72,8 @@ also dont give too long pronpts just brief and sinple yet more powerful.
 
 please include time line as the formatt i gave you, ie the number , time line in brackets and the inage peompt , this is very important , do not forget.
 
+alao do not include animals exceot if it a logo , also even if just make it a silhoutte ie 2.5d black silhoutte or shadow, nothing ahould appear 
+
 do not include any female silhoutte just male figures silhouttes.
                                                                         
 Start immediately with prompts. No intro.
