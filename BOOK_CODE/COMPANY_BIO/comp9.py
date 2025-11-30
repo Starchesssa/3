@@ -16,8 +16,8 @@ IMAGE_HEIGHT = 720
 SEED = 10000
 
 PROMPT_SUFFIX = (
-    "make sure the silhouettes have no eyes, no hair, no nose, no ears, no mouth, "
-    "just blank silhouette dark shadow with shape of head, only male silhouettes, "
+    "make sure the head have no eyes, no hair, no nose, no ears, no mouth, "
+    "the head should have just blank dark shadow ,no nose, no mouth , no hair ,no ears,etc just black shadow, only male silhouettes, "
     "no female silhouettes, polished gradients between colours, smooth viewing."
 )
 
