@@ -7,7 +7,7 @@ import os
 # ===============================
 image_path = "public/1.jpg"
 depth_path = "public/1.png"
-output_dir = "output_cinematic_action"
+output_dir = "output_videos"
 os.makedirs(output_dir, exist_ok=True)
 
 FPS = 30
