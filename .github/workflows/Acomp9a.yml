@@ -1,31 +1,38 @@
-name: Run comp9a.py
+
+name: Run comp9a (Manual)
 
 on:
-  workflow_dispatch:   # Manual trigger
+  workflow_dispatch:
 
 permissions:
-  contents: write      # Allows writing files to repo
-  actions: write
-  checks: write
+  contents: write
 
 jobs:
-  run-comp9a:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: 🐍 Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.10"
 
-      - name: 📦 Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install requests google-generativeai google-genai
+      - name: Run comp9a.py
+        run: python BOOK_CODE/COMPANY_BIO/comp9a.py
 
-      - name: ▶️ Run comp9a.py
+      - name: Commit timeline files
         run: |
-          python BOOK_CODE/COMPANY_BIO/comp9a.py
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+
+          # Add only the output directory where your TXT files are saved
+          git add BOOKS/Temp/MAPPINGS/*.txt || echo "No TXT files found"
+
+          # Commit if there are changes
+          git commit -m "Update timeline txt files from comp9a" || echo "Nothing to commit"
+
+      - name: Push changes
+        run: git push
