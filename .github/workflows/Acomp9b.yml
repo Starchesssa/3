@@ -1,0 +1,44 @@
+name: Run Depth Map Generator
+
+on:
+  workflow_dispatch:   # manual trigger
+
+permissions:
+  contents: write      # allow commit/push
+
+jobs:
+  run-depth-map:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install transformers pillow torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run comp9b.py
+        run: |
+          python BOOK_CODE/COMPANY_BIO/comp9b.py
+
+      - name: Commit depth maps
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          # ADD GENERATED FILES
+          git add BOOKS/Temp/IMG || true
+
+          # CHECK IF ANYTHING STAGED
+          if git diff --cached --quiet; then
+            echo "No depth maps to commit."
+          else
+            git commit -m "Added new depth maps (BOOKS/Temp/IMG)"
+            git push
+          fi
