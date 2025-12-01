@@ -1,15 +1,4 @@
 
-#!/usr/bin/env python3
-"""
-parse_timeline.py
-
-- Reads each .txt file in BOOKS/Temp/PROMPTS/
-- Extracts timeline entries in the format:
-  1.(0.00-9.79)- description
-- Saves a simple timeline file per prompts file:
-  BOOKS/Temp/MAPPINGS/<base>_timeline.txt
-"""
-
 import re
 from pathlib import Path
 
@@ -17,52 +6,46 @@ PROMPTS_DIR = Path("BOOKS/Temp/PROMPTS")
 OUT_DIR = Path("BOOKS/Temp/MAPPINGS")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# regex for timeline lines
-TIMELINE_RE = re.compile(r'^\s*(\d+)\.\(\s*([0-9]+(?:\.[0-9]+)?)\s*-\s*([0-9]+(?:\.[0-9]+)?)\s*\)\s*-\s*(.+)$')
+# FLEXIBLE REGEX THAT MATCHES ALL FORMATS
+TIMELINE_REGEX = re.compile(
+    r"""
+    ^\s*                      # Start, whitespace allowed
+    (\d+)\.?\s*               # Number like 1. or 1
+    \(                        # Opening parenthesis
+    \s*([\d\.]+)\s*           # Start time
+    (?:-|-->|–)\s*            # Dash OR --> OR long dash
+    ([\d\.]+)\s*              # End time
+    \)\s*[-–]?\s*             # Closing )
+    (.*)$                     # Description (optional)
+    """,
+    re.VERBOSE,
+)
 
-def parse_prompts_file(file_path):
-    """Parse timeline lines into list of dicts"""
-    items = []
-    with open(file_path, "r", encoding="utf-8") as f:
-        for line in f:
-            s = line.strip()
-            if not s:
-                continue
-            m = TIMELINE_RE.match(s)
-            if not m:
-                print(f"⚠️ Unrecognized line (skipping): {s}")
-                continue
-            idx = int(m.group(1))
-            start = float(m.group(2))
-            end = float(m.group(3))
-            text = m.group(4).strip()
-            items.append({
-                "index": idx,
-                "start": start,
-                "end": end,
-                "text": text
-            })
-    return items
+def parse_file(file_path: Path):
+    print(f"📄 Parsing: {file_path.name}")
 
-def main():
-    txt_files = list(PROMPTS_DIR.glob("*.txt"))
-    if not txt_files:
-        print("❌ No prompts files found in", PROMPTS_DIR)
+    lines = file_path.read_text(encoding="utf-8").splitlines()
+    entries = []
+
+    for line in lines:
+        match = TIMELINE_REGEX.match(line)
+        if match:
+            index, start, end, desc = match.groups()
+            entries.append(f"{index} | {start} --> {end} | {desc.strip()}")
+        else:
+            print(f"⚠️ Unrecognized line (skipping): {line}")
+
+    if not entries:
+        print(f"⚠️ No timeline entries found in {file_path.name}")
         return
 
-    for txt_file in txt_files:
-        print(f"📄 Parsing: {txt_file.name}")
-        timeline = parse_prompts_file(txt_file)
-        if not timeline:
-            print(f"⚠️ No timeline entries found in {txt_file.name}")
-            continue
+    out_path = OUT_DIR / f"{file_path.stem}_timeline.txt"
+    out_path.write_text("\n".join(entries), encoding="utf-8")
+    print(f"💾 Saved timeline: {out_path}")
 
-        out_file = OUT_DIR / f"{txt_file.stem}_timeline.txt"
-        with open(out_file, "w", encoding="utf-8") as f:
-            for item in timeline:
-                # just save index, start, end in seconds
-                f.write(f"{item['index']}: {item['start']} - {item['end']}\n")
-        print(f"💾 Saved timeline: {out_file}")
+def main():
+    for file in PROMPTS_DIR.glob("*.txt"):
+        parse_file(file)
 
 if __name__ == "__main__":
     main()
