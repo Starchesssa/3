@@ -7,7 +7,7 @@ import os
 # ===============================
 image_path = "public/1.jpg"
 depth_path = "public/1.png"
-output_dir = "output_videos"
+output_dir = "output_clean_particles"
 os.makedirs(output_dir, exist_ok=True)
 
 FPS = 30
@@ -30,76 +30,56 @@ depth_raw = cv2.resize(depth_raw, (w, h))
 depth_norm = depth_raw.astype(np.float32) / 255.0
 
 # ===============================
-# COOL VISUAL FX UTILITIES
+# UTILITIES
 # ===============================
 
 def ease_in_out_sine(t):
     """Makes motion start slow, speed up, then end slow."""
     return -(np.cos(np.pi * t) - 1) / 2
 
-def apply_vignette(curr_img):
-    """Adds a cinematic dark border to frame the subject."""
-    Y, X = np.ogrid[:h, :w]
-    center_y, center_x = h / 2, w / 2
-    
-    # Calculate distance from center
-    dist_from_center = np.sqrt((X - center_x)**2 + (Y - center_y)**2)
-    
-    # Create mask: 1.0 at center, fading to 0.4 at corners
-    mask = 1 - (dist_from_center / (np.sqrt(h**2 + w**2) / 1.3))
-    mask = np.clip(mask, 0.4, 1.0) # Don't make corners pitch black, just darker
-    mask = np.dstack([mask] * 3)
-    
-    return (curr_img * mask).astype(np.uint8)
-
-def overlay_enhanced_particles(curr_img, time_step, cam_shift_x, cam_shift_y):
+def overlay_fine_dust(curr_img, time_step, cam_shift_x, cam_shift_y):
     """
-    Creates a multi-layered 3D particle system.
-    Some particles are 'close' (fast), some are 'far' (slow).
+    Creates very fine, subtle dust particles.
     """
     overlay = curr_img.copy()
     
-    # Seed ensures particles are deterministic (same every time we run code)
-    np.random.seed(99) 
+    # Consistent random seed so particles don't jitter randomly between frames
+    np.random.seed(42) 
     
     # Number of particles
-    num_particles = 70
+    num_particles = 100 
     
     for i in range(num_particles):
-        # Random properties for each particle
+        # Random properties
         p_x_start = np.random.randint(0, w)
         p_y_start = np.random.randint(0, h)
         p_depth = np.random.rand() # 0.0 (far) to 1.0 (close)
-        p_size = np.random.randint(1, 4) # Variable size
         
         # 1. CONSTANT DRIFT (Wind)
-        # Particles drift slowly to the right/down over time
-        drift_x = time_step * (20 * p_depth) 
-        drift_y = time_step * (10 * p_depth)
+        drift_x = time_step * (15 * p_depth) 
+        drift_y = time_step * (5 * p_depth)
 
         # 2. CAMERA REACTION (Parallax)
-        # If camera moves Left (negative shift), particles move Right.
-        # Close particles (p_depth 1.0) move MORE than background ones.
-        parallax_x = -cam_shift_x * (p_depth * 3.0) 
-        parallax_y = -cam_shift_y * (p_depth * 3.0)
+        # Particles move opposite to camera movement
+        parallax_x = -cam_shift_x * (p_depth * 2.0) 
+        parallax_y = -cam_shift_y * (p_depth * 2.0)
 
-        # Calculate final position with wrapping (modulo)
         final_x = int((p_x_start + drift_x + parallax_x) % w)
         final_y = int((p_y_start + drift_y + parallax_y) % h)
         
-        # Draw the particle
-        # We use circle with negative thickness for filled
-        opacity = 0.4 + (p_depth * 0.4) # Closer particles are brighter
-        color = (255, 255, 255)
+        # Draw TINY particle (Size = 1 pixel)
+        # Color: White
+        # Opacity: Based on depth (closer = more visible)
+        opacity = 0.2 + (p_depth * 0.4) # Range 0.2 to 0.6 opacity
         
-        # Manual Alpha Blending for the dot
-        # Get background color
         bg_color = overlay[final_y, final_x].astype(float)
+        particle_color = np.array([255, 255, 255])
         
-        # Blend: Output = Alpha * Particle + (1-Alpha) * BG
-        blended = (opacity * np.array(color) + (1 - opacity) * bg_color).astype(np.uint8)
+        # Blend
+        blended = (opacity * particle_color + (1 - opacity) * bg_color).astype(np.uint8)
         
-        cv2.circle(overlay, (final_x, final_y), p_size, blended.tolist(), -1)
+        # Set pixel directly
+        overlay[final_y, final_x] = blended
 
     return overlay
 
@@ -107,24 +87,19 @@ def overlay_enhanced_particles(curr_img, time_step, cam_shift_x, cam_shift_y):
 # WARPING ENGINE
 # ===============================
 def generate_frame(mx, my, zoom):
-    """
-    mx, my: Movement in pixels (Parallax strength)
-    zoom: Zoom factor (e.g. 1.0 to 1.2)
-    """
     
     # 1. PARALLAX DISPLACEMENT
     grid_x, grid_y = np.meshgrid(np.arange(w), np.arange(h))
     
-    # Pixel shift formula: Shift * Depth
-    # Near pixels move a lot, far pixels move little
+    # Near pixels move according to mx/my
     map_x = (grid_x - (depth_norm * mx)).astype(np.float32)
     map_y = (grid_y - (depth_norm * my)).astype(np.float32)
     
     warped = cv2.remap(img, map_x, map_y, cv2.INTER_LINEAR, cv2.BORDER_REFLECT)
     
-    # 2. ZOOM & CROP
-    # We always zoom slightly to hide the "messy edges" caused by warping
-    real_zoom = zoom * 1.05 
+    # 2. SAFETY CROP
+    # Minimal zoom (1.02) to cut off the messy edges from warping
+    real_zoom = zoom * 1.02
     
     cw = int(w / real_zoom)
     ch = int(h / real_zoom)
@@ -132,12 +107,8 @@ def generate_frame(mx, my, zoom):
     
     crop = warped[cy - ch//2 : cy + ch//2, cx - cw//2 : cx + cw//2]
     
-    # Resize back to original
-    if crop.size == 0: return warped # Safety check
+    if crop.size == 0: return warped
     final = cv2.resize(crop, (w, h), interpolation=cv2.INTER_LINEAR)
-    
-    # 3. ADD VIGNETTE
-    final = apply_vignette(final)
     
     return final
 
@@ -145,57 +116,47 @@ def generate_frame(mx, my, zoom):
 # STYLES
 # ===============================
 
-# Style 1: "The Observer"
-# Slow, smooth horizontal drift with floating dust. Very atmospheric.
-def style_observer(progress, frame_idx):
+# Style 1: "Clean Float"
+# Gentle horizontal movement. Crisp image.
+def style_clean_float(progress, frame_idx):
     p = ease_in_out_sine(progress)
     
-    # Camera moves left-to-right (Parallax X)
-    shift_x = np.sin(p * np.pi) * 20 # 20px shift
-    shift_y = np.sin(p * np.pi * 2) * 5 # Subtle bobbing
+    # Move left to right
+    shift_x = np.sin(p * np.pi) * 15 
+    shift_y = 0
+    zoom = 1.0 # No extra zoom
     
-    # Very slow zoom in
-    zoom = 1.0 + (p * 0.1)
-    
-    # Generate Base
     frame = generate_frame(shift_x, shift_y, zoom)
-    
-    # Add Particles (pass shifts so they react!)
-    frame = overlay_enhanced_particles(frame, progress, shift_x, shift_y)
-    
+    frame = overlay_fine_dust(frame, progress, shift_x, shift_y)
     return frame
 
-# Style 2: "The Vertigo"
-# Zoom In + Depth Shift Out. Background feels like it's expanding.
-def style_vertigo(progress, frame_idx):
+# Style 2: "Depth Pulse"
+# Moves forward and backward slightly.
+def style_depth_pulse(progress, frame_idx):
     p = ease_in_out_sine(progress)
     
-    # Strong Zoom In
-    zoom = 1.0 + (p * 0.25)
+    # Zoom In then Out
+    zoom = 1.0 + (np.sin(p * np.pi) * 0.05)
     
-    # Inverse Parallax Shift (Compensates for zoom, stretching perspective)
-    # The negative shift separates foreground from background
-    shift_x = -(p * 30) 
+    # Perspective shift (Vertigo feel but subtle)
+    shift_x = np.sin(p * np.pi) * -10
     
     frame = generate_frame(shift_x, 0, zoom)
-    frame = overlay_enhanced_particles(frame, progress, shift_x, 0)
+    frame = overlay_fine_dust(frame, progress, shift_x, 0)
     return frame
 
-# Style 3: "3D Orbit"
-# Circular camera movement. Feels like we are rotating around the subject.
-def style_orbit(progress, frame_idx):
-    # Continuous loop
-    angle = progress * 2 * np.pi
+# Style 3: "Diagonal Slide"
+# Dynamic diagonal movement
+def style_diagonal(progress, frame_idx):
+    p = ease_in_out_sine(progress)
     
-    # Orbit radius
-    radius = 15
-    shift_x = np.cos(angle) * radius
-    shift_y = np.sin(angle) * radius * 0.5 # Elliptical orbit
+    shift_x = np.sin(p * np.pi) * 12
+    shift_y = np.sin(p * np.pi) * 8
     
-    zoom = 1.05 # Static zoom
+    zoom = 1.02 # Static slight zoom
     
     frame = generate_frame(shift_x, shift_y, zoom)
-    frame = overlay_enhanced_particles(frame, progress, shift_x, shift_y)
+    frame = overlay_fine_dust(frame, progress, shift_x, shift_y)
     return frame
 
 # ===============================
@@ -208,19 +169,18 @@ def save_video(style_func, filename):
     out = cv2.VideoWriter(path, cv2.VideoWriter_fourcc(*'mp4v'), FPS, (w, h))
     
     for i in range(NUM_FRAMES):
-        # Progress 0.0 to 1.0
         progress = i / NUM_FRAMES 
         frame = style_func(progress, i)
         out.write(frame)
         
     out.release()
-    print(f"✅ Saved to {path}")
+    print(f"✅ Saved {path}")
 
 # ===============================
-# RUN ALL
+# RUN
 # ===============================
-save_video(style_observer, "Style1_Observer.mp4")
-save_video(style_vertigo,  "Style2_Vertigo.mp4")
-save_video(style_orbit,    "Style3_Orbit.mp4")
+save_video(style_clean_float, "1_Clean_Float.mp4")
+save_video(style_depth_pulse, "2_Depth_Pulse.mp4")
+save_video(style_diagonal,    "3_Diagonal_Slide.mp4")
 
-print("\n🎉 Done! Check the 'output_cool_noblur' folder.")
+print(f"\n✨ Done! Clean, crisp videos saved in '{output_dir}'")
