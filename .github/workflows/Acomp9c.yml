@@ -1,0 +1,38 @@
+name: Build Parallax Video
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-video:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install pillow moviepy opencv-python
+          pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install transformers
+
+      - name: Run video builder
+        run: |
+          python BOOK_CODE/COMPANY_BIO/comp9c.py
+
+      - name: Commit final videos
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add BOOKS/Temp/FINAL/*.mp4 || echo "nothing to add"
+          git commit -m "Added rendered videos" || echo "no changes"
+          git push || echo "no push"
