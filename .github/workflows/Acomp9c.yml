@@ -39,6 +39,6 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
-          git add BOOKS/Temp/FINAL/*.mp4
+          git add BOOKS/Temp/VIDEO/*.mp4
           git diff --cached --quiet || git commit -m "Added rendered videos"
           git push
