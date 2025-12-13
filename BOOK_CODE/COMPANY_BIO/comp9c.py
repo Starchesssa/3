@@ -1,19 +1,12 @@
 
 #!/usr/bin/env python3
 """
-advanced_depth_video.py (CINEMATIC VERSION)
+advanced_depth_video.py (CINEMATIC – SAMPLE MATCHED)
 
-Generates realistic, subtle depth-based parallax videos.
-
-Folders (UNCHANGED):
-BOOKS/Temp/IMG/<base>/
-BOOKS/Temp/MAPPINGS/<base>_timeline.txt
-BOOKS/Temp/FRAMES/
-BOOKS/Temp/VIDEO/
-
-Requirements:
-pip install opencv-python numpy
-ffmpeg installed
+Depth animation matches user's proven sample:
+- Signed depth offset (depth - 0.5)
+- Motion scaled by image size
+- Gentle zoom breathing
 """
 
 import cv2
@@ -24,7 +17,7 @@ import random
 import math
 
 # ---------------------------
-# Config (SAFE CINEMATIC)
+# Config
 # ---------------------------
 IMG_DIR = Path("BOOKS/Temp/IMG")
 MAP_DIR = Path("BOOKS/Temp/MAPPINGS")
@@ -35,87 +28,87 @@ TEMP_DIR.mkdir(parents=True, exist_ok=True)
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 FPS = 30
-DEPTH_BLUR = (31, 31)   # smoother = safer
+DEPTH_BLUR = (25, 25)
 
 # ---------------------------
 # Utilities
 # ---------------------------
 def normalize_depth(depth):
-    """Normalize depth map to 0..1 (cinematic safe)."""
     d = depth.astype(np.float32)
-
     if DEPTH_BLUR:
         d = cv2.GaussianBlur(d, DEPTH_BLUR, 0)
-
-    mn, mx = d.min(), d.max()
-    if mx - mn < 1e-6:
-        return np.zeros_like(d)
-
-    d = (d - mn) / (mx - mn)
+    d /= 255.0
     return np.clip(d, 0.0, 1.0)
 
 
-def cinematic_depth_pan(img, d, shift_x, shift_y):
+def cinematic_depth_motion(img, d, shift_x, shift_y, zoom):
     """
-    Cinematic parallax:
-    - No perspective warp
-    - No geometry distortion
-    - Depth used ONLY as motion weight
+    EXACTLY matches user's working sample logic
     """
     h, w = d.shape
+    map_x, map_y = np.meshgrid(np.arange(w), np.arange(h))
 
-    dx = (d - 0.5) * shift_x
-    dy = (d - 0.5) * shift_y
+    dx = (d - 0.5) * shift_x * w
+    dy = (d - 0.5) * shift_y * h
 
-    x, y = np.meshgrid(np.arange(w), np.arange(h))
+    map_x = (map_x + dx).astype(np.float32)
+    map_y = (map_y + dy).astype(np.float32)
 
-    map_x = (x - dx).astype(np.float32)
-    map_y = (y - dy).astype(np.float32)
-
-    return cv2.remap(
-        img,
-        map_x,
-        map_y,
+    warped = cv2.remap(
+        img, map_x, map_y,
         cv2.INTER_LINEAR,
         borderMode=cv2.BORDER_REFLECT
     )
 
+    # Zoom crop (same as sample)
+    cx, cy = w // 2, h // 2
+    zw, zh = int(w / zoom), int(h / zoom)
+
+    x1 = max(0, cx - zw // 2)
+    y1 = max(0, cy - zh // 2)
+    x2 = min(w, x1 + zw)
+    y2 = min(h, y1 + zh)
+
+    cropped = warped[y1:y2, x1:x2]
+    return cv2.resize(cropped, (w, h))
+
 
 def ease(t):
-    """Smooth cinematic easing."""
     return 0.5 - 0.5 * math.cos(math.pi * t)
 
 # ---------------------------
-# Styles (REALISTIC ONLY)
+# Styles (SAMPLE-BASED)
 # ---------------------------
 def style_push_in(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, 0, -4 * e)
+    return cinematic_depth_motion(img, d, 0.0, -0.03 * e, 1.0 + 0.06 * e)
 
 def style_pull_out(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, 0, 4 * e)
+    return cinematic_depth_motion(img, d, 0.0, 0.03 * e, 1.06 - 0.06 * e)
 
 def style_pan_left(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, 8 * e, 0)
+    return cinematic_depth_motion(img, d, 0.05 * e, 0.0, 1.05)
 
 def style_pan_right(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, -8 * e, 0)
+    return cinematic_depth_motion(img, d, -0.05 * e, 0.0, 1.05)
 
 def style_tilt_up(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, 0, -6 * e)
+    return cinematic_depth_motion(img, d, 0.0, -0.04 * e, 1.05)
 
 def style_tilt_down(img, d, t):
     e = ease(t)
-    return cinematic_depth_pan(img, d, 0, 6 * e)
+    return cinematic_depth_motion(img, d, 0.0, 0.04 * e, 1.05)
 
 def style_float(img, d, t):
-    x = math.sin(t * 2 * math.pi) * 4
-    y = math.cos(t * 2 * math.pi) * 3
-    return cinematic_depth_pan(img, d, x, y)
+    angle = t * 2 * math.pi
+    sx = math.sin(angle) * 0.05
+    sy = math.cos(angle) * 0.03
+    zoom = 1.0 + 0.08 * math.sin(angle * 0.5)
+    return cinematic_depth_motion(img, d, sx, sy, zoom)
 
 STYLES = [
     style_push_in,
@@ -133,20 +126,15 @@ STYLES = [
 def parse_timeline(map_file: Path):
     lines = map_file.read_text(encoding="utf-8").splitlines()
     result = []
-
     for line in lines:
-        line = line.strip()
-        if not line:
+        if not line.strip():
             continue
         try:
             idx, time, _ = line.split("|", maxsplit=2)
             start_s, end_s = time.split("-->")
-            result.append(
-                (int(idx.strip()), float(start_s), float(end_s))
-            )
+            result.append((int(idx), float(start_s), float(end_s)))
         except Exception:
             continue
-
     return result
 
 # ---------------------------
@@ -157,18 +145,18 @@ def create_clip(image_path, depth_path, duration, base, index, style_fn):
     depth = cv2.imread(str(depth_path), cv2.IMREAD_GRAYSCALE)
 
     if img is None or depth is None:
-        print(f"❌ Missing image/depth for {index}")
         return
 
+    depth = cv2.resize(depth, (img.shape[1], img.shape[0]))
     d = normalize_depth(depth)
+
     total_frames = max(1, int(duration * FPS))
 
     for f in range(total_frames):
-        t = f / max(1, total_frames - 1)
+        t = f / (total_frames - 1 if total_frames > 1 else 1)
         frame = style_fn(img, d, t)
-
         out = TEMP_DIR / f"{base}_{index}_{f:05}.jpg"
-        cv2.imwrite(str(out), frame, [int(cv2.IMWRITE_JPEG_QUALITY), 92])
+        cv2.imwrite(str(out), frame, [cv2.IMWRITE_JPEG_QUALITY, 92])
 
 # ---------------------------
 # FFmpeg combine
@@ -177,9 +165,8 @@ def combine_video(base):
     out_file = OUT_DIR / f"{base}.mp4"
     pattern = f"{TEMP_DIR}/{base}_*_[0-9][0-9][0-9][0-9][0-9].jpg"
 
-    cmd = [
-        "ffmpeg",
-        "-y",
+    subprocess.run([
+        "ffmpeg", "-y",
         "-framerate", str(FPS),
         "-pattern_type", "glob",
         "-i", pattern,
@@ -187,11 +174,7 @@ def combine_video(base):
         "-pix_fmt", "yuv420p",
         "-preset", "fast",
         str(out_file)
-    ]
-
-    print("🎬 Encoding video...")
-    subprocess.run(cmd, check=True)
-    print(f"✅ Saved → {out_file}")
+    ], check=True)
 
 # ---------------------------
 # Folder processing
@@ -199,37 +182,28 @@ def combine_video(base):
 def process_folder(folder: Path):
     base = folder.name
     map_file = MAP_DIR / f"{base}_timeline.txt"
-
     if not map_file.exists():
-        print(f"⚠ No mapping for {base}")
         return
 
     timeline = parse_timeline(map_file)
     if not timeline:
-        print(f"⚠ Empty timeline for {base}")
         return
 
-    print(f"\n🎞 Processing {base}")
-
-    # clear old frames
     for f in TEMP_DIR.glob(f"{base}_*"):
         f.unlink()
 
     last_style = None
-
     for idx, start, end in timeline:
         img_path = folder / f"{idx}_image.jpg"
         depth_path = folder / f"{idx}_depth.png"
 
         if not img_path.exists() or not depth_path.exists():
-            print(f"⚠ Missing files for {idx}")
             continue
 
         duration = max(0.5, end - start)
         style = random.choice([s for s in STYLES if s != last_style])
         last_style = style
 
-        print(f" → Clip {idx} | {duration:.2f}s | {style.__name__}")
         create_clip(img_path, depth_path, duration, base, idx, style)
 
     combine_video(base)
@@ -238,13 +212,9 @@ def process_folder(folder: Path):
 # Main
 # ---------------------------
 def main():
-    print("\n🚀 CINEMATIC DEPTH VIDEO MAKER STARTED\n")
-
     for folder in sorted(IMG_DIR.iterdir()):
         if folder.is_dir():
             process_folder(folder)
-
-    print("\n🎉 DONE — check", OUT_DIR)
 
 if __name__ == "__main__":
     main()
