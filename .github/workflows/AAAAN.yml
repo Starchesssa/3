@@ -1,0 +1,33 @@
+
+name: Generate 3D OBJ
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install numpy PyMCubes
+
+      - name: Run N.py
+        working-directory: OPEN_CV/Numpy
+        run: python N.py
+
+      - name: Upload generated OBJ
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-obj
+          path: OPEN_CV/Numpy/sphere.obj
