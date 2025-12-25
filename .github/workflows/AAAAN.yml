@@ -27,7 +27,7 @@ jobs:
         run: python N.py
 
       - name: Upload generated OBJ
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: generated-obj
           path: OPEN_CV/Numpy/sphere.obj
