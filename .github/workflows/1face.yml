@@ -1,0 +1,33 @@
+name: MediaPipe Face Mesh Mask
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  face-mesh:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install mediapipe opencv-python-headless numpy
+
+    - name: Run face mesh mask
+      run: |
+        python MANIM/face_mesh_mask.py
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: face-mesh-output
+        path: MANIM/output
