@@ -8,9 +8,10 @@ OUTPUT_DIR = "MANIM/output"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+# ✅ Correct access (works only with proper mediapipe build)
 mp_face_mesh = mp.solutions.face_mesh
 mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
+mp_styles = mp.solutions.drawing_styles
 
 face_mesh = mp_face_mesh.FaceMesh(
     static_image_mode=True,
@@ -20,11 +21,11 @@ face_mesh = mp_face_mesh.FaceMesh(
 )
 
 for file in os.listdir(INPUT_DIR):
-    if not file.lower().endswith((".jpg", ".png", ".jpeg")):
+    if not file.lower().endswith((".jpg", ".jpeg", ".png")):
         continue
 
-    img_path = os.path.join(INPUT_DIR, file)
-    image = cv2.imread(img_path)
+    path = os.path.join(INPUT_DIR, file)
+    image = cv2.imread(path)
     if image is None:
         continue
 
@@ -33,27 +34,26 @@ for file in os.listdir(INPUT_DIR):
 
     if results.multi_face_landmarks:
         for face_landmarks in results.multi_face_landmarks:
-            # Draw full face mesh (mask-like)
+            # Mask-like tessellation
             mp_drawing.draw_landmarks(
                 image=image,
                 landmark_list=face_landmarks,
                 connections=mp_face_mesh.FACEMESH_TESSELATION,
                 landmark_drawing_spec=None,
-                connection_drawing_spec=mp_drawing_styles
+                connection_drawing_spec=mp_styles
                 .get_default_face_mesh_tesselation_style()
             )
 
-            # Optional: reinforce contours (mask edge)
+            # Strong edge (mask border)
             mp_drawing.draw_landmarks(
                 image=image,
                 landmark_list=face_landmarks,
                 connections=mp_face_mesh.FACEMESH_CONTOURS,
                 landmark_drawing_spec=None,
-                connection_drawing_spec=mp_drawing_styles
+                connection_drawing_spec=mp_styles
                 .get_default_face_mesh_contours_style()
             )
 
-    out_path = os.path.join(OUTPUT_DIR, file)
-    cv2.imwrite(out_path, image)
+    cv2.imwrite(os.path.join(OUTPUT_DIR, file), image)
 
-print("✅ Face mesh mask generation complete.")
+print("✅ Face mesh mask artifacts created.")
