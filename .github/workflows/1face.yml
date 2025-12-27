@@ -17,10 +17,23 @@ jobs:
       with:
         python-version: "3.10"
 
-    - name: Install dependencies
+    - name: Upgrade pip
       run: |
-        pip install --upgrade pip
-        pip install mediapipe opencv-python-headless numpy
+        python -m pip install --upgrade pip
+
+    - name: Install dependencies (SAFE)
+      run: |
+        pip uninstall mediapipe -y || true
+        pip install mediapipe==0.10.9
+        pip install opencv-python-headless numpy
+
+    - name: Verify MediaPipe install
+      run: |
+        python - << 'EOF'
+        import mediapipe as mp
+        print("MediaPipe version:", mp.__version__)
+        print("Has solutions:", hasattr(mp, "solutions"))
+        EOF
 
     - name: Run face mesh mask
       run: |
