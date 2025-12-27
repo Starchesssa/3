@@ -24,7 +24,7 @@ jobs:
 
     - name: Run face mesh mask
       run: |
-        python MANIM/face_mesh_mask.py
+        python MANIM/f.py
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
