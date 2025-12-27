@@ -2,16 +2,14 @@
 import cv2
 import os
 import mediapipe as mp
+import numpy as np
 
 INPUT_DIR = "MANIM/Imag_samples"
 OUTPUT_DIR = "MANIM/output"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# ✅ Correct access (works only with proper mediapipe build)
 mp_face_mesh = mp.solutions.face_mesh
-mp_drawing = mp.solutions.drawing_utils
-mp_styles = mp.solutions.drawing_styles
 
 face_mesh = mp_face_mesh.FaceMesh(
     static_image_mode=True,
@@ -29,31 +27,28 @@ for file in os.listdir(INPUT_DIR):
     if image is None:
         continue
 
+    h, w = image.shape[:2]
     rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = face_mesh.process(rgb)
 
     if results.multi_face_landmarks:
         for face_landmarks in results.multi_face_landmarks:
-            # Mask-like tessellation
-            mp_drawing.draw_landmarks(
-                image=image,
-                landmark_list=face_landmarks,
-                connections=mp_face_mesh.FACEMESH_TESSELATION,
-                landmark_drawing_spec=None,
-                connection_drawing_spec=mp_styles
-                .get_default_face_mesh_tesselation_style()
-            )
+            points = []
+            for lm in face_landmarks.landmark:
+                x = int(lm.x * w)
+                y = int(lm.y * h)
+                points.append([x, y])
 
-            # Strong edge (mask border)
-            mp_drawing.draw_landmarks(
-                image=image,
-                landmark_list=face_landmarks,
-                connections=mp_face_mesh.FACEMESH_CONTOURS,
-                landmark_drawing_spec=None,
-                connection_drawing_spec=mp_styles
-                .get_default_face_mesh_contours_style()
-            )
+            points = np.array(points, dtype=np.int32)
+
+            # Create real mask
+            mask = np.zeros((h, w), dtype=np.uint8)
+            hull = cv2.convexHull(points)
+            cv2.fillConvexPoly(mask, hull, 255)
+
+            # Apply mask (black face)
+            image[mask == 255] = (0, 0, 0)
 
     cv2.imwrite(os.path.join(OUTPUT_DIR, file), image)
 
-print("✅ Face mesh mask artifacts created.")
+print("✅ Real face masks created.")
