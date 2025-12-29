@@ -1,4 +1,3 @@
-
 from manim import *
 import os
 
@@ -35,13 +34,13 @@ class PNGZDepthSequence(ThreeDScene):
 
                 self.add(im)
 
-                # Move camera forward to the image
-                self.play(
-                    self.renderer.camera.animate.move_to(
-                        ORIGIN + IN * current_z
-                    ),
-                    run_time=fly_time,
-                    rate_func=smooth
+                # ---------- Move camera using CE 0.19 3D API ----------
+                self.move_camera(
+                    phi=70 * DEGREES,
+                    theta=-90 * DEGREES,
+                    distance=20,
+                    focal_point=ORIGIN + IN * current_z,
+                    run_time=fly_time
                 )
 
                 self.wait(0.3)
