@@ -8,7 +8,7 @@ class PNGZDepthSequence(ThreeDScene):
         self.set_camera_orientation(
             phi=70 * DEGREES,
             theta=-90 * DEGREES,
-            focal_distance=10
+            distance=20
         )
 
         # ---------- Load PNGs ----------
@@ -26,9 +26,6 @@ class PNGZDepthSequence(ThreeDScene):
 
         current_z = 0
 
-        # ---------- Start camera behind everything ----------
-        self.get_camera_frame().move_to(ORIGIN + OUT * 6)
-
         # ---------- Loop twice ----------
         for _ in range(2):
             for img in image_files:
@@ -40,7 +37,7 @@ class PNGZDepthSequence(ThreeDScene):
 
                 # Move camera forward to the image
                 self.play(
-                    self.get_camera_frame().animate.move_to(
+                    self.renderer.camera.animate.move_to(
                         ORIGIN + IN * current_z
                     ),
                     run_time=fly_time,
