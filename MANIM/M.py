@@ -1,3 +1,4 @@
+
 from manim import *
 import os
 
@@ -25,8 +26,8 @@ class PNGZDepthSequence(ThreeDScene):
 
         current_z = 0
 
-        # Start camera behind
-        self.camera.frame.move_to(ORIGIN + OUT * 6)
+        # ---------- Start camera behind everything ----------
+        self.get_camera_frame().move_to(ORIGIN + OUT * 6)
 
         # ---------- Loop twice ----------
         for _ in range(2):
@@ -39,7 +40,7 @@ class PNGZDepthSequence(ThreeDScene):
 
                 # Move camera forward to the image
                 self.play(
-                    self.camera.frame.animate.move_to(
+                    self.get_camera_frame().animate.move_to(
                         ORIGIN + IN * current_z
                     ),
                     run_time=fly_time,
