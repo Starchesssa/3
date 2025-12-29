@@ -1,35 +1,50 @@
+
 name: Run Manim Z-Depth PNG Scene
 
+# Allows manual run
 on:
-  workflow_dispatch:   # allows manual run
+  workflow_dispatch:
 
 jobs:
   render:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2️⃣ Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
+      # 3️⃣ Install system dependencies (fix pangocairo issue)
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y ffmpeg libcairo2-dev pkg-config python3-dev
+          sudo apt install -y \
+            ffmpeg \
+            libcairo2-dev \
+            pkg-config \
+            python3-dev \
+            libpango1.0-dev \
+            libpangocairo-1.0-0
 
+      # 4️⃣ Install Manim
       - name: Install Manim
         run: |
+          pip install --upgrade pip
           pip install manim
 
+      # 5️⃣ Render your scene
       - name: Render Manim Scene
         run: |
           manim -ql MANIM/M.py PNGZDepthSequence
 
-      - name: Upload video
+      # 6️⃣ Upload the rendered video
+      - name: Upload video artifact
         uses: actions/upload-artifact@v4
         with:
           name: manim-output
