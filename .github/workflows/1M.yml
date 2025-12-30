@@ -1,51 +1,47 @@
 
-name: Run Manim Z-Depth PNG Scene
+name: Video Background Removal (CLI Only)
 
-# Allows manual run
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "MANIM/Vid_sample/*.mp4"
 
 jobs:
-  render:
+  remove-bg:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repo
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      # 2️⃣ Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y ffmpeg
 
-      # 3️⃣ Install system dependencies (fix pangocairo issue)
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            ffmpeg \
-            libcairo2-dev \
-            pkg-config \
-            python3-dev \
-            libpango1.0-dev \
-            libpangocairo-1.0-0
+    - name: Install Python tools (CPU only)
+      run: |
+        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+        pip install backgroundremover
 
-      # 4️⃣ Install Manim
-      - name: Install Manim
-        run: |
-          pip install --upgrade pip
-          pip install manim
+    - name: Create output folder
+      run: |
+        mkdir -p MANIM/Vid_sample/output
 
-      # 5️⃣ Render your scene
-      - name: Render Manim Scene
-        run: |
-          manim -ql MANIM/M.py PNGZDepthSequence
+    - name: Remove background from all MP4s
+      run: |
+        for video in MANIM/Vid_sample/*.mp4; do
+          name=$(basename "$video" .mp4)
+          echo "Processing $video"
+          backgroundremover \
+            -i "$video" \
+            -tv \
+            -o "MANIM/Vid_sample/output/${name}_nobg.mov"
+        done
 
-      # 6️⃣ Upload the rendered video
-      - name: Upload video artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: manim-output
-          path: media/videos
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: bg_removed_videos
+        path: MANIM/Vid_sample/output
