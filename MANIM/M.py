@@ -33,14 +33,12 @@ class PNGZDepthSequence(ThreeDScene):
             self.play(FadeIn(im), run_time=fade_time)
             self.wait(hold_time)
 
-            # Camera moves forward THROUGH space
-            self.play(
-                self.camera.frame.animate.shift(OUT * z_step),
-                run_time=fly_time,
-                rate_func=smooth
+            # ✅ Camera moves forward (version-safe)
+            self.move_camera(
+                frame_center=[0, 0, current_z + z_step],
+                run_time=fly_time
             )
 
-            # Remove old image
             if last_image:
                 self.remove(last_image)
 
