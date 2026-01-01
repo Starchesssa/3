@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "remotion preview",
-    "build": "npx remotion render ParallaxThree out/video.mp4"
+    "build": "node get-images.js && remotion render MyVideo out.mp4"
   },
   "dependencies": {
     "react": "^18.2.0",
