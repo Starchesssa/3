@@ -1,0 +1,53 @@
+name: Render Manim Video
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "MANIM/**"
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies for Manim
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ffmpeg \
+            libcairo2 \
+            libpango-1.0-0 \
+            libpangocairo-1.0-0 \
+            libgdk-pixbuf2.0-0 \
+            libffi-dev \
+            pkg-config \
+            python3-dev \
+            libcairo2-dev \
+            libpango1.0-dev \
+            libgirepository1.0-dev \
+            gir1.2-pango-1.0
+
+      - name: Install Python packages
+        run: |
+          pip install manim
+          pip install requests
+
+      - name: Render Compounding Habits Video
+        run: |
+          cd MANIM
+          manim -pql MANIM.py CompoundingHabits -o compounding_habits.mp4
+
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manim-video
+          path: MANIM/media/videos/**/compounding_habits.mp4
