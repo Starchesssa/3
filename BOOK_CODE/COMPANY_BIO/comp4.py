@@ -14,9 +14,12 @@ OUTPUT_DIR = "BOOKS/Temp/TTS"
 TONE_INSTRUCTION = "Read like you are telling a story to a friend:\n\n"
 
 # ===============================
-# Hardcoded API key (KABAJU7)
+# API Key from environment variable (GitHub Secret)
 # ===============================
-API_KEY = "AIzaSyBcsaujaEzxWT7O7ln2ysDwXjs-vhgjREo"  # <-- hardcoded here
+API_KEY = os.getenv("KABAJU7")  # GitHub Actions secret should be mapped to env
+if not API_KEY:
+    raise ValueError("API key not found. Make sure KABAJU7 secret is set in GitHub Actions.")
+
 API_KEYS = [API_KEY]  # kept as list for retry compatibility
 
 # ===============================
@@ -120,15 +123,15 @@ def convert_to_wav(audio_data: bytes, mime_type: str) -> bytes:
 
 
 # ===============================
-# TTS with Retry Logic (KABAJU7)
+# TTS with Retry Logic
 # ===============================
 
 def generate_tts(api_keys, combined_script, output_filename, delay=10):
-    max_attempts = 2  # same key retried twice
+    max_attempts = 2
 
     for attempt in range(max_attempts):
         api_key = api_keys[0]
-        print(f"🔁 Attempt {attempt + 1}/{max_attempts} using KABAJU7")
+        print(f"🔁 Attempt {attempt + 1}/{max_attempts} using GitHub Secret")
 
         try:
             client = genai.Client(api_key=api_key)
@@ -219,8 +222,6 @@ def main():
         combined_script = TONE_INSTRUCTION + body.strip()
 
         print(f"\n🎤 Section {section_num}: {heading}")
-        print("➡️ Using KABAJU7 API key")
-
         generate_tts(API_KEYS, combined_script, output_filename)
 
         section_num += 1
