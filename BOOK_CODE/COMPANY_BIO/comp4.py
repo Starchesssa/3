@@ -155,7 +155,7 @@ def generate_tts(api_keys, combined_script, output_filename, delay=10):
             )
 
             for chunk in client.models.generate_content_stream(
-                model="gemini-2.5-pro-preview-tts",
+                model="gemini-2.5-flash-preview-tts",
                 contents=contents,
                 config=config,
             ):
