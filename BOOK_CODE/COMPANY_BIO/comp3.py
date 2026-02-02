@@ -6,7 +6,7 @@ from google import genai
 # === Paths ===
 COMPANY_BIO_PATH = "BOOKS/Temp/COMPANY_BIO"
 SCRIPT_OUTPUT_PATH = "BOOKS/Temp/SCRIPT/COMPANY_BIO"
-MODEL = "gemini-2.5-pro"
+MODEL = "gemini-2.5-flash"
 
 # === Load Gemini API keys ===
 API_KEYS = [
