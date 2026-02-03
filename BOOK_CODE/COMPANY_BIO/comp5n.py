@@ -9,7 +9,7 @@ from google import genai
 
 TTS_AUDIO_PATH = "BOOKS/Temp/TTS"
 ICONS_PATH = "src/react-icons"
-OUTPUT_PATH = "BOOKS/Temp/Timelines"
+OUTPUT_PATH = "BOOKS/Temp/Timeline"
 MODEL = "gemini-2.5-pro"
 API_KEY = os.environ.get("GEMINI_API")
 
