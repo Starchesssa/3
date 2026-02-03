@@ -29,6 +29,6 @@ jobs:
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@users.noreply.github.com"
-        git add public/react-icons-list.txt
+        git add react-icons-list.txt
         git commit -m "Update React Icons list" || echo "No changes to commit"
         git push
