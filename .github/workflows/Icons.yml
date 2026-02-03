@@ -1,0 +1,34 @@
+name: Save React Icons List
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # <-- gives permission to push / commit
+
+jobs:
+  save-icons:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install react-icons
+
+    - name: Run save-icons.js
+      run: node save-icons.js
+
+    - name: Commit and push icons list
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git add public/react-icons-list.txt
+        git commit -m "Update React Icons list" || echo "No changes to commit"
+        git push
