@@ -28,7 +28,7 @@ jobs:
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
         run: |
-          python comp5n.py
+          python BOOK_CODE/COMPANY_BIO/comp5n.py
 
       - name: Commit timeline output
         run: |
