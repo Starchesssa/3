@@ -7,7 +7,7 @@ from google import genai
 # ================= CONFIG =================
 
 TTS_AUDIO_PATH = "BOOKS/Temp/TTS"
-OUTPUT_PATH = "BOOKS/Temp/GeminiTimeline"
+OUTPUT_PATH = "BOOKS/Temp/Timeline"
 MODEL = "gemini-flash-latest"
 API_KEY = os.environ.get("GEMINI_API")
 
