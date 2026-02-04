@@ -8,7 +8,7 @@ from google import genai
 
 TTS_AUDIO_PATH = "BOOKS/Temp/TTS"
 OUTPUT_PATH = "BOOKS/Temp/GeminiTimeline"
-MODEL = "gemini-2.5-pro"
+MODEL = "gemini-3-pro"
 API_KEY = os.environ.get("GEMINI_API")
 
 # ================= HELPERS =================
