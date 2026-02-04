@@ -1,0 +1,123 @@
+[
+  {
+    "start": 0.0,
+    "end": 131.85,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 131.85,
+    "end": 288.78,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 288.78,
+    "end": 431.11,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 431.11,
+    "end": 529.72,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 529.72,
+    "end": 674.61,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 674.61,
+    "end": 808.63,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 808.63,
+    "end": 948.36,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 948.36,
+    "end": 1105.21,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 1105.21,
+    "end": 1256.26,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 1256.26,
+    "end": 1405.19,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  },
+  {
+    "start": 1405.19,
+    "end": 1546.2,
+    "visual_type": "text",
+    "icon": null,
+    "text": "",
+    "position": "center",
+    "size": 80,
+    "animation": "fade-in",
+    "emotion": "neutral"
+  }
+]
