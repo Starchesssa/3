@@ -1,89 +1,158 @@
 import os
 import time
+import re
 from google import genai
 
 # ================= CONFIG =================
+
 STT_PATH = "BOOKS/Temp/STT"
 OUTPUT_PATH = "BOOKS/Temp/Timeline"
+ICON_LIST_FILE = "react-icons-list.txt"
+
 MODEL = "gemini-flash-latest"
 API_KEY = os.environ.get("GEMINI_API")
 
 # ================= HELPERS =================
 
 def list_txt_files(directory):
-    """List all TXT files in a directory, sorted"""
     if not os.path.isdir(directory):
         raise FileNotFoundError(f"STT directory not found: {directory}")
     return sorted(f for f in os.listdir(directory) if f.lower().endswith(".txt"))
 
-def extract_text_from_stt(file_path):
-    """Extract plain text from timestamped STT file"""
-    text_lines = []
+
+def load_icon_list(path):
+    if not os.path.isfile(path):
+        raise FileNotFoundError(f"Icon list not found: {path}")
+    with open(path, "r", encoding="utf-8") as f:
+        return [line.strip() for line in f if line.strip()]
+
+
+def extract_clean_text(file_path):
+    """
+    Removes timestamps and reconstructs sentences
+    """
+    words = []
     with open(file_path, "r", encoding="utf-8") as f:
         for line in f:
             if ":" in line:
-                parts = line.strip().split(":", 1)
-                if len(parts) == 2:
-                    text_lines.append(parts[1].strip())
-    return " ".join(text_lines)  # single string
+                _, text = line.split(":", 1)
+                words.append(text.strip())
 
-def ask_gemini_for_timeline(text, index):
-    """
-    Ask Gemini to generate visuals for the text segment.
-    Each sentence should get its own suggested visuals/icons.
-    """
+    raw_text = " ".join(words)
+    raw_text = re.sub(r"\s+", " ", raw_text)
+    return raw_text.strip()
+
+
+def ask_gemini_for_timeline(text, index, icon_list):
+    icon_block = "\n".join(icon_list)
+
     prompt = f"""
-You are a motion designer for a video system.
+You are a motion designer for a video automation system.
 
-Here is a transcript of a segment:
-- Segment index: {index}
-- Transcript: {text}
+RULES (VERY IMPORTANT):
+- You MUST ONLY use icons from the provided icon list.
+- DO NOT invent icon names.
+- DO NOT use emojis.
+- DO NOT output JSON.
+- Use EXACTLY the output structure shown in the example.
 
-Please generate relevant visuals/icons for each sentence in the transcript.
-Each sentence must have its own visuals (icons, text, position, animation, emotion).
-Arrange icons in numbers:
-1. First sentence icons
-2. Second sentence icons
-...
-Output each sentence on a new line.
+ALLOWED ICONS (React Icons real names):
+{icon_block}
+
+AVAILABLE PARAMETERS (choose ONLY from these):
+
+animation:
+- fade-in
+- slide-left
+- slide-right
+- scale-up
+- pop
+- none
+
+position:
+- center
+- top-left
+- top-right
+- bottom-left
+- bottom-right
+
+TIMING RULE:
+- start_time must be cumulative and approximate
+- First sentence starts at 0.0
+- Increase naturally per sentence
+
+================ EXAMPLE OUTPUT ================
+
+1. Sentence: At the heart of Microsoft's transformation
+   icon: FaLightbulb
+   start_time: 0.0
+   animation: fade-in
+   position: center
+
+2. Sentence: under Satya Nadella is a profound re-evaluation
+   icon: FaBrain
+   start_time: 1.8
+   animation: slide-left
+   position: center
+
+================================================
+
+NOW PROCESS THIS TRANSCRIPT:
+
+Segment index: {index}
+
+{text}
+
+Generate ONE numbered block per sentence.
+Follow the structure EXACTLY.
 """
+
     client = genai.Client(api_key=API_KEY)
     response = client.models.generate_content(
         model=MODEL,
         contents=[{"role": "user", "parts": [{"text": prompt}]}]
     )
+
     return response.text.strip()
+
 
 # ================= MAIN =================
 
-def build_gemini_timeline_from_txt():
+def build_gemini_timeline_from_stt():
     os.makedirs(OUTPUT_PATH, exist_ok=True)
 
     txt_files = list_txt_files(STT_PATH)
+    icons = load_icon_list(ICON_LIST_FILE)
+
     if not txt_files:
-        print("No TXT files found in STT directory.")
+        print("No STT TXT files found.")
         return
 
-    for idx, txt_file in enumerate(txt_files):
-        txt_path = os.path.join(STT_PATH, txt_file)
-        segment_text = extract_text_from_stt(txt_path)
+    for idx, txt in enumerate(txt_files):
+        txt_path = os.path.join(STT_PATH, txt)
+        transcript_text = extract_clean_text(txt_path)
 
         try:
-            gemini_output = ask_gemini_for_timeline(segment_text, idx + 1)
+            output = ask_gemini_for_timeline(
+                transcript_text,
+                idx + 1,
+                icons
+            )
         except Exception as e:
             print(f"⚠️ Gemini failed on segment {idx + 1}: {e}")
-            gemini_output = f"⚠️ Error: {e}"
+            output = f"ERROR: {e}"
 
         out_file = os.path.join(OUTPUT_PATH, f"segment_{idx+1}.txt")
         with open(out_file, "w", encoding="utf-8") as f:
-            f.write(gemini_output)
+            f.write(output)
 
-        print(f"✅ Saved Gemini output for segment {idx + 1} to {out_file}")
-        print(f"---- Segment {idx + 1} output start ----")
-        print(gemini_output)
-        print(f"---- Segment {idx + 1} output end ----\n")
+        print(f"✅ Segment {idx+1} saved → {out_file}")
+        print("----- OUTPUT START -----")
+        print(output)
+        print("----- OUTPUT END -----\n")
 
-        time.sleep(0.5)  # small delay to avoid rate limits
+        time.sleep(0.6)  # rate-limit safety
+
 
 if __name__ == "__main__":
-    build_gemini_timeline_from_txt()
+    build_gemini_timeline_from_stt()
