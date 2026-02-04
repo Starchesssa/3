@@ -39,9 +39,11 @@ Here is an audio segment:
 - Duration: {duration:.2f} seconds
 - Segment index: {index}
 
-Please generate a visual description for each sentence in the audio.
+Please generate a relevant icons  for each sentence in the audio.
 Each sentence should have its own suggested visuals (icons, text, position, animation, emotion).
-Do NOT create JSON, just describe them in plain text so we can see it clearly.
+arrange icons in numbers ie each sentence must have its own visuals and arenage like ie 
+1. xyz icons
+2. wzy icons 
 
 Output each sentence on a new line.
 """
