@@ -34,6 +34,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add BOOKS/Temp/Timeline/video_timeline.json
+          git add -A BOOKS/Temp/Timeline/   # Add all changes in Timeline folder
           git commit -m "🎬 Auto-generate Gemini video timeline" || echo "No changes to commit"
           git push
