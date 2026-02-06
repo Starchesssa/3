@@ -47,17 +47,20 @@ def ask_gemini_for_timeline(text, index, icon_list):
     icon_block = "\n".join(icon_list)
 
     prompt = f"""
-You are a motion designer for a video automation system.
+You are a 2.5D motion deigner for a video automation system.
 
 RULES (VERY IMPORTANT):
-- You MUST ONLY use icons from the provided icon list.
-- DO NOT invent icon names.
-- DO NOT use emojis.
-- DO NOT output JSON.
-- Use EXACTLY the output structure shown in the example.
+- You MUST ONLY use images ie House.png  
+- each image should be straight ie House.png instead of house with .....
+- each sentence has its own layers and each layer is a image png 
+- output like ie 
+1.house.png -6s 
+ money.png-8s 
+ table.png -10s 
+ 
 
-ALLOWED ICONS (React Icons real names):
-{icon_block}
+- Use EXACTLY 
+
 
 AVAILABLE PARAMETERS (choose ONLY from these):
 
