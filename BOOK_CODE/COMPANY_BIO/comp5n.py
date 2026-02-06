@@ -7,7 +7,7 @@ from google import genai
 # === Paths ===
 SCRIPT_PATH = "BOOKS/Temp/STT"        # Transcript input folder
 PROMPTS_PATH = "BOOKS/Temp/PROMPTS"   # Output folder
-MODEL = "gemini-2.5-pro"
+MODEL = "gemini-2.5-pro-preview"
 
 # === Load API Keys ===
 API_KEYS = [
