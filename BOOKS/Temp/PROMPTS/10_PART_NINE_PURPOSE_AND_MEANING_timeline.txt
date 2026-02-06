@@ -1,0 +1,17 @@
+1.(0.00-6.50)- corporate_strategy.png
+2.(7.18-16.32)- market_domination_computer.png
+3.(16.90-25.18)- financial_success_gap.png
+4.(25.90-35.30)- global_empowerment.png
+5.(35.72-39.78)- impact_ripple_effect.png
+6.(40.24-45.28)- tools_ingenuity_lightbulb.png
+7.(45.92-57.24)- north_star_guidance.png
+8.(57.64-61.10)- multi_point_diagram.png
+9.(61.76-69.40)- universal_design_icon.png
+10.(69.82-77.74)- cloud_global_network.png
+11.(78.26-84.98)- education_creativity_blocks.png
+12.(85.52-92.96)- ai_ethics_balance.png
+13.(93.56-97.66)- shared_vision_puzzle.png
+14.(98.16-104.78)- purpose_alignment_diagram.png
+15.(105.30-111.70)- workforce_motivation_chart.png
+16.(112.20-125.10)- impact_over_profit.png
+17.(125.58-131.48)- global_perception_shift.png
