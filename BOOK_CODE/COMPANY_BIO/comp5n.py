@@ -43,38 +43,19 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task:,here is my transcipt, give me image  description for the timeline using 
-all character you make will have head with no eyes,no nose, no mouth , no ears, just an black blank shadow shape ,here is the formular (2.5D parallax silhoutte + pose of the charcter/s+environment) all in 2.5D Depth parallax),this is the formular ,
+Your task:,here is my transcipt, give me image  relevant image  for the timeline. 
 
-use vector illustation silhouttes  in clothes(describe what the silhouts wear ) and environment in parallax , but more important pose estimation ie hand touching chin or fore finger touching head for thinking. in the image based on the emotion  this is very important .
 
-some logos or words are nore important , so include them in a scene background so one undetands our concern , so not exceed two words in background ie the word 'money' in background bold and big in xyz font , or netflix logo in background of the scene
-
-any word you emtion shoukd be in the scene ,instead of word XYZ in scene say word XYZ in the wall , see seeing the word in the wall   the image makes a belonging of the visual where words are inside scene 
-
-each image should feel the script emotion ie by adding ie a company logo if a company it talked about ,cool emotional pose ,adding money vfx if money is talked about ,important key owrds in background if they are talked about etc make each impage pormpt feel the emotions of the sceipt its representing 
-
-make poses based on emotion , each image must cobtain a character  with a certain pose ,dont make the character stand still.
-Timeline format:
-1.(0.00-9.79)- image  description
-2.(9.79-15.00)- image description
-3.(15.00-19.19)- image  description
+1.(0.00-1.79)- house.png
+2.(1.79-2.62)- money.png
+3.(2.62-3.57)- stock_chart.png
 ...
-in making prompts , each prompt should begin with, a vector illustration style of a ........
 
-all characters must be describe by no face in prompt ie  the 2.5D character must have blank head with no hair, no eyes,no nose , no mouth ,just black blank shadow shape.
 
-remember , pose count to 90% of the image/visual story telling, make sure you use pose estimation more.
+do not include images of living things ie animals and people,
 
-The 2 5D silhoutte must described wearing clothes ie suit,jeans,watch ,shirt etc each silhoutte must be wearibg clothes,also each silhoutte must be described by age . clothes and age must match script 
-    
-also dont give too long pronpts just brief and sinple yet more powerful.
+use generic images ie instead of kilimanjaro_mountain.png say mountain.png 
 
-please include time line as the formatt i gave you, ie the number , time line in brackets and the inage peompt , this is very important , do not forget.
-
-alao do not include animals exceot if it a logo , also even if just make it a silhoutte ie 2.5d black silhoutte or shadow, nothing ahould appear 
-
-do not include any female silhoutte just male figures silhouttes.
                                                                         
 Start immediately with prompts. No intro.
 Begin:
