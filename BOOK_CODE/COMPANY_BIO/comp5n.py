@@ -54,6 +54,8 @@ Your task:,here is my transcipt, give me image  relevant image  for the timeline
 
 do not include images of living things ie animals and people,
 
+each sentence muat have atleast 2 to 3 .pngs
+
 use generic images ie instead of kilimanjaro_mountain.png say mountain.png 
 
 
