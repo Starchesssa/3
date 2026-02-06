@@ -56,6 +56,8 @@ do not include images of living things ie animals and people,
 
 use generic images ie instead of kilimanjaro_mountain.png say mountain.png 
 
+
+
                                                                         
 Start immediately with prompts. No intro.
 Begin:
