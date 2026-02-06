@@ -1,39 +1,48 @@
-name: Build Gemini Video Timeline
+name: 🎨 Create Kurzgesagt Prompts from Company Bio Script
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # 👈 REQUIRED to commit back
+  contents: write
+
+concurrency:
+  group: "company-bio-prompts"
+  cancel-in-progress: true
 
 jobs:
-  build-timeline:
+  create-prompts:
     runs-on: ubuntu-latest
+    name: 🖌️ Generate Kurzgesagt Prompts
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
+      - name: 🧠 Install Gemini SDK & Run Prompt Script
         run: |
-          pip install --upgrade pip
-          pip install google-genai
-
-      - name: Run timeline builder
+          export PYTHONUNBUFFERED=1
+          pip install --no-cache-dir --progress-bar=off google-genai
+          python -u BOOK_CODE/COMPANY_BIO/comp5.py
         env:
           GEMINI_API: ${{ secrets.GEMINI_API }}
-        run: |
-          python BOOK_CODE/COMPANY_BIO/comp5n.py
+          GEMINI_API2: ${{ secrets.GEMINI_API2 }}
+          GEMINI_API3: ${{ secrets.GEMINI_API3 }}
+          GEMINI_API4: ${{ secrets.GEMINI_API4 }}
+          GEMINI_API5: ${{ secrets.GEMINI_API5 }}
 
-      - name: Commit timeline output
+      - name: ✅ Commit & Push Generated Prompts
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add -A BOOKS/Temp/Timeline/   # Add all changes in Timeline folder
-          git commit -m "🎬 Auto-generate Gemini video timeline" || echo "No changes to commit"
-          git push
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+          git add BOOKS/Temp/PROMPTS/
+
+          if git diff --cached --quiet; then
+            echo "🟡 No new prompts to commit."
+          else
+            git commit -m "📝 Add Kurzgesagt prompts via Gemini"
+            git push
+            echo "✅ Prompts committed and pushed."
+          fi
