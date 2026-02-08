@@ -1,0 +1,355 @@
+0.00 --> 0.74 : microsoft ai strategy
+0.74 --> 1.28 : strong foundation architecture
+1.28 --> 1.82 : future technology concept
+1.82 --> 2.12 : digital transition path
+2.12 --> 2.56 : synthetic intelligence circuits
+2.56 --> 3.30 : neural network diagram
+3.30 --> 3.70 : technology core
+3.70 --> 3.88 : central processing unit
+3.88 --> 4.48 : era defining innovation
+4.48 --> 5.18 : futuristic tech infrastructure
+5.18 --> 5.38 : digital era timeline
+5.38 --> 5.48 : global tech landscape
+5.48 --> 6.00 : modern innovation cycle
+6.42 --> 6.70 : technology evolution roadmap
+6.70 --> 6.94 : future data flow
+6.94 --> 7.32 : future cityscape digital
+7.32 --> 7.52 : computing infrastructure
+7.52 --> 7.94 : server racks data center
+7.94 --> 8.36 : interconnected network
+8.36 --> 8.84 : digital society infrastructure
+9.42 --> 9.72 : microsoft corporate vision
+9.72 --> 10.02 : integrated system modules
+10.02 --> 10.20 : strategic framework diagram
+10.20 --> 10.52 : ai core processing unit
+10.52 --> 10.94 : standalone software icon
+10.94 --> 11.04 : product box packaging
+11.04 --> 11.48 : modular tech components
+11.48 --> 12.02 : software application icon
+12.36 --> 12.56 : system architecture diagram
+12.56 --> 12.76 : foundational platform diagram
+12.76 --> 12.86 : core technology building blocks
+12.86 --> 13.52 : digital infrastructure blueprint
+13.52 --> 14.28 : technology empowerment graphic
+14.28 --> 14.58 : data flow integration
+14.58 --> 14.72 : infusion tech liquid
+14.72 --> 15.36 : integrated circuits design
+15.36 --> 15.68 : enhancement growth chart
+15.68 --> 16.00 : performance boost graphic
+16.00 --> 16.68 : comprehensive system overview
+16.68 --> 17.10 : component module architecture
+17.10 --> 17.30 : microsoft logo digital
+17.30 --> 17.84 : microsoft brand identity
+17.84 --> 18.22 : software services portfolio
+18.66 --> 18.78 : cloud computing icons
+18.78 --> 19.10 : azure cloud infrastructure
+19.10 --> 19.60 : digital service network
+19.60 --> 20.00 : office productivity suite icons
+20.00 --> 20.48 : workflow optimization graphic
+20.48 --> 20.98 : software toolkit icons
+20.98 --> 21.42 : search engine interface
+21.42 --> 21.68 : magnifying glass data
+21.68 --> 21.94 : gaming console digital
+21.94 --> 22.24 : gaming controller abstract
+22.82 --> 23.16 : corporate vision board
+23.16 --> 23.48 : future path diagram
+23.48 --> 23.66 : ai blueprint design
+23.66 --> 23.88 : artificial intelligence icon
+23.88 --> 24.28 : technological progress graphic
+24.28 --> 24.48 : advancement data visualization
+24.48 --> 24.74 : robot arm factory
+24.74 --> 24.94 : tech innovation abstract
+24.94 --> 25.46 : science research lab
+25.46 --> 26.14 : progress bar digital
+26.14 --> 26.66 : ethical code diagram
+26.66 --> 27.02 : responsibility scales balance
+27.02 --> 27.30 : ai ethics framework
+27.30 --> 27.70 : digital ethics guidelines
+27.70 --> 28.48 : data security protocols
+28.48 --> 29.00 : empowerment symbol abstract
+29.00 --> 29.58 : humanity tech integration
+29.58 --> 30.22 : global network connections
+31.20 --> 31.46 : microsoft headquarters building
+31.46 --> 31.90 : investment growth chart
+31.90 --> 32.34 : financial capital flow
+32.34 --> 32.82 : large scale investment
+32.82 --> 33.10 : ai research lab equipment
+33.10 --> 33.32 : artificial intelligence chip
+33.32 --> 33.78 : data analysis tools
+33.78 --> 34.00 : development pipeline graphic
+34.00 --> 34.42 : innovation process diagram
+34.84 --> 35.10 : software architecture blueprint
+35.10 --> 35.30 : comprehensive service catalog
+35.30 --> 35.76 : full suite software
+35.76 --> 36.24 : integrated software solutions
+36.24 --> 36.44 : ai services icons
+36.44 --> 36.58 : ai cloud platform
+36.58 --> 37.06 : azure cloud logo
+37.06 --> 37.38 : azure data center
+37.38 --> 37.70 : cloud computing infrastructure
+38.34 --> 38.60 : cognitive computing diagram
+38.60 --> 39.00 : service offerings list
+39.00 --> 39.42 : ai cognition models
+39.42 --> 39.98 : microsoft cognitive services logos
+39.98 --> 40.28 : computer vision interface
+40.28 --> 40.68 : object recognition ai
+41.08 --> 41.30 : speech recognition waveform
+41.78 --> 42.06 : natural language processing diagram
+42.28 --> 42.36 : decision making flowchart
+42.36 --> 42.68 : data driven decisions graphic
+42.68 --> 42.98 : automated decision system
+43.46 --> 43.72 : developer tools interface
+43.72 --> 44.28 : code editor interface
+44.28 --> 44.52 : easy integration icon
+44.52 --> 44.98 : simplified workflow diagram
+44.98 --> 45.40 : api integration process
+45.40 --> 46.16 : advanced ai algorithms
+46.16 --> 46.42 : ai capability modules
+46.42 --> 47.04 : software functionality icons
+47.04 --> 47.46 : application development environment
+47.46 --> 47.62 : mobile app UI design
+47.62 --> 48.12 : software program architecture
+48.12 --> 48.76 : simplified learning curve graphic
+48.76 --> 49.16 : deep expertise symbol
+49.16 --> 49.40 : machine learning model structure
+49.40 --> 49.76 : data science neural networks
+49.76 --> 50.10 : machine learning algorithm flow
+50.10 --> 50.32 : learning algorithm concept
+50.32 --> 50.66 : ai education resources
+51.12 --> 51.52 : intelligent cloud concept
+51.52 --> 52.12 : smart cloud infrastructure
+52.12 --> 52.40 : cloud data processing
+52.40 --> 53.18 : intelligent edge computing
+53.18 --> 53.50 : edge device network
+53.50 --> 53.84 : computing paradigm diagram
+53.84 --> 54.30 : technology synergy graphic
+54.30 --> 54.54 : cloud edge integration
+55.06 --> 55.38 : ai model training
+55.38 --> 55.82 : machine learning model diagram
+55.82 --> 56.02 : training data visualization
+56.02 --> 56.16 : neural network training process
+56.16 --> 56.54 : computational power abstract
+56.54 --> 56.66 : cloud computing power
+56.66 --> 56.76 : vast data center interior
+56.76 --> 57.08 : scalable computing infrastructure
+57.08 --> 57.66 : high performance computing
+57.66 --> 58.02 : cloud server farm
+58.02 --> 58.22 : azure cloud platform
+58.22 --> 58.30 : cloud storage icon
+58.30 --> 58.56 : azure logo background
+58.90 --> 59.14 : data deployment diagram
+59.44 --> 59.80 : software deployment process
+59.80 --> 59.96 : edge computing devices
+59.96 --> 60.34 : iot sensor network
+60.34 --> 60.58 : edge device connectivity
+60.58 --> 60.72 : iot sensors abstract
+60.72 --> 60.96 : smartphone interface abstract
+61.48 --> 61.68 : internet of things devices
+61.68 --> 62.08 : iot sensor array
+62.08 --> 62.36 : sensor technology icon
+62.36 --> 62.88 : futuristic smartphone design
+63.30 --> 63.62 : autonomous vehicle concept
+63.88 --> 63.92 : self driving car interior
+63.92 --> 64.26 : ai in vehicles
+64.26 --> 64.74 : vehicle automation system
+64.74 --> 65.18 : real time data processing
+65.18 --> 65.70 : instant decision making graphic
+65.70 --> 66.00 : automated workflow logic
+66.00 --> 66.30 : time sensitive data
+66.30 --> 66.64 : decision support system
+66.64 --> 67.00 : smart factory automation
+67.00 --> 67.30 : industrial automation solutions
+67.74 --> 68.34 : ai application examples
+68.34 --> 68.64 : leading technology demonstration
+68.64 --> 69.10 : microsoft ai showcase
+69.10 --> 69.24 : ai in action graphic
+69.24 --> 69.46 : artificial intelligence implementation
+69.46 --> 69.70 : software integration diagram
+69.70 --> 69.94 : microsoft office suite icons
+69.94 --> 70.06 : microsoft productivity tools
+70.06 --> 70.42 : productivity software interface
+70.42 --> 70.82 : digital tool integration
+70.82 --> 71.02 : software feature icons
+71.02 --> 71.56 : workflow automation graphic
+71.56 --> 71.82 : productivity tools interface
+71.82 --> 72.22 : office software tools
+72.22 --> 72.76 : powerpoint designer interface
+73.30 --> 73.54 : powerpoint presentation layout
+73.54 --> 73.82 : automatic layout generation
+73.82 --> 74.28 : presentation slide design
+74.28 --> 74.70 : ai layout suggestion
+75.04 --> 75.24 : automatic design recommendations
+75.24 --> 75.76 : intelligent formatting software
+75.76 --> 76.22 : layout optimization graphic
+76.22 --> 76.66 : formatting options digital
+76.66 --> 76.94 : document improvement features
+76.94 --> 77.26 : ai design principles
+77.26 --> 77.84 : excel spreadsheet data
+78.18 --> 78.46 : excel ideas function icon
+78.46 --> 78.90 : data analysis visualization
+78.90 --> 79.34 : intelligent data insights
+79.34 --> 79.76 : data analysis report
+80.00 --> 80.14 : automated data analysis
+80.14 --> 80.30 : data insights visualization
+80.30 --> 80.66 : pivot table structure
+80.66 --> 81.06 : chart generation software
+81.06 --> 81.26 : data visualization dashboard
+81.26 --> 81.56 : ai data recommendations
+81.56 --> 81.84 : data table structure
+81.84 --> 82.24 : chart types graphic
+82.24 --> 82.42 : business intelligence charts
+82.42 --> 82.66 : ai task automation
+82.66 --> 83.48 : everyday digital tasks
+83.48 --> 83.80 : ai smart solutions
+83.80 --> 84.04 : smarter technology concept
+84.04 --> 84.32 : efficiency improvement graphic
+84.32 --> 84.50 : task automation icons
+84.50 --> 85.06 : optimized workflow diagram
+85.06 --> 85.40 : smart office technology
+85.40 --> 85.96 : efficient digital tools
+85.96 --> 86.24 : productivity gains graphic
+86.24 --> 86.38 : streamlined processes diagram
+86.38 --> 86.76 : time saving technology
+87.42 --> 88.00 : cortana logo abstract
+88.26 --> 88.80 : microsoft digital assistant icon
+88.80 --> 89.00 : ai assistant interface
+89.00 --> 89.42 : virtual assistant technology
+89.92 --> 90.06 : technology integration goal
+90.06 --> 90.24 : cross device compatibility
+90.24 --> 90.62 : seamless digital experience
+90.62 --> 90.86 : interconnected device network
+90.86 --> 91.28 : digital services ecosystem
+91.28 --> 91.46 : software service integration
+91.46 --> 91.90 : consumer technology shift
+92.20 --> 92.42 : strategic focus adjustment
+92.42 --> 92.62 : market strategy evolution
+92.62 --> 92.86 : customer segment analysis
+92.86 --> 93.32 : product focus re-evaluation
+93.32 --> 93.68 : business strategy pivot
+93.68 --> 93.88 : shifted market trends
+93.88 --> 94.14 : evolving technology landscape
+94.70 --> 94.92 : broad technology application
+94.92 --> 95.30 : ai impact scope
+95.58 --> 95.74 : artificial intelligence functionality
+95.74 --> 96.02 : accessibility features icon
+96.02 --> 96.16 : windows operating system interface
+96.16 --> 96.82 : universal design principles
+96.82 --> 97.34 : assistive technology symbols
+97.34 --> 97.62 : windows accessibility settings
+97.62 --> 97.94 : real time speech translation
+98.40 --> 98.72 : language conversion software
+98.72 --> 99.08 : audio waveform text
+99.08 --> 99.28 : real time data flow
+99.28 --> 99.44 : instant language translation
+99.44 --> 99.76 : natural interaction interface
+100.04 --> 100.18 : intuitive technology design
+100.18 --> 100.54 : human computer interaction diagram
+100.54 --> 100.86 : seamless tech integration
+100.86 --> 101.26 : technology user experience
+101.26 --> 101.80 : conversational ai interface
+101.80 --> 102.04 : digital communication flow
+102.04 --> 102.56 : futuristic tech connection
+103.18 --> 103.66 : ai ethics framework
+104.20 --> 104.38 : microsoft ai principles
+104.38 --> 104.90 : ethical ai importance
+104.90 --> 105.40 : critical importance icon
+105.40 --> 105.68 : ai ethical guidelines
+105.68 --> 106.06 : foundational ethics diagram
+106.06 --> 106.54 : responsible ai concept
+106.54 --> 106.78 : ai fairness principles
+106.78 --> 107.14 : ai ethics logo
+107.14 --> 107.50 : ai moral compass
+108.00 --> 108.18 : corporate governance policy
+108.18 --> 108.44 : ai design principles
+108.44 --> 108.68 : fairness in algorithms
+108.68 --> 108.96 : algorithmic accountability framework
+108.96 --> 109.10 : data transparency visualization
+109.10 --> 109.24 : ethical design process
+109.24 --> 109.42 : ai system architecture
+109.42 --> 109.58 : ai development guidelines
+109.58 --> 109.82 : design principles blueprint
+109.82 --> 109.90 : fairness scales digital
+109.90 --> 110.22 : accountability checklist graphic
+110.22 --> 110.46 : transparency glass effect
+110.46 --> 110.84 : ethical ai attributes
+110.84 --> 111.62 : responsible innovation diagram
+111.98 --> 112.00 : clear data path
+112.00 --> 112.52 : open source principles
+112.52 --> 112.80 : mind map concept
+112.80 --> 113.06 : strategic thinking graphic
+113.70 --> 113.94 : microsoft corporate structure
+113.94 --> 114.28 : responsible ai office logo
+114.28 --> 114.68 : governance framework diagram
+114.68 --> 114.88 : office organizational chart
+114.88 --> 115.14 : responsible ai policy
+115.14 --> 115.32 : ai ethics committee icon
+115.32 --> 115.82 : ethical guidelines document
+115.82 --> 116.06 : ai development standards
+116.06 --> 116.46 : corporate ethics board
+116.46 --> 116.60 : committee meeting room empty
+116.60 --> 116.80 : ai ethical dilemmas
+116.80 --> 117.24 : regulatory compliance graphic
+117.24 --> 117.46 : guidance system architecture
+117.46 --> 117.70 : development roadmap plan
+117.70 --> 117.90 : profound impact graphic
+117.90 --> 118.08 : societal change concept
+118.08 --> 118.54 : technology implications diagram
+119.00 --> 119.34 : powerful technology symbol
+119.34 --> 119.60 : innovation influence chart
+119.60 --> 120.00 : world impact map
+120.00 --> 120.64 : community structure digital
+120.64 --> 121.08 : future outlook visualization
+121.08 --> 121.38 : powerful AI systems
+121.38 --> 121.50 : advanced AI computing
+121.50 --> 121.88 : transformative technology concept
+121.88 --> 122.50 : tech revolution graphic
+123.04 --> 123.32 : corporate engagement strategy
+123.32 --> 123.56 : microsoft policy diagram
+123.56 --> 124.02 : proactive discussion forum
+124.02 --> 124.48 : ai governance framework
+124.48 --> 124.68 : ai regulation compliance
+124.68 --> 125.06 : policy dialogue symbols
+125.06 --> 125.36 : ai governance models
+125.36 --> 125.56 : regulatory landscape ai
+125.56 --> 126.02 : legal framework technology
+126.02 --> 126.24 : advocacy policy abstract
+126.24 --> 126.72 : human centered design icon
+127.20 --> 127.52 : user experience focus
+127.52 --> 127.78 : ai societal benefit
+127.78 --> 127.88 : ethical ai service
+127.88 --> 128.14 : best interests protection
+128.14 --> 128.48 : ai benefit optimization
+128.48 --> 128.76 : strategic framework diagram
+128.76 --> 129.04 : ensuring success graphic
+129.04 --> 129.34 : ai serving purpose
+129.34 --> 129.72 : humanity tech future
+129.72 --> 130.06 : positive societal impact
+130.06 --> 130.66 : collective well being graphic
+130.66 --> 130.80 : optimal outcomes diagram
+130.80 --> 131.14 : mutual benefit concept
+131.78 --> 132.02 : commitment to ethics
+132.02 --> 132.36 : responsible ai strategy
+132.36 --> 132.54 : ai governance policy
+132.54 --> 133.00 : ethical tech development
+133.00 --> 133.24 : ai moral guidelines
+133.24 --> 133.66 : deeper understanding concept
+133.66 --> 133.92 : technological progress roadmap
+133.92 --> 134.18 : innovation guided principles
+134.18 --> 134.76 : moral compass digital
+134.76 --> 135.24 : strong moral foundation
+135.24 --> 135.68 : principle guided technology
+135.68 --> 136.18 : development framework diagram
+136.18 --> 136.40 : ethical tech philosophy
+136.40 --> 136.58 : guiding light concept
+136.58 --> 136.86 : strong principles architecture
+136.86 --> 137.04 : moral values abstract
+137.04 --> 137.42 : ethical framework blueprint
+137.42 --> 137.72 : core principles diagram
+137.72 --> 138.24 : key tenant architecture
+138.70 --> 138.80 : microsoft purpose statement
+138.80 --> 138.96 : refreshed corporate mission
+138.96 --> 139.24 : strategic vision update
+139.24 --> 139.42 : microsoft logo new
+139.42 --> 139.96 : company values graphic
+139.96 --> 140.28 : corporate identity evolution
+140.28 --> 140.60 : mission statement design
