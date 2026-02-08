@@ -46,8 +46,8 @@ The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 Your task:,here is my transcipt, give me image  relevant image  for the timeline,give search term to search on google to find relevant inage .. 
 
 
-1.(0.00-1.79)- microsoft logo 
-2.(1.79-2.62)- microsoft windows desktop or laptop
+1.(0.00-1.79)- bullish stock chart 
+2.(1.79-2.62)- microsoft windows desktop
 3.(2.62-3.57)- window phone 
 ...
 
@@ -56,7 +56,7 @@ do not include images of living things ie animals and people,
 
 each sentence muat have atleast 2 to 3 images 
 
-search term should be short and clear
+search term should be short and clear and one timeline should have 1 search term like i showed above.
 
 give me cool search terms which do not ibclude people or animals ie instrad of mmeeting in office say office chairs for meeting .
                                                                                                                    
