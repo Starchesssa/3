@@ -56,7 +56,10 @@ do not include images of living things ie animals and people,
 
 each sentence muat have atleast 2 to 3 images 
 
-give me cool search terms which do not ibclude people or animals ie instrad of mmeeting in office say ofgice chairs for meeting .
+search term should be short and clear
+
+give me cool search terms which do not ibclude people or animals ie instrad of mmeeting in office say office chairs for meeting .
+                                                                                                                   
 
 
 
