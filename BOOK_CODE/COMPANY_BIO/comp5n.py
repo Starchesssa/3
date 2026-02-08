@@ -43,20 +43,20 @@ Content:
 
 The timeline is in seconds, e.g. 0.00 --> 0.36 means 0.00 to 0.35 seconds.
 
-Your task:,here is my transcipt, give me image  relevant image  for the timeline. 
+Your task:,here is my transcipt, give me image  relevant image  for the timeline,give search term to search on google to find relevant inage .. 
 
 
-1.(0.00-1.79)- house.png
-2.(1.79-2.62)- money.png
-3.(2.62-3.57)- stock_chart.png
+1.(0.00-1.79)- microsoft logo 
+2.(1.79-2.62)- microsoft windows desktop or laptop
+3.(2.62-3.57)- window phone 
 ...
 
 
 do not include images of living things ie animals and people,
 
-each sentence muat have atleast 2 to 3 .pngs
+each sentence muat have atleast 2 to 3 images 
 
-use generic images ie instead of kilimanjaro_mountain.png say mountain.png 
+give me cool search terms which do not ibclude people or animals ie instrad of mmeeting in office say ofgice chairs for meeting .
 
 
 
