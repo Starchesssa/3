@@ -1,0 +1,26 @@
+0.00 --> 6.00 : Microsoft AI strategy, defining technology graphic, future generation technology
+6.42 --> 8.84 : Future computing landscape, AI societal impact abstract, technology shaping progress
+9.42 --> 12.02 : Integrated AI concept, AI system interconnections, non-isolated technology graphic
+12.36 --> 18.22 : Foundational AI blocks, Microsoft tech ecosystem, AI infused product graphic
+18.66 --> 22.24 : Cloud data center servers, productivity software icons, generic search engine interface, gaming console abstract
+22.82 --> 30.22 : AI innovation graphic, ethical AI principles, technology for human empowerment, responsible AI design
+31.20 --> 34.42 : Microsoft AI lab abstract, AI R&D infographic, deep learning research facility
+34.84 --> 37.70 : Azure AI services, cloud AI platform architecture, Microsoft Azure ecosystem
+38.34 --> 42.98 : AI vision system, speech recognition software waves, natural language processing diagram, AI decision tree flowchart
+43.46 --> 50.66 : AI integration toolkit, application development with AI, simplified machine learning interface, low-code AI platform
+51.12 --> 54.30 : Intelligent Cloud Edge architecture, distributed AI system concept, cloud to edge computing diagram
+55.06 --> 60.96 : AI model training graphic, Azure cloud data processing, edge computing deployment, cloud to edge data flow
+61.48 --> 67.30 : IoT sensor network, smartphone abstract design, autonomous vehicle sensor array, real-time AI processing
+67.74 --> 72.76 : AI powered productivity, Microsoft office suite graphic, intelligent workflow automation
+73.30 --> 77.84 : PowerPoint design suggestions, AI powered slide layout, automatic presentation formatting
+78.18 --> 86.76 : Excel data analysis, AI insights spreadsheet, smart data visualization, efficient task automation
+87.42 --> 94.14 : Digital assistant interface, cross-device integration icons, AI assistant ecosystem, smart helper software
+94.70 --> 102.56 : Windows accessibility features, real-time speech translator, natural human-computer interaction, inclusive tech design
+103.18 --> 107.50 : Ethical AI symbol, importance of AI ethics, responsible technology development
+108.00 --> 113.06 : AI fairness principles, accountability in AI systems, transparency in AI algorithms
+113.70 --> 118.54 : Microsoft Responsible AI framework, AI ethics committee logo, AI governance structure
+119.00 --> 122.50 : AI societal impact diagram, technology social responsibility, future implications of AI
+123.04 --> 126.72 : AI governance model, artificial intelligence regulation, tech policy discussion graphic
+127.20 --> 131.14 : Human-centered AI design, AI for good concept, beneficial AI development
+131.78 --> 138.24 : Responsible AI commitment, technology ethics framework, moral principles in tech, ethical AI framework
+138.70 --> 140.60 : Microsoft purpose statement abstract, brand values graphic, core principles technology

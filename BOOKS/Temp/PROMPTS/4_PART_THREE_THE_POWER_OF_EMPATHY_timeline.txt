@@ -1,0 +1,84 @@
+1.  (0.00-0.68) - Microsoft logo evolution, abstract corporate transformation, modern tech branding.
+2.  (0.68-1.58) - Microsoft campus architecture, clean tech office interior, corporate innovation abstract.
+3.  (1.58-2.96) - Abstract gears interlocking, strategic business blueprint, foundational architectural elements.
+4.  (2.96-3.68) - Digital empathy symbol, user connection interface, partner network diagram.
+5.  (3.68-4.42) - Microsoft data visualization, abstract organizational structure, tech company growth chart.
+6.  (4.42-5.72) - Strategic planning whiteboard, digital empathy infographic, corporate principle icons.
+7.  (5.72-6.96) - Abstract understanding symbols, digital human connection, interconnected thought bubbles.
+8.  (7.56-8.50) - Microsoft strategic vision, corporate imperative roadmap, tech business foundation.
+9.  (8.50-9.76) - Abstract soft quality, strategic planning diagram, foundational pillar graphic.
+10. (9.76-10.84) - Corporate quality metrics, strategic imperative diagram, essential business framework.
+11. (11.24-12.28) - Strategic business pathway, imperative action plan, foundational principle graphic.
+12. (12.28-13.94) - Core business principles, foundational organizational structure, essential tech operations.
+13. (13.94-15.32) - Understanding user needs icons, partner collaboration network, employee engagement visuals.
+14. (15.32-16.60) - User experience flow, partner ecosystem diagram, abstract team collaboration.
+15. (17.04-18.64) - Abstract partner network, employee engagement symbols, user interface feedback.
+16. (19.24-20.64) - Digital empathy illustration, abstract concept of understanding, human connection graphic (non-human).
+17. (20.64-21.70) - Ability to understand icons, digital sharing concept, abstract emotional intelligence.
+18. (21.70-22.74) - Abstract understanding concepts, sharing information graphics, digital feelings visualization.
+19. (22.74-24.14) - Feelings visualization abstract, digital empathy icons, shared understanding graphics.
+20. (24.52-25.64) - Metaphorical empty shoes, pathway with different shoe prints, abstract perspective-taking.
+21. (25.64-27.14) - Abstract different shoes, concept of diverse viewpoints, empathy journey pathway.
+22. (27.14-28.18) - Empathy impact assessment, genuine connection diagram, strategic product development.
+23. (28.18-29.66) - Abstract empathy gap, impossible task graphic, relevant product design blueprint.
+24. (29.66-31.28) - Impactful product design, truly relevant technology, abstract product creation.
+25. (31.28-32.62) - Relevant product features, impactful tech solutions, strong foundational relationships.
+26. (32.62-33.84) - Lasting business relationships, strong partnership diagrams, product development roadmap.
+27. (33.84-35.86) - Building strong partnerships, lasting enterprise connections, product success metrics.
+28. (36.34-37.98) - Radical change diagram, Microsoft transformation graphic, corporate departure symbol.
+29. (37.98-39.04) - Microsoft cultural shift, abstract new direction, company evolution timeline.
+30. (39.72-40.74) - Microsoft legacy products, previous corporate era graphics, old technology interface.
+31. (41.24-42.52) - Product-centric design, historical Microsoft products, company prior approach.
+32. (42.52-43.66) - Arrogant product display, dictating tech trends, company old mindset.
+33. (44.10-45.68) - Product feature announcements, dictatorial design philosophy, corporate self-importance.
+34. (45.68-47.38) - Dictating user experience, listening feedback loop, product requirement specification.
+35. (47.38-48.40) - User feedback system, listening to market needs, customer insight generation.
+36. (48.40-50.44) - Innovation concept graphic, Microsoft future vision, technological prowess abstract.
+37. (50.44-52.76) - Tech innovation blueprint, prowess in software development, abstract technological leadership.
+38. (53.16-53.90) - Problem-solving flowchart, real-world scenario representation, solution architecture.
+39. (53.90-55.40) - Digital problem solving, practical application of technology, real-world impact.
+40. (55.40-56.08) - Solution for industries, people-centric (abstract) technology, real-world challenges.
+41. (56.54-57.86) - Team collaboration interface, customer interaction portal, product usage analytics.
+42. (57.86-59.08) - Customer journey mapping, observing product interaction, user feedback collection.
+43. (59.54-61.04) - Product usage heat map, understanding user frustration icons, anticipating needs graphic.
+44. (61.04-62.90) - User pain points diagram, frustration analysis visualization, unspoken user requirements.
+45. (62.90-64.68) - Anticipating product needs, predictive user behavior, future feature development.
+46. (65.24-66.96) - Microsoft Office 365 logo, software transformation graphic, modern collaboration tools.
+47. (66.96-68.52) - Office 365 evolution, workforce collaboration platform, real-time co-authoring interface.
+48. (68.52-71.10) - Listening to feedback loop, modern team workflows, fluid document editing.
+41. (71.10-72.42) - Collaborative work environment, real-time shared documents, communication platform interface.
+42. (72.42-73.84) - Fluid co-authoring screen, real-time communication tools, seamless collaboration icons.
+43. (73.84-75.68) - Co-authoring document interface, communication stream, digital team interaction.
+44. (75.68-77.98) - Empathy commitment visual, tangible manifestation graphic, Microsoft renewed focus.
+45. (77.98-80.78) - Microsoft accessibility logo, inclusive design symbol, renewed corporate values.
+46. (80.78-82.40) - Focus on accessibility features, universal design principles, technology for all.
+47. (83.14-84.90) - Accessibility as a core principle, design inclusivity graphic, non-afterthought symbol.
+48. (84.90-86.28) - Core design framework, accessibility integrated into design, principle-driven development.
+49. (86.28-87.24) - Not an afterthought icon, design process starting with accessibility, foundational accessibility.
+50. (87.70-89.26) - Technology investment graphic, Microsoft innovation in accessibility, inclusive tech solutions.
+51. (89.26-90.40) - Windows iControl interface, narrator accessibility features, learning tools for everyone.
+52. (90.40-91.12) - Dyslexia learning aids, assistive technology interface, improved digital narration.
+53. (91.56-92.66) - Narrator software interface, learning tools for students, cognitive accessibility.
+54. (92.66-94.56) - Dyslexia-friendly fonts, inclusive learning software, accessibility for neurodiversity.
+55. (94.56-96.28) - Initiatives for inclusion, directly stemming from empathy, deep understanding graphic.
+56. (96.28-98.02) - Empathetic connection diagram, understanding diverse needs, disabilities support technology.
+57. (98.02-100.42) - Empowering technology solutions, achieving more with accessibility, refreshed Microsoft mission.
+58. (100.42-102.72) - Disability inclusion icons, technology for empowerment, mission statement graphic.
+59. (102.72-103.38) - Achieving more through tech, Microsoft mission alignment, accessibility impact.
+60. (103.84-105.86) - Microsoft mission statement text, renewed purpose graphic, corporate values redefinition.
+61. (105.86-106.58) - Mission statement on a screen, corporate ethos, strategic alignment visualization.
+62. (106.92-107.66) - Cultivating empathy diagram, Microsoft building bridges, customer relationship management.
+63. (107.66-109.96) - Bridge connecting abstract entities, customer engagement, developer community network.
+64. (109.96-111.42) - Microsoft customer connections, developer tools integration, diverse workforce collaboration.
+65. (111.42-113.18) - Developer community symbols, internal workforce dynamics, diverse team structure.
+66. (113.18-114.26) - Diverse team cohesion, internal collaboration platforms, unified corporate culture.
+67. (114.26-115.92) - Critical step graphic, shifting mindset illustration, know-it-all attitude symbol.
+68. (115.92-117.96) - Know-it-all vs. learn-it-all, Microsoft cultural shift, presumption of answers.
+69. (118.14-121.04) - All the answers infographic, learn-it-all approach icon, curiosity and understanding.
+70. (121.04-122.34) - Learn-it-all growth path, prioritizing curiosity, understanding as a core value.
+71. (122.34-124.46) - Curiosity exploration graphic, understanding knowledge growth, prioritized learning.
+72. (125.22-126.68) - Cultural shift diagram, thawing rigid silos, collaborative environment.
+73. (126.68-128.06) - Melting internal barriers, rigid corporate structure, silo breakdown graphic.
+74. (128.06-129.58) - Internal communication flow, collaborative workspace design, externally focused strategy.
+75. (129.58-131.34) - Fostering collaboration, unified company vision, external market focus.
+76. (131.34-133.70) - Collaborative digital tools, externally focused market research, integrated corporate environment.
