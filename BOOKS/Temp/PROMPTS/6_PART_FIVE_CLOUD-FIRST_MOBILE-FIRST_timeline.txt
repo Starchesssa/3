@@ -1,0 +1,64 @@
+1.(0.00-1.79)- `Microsoft logo`, `tech brand identity`, `corporate emblem`
+2.(1.79-2.62)- `2010s desktop computer`, `classic Windows PC`, `vintage enterprise tech`
+3.(2.62-3.57)- `Windows Phone interface`, `old smartphone UI`, `mobile OS tiles`
+4.(3.57-7.98)- `missed mobile revolution icon`, `smartphone evolution timeline`, `mobile tech gap graphic`
+5.(8.66-10.88)- `Apple iOS logo`, `iOS app icons`, `mobile OS branding`
+6.(10.88-13.36)- `Google Android logo`, `Android OS interface`, `smartphone platform dominance`
+7.(13.88-16.38)- `Microsoft ventures failure`, `business venture challenge`, `corporate strategy setback`
+8.(16.38-19.20)- `Windows Phone device`, `Nokia smartphone Windows`, `mobile device business`
+9.(19.20-21.30)- `unsuccessful product launch`, `failed tech project icon`, `corporate disappointment graphic`
+10.(21.30-24.78)- `market share decline chart`, `business write down graphic`, `losses financial graph`
+11.(25.50-29.46)- `Windows Phone market share 2014`, `global smartphone share small`, `less than 3 percent data`
+12.(29.46-30.66)- `minimal market presence icon`, `tiny slice of pie chart`, `low percentage graphic`
+13.(31.00-33.52)- `Windows PC market share`, `dominant desktop OS graph`, `high market percentage`
+14.(33.52-35.20)- `90 percent market share chart`, `PC operating system leadership`, `Windows desktop dominance`
+15.(36.24-39.64)- `Microsoft cloud division`, `enterprise tech infrastructure`, `cloud business growth`
+16.(39.64-42.16)- `future of computing icon`, `tech vision graphic`, `evolution of technology`
+17.(42.16-45.46)- `cloud first strategy`, `cloud computing concept`, `data center blueprint`
+18.(46.00-48.48)- `computing shift graphic`, `device centric model`, `traditional tech architecture`
+18.(48.48-52.20)- `services centric model`, `cloud data flow diagram`, `software as a service concept`
+19.(52.20-54.62)- `data in cloud storage`, `cloud application architecture`, `centralized data platform`
+20.(54.62-56.72)- `any device access icon`, `universal connectivity graphic`, `cross-device access`
+21.(57.26-59.64)- `strategic business pivot`, `corporate transformation icon`, `new direction strategy`
+22.(59.64-61.64)- `Microsoft Azure platform`, `Azure cloud infrastructure`, `cloud computing core`
+23.(61.64-64.00)- `heart of company graphic`, `future business foundation`, `core tech strategy`
+24.(64.58-67.14)- `massive tech investment`, `capital expenditure graphic`, `infrastructure spending`
+25.(67.14-68.74)- `global data center network`, `worldwide server farm map`, `distributed cloud architecture`
+26.(69.16-70.50)- `Azure services expansion`, `cloud service offerings`, `growing Azure portfolio`
+27.(70.90-73.58)- `AWS vs Azure competition`, `cloud provider rivalry`, `competitive tech landscape`
+28.(73.58-75.54)- `head start advantage graphic`, `early market leader`, `first mover advantage`
+29.(76.16-79.16)- `mobile first cloud first`, `integrated tech strategy`, `modern IT approach`
+30.(79.16-82.22)- `embracing competitor platforms`, `tech partnership strategy`, `cross-platform collaboration`
+31.(82.86-84.58)- `historical Microsoft strategy`, `legacy tech focus`, `past business model`
+32.(84.58-87.18)- `Windows ecosystem focus`, `proprietary software dominance`, `Microsoft Windows-centric`
+33.(87.18-88.74)- `prioritization icon`, `single focus strategy`, `exclusive platform support`
+34.(89.32-91.52)- `dramatic change graphic`, `business model overhaul`, `strategic transformation icon`
+35.(91.52-92.12)- `paradigm shift in tech`, `fundamental business change`, `corporate evolution`
+36.(92.66-94.26)- `Office 365 logo`, `cloud productivity suite`, `subscription software platform`
+37.(94.26-97.44)- `flagship productivity suite`, `Microsoft Office cloud`, `enterprise software subscription`
+38.(97.74-99.52)- `Office 365 iOS app`, `Office 365 Android app`, `mobile productivity apps`
+39.(99.52-103.24)- `cross-platform feature parity`, `mobile first software update`, `multi-device app support`
+40.(103.80-105.10)- `profound business shift`, `strategic turning point`, `new corporate direction`
+41.(105.10-106.06)- `tectonic shift in tech`, `major industry change`, `business model revolution`
+42.(106.58-109.10)- `beyond Windows gateway`, `multiple access points`, `open platform strategy`
+43.(109.10-110.56)- `diversified user reach`, `universal user access`, `non-exclusive tech gateway`
+44.(110.56-112.64)- `meeting users everywhere`, `ubiquitous tech presence`, `global user engagement`
+45.(112.64-115.08)- `device agnostic access`, `choose your own device tech`, `flexible user experience`
+46.(115.08-117.74)- `essential cloud services`, `cloud software delivery`, `integrated tech solutions`
+47.(118.20-119.86)- `strategic pivot results`, `business transformation outcome`, `successful corporate strategy`
+48.(119.86-120.84)- `remarkable growth graphic`, `positive business impact`, `achievement icon`
+49.(121.46-122.50)- `Azure explosive growth`, `rapid cloud expansion`, `accelerated business growth`
+50.(122.50-123.20)- `cloud market acceleration`, `exponential tech growth`, `dynamic market growth`
+51.(123.82-127.02)- `2023 cloud revenue`, `Microsoft cloud services chart`, `fiscal year financial results`
+52.(127.02-130.80)- `27 percent growth graph`, `constant currency revenue increase`, `cloud revenue growth rate`
+53.(131.30-132.90)- `formidable tech competitor`, `cloud market rivalry`, `top cloud providers`
+54.(132.90-134.40)- `AWS Google Cloud Azure market`, `cloud infrastructure competition`, `major cloud platforms`
+55.(134.82-136.18)- `Microsoft transformation graphic`, `desktop OS to cloud provider`, `business model evolution`
+56.(136.18-140.88)- `leading global cloud provider`, `worldwide cloud services map`, `enterprise cloud leadership`
+57.(140.88-142.84)- `diversified revenue streams`, `multiple income sources graphic`, `financial resilience strategy`
+58.(142.84-146.16)- `reestablishing tech relevance`, `modern computing leadership`, `critical tech areas`
+59.(146.66-148.68)- `stagnated market capitalization`, `flat stock performance`, `years of financial plateau`
+60.(148.68-149.70)- `market cap stagnation chart`, `business stagnation graphic`, `unchanging valuation`
+61.(150.38-152.26)- `soaring market capitalization`, `skyrocketing stock value`, `exponential growth chart`
+62.(152.26-154.12)- `multi-trillion dollar valuation`, `high tech market cap`, `mega-cap company`
+63.(154.12-156.50)- `cloud business success impact`, `revenue driven by cloud`, `financial boost from cloud`
