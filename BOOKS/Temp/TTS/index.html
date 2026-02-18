@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TTS Sequential Player</title>
 
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .player {
+    background: black;
+    border: 4px solid white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+  }
+
+  button {
+    background: yellow;
+    border: 3px solid black;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  .track {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #aaa;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="player">
+  <h2>📖 TTS Audio Player</h2>
+  <audio id="audio" controls></audio>
+  <div class="track" id="trackName">Ready</div>
+  <button onclick="startPlayback()">▶ Start</button>
+</div>
+
+<script>
+const tracks = [
+  "1_INTRO.wav",
+  "2_PART_ONE:_THE_ROAD_TO_REDEMPTION.wav",
+  "10_PART_NINE:_PURPOSE_AND_MEANING.wav",
+  "11_PART_TEN:_LEADERSHIP_AND_LEGACY.wav"
+];
+
+// ✅ Sort numerically based on leading number
+tracks.sort((a, b) => {
+  const numA = parseInt(a.match(/^\\d+/));
+  const numB = parseInt(b.match(/^\\d+/));
+  return numA - numB;
+});
+
+let currentTrack = 0;
+const audio = document.getElementById("audio");
+const trackName = document.getElementById("trackName");
+
+function loadTrack(index) {
+  audio.src = tracks[index];
+  trackName.textContent = "Playing: " + tracks[index];
+}
+
+function startPlayback() {
+  currentTrack = 0;
+  loadTrack(currentTrack);
+  audio.play();
+}
+
+// ✅ Auto play next track
+audio.addEventListener("ended", () => {
+  currentTrack++;
+  if (currentTrack < tracks.length) {
+    loadTrack(currentTrack);
+    audio.play();
+  } else {
+    trackName.textContent = "✅ Finished all tracks";
+  }
+});
+</script>
+
+</body>
+</html>
