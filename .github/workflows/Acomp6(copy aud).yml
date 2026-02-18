@@ -1,0 +1,51 @@
+name: Move WAV Files to Public and Commit
+
+on:
+  push:
+    paths:
+      - 'BOOKS/Temp/TTS/**'
+
+jobs:
+  move-and-commit:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # ✅ Give write permission to commit
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true  # Needed to push
+
+      # 2️⃣ Create destination folder
+      - name: Create audio folder
+        run: mkdir -p public/audio
+
+      # 3️⃣ Copy WAV files
+      - name: Copy WAV files
+        run: |
+          echo "Copying WAV files from BOOKS/Temp/TTS to public/audio..."
+          find BOOKS/Temp/TTS -type f -name "*.wav" -exec cp {} public/audio/ \;
+
+      # 4️⃣ Configure Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 5️⃣ Commit changes if any
+      - name: Commit and Push
+        run: |
+          git add public/audio
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Add/update WAV files in public/audio"
+            git push
+          fi
+
+      # 6️⃣ List files to verify
+      - name: List files
+        run: ls -l public/audio
