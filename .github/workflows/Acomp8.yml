@@ -1,0 +1,41 @@
+name: Render Audio Videos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        composition: [Audio_1, Audio_2, Audio_3]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Bundle Remotion Project
+        run: npx remotion bundle src/index.ts --output=dist/index.js
+
+      - name: Render Video
+        run: |
+          mkdir -p out
+          npx remotion render dist/index.js \
+            ${{ matrix.composition }} \
+            out/${{ matrix.composition }}.mp4 \
+            --codec=h264
+
+      - name: Upload Rendered Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.composition }}
+          path: out/${{ matrix.composition }}.mp4
