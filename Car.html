@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>3D Line Car Animation</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+        background: linear-gradient(#0f172a, #020617);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+
+    .scene {
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
+        position: relative;
+    }
+
+    /* ROAD */
+    .road {
+        position: absolute;
+        bottom: 0;
+        width: 200%;
+        height: 200px;
+        background: repeating-linear-gradient(
+            90deg,
+            #020617 0px,
+            #020617 40px,
+            #1e293b 40px,
+            #1e293b 80px
+        );
+        transform: rotateX(60deg);
+        transform-origin: bottom;
+        animation: roadMove 2s linear infinite;
+    }
+
+    @keyframes roadMove {
+        from { transform: rotateX(60deg) translateX(0); }
+        to   { transform: rotateX(60deg) translateX(-200px); }
+    }
+
+    /* CAR CONTAINER */
+    .car-wrapper {
+        position: absolute;
+        bottom: 120px;
+        left: 50%;
+        transform-style: preserve-3d;
+        transform: translateX(-50%);
+        animation: carFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes carFloat {
+        0%,100% { transform: translateX(-50%) translateY(0); }
+        50%     { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .car {
+        position: relative;
+        width: 320px;
+        height: 120px;
+        transform-style: preserve-3d;
+        transform: rotateX(10deg) rotateY(-15deg);
+    }
+
+    /* BODY */
+    .body {
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        border: 2px solid #38bdf8;
+        top: 40px;
+        transform: translateZ(20px);
+    }
+
+    .roof {
+        position: absolute;
+        width: 180px;
+        height: 40px;
+        border: 2px solid #38bdf8;
+        left: 70px;
+        top: 0;
+        transform: translateZ(30px);
+    }
+
+    .line {
+        position: absolute;
+        height: 2px;
+        background: #38bdf8;
+    }
+
+    .diag {
+        width: 60px;
+        transform: rotate(25deg);
+    }
+
+    /* WINDOWS */
+    .window {
+        position: absolute;
+        border: 2px solid #38bdf8;
+        width: 60px;
+        height: 30px;
+        top: 5px;
+    }
+
+    .w1 { left: 10px; }
+    .w2 { right: 10px; }
+
+    /* WHEELS */
+    .wheel {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border: 2px solid #facc15;
+        border-radius: 50%;
+        bottom: -10px;
+        animation: spin 0.6s linear infinite;
+    }
+
+    .wheel::before, .wheel::after {
+        content:'';
+        position:absolute;
+        background:#facc15;
+        top:50%; left:50%;
+        transform-origin:center;
+    }
+
+    .wheel::before {
+        width:2px; height:50px;
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+
+    .wheel::after {
+        width:50px; height:2px;
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+
+    .front { right: 20px; }
+    .rear  { left: 20px; }
+
+    /* LIGHT GLOW */
+    .glow {
+        position: absolute;
+        width: 120px;
+        height: 20px;
+        background: radial-gradient(circle, rgba(56,189,248,0.5), transparent);
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        filter: blur(8px);
+    }
+
+    /* SPEED LINES */
+    .speed-line {
+        position: absolute;
+        width: 80px;
+        height: 2px;
+        background: rgba(56,189,248,0.3);
+        left: -200px;
+        animation: speed 1s linear infinite;
+    }
+
+    @keyframes speed {
+        from { transform: translateX(0); opacity:0; }
+        to   { transform: translateX(100vw); opacity:1; }
+    }
+
+</style>
+</head>
+<body>
+<div class="scene">
+    <div class="road"></div>
+
+    <div class="car-wrapper">
+        <div class="car">
+            <div class="roof">
+                <div class="window w1"></div>
+                <div class="window w2"></div>
+            </div>
+
+            <div class="body"></div>
+
+            <div class="wheel rear"></div>
+            <div class="wheel front"></div>
+
+            <div class="glow"></div>
+        </div>
+    </div>
+
+    <!-- Speed lines -->
+    <div class="speed-line" style="top:20%; animation-delay:0s;"></div>
+    <div class="speed-line" style="top:35%; animation-delay:0.3s;"></div>
+    <div class="speed-line" style="top:50%; animation-delay:0.6s;"></div>
+</div>
+</body>
+      </html>
