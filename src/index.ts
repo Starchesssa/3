@@ -1,4 +1,4 @@
-// src/index.tsx
+// src/index.ts
 import {registerRoot} from 'remotion';
 import {RemotionVideo} from './DepthShowcase';
 
