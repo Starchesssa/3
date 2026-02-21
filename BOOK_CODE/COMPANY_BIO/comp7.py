@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 import re
@@ -13,7 +12,6 @@ def numeric_sort_key(filename):
     match = re.match(r"(\d+)", filename)
     return int(match.group(1)) if match else 9999
 
-# Collect wav files
 files = [f for f in os.listdir(AUDIO_DIR) if f.endswith(".wav")]
 files.sort(key=numeric_sort_key)
 
@@ -22,7 +20,6 @@ video_segments = []
 for file in files:
     input_audio = os.path.join(AUDIO_DIR, file)
 
-    # Extract display name from filename
     name = os.path.splitext(file)[0]
     name = re.sub(r"^\d+[_\- ]*", "", name)
 
@@ -35,11 +32,12 @@ for file in files:
         "-y",
         "-i", input_audio,
 
-        # Waveform visualizer
         "-filter_complex",
-        f"[0:a]showwaves=s=1280x720:mode=line:rate=25,format=yuv420p[v];"
-        f"[v]drawtext=text='{name}':fontcolor=white:fontsize=48:"
-        f"x=(w-text_w)/2:y=h-100",
+        f"[0:a]showwaves=s=1280x720:mode=line:rate=25,"
+        f"format=yuv420p,"
+        f"drawtext=text='{name}':fontcolor=white:fontsize=48:"
+        f"x=(w-text_w)/2:y=h-100"
+        f"[v]",
 
         "-map", "[v]",
         "-map", "0:a",
@@ -52,7 +50,6 @@ for file in files:
     subprocess.run(cmd, check=True)
     video_segments.append(segment_video)
 
-# Create concat list
 with open(CONCAT_FILE, "w") as f:
     for segment in video_segments:
         f.write(f"file '{os.path.abspath(segment)}'\n")
