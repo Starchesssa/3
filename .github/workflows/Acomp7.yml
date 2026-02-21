@@ -1,32 +1,24 @@
-name: Python Audio Visualizer
+name: Build Audio Visualizer Video
 
 on:
   workflow_dispatch:
 
 jobs:
-  render:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Install Python deps
-        run: pip install numpy librosa moviepy matplotlib
-
-      - name: Run visualizer
+      - name: Run Python script
         run: python BOOK_CODE/COMPANY_BIO/comp7.py
 
-      - name: Upload video
+      - name: Upload video artifact
         uses: actions/upload-artifact@v4
         with:
-          name: final-video
-          path: final_video.mp4
+          name: audio-visualizer-video
+          path: BOOKS/Temp/output/final_video.mp4
