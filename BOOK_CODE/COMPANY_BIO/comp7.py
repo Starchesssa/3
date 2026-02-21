@@ -1,126 +1,74 @@
+
 import os
+import subprocess
 import re
-import numpy as np
-import librosa
-import matplotlib.pyplot as plt
-from moviepy.editor import *
 
-# =====================
-# SETTINGS
-# =====================
 AUDIO_DIR = "BOOKS/Temp/TTS"
-OUTPUT_VIDEO = "final_video.mp4"
-FPS = 60
-BARS = 80
+OUTPUT_DIR = "BOOKS/Temp/output"
+CONCAT_FILE = os.path.join(OUTPUT_DIR, "concat.txt")
 
-# =====================
-# LOAD & SORT AUDIOS
-# =====================
-def extract_number(filename):
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+def numeric_sort_key(filename):
     match = re.match(r"(\d+)", filename)
-    return int(match.group(1)) if match else 999
+    return int(match.group(1)) if match else 9999
 
-audio_files = [
-    f for f in os.listdir(AUDIO_DIR) if f.endswith(".wav")
-]
+# Collect wav files
+files = [f for f in os.listdir(AUDIO_DIR) if f.endswith(".wav")]
+files.sort(key=numeric_sort_key)
 
-audio_files.sort(key=extract_number)
+video_segments = []
 
-if not audio_files:
-    raise Exception("No WAV files found!")
+for file in files:
+    input_audio = os.path.join(AUDIO_DIR, file)
 
-print("Sorted audio order:")
-for f in audio_files:
-    print(f)
+    # Extract display name from filename
+    name = os.path.splitext(file)[0]
+    name = re.sub(r"^\d+[_\- ]*", "", name)
 
-# =====================
-# CONCATENATE AUDIO
-# =====================
-audio_clips = []
-durations = []
-names = []
+    segment_video = os.path.join(OUTPUT_DIR, f"{name}.mp4")
 
-for file in audio_files:
-    path = os.path.join(AUDIO_DIR, file)
-    clip = AudioFileClip(path)
-    audio_clips.append(clip)
-    durations.append(clip.duration)
+    print(f"Creating video for: {name}")
 
-    # Remove number prefix & extension
-    name = re.sub(r"^\d+[_\-]*", "", file)
-    name = name.replace(".wav", "")
-    names.append(name)
+    cmd = [
+        "ffmpeg",
+        "-y",
+        "-i", input_audio,
 
-final_audio = concatenate_audioclips(audio_clips)
+        # Waveform visualizer
+        "-filter_complex",
+        f"[0:a]showwaves=s=1280x720:mode=line:rate=25,format=yuv420p[v];"
+        f"[v]drawtext=text='{name}':fontcolor=white:fontsize=48:"
+        f"x=(w-text_w)/2:y=h-100",
 
-# =====================
-# FRAME GENERATOR
-# =====================
-# Preload audio for analysis
-y, sr = librosa.load(os.path.join(AUDIO_DIR, audio_files[0]))
-full_audio = []
-for file in audio_files:
-    y_part, _ = librosa.load(os.path.join(AUDIO_DIR, file), sr=sr)
-    full_audio.append(y_part)
+        "-map", "[v]",
+        "-map", "0:a",
+        "-c:v", "libx264",
+        "-c:a", "aac",
+        "-shortest",
+        segment_video
+    ]
 
-y = np.concatenate(full_audio)
-total_duration = final_audio.duration
+    subprocess.run(cmd, check=True)
+    video_segments.append(segment_video)
 
-# Track segments
-segment_times = np.cumsum([0] + durations)
+# Create concat list
+with open(CONCAT_FILE, "w") as f:
+    for segment in video_segments:
+        f.write(f"file '{os.path.abspath(segment)}'\n")
 
-def get_current_label(t):
-    for i in range(len(segment_times) - 1):
-        if segment_times[i] <= t < segment_times[i + 1]:
-            return names[i]
-    return names[-1]
+final_video = os.path.join(OUTPUT_DIR, "final_video.mp4")
 
-def make_frame(t):
-    plt.clf()
+print("Joining videos...")
 
-    frame_index = int(t * sr)
-    window_size = 2048
-    slice_ = y[frame_index:frame_index + window_size]
+subprocess.run([
+    "ffmpeg",
+    "-y",
+    "-f", "concat",
+    "-safe", "0",
+    "-i", CONCAT_FILE,
+    "-c", "copy",
+    final_video
+], check=True)
 
-    if len(slice_) == 0:
-        slice_ = np.zeros(window_size)
-
-    spectrum = np.abs(np.fft.fft(slice_))[:BARS]
-    spectrum = spectrum / (np.max(spectrum) + 1e-6)
-
-    plt.style.use("default")
-    plt.bar(range(BARS), spectrum)
-    plt.ylim(0, 1)
-    plt.axis("off")
-
-    # Label
-    label = get_current_label(t)
-    plt.text(
-        0.5, 0.9,
-        label.upper(),
-        fontsize=24,
-        ha="center",
-        transform=plt.gca().transAxes,
-        weight="bold"
-    )
-
-    fig = plt.gcf()
-    fig.canvas.draw()
-
-    img = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
-    img = img.reshape(fig.canvas.get_width_height()[::-1] + (3,))
-
-    return img
-
-# =====================
-# VIDEO BUILD
-# =====================
-video_clip = VideoClip(make_frame, duration=total_duration)
-video_clip = video_clip.set_audio(final_audio)
-
-video_clip.write_videofile(
-    OUTPUT_VIDEO,
-    fps=FPS,
-    codec="libx264",
-    audio_codec="aac"
-)
+print("Done →", final_video)
