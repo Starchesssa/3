@@ -1,72 +1,102 @@
-import librosa
-import numpy as np
-import matplotlib.pyplot as plt
 import os
+import re
 import subprocess
+from pathlib import Path
 
-# --- SETTINGS ---
-audio_path = "audio.mp3"
-fps = 30
-output_dir = "frames"
-video_out = "waveform_video.mp4"
+import numpy as np
+from pydub import AudioSegment
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib.colors import LinearSegmentedColormap
 
-# Colors (modern minimal)
-bg_color = "#0f0f0f"
-wave_color = "#444444"
-progress_color = "#6949FF"
+# --- CONFIG ---
+AUDIO_DIR = "BOOKS/Temp/TTS"
+OUTPUT_DIR = "BOOKS/Temp/output"
+FPS = 30
+RESOLUTION = (1280, 720)
 
-# --- LOAD AUDIO ---
-y, sr = librosa.load(audio_path, sr=None)
-duration = librosa.get_duration(y=y, sr=sr)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Downsample waveform for performance
-samples = 2000
-waveform = librosa.util.normalize(y)
-waveform = waveform[::len(waveform)//samples]
+# --- LIST FILES NUMERICALLY ---
+def numeric_sort_key(filename):
+    match = re.match(r"(\d+)", filename)
+    return int(match.group(1)) if match else 9999
 
-# --- PREPARE FRAMES FOLDER ---
-os.makedirs(output_dir, exist_ok=True)
+files = [f for f in os.listdir(AUDIO_DIR) if f.endswith(".wav")]
+files.sort(key=numeric_sort_key)
 
-# --- GENERATE FRAMES ---
-total_frames = int(duration * fps)
+# --- MODERN COLORS / STYLE ---
+colors = ["#6949FF", "#FF6B6B", "#FFC75F", "#2ED573", "#1E90FF"]
+cmap = LinearSegmentedColormap.from_list("modern", colors)
 
-for frame in range(total_frames):
-    progress = frame / total_frames
+# --- FUNCTION TO CREATE VIDEO ---
+def create_visualizer_video(audio_path, output_path, title):
+    from scipy.io import wavfile
 
-    plt.figure(figsize=(12, 4))
-    plt.style.use("dark_background")
-    plt.rcParams["axes.facecolor"] = bg_color
+    # Load audio
+    sr, y = wavfile.read(audio_path)
+    y = y / np.max(np.abs(y))  # normalize
 
-    x = np.linspace(0, 1, len(waveform))
+    fig, ax = plt.subplots(figsize=(RESOLUTION[0]/100, RESOLUTION[1]/100), dpi=100)
+    fig.patch.set_facecolor('#fdfdfd')  # background color
+    ax.set_facecolor('#fdfdfd')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_xlim(0, len(y))
+    ax.set_ylim(-1, 1)
 
-    # Base waveform
-    plt.plot(x, waveform, color=wave_color, linewidth=2)
+    line, = ax.plot([], [], lw=4)
 
-    # Progress overlay
-    progress_idx = int(len(x) * progress)
-    plt.plot(x[:progress_idx], waveform[:progress_idx],
-             color=progress_color, linewidth=2)
+    # Shadow effect
+    shadow_line, = ax.plot([], [], lw=6, alpha=0.3, color="black")
 
-    plt.axis("off")
+    # Title
+    ax.text(len(y)//2, 0.9, title, fontsize=28, fontweight="bold",
+            ha='center', va='center', color="#000000", alpha=0.8)
 
-    frame_path = f"{output_dir}/frame_{frame:05d}.png"
-    plt.savefig(frame_path, dpi=150, bbox_inches="tight", pad_inches=0)
-    plt.close()
+    frames = len(y) // (sr // FPS)
 
-print("Frames generated.")
+    def animate(i):
+        idx = i * (sr // FPS)
+        window = y[:idx] if idx < len(y) else y
+        line.set_data(np.arange(len(window)), window)
+        line.set_color(cmap(i / frames))
+        shadow_line.set_data(np.arange(len(window)), window)
+        return line, shadow_line
 
-# --- FFmpeg: Frames → Video ---
+    anim = FuncAnimation(fig, animate, frames=frames, interval=1000/FPS, blit=True)
+
+    # Save animation to mp4 via ffmpeg
+    anim.save(output_path, fps=FPS, extra_args=['-vcodec', 'libx264', '-pix_fmt', 'yuv420p'])
+    plt.close(fig)
+
+# --- PROCESS ALL AUDIO FILES ---
+segment_videos = []
+
+for file in files:
+    audio_path = os.path.join(AUDIO_DIR, file)
+    name = os.path.splitext(file)[0]
+    name_title = re.sub(r"^\d+[_\- ]*", "", name)  # remove numbers
+    output_video = os.path.join(OUTPUT_DIR, f"{name_title}.mp4")
+    print(f"Creating fancy video for: {name_title}")
+    create_visualizer_video(audio_path, output_video, title=name_title)
+    segment_videos.append(output_video)
+
+# --- CONCAT VIDEOS USING FFmpeg ---
+concat_file = os.path.join(OUTPUT_DIR, "concat.txt")
+with open(concat_file, "w") as f:
+    for seg in segment_videos:
+        f.write(f"file '{Path(seg).absolute()}'\n")
+
+final_video = os.path.join(OUTPUT_DIR, "final_video.mp4")
 subprocess.run([
     "ffmpeg",
     "-y",
-    "-framerate", str(fps),
-    "-i", f"{output_dir}/frame_%05d.png",
-    "-i", audio_path,
-    "-c:v", "libx264",
-    "-pix_fmt", "yuv420p",
-    "-c:a", "aac",
-    "-shortest",
-    video_out
-])
+    "-f", "concat",
+    "-safe", "0",
+    "-i", concat_file,
+    "-c", "copy",
+    final_video
+], check=True)
 
-print("Video created:", video_out)
+print("✅ Done →", final_video)
