@@ -30,7 +30,7 @@ jobs:
 
       # 5️⃣ Run the Python visualizer script
       - name: Run Audio Visualizer Script
-        run: python BOOK_CODE/COMPANY_BIO/comp7.py
+        run: python BOOK_CODE/COMPANY_BIO/comp7a.py
 
       # 6️⃣ Upload the final video as artifact
       - name: Upload Final Video
