@@ -26,7 +26,7 @@ jobs:
           -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 192k "$OUT" -y
 
       - name: Upload MP4 as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: audio-visual
           path: out.mp4
