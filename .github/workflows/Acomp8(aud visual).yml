@@ -1,0 +1,32 @@
+name: Audio to Video Renderer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up FFmpeg
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg
+
+      - name: Render audio to video
+        run: |
+          AUDIO="BOOKS/Temp/TTS/1_INTRO.wav"
+          OUT="out.mp4"
+          
+          ffmpeg -i "$AUDIO" \
+          -filter_complex "[0:a]aformat=channel_layouts=mono,showwaves=s=400x400:mode=line:colors=white:draw=full,geq='p(mod(W/PI*(PI+atan2(H/2-Y,X-W/2)),W), H-2*hypot(H/2-Y,X-W/2))':a='alpha(mod(W/PI*(PI+atan2(H/2-Y,X-W/2)),W), H-2*hypot(H/2-Y,X-W/2))'" \
+          -c:v libx264 -c:a aac -b:a 192k "$OUT" -y
+
+      - name: Upload MP4 as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: audio-visual
+          path: out.mp4
