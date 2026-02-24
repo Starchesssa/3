@@ -1,4 +1,4 @@
-name: Audio to Video Renderer
+name: Upward Wave Visualizer
 
 on:
   workflow_dispatch:
@@ -8,25 +8,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up FFmpeg
+      - name: Install FFmpeg
         run: |
           sudo apt update
           sudo apt install -y ffmpeg
 
-      - name: Render audio to video (Android-friendly)
+      - name: Render upward waveform
         run: |
           AUDIO="BOOKS/Temp/TTS/1_INTRO.wav"
-          OUT="out.mp4"
+          OUT="upward.mp4"
 
           ffmpeg -i "$AUDIO" \
-          -filter_complex "[0:a]aformat=channel_layouts=mono,showwaves=s=400x400:mode=line:colors=white:draw=full" \
-          -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 192k "$OUT" -y
+          -filter_complex "[0:a]aformat=channel_layouts=mono,showwaves=s=720x400:mode=p2p:colors=white" \
+          -c:v libx264 -pix_fmt yuv420p \
+          -c:a aac -b:a 192k \
+          "$OUT" -y
 
-      - name: Upload MP4 as Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: audio-visual
-          path: out.mp4
+          name: upward-wave
+          path: upward.mp4
