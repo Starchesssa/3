@@ -1,10 +1,10 @@
-name: Build Modern Audio Visualizer Video
+name: Manim Audio Player Render
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  render:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,24 +12,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
-      - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install numpy scipy matplotlib pydub
-          pip show pydub
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
-      - name: Run Modern Visualizer Script
-        run: python BOOK_CODE/COMPANY_BIO/comp7a.py
+      - name: Install Python dependencies
+        run: |
+          pip install manim numpy pydub
 
-      - name: Upload final video
+      - name: Render Manim Scene
+        run: |
+          manim BOOK_CODE/COMPANY_BIO/comp7a.py CompanyBioScene -pqh
+
+      - name: Upload Video Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: modern-audio-visualizer
-          path: BOOKS/Temp/output/final_video.mp4
+          name: audio-player-video
+          path: media/videos/
