@@ -16,10 +16,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      # ✅ Install Manim system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y \
+            ffmpeg \
+            libcairo2-dev \
+            libpango1.0-dev \
+            pkg-config \
+            python3-dev
 
       - name: Install Python dependencies
         run: |
