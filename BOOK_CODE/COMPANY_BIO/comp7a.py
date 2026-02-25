@@ -1,102 +1,76 @@
-import os
-import re
-import subprocess
-from pathlib import Path
-
+from manim import *
 import numpy as np
 from pydub import AudioSegment
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-from matplotlib.colors import LinearSegmentedColormap
 
-# --- CONFIG ---
-AUDIO_DIR = "BOOKS/Temp/TTS"
-OUTPUT_DIR = "BOOKS/Temp/output"
-FPS = 30
-RESOLUTION = (1280, 720)
+class CompanyBioScene(Scene):
+    def construct(self):
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+        audio_path = "BOOKS/Temp/TTS/3_PART_TWO:_THE_UNLIKELY_CHOICE.wav"
 
-# --- LIST FILES NUMERICALLY ---
-def numeric_sort_key(filename):
-    match = re.match(r"(\d+)", filename)
-    return int(match.group(1)) if match else 9999
+        # 🎵 Load audio
+        audio = AudioSegment.from_wav(audio_path)
+        samples = np.array(audio.get_array_of_samples())
 
-files = [f for f in os.listdir(AUDIO_DIR) if f.endswith(".wav")]
-files.sort(key=numeric_sort_key)
+        # Convert to mono if stereo
+        if audio.channels == 2:
+            samples = samples.reshape((-1, 2)).mean(axis=1)
 
-# --- MODERN COLORS / STYLE ---
-colors = ["#6949FF", "#FF6B6B", "#FFC75F", "#2ED573", "#1E90FF"]
-cmap = LinearSegmentedColormap.from_list("modern", colors)
+        # Normalize samples
+        samples = samples / np.max(np.abs(samples))
 
-# --- FUNCTION TO CREATE VIDEO ---
-def create_visualizer_video(audio_path, output_path, title):
-    from scipy.io import wavfile
+        duration = audio.duration_seconds
 
-    # Load audio
-    sr, y = wavfile.read(audio_path)
-    y = y / np.max(np.abs(y))  # normalize
+        # 📝 Title (bold, top)
+        title = Text(
+            "THE UNLIKELY CHOICE",
+            font_size=48,
+            weight=BOLD
+        ).to_edge(UP)
 
-    fig, ax = plt.subplots(figsize=(RESOLUTION[0]/100, RESOLUTION[1]/100), dpi=100)
-    fig.patch.set_facecolor('#fdfdfd')  # background color
-    ax.set_facecolor('#fdfdfd')
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_xlim(0, len(y))
-    ax.set_ylim(-1, 1)
+        self.play(FadeIn(title, shift=DOWN))
 
-    line, = ax.plot([], [], lw=4)
+        # 📊 Audio bars
+        num_bars = 40
+        bars = VGroup()
 
-    # Shadow effect
-    shadow_line, = ax.plot([], [], lw=6, alpha=0.3, color="black")
+        for i in range(num_bars):
+            bar = Rectangle(
+                width=0.15,
+                height=0.1,
+                fill_opacity=1
+            )
+            bars.add(bar)
 
-    # Title
-    ax.text(len(y)//2, 0.9, title, fontsize=28, fontweight="bold",
-            ha='center', va='center', color="#000000", alpha=0.8)
+        bars.arrange(RIGHT, buff=0.05)
+        bars.move_to(DOWN * 1.5)
 
-    frames = len(y) // (sr // FPS)
+        self.add(bars)
 
-    def animate(i):
-        idx = i * (sr // FPS)
-        window = y[:idx] if idx < len(y) else y
-        line.set_data(np.arange(len(window)), window)
-        line.set_color(cmap(i / frames))
-        shadow_line.set_data(np.arange(len(window)), window)
-        return line, shadow_line
+        # 🎵 Play audio
+        self.add_sound(audio_path)
 
-    anim = FuncAnimation(fig, animate, frames=frames, interval=1000/FPS, blit=True)
+        # 📈 Animate bars based on waveform
+        def update_bars(bars, alpha):
+            t = alpha * duration
+            index = int(t * audio.frame_rate)
 
-    # Save animation to mp4 via ffmpeg
-    anim.save(output_path, fps=FPS, extra_args=['-vcodec', 'libx264', '-pix_fmt', 'yuv420p'])
-    plt.close(fig)
+            chunk_size = 500
+            chunk = samples[index:index + chunk_size]
 
-# --- PROCESS ALL AUDIO FILES ---
-segment_videos = []
+            if len(chunk) == 0:
+                return
 
-for file in files:
-    audio_path = os.path.join(AUDIO_DIR, file)
-    name = os.path.splitext(file)[0]
-    name_title = re.sub(r"^\d+[_\- ]*", "", name)  # remove numbers
-    output_video = os.path.join(OUTPUT_DIR, f"{name_title}.mp4")
-    print(f"Creating fancy video for: {name_title}")
-    create_visualizer_video(audio_path, output_video, title=name_title)
-    segment_videos.append(output_video)
+            level = np.abs(chunk).mean()
 
-# --- CONCAT VIDEOS USING FFmpeg ---
-concat_file = os.path.join(OUTPUT_DIR, "concat.txt")
-with open(concat_file, "w") as f:
-    for seg in segment_videos:
-        f.write(f"file '{Path(seg).absolute()}'\n")
+            for bar in bars:
+                new_height = 0.1 + level * 3
+                bar.stretch_to_fit_height(new_height)
+                bar.align_to(bars, DOWN)
 
-final_video = os.path.join(OUTPUT_DIR, "final_video.mp4")
-subprocess.run([
-    "ffmpeg",
-    "-y",
-    "-f", "concat",
-    "-safe", "0",
-    "-i", concat_file,
-    "-c", "copy",
-    final_video
-], check=True)
+        self.play(
+            UpdateFromAlphaFunc(bars, update_bars),
+            run_time=duration,
+            rate_func=linear
+        )
 
-print("✅ Done →", final_video)
+        self.wait(0.3)
