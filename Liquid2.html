@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Starches Liquid Glass</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:500vh;font-family:system-ui,sans-serif;overflow-x:hidden}
+body{background:#10251b;color:white}
+.bg{position:absolute;inset:0;z-index:0}
+.bg img{width:100%;height:100vh;object-fit:cover;position:sticky;top:0}
+.content{position:relative;z-index:1;padding:28px 20px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:850;letter-spacing:-1px;text-shadow:0 2px 12px #0008}
+.logo span{color:#72f5b8}
+.location{font-size:12px;margin-top:6px;color:#e3f6e9}
+h1{font-size:39px;line-height:1.05;letter-spacing:-2px;margin:45px 0 20px}
+h1 span{color:#b4f9d4}
+.search{padding:15px 18px;border-radius:30px;margin-bottom:24px}
+.categories{display:flex;gap:10px;overflow:auto}
+.chip{padding:10px 17px;border-radius:25px;white-space:nowrap}
+section{margin-top:30px}
+h2{font-size:22px;letter-spacing:-.5px}
+.card{padding:14px;border-radius:25px;margin:12px 0}
+.food{font-size:65px}
+.card h3{margin:5px 0}
+.card p{font-size:13px;color:#e1eae4}
+.price{font-weight:750;color:#b6f8d8}
+.glass{
+ background:rgba(255,255,255,.10);
+ border:1px solid rgba(255,255,255,.52);
+ box-shadow:0 0 0 1px #ffffff22,0 15px 35px #0003,inset 0 1px 1px #ffffffa0;
+ backdrop-filter:blur(12px) saturate(170%);
+ -webkit-backdrop-filter:blur(12px) saturate(170%);
+}
+.lens{
+ position:fixed;z-index:5;left:50%;top:50%;
+ transform:translate(-50%,-50%);
+ width:min(76vw,310px);aspect-ratio:1;border-radius:50%;
+ background:rgba(255,255,255,.045);
+ border:2px solid transparent;
+ box-shadow:0 0 0 2px #ffffffa0,0 18px 45px #0003,
+ inset 0 0 22px #ffffff32,inset 0 2px 3px #ffffffb0;
+ -webkit-backdrop-filter:blur(2px) saturate(180%);
+ backdrop-filter:blur(2px) saturate(180%);
+ display:grid;place-items:center;
+}
+.lens:before{
+ content:"";position:absolute;inset:3px;border-radius:50%;
+ border:1px solid #ffffff70;pointer-events:none;
+}
+.lens:after{
+ content:"";position:absolute;width:42%;height:5px;top:17%;left:25%;
+ border-radius:10px;background:#ffffffb0;transform:rotate(-35deg);
+ filter:blur(.5px);pointer-events:none;
+}
+.lens-label{
+ text-align:center;text-shadow:0 2px 12px #0008;
+ font-weight:750;font-size:19px;
+}
+.lens-label small{display:block;font-size:11px;font-weight:500;margin-top:7px}
+.bottom{
+ position:fixed;z-index:6;bottom:16px;left:50%;transform:translateX(-50%);
+ width:calc(100% - 28px);max-width:390px;border-radius:30px;
+ display:flex;justify-content:space-around;padding:12px 5px;
+ background:rgba(255,255,255,.16);border:1px solid #ffffff70;
+ backdrop-filter:blur(28px) saturate(180%);
+ -webkit-backdrop-filter:blur(28px) saturate(180%);
+ box-shadow:0 10px 35px #0003,inset 0 1px #ffffff90;
+}
+.nav{text-align:center;font-size:10px;color:#fff;text-shadow:0 1px 5px #0005}
+.nav b{display:block;font-size:21px;margin-bottom:3px}
+.nav.active{color:#b6f8d8}
+.hint{position:fixed;z-index:4;bottom:100px;left:0;right:0;text-align:center;font-size:11px;color:#fff9;text-shadow:0 1px 8px #000}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+ <filter id="frosted" x="-20%" y="-20%" width="140%" height="140%">
+  <feTurbulence type="fractalNoise" baseFrequency=".012"
+   numOctaves="2" seed="8" result="noise"/>
+  <feDisplacementMap in="SourceGraphic" in2="noise"
+   scale="12" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</svg>
+
+<div class="bg">
+ <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=85" alt="">
+</div>
+
+<main class="content">
+ <header>
+  <div>
+   <div class="logo">starches<span>.</span></div>
+   <div class="location">⌖ Deliver to · Dar es Salaam</div>
+  </div>
+  <div class="glass" style="padding:13px;border-radius:50%">🛍</div>
+ </header>
+
+ <h1>Good food.<br><span>Better mood.</span></h1>
+ <div class="glass search">⌕ &nbsp; Search food and groceries</div>
+
+ <div class="categories">
+  <div class="glass chip">✦ All</div>
+  <div class="glass chip">🍔 Restaurants</div>
+  <div class="glass chip">🥬 Groceries</div>
+ </div>
+
+ <section>
+  <h2>Popular near you</h2>
+  <article class="glass card">
+   <div class="food">🍕</div>
+   <h3>Classic Pizza</h3>
+   <p>★ 4.8 · Fast food · 25 min</p>
+   <div class="price">TSh 12,000</div>
+  </article>
+  <article class="glass card">
+   <div class="food">🍔</div>
+   <h3>Beef Burger</h3>
+   <p>★ 4.7 · Burgers · 20 min</p>
+   <div class="price">TSh 8,000</div>
+  </article>
+  <article class="glass card">
+   <div class="food">🍗</div>
+   <h3>Grilled Chicken</h3>
+   <p>★ 4.9 · Chicken · 30 min</p>
+   <div class="price">TSh 10,000</div>
+  </article>
+ </section>
+</main>
+
+<div class="lens">
+ <div class="lens-label">STARCHES<span style="color:#b6f8d8">.</span>
+  <small>GOOD FOOD, CLOSER.</small>
+ </div>
+</div>
+
+<div class="hint">Scroll to explore · Liquid Glass concept</div>
+
+<nav class="bottom">
+ <div class="nav active"><b>⌂</b>Home</div>
+ <div class="nav"><b>⌕</b>Explore</div>
+ <div class="nav"><b>▤</b>Orders</div>
+ <div class="nav"><b>♡</b>Saved</div>
+ <div class="nav"><b>♙</b>Profile</div>
+</nav>
+</body>
+</html>
