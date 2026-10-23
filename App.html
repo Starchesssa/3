@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starches Food Delivery</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f5;color:#17251e;font-family:Arial,sans-serif}
+.app{max-width:430px;min-height:100vh;margin:auto;background:#fff;padding:22px 18px 90px}
+header{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:800;color:#009b63;letter-spacing:-1px}
+.location{font-size:12px;color:#68756d;margin-top:6px}
+h1{font-size:25px;line-height:1.25;margin:28px 0 16px}
+.search{background:#f0f4f1;padding:15px;border-radius:15px;color:#738078;margin-bottom:20px}
+.categories{display:flex;gap:9px;overflow:auto;padding-bottom:6px}
+.chip{white-space:nowrap;padding:11px 17px;border-radius:25px;background:#f0f4f1;font-size:13px}
+.chip.active{background:#087f52;color:white}
+.banner{margin:23px 0;background:#073f2c;color:white;padding:23px;border-radius:22px;overflow:hidden}
+.banner small{color:#a8f4d0}
+.banner h2{font-size:25px;line-height:1.2;max-width:230px;margin:12px 0}
+.banner p{font-size:13px;color:#d3e8dd}
+.banner button{background:#00d084;color:#053d2b;border:0;padding:12px 17px;border-radius:25px;font-weight:bold}
+h3{font-size:19px;margin:25px 0 14px}
+.see{float:right;color:#008f5a;font-size:13px;font-weight:normal}
+.food{display:flex;gap:13px;padding:12px;margin-bottom:12px;border:1px solid #edf0ed;border-radius:18px;align-items:center}
+.photo{width:90px;height:90px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:44px;background:#fff0df;flex-shrink:0}
+.food:nth-of-type(2) .photo{background:#e7f6e9}
+.food:nth-of-type(3) .photo{background:#fff0d6}
+.details{flex:1;min-width:0}
+.details h4{margin:0 0 7px;font-size:15px}
+.details p{margin:0 0 7px;color:#758078;font-size:12px}
+.price{font-weight:bold;font-size:14px}
+.rating{color:#c27b00;font-size:12px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:white;border-top:1px solid #edf0ed;display:flex;justify-content:space-around;padding:12px 5px calc(12px + env(safe-area-inset-bottom))}
+.nav{text-align:center;font-size:11px;color:#758078;min-width:55px}
+.nav span{display:block;font-size:21px;margin-bottom:5px}
+.nav.active{color:#008b58;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <div class="logo">STARCHES.</div>
+      <div class="location">📍 Deliver to · Mbezi, Dar es Salaam ▾</div>
+    </div>
+    <div style="font-size:25px">🛒</div>
+  </header>
+
+  <h1>What are you<br>craving today?</h1>
+
+  <div class="search">⌕ &nbsp; Search food, restaurants, groceries...</div>
+
+  <div class="categories">
+    <div class="chip active">All</div>
+    <div class="chip">🍕 Restaurants</div>
+    <div class="chip">🛒 Groceries</div>
+  </div>
+
+  <section class="banner">
+    <small>GOOD FOOD, CLOSER TO YOU</small>
+    <h2>Your next favourite meal awaits.</h2>
+    <p>Discover delicious food around you.</p>
+    <button>Explore food →</button>
+  </section>
+
+  <h3>Popular near you <span class="see">See all →</span></h3>
+
+  <div class="food">
+    <div class="photo">🍕</div>
+    <div class="details">
+      <h4>Classic Pizza</h4>
+      <p>Pizza · Fast food</p>
+      <div class="rating">★ 4.8 <span style="color:#758078"> · 20–30 min</span></div>
+      <p class="price">TSh 12,000</p>
+    </div>
+  </div>
+
+  <div class="food">
+    <div class="photo">🍔</div>
+    <div class="details">
+      <h4>Juicy Beef Burger</h4>
+      <p>Burgers · Popular</p>
+      <div class="rating">★ 4.7 <span style="color:#758078"> · 15–25 min</span></div>
+      <p class="price">TSh 8,000</p>
+    </div>
+  </div>
+
+  <div class="food">
+    <div class="photo">🍗</div>
+    <div class="details">
+      <h4>Grilled Chicken</h4>
+      <p>Chicken · Local favourites</p>
+      <div class="rating">★ 4.9 <span style="color:#758078"> · 25–35 min</span></div>
+      <p class="price">TSh 10,000</p>
+    </div>
+  </div>
+
+  <h3>Shop everyday essentials <span class="see">See all →</span></h3>
+  <div class="food">
+    <div class="photo" style="background:#e8f6e9">🥑</div>
+    <div class="details">
+      <h4>Fresh Groceries</h4>
+      <p>Fruit · Vegetables · Essentials</p>
+      <div class="price">Explore products →</div>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom">
+  <div class="nav active"><span>⌂</span>Home</div>
+  <div class="nav"><span>⌕</span>Explore</div>
+  <div class="nav"><span>▣</span>Orders</div>
+  <div class="nav"><span>♡</span>Favourites</div>
+  <div class="nav"><span>♙</span>Profile</div>
+</nav>
+</body>
+</html>
